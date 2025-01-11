@@ -75,7 +75,7 @@ model Topics {
   contestDate DateTime
 
   //relationships
-  contestResult contestResult[]
+  contestResult ContestResult[]
 }
 
 model Questions {
@@ -153,7 +153,7 @@ model ContestResult {
 
   //relationships
   student Student @relation(fields: [studentId], references: [id])
-  topics Topics(fields: [topicId], references: [id])
+  topics Topics @relation(fields: [topicId], references: [id])
 
   @@index([totalPoints,timeTaken])
 }
