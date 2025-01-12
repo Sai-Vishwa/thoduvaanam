@@ -1,0 +1,177 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TestCaseType {
+  OPEN
+  HIDDEN
+}
+
+enum DifficultyType {
+  EASY
+  BALANCED
+  INTENSE
+  HELL
+}
+
+enum AcceptedType {
+  ACCEPTED
+  REJECTED
+}
+
+enum AchievementType {
+  ONETIME
+  COUNTABLE
+}
+
+enum QuestionType {
+  PRACTICE
+  CONTEST
+}
+
+enum SubmissionType {
+  WEBSITE
+  LEETCODE
+}
+
+enum OTPStatus {
+  PENDING
+  APPROVED
+}
+
+model Student {
+  id              Int      @id @default(autoincrement())
+  name            String
+  rno             String   @unique
+  uname           String   @unique
+  leetCodeName    String
+  salt            String
+  hash            String
+  currStreak      Int      @default(0)
+  maxStreak       Int      @default(0)
+  points          Int      @default(0)
+  lastLogin       DateTime @default(now())
+  leetCodeProfile String?
+
+  //relationships
+  submission          Submission[]
+  studentAchievements StudentAchievements[]
+  contestResult       ContestResult[]
+
+  @@index([points])
+}
+
+model Topics {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  notes       String?  @unique
+  contestDate DateTime
+
+  //relationships
+  contestResult ContestResult[]
+}
+
+model Questions {
+  id                      Int            @id @default(autoincrement())
+  title                   String
+  description             String?
+  noOfHiddenTestCases     Int            @default(18)
+  noOfExternalTestCases   Int            @default(2)
+  difficulty              DifficultyType @default(EASY)
+  pointsPerTestCaseSolved Int
+  type                    QuestionType   @default(PRACTICE)
+  leetCodeLink            String?
+
+  //relationships
+  testCase   TestCase[]
+  submission Submission[]
+}
+
+model TestCase {
+  id           Int    @id @default(autoincrement())
+  inputString  String
+  outputString String
+  questionId   Int
+
+  //relationships
+  questions Questions @relation(fields: [questionId], references: [id])
+}
+
+model Submission {
+  id              Int            @id @default(autoincrement())
+  questionId      Int
+  studentId       Int
+  solvedOn        DateTime       @default(now())
+  status          AcceptedType   @default(ACCEPTED)
+  noOfCasesPassed Int
+  pointsSecured   Int
+  type            SubmissionType @default(WEBSITE)
+
+  //relationships
+  questions Questions @relation(fields: [questionId], references: [id])
+  student   Student   @relation(fields: [studentId], references: [id])
+}
+
+model Achievements {
+  id          Int             @id @default(autoincrement())
+  title       String
+  description String?
+  type        AchievementType @default(ONETIME)
+  minCriteria Int             @default(-1)
+  maxCriteria Int             @default(-1)
+
+  //relationships
+  studentAchievements StudentAchievements[]
+}
+
+model StudentAchievements {
+  id            Int      @id @default(autoincrement())
+  studentId     Int
+  achievementId Int
+  acquiredOn    DateTime @default(now())
+
+  //relationships
+  student      Student      @relation(fields: [studentId], references: [id])
+  achievements Achievements @relation(fields: [achievementId], references: [id])
+}
+
+model ContestResult {
+  id          Int      @id @default(autoincrement())
+  studentId   Int
+  timeTaken   DateTime
+  totalPoints Int
+  topicId     Int
+
+  //relationships
+  student Student @relation(fields: [studentId], references: [id])
+  topics  Topics  @relation(fields: [topicId], references: [id])
+
+  @@index([totalPoints, timeTaken])
+}
+
+model OTPStudent {
+  id              Int       @id @default(autoincrement())
+  name            String
+  rno             String    @unique
+  uname           String    @unique
+  leetCodeName    String
+  salt            String
+  hash            String
+  leetCodeProfile String?
+  otp             String
+  expiry          DateTime
+  status          OTPStatus @default(PENDING)
+}

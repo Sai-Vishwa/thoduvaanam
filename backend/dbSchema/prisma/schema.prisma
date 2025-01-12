@@ -46,6 +46,11 @@ enum SubmissionType{
   LEETCODE
 }
 
+enum OTPStatus {
+  PENDING
+  APPROVED
+}
+
 model Student {
   id Int @id @default(autoincrement())
   name String 
@@ -58,6 +63,7 @@ model Student {
   maxStreak Int @default(0)
   points Int @default(0)
   lastLogin DateTime @default(now())
+  leetCodeProfile String?
 
   //relationships
   submission Submission[]
@@ -156,4 +162,18 @@ model ContestResult {
   topics Topics @relation(fields: [topicId], references: [id])
 
   @@index([totalPoints,timeTaken])
+}
+
+model OTPStudent {
+  id Int @id @default(autoincrement())
+  name String 
+  rno String @unique
+  uname String @unique
+  leetCodeName String
+  salt String
+  hash String
+  leetCodeProfile String?
+  otp String 
+  expiry DateTime
+  status OTPStatus @default(PENDING)
 }
