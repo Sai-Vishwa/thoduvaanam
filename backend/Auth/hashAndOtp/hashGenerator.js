@@ -5,7 +5,8 @@ async function hashGenerator(password) {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
     return {hash:hash , salt:salt}
-  } catch (err) {
+  } catch (error) {
+    console.log(error)
     return {err:"Internal error generating hash"}
   }
 }
