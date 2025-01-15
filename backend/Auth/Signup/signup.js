@@ -42,7 +42,8 @@ async function signUp(req,res) {
             })
         }
     }
-    catch(err){
+    catch(error){
+        console.log(error)
         res.status(400).json({
             err:"Internal error"
         })

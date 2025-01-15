@@ -130,7 +130,7 @@ exports.Prisma.StudentScalarFieldEnum = {
   points: 'points',
   lastLogin: 'lastLogin',
   leetCodeProfile: 'leetCodeProfile',
-  session: 'session'
+  lastQuestionSolved: 'lastQuestionSolved'
 };
 
 exports.Prisma.TopicsScalarFieldEnum = {
@@ -209,6 +209,13 @@ exports.Prisma.OTPStudentScalarFieldEnum = {
   status: 'status'
 };
 
+exports.Prisma.SessionScalarFieldEnum = {
+  id: 'id',
+  uname: 'uname',
+  session: 'session',
+  expiry: 'expiry'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -264,7 +271,8 @@ exports.Prisma.ModelName = {
   Achievements: 'Achievements',
   StudentAchievements: 'StudentAchievements',
   ContestResult: 'ContestResult',
-  OTPStudent: 'OTPStudent'
+  OTPStudent: 'OTPStudent',
+  Session: 'Session'
 };
 
 /**

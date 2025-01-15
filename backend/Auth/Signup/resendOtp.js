@@ -30,6 +30,7 @@ async function resendOtp(req,rse) {
         }
     }
     catch(error){
+        console.log(error)
         res.status(400).json({
             err:"Internal error"
         })

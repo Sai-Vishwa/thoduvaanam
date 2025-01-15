@@ -1,9 +1,11 @@
 const { PrismaClient } = require('../../dbSchema/generated');
+const { hashGenerator } = require('../hashAndOtp/hashGenerator');
 
 const prisma = new PrismaClient();
 
 async function verifyOTP(req,res) {
-    try{    const student = await prisma.oTPStudent.findUnique({
+    try{    
+        const student = await prisma.oTPStudent.findUnique({
             where:{
                 rno: req.body.rno
             }
@@ -13,23 +15,36 @@ async function verifyOTP(req,res) {
                 err:"User does not exist"
             })
         }
+        else{
         const otpTime = new Date(student.expiry);
         const currTime = new Date();
+        const exp = new Date(now.getTime()+60*60*1000);
+        const data = {
+            name: student.name,
+            rno: student.rno,
+            uname: student.uname,
+            leetCodeName: student.leetCodeName,
+            salt: student.salt,
+            hash: student.hash,
+            leetCodeProfile: student.leetCodeProfile,
+            lastLogin: currTime,
+        }
+        const session = hashGenerator(student.uname)
         if(student["otp"]==req.body.otp && otpTime<currTime){
             const std = await prisma.student.create({
-                data: {
-                    name: student.name,
-                    rno: student.rno,
-                    uname: student.uname,
-                    leetCodeName: student.leetCodeName,
-                    salt: student.salt,
-                    hash: student.hash,
-                    leetCodeProfile: student.leetCodeProfile,
-                    lastLogin: currTime
+                data: data
+            })
+            const ses = await prisma.session.create({
+                data:{
+                    uname:student.uname,
+                    session:session,
+                    expiry: exp
                 }
             })
             res.status(200).json({
-                msg:"OTP verified successfully"
+                msg:"Success",
+                data: data,
+                session : session
             })
 
         }
@@ -42,8 +57,9 @@ async function verifyOTP(req,res) {
             res.status(200).json({
                 err:"OTP time out"
             })
-        }}
-    catch(err){
+        }}}
+    catch(error){
+        console.log(error)
         res.status(400).json({
             err: "Internal error"
         })

@@ -58,6 +58,11 @@ export type ContestResult = $Result.DefaultSelection<Prisma.$ContestResultPayloa
  * 
  */
 export type OTPStudent = $Result.DefaultSelection<Prisma.$OTPStudentPayload>
+/**
+ * Model Session
+ * 
+ */
+export type Session = $Result.DefaultSelection<Prisma.$SessionPayload>
 
 /**
  * Enums
@@ -364,6 +369,16 @@ export class PrismaClient<
     * ```
     */
   get oTPStudent(): Prisma.OTPStudentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.session`: Exposes CRUD operations for the **Session** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Sessions
+    * const sessions = await prisma.session.findMany()
+    * ```
+    */
+  get session(): Prisma.SessionDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -812,7 +827,8 @@ export namespace Prisma {
     Achievements: 'Achievements',
     StudentAchievements: 'StudentAchievements',
     ContestResult: 'ContestResult',
-    OTPStudent: 'OTPStudent'
+    OTPStudent: 'OTPStudent',
+    Session: 'Session'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -828,7 +844,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "student" | "topics" | "questions" | "testCase" | "submission" | "achievements" | "studentAchievements" | "contestResult" | "oTPStudent"
+      modelProps: "student" | "topics" | "questions" | "testCase" | "submission" | "achievements" | "studentAchievements" | "contestResult" | "oTPStudent" | "session"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1498,6 +1514,80 @@ export namespace Prisma {
           }
         }
       }
+      Session: {
+        payload: Prisma.$SessionPayload<ExtArgs>
+        fields: Prisma.SessionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SessionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SessionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>
+          }
+          findFirst: {
+            args: Prisma.SessionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SessionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>
+          }
+          findMany: {
+            args: Prisma.SessionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>[]
+          }
+          create: {
+            args: Prisma.SessionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>
+          }
+          createMany: {
+            args: Prisma.SessionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SessionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>[]
+          }
+          delete: {
+            args: Prisma.SessionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>
+          }
+          update: {
+            args: Prisma.SessionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>
+          }
+          deleteMany: {
+            args: Prisma.SessionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SessionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SessionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>[]
+          }
+          upsert: {
+            args: Prisma.SessionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>
+          }
+          aggregate: {
+            args: Prisma.SessionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSession>
+          }
+          groupBy: {
+            args: Prisma.SessionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SessionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SessionCountArgs<ExtArgs>
+            result: $Utils.Optional<SessionCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1591,6 +1681,7 @@ export namespace Prisma {
     studentAchievements?: StudentAchievementsOmit
     contestResult?: ContestResultOmit
     oTPStudent?: OTPStudentOmit
+    session?: SessionOmit
   }
 
   /* Types for Logging */
@@ -1874,7 +1965,7 @@ export namespace Prisma {
     points: number | null
     lastLogin: Date | null
     leetCodeProfile: string | null
-    session: string | null
+    lastQuestionSolved: Date | null
   }
 
   export type StudentMaxAggregateOutputType = {
@@ -1890,7 +1981,7 @@ export namespace Prisma {
     points: number | null
     lastLogin: Date | null
     leetCodeProfile: string | null
-    session: string | null
+    lastQuestionSolved: Date | null
   }
 
   export type StudentCountAggregateOutputType = {
@@ -1906,7 +1997,7 @@ export namespace Prisma {
     points: number
     lastLogin: number
     leetCodeProfile: number
-    session: number
+    lastQuestionSolved: number
     _all: number
   }
 
@@ -1938,7 +2029,7 @@ export namespace Prisma {
     points?: true
     lastLogin?: true
     leetCodeProfile?: true
-    session?: true
+    lastQuestionSolved?: true
   }
 
   export type StudentMaxAggregateInputType = {
@@ -1954,7 +2045,7 @@ export namespace Prisma {
     points?: true
     lastLogin?: true
     leetCodeProfile?: true
-    session?: true
+    lastQuestionSolved?: true
   }
 
   export type StudentCountAggregateInputType = {
@@ -1970,7 +2061,7 @@ export namespace Prisma {
     points?: true
     lastLogin?: true
     leetCodeProfile?: true
-    session?: true
+    lastQuestionSolved?: true
     _all?: true
   }
 
@@ -2073,7 +2164,7 @@ export namespace Prisma {
     points: number
     lastLogin: Date
     leetCodeProfile: string | null
-    session: string | null
+    lastQuestionSolved: Date
     _count: StudentCountAggregateOutputType | null
     _avg: StudentAvgAggregateOutputType | null
     _sum: StudentSumAggregateOutputType | null
@@ -2108,10 +2199,11 @@ export namespace Prisma {
     points?: boolean
     lastLogin?: boolean
     leetCodeProfile?: boolean
-    session?: boolean
+    lastQuestionSolved?: boolean
     submission?: boolean | Student$submissionArgs<ExtArgs>
     studentAchievements?: boolean | Student$studentAchievementsArgs<ExtArgs>
     contestResult?: boolean | Student$contestResultArgs<ExtArgs>
+    session?: boolean | Student$sessionArgs<ExtArgs>
     _count?: boolean | StudentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["student"]>
 
@@ -2128,7 +2220,7 @@ export namespace Prisma {
     points?: boolean
     lastLogin?: boolean
     leetCodeProfile?: boolean
-    session?: boolean
+    lastQuestionSolved?: boolean
   }, ExtArgs["result"]["student"]>
 
   export type StudentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2144,7 +2236,7 @@ export namespace Prisma {
     points?: boolean
     lastLogin?: boolean
     leetCodeProfile?: boolean
-    session?: boolean
+    lastQuestionSolved?: boolean
   }, ExtArgs["result"]["student"]>
 
   export type StudentSelectScalar = {
@@ -2160,14 +2252,15 @@ export namespace Prisma {
     points?: boolean
     lastLogin?: boolean
     leetCodeProfile?: boolean
-    session?: boolean
+    lastQuestionSolved?: boolean
   }
 
-  export type StudentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rno" | "uname" | "leetCodeName" | "salt" | "hash" | "currStreak" | "maxStreak" | "points" | "lastLogin" | "leetCodeProfile" | "session", ExtArgs["result"]["student"]>
+  export type StudentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rno" | "uname" | "leetCodeName" | "salt" | "hash" | "currStreak" | "maxStreak" | "points" | "lastLogin" | "leetCodeProfile" | "lastQuestionSolved", ExtArgs["result"]["student"]>
   export type StudentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     submission?: boolean | Student$submissionArgs<ExtArgs>
     studentAchievements?: boolean | Student$studentAchievementsArgs<ExtArgs>
     contestResult?: boolean | Student$contestResultArgs<ExtArgs>
+    session?: boolean | Student$sessionArgs<ExtArgs>
     _count?: boolean | StudentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type StudentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2179,6 +2272,7 @@ export namespace Prisma {
       submission: Prisma.$SubmissionPayload<ExtArgs>[]
       studentAchievements: Prisma.$StudentAchievementsPayload<ExtArgs>[]
       contestResult: Prisma.$ContestResultPayload<ExtArgs>[]
+      session: Prisma.$SessionPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2193,7 +2287,7 @@ export namespace Prisma {
       points: number
       lastLogin: Date
       leetCodeProfile: string | null
-      session: string | null
+      lastQuestionSolved: Date
     }, ExtArgs["result"]["student"]>
     composites: {}
   }
@@ -2591,6 +2685,7 @@ export namespace Prisma {
     submission<T extends Student$submissionArgs<ExtArgs> = {}>(args?: Subset<T, Student$submissionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     studentAchievements<T extends Student$studentAchievementsArgs<ExtArgs> = {}>(args?: Subset<T, Student$studentAchievementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudentAchievementsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     contestResult<T extends Student$contestResultArgs<ExtArgs> = {}>(args?: Subset<T, Student$contestResultArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestResultPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    session<T extends Student$sessionArgs<ExtArgs> = {}>(args?: Subset<T, Student$sessionArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2632,7 +2727,7 @@ export namespace Prisma {
     readonly points: FieldRef<"Student", 'Int'>
     readonly lastLogin: FieldRef<"Student", 'DateTime'>
     readonly leetCodeProfile: FieldRef<"Student", 'String'>
-    readonly session: FieldRef<"Student", 'String'>
+    readonly lastQuestionSolved: FieldRef<"Student", 'DateTime'>
   }
     
 
@@ -3078,6 +3173,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ContestResultScalarFieldEnum | ContestResultScalarFieldEnum[]
+  }
+
+  /**
+   * Student.session
+   */
+  export type Student$sessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    where?: SessionWhereInput
   }
 
   /**
@@ -11981,6 +12095,1073 @@ export namespace Prisma {
 
 
   /**
+   * Model Session
+   */
+
+  export type AggregateSession = {
+    _count: SessionCountAggregateOutputType | null
+    _avg: SessionAvgAggregateOutputType | null
+    _sum: SessionSumAggregateOutputType | null
+    _min: SessionMinAggregateOutputType | null
+    _max: SessionMaxAggregateOutputType | null
+  }
+
+  export type SessionAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type SessionSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type SessionMinAggregateOutputType = {
+    id: number | null
+    uname: string | null
+    session: string | null
+    expiry: Date | null
+  }
+
+  export type SessionMaxAggregateOutputType = {
+    id: number | null
+    uname: string | null
+    session: string | null
+    expiry: Date | null
+  }
+
+  export type SessionCountAggregateOutputType = {
+    id: number
+    uname: number
+    session: number
+    expiry: number
+    _all: number
+  }
+
+
+  export type SessionAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type SessionSumAggregateInputType = {
+    id?: true
+  }
+
+  export type SessionMinAggregateInputType = {
+    id?: true
+    uname?: true
+    session?: true
+    expiry?: true
+  }
+
+  export type SessionMaxAggregateInputType = {
+    id?: true
+    uname?: true
+    session?: true
+    expiry?: true
+  }
+
+  export type SessionCountAggregateInputType = {
+    id?: true
+    uname?: true
+    session?: true
+    expiry?: true
+    _all?: true
+  }
+
+  export type SessionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Session to aggregate.
+     */
+    where?: SessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sessions to fetch.
+     */
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Sessions
+    **/
+    _count?: true | SessionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SessionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SessionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SessionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SessionMaxAggregateInputType
+  }
+
+  export type GetSessionAggregateType<T extends SessionAggregateArgs> = {
+        [P in keyof T & keyof AggregateSession]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSession[P]>
+      : GetScalarType<T[P], AggregateSession[P]>
+  }
+
+
+
+
+  export type SessionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SessionWhereInput
+    orderBy?: SessionOrderByWithAggregationInput | SessionOrderByWithAggregationInput[]
+    by: SessionScalarFieldEnum[] | SessionScalarFieldEnum
+    having?: SessionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SessionCountAggregateInputType | true
+    _avg?: SessionAvgAggregateInputType
+    _sum?: SessionSumAggregateInputType
+    _min?: SessionMinAggregateInputType
+    _max?: SessionMaxAggregateInputType
+  }
+
+  export type SessionGroupByOutputType = {
+    id: number
+    uname: string
+    session: string
+    expiry: Date
+    _count: SessionCountAggregateOutputType | null
+    _avg: SessionAvgAggregateOutputType | null
+    _sum: SessionSumAggregateOutputType | null
+    _min: SessionMinAggregateOutputType | null
+    _max: SessionMaxAggregateOutputType | null
+  }
+
+  type GetSessionGroupByPayload<T extends SessionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SessionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SessionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SessionGroupByOutputType[P]>
+            : GetScalarType<T[P], SessionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SessionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uname?: boolean
+    session?: boolean
+    expiry?: boolean
+    student?: boolean | StudentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["session"]>
+
+  export type SessionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uname?: boolean
+    session?: boolean
+    expiry?: boolean
+    student?: boolean | StudentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["session"]>
+
+  export type SessionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uname?: boolean
+    session?: boolean
+    expiry?: boolean
+    student?: boolean | StudentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["session"]>
+
+  export type SessionSelectScalar = {
+    id?: boolean
+    uname?: boolean
+    session?: boolean
+    expiry?: boolean
+  }
+
+  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uname" | "session" | "expiry", ExtArgs["result"]["session"]>
+  export type SessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    student?: boolean | StudentDefaultArgs<ExtArgs>
+  }
+  export type SessionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    student?: boolean | StudentDefaultArgs<ExtArgs>
+  }
+  export type SessionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    student?: boolean | StudentDefaultArgs<ExtArgs>
+  }
+
+  export type $SessionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Session"
+    objects: {
+      student: Prisma.$StudentPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      uname: string
+      session: string
+      expiry: Date
+    }, ExtArgs["result"]["session"]>
+    composites: {}
+  }
+
+  type SessionGetPayload<S extends boolean | null | undefined | SessionDefaultArgs> = $Result.GetResult<Prisma.$SessionPayload, S>
+
+  type SessionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SessionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SessionCountAggregateInputType | true
+    }
+
+  export interface SessionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Session'], meta: { name: 'Session' } }
+    /**
+     * Find zero or one Session that matches the filter.
+     * @param {SessionFindUniqueArgs} args - Arguments to find a Session
+     * @example
+     * // Get one Session
+     * const session = await prisma.session.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SessionFindUniqueArgs>(args: SelectSubset<T, SessionFindUniqueArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one Session that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SessionFindUniqueOrThrowArgs} args - Arguments to find a Session
+     * @example
+     * // Get one Session
+     * const session = await prisma.session.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SessionFindUniqueOrThrowArgs>(args: SelectSubset<T, SessionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Session that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionFindFirstArgs} args - Arguments to find a Session
+     * @example
+     * // Get one Session
+     * const session = await prisma.session.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SessionFindFirstArgs>(args?: SelectSubset<T, SessionFindFirstArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Session that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionFindFirstOrThrowArgs} args - Arguments to find a Session
+     * @example
+     * // Get one Session
+     * const session = await prisma.session.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SessionFindFirstOrThrowArgs>(args?: SelectSubset<T, SessionFindFirstOrThrowArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more Sessions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Sessions
+     * const sessions = await prisma.session.findMany()
+     * 
+     * // Get first 10 Sessions
+     * const sessions = await prisma.session.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const sessionWithIdOnly = await prisma.session.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SessionFindManyArgs>(args?: SelectSubset<T, SessionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a Session.
+     * @param {SessionCreateArgs} args - Arguments to create a Session.
+     * @example
+     * // Create one Session
+     * const Session = await prisma.session.create({
+     *   data: {
+     *     // ... data to create a Session
+     *   }
+     * })
+     * 
+     */
+    create<T extends SessionCreateArgs>(args: SelectSubset<T, SessionCreateArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many Sessions.
+     * @param {SessionCreateManyArgs} args - Arguments to create many Sessions.
+     * @example
+     * // Create many Sessions
+     * const session = await prisma.session.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SessionCreateManyArgs>(args?: SelectSubset<T, SessionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Sessions and returns the data saved in the database.
+     * @param {SessionCreateManyAndReturnArgs} args - Arguments to create many Sessions.
+     * @example
+     * // Create many Sessions
+     * const session = await prisma.session.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Sessions and only return the `id`
+     * const sessionWithIdOnly = await prisma.session.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SessionCreateManyAndReturnArgs>(args?: SelectSubset<T, SessionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a Session.
+     * @param {SessionDeleteArgs} args - Arguments to delete one Session.
+     * @example
+     * // Delete one Session
+     * const Session = await prisma.session.delete({
+     *   where: {
+     *     // ... filter to delete one Session
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SessionDeleteArgs>(args: SelectSubset<T, SessionDeleteArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one Session.
+     * @param {SessionUpdateArgs} args - Arguments to update one Session.
+     * @example
+     * // Update one Session
+     * const session = await prisma.session.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SessionUpdateArgs>(args: SelectSubset<T, SessionUpdateArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more Sessions.
+     * @param {SessionDeleteManyArgs} args - Arguments to filter Sessions to delete.
+     * @example
+     * // Delete a few Sessions
+     * const { count } = await prisma.session.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SessionDeleteManyArgs>(args?: SelectSubset<T, SessionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Sessions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Sessions
+     * const session = await prisma.session.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SessionUpdateManyArgs>(args: SelectSubset<T, SessionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Sessions and returns the data updated in the database.
+     * @param {SessionUpdateManyAndReturnArgs} args - Arguments to update many Sessions.
+     * @example
+     * // Update many Sessions
+     * const session = await prisma.session.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Sessions and only return the `id`
+     * const sessionWithIdOnly = await prisma.session.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SessionUpdateManyAndReturnArgs>(args: SelectSubset<T, SessionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one Session.
+     * @param {SessionUpsertArgs} args - Arguments to update or create a Session.
+     * @example
+     * // Update or create a Session
+     * const session = await prisma.session.upsert({
+     *   create: {
+     *     // ... data to create a Session
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Session we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SessionUpsertArgs>(args: SelectSubset<T, SessionUpsertArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of Sessions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionCountArgs} args - Arguments to filter Sessions to count.
+     * @example
+     * // Count the number of Sessions
+     * const count = await prisma.session.count({
+     *   where: {
+     *     // ... the filter for the Sessions we want to count
+     *   }
+     * })
+    **/
+    count<T extends SessionCountArgs>(
+      args?: Subset<T, SessionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SessionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Session.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SessionAggregateArgs>(args: Subset<T, SessionAggregateArgs>): Prisma.PrismaPromise<GetSessionAggregateType<T>>
+
+    /**
+     * Group by Session.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SessionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SessionGroupByArgs['orderBy'] }
+        : { orderBy?: SessionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SessionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSessionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Session model
+   */
+  readonly fields: SessionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Session.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SessionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    student<T extends StudentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StudentDefaultArgs<ExtArgs>>): Prisma__StudentClient<$Result.GetResult<Prisma.$StudentPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Session model
+   */ 
+  interface SessionFieldRefs {
+    readonly id: FieldRef<"Session", 'Int'>
+    readonly uname: FieldRef<"Session", 'String'>
+    readonly session: FieldRef<"Session", 'String'>
+    readonly expiry: FieldRef<"Session", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Session findUnique
+   */
+  export type SessionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * Filter, which Session to fetch.
+     */
+    where: SessionWhereUniqueInput
+  }
+
+  /**
+   * Session findUniqueOrThrow
+   */
+  export type SessionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * Filter, which Session to fetch.
+     */
+    where: SessionWhereUniqueInput
+  }
+
+  /**
+   * Session findFirst
+   */
+  export type SessionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * Filter, which Session to fetch.
+     */
+    where?: SessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sessions to fetch.
+     */
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Sessions.
+     */
+    cursor?: SessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Sessions.
+     */
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+  }
+
+  /**
+   * Session findFirstOrThrow
+   */
+  export type SessionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * Filter, which Session to fetch.
+     */
+    where?: SessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sessions to fetch.
+     */
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Sessions.
+     */
+    cursor?: SessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Sessions.
+     */
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+  }
+
+  /**
+   * Session findMany
+   */
+  export type SessionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * Filter, which Sessions to fetch.
+     */
+    where?: SessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sessions to fetch.
+     */
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Sessions.
+     */
+    cursor?: SessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sessions.
+     */
+    skip?: number
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+  }
+
+  /**
+   * Session create
+   */
+  export type SessionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Session.
+     */
+    data: XOR<SessionCreateInput, SessionUncheckedCreateInput>
+  }
+
+  /**
+   * Session createMany
+   */
+  export type SessionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Sessions.
+     */
+    data: SessionCreateManyInput | SessionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Session createManyAndReturn
+   */
+  export type SessionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * The data used to create many Sessions.
+     */
+    data: SessionCreateManyInput | SessionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Session update
+   */
+  export type SessionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Session.
+     */
+    data: XOR<SessionUpdateInput, SessionUncheckedUpdateInput>
+    /**
+     * Choose, which Session to update.
+     */
+    where: SessionWhereUniqueInput
+  }
+
+  /**
+   * Session updateMany
+   */
+  export type SessionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Sessions.
+     */
+    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyInput>
+    /**
+     * Filter which Sessions to update
+     */
+    where?: SessionWhereInput
+  }
+
+  /**
+   * Session updateManyAndReturn
+   */
+  export type SessionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * The data used to update Sessions.
+     */
+    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyInput>
+    /**
+     * Filter which Sessions to update
+     */
+    where?: SessionWhereInput
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Session upsert
+   */
+  export type SessionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Session to update in case it exists.
+     */
+    where: SessionWhereUniqueInput
+    /**
+     * In case the Session found by the `where` argument doesn't exist, create a new Session with this data.
+     */
+    create: XOR<SessionCreateInput, SessionUncheckedCreateInput>
+    /**
+     * In case the Session was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SessionUpdateInput, SessionUncheckedUpdateInput>
+  }
+
+  /**
+   * Session delete
+   */
+  export type SessionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * Filter which Session to delete.
+     */
+    where: SessionWhereUniqueInput
+  }
+
+  /**
+   * Session deleteMany
+   */
+  export type SessionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Sessions to delete
+     */
+    where?: SessionWhereInput
+  }
+
+  /**
+   * Session without action
+   */
+  export type SessionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -12007,7 +13188,7 @@ export namespace Prisma {
     points: 'points',
     lastLogin: 'lastLogin',
     leetCodeProfile: 'leetCodeProfile',
-    session: 'session'
+    lastQuestionSolved: 'lastQuestionSolved'
   };
 
   export type StudentScalarFieldEnum = (typeof StudentScalarFieldEnum)[keyof typeof StudentScalarFieldEnum]
@@ -12111,6 +13292,16 @@ export namespace Prisma {
   };
 
   export type OTPStudentScalarFieldEnum = (typeof OTPStudentScalarFieldEnum)[keyof typeof OTPStudentScalarFieldEnum]
+
+
+  export const SessionScalarFieldEnum: {
+    id: 'id',
+    uname: 'uname',
+    session: 'session',
+    expiry: 'expiry'
+  };
+
+  export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -12301,10 +13492,11 @@ export namespace Prisma {
     points?: IntFilter<"Student"> | number
     lastLogin?: DateTimeFilter<"Student"> | Date | string
     leetCodeProfile?: StringNullableFilter<"Student"> | string | null
-    session?: StringNullableFilter<"Student"> | string | null
+    lastQuestionSolved?: DateTimeFilter<"Student"> | Date | string
     submission?: SubmissionListRelationFilter
     studentAchievements?: StudentAchievementsListRelationFilter
     contestResult?: ContestResultListRelationFilter
+    session?: XOR<SessionNullableScalarRelationFilter, SessionWhereInput> | null
   }
 
   export type StudentOrderByWithRelationInput = {
@@ -12320,10 +13512,11 @@ export namespace Prisma {
     points?: SortOrder
     lastLogin?: SortOrder
     leetCodeProfile?: SortOrderInput | SortOrder
-    session?: SortOrderInput | SortOrder
+    lastQuestionSolved?: SortOrder
     submission?: SubmissionOrderByRelationAggregateInput
     studentAchievements?: StudentAchievementsOrderByRelationAggregateInput
     contestResult?: ContestResultOrderByRelationAggregateInput
+    session?: SessionOrderByWithRelationInput
   }
 
   export type StudentWhereUniqueInput = Prisma.AtLeast<{
@@ -12342,10 +13535,11 @@ export namespace Prisma {
     points?: IntFilter<"Student"> | number
     lastLogin?: DateTimeFilter<"Student"> | Date | string
     leetCodeProfile?: StringNullableFilter<"Student"> | string | null
-    session?: StringNullableFilter<"Student"> | string | null
+    lastQuestionSolved?: DateTimeFilter<"Student"> | Date | string
     submission?: SubmissionListRelationFilter
     studentAchievements?: StudentAchievementsListRelationFilter
     contestResult?: ContestResultListRelationFilter
+    session?: XOR<SessionNullableScalarRelationFilter, SessionWhereInput> | null
   }, "id" | "rno" | "uname">
 
   export type StudentOrderByWithAggregationInput = {
@@ -12361,7 +13555,7 @@ export namespace Prisma {
     points?: SortOrder
     lastLogin?: SortOrder
     leetCodeProfile?: SortOrderInput | SortOrder
-    session?: SortOrderInput | SortOrder
+    lastQuestionSolved?: SortOrder
     _count?: StudentCountOrderByAggregateInput
     _avg?: StudentAvgOrderByAggregateInput
     _max?: StudentMaxOrderByAggregateInput
@@ -12385,7 +13579,7 @@ export namespace Prisma {
     points?: IntWithAggregatesFilter<"Student"> | number
     lastLogin?: DateTimeWithAggregatesFilter<"Student"> | Date | string
     leetCodeProfile?: StringNullableWithAggregatesFilter<"Student"> | string | null
-    session?: StringNullableWithAggregatesFilter<"Student"> | string | null
+    lastQuestionSolved?: DateTimeWithAggregatesFilter<"Student"> | Date | string
   }
 
   export type TopicsWhereInput = {
@@ -12913,6 +14107,58 @@ export namespace Prisma {
     status?: EnumOTPStatusWithAggregatesFilter<"OTPStudent"> | $Enums.OTPStatus
   }
 
+  export type SessionWhereInput = {
+    AND?: SessionWhereInput | SessionWhereInput[]
+    OR?: SessionWhereInput[]
+    NOT?: SessionWhereInput | SessionWhereInput[]
+    id?: IntFilter<"Session"> | number
+    uname?: StringFilter<"Session"> | string
+    session?: StringFilter<"Session"> | string
+    expiry?: DateTimeFilter<"Session"> | Date | string
+    student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
+  }
+
+  export type SessionOrderByWithRelationInput = {
+    id?: SortOrder
+    uname?: SortOrder
+    session?: SortOrder
+    expiry?: SortOrder
+    student?: StudentOrderByWithRelationInput
+  }
+
+  export type SessionWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    uname?: string
+    AND?: SessionWhereInput | SessionWhereInput[]
+    OR?: SessionWhereInput[]
+    NOT?: SessionWhereInput | SessionWhereInput[]
+    session?: StringFilter<"Session"> | string
+    expiry?: DateTimeFilter<"Session"> | Date | string
+    student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
+  }, "id" | "uname">
+
+  export type SessionOrderByWithAggregationInput = {
+    id?: SortOrder
+    uname?: SortOrder
+    session?: SortOrder
+    expiry?: SortOrder
+    _count?: SessionCountOrderByAggregateInput
+    _avg?: SessionAvgOrderByAggregateInput
+    _max?: SessionMaxOrderByAggregateInput
+    _min?: SessionMinOrderByAggregateInput
+    _sum?: SessionSumOrderByAggregateInput
+  }
+
+  export type SessionScalarWhereWithAggregatesInput = {
+    AND?: SessionScalarWhereWithAggregatesInput | SessionScalarWhereWithAggregatesInput[]
+    OR?: SessionScalarWhereWithAggregatesInput[]
+    NOT?: SessionScalarWhereWithAggregatesInput | SessionScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Session"> | number
+    uname?: StringWithAggregatesFilter<"Session"> | string
+    session?: StringWithAggregatesFilter<"Session"> | string
+    expiry?: DateTimeWithAggregatesFilter<"Session"> | Date | string
+  }
+
   export type StudentCreateInput = {
     name: string
     rno: string
@@ -12925,10 +14171,11 @@ export namespace Prisma {
     points?: number
     lastLogin?: Date | string
     leetCodeProfile?: string | null
-    session?: string | null
+    lastQuestionSolved: Date | string
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultCreateNestedManyWithoutStudentInput
+    session?: SessionCreateNestedOneWithoutStudentInput
   }
 
   export type StudentUncheckedCreateInput = {
@@ -12944,10 +14191,11 @@ export namespace Prisma {
     points?: number
     lastLogin?: Date | string
     leetCodeProfile?: string | null
-    session?: string | null
+    lastQuestionSolved: Date | string
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
+    session?: SessionUncheckedCreateNestedOneWithoutStudentInput
   }
 
   export type StudentUpdateInput = {
@@ -12962,10 +14210,11 @@ export namespace Prisma {
     points?: IntFieldUpdateOperationsInput | number
     lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    session?: NullableStringFieldUpdateOperationsInput | string | null
+    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
+    session?: SessionUpdateOneWithoutStudentNestedInput
   }
 
   export type StudentUncheckedUpdateInput = {
@@ -12981,10 +14230,11 @@ export namespace Prisma {
     points?: IntFieldUpdateOperationsInput | number
     lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    session?: NullableStringFieldUpdateOperationsInput | string | null
+    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
+    session?: SessionUncheckedUpdateOneWithoutStudentNestedInput
   }
 
   export type StudentCreateManyInput = {
@@ -13000,7 +14250,7 @@ export namespace Prisma {
     points?: number
     lastLogin?: Date | string
     leetCodeProfile?: string | null
-    session?: string | null
+    lastQuestionSolved: Date | string
   }
 
   export type StudentUpdateManyMutationInput = {
@@ -13015,7 +14265,7 @@ export namespace Prisma {
     points?: IntFieldUpdateOperationsInput | number
     lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    session?: NullableStringFieldUpdateOperationsInput | string | null
+    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StudentUncheckedUpdateManyInput = {
@@ -13031,7 +14281,7 @@ export namespace Prisma {
     points?: IntFieldUpdateOperationsInput | number
     lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    session?: NullableStringFieldUpdateOperationsInput | string | null
+    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TopicsCreateInput = {
@@ -13551,6 +14801,51 @@ export namespace Prisma {
     status?: EnumOTPStatusFieldUpdateOperationsInput | $Enums.OTPStatus
   }
 
+  export type SessionCreateInput = {
+    session: string
+    expiry: Date | string
+    student: StudentCreateNestedOneWithoutSessionInput
+  }
+
+  export type SessionUncheckedCreateInput = {
+    id?: number
+    uname: string
+    session: string
+    expiry: Date | string
+  }
+
+  export type SessionUpdateInput = {
+    session?: StringFieldUpdateOperationsInput | string
+    expiry?: DateTimeFieldUpdateOperationsInput | Date | string
+    student?: StudentUpdateOneRequiredWithoutSessionNestedInput
+  }
+
+  export type SessionUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uname?: StringFieldUpdateOperationsInput | string
+    session?: StringFieldUpdateOperationsInput | string
+    expiry?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SessionCreateManyInput = {
+    id?: number
+    uname: string
+    session: string
+    expiry: Date | string
+  }
+
+  export type SessionUpdateManyMutationInput = {
+    session?: StringFieldUpdateOperationsInput | string
+    expiry?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SessionUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uname?: StringFieldUpdateOperationsInput | string
+    session?: StringFieldUpdateOperationsInput | string
+    expiry?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -13621,6 +14916,11 @@ export namespace Prisma {
     none?: ContestResultWhereInput
   }
 
+  export type SessionNullableScalarRelationFilter = {
+    is?: SessionWhereInput | null
+    isNot?: SessionWhereInput | null
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -13651,7 +14951,7 @@ export namespace Prisma {
     points?: SortOrder
     lastLogin?: SortOrder
     leetCodeProfile?: SortOrder
-    session?: SortOrder
+    lastQuestionSolved?: SortOrder
   }
 
   export type StudentAvgOrderByAggregateInput = {
@@ -13674,7 +14974,7 @@ export namespace Prisma {
     points?: SortOrder
     lastLogin?: SortOrder
     leetCodeProfile?: SortOrder
-    session?: SortOrder
+    lastQuestionSolved?: SortOrder
   }
 
   export type StudentMinOrderByAggregateInput = {
@@ -13690,7 +14990,7 @@ export namespace Prisma {
     points?: SortOrder
     lastLogin?: SortOrder
     leetCodeProfile?: SortOrder
-    session?: SortOrder
+    lastQuestionSolved?: SortOrder
   }
 
   export type StudentSumOrderByAggregateInput = {
@@ -14220,6 +15520,35 @@ export namespace Prisma {
     _max?: NestedEnumOTPStatusFilter<$PrismaModel>
   }
 
+  export type SessionCountOrderByAggregateInput = {
+    id?: SortOrder
+    uname?: SortOrder
+    session?: SortOrder
+    expiry?: SortOrder
+  }
+
+  export type SessionAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type SessionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uname?: SortOrder
+    session?: SortOrder
+    expiry?: SortOrder
+  }
+
+  export type SessionMinOrderByAggregateInput = {
+    id?: SortOrder
+    uname?: SortOrder
+    session?: SortOrder
+    expiry?: SortOrder
+  }
+
+  export type SessionSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
   export type SubmissionCreateNestedManyWithoutStudentInput = {
     create?: XOR<SubmissionCreateWithoutStudentInput, SubmissionUncheckedCreateWithoutStudentInput> | SubmissionCreateWithoutStudentInput[] | SubmissionUncheckedCreateWithoutStudentInput[]
     connectOrCreate?: SubmissionCreateOrConnectWithoutStudentInput | SubmissionCreateOrConnectWithoutStudentInput[]
@@ -14241,6 +15570,12 @@ export namespace Prisma {
     connect?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
   }
 
+  export type SessionCreateNestedOneWithoutStudentInput = {
+    create?: XOR<SessionCreateWithoutStudentInput, SessionUncheckedCreateWithoutStudentInput>
+    connectOrCreate?: SessionCreateOrConnectWithoutStudentInput
+    connect?: SessionWhereUniqueInput
+  }
+
   export type SubmissionUncheckedCreateNestedManyWithoutStudentInput = {
     create?: XOR<SubmissionCreateWithoutStudentInput, SubmissionUncheckedCreateWithoutStudentInput> | SubmissionCreateWithoutStudentInput[] | SubmissionUncheckedCreateWithoutStudentInput[]
     connectOrCreate?: SubmissionCreateOrConnectWithoutStudentInput | SubmissionCreateOrConnectWithoutStudentInput[]
@@ -14260,6 +15595,12 @@ export namespace Prisma {
     connectOrCreate?: ContestResultCreateOrConnectWithoutStudentInput | ContestResultCreateOrConnectWithoutStudentInput[]
     createMany?: ContestResultCreateManyStudentInputEnvelope
     connect?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
+  }
+
+  export type SessionUncheckedCreateNestedOneWithoutStudentInput = {
+    create?: XOR<SessionCreateWithoutStudentInput, SessionUncheckedCreateWithoutStudentInput>
+    connectOrCreate?: SessionCreateOrConnectWithoutStudentInput
+    connect?: SessionWhereUniqueInput
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -14324,6 +15665,16 @@ export namespace Prisma {
     deleteMany?: ContestResultScalarWhereInput | ContestResultScalarWhereInput[]
   }
 
+  export type SessionUpdateOneWithoutStudentNestedInput = {
+    create?: XOR<SessionCreateWithoutStudentInput, SessionUncheckedCreateWithoutStudentInput>
+    connectOrCreate?: SessionCreateOrConnectWithoutStudentInput
+    upsert?: SessionUpsertWithoutStudentInput
+    disconnect?: SessionWhereInput | boolean
+    delete?: SessionWhereInput | boolean
+    connect?: SessionWhereUniqueInput
+    update?: XOR<XOR<SessionUpdateToOneWithWhereWithoutStudentInput, SessionUpdateWithoutStudentInput>, SessionUncheckedUpdateWithoutStudentInput>
+  }
+
   export type SubmissionUncheckedUpdateManyWithoutStudentNestedInput = {
     create?: XOR<SubmissionCreateWithoutStudentInput, SubmissionUncheckedCreateWithoutStudentInput> | SubmissionCreateWithoutStudentInput[] | SubmissionUncheckedCreateWithoutStudentInput[]
     connectOrCreate?: SubmissionCreateOrConnectWithoutStudentInput | SubmissionCreateOrConnectWithoutStudentInput[]
@@ -14364,6 +15715,16 @@ export namespace Prisma {
     update?: ContestResultUpdateWithWhereUniqueWithoutStudentInput | ContestResultUpdateWithWhereUniqueWithoutStudentInput[]
     updateMany?: ContestResultUpdateManyWithWhereWithoutStudentInput | ContestResultUpdateManyWithWhereWithoutStudentInput[]
     deleteMany?: ContestResultScalarWhereInput | ContestResultScalarWhereInput[]
+  }
+
+  export type SessionUncheckedUpdateOneWithoutStudentNestedInput = {
+    create?: XOR<SessionCreateWithoutStudentInput, SessionUncheckedCreateWithoutStudentInput>
+    connectOrCreate?: SessionCreateOrConnectWithoutStudentInput
+    upsert?: SessionUpsertWithoutStudentInput
+    disconnect?: SessionWhereInput | boolean
+    delete?: SessionWhereInput | boolean
+    connect?: SessionWhereUniqueInput
+    update?: XOR<XOR<SessionUpdateToOneWithWhereWithoutStudentInput, SessionUpdateWithoutStudentInput>, SessionUncheckedUpdateWithoutStudentInput>
   }
 
   export type ContestResultCreateNestedManyWithoutTopicsInput = {
@@ -14654,6 +16015,20 @@ export namespace Prisma {
 
   export type EnumOTPStatusFieldUpdateOperationsInput = {
     set?: $Enums.OTPStatus
+  }
+
+  export type StudentCreateNestedOneWithoutSessionInput = {
+    create?: XOR<StudentCreateWithoutSessionInput, StudentUncheckedCreateWithoutSessionInput>
+    connectOrCreate?: StudentCreateOrConnectWithoutSessionInput
+    connect?: StudentWhereUniqueInput
+  }
+
+  export type StudentUpdateOneRequiredWithoutSessionNestedInput = {
+    create?: XOR<StudentCreateWithoutSessionInput, StudentUncheckedCreateWithoutSessionInput>
+    connectOrCreate?: StudentCreateOrConnectWithoutSessionInput
+    upsert?: StudentUpsertWithoutSessionInput
+    connect?: StudentWhereUniqueInput
+    update?: XOR<XOR<StudentUpdateToOneWithWhereWithoutSessionInput, StudentUpdateWithoutSessionInput>, StudentUncheckedUpdateWithoutSessionInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -14967,6 +16342,22 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SessionCreateWithoutStudentInput = {
+    session: string
+    expiry: Date | string
+  }
+
+  export type SessionUncheckedCreateWithoutStudentInput = {
+    id?: number
+    session: string
+    expiry: Date | string
+  }
+
+  export type SessionCreateOrConnectWithoutStudentInput = {
+    where: SessionWhereUniqueInput
+    create: XOR<SessionCreateWithoutStudentInput, SessionUncheckedCreateWithoutStudentInput>
+  }
+
   export type SubmissionUpsertWithWhereUniqueWithoutStudentInput = {
     where: SubmissionWhereUniqueInput
     update: XOR<SubmissionUpdateWithoutStudentInput, SubmissionUncheckedUpdateWithoutStudentInput>
@@ -15048,6 +16439,28 @@ export namespace Prisma {
     timeTaken?: DateTimeFilter<"ContestResult"> | Date | string
     totalPoints?: IntFilter<"ContestResult"> | number
     topicId?: IntFilter<"ContestResult"> | number
+  }
+
+  export type SessionUpsertWithoutStudentInput = {
+    update: XOR<SessionUpdateWithoutStudentInput, SessionUncheckedUpdateWithoutStudentInput>
+    create: XOR<SessionCreateWithoutStudentInput, SessionUncheckedCreateWithoutStudentInput>
+    where?: SessionWhereInput
+  }
+
+  export type SessionUpdateToOneWithWhereWithoutStudentInput = {
+    where?: SessionWhereInput
+    data: XOR<SessionUpdateWithoutStudentInput, SessionUncheckedUpdateWithoutStudentInput>
+  }
+
+  export type SessionUpdateWithoutStudentInput = {
+    session?: StringFieldUpdateOperationsInput | string
+    expiry?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SessionUncheckedUpdateWithoutStudentInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    session?: StringFieldUpdateOperationsInput | string
+    expiry?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ContestResultCreateWithoutTopicsInput = {
@@ -15289,9 +16702,10 @@ export namespace Prisma {
     points?: number
     lastLogin?: Date | string
     leetCodeProfile?: string | null
-    session?: string | null
+    lastQuestionSolved: Date | string
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultCreateNestedManyWithoutStudentInput
+    session?: SessionCreateNestedOneWithoutStudentInput
   }
 
   export type StudentUncheckedCreateWithoutSubmissionInput = {
@@ -15307,9 +16721,10 @@ export namespace Prisma {
     points?: number
     lastLogin?: Date | string
     leetCodeProfile?: string | null
-    session?: string | null
+    lastQuestionSolved: Date | string
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
+    session?: SessionUncheckedCreateNestedOneWithoutStudentInput
   }
 
   export type StudentCreateOrConnectWithoutSubmissionInput = {
@@ -15376,9 +16791,10 @@ export namespace Prisma {
     points?: IntFieldUpdateOperationsInput | number
     lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    session?: NullableStringFieldUpdateOperationsInput | string | null
+    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
+    session?: SessionUpdateOneWithoutStudentNestedInput
   }
 
   export type StudentUncheckedUpdateWithoutSubmissionInput = {
@@ -15394,9 +16810,10 @@ export namespace Prisma {
     points?: IntFieldUpdateOperationsInput | number
     lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    session?: NullableStringFieldUpdateOperationsInput | string | null
+    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
+    session?: SessionUncheckedUpdateOneWithoutStudentNestedInput
   }
 
   export type StudentAchievementsCreateWithoutAchievementsInput = {
@@ -15448,9 +16865,10 @@ export namespace Prisma {
     points?: number
     lastLogin?: Date | string
     leetCodeProfile?: string | null
-    session?: string | null
+    lastQuestionSolved: Date | string
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultCreateNestedManyWithoutStudentInput
+    session?: SessionCreateNestedOneWithoutStudentInput
   }
 
   export type StudentUncheckedCreateWithoutStudentAchievementsInput = {
@@ -15466,9 +16884,10 @@ export namespace Prisma {
     points?: number
     lastLogin?: Date | string
     leetCodeProfile?: string | null
-    session?: string | null
+    lastQuestionSolved: Date | string
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
+    session?: SessionUncheckedCreateNestedOneWithoutStudentInput
   }
 
   export type StudentCreateOrConnectWithoutStudentAchievementsInput = {
@@ -15521,9 +16940,10 @@ export namespace Prisma {
     points?: IntFieldUpdateOperationsInput | number
     lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    session?: NullableStringFieldUpdateOperationsInput | string | null
+    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
+    session?: SessionUpdateOneWithoutStudentNestedInput
   }
 
   export type StudentUncheckedUpdateWithoutStudentAchievementsInput = {
@@ -15539,9 +16959,10 @@ export namespace Prisma {
     points?: IntFieldUpdateOperationsInput | number
     lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    session?: NullableStringFieldUpdateOperationsInput | string | null
+    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
+    session?: SessionUncheckedUpdateOneWithoutStudentNestedInput
   }
 
   export type AchievementsUpsertWithoutStudentAchievementsInput = {
@@ -15584,9 +17005,10 @@ export namespace Prisma {
     points?: number
     lastLogin?: Date | string
     leetCodeProfile?: string | null
-    session?: string | null
+    lastQuestionSolved: Date | string
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
+    session?: SessionCreateNestedOneWithoutStudentInput
   }
 
   export type StudentUncheckedCreateWithoutContestResultInput = {
@@ -15602,9 +17024,10 @@ export namespace Prisma {
     points?: number
     lastLogin?: Date | string
     leetCodeProfile?: string | null
-    session?: string | null
+    lastQuestionSolved: Date | string
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
+    session?: SessionUncheckedCreateNestedOneWithoutStudentInput
   }
 
   export type StudentCreateOrConnectWithoutContestResultInput = {
@@ -15655,9 +17078,10 @@ export namespace Prisma {
     points?: IntFieldUpdateOperationsInput | number
     lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    session?: NullableStringFieldUpdateOperationsInput | string | null
+    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
+    session?: SessionUpdateOneWithoutStudentNestedInput
   }
 
   export type StudentUncheckedUpdateWithoutContestResultInput = {
@@ -15673,9 +17097,10 @@ export namespace Prisma {
     points?: IntFieldUpdateOperationsInput | number
     lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    session?: NullableStringFieldUpdateOperationsInput | string | null
+    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
+    session?: SessionUncheckedUpdateOneWithoutStudentNestedInput
   }
 
   export type TopicsUpsertWithoutContestResultInput = {
@@ -15702,6 +17127,96 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudentCreateWithoutSessionInput = {
+    name: string
+    rno: string
+    uname: string
+    leetCodeName: string
+    salt: string
+    hash: string
+    currStreak?: number
+    maxStreak?: number
+    points?: number
+    lastLogin?: Date | string
+    leetCodeProfile?: string | null
+    lastQuestionSolved: Date | string
+    submission?: SubmissionCreateNestedManyWithoutStudentInput
+    studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
+    contestResult?: ContestResultCreateNestedManyWithoutStudentInput
+  }
+
+  export type StudentUncheckedCreateWithoutSessionInput = {
+    id?: number
+    name: string
+    rno: string
+    uname: string
+    leetCodeName: string
+    salt: string
+    hash: string
+    currStreak?: number
+    maxStreak?: number
+    points?: number
+    lastLogin?: Date | string
+    leetCodeProfile?: string | null
+    lastQuestionSolved: Date | string
+    submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
+    studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
+    contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
+  }
+
+  export type StudentCreateOrConnectWithoutSessionInput = {
+    where: StudentWhereUniqueInput
+    create: XOR<StudentCreateWithoutSessionInput, StudentUncheckedCreateWithoutSessionInput>
+  }
+
+  export type StudentUpsertWithoutSessionInput = {
+    update: XOR<StudentUpdateWithoutSessionInput, StudentUncheckedUpdateWithoutSessionInput>
+    create: XOR<StudentCreateWithoutSessionInput, StudentUncheckedCreateWithoutSessionInput>
+    where?: StudentWhereInput
+  }
+
+  export type StudentUpdateToOneWithWhereWithoutSessionInput = {
+    where?: StudentWhereInput
+    data: XOR<StudentUpdateWithoutSessionInput, StudentUncheckedUpdateWithoutSessionInput>
+  }
+
+  export type StudentUpdateWithoutSessionInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    rno?: StringFieldUpdateOperationsInput | string
+    uname?: StringFieldUpdateOperationsInput | string
+    leetCodeName?: StringFieldUpdateOperationsInput | string
+    salt?: StringFieldUpdateOperationsInput | string
+    hash?: StringFieldUpdateOperationsInput | string
+    currStreak?: IntFieldUpdateOperationsInput | number
+    maxStreak?: IntFieldUpdateOperationsInput | number
+    points?: IntFieldUpdateOperationsInput | number
+    lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
+    leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
+    submission?: SubmissionUpdateManyWithoutStudentNestedInput
+    studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
+    contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
+  }
+
+  export type StudentUncheckedUpdateWithoutSessionInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    rno?: StringFieldUpdateOperationsInput | string
+    uname?: StringFieldUpdateOperationsInput | string
+    leetCodeName?: StringFieldUpdateOperationsInput | string
+    salt?: StringFieldUpdateOperationsInput | string
+    hash?: StringFieldUpdateOperationsInput | string
+    currStreak?: IntFieldUpdateOperationsInput | number
+    maxStreak?: IntFieldUpdateOperationsInput | number
+    points?: IntFieldUpdateOperationsInput | number
+    lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
+    leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
+    submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
+    studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
+    contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
   }
 
   export type SubmissionCreateManyStudentInput = {

@@ -20,7 +20,8 @@ async function SendEmail(toAddr , otp) {
         const status = await transporter.sendMail(mailObject);
         return 1;
     }
-    catch (err){
+    catch (error){
+        console.log(error)
         return 0;
     }
 }

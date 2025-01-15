@@ -64,12 +64,13 @@ model Student {
   points Int @default(0)
   lastLogin DateTime @default(now())
   leetCodeProfile String?
-  session String?
-
+  lastQuestionSolved DateTime?
+  
   //relationships
   submission Submission[]
   studentAchievements StudentAchievements[]
   contestResult ContestResult[]
+  session Session?
 
   @@index([points])
 }
@@ -177,4 +178,14 @@ model OTPStudent {
   otp String 
   expiry DateTime
   status OTPStatus @default(PENDING)
+}
+
+model Session {
+  id Int @id @default(autoincrement())
+  uname String @unique
+  session String
+  expiry DateTime
+
+  //relationships
+  student Student @relation(fields: [uname],references:[uname])
 }
