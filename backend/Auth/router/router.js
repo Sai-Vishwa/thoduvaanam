@@ -1,4 +1,9 @@
 const { Router } = require("express");
+const { verifyOTP } = require("../Signup/otpVerify");
+const { resendOtp } = require("../Signup/resendOtp");
+const { login } = require("../Login/login");
+const { signUp } = require("../Signup/signup");
+const { unameVerify } = require("../Signup/unameVerify");
 
 const router = new Router();
 
@@ -6,6 +11,31 @@ const asyncHandler = (fn) => (req, res, next) => {
     Promise.resolve(fn(req, res, next)).catch(next);
   };
 
+  router.post('/otp-verify', asyncHandler(async (req, res) => {
+    await verifyOTP(req,res);
+  }));
+
+  router.post('/otp-resend', asyncHandler(async (req, res) => {
+    await resendOtp(req,res)
+  }));
+
+  router.post('/login', asyncHandler(async (req, res) => {
+    await login(req,res);
+  }));
+  
+  router.post('/signup', asyncHandler(async (req, res) => {
+    await signUp(req,res);
+  }));
+
+  router.post('/uname-verify', asyncHandler(async (req, res) => {
+    console.log("im here");
+    await unameVerify(req,res);
+  }));
+
+  router.get("/",asyncHandler(async (req,res)=>{
+    console.log("auth is working");
+    res.status(200).send("HI IAM WORKING");
+  }))
 module.exports = {
     router
 };

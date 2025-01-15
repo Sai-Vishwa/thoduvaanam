@@ -1874,6 +1874,7 @@ export namespace Prisma {
     points: number | null
     lastLogin: Date | null
     leetCodeProfile: string | null
+    session: string | null
   }
 
   export type StudentMaxAggregateOutputType = {
@@ -1889,6 +1890,7 @@ export namespace Prisma {
     points: number | null
     lastLogin: Date | null
     leetCodeProfile: string | null
+    session: string | null
   }
 
   export type StudentCountAggregateOutputType = {
@@ -1904,6 +1906,7 @@ export namespace Prisma {
     points: number
     lastLogin: number
     leetCodeProfile: number
+    session: number
     _all: number
   }
 
@@ -1935,6 +1938,7 @@ export namespace Prisma {
     points?: true
     lastLogin?: true
     leetCodeProfile?: true
+    session?: true
   }
 
   export type StudentMaxAggregateInputType = {
@@ -1950,6 +1954,7 @@ export namespace Prisma {
     points?: true
     lastLogin?: true
     leetCodeProfile?: true
+    session?: true
   }
 
   export type StudentCountAggregateInputType = {
@@ -1965,6 +1970,7 @@ export namespace Prisma {
     points?: true
     lastLogin?: true
     leetCodeProfile?: true
+    session?: true
     _all?: true
   }
 
@@ -2067,6 +2073,7 @@ export namespace Prisma {
     points: number
     lastLogin: Date
     leetCodeProfile: string | null
+    session: string | null
     _count: StudentCountAggregateOutputType | null
     _avg: StudentAvgAggregateOutputType | null
     _sum: StudentSumAggregateOutputType | null
@@ -2101,6 +2108,7 @@ export namespace Prisma {
     points?: boolean
     lastLogin?: boolean
     leetCodeProfile?: boolean
+    session?: boolean
     submission?: boolean | Student$submissionArgs<ExtArgs>
     studentAchievements?: boolean | Student$studentAchievementsArgs<ExtArgs>
     contestResult?: boolean | Student$contestResultArgs<ExtArgs>
@@ -2120,6 +2128,7 @@ export namespace Prisma {
     points?: boolean
     lastLogin?: boolean
     leetCodeProfile?: boolean
+    session?: boolean
   }, ExtArgs["result"]["student"]>
 
   export type StudentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2135,6 +2144,7 @@ export namespace Prisma {
     points?: boolean
     lastLogin?: boolean
     leetCodeProfile?: boolean
+    session?: boolean
   }, ExtArgs["result"]["student"]>
 
   export type StudentSelectScalar = {
@@ -2150,9 +2160,10 @@ export namespace Prisma {
     points?: boolean
     lastLogin?: boolean
     leetCodeProfile?: boolean
+    session?: boolean
   }
 
-  export type StudentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rno" | "uname" | "leetCodeName" | "salt" | "hash" | "currStreak" | "maxStreak" | "points" | "lastLogin" | "leetCodeProfile", ExtArgs["result"]["student"]>
+  export type StudentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rno" | "uname" | "leetCodeName" | "salt" | "hash" | "currStreak" | "maxStreak" | "points" | "lastLogin" | "leetCodeProfile" | "session", ExtArgs["result"]["student"]>
   export type StudentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     submission?: boolean | Student$submissionArgs<ExtArgs>
     studentAchievements?: boolean | Student$studentAchievementsArgs<ExtArgs>
@@ -2182,6 +2193,7 @@ export namespace Prisma {
       points: number
       lastLogin: Date
       leetCodeProfile: string | null
+      session: string | null
     }, ExtArgs["result"]["student"]>
     composites: {}
   }
@@ -2620,6 +2632,7 @@ export namespace Prisma {
     readonly points: FieldRef<"Student", 'Int'>
     readonly lastLogin: FieldRef<"Student", 'DateTime'>
     readonly leetCodeProfile: FieldRef<"Student", 'String'>
+    readonly session: FieldRef<"Student", 'String'>
   }
     
 
@@ -11993,7 +12006,8 @@ export namespace Prisma {
     maxStreak: 'maxStreak',
     points: 'points',
     lastLogin: 'lastLogin',
-    leetCodeProfile: 'leetCodeProfile'
+    leetCodeProfile: 'leetCodeProfile',
+    session: 'session'
   };
 
   export type StudentScalarFieldEnum = (typeof StudentScalarFieldEnum)[keyof typeof StudentScalarFieldEnum]
@@ -12287,6 +12301,7 @@ export namespace Prisma {
     points?: IntFilter<"Student"> | number
     lastLogin?: DateTimeFilter<"Student"> | Date | string
     leetCodeProfile?: StringNullableFilter<"Student"> | string | null
+    session?: StringNullableFilter<"Student"> | string | null
     submission?: SubmissionListRelationFilter
     studentAchievements?: StudentAchievementsListRelationFilter
     contestResult?: ContestResultListRelationFilter
@@ -12305,6 +12320,7 @@ export namespace Prisma {
     points?: SortOrder
     lastLogin?: SortOrder
     leetCodeProfile?: SortOrderInput | SortOrder
+    session?: SortOrderInput | SortOrder
     submission?: SubmissionOrderByRelationAggregateInput
     studentAchievements?: StudentAchievementsOrderByRelationAggregateInput
     contestResult?: ContestResultOrderByRelationAggregateInput
@@ -12326,6 +12342,7 @@ export namespace Prisma {
     points?: IntFilter<"Student"> | number
     lastLogin?: DateTimeFilter<"Student"> | Date | string
     leetCodeProfile?: StringNullableFilter<"Student"> | string | null
+    session?: StringNullableFilter<"Student"> | string | null
     submission?: SubmissionListRelationFilter
     studentAchievements?: StudentAchievementsListRelationFilter
     contestResult?: ContestResultListRelationFilter
@@ -12344,6 +12361,7 @@ export namespace Prisma {
     points?: SortOrder
     lastLogin?: SortOrder
     leetCodeProfile?: SortOrderInput | SortOrder
+    session?: SortOrderInput | SortOrder
     _count?: StudentCountOrderByAggregateInput
     _avg?: StudentAvgOrderByAggregateInput
     _max?: StudentMaxOrderByAggregateInput
@@ -12367,6 +12385,7 @@ export namespace Prisma {
     points?: IntWithAggregatesFilter<"Student"> | number
     lastLogin?: DateTimeWithAggregatesFilter<"Student"> | Date | string
     leetCodeProfile?: StringNullableWithAggregatesFilter<"Student"> | string | null
+    session?: StringNullableWithAggregatesFilter<"Student"> | string | null
   }
 
   export type TopicsWhereInput = {
@@ -12906,6 +12925,7 @@ export namespace Prisma {
     points?: number
     lastLogin?: Date | string
     leetCodeProfile?: string | null
+    session?: string | null
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultCreateNestedManyWithoutStudentInput
@@ -12924,6 +12944,7 @@ export namespace Prisma {
     points?: number
     lastLogin?: Date | string
     leetCodeProfile?: string | null
+    session?: string | null
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
@@ -12941,6 +12962,7 @@ export namespace Prisma {
     points?: IntFieldUpdateOperationsInput | number
     lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    session?: NullableStringFieldUpdateOperationsInput | string | null
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
@@ -12959,6 +12981,7 @@ export namespace Prisma {
     points?: IntFieldUpdateOperationsInput | number
     lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    session?: NullableStringFieldUpdateOperationsInput | string | null
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
@@ -12977,6 +13000,7 @@ export namespace Prisma {
     points?: number
     lastLogin?: Date | string
     leetCodeProfile?: string | null
+    session?: string | null
   }
 
   export type StudentUpdateManyMutationInput = {
@@ -12991,6 +13015,7 @@ export namespace Prisma {
     points?: IntFieldUpdateOperationsInput | number
     lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    session?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StudentUncheckedUpdateManyInput = {
@@ -13006,6 +13031,7 @@ export namespace Prisma {
     points?: IntFieldUpdateOperationsInput | number
     lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    session?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TopicsCreateInput = {
@@ -13625,6 +13651,7 @@ export namespace Prisma {
     points?: SortOrder
     lastLogin?: SortOrder
     leetCodeProfile?: SortOrder
+    session?: SortOrder
   }
 
   export type StudentAvgOrderByAggregateInput = {
@@ -13647,6 +13674,7 @@ export namespace Prisma {
     points?: SortOrder
     lastLogin?: SortOrder
     leetCodeProfile?: SortOrder
+    session?: SortOrder
   }
 
   export type StudentMinOrderByAggregateInput = {
@@ -13662,6 +13690,7 @@ export namespace Prisma {
     points?: SortOrder
     lastLogin?: SortOrder
     leetCodeProfile?: SortOrder
+    session?: SortOrder
   }
 
   export type StudentSumOrderByAggregateInput = {
@@ -15260,6 +15289,7 @@ export namespace Prisma {
     points?: number
     lastLogin?: Date | string
     leetCodeProfile?: string | null
+    session?: string | null
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultCreateNestedManyWithoutStudentInput
   }
@@ -15277,6 +15307,7 @@ export namespace Prisma {
     points?: number
     lastLogin?: Date | string
     leetCodeProfile?: string | null
+    session?: string | null
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
   }
@@ -15345,6 +15376,7 @@ export namespace Prisma {
     points?: IntFieldUpdateOperationsInput | number
     lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    session?: NullableStringFieldUpdateOperationsInput | string | null
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
   }
@@ -15362,6 +15394,7 @@ export namespace Prisma {
     points?: IntFieldUpdateOperationsInput | number
     lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    session?: NullableStringFieldUpdateOperationsInput | string | null
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
   }
@@ -15415,6 +15448,7 @@ export namespace Prisma {
     points?: number
     lastLogin?: Date | string
     leetCodeProfile?: string | null
+    session?: string | null
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultCreateNestedManyWithoutStudentInput
   }
@@ -15432,6 +15466,7 @@ export namespace Prisma {
     points?: number
     lastLogin?: Date | string
     leetCodeProfile?: string | null
+    session?: string | null
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
   }
@@ -15486,6 +15521,7 @@ export namespace Prisma {
     points?: IntFieldUpdateOperationsInput | number
     lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    session?: NullableStringFieldUpdateOperationsInput | string | null
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
   }
@@ -15503,6 +15539,7 @@ export namespace Prisma {
     points?: IntFieldUpdateOperationsInput | number
     lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    session?: NullableStringFieldUpdateOperationsInput | string | null
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
   }
@@ -15547,6 +15584,7 @@ export namespace Prisma {
     points?: number
     lastLogin?: Date | string
     leetCodeProfile?: string | null
+    session?: string | null
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
   }
@@ -15564,6 +15602,7 @@ export namespace Prisma {
     points?: number
     lastLogin?: Date | string
     leetCodeProfile?: string | null
+    session?: string | null
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
   }
@@ -15616,6 +15655,7 @@ export namespace Prisma {
     points?: IntFieldUpdateOperationsInput | number
     lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    session?: NullableStringFieldUpdateOperationsInput | string | null
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
   }
@@ -15633,6 +15673,7 @@ export namespace Prisma {
     points?: IntFieldUpdateOperationsInput | number
     lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    session?: NullableStringFieldUpdateOperationsInput | string | null
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
   }

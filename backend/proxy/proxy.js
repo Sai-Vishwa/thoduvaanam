@@ -13,3 +13,20 @@ const setRequestBodydata = (proxyReq, req, res) => {
     console.error('Proxy Error:', err);
     res.status(500).send('Proxy Error');
   }
+
+  const authProxy = createProxyMiddleware({
+    target: 'http://localhost:4001/api/v1/login-signup',
+    changeOrigin: true,
+    pathRewrite: {
+      '^/login-signup': ''
+    },
+    on: {
+      proxyReq: (proxyReq, req, res) => setRequestBodydata(proxyReq, req, res),
+      proxyRes: (proxyRes, req, res) => responseHandle(proxyRes, req, res),
+      error: (err, req, res) => proxyError(err, req, res)
+    }
+  });
+
+  module.exports = { 
+    authProxy
+  }

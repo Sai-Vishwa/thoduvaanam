@@ -64,6 +64,7 @@ model Student {
   points Int @default(0)
   lastLogin DateTime @default(now())
   leetCodeProfile String?
+  session String?
 
   //relationships
   submission Submission[]

@@ -129,7 +129,8 @@ exports.Prisma.StudentScalarFieldEnum = {
   maxStreak: 'maxStreak',
   points: 'points',
   lastLogin: 'lastLogin',
-  leetCodeProfile: 'leetCodeProfile'
+  leetCodeProfile: 'leetCodeProfile',
+  session: 'session'
 };
 
 exports.Prisma.TopicsScalarFieldEnum = {
