@@ -1,9 +1,11 @@
 const { Router } = require("express");
-const { verifyOTP } = require("../Signup/otpVerify");
 const { resendOtp } = require("../Signup/resendOtp");
 const { login } = require("../Login/login");
 const { signUp } = require("../Signup/signup");
 const { unameVerify } = require("../Signup/unameVerify");
+const { verifyOTPforSignUp } = require("../Signup/otpVerifySignUp");
+const { forgotPassword } = require("../Login/forgotPassword");
+const { verifyOTPforLogin } = require("../Login/otpVerfiyLogin");
 
 const router = new Router();
 
@@ -11,8 +13,8 @@ const asyncHandler = (fn) => (req, res, next) => {
     Promise.resolve(fn(req, res, next)).catch(next);
   };
 
-  router.post('/otp-verify', asyncHandler(async (req, res) => {
-    await verifyOTP(req,res);
+  router.post('/otp-verify-signup', asyncHandler(async (req, res) => {
+    await verifyOTPforSignUp(req,res);
   }));
 
   router.post('/otp-resend', asyncHandler(async (req, res) => {
@@ -30,6 +32,14 @@ const asyncHandler = (fn) => (req, res, next) => {
   router.post('/uname-verify', asyncHandler(async (req, res) => {
     console.log("im here");
     await unameVerify(req,res);
+  }));
+
+  router.post('/forgot-password', asyncHandler(async (req, res) => {
+    await forgotPassword(req,res);
+  }));
+
+  router.post('/otp-verify-login', asyncHandler(async (req, res) => {
+    await verifyOTPforLogin(req,res);
   }));
 
   router.get("/",asyncHandler(async (req,res)=>{

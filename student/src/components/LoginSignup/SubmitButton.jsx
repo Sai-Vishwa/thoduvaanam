@@ -1,8 +1,24 @@
 import { useNavigate } from 'react-router-dom';
-function SubmitButton({unameOrRno,password,type,data,setOTP}){
+function SubmitButton({unameOrRno,password,type,data,setOTP,forgotpassword,setUnameError,setPasswordError}){
     const nav = useNavigate;
     function onSubmit(){
-        if(type=="block"){
+        if(type=="block" && forgotpassword.val=="forgot password?"){
+            let flag=0;
+            if(unameOrRno==""){
+                setUnameError({"val":"*Username cannot be empty","style":"text-white"})
+                flag+=1;
+            }
+            else{
+                setUnameError({"val":"Kaaka katha keturukken","style":"text-red-800"})
+            }
+            if(password==""){
+                setPasswordError({"val":"*Password cannot be empty","style":"text-white"})
+                flag+=1
+            }
+            else{
+                setPasswordError({"val":"Kaathula ola otirukken","style":"text-red-800"})
+            }
+            if(flag==0){
             fetch("http://localhost:4000/login-signup/login",{
                 method: 'Post',
                 headers: {
@@ -27,6 +43,9 @@ function SubmitButton({unameOrRno,password,type,data,setOTP}){
                 console.log(err);
                 alert("Some error")
             })
+        }}
+        else if(type=="block"){
+            
         }
         else{
             fetch("http://localhost:4000/login-signup/signup",{

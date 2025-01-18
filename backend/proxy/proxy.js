@@ -27,6 +27,19 @@ const setRequestBodydata = (proxyReq, req, res) => {
     }
   });
 
+  const basicProxy = createProxyMiddleware({
+    target: 'http://localhost:4002/api/v1/basic',
+    changeOrigin: true,
+    pathRewrite: {
+      '^/basic': ''
+    },
+    on: {
+      proxyReq: (proxyReq, req, res) => setRequestBodydata(proxyReq, req, res),
+      proxyRes: (proxyRes, req, res) => responseHandle(proxyRes, req, res),
+      error: (err, req, res) => proxyError(err, req, res)
+    }
+  });
+
   module.exports = { 
-    authProxy
+    authProxy,basicProxy
   }

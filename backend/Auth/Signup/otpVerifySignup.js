@@ -3,7 +3,7 @@ const { hashGenerator } = require('../hashAndOtp/hashGenerator');
 
 const prisma = new PrismaClient();
 
-async function verifyOTP(req,res) {
+async function verifyOTPforSignUp(req,res) {
     try{    
         const student = await prisma.oTPStudent.findUnique({
             where:{
@@ -33,6 +33,19 @@ async function verifyOTP(req,res) {
         if(student["otp"]==req.body.otp && otpTime<currTime){
             const std = await prisma.student.create({
                 data: data
+            })
+            const otpVerified = await prisma.oTPStudent.update({
+                where:{
+                    rno:student.rno
+                },
+                data:{
+                    status:"APPROVED"
+                }
+            })
+            const del = await prisma.session.deleteMany({
+                where:{
+                    uname:student.uname
+                }
             })
             const ses = await prisma.session.create({
                 data:{
@@ -67,5 +80,5 @@ async function verifyOTP(req,res) {
 }
 
 module.exports = {
-    verifyOTP
+    verifyOTPforSignUp
 }
