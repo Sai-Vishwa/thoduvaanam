@@ -1,7 +1,7 @@
 function Signup({signupData , setSignupData}){
     
     return(
-    <div className="w-full h-full text-red-600 block mt-4 mb-8">
+    <div className="w-full h-full text-blue-800 block mt-4 mb-8">
                 <input type="text" placeholder="Enter your full name" onChange={(e)=>{setSignupData({...signupData ,"name":e.target.value})}} className="p-2 w-full mb-4 required:"/>
 
         <input type="text" placeholder="Enter an unique username to identify you" onChange={(e)=>{setSignupData({...signupData ,"uname":e.target.value})}} className="p-2 w-full mb-4"/>

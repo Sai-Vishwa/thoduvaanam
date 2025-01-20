@@ -14,6 +14,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum CommentType {
+  GENERAL
+  SPECIFIC
+}
+
 enum TestCaseType {
   OPEN
   HIDDEN
@@ -29,11 +34,6 @@ enum DifficultyType {
 enum AcceptedType {
   ACCEPTED
   REJECTED
-}
-
-enum AchievementType {
-  ONETIME
-  COUNTABLE
 }
 
 enum QuestionType {
@@ -59,20 +59,14 @@ model Student {
   leetCodeName String
   salt String
   hash String
-  currStreak Int @default(0)
-  maxStreak Int @default(0)
-  points Int @default(0)
-  lastLogin DateTime @default(now())
   leetCodeProfile String?
-  lastQuestionSolved DateTime?
   
   //relationships
   submission Submission[]
   studentAchievements StudentAchievements[]
   contestResult ContestResult[]
   session Session?
-
-  @@index([points])
+  discussion Discussions[]
 }
 
 model Topics {
@@ -96,10 +90,12 @@ model Questions {
   pointsPerTestCaseSolved Int 
   type QuestionType @default(PRACTICE)
   leetCodeLink String?
+  leetCodeTitle String?
 
   //relationships
   testCase TestCase[]
   submission Submission[]
+  discussion Discussions[]
 }
 
 model TestCase {
@@ -132,10 +128,7 @@ model Achievements {
   id Int @id @default(autoincrement())
   title String 
   description String?
-  type AchievementType @default(ONETIME)
-  minCriteria Int @default(-1)
-  maxCriteria Int @default(-1)
-
+  
   //relationships
   studentAchievements StudentAchievements[]
 }
@@ -144,12 +137,13 @@ model StudentAchievements {
   id Int @id @default(autoincrement())
   studentId Int
   achievementId Int
-  acquiredOn DateTime @default(now())
+  count Int 
 
   //relationships
   student Student @relation(fields: [studentId], references: [id])
   achievements Achievements @relation(fields: [achievementId], references: [id])
 
+  @@index([count])
 }
 
 model ContestResult {
@@ -188,4 +182,18 @@ model Session {
 
   //relationships
   student Student @relation(fields: [uname],references:[uname])
+}
+
+model Discussions {
+  id Int @id @default(autoincrement())
+  studentId Int
+  type CommentType @default(GENERAL)
+  questionId Int?
+  repliedTo Int?
+
+  //relationships
+  student Student @relation(fields: [studentId],references:[id])
+  question Questions? @relation(fields: [questionId],references:[id])
+  toWhomIReply Discussions? @relation("SelfMapping",fields: [repliedTo] , references:[id])
+  repliesIGet Discussions[] @relation("SelfMapping")
 }

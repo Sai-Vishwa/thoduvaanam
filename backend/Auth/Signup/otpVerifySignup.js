@@ -27,7 +27,6 @@ async function verifyOTPforSignUp(req,res) {
             salt: student.salt,
             hash: student.hash,
             leetCodeProfile: student.leetCodeProfile,
-            lastLogin: currTime,
         }
         const session = hashGenerator(student.uname)
         if(student["otp"]==req.body.otp && otpTime<currTime){
@@ -36,7 +35,7 @@ async function verifyOTPforSignUp(req,res) {
             })
             const otpVerified = await prisma.oTPStudent.update({
                 where:{
-                    rno:student.rno
+                    id:student.id
                 },
                 data:{
                     status:"APPROVED"
@@ -53,6 +52,33 @@ async function verifyOTPforSignUp(req,res) {
                     session:session,
                     expiry: exp
                 }
+            })
+            const achievements = await prisma.studentAchievements.createMany({
+                data:[{
+                    studentId: student.id,
+                    achievementId: 1,
+                    count: 0
+                },{
+                    studentId: student.id,
+                    achievementId: 2,
+                    count: 0
+                },{
+                    studentId: student.id,
+                    achievementId: 3,
+                    count: 0
+                },{
+                    studentId: student.id,
+                    achievementId: 4,
+                    count: 0
+                },{
+                    studentId: student.id,
+                    achievementId: 5,
+                    count: 0
+                },{
+                    studentId: student.id,
+                    achievementId: 6,
+                    count: 0
+                },]
             })
             res.status(200).json({
                 msg:"Success",

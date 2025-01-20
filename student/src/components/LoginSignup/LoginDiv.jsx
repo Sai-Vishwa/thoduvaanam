@@ -4,7 +4,7 @@ function Login({setName , setPassword ,forgotpassword , setForgotPassword,unameE
 
     
     return(
-    <div className="w-full h-full text-red-600 block mt-4 mb-6 relative">
+    <div className="w-full h-full text-blue-800 block mt-4 mb-6 relative">
         <input type="text" placeholder="Enter uname/regno" onChange={(e)=>{setName(e.target.value)}} className="p-2 w-full mb-0 mt-2"/>
         <div className="flex items-baseline mb-3">
         <p className={`text-sm ${unameError.style}`}>{unameError.val}</p>
@@ -15,7 +15,7 @@ function Login({setName , setPassword ,forgotpassword , setForgotPassword,unameE
         </div>
         <div className="text-white text-md hover:underline" onClick={()=>{
             if(forgotpassword.style=="block"){
-                setForgotPassword({"val":"remember password?","style":"hidden"});setPasswordError({"val":"Kathula ola otirukken","style":"text-red-800"});
+                setForgotPassword({"val":"remember password?","style":"hidden"});setPasswordError({"val":"Kathula ola otirukken","style":"text-blue-950"});
             }
             else{
                 setForgotPassword({"val":"forgot password?","style":"block"});

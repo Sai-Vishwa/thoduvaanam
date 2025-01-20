@@ -9,14 +9,14 @@ function SubmitButton({unameOrRno,password,type,data,setOTP,forgotpassword,setUn
                 flag+=1;
             }
             else{
-                setUnameError({"val":"Kaaka katha keturukken","style":"text-red-800"})
+                setUnameError({"val":"Kaaka katha keturukken","style":"text-blue-950"})
             }
             if(password==""){
                 setPasswordError({"val":"*Password cannot be empty","style":"text-white"})
                 flag+=1
             }
             else{
-                setPasswordError({"val":"Kaathula ola otirukken","style":"text-red-800"})
+                setPasswordError({"val":"Kaathula ola otirukken","style":"text-blue-950"})
             }
             if(flag==0){
             fetch("http://localhost:4000/login-signup/login",{
@@ -75,7 +75,7 @@ function SubmitButton({unameOrRno,password,type,data,setOTP,forgotpassword,setUn
         }
     }
     return(<>
-    <button onClick={onSubmit} className='border-2 border-white cursor-pointer rounded-lg px-1 py-2 text-white hover:text-red-800 bg-red-800 hover:bg-white'>
+    <button onClick={onSubmit} className='border-2 border-white cursor-pointer rounded-lg px-1 py-2 text-white  bg-blue-950 hover:text-3xl'>
         Submit
     </button>
     </>)
