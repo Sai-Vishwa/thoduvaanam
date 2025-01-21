@@ -1,10 +1,10 @@
 const {PrismaClient} = require("../dbSchema/generated");
 const prisma = new PrismaClient();
-async function sessionChecker(uname , sessionId) {
+async function sessionChecker(id , sessionId) {
     const session = await prisma.session.findFirst({
         where:{
             AND:[
-                {uname:uname},
+                {studentId:id},
                 {session:sessionId}
             ]
         }

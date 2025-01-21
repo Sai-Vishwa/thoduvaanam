@@ -32,6 +32,7 @@ enum DifficultyType {
 }
 
 enum AcceptedType {
+  PENDING
   ACCEPTED
   REJECTED
 }
@@ -78,12 +79,14 @@ model Topics {
 
   //relationships
   contestResult ContestResult[]
+  question Questions[]
 }
 
 model Questions {
   id Int @id @default(autoincrement())
   title String 
   description String?
+  topic Int
   noOfHiddenTestCases Int @default(18)
   noOfExternalTestCases Int @default(2)
   difficulty DifficultyType @default(EASY)
@@ -96,6 +99,7 @@ model Questions {
   testCase TestCase[]
   submission Submission[]
   discussion Discussions[]
+  topics Topics @relation(fields: [topic],references:[id])
 }
 
 model TestCase {
@@ -113,7 +117,7 @@ model Submission {
   questionId Int
   studentId Int
   solvedOn DateTime @default(now())
-  status AcceptedType @default(ACCEPTED)
+  status AcceptedType @default(PENDING)
   noOfCasesPassed Int 
   pointsSecured Int  
   type SubmissionType @default(WEBSITE)
@@ -176,12 +180,12 @@ model OTPStudent {
 
 model Session {
   id Int @id @default(autoincrement())
-  uname String @unique
+  studentId Int @unique
   session String
   expiry DateTime
 
   //relationships
-  student Student @relation(fields: [uname],references:[uname])
+  student Student @relation(fields: [studentId],references:[id])
 }
 
 model Discussions {

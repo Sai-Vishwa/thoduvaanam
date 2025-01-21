@@ -63,12 +63,25 @@ export type OTPStudent = $Result.DefaultSelection<Prisma.$OTPStudentPayload>
  * 
  */
 export type Session = $Result.DefaultSelection<Prisma.$SessionPayload>
+/**
+ * Model Discussions
+ * 
+ */
+export type Discussions = $Result.DefaultSelection<Prisma.$DiscussionsPayload>
 
 /**
  * Enums
  */
 export namespace $Enums {
-  export const TestCaseType: {
+  export const CommentType: {
+  GENERAL: 'GENERAL',
+  SPECIFIC: 'SPECIFIC'
+};
+
+export type CommentType = (typeof CommentType)[keyof typeof CommentType]
+
+
+export const TestCaseType: {
   OPEN: 'OPEN',
   HIDDEN: 'HIDDEN'
 };
@@ -87,19 +100,12 @@ export type DifficultyType = (typeof DifficultyType)[keyof typeof DifficultyType
 
 
 export const AcceptedType: {
+  PENDING: 'PENDING',
   ACCEPTED: 'ACCEPTED',
   REJECTED: 'REJECTED'
 };
 
 export type AcceptedType = (typeof AcceptedType)[keyof typeof AcceptedType]
-
-
-export const AchievementType: {
-  ONETIME: 'ONETIME',
-  COUNTABLE: 'COUNTABLE'
-};
-
-export type AchievementType = (typeof AchievementType)[keyof typeof AchievementType]
 
 
 export const QuestionType: {
@@ -127,6 +133,10 @@ export type OTPStatus = (typeof OTPStatus)[keyof typeof OTPStatus]
 
 }
 
+export type CommentType = $Enums.CommentType
+
+export const CommentType: typeof $Enums.CommentType
+
 export type TestCaseType = $Enums.TestCaseType
 
 export const TestCaseType: typeof $Enums.TestCaseType
@@ -138,10 +148,6 @@ export const DifficultyType: typeof $Enums.DifficultyType
 export type AcceptedType = $Enums.AcceptedType
 
 export const AcceptedType: typeof $Enums.AcceptedType
-
-export type AchievementType = $Enums.AchievementType
-
-export const AchievementType: typeof $Enums.AchievementType
 
 export type QuestionType = $Enums.QuestionType
 
@@ -379,6 +385,16 @@ export class PrismaClient<
     * ```
     */
   get session(): Prisma.SessionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.discussions`: Exposes CRUD operations for the **Discussions** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Discussions
+    * const discussions = await prisma.discussions.findMany()
+    * ```
+    */
+  get discussions(): Prisma.DiscussionsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -828,7 +844,8 @@ export namespace Prisma {
     StudentAchievements: 'StudentAchievements',
     ContestResult: 'ContestResult',
     OTPStudent: 'OTPStudent',
-    Session: 'Session'
+    Session: 'Session',
+    Discussions: 'Discussions'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -844,7 +861,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "student" | "topics" | "questions" | "testCase" | "submission" | "achievements" | "studentAchievements" | "contestResult" | "oTPStudent" | "session"
+      modelProps: "student" | "topics" | "questions" | "testCase" | "submission" | "achievements" | "studentAchievements" | "contestResult" | "oTPStudent" | "session" | "discussions"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1588,6 +1605,80 @@ export namespace Prisma {
           }
         }
       }
+      Discussions: {
+        payload: Prisma.$DiscussionsPayload<ExtArgs>
+        fields: Prisma.DiscussionsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DiscussionsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DiscussionsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionsPayload>
+          }
+          findFirst: {
+            args: Prisma.DiscussionsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DiscussionsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionsPayload>
+          }
+          findMany: {
+            args: Prisma.DiscussionsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionsPayload>[]
+          }
+          create: {
+            args: Prisma.DiscussionsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionsPayload>
+          }
+          createMany: {
+            args: Prisma.DiscussionsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DiscussionsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionsPayload>[]
+          }
+          delete: {
+            args: Prisma.DiscussionsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionsPayload>
+          }
+          update: {
+            args: Prisma.DiscussionsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionsPayload>
+          }
+          deleteMany: {
+            args: Prisma.DiscussionsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DiscussionsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DiscussionsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionsPayload>[]
+          }
+          upsert: {
+            args: Prisma.DiscussionsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionsPayload>
+          }
+          aggregate: {
+            args: Prisma.DiscussionsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDiscussions>
+          }
+          groupBy: {
+            args: Prisma.DiscussionsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DiscussionsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DiscussionsCountArgs<ExtArgs>
+            result: $Utils.Optional<DiscussionsCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1682,6 +1773,7 @@ export namespace Prisma {
     contestResult?: ContestResultOmit
     oTPStudent?: OTPStudentOmit
     session?: SessionOmit
+    discussions?: DiscussionsOmit
   }
 
   /* Types for Logging */
@@ -1779,12 +1871,14 @@ export namespace Prisma {
     submission: number
     studentAchievements: number
     contestResult: number
+    discussion: number
   }
 
   export type StudentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     submission?: boolean | StudentCountOutputTypeCountSubmissionArgs
     studentAchievements?: boolean | StudentCountOutputTypeCountStudentAchievementsArgs
     contestResult?: boolean | StudentCountOutputTypeCountContestResultArgs
+    discussion?: boolean | StudentCountOutputTypeCountDiscussionArgs
   }
 
   // Custom InputTypes
@@ -1819,6 +1913,13 @@ export namespace Prisma {
     where?: ContestResultWhereInput
   }
 
+  /**
+   * StudentCountOutputType without action
+   */
+  export type StudentCountOutputTypeCountDiscussionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DiscussionsWhereInput
+  }
+
 
   /**
    * Count Type TopicsCountOutputType
@@ -1826,10 +1927,12 @@ export namespace Prisma {
 
   export type TopicsCountOutputType = {
     contestResult: number
+    question: number
   }
 
   export type TopicsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     contestResult?: boolean | TopicsCountOutputTypeCountContestResultArgs
+    question?: boolean | TopicsCountOutputTypeCountQuestionArgs
   }
 
   // Custom InputTypes
@@ -1850,6 +1953,13 @@ export namespace Prisma {
     where?: ContestResultWhereInput
   }
 
+  /**
+   * TopicsCountOutputType without action
+   */
+  export type TopicsCountOutputTypeCountQuestionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuestionsWhereInput
+  }
+
 
   /**
    * Count Type QuestionsCountOutputType
@@ -1858,11 +1968,13 @@ export namespace Prisma {
   export type QuestionsCountOutputType = {
     testCase: number
     submission: number
+    discussion: number
   }
 
   export type QuestionsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     testCase?: boolean | QuestionsCountOutputTypeCountTestCaseArgs
     submission?: boolean | QuestionsCountOutputTypeCountSubmissionArgs
+    discussion?: boolean | QuestionsCountOutputTypeCountDiscussionArgs
   }
 
   // Custom InputTypes
@@ -1888,6 +2000,13 @@ export namespace Prisma {
    */
   export type QuestionsCountOutputTypeCountSubmissionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SubmissionWhereInput
+  }
+
+  /**
+   * QuestionsCountOutputType without action
+   */
+  export type QuestionsCountOutputTypeCountDiscussionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DiscussionsWhereInput
   }
 
 
@@ -1923,6 +2042,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type DiscussionsCountOutputType
+   */
+
+  export type DiscussionsCountOutputType = {
+    repliesIGet: number
+  }
+
+  export type DiscussionsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    repliesIGet?: boolean | DiscussionsCountOutputTypeCountRepliesIGetArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * DiscussionsCountOutputType without action
+   */
+  export type DiscussionsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DiscussionsCountOutputType
+     */
+    select?: DiscussionsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * DiscussionsCountOutputType without action
+   */
+  export type DiscussionsCountOutputTypeCountRepliesIGetArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DiscussionsWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -1940,16 +2090,10 @@ export namespace Prisma {
 
   export type StudentAvgAggregateOutputType = {
     id: number | null
-    currStreak: number | null
-    maxStreak: number | null
-    points: number | null
   }
 
   export type StudentSumAggregateOutputType = {
     id: number | null
-    currStreak: number | null
-    maxStreak: number | null
-    points: number | null
   }
 
   export type StudentMinAggregateOutputType = {
@@ -1960,12 +2104,7 @@ export namespace Prisma {
     leetCodeName: string | null
     salt: string | null
     hash: string | null
-    currStreak: number | null
-    maxStreak: number | null
-    points: number | null
-    lastLogin: Date | null
     leetCodeProfile: string | null
-    lastQuestionSolved: Date | null
   }
 
   export type StudentMaxAggregateOutputType = {
@@ -1976,12 +2115,7 @@ export namespace Prisma {
     leetCodeName: string | null
     salt: string | null
     hash: string | null
-    currStreak: number | null
-    maxStreak: number | null
-    points: number | null
-    lastLogin: Date | null
     leetCodeProfile: string | null
-    lastQuestionSolved: Date | null
   }
 
   export type StudentCountAggregateOutputType = {
@@ -1992,28 +2126,17 @@ export namespace Prisma {
     leetCodeName: number
     salt: number
     hash: number
-    currStreak: number
-    maxStreak: number
-    points: number
-    lastLogin: number
     leetCodeProfile: number
-    lastQuestionSolved: number
     _all: number
   }
 
 
   export type StudentAvgAggregateInputType = {
     id?: true
-    currStreak?: true
-    maxStreak?: true
-    points?: true
   }
 
   export type StudentSumAggregateInputType = {
     id?: true
-    currStreak?: true
-    maxStreak?: true
-    points?: true
   }
 
   export type StudentMinAggregateInputType = {
@@ -2024,12 +2147,7 @@ export namespace Prisma {
     leetCodeName?: true
     salt?: true
     hash?: true
-    currStreak?: true
-    maxStreak?: true
-    points?: true
-    lastLogin?: true
     leetCodeProfile?: true
-    lastQuestionSolved?: true
   }
 
   export type StudentMaxAggregateInputType = {
@@ -2040,12 +2158,7 @@ export namespace Prisma {
     leetCodeName?: true
     salt?: true
     hash?: true
-    currStreak?: true
-    maxStreak?: true
-    points?: true
-    lastLogin?: true
     leetCodeProfile?: true
-    lastQuestionSolved?: true
   }
 
   export type StudentCountAggregateInputType = {
@@ -2056,12 +2169,7 @@ export namespace Prisma {
     leetCodeName?: true
     salt?: true
     hash?: true
-    currStreak?: true
-    maxStreak?: true
-    points?: true
-    lastLogin?: true
     leetCodeProfile?: true
-    lastQuestionSolved?: true
     _all?: true
   }
 
@@ -2159,12 +2267,7 @@ export namespace Prisma {
     leetCodeName: string
     salt: string
     hash: string
-    currStreak: number
-    maxStreak: number
-    points: number
-    lastLogin: Date
     leetCodeProfile: string | null
-    lastQuestionSolved: Date
     _count: StudentCountAggregateOutputType | null
     _avg: StudentAvgAggregateOutputType | null
     _sum: StudentSumAggregateOutputType | null
@@ -2194,16 +2297,12 @@ export namespace Prisma {
     leetCodeName?: boolean
     salt?: boolean
     hash?: boolean
-    currStreak?: boolean
-    maxStreak?: boolean
-    points?: boolean
-    lastLogin?: boolean
     leetCodeProfile?: boolean
-    lastQuestionSolved?: boolean
     submission?: boolean | Student$submissionArgs<ExtArgs>
     studentAchievements?: boolean | Student$studentAchievementsArgs<ExtArgs>
     contestResult?: boolean | Student$contestResultArgs<ExtArgs>
     session?: boolean | Student$sessionArgs<ExtArgs>
+    discussion?: boolean | Student$discussionArgs<ExtArgs>
     _count?: boolean | StudentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["student"]>
 
@@ -2215,12 +2314,7 @@ export namespace Prisma {
     leetCodeName?: boolean
     salt?: boolean
     hash?: boolean
-    currStreak?: boolean
-    maxStreak?: boolean
-    points?: boolean
-    lastLogin?: boolean
     leetCodeProfile?: boolean
-    lastQuestionSolved?: boolean
   }, ExtArgs["result"]["student"]>
 
   export type StudentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2231,12 +2325,7 @@ export namespace Prisma {
     leetCodeName?: boolean
     salt?: boolean
     hash?: boolean
-    currStreak?: boolean
-    maxStreak?: boolean
-    points?: boolean
-    lastLogin?: boolean
     leetCodeProfile?: boolean
-    lastQuestionSolved?: boolean
   }, ExtArgs["result"]["student"]>
 
   export type StudentSelectScalar = {
@@ -2247,20 +2336,16 @@ export namespace Prisma {
     leetCodeName?: boolean
     salt?: boolean
     hash?: boolean
-    currStreak?: boolean
-    maxStreak?: boolean
-    points?: boolean
-    lastLogin?: boolean
     leetCodeProfile?: boolean
-    lastQuestionSolved?: boolean
   }
 
-  export type StudentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rno" | "uname" | "leetCodeName" | "salt" | "hash" | "currStreak" | "maxStreak" | "points" | "lastLogin" | "leetCodeProfile" | "lastQuestionSolved", ExtArgs["result"]["student"]>
+  export type StudentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rno" | "uname" | "leetCodeName" | "salt" | "hash" | "leetCodeProfile", ExtArgs["result"]["student"]>
   export type StudentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     submission?: boolean | Student$submissionArgs<ExtArgs>
     studentAchievements?: boolean | Student$studentAchievementsArgs<ExtArgs>
     contestResult?: boolean | Student$contestResultArgs<ExtArgs>
     session?: boolean | Student$sessionArgs<ExtArgs>
+    discussion?: boolean | Student$discussionArgs<ExtArgs>
     _count?: boolean | StudentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type StudentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2273,6 +2358,7 @@ export namespace Prisma {
       studentAchievements: Prisma.$StudentAchievementsPayload<ExtArgs>[]
       contestResult: Prisma.$ContestResultPayload<ExtArgs>[]
       session: Prisma.$SessionPayload<ExtArgs> | null
+      discussion: Prisma.$DiscussionsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2282,12 +2368,7 @@ export namespace Prisma {
       leetCodeName: string
       salt: string
       hash: string
-      currStreak: number
-      maxStreak: number
-      points: number
-      lastLogin: Date
       leetCodeProfile: string | null
-      lastQuestionSolved: Date
     }, ExtArgs["result"]["student"]>
     composites: {}
   }
@@ -2686,6 +2767,7 @@ export namespace Prisma {
     studentAchievements<T extends Student$studentAchievementsArgs<ExtArgs> = {}>(args?: Subset<T, Student$studentAchievementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudentAchievementsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     contestResult<T extends Student$contestResultArgs<ExtArgs> = {}>(args?: Subset<T, Student$contestResultArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestResultPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     session<T extends Student$sessionArgs<ExtArgs> = {}>(args?: Subset<T, Student$sessionArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    discussion<T extends Student$discussionArgs<ExtArgs> = {}>(args?: Subset<T, Student$discussionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscussionsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2722,12 +2804,7 @@ export namespace Prisma {
     readonly leetCodeName: FieldRef<"Student", 'String'>
     readonly salt: FieldRef<"Student", 'String'>
     readonly hash: FieldRef<"Student", 'String'>
-    readonly currStreak: FieldRef<"Student", 'Int'>
-    readonly maxStreak: FieldRef<"Student", 'Int'>
-    readonly points: FieldRef<"Student", 'Int'>
-    readonly lastLogin: FieldRef<"Student", 'DateTime'>
     readonly leetCodeProfile: FieldRef<"Student", 'String'>
-    readonly lastQuestionSolved: FieldRef<"Student", 'DateTime'>
   }
     
 
@@ -3195,6 +3272,30 @@ export namespace Prisma {
   }
 
   /**
+   * Student.discussion
+   */
+  export type Student$discussionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussions
+     */
+    select?: DiscussionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Discussions
+     */
+    omit?: DiscussionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionsInclude<ExtArgs> | null
+    where?: DiscussionsWhereInput
+    orderBy?: DiscussionsOrderByWithRelationInput | DiscussionsOrderByWithRelationInput[]
+    cursor?: DiscussionsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DiscussionsScalarFieldEnum | DiscussionsScalarFieldEnum[]
+  }
+
+  /**
    * Student without action
    */
   export type StudentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3412,6 +3513,7 @@ export namespace Prisma {
     notes?: boolean
     contestDate?: boolean
     contestResult?: boolean | Topics$contestResultArgs<ExtArgs>
+    question?: boolean | Topics$questionArgs<ExtArgs>
     _count?: boolean | TopicsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["topics"]>
 
@@ -3442,6 +3544,7 @@ export namespace Prisma {
   export type TopicsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "notes" | "contestDate", ExtArgs["result"]["topics"]>
   export type TopicsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     contestResult?: boolean | Topics$contestResultArgs<ExtArgs>
+    question?: boolean | Topics$questionArgs<ExtArgs>
     _count?: boolean | TopicsCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TopicsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3451,6 +3554,7 @@ export namespace Prisma {
     name: "Topics"
     objects: {
       contestResult: Prisma.$ContestResultPayload<ExtArgs>[]
+      question: Prisma.$QuestionsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3853,6 +3957,7 @@ export namespace Prisma {
   export interface Prisma__TopicsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     contestResult<T extends Topics$contestResultArgs<ExtArgs> = {}>(args?: Subset<T, Topics$contestResultArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestResultPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    question<T extends Topics$questionArgs<ExtArgs> = {}>(args?: Subset<T, Topics$questionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestionsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4287,6 +4392,30 @@ export namespace Prisma {
   }
 
   /**
+   * Topics.question
+   */
+  export type Topics$questionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Questions
+     */
+    select?: QuestionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Questions
+     */
+    omit?: QuestionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestionsInclude<ExtArgs> | null
+    where?: QuestionsWhereInput
+    orderBy?: QuestionsOrderByWithRelationInput | QuestionsOrderByWithRelationInput[]
+    cursor?: QuestionsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: QuestionsScalarFieldEnum | QuestionsScalarFieldEnum[]
+  }
+
+  /**
    * Topics without action
    */
   export type TopicsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4319,6 +4448,7 @@ export namespace Prisma {
 
   export type QuestionsAvgAggregateOutputType = {
     id: number | null
+    topic: number | null
     noOfHiddenTestCases: number | null
     noOfExternalTestCases: number | null
     pointsPerTestCaseSolved: number | null
@@ -4326,6 +4456,7 @@ export namespace Prisma {
 
   export type QuestionsSumAggregateOutputType = {
     id: number | null
+    topic: number | null
     noOfHiddenTestCases: number | null
     noOfExternalTestCases: number | null
     pointsPerTestCaseSolved: number | null
@@ -4335,42 +4466,49 @@ export namespace Prisma {
     id: number | null
     title: string | null
     description: string | null
+    topic: number | null
     noOfHiddenTestCases: number | null
     noOfExternalTestCases: number | null
     difficulty: $Enums.DifficultyType | null
     pointsPerTestCaseSolved: number | null
     type: $Enums.QuestionType | null
     leetCodeLink: string | null
+    leetCodeTitle: string | null
   }
 
   export type QuestionsMaxAggregateOutputType = {
     id: number | null
     title: string | null
     description: string | null
+    topic: number | null
     noOfHiddenTestCases: number | null
     noOfExternalTestCases: number | null
     difficulty: $Enums.DifficultyType | null
     pointsPerTestCaseSolved: number | null
     type: $Enums.QuestionType | null
     leetCodeLink: string | null
+    leetCodeTitle: string | null
   }
 
   export type QuestionsCountAggregateOutputType = {
     id: number
     title: number
     description: number
+    topic: number
     noOfHiddenTestCases: number
     noOfExternalTestCases: number
     difficulty: number
     pointsPerTestCaseSolved: number
     type: number
     leetCodeLink: number
+    leetCodeTitle: number
     _all: number
   }
 
 
   export type QuestionsAvgAggregateInputType = {
     id?: true
+    topic?: true
     noOfHiddenTestCases?: true
     noOfExternalTestCases?: true
     pointsPerTestCaseSolved?: true
@@ -4378,6 +4516,7 @@ export namespace Prisma {
 
   export type QuestionsSumAggregateInputType = {
     id?: true
+    topic?: true
     noOfHiddenTestCases?: true
     noOfExternalTestCases?: true
     pointsPerTestCaseSolved?: true
@@ -4387,36 +4526,42 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
+    topic?: true
     noOfHiddenTestCases?: true
     noOfExternalTestCases?: true
     difficulty?: true
     pointsPerTestCaseSolved?: true
     type?: true
     leetCodeLink?: true
+    leetCodeTitle?: true
   }
 
   export type QuestionsMaxAggregateInputType = {
     id?: true
     title?: true
     description?: true
+    topic?: true
     noOfHiddenTestCases?: true
     noOfExternalTestCases?: true
     difficulty?: true
     pointsPerTestCaseSolved?: true
     type?: true
     leetCodeLink?: true
+    leetCodeTitle?: true
   }
 
   export type QuestionsCountAggregateInputType = {
     id?: true
     title?: true
     description?: true
+    topic?: true
     noOfHiddenTestCases?: true
     noOfExternalTestCases?: true
     difficulty?: true
     pointsPerTestCaseSolved?: true
     type?: true
     leetCodeLink?: true
+    leetCodeTitle?: true
     _all?: true
   }
 
@@ -4510,12 +4655,14 @@ export namespace Prisma {
     id: number
     title: string
     description: string | null
+    topic: number
     noOfHiddenTestCases: number
     noOfExternalTestCases: number
     difficulty: $Enums.DifficultyType
     pointsPerTestCaseSolved: number
     type: $Enums.QuestionType
     leetCodeLink: string | null
+    leetCodeTitle: string | null
     _count: QuestionsCountAggregateOutputType | null
     _avg: QuestionsAvgAggregateOutputType | null
     _sum: QuestionsSumAggregateOutputType | null
@@ -4541,14 +4688,18 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    topic?: boolean
     noOfHiddenTestCases?: boolean
     noOfExternalTestCases?: boolean
     difficulty?: boolean
     pointsPerTestCaseSolved?: boolean
     type?: boolean
     leetCodeLink?: boolean
+    leetCodeTitle?: boolean
     testCase?: boolean | Questions$testCaseArgs<ExtArgs>
     submission?: boolean | Questions$submissionArgs<ExtArgs>
+    discussion?: boolean | Questions$discussionArgs<ExtArgs>
+    topics?: boolean | TopicsDefaultArgs<ExtArgs>
     _count?: boolean | QuestionsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["questions"]>
 
@@ -4556,63 +4707,81 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    topic?: boolean
     noOfHiddenTestCases?: boolean
     noOfExternalTestCases?: boolean
     difficulty?: boolean
     pointsPerTestCaseSolved?: boolean
     type?: boolean
     leetCodeLink?: boolean
+    leetCodeTitle?: boolean
+    topics?: boolean | TopicsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["questions"]>
 
   export type QuestionsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
     description?: boolean
+    topic?: boolean
     noOfHiddenTestCases?: boolean
     noOfExternalTestCases?: boolean
     difficulty?: boolean
     pointsPerTestCaseSolved?: boolean
     type?: boolean
     leetCodeLink?: boolean
+    leetCodeTitle?: boolean
+    topics?: boolean | TopicsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["questions"]>
 
   export type QuestionsSelectScalar = {
     id?: boolean
     title?: boolean
     description?: boolean
+    topic?: boolean
     noOfHiddenTestCases?: boolean
     noOfExternalTestCases?: boolean
     difficulty?: boolean
     pointsPerTestCaseSolved?: boolean
     type?: boolean
     leetCodeLink?: boolean
+    leetCodeTitle?: boolean
   }
 
-  export type QuestionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "noOfHiddenTestCases" | "noOfExternalTestCases" | "difficulty" | "pointsPerTestCaseSolved" | "type" | "leetCodeLink", ExtArgs["result"]["questions"]>
+  export type QuestionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "topic" | "noOfHiddenTestCases" | "noOfExternalTestCases" | "difficulty" | "pointsPerTestCaseSolved" | "type" | "leetCodeLink" | "leetCodeTitle", ExtArgs["result"]["questions"]>
   export type QuestionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     testCase?: boolean | Questions$testCaseArgs<ExtArgs>
     submission?: boolean | Questions$submissionArgs<ExtArgs>
+    discussion?: boolean | Questions$discussionArgs<ExtArgs>
+    topics?: boolean | TopicsDefaultArgs<ExtArgs>
     _count?: boolean | QuestionsCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type QuestionsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type QuestionsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type QuestionsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    topics?: boolean | TopicsDefaultArgs<ExtArgs>
+  }
+  export type QuestionsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    topics?: boolean | TopicsDefaultArgs<ExtArgs>
+  }
 
   export type $QuestionsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Questions"
     objects: {
       testCase: Prisma.$TestCasePayload<ExtArgs>[]
       submission: Prisma.$SubmissionPayload<ExtArgs>[]
+      discussion: Prisma.$DiscussionsPayload<ExtArgs>[]
+      topics: Prisma.$TopicsPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       title: string
       description: string | null
+      topic: number
       noOfHiddenTestCases: number
       noOfExternalTestCases: number
       difficulty: $Enums.DifficultyType
       pointsPerTestCaseSolved: number
       type: $Enums.QuestionType
       leetCodeLink: string | null
+      leetCodeTitle: string | null
     }, ExtArgs["result"]["questions"]>
     composites: {}
   }
@@ -5009,6 +5178,8 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     testCase<T extends Questions$testCaseArgs<ExtArgs> = {}>(args?: Subset<T, Questions$testCaseArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestCasePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     submission<T extends Questions$submissionArgs<ExtArgs> = {}>(args?: Subset<T, Questions$submissionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    discussion<T extends Questions$discussionArgs<ExtArgs> = {}>(args?: Subset<T, Questions$discussionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscussionsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    topics<T extends TopicsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TopicsDefaultArgs<ExtArgs>>): Prisma__TopicsClient<$Result.GetResult<Prisma.$TopicsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5041,12 +5212,14 @@ export namespace Prisma {
     readonly id: FieldRef<"Questions", 'Int'>
     readonly title: FieldRef<"Questions", 'String'>
     readonly description: FieldRef<"Questions", 'String'>
+    readonly topic: FieldRef<"Questions", 'Int'>
     readonly noOfHiddenTestCases: FieldRef<"Questions", 'Int'>
     readonly noOfExternalTestCases: FieldRef<"Questions", 'Int'>
     readonly difficulty: FieldRef<"Questions", 'DifficultyType'>
     readonly pointsPerTestCaseSolved: FieldRef<"Questions", 'Int'>
     readonly type: FieldRef<"Questions", 'QuestionType'>
     readonly leetCodeLink: FieldRef<"Questions", 'String'>
+    readonly leetCodeTitle: FieldRef<"Questions", 'String'>
   }
     
 
@@ -5296,6 +5469,10 @@ export namespace Prisma {
      */
     data: QuestionsCreateManyInput | QuestionsCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestionsIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -5358,6 +5535,10 @@ export namespace Prisma {
      * Filter which Questions to update
      */
     where?: QuestionsWhereInput
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestionsIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -5468,6 +5649,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SubmissionScalarFieldEnum | SubmissionScalarFieldEnum[]
+  }
+
+  /**
+   * Questions.discussion
+   */
+  export type Questions$discussionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussions
+     */
+    select?: DiscussionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Discussions
+     */
+    omit?: DiscussionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionsInclude<ExtArgs> | null
+    where?: DiscussionsWhereInput
+    orderBy?: DiscussionsOrderByWithRelationInput | DiscussionsOrderByWithRelationInput[]
+    cursor?: DiscussionsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DiscussionsScalarFieldEnum | DiscussionsScalarFieldEnum[]
   }
 
   /**
@@ -7717,82 +7922,56 @@ export namespace Prisma {
 
   export type AchievementsAvgAggregateOutputType = {
     id: number | null
-    minCriteria: number | null
-    maxCriteria: number | null
   }
 
   export type AchievementsSumAggregateOutputType = {
     id: number | null
-    minCriteria: number | null
-    maxCriteria: number | null
   }
 
   export type AchievementsMinAggregateOutputType = {
     id: number | null
     title: string | null
     description: string | null
-    type: $Enums.AchievementType | null
-    minCriteria: number | null
-    maxCriteria: number | null
   }
 
   export type AchievementsMaxAggregateOutputType = {
     id: number | null
     title: string | null
     description: string | null
-    type: $Enums.AchievementType | null
-    minCriteria: number | null
-    maxCriteria: number | null
   }
 
   export type AchievementsCountAggregateOutputType = {
     id: number
     title: number
     description: number
-    type: number
-    minCriteria: number
-    maxCriteria: number
     _all: number
   }
 
 
   export type AchievementsAvgAggregateInputType = {
     id?: true
-    minCriteria?: true
-    maxCriteria?: true
   }
 
   export type AchievementsSumAggregateInputType = {
     id?: true
-    minCriteria?: true
-    maxCriteria?: true
   }
 
   export type AchievementsMinAggregateInputType = {
     id?: true
     title?: true
     description?: true
-    type?: true
-    minCriteria?: true
-    maxCriteria?: true
   }
 
   export type AchievementsMaxAggregateInputType = {
     id?: true
     title?: true
     description?: true
-    type?: true
-    minCriteria?: true
-    maxCriteria?: true
   }
 
   export type AchievementsCountAggregateInputType = {
     id?: true
     title?: true
     description?: true
-    type?: true
-    minCriteria?: true
-    maxCriteria?: true
     _all?: true
   }
 
@@ -7886,9 +8065,6 @@ export namespace Prisma {
     id: number
     title: string
     description: string | null
-    type: $Enums.AchievementType
-    minCriteria: number
-    maxCriteria: number
     _count: AchievementsCountAggregateOutputType | null
     _avg: AchievementsAvgAggregateOutputType | null
     _sum: AchievementsSumAggregateOutputType | null
@@ -7914,9 +8090,6 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
-    type?: boolean
-    minCriteria?: boolean
-    maxCriteria?: boolean
     studentAchievements?: boolean | Achievements$studentAchievementsArgs<ExtArgs>
     _count?: boolean | AchievementsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["achievements"]>
@@ -7925,30 +8098,21 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
-    type?: boolean
-    minCriteria?: boolean
-    maxCriteria?: boolean
   }, ExtArgs["result"]["achievements"]>
 
   export type AchievementsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
     description?: boolean
-    type?: boolean
-    minCriteria?: boolean
-    maxCriteria?: boolean
   }, ExtArgs["result"]["achievements"]>
 
   export type AchievementsSelectScalar = {
     id?: boolean
     title?: boolean
     description?: boolean
-    type?: boolean
-    minCriteria?: boolean
-    maxCriteria?: boolean
   }
 
-  export type AchievementsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "type" | "minCriteria" | "maxCriteria", ExtArgs["result"]["achievements"]>
+  export type AchievementsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description", ExtArgs["result"]["achievements"]>
   export type AchievementsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     studentAchievements?: boolean | Achievements$studentAchievementsArgs<ExtArgs>
     _count?: boolean | AchievementsCountOutputTypeDefaultArgs<ExtArgs>
@@ -7965,9 +8129,6 @@ export namespace Prisma {
       id: number
       title: string
       description: string | null
-      type: $Enums.AchievementType
-      minCriteria: number
-      maxCriteria: number
     }, ExtArgs["result"]["achievements"]>
     composites: {}
   }
@@ -8395,9 +8556,6 @@ export namespace Prisma {
     readonly id: FieldRef<"Achievements", 'Int'>
     readonly title: FieldRef<"Achievements", 'String'>
     readonly description: FieldRef<"Achievements", 'String'>
-    readonly type: FieldRef<"Achievements", 'AchievementType'>
-    readonly minCriteria: FieldRef<"Achievements", 'Int'>
-    readonly maxCriteria: FieldRef<"Achievements", 'Int'>
   }
     
 
@@ -8832,33 +8990,35 @@ export namespace Prisma {
     id: number | null
     studentId: number | null
     achievementId: number | null
+    count: number | null
   }
 
   export type StudentAchievementsSumAggregateOutputType = {
     id: number | null
     studentId: number | null
     achievementId: number | null
+    count: number | null
   }
 
   export type StudentAchievementsMinAggregateOutputType = {
     id: number | null
     studentId: number | null
     achievementId: number | null
-    acquiredOn: Date | null
+    count: number | null
   }
 
   export type StudentAchievementsMaxAggregateOutputType = {
     id: number | null
     studentId: number | null
     achievementId: number | null
-    acquiredOn: Date | null
+    count: number | null
   }
 
   export type StudentAchievementsCountAggregateOutputType = {
     id: number
     studentId: number
     achievementId: number
-    acquiredOn: number
+    count: number
     _all: number
   }
 
@@ -8867,33 +9027,35 @@ export namespace Prisma {
     id?: true
     studentId?: true
     achievementId?: true
+    count?: true
   }
 
   export type StudentAchievementsSumAggregateInputType = {
     id?: true
     studentId?: true
     achievementId?: true
+    count?: true
   }
 
   export type StudentAchievementsMinAggregateInputType = {
     id?: true
     studentId?: true
     achievementId?: true
-    acquiredOn?: true
+    count?: true
   }
 
   export type StudentAchievementsMaxAggregateInputType = {
     id?: true
     studentId?: true
     achievementId?: true
-    acquiredOn?: true
+    count?: true
   }
 
   export type StudentAchievementsCountAggregateInputType = {
     id?: true
     studentId?: true
     achievementId?: true
-    acquiredOn?: true
+    count?: true
     _all?: true
   }
 
@@ -8987,7 +9149,7 @@ export namespace Prisma {
     id: number
     studentId: number
     achievementId: number
-    acquiredOn: Date
+    count: number
     _count: StudentAchievementsCountAggregateOutputType | null
     _avg: StudentAchievementsAvgAggregateOutputType | null
     _sum: StudentAchievementsSumAggregateOutputType | null
@@ -9013,7 +9175,7 @@ export namespace Prisma {
     id?: boolean
     studentId?: boolean
     achievementId?: boolean
-    acquiredOn?: boolean
+    count?: boolean
     student?: boolean | StudentDefaultArgs<ExtArgs>
     achievements?: boolean | AchievementsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["studentAchievements"]>
@@ -9022,7 +9184,7 @@ export namespace Prisma {
     id?: boolean
     studentId?: boolean
     achievementId?: boolean
-    acquiredOn?: boolean
+    count?: boolean
     student?: boolean | StudentDefaultArgs<ExtArgs>
     achievements?: boolean | AchievementsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["studentAchievements"]>
@@ -9031,7 +9193,7 @@ export namespace Prisma {
     id?: boolean
     studentId?: boolean
     achievementId?: boolean
-    acquiredOn?: boolean
+    count?: boolean
     student?: boolean | StudentDefaultArgs<ExtArgs>
     achievements?: boolean | AchievementsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["studentAchievements"]>
@@ -9040,10 +9202,10 @@ export namespace Prisma {
     id?: boolean
     studentId?: boolean
     achievementId?: boolean
-    acquiredOn?: boolean
+    count?: boolean
   }
 
-  export type StudentAchievementsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "studentId" | "achievementId" | "acquiredOn", ExtArgs["result"]["studentAchievements"]>
+  export type StudentAchievementsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "studentId" | "achievementId" | "count", ExtArgs["result"]["studentAchievements"]>
   export type StudentAchievementsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     student?: boolean | StudentDefaultArgs<ExtArgs>
     achievements?: boolean | AchievementsDefaultArgs<ExtArgs>
@@ -9067,7 +9229,7 @@ export namespace Prisma {
       id: number
       studentId: number
       achievementId: number
-      acquiredOn: Date
+      count: number
     }, ExtArgs["result"]["studentAchievements"]>
     composites: {}
   }
@@ -9496,7 +9658,7 @@ export namespace Prisma {
     readonly id: FieldRef<"StudentAchievements", 'Int'>
     readonly studentId: FieldRef<"StudentAchievements", 'Int'>
     readonly achievementId: FieldRef<"StudentAchievements", 'Int'>
-    readonly acquiredOn: FieldRef<"StudentAchievements", 'DateTime'>
+    readonly count: FieldRef<"StudentAchievements", 'Int'>
   }
     
 
@@ -12108,29 +12270,31 @@ export namespace Prisma {
 
   export type SessionAvgAggregateOutputType = {
     id: number | null
+    studentId: number | null
   }
 
   export type SessionSumAggregateOutputType = {
     id: number | null
+    studentId: number | null
   }
 
   export type SessionMinAggregateOutputType = {
     id: number | null
-    uname: string | null
+    studentId: number | null
     session: string | null
     expiry: Date | null
   }
 
   export type SessionMaxAggregateOutputType = {
     id: number | null
-    uname: string | null
+    studentId: number | null
     session: string | null
     expiry: Date | null
   }
 
   export type SessionCountAggregateOutputType = {
     id: number
-    uname: number
+    studentId: number
     session: number
     expiry: number
     _all: number
@@ -12139,29 +12303,31 @@ export namespace Prisma {
 
   export type SessionAvgAggregateInputType = {
     id?: true
+    studentId?: true
   }
 
   export type SessionSumAggregateInputType = {
     id?: true
+    studentId?: true
   }
 
   export type SessionMinAggregateInputType = {
     id?: true
-    uname?: true
+    studentId?: true
     session?: true
     expiry?: true
   }
 
   export type SessionMaxAggregateInputType = {
     id?: true
-    uname?: true
+    studentId?: true
     session?: true
     expiry?: true
   }
 
   export type SessionCountAggregateInputType = {
     id?: true
-    uname?: true
+    studentId?: true
     session?: true
     expiry?: true
     _all?: true
@@ -12255,7 +12421,7 @@ export namespace Prisma {
 
   export type SessionGroupByOutputType = {
     id: number
-    uname: string
+    studentId: number
     session: string
     expiry: Date
     _count: SessionCountAggregateOutputType | null
@@ -12281,7 +12447,7 @@ export namespace Prisma {
 
   export type SessionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    uname?: boolean
+    studentId?: boolean
     session?: boolean
     expiry?: boolean
     student?: boolean | StudentDefaultArgs<ExtArgs>
@@ -12289,7 +12455,7 @@ export namespace Prisma {
 
   export type SessionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    uname?: boolean
+    studentId?: boolean
     session?: boolean
     expiry?: boolean
     student?: boolean | StudentDefaultArgs<ExtArgs>
@@ -12297,7 +12463,7 @@ export namespace Prisma {
 
   export type SessionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    uname?: boolean
+    studentId?: boolean
     session?: boolean
     expiry?: boolean
     student?: boolean | StudentDefaultArgs<ExtArgs>
@@ -12305,12 +12471,12 @@ export namespace Prisma {
 
   export type SessionSelectScalar = {
     id?: boolean
-    uname?: boolean
+    studentId?: boolean
     session?: boolean
     expiry?: boolean
   }
 
-  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uname" | "session" | "expiry", ExtArgs["result"]["session"]>
+  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "studentId" | "session" | "expiry", ExtArgs["result"]["session"]>
   export type SessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     student?: boolean | StudentDefaultArgs<ExtArgs>
   }
@@ -12328,7 +12494,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      uname: string
+      studentId: number
       session: string
       expiry: Date
     }, ExtArgs["result"]["session"]>
@@ -12756,7 +12922,7 @@ export namespace Prisma {
    */ 
   interface SessionFieldRefs {
     readonly id: FieldRef<"Session", 'Int'>
-    readonly uname: FieldRef<"Session", 'String'>
+    readonly studentId: FieldRef<"Session", 'Int'>
     readonly session: FieldRef<"Session", 'String'>
     readonly expiry: FieldRef<"Session", 'DateTime'>
   }
@@ -13162,6 +13328,1182 @@ export namespace Prisma {
 
 
   /**
+   * Model Discussions
+   */
+
+  export type AggregateDiscussions = {
+    _count: DiscussionsCountAggregateOutputType | null
+    _avg: DiscussionsAvgAggregateOutputType | null
+    _sum: DiscussionsSumAggregateOutputType | null
+    _min: DiscussionsMinAggregateOutputType | null
+    _max: DiscussionsMaxAggregateOutputType | null
+  }
+
+  export type DiscussionsAvgAggregateOutputType = {
+    id: number | null
+    studentId: number | null
+    questionId: number | null
+    repliedTo: number | null
+  }
+
+  export type DiscussionsSumAggregateOutputType = {
+    id: number | null
+    studentId: number | null
+    questionId: number | null
+    repliedTo: number | null
+  }
+
+  export type DiscussionsMinAggregateOutputType = {
+    id: number | null
+    studentId: number | null
+    type: $Enums.CommentType | null
+    questionId: number | null
+    repliedTo: number | null
+  }
+
+  export type DiscussionsMaxAggregateOutputType = {
+    id: number | null
+    studentId: number | null
+    type: $Enums.CommentType | null
+    questionId: number | null
+    repliedTo: number | null
+  }
+
+  export type DiscussionsCountAggregateOutputType = {
+    id: number
+    studentId: number
+    type: number
+    questionId: number
+    repliedTo: number
+    _all: number
+  }
+
+
+  export type DiscussionsAvgAggregateInputType = {
+    id?: true
+    studentId?: true
+    questionId?: true
+    repliedTo?: true
+  }
+
+  export type DiscussionsSumAggregateInputType = {
+    id?: true
+    studentId?: true
+    questionId?: true
+    repliedTo?: true
+  }
+
+  export type DiscussionsMinAggregateInputType = {
+    id?: true
+    studentId?: true
+    type?: true
+    questionId?: true
+    repliedTo?: true
+  }
+
+  export type DiscussionsMaxAggregateInputType = {
+    id?: true
+    studentId?: true
+    type?: true
+    questionId?: true
+    repliedTo?: true
+  }
+
+  export type DiscussionsCountAggregateInputType = {
+    id?: true
+    studentId?: true
+    type?: true
+    questionId?: true
+    repliedTo?: true
+    _all?: true
+  }
+
+  export type DiscussionsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Discussions to aggregate.
+     */
+    where?: DiscussionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Discussions to fetch.
+     */
+    orderBy?: DiscussionsOrderByWithRelationInput | DiscussionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DiscussionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Discussions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Discussions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Discussions
+    **/
+    _count?: true | DiscussionsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DiscussionsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DiscussionsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DiscussionsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DiscussionsMaxAggregateInputType
+  }
+
+  export type GetDiscussionsAggregateType<T extends DiscussionsAggregateArgs> = {
+        [P in keyof T & keyof AggregateDiscussions]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDiscussions[P]>
+      : GetScalarType<T[P], AggregateDiscussions[P]>
+  }
+
+
+
+
+  export type DiscussionsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DiscussionsWhereInput
+    orderBy?: DiscussionsOrderByWithAggregationInput | DiscussionsOrderByWithAggregationInput[]
+    by: DiscussionsScalarFieldEnum[] | DiscussionsScalarFieldEnum
+    having?: DiscussionsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DiscussionsCountAggregateInputType | true
+    _avg?: DiscussionsAvgAggregateInputType
+    _sum?: DiscussionsSumAggregateInputType
+    _min?: DiscussionsMinAggregateInputType
+    _max?: DiscussionsMaxAggregateInputType
+  }
+
+  export type DiscussionsGroupByOutputType = {
+    id: number
+    studentId: number
+    type: $Enums.CommentType
+    questionId: number | null
+    repliedTo: number | null
+    _count: DiscussionsCountAggregateOutputType | null
+    _avg: DiscussionsAvgAggregateOutputType | null
+    _sum: DiscussionsSumAggregateOutputType | null
+    _min: DiscussionsMinAggregateOutputType | null
+    _max: DiscussionsMaxAggregateOutputType | null
+  }
+
+  type GetDiscussionsGroupByPayload<T extends DiscussionsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DiscussionsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DiscussionsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DiscussionsGroupByOutputType[P]>
+            : GetScalarType<T[P], DiscussionsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DiscussionsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    studentId?: boolean
+    type?: boolean
+    questionId?: boolean
+    repliedTo?: boolean
+    student?: boolean | StudentDefaultArgs<ExtArgs>
+    question?: boolean | Discussions$questionArgs<ExtArgs>
+    toWhomIReply?: boolean | Discussions$toWhomIReplyArgs<ExtArgs>
+    repliesIGet?: boolean | Discussions$repliesIGetArgs<ExtArgs>
+    _count?: boolean | DiscussionsCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["discussions"]>
+
+  export type DiscussionsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    studentId?: boolean
+    type?: boolean
+    questionId?: boolean
+    repliedTo?: boolean
+    student?: boolean | StudentDefaultArgs<ExtArgs>
+    question?: boolean | Discussions$questionArgs<ExtArgs>
+    toWhomIReply?: boolean | Discussions$toWhomIReplyArgs<ExtArgs>
+  }, ExtArgs["result"]["discussions"]>
+
+  export type DiscussionsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    studentId?: boolean
+    type?: boolean
+    questionId?: boolean
+    repliedTo?: boolean
+    student?: boolean | StudentDefaultArgs<ExtArgs>
+    question?: boolean | Discussions$questionArgs<ExtArgs>
+    toWhomIReply?: boolean | Discussions$toWhomIReplyArgs<ExtArgs>
+  }, ExtArgs["result"]["discussions"]>
+
+  export type DiscussionsSelectScalar = {
+    id?: boolean
+    studentId?: boolean
+    type?: boolean
+    questionId?: boolean
+    repliedTo?: boolean
+  }
+
+  export type DiscussionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "studentId" | "type" | "questionId" | "repliedTo", ExtArgs["result"]["discussions"]>
+  export type DiscussionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    student?: boolean | StudentDefaultArgs<ExtArgs>
+    question?: boolean | Discussions$questionArgs<ExtArgs>
+    toWhomIReply?: boolean | Discussions$toWhomIReplyArgs<ExtArgs>
+    repliesIGet?: boolean | Discussions$repliesIGetArgs<ExtArgs>
+    _count?: boolean | DiscussionsCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type DiscussionsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    student?: boolean | StudentDefaultArgs<ExtArgs>
+    question?: boolean | Discussions$questionArgs<ExtArgs>
+    toWhomIReply?: boolean | Discussions$toWhomIReplyArgs<ExtArgs>
+  }
+  export type DiscussionsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    student?: boolean | StudentDefaultArgs<ExtArgs>
+    question?: boolean | Discussions$questionArgs<ExtArgs>
+    toWhomIReply?: boolean | Discussions$toWhomIReplyArgs<ExtArgs>
+  }
+
+  export type $DiscussionsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Discussions"
+    objects: {
+      student: Prisma.$StudentPayload<ExtArgs>
+      question: Prisma.$QuestionsPayload<ExtArgs> | null
+      toWhomIReply: Prisma.$DiscussionsPayload<ExtArgs> | null
+      repliesIGet: Prisma.$DiscussionsPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      studentId: number
+      type: $Enums.CommentType
+      questionId: number | null
+      repliedTo: number | null
+    }, ExtArgs["result"]["discussions"]>
+    composites: {}
+  }
+
+  type DiscussionsGetPayload<S extends boolean | null | undefined | DiscussionsDefaultArgs> = $Result.GetResult<Prisma.$DiscussionsPayload, S>
+
+  type DiscussionsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DiscussionsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DiscussionsCountAggregateInputType | true
+    }
+
+  export interface DiscussionsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Discussions'], meta: { name: 'Discussions' } }
+    /**
+     * Find zero or one Discussions that matches the filter.
+     * @param {DiscussionsFindUniqueArgs} args - Arguments to find a Discussions
+     * @example
+     * // Get one Discussions
+     * const discussions = await prisma.discussions.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DiscussionsFindUniqueArgs>(args: SelectSubset<T, DiscussionsFindUniqueArgs<ExtArgs>>): Prisma__DiscussionsClient<$Result.GetResult<Prisma.$DiscussionsPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one Discussions that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DiscussionsFindUniqueOrThrowArgs} args - Arguments to find a Discussions
+     * @example
+     * // Get one Discussions
+     * const discussions = await prisma.discussions.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DiscussionsFindUniqueOrThrowArgs>(args: SelectSubset<T, DiscussionsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DiscussionsClient<$Result.GetResult<Prisma.$DiscussionsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Discussions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscussionsFindFirstArgs} args - Arguments to find a Discussions
+     * @example
+     * // Get one Discussions
+     * const discussions = await prisma.discussions.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DiscussionsFindFirstArgs>(args?: SelectSubset<T, DiscussionsFindFirstArgs<ExtArgs>>): Prisma__DiscussionsClient<$Result.GetResult<Prisma.$DiscussionsPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Discussions that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscussionsFindFirstOrThrowArgs} args - Arguments to find a Discussions
+     * @example
+     * // Get one Discussions
+     * const discussions = await prisma.discussions.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DiscussionsFindFirstOrThrowArgs>(args?: SelectSubset<T, DiscussionsFindFirstOrThrowArgs<ExtArgs>>): Prisma__DiscussionsClient<$Result.GetResult<Prisma.$DiscussionsPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more Discussions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscussionsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Discussions
+     * const discussions = await prisma.discussions.findMany()
+     * 
+     * // Get first 10 Discussions
+     * const discussions = await prisma.discussions.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const discussionsWithIdOnly = await prisma.discussions.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DiscussionsFindManyArgs>(args?: SelectSubset<T, DiscussionsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscussionsPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a Discussions.
+     * @param {DiscussionsCreateArgs} args - Arguments to create a Discussions.
+     * @example
+     * // Create one Discussions
+     * const Discussions = await prisma.discussions.create({
+     *   data: {
+     *     // ... data to create a Discussions
+     *   }
+     * })
+     * 
+     */
+    create<T extends DiscussionsCreateArgs>(args: SelectSubset<T, DiscussionsCreateArgs<ExtArgs>>): Prisma__DiscussionsClient<$Result.GetResult<Prisma.$DiscussionsPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many Discussions.
+     * @param {DiscussionsCreateManyArgs} args - Arguments to create many Discussions.
+     * @example
+     * // Create many Discussions
+     * const discussions = await prisma.discussions.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DiscussionsCreateManyArgs>(args?: SelectSubset<T, DiscussionsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Discussions and returns the data saved in the database.
+     * @param {DiscussionsCreateManyAndReturnArgs} args - Arguments to create many Discussions.
+     * @example
+     * // Create many Discussions
+     * const discussions = await prisma.discussions.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Discussions and only return the `id`
+     * const discussionsWithIdOnly = await prisma.discussions.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DiscussionsCreateManyAndReturnArgs>(args?: SelectSubset<T, DiscussionsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscussionsPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a Discussions.
+     * @param {DiscussionsDeleteArgs} args - Arguments to delete one Discussions.
+     * @example
+     * // Delete one Discussions
+     * const Discussions = await prisma.discussions.delete({
+     *   where: {
+     *     // ... filter to delete one Discussions
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DiscussionsDeleteArgs>(args: SelectSubset<T, DiscussionsDeleteArgs<ExtArgs>>): Prisma__DiscussionsClient<$Result.GetResult<Prisma.$DiscussionsPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one Discussions.
+     * @param {DiscussionsUpdateArgs} args - Arguments to update one Discussions.
+     * @example
+     * // Update one Discussions
+     * const discussions = await prisma.discussions.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DiscussionsUpdateArgs>(args: SelectSubset<T, DiscussionsUpdateArgs<ExtArgs>>): Prisma__DiscussionsClient<$Result.GetResult<Prisma.$DiscussionsPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more Discussions.
+     * @param {DiscussionsDeleteManyArgs} args - Arguments to filter Discussions to delete.
+     * @example
+     * // Delete a few Discussions
+     * const { count } = await prisma.discussions.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DiscussionsDeleteManyArgs>(args?: SelectSubset<T, DiscussionsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Discussions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscussionsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Discussions
+     * const discussions = await prisma.discussions.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DiscussionsUpdateManyArgs>(args: SelectSubset<T, DiscussionsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Discussions and returns the data updated in the database.
+     * @param {DiscussionsUpdateManyAndReturnArgs} args - Arguments to update many Discussions.
+     * @example
+     * // Update many Discussions
+     * const discussions = await prisma.discussions.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Discussions and only return the `id`
+     * const discussionsWithIdOnly = await prisma.discussions.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DiscussionsUpdateManyAndReturnArgs>(args: SelectSubset<T, DiscussionsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscussionsPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one Discussions.
+     * @param {DiscussionsUpsertArgs} args - Arguments to update or create a Discussions.
+     * @example
+     * // Update or create a Discussions
+     * const discussions = await prisma.discussions.upsert({
+     *   create: {
+     *     // ... data to create a Discussions
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Discussions we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DiscussionsUpsertArgs>(args: SelectSubset<T, DiscussionsUpsertArgs<ExtArgs>>): Prisma__DiscussionsClient<$Result.GetResult<Prisma.$DiscussionsPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of Discussions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscussionsCountArgs} args - Arguments to filter Discussions to count.
+     * @example
+     * // Count the number of Discussions
+     * const count = await prisma.discussions.count({
+     *   where: {
+     *     // ... the filter for the Discussions we want to count
+     *   }
+     * })
+    **/
+    count<T extends DiscussionsCountArgs>(
+      args?: Subset<T, DiscussionsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DiscussionsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Discussions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscussionsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DiscussionsAggregateArgs>(args: Subset<T, DiscussionsAggregateArgs>): Prisma.PrismaPromise<GetDiscussionsAggregateType<T>>
+
+    /**
+     * Group by Discussions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscussionsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DiscussionsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DiscussionsGroupByArgs['orderBy'] }
+        : { orderBy?: DiscussionsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DiscussionsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDiscussionsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Discussions model
+   */
+  readonly fields: DiscussionsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Discussions.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DiscussionsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    student<T extends StudentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StudentDefaultArgs<ExtArgs>>): Prisma__StudentClient<$Result.GetResult<Prisma.$StudentPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    question<T extends Discussions$questionArgs<ExtArgs> = {}>(args?: Subset<T, Discussions$questionArgs<ExtArgs>>): Prisma__QuestionsClient<$Result.GetResult<Prisma.$QuestionsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    toWhomIReply<T extends Discussions$toWhomIReplyArgs<ExtArgs> = {}>(args?: Subset<T, Discussions$toWhomIReplyArgs<ExtArgs>>): Prisma__DiscussionsClient<$Result.GetResult<Prisma.$DiscussionsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    repliesIGet<T extends Discussions$repliesIGetArgs<ExtArgs> = {}>(args?: Subset<T, Discussions$repliesIGetArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscussionsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Discussions model
+   */ 
+  interface DiscussionsFieldRefs {
+    readonly id: FieldRef<"Discussions", 'Int'>
+    readonly studentId: FieldRef<"Discussions", 'Int'>
+    readonly type: FieldRef<"Discussions", 'CommentType'>
+    readonly questionId: FieldRef<"Discussions", 'Int'>
+    readonly repliedTo: FieldRef<"Discussions", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Discussions findUnique
+   */
+  export type DiscussionsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussions
+     */
+    select?: DiscussionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Discussions
+     */
+    omit?: DiscussionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionsInclude<ExtArgs> | null
+    /**
+     * Filter, which Discussions to fetch.
+     */
+    where: DiscussionsWhereUniqueInput
+  }
+
+  /**
+   * Discussions findUniqueOrThrow
+   */
+  export type DiscussionsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussions
+     */
+    select?: DiscussionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Discussions
+     */
+    omit?: DiscussionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionsInclude<ExtArgs> | null
+    /**
+     * Filter, which Discussions to fetch.
+     */
+    where: DiscussionsWhereUniqueInput
+  }
+
+  /**
+   * Discussions findFirst
+   */
+  export type DiscussionsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussions
+     */
+    select?: DiscussionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Discussions
+     */
+    omit?: DiscussionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionsInclude<ExtArgs> | null
+    /**
+     * Filter, which Discussions to fetch.
+     */
+    where?: DiscussionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Discussions to fetch.
+     */
+    orderBy?: DiscussionsOrderByWithRelationInput | DiscussionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Discussions.
+     */
+    cursor?: DiscussionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Discussions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Discussions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Discussions.
+     */
+    distinct?: DiscussionsScalarFieldEnum | DiscussionsScalarFieldEnum[]
+  }
+
+  /**
+   * Discussions findFirstOrThrow
+   */
+  export type DiscussionsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussions
+     */
+    select?: DiscussionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Discussions
+     */
+    omit?: DiscussionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionsInclude<ExtArgs> | null
+    /**
+     * Filter, which Discussions to fetch.
+     */
+    where?: DiscussionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Discussions to fetch.
+     */
+    orderBy?: DiscussionsOrderByWithRelationInput | DiscussionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Discussions.
+     */
+    cursor?: DiscussionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Discussions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Discussions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Discussions.
+     */
+    distinct?: DiscussionsScalarFieldEnum | DiscussionsScalarFieldEnum[]
+  }
+
+  /**
+   * Discussions findMany
+   */
+  export type DiscussionsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussions
+     */
+    select?: DiscussionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Discussions
+     */
+    omit?: DiscussionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionsInclude<ExtArgs> | null
+    /**
+     * Filter, which Discussions to fetch.
+     */
+    where?: DiscussionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Discussions to fetch.
+     */
+    orderBy?: DiscussionsOrderByWithRelationInput | DiscussionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Discussions.
+     */
+    cursor?: DiscussionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Discussions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Discussions.
+     */
+    skip?: number
+    distinct?: DiscussionsScalarFieldEnum | DiscussionsScalarFieldEnum[]
+  }
+
+  /**
+   * Discussions create
+   */
+  export type DiscussionsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussions
+     */
+    select?: DiscussionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Discussions
+     */
+    omit?: DiscussionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Discussions.
+     */
+    data: XOR<DiscussionsCreateInput, DiscussionsUncheckedCreateInput>
+  }
+
+  /**
+   * Discussions createMany
+   */
+  export type DiscussionsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Discussions.
+     */
+    data: DiscussionsCreateManyInput | DiscussionsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Discussions createManyAndReturn
+   */
+  export type DiscussionsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussions
+     */
+    select?: DiscussionsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Discussions
+     */
+    omit?: DiscussionsOmit<ExtArgs> | null
+    /**
+     * The data used to create many Discussions.
+     */
+    data: DiscussionsCreateManyInput | DiscussionsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Discussions update
+   */
+  export type DiscussionsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussions
+     */
+    select?: DiscussionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Discussions
+     */
+    omit?: DiscussionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Discussions.
+     */
+    data: XOR<DiscussionsUpdateInput, DiscussionsUncheckedUpdateInput>
+    /**
+     * Choose, which Discussions to update.
+     */
+    where: DiscussionsWhereUniqueInput
+  }
+
+  /**
+   * Discussions updateMany
+   */
+  export type DiscussionsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Discussions.
+     */
+    data: XOR<DiscussionsUpdateManyMutationInput, DiscussionsUncheckedUpdateManyInput>
+    /**
+     * Filter which Discussions to update
+     */
+    where?: DiscussionsWhereInput
+  }
+
+  /**
+   * Discussions updateManyAndReturn
+   */
+  export type DiscussionsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussions
+     */
+    select?: DiscussionsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Discussions
+     */
+    omit?: DiscussionsOmit<ExtArgs> | null
+    /**
+     * The data used to update Discussions.
+     */
+    data: XOR<DiscussionsUpdateManyMutationInput, DiscussionsUncheckedUpdateManyInput>
+    /**
+     * Filter which Discussions to update
+     */
+    where?: DiscussionsWhereInput
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Discussions upsert
+   */
+  export type DiscussionsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussions
+     */
+    select?: DiscussionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Discussions
+     */
+    omit?: DiscussionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Discussions to update in case it exists.
+     */
+    where: DiscussionsWhereUniqueInput
+    /**
+     * In case the Discussions found by the `where` argument doesn't exist, create a new Discussions with this data.
+     */
+    create: XOR<DiscussionsCreateInput, DiscussionsUncheckedCreateInput>
+    /**
+     * In case the Discussions was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DiscussionsUpdateInput, DiscussionsUncheckedUpdateInput>
+  }
+
+  /**
+   * Discussions delete
+   */
+  export type DiscussionsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussions
+     */
+    select?: DiscussionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Discussions
+     */
+    omit?: DiscussionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionsInclude<ExtArgs> | null
+    /**
+     * Filter which Discussions to delete.
+     */
+    where: DiscussionsWhereUniqueInput
+  }
+
+  /**
+   * Discussions deleteMany
+   */
+  export type DiscussionsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Discussions to delete
+     */
+    where?: DiscussionsWhereInput
+  }
+
+  /**
+   * Discussions.question
+   */
+  export type Discussions$questionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Questions
+     */
+    select?: QuestionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Questions
+     */
+    omit?: QuestionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestionsInclude<ExtArgs> | null
+    where?: QuestionsWhereInput
+  }
+
+  /**
+   * Discussions.toWhomIReply
+   */
+  export type Discussions$toWhomIReplyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussions
+     */
+    select?: DiscussionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Discussions
+     */
+    omit?: DiscussionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionsInclude<ExtArgs> | null
+    where?: DiscussionsWhereInput
+  }
+
+  /**
+   * Discussions.repliesIGet
+   */
+  export type Discussions$repliesIGetArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussions
+     */
+    select?: DiscussionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Discussions
+     */
+    omit?: DiscussionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionsInclude<ExtArgs> | null
+    where?: DiscussionsWhereInput
+    orderBy?: DiscussionsOrderByWithRelationInput | DiscussionsOrderByWithRelationInput[]
+    cursor?: DiscussionsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DiscussionsScalarFieldEnum | DiscussionsScalarFieldEnum[]
+  }
+
+  /**
+   * Discussions without action
+   */
+  export type DiscussionsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussions
+     */
+    select?: DiscussionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Discussions
+     */
+    omit?: DiscussionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionsInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -13183,12 +14525,7 @@ export namespace Prisma {
     leetCodeName: 'leetCodeName',
     salt: 'salt',
     hash: 'hash',
-    currStreak: 'currStreak',
-    maxStreak: 'maxStreak',
-    points: 'points',
-    lastLogin: 'lastLogin',
-    leetCodeProfile: 'leetCodeProfile',
-    lastQuestionSolved: 'lastQuestionSolved'
+    leetCodeProfile: 'leetCodeProfile'
   };
 
   export type StudentScalarFieldEnum = (typeof StudentScalarFieldEnum)[keyof typeof StudentScalarFieldEnum]
@@ -13209,12 +14546,14 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     description: 'description',
+    topic: 'topic',
     noOfHiddenTestCases: 'noOfHiddenTestCases',
     noOfExternalTestCases: 'noOfExternalTestCases',
     difficulty: 'difficulty',
     pointsPerTestCaseSolved: 'pointsPerTestCaseSolved',
     type: 'type',
-    leetCodeLink: 'leetCodeLink'
+    leetCodeLink: 'leetCodeLink',
+    leetCodeTitle: 'leetCodeTitle'
   };
 
   export type QuestionsScalarFieldEnum = (typeof QuestionsScalarFieldEnum)[keyof typeof QuestionsScalarFieldEnum]
@@ -13247,10 +14586,7 @@ export namespace Prisma {
   export const AchievementsScalarFieldEnum: {
     id: 'id',
     title: 'title',
-    description: 'description',
-    type: 'type',
-    minCriteria: 'minCriteria',
-    maxCriteria: 'maxCriteria'
+    description: 'description'
   };
 
   export type AchievementsScalarFieldEnum = (typeof AchievementsScalarFieldEnum)[keyof typeof AchievementsScalarFieldEnum]
@@ -13260,7 +14596,7 @@ export namespace Prisma {
     id: 'id',
     studentId: 'studentId',
     achievementId: 'achievementId',
-    acquiredOn: 'acquiredOn'
+    count: 'count'
   };
 
   export type StudentAchievementsScalarFieldEnum = (typeof StudentAchievementsScalarFieldEnum)[keyof typeof StudentAchievementsScalarFieldEnum]
@@ -13296,12 +14632,23 @@ export namespace Prisma {
 
   export const SessionScalarFieldEnum: {
     id: 'id',
-    uname: 'uname',
+    studentId: 'studentId',
     session: 'session',
     expiry: 'expiry'
   };
 
   export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+
+
+  export const DiscussionsScalarFieldEnum: {
+    id: 'id',
+    studentId: 'studentId',
+    type: 'type',
+    questionId: 'questionId',
+    repliedTo: 'repliedTo'
+  };
+
+  export type DiscussionsScalarFieldEnum = (typeof DiscussionsScalarFieldEnum)[keyof typeof DiscussionsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -13432,20 +14779,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'AchievementType'
-   */
-  export type EnumAchievementTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AchievementType'>
-    
-
-
-  /**
-   * Reference to a field of type 'AchievementType[]'
-   */
-  export type ListEnumAchievementTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AchievementType[]'>
-    
-
-
-  /**
    * Reference to a field of type 'OTPStatus'
    */
   export type EnumOTPStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OTPStatus'>
@@ -13456,6 +14789,20 @@ export namespace Prisma {
    * Reference to a field of type 'OTPStatus[]'
    */
   export type ListEnumOTPStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OTPStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'CommentType'
+   */
+  export type EnumCommentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CommentType'>
+    
+
+
+  /**
+   * Reference to a field of type 'CommentType[]'
+   */
+  export type ListEnumCommentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CommentType[]'>
     
 
 
@@ -13487,16 +14834,12 @@ export namespace Prisma {
     leetCodeName?: StringFilter<"Student"> | string
     salt?: StringFilter<"Student"> | string
     hash?: StringFilter<"Student"> | string
-    currStreak?: IntFilter<"Student"> | number
-    maxStreak?: IntFilter<"Student"> | number
-    points?: IntFilter<"Student"> | number
-    lastLogin?: DateTimeFilter<"Student"> | Date | string
     leetCodeProfile?: StringNullableFilter<"Student"> | string | null
-    lastQuestionSolved?: DateTimeFilter<"Student"> | Date | string
     submission?: SubmissionListRelationFilter
     studentAchievements?: StudentAchievementsListRelationFilter
     contestResult?: ContestResultListRelationFilter
     session?: XOR<SessionNullableScalarRelationFilter, SessionWhereInput> | null
+    discussion?: DiscussionsListRelationFilter
   }
 
   export type StudentOrderByWithRelationInput = {
@@ -13507,16 +14850,12 @@ export namespace Prisma {
     leetCodeName?: SortOrder
     salt?: SortOrder
     hash?: SortOrder
-    currStreak?: SortOrder
-    maxStreak?: SortOrder
-    points?: SortOrder
-    lastLogin?: SortOrder
     leetCodeProfile?: SortOrderInput | SortOrder
-    lastQuestionSolved?: SortOrder
     submission?: SubmissionOrderByRelationAggregateInput
     studentAchievements?: StudentAchievementsOrderByRelationAggregateInput
     contestResult?: ContestResultOrderByRelationAggregateInput
     session?: SessionOrderByWithRelationInput
+    discussion?: DiscussionsOrderByRelationAggregateInput
   }
 
   export type StudentWhereUniqueInput = Prisma.AtLeast<{
@@ -13530,16 +14869,12 @@ export namespace Prisma {
     leetCodeName?: StringFilter<"Student"> | string
     salt?: StringFilter<"Student"> | string
     hash?: StringFilter<"Student"> | string
-    currStreak?: IntFilter<"Student"> | number
-    maxStreak?: IntFilter<"Student"> | number
-    points?: IntFilter<"Student"> | number
-    lastLogin?: DateTimeFilter<"Student"> | Date | string
     leetCodeProfile?: StringNullableFilter<"Student"> | string | null
-    lastQuestionSolved?: DateTimeFilter<"Student"> | Date | string
     submission?: SubmissionListRelationFilter
     studentAchievements?: StudentAchievementsListRelationFilter
     contestResult?: ContestResultListRelationFilter
     session?: XOR<SessionNullableScalarRelationFilter, SessionWhereInput> | null
+    discussion?: DiscussionsListRelationFilter
   }, "id" | "rno" | "uname">
 
   export type StudentOrderByWithAggregationInput = {
@@ -13550,12 +14885,7 @@ export namespace Prisma {
     leetCodeName?: SortOrder
     salt?: SortOrder
     hash?: SortOrder
-    currStreak?: SortOrder
-    maxStreak?: SortOrder
-    points?: SortOrder
-    lastLogin?: SortOrder
     leetCodeProfile?: SortOrderInput | SortOrder
-    lastQuestionSolved?: SortOrder
     _count?: StudentCountOrderByAggregateInput
     _avg?: StudentAvgOrderByAggregateInput
     _max?: StudentMaxOrderByAggregateInput
@@ -13574,12 +14904,7 @@ export namespace Prisma {
     leetCodeName?: StringWithAggregatesFilter<"Student"> | string
     salt?: StringWithAggregatesFilter<"Student"> | string
     hash?: StringWithAggregatesFilter<"Student"> | string
-    currStreak?: IntWithAggregatesFilter<"Student"> | number
-    maxStreak?: IntWithAggregatesFilter<"Student"> | number
-    points?: IntWithAggregatesFilter<"Student"> | number
-    lastLogin?: DateTimeWithAggregatesFilter<"Student"> | Date | string
     leetCodeProfile?: StringNullableWithAggregatesFilter<"Student"> | string | null
-    lastQuestionSolved?: DateTimeWithAggregatesFilter<"Student"> | Date | string
   }
 
   export type TopicsWhereInput = {
@@ -13592,6 +14917,7 @@ export namespace Prisma {
     notes?: StringNullableFilter<"Topics"> | string | null
     contestDate?: DateTimeFilter<"Topics"> | Date | string
     contestResult?: ContestResultListRelationFilter
+    question?: QuestionsListRelationFilter
   }
 
   export type TopicsOrderByWithRelationInput = {
@@ -13601,6 +14927,7 @@ export namespace Prisma {
     notes?: SortOrderInput | SortOrder
     contestDate?: SortOrder
     contestResult?: ContestResultOrderByRelationAggregateInput
+    question?: QuestionsOrderByRelationAggregateInput
   }
 
   export type TopicsWhereUniqueInput = Prisma.AtLeast<{
@@ -13613,6 +14940,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Topics"> | string | null
     contestDate?: DateTimeFilter<"Topics"> | Date | string
     contestResult?: ContestResultListRelationFilter
+    question?: QuestionsListRelationFilter
   }, "id" | "name" | "notes">
 
   export type TopicsOrderByWithAggregationInput = {
@@ -13646,28 +14974,36 @@ export namespace Prisma {
     id?: IntFilter<"Questions"> | number
     title?: StringFilter<"Questions"> | string
     description?: StringNullableFilter<"Questions"> | string | null
+    topic?: IntFilter<"Questions"> | number
     noOfHiddenTestCases?: IntFilter<"Questions"> | number
     noOfExternalTestCases?: IntFilter<"Questions"> | number
     difficulty?: EnumDifficultyTypeFilter<"Questions"> | $Enums.DifficultyType
     pointsPerTestCaseSolved?: IntFilter<"Questions"> | number
     type?: EnumQuestionTypeFilter<"Questions"> | $Enums.QuestionType
     leetCodeLink?: StringNullableFilter<"Questions"> | string | null
+    leetCodeTitle?: StringNullableFilter<"Questions"> | string | null
     testCase?: TestCaseListRelationFilter
     submission?: SubmissionListRelationFilter
+    discussion?: DiscussionsListRelationFilter
+    topics?: XOR<TopicsScalarRelationFilter, TopicsWhereInput>
   }
 
   export type QuestionsOrderByWithRelationInput = {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
+    topic?: SortOrder
     noOfHiddenTestCases?: SortOrder
     noOfExternalTestCases?: SortOrder
     difficulty?: SortOrder
     pointsPerTestCaseSolved?: SortOrder
     type?: SortOrder
     leetCodeLink?: SortOrderInput | SortOrder
+    leetCodeTitle?: SortOrderInput | SortOrder
     testCase?: TestCaseOrderByRelationAggregateInput
     submission?: SubmissionOrderByRelationAggregateInput
+    discussion?: DiscussionsOrderByRelationAggregateInput
+    topics?: TopicsOrderByWithRelationInput
   }
 
   export type QuestionsWhereUniqueInput = Prisma.AtLeast<{
@@ -13677,26 +15013,32 @@ export namespace Prisma {
     NOT?: QuestionsWhereInput | QuestionsWhereInput[]
     title?: StringFilter<"Questions"> | string
     description?: StringNullableFilter<"Questions"> | string | null
+    topic?: IntFilter<"Questions"> | number
     noOfHiddenTestCases?: IntFilter<"Questions"> | number
     noOfExternalTestCases?: IntFilter<"Questions"> | number
     difficulty?: EnumDifficultyTypeFilter<"Questions"> | $Enums.DifficultyType
     pointsPerTestCaseSolved?: IntFilter<"Questions"> | number
     type?: EnumQuestionTypeFilter<"Questions"> | $Enums.QuestionType
     leetCodeLink?: StringNullableFilter<"Questions"> | string | null
+    leetCodeTitle?: StringNullableFilter<"Questions"> | string | null
     testCase?: TestCaseListRelationFilter
     submission?: SubmissionListRelationFilter
+    discussion?: DiscussionsListRelationFilter
+    topics?: XOR<TopicsScalarRelationFilter, TopicsWhereInput>
   }, "id">
 
   export type QuestionsOrderByWithAggregationInput = {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
+    topic?: SortOrder
     noOfHiddenTestCases?: SortOrder
     noOfExternalTestCases?: SortOrder
     difficulty?: SortOrder
     pointsPerTestCaseSolved?: SortOrder
     type?: SortOrder
     leetCodeLink?: SortOrderInput | SortOrder
+    leetCodeTitle?: SortOrderInput | SortOrder
     _count?: QuestionsCountOrderByAggregateInput
     _avg?: QuestionsAvgOrderByAggregateInput
     _max?: QuestionsMaxOrderByAggregateInput
@@ -13711,12 +15053,14 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Questions"> | number
     title?: StringWithAggregatesFilter<"Questions"> | string
     description?: StringNullableWithAggregatesFilter<"Questions"> | string | null
+    topic?: IntWithAggregatesFilter<"Questions"> | number
     noOfHiddenTestCases?: IntWithAggregatesFilter<"Questions"> | number
     noOfExternalTestCases?: IntWithAggregatesFilter<"Questions"> | number
     difficulty?: EnumDifficultyTypeWithAggregatesFilter<"Questions"> | $Enums.DifficultyType
     pointsPerTestCaseSolved?: IntWithAggregatesFilter<"Questions"> | number
     type?: EnumQuestionTypeWithAggregatesFilter<"Questions"> | $Enums.QuestionType
     leetCodeLink?: StringNullableWithAggregatesFilter<"Questions"> | string | null
+    leetCodeTitle?: StringNullableWithAggregatesFilter<"Questions"> | string | null
   }
 
   export type TestCaseWhereInput = {
@@ -13853,9 +15197,6 @@ export namespace Prisma {
     id?: IntFilter<"Achievements"> | number
     title?: StringFilter<"Achievements"> | string
     description?: StringNullableFilter<"Achievements"> | string | null
-    type?: EnumAchievementTypeFilter<"Achievements"> | $Enums.AchievementType
-    minCriteria?: IntFilter<"Achievements"> | number
-    maxCriteria?: IntFilter<"Achievements"> | number
     studentAchievements?: StudentAchievementsListRelationFilter
   }
 
@@ -13863,9 +15204,6 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
-    type?: SortOrder
-    minCriteria?: SortOrder
-    maxCriteria?: SortOrder
     studentAchievements?: StudentAchievementsOrderByRelationAggregateInput
   }
 
@@ -13876,9 +15214,6 @@ export namespace Prisma {
     NOT?: AchievementsWhereInput | AchievementsWhereInput[]
     title?: StringFilter<"Achievements"> | string
     description?: StringNullableFilter<"Achievements"> | string | null
-    type?: EnumAchievementTypeFilter<"Achievements"> | $Enums.AchievementType
-    minCriteria?: IntFilter<"Achievements"> | number
-    maxCriteria?: IntFilter<"Achievements"> | number
     studentAchievements?: StudentAchievementsListRelationFilter
   }, "id">
 
@@ -13886,9 +15221,6 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
-    type?: SortOrder
-    minCriteria?: SortOrder
-    maxCriteria?: SortOrder
     _count?: AchievementsCountOrderByAggregateInput
     _avg?: AchievementsAvgOrderByAggregateInput
     _max?: AchievementsMaxOrderByAggregateInput
@@ -13903,9 +15235,6 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Achievements"> | number
     title?: StringWithAggregatesFilter<"Achievements"> | string
     description?: StringNullableWithAggregatesFilter<"Achievements"> | string | null
-    type?: EnumAchievementTypeWithAggregatesFilter<"Achievements"> | $Enums.AchievementType
-    minCriteria?: IntWithAggregatesFilter<"Achievements"> | number
-    maxCriteria?: IntWithAggregatesFilter<"Achievements"> | number
   }
 
   export type StudentAchievementsWhereInput = {
@@ -13915,7 +15244,7 @@ export namespace Prisma {
     id?: IntFilter<"StudentAchievements"> | number
     studentId?: IntFilter<"StudentAchievements"> | number
     achievementId?: IntFilter<"StudentAchievements"> | number
-    acquiredOn?: DateTimeFilter<"StudentAchievements"> | Date | string
+    count?: IntFilter<"StudentAchievements"> | number
     student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
     achievements?: XOR<AchievementsScalarRelationFilter, AchievementsWhereInput>
   }
@@ -13924,7 +15253,7 @@ export namespace Prisma {
     id?: SortOrder
     studentId?: SortOrder
     achievementId?: SortOrder
-    acquiredOn?: SortOrder
+    count?: SortOrder
     student?: StudentOrderByWithRelationInput
     achievements?: AchievementsOrderByWithRelationInput
   }
@@ -13936,7 +15265,7 @@ export namespace Prisma {
     NOT?: StudentAchievementsWhereInput | StudentAchievementsWhereInput[]
     studentId?: IntFilter<"StudentAchievements"> | number
     achievementId?: IntFilter<"StudentAchievements"> | number
-    acquiredOn?: DateTimeFilter<"StudentAchievements"> | Date | string
+    count?: IntFilter<"StudentAchievements"> | number
     student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
     achievements?: XOR<AchievementsScalarRelationFilter, AchievementsWhereInput>
   }, "id">
@@ -13945,7 +15274,7 @@ export namespace Prisma {
     id?: SortOrder
     studentId?: SortOrder
     achievementId?: SortOrder
-    acquiredOn?: SortOrder
+    count?: SortOrder
     _count?: StudentAchievementsCountOrderByAggregateInput
     _avg?: StudentAchievementsAvgOrderByAggregateInput
     _max?: StudentAchievementsMaxOrderByAggregateInput
@@ -13960,7 +15289,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"StudentAchievements"> | number
     studentId?: IntWithAggregatesFilter<"StudentAchievements"> | number
     achievementId?: IntWithAggregatesFilter<"StudentAchievements"> | number
-    acquiredOn?: DateTimeWithAggregatesFilter<"StudentAchievements"> | Date | string
+    count?: IntWithAggregatesFilter<"StudentAchievements"> | number
   }
 
   export type ContestResultWhereInput = {
@@ -14112,7 +15441,7 @@ export namespace Prisma {
     OR?: SessionWhereInput[]
     NOT?: SessionWhereInput | SessionWhereInput[]
     id?: IntFilter<"Session"> | number
-    uname?: StringFilter<"Session"> | string
+    studentId?: IntFilter<"Session"> | number
     session?: StringFilter<"Session"> | string
     expiry?: DateTimeFilter<"Session"> | Date | string
     student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
@@ -14120,7 +15449,7 @@ export namespace Prisma {
 
   export type SessionOrderByWithRelationInput = {
     id?: SortOrder
-    uname?: SortOrder
+    studentId?: SortOrder
     session?: SortOrder
     expiry?: SortOrder
     student?: StudentOrderByWithRelationInput
@@ -14128,18 +15457,18 @@ export namespace Prisma {
 
   export type SessionWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    uname?: string
+    studentId?: number
     AND?: SessionWhereInput | SessionWhereInput[]
     OR?: SessionWhereInput[]
     NOT?: SessionWhereInput | SessionWhereInput[]
     session?: StringFilter<"Session"> | string
     expiry?: DateTimeFilter<"Session"> | Date | string
     student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
-  }, "id" | "uname">
+  }, "id" | "studentId">
 
   export type SessionOrderByWithAggregationInput = {
     id?: SortOrder
-    uname?: SortOrder
+    studentId?: SortOrder
     session?: SortOrder
     expiry?: SortOrder
     _count?: SessionCountOrderByAggregateInput
@@ -14154,9 +15483,75 @@ export namespace Prisma {
     OR?: SessionScalarWhereWithAggregatesInput[]
     NOT?: SessionScalarWhereWithAggregatesInput | SessionScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Session"> | number
-    uname?: StringWithAggregatesFilter<"Session"> | string
+    studentId?: IntWithAggregatesFilter<"Session"> | number
     session?: StringWithAggregatesFilter<"Session"> | string
     expiry?: DateTimeWithAggregatesFilter<"Session"> | Date | string
+  }
+
+  export type DiscussionsWhereInput = {
+    AND?: DiscussionsWhereInput | DiscussionsWhereInput[]
+    OR?: DiscussionsWhereInput[]
+    NOT?: DiscussionsWhereInput | DiscussionsWhereInput[]
+    id?: IntFilter<"Discussions"> | number
+    studentId?: IntFilter<"Discussions"> | number
+    type?: EnumCommentTypeFilter<"Discussions"> | $Enums.CommentType
+    questionId?: IntNullableFilter<"Discussions"> | number | null
+    repliedTo?: IntNullableFilter<"Discussions"> | number | null
+    student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
+    question?: XOR<QuestionsNullableScalarRelationFilter, QuestionsWhereInput> | null
+    toWhomIReply?: XOR<DiscussionsNullableScalarRelationFilter, DiscussionsWhereInput> | null
+    repliesIGet?: DiscussionsListRelationFilter
+  }
+
+  export type DiscussionsOrderByWithRelationInput = {
+    id?: SortOrder
+    studentId?: SortOrder
+    type?: SortOrder
+    questionId?: SortOrderInput | SortOrder
+    repliedTo?: SortOrderInput | SortOrder
+    student?: StudentOrderByWithRelationInput
+    question?: QuestionsOrderByWithRelationInput
+    toWhomIReply?: DiscussionsOrderByWithRelationInput
+    repliesIGet?: DiscussionsOrderByRelationAggregateInput
+  }
+
+  export type DiscussionsWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: DiscussionsWhereInput | DiscussionsWhereInput[]
+    OR?: DiscussionsWhereInput[]
+    NOT?: DiscussionsWhereInput | DiscussionsWhereInput[]
+    studentId?: IntFilter<"Discussions"> | number
+    type?: EnumCommentTypeFilter<"Discussions"> | $Enums.CommentType
+    questionId?: IntNullableFilter<"Discussions"> | number | null
+    repliedTo?: IntNullableFilter<"Discussions"> | number | null
+    student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
+    question?: XOR<QuestionsNullableScalarRelationFilter, QuestionsWhereInput> | null
+    toWhomIReply?: XOR<DiscussionsNullableScalarRelationFilter, DiscussionsWhereInput> | null
+    repliesIGet?: DiscussionsListRelationFilter
+  }, "id">
+
+  export type DiscussionsOrderByWithAggregationInput = {
+    id?: SortOrder
+    studentId?: SortOrder
+    type?: SortOrder
+    questionId?: SortOrderInput | SortOrder
+    repliedTo?: SortOrderInput | SortOrder
+    _count?: DiscussionsCountOrderByAggregateInput
+    _avg?: DiscussionsAvgOrderByAggregateInput
+    _max?: DiscussionsMaxOrderByAggregateInput
+    _min?: DiscussionsMinOrderByAggregateInput
+    _sum?: DiscussionsSumOrderByAggregateInput
+  }
+
+  export type DiscussionsScalarWhereWithAggregatesInput = {
+    AND?: DiscussionsScalarWhereWithAggregatesInput | DiscussionsScalarWhereWithAggregatesInput[]
+    OR?: DiscussionsScalarWhereWithAggregatesInput[]
+    NOT?: DiscussionsScalarWhereWithAggregatesInput | DiscussionsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Discussions"> | number
+    studentId?: IntWithAggregatesFilter<"Discussions"> | number
+    type?: EnumCommentTypeWithAggregatesFilter<"Discussions"> | $Enums.CommentType
+    questionId?: IntNullableWithAggregatesFilter<"Discussions"> | number | null
+    repliedTo?: IntNullableWithAggregatesFilter<"Discussions"> | number | null
   }
 
   export type StudentCreateInput = {
@@ -14166,16 +15561,12 @@ export namespace Prisma {
     leetCodeName: string
     salt: string
     hash: string
-    currStreak?: number
-    maxStreak?: number
-    points?: number
-    lastLogin?: Date | string
     leetCodeProfile?: string | null
-    lastQuestionSolved: Date | string
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultCreateNestedManyWithoutStudentInput
     session?: SessionCreateNestedOneWithoutStudentInput
+    discussion?: DiscussionsCreateNestedManyWithoutStudentInput
   }
 
   export type StudentUncheckedCreateInput = {
@@ -14186,16 +15577,12 @@ export namespace Prisma {
     leetCodeName: string
     salt: string
     hash: string
-    currStreak?: number
-    maxStreak?: number
-    points?: number
-    lastLogin?: Date | string
     leetCodeProfile?: string | null
-    lastQuestionSolved: Date | string
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
     session?: SessionUncheckedCreateNestedOneWithoutStudentInput
+    discussion?: DiscussionsUncheckedCreateNestedManyWithoutStudentInput
   }
 
   export type StudentUpdateInput = {
@@ -14205,16 +15592,12 @@ export namespace Prisma {
     leetCodeName?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    currStreak?: IntFieldUpdateOperationsInput | number
-    maxStreak?: IntFieldUpdateOperationsInput | number
-    points?: IntFieldUpdateOperationsInput | number
-    lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
     session?: SessionUpdateOneWithoutStudentNestedInput
+    discussion?: DiscussionsUpdateManyWithoutStudentNestedInput
   }
 
   export type StudentUncheckedUpdateInput = {
@@ -14225,16 +15608,12 @@ export namespace Prisma {
     leetCodeName?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    currStreak?: IntFieldUpdateOperationsInput | number
-    maxStreak?: IntFieldUpdateOperationsInput | number
-    points?: IntFieldUpdateOperationsInput | number
-    lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
     session?: SessionUncheckedUpdateOneWithoutStudentNestedInput
+    discussion?: DiscussionsUncheckedUpdateManyWithoutStudentNestedInput
   }
 
   export type StudentCreateManyInput = {
@@ -14245,12 +15624,7 @@ export namespace Prisma {
     leetCodeName: string
     salt: string
     hash: string
-    currStreak?: number
-    maxStreak?: number
-    points?: number
-    lastLogin?: Date | string
     leetCodeProfile?: string | null
-    lastQuestionSolved: Date | string
   }
 
   export type StudentUpdateManyMutationInput = {
@@ -14260,12 +15634,7 @@ export namespace Prisma {
     leetCodeName?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    currStreak?: IntFieldUpdateOperationsInput | number
-    maxStreak?: IntFieldUpdateOperationsInput | number
-    points?: IntFieldUpdateOperationsInput | number
-    lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StudentUncheckedUpdateManyInput = {
@@ -14276,12 +15645,7 @@ export namespace Prisma {
     leetCodeName?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    currStreak?: IntFieldUpdateOperationsInput | number
-    maxStreak?: IntFieldUpdateOperationsInput | number
-    points?: IntFieldUpdateOperationsInput | number
-    lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TopicsCreateInput = {
@@ -14290,6 +15654,7 @@ export namespace Prisma {
     notes?: string | null
     contestDate: Date | string
     contestResult?: ContestResultCreateNestedManyWithoutTopicsInput
+    question?: QuestionsCreateNestedManyWithoutTopicsInput
   }
 
   export type TopicsUncheckedCreateInput = {
@@ -14299,6 +15664,7 @@ export namespace Prisma {
     notes?: string | null
     contestDate: Date | string
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutTopicsInput
+    question?: QuestionsUncheckedCreateNestedManyWithoutTopicsInput
   }
 
   export type TopicsUpdateInput = {
@@ -14307,6 +15673,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
     contestResult?: ContestResultUpdateManyWithoutTopicsNestedInput
+    question?: QuestionsUpdateManyWithoutTopicsNestedInput
   }
 
   export type TopicsUncheckedUpdateInput = {
@@ -14316,6 +15683,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
     contestResult?: ContestResultUncheckedUpdateManyWithoutTopicsNestedInput
+    question?: QuestionsUncheckedUpdateManyWithoutTopicsNestedInput
   }
 
   export type TopicsCreateManyInput = {
@@ -14350,22 +15718,28 @@ export namespace Prisma {
     pointsPerTestCaseSolved: number
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
+    leetCodeTitle?: string | null
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
+    discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
+    topics: TopicsCreateNestedOneWithoutQuestionInput
   }
 
   export type QuestionsUncheckedCreateInput = {
     id?: number
     title: string
     description?: string | null
+    topic: number
     noOfHiddenTestCases?: number
     noOfExternalTestCases?: number
     difficulty?: $Enums.DifficultyType
     pointsPerTestCaseSolved: number
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
+    leetCodeTitle?: string | null
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
+    discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionsUpdateInput = {
@@ -14377,34 +15751,42 @@ export namespace Prisma {
     pointsPerTestCaseSolved?: IntFieldUpdateOperationsInput | number
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
+    discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
+    topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
   }
 
   export type QuestionsUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: IntFieldUpdateOperationsInput | number
     noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
     noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
     pointsPerTestCaseSolved?: IntFieldUpdateOperationsInput | number
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
+    discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
   export type QuestionsCreateManyInput = {
     id?: number
     title: string
     description?: string | null
+    topic: number
     noOfHiddenTestCases?: number
     noOfExternalTestCases?: number
     difficulty?: $Enums.DifficultyType
     pointsPerTestCaseSolved: number
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
+    leetCodeTitle?: string | null
   }
 
   export type QuestionsUpdateManyMutationInput = {
@@ -14416,18 +15798,21 @@ export namespace Prisma {
     pointsPerTestCaseSolved?: IntFieldUpdateOperationsInput | number
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type QuestionsUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: IntFieldUpdateOperationsInput | number
     noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
     noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
     pointsPerTestCaseSolved?: IntFieldUpdateOperationsInput | number
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TestCaseCreateInput = {
@@ -14550,9 +15935,6 @@ export namespace Prisma {
   export type AchievementsCreateInput = {
     title: string
     description?: string | null
-    type?: $Enums.AchievementType
-    minCriteria?: number
-    maxCriteria?: number
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutAchievementsInput
   }
 
@@ -14560,18 +15942,12 @@ export namespace Prisma {
     id?: number
     title: string
     description?: string | null
-    type?: $Enums.AchievementType
-    minCriteria?: number
-    maxCriteria?: number
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutAchievementsInput
   }
 
   export type AchievementsUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumAchievementTypeFieldUpdateOperationsInput | $Enums.AchievementType
-    minCriteria?: IntFieldUpdateOperationsInput | number
-    maxCriteria?: IntFieldUpdateOperationsInput | number
     studentAchievements?: StudentAchievementsUpdateManyWithoutAchievementsNestedInput
   }
 
@@ -14579,9 +15955,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumAchievementTypeFieldUpdateOperationsInput | $Enums.AchievementType
-    minCriteria?: IntFieldUpdateOperationsInput | number
-    maxCriteria?: IntFieldUpdateOperationsInput | number
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutAchievementsNestedInput
   }
 
@@ -14589,30 +15962,21 @@ export namespace Prisma {
     id?: number
     title: string
     description?: string | null
-    type?: $Enums.AchievementType
-    minCriteria?: number
-    maxCriteria?: number
   }
 
   export type AchievementsUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumAchievementTypeFieldUpdateOperationsInput | $Enums.AchievementType
-    minCriteria?: IntFieldUpdateOperationsInput | number
-    maxCriteria?: IntFieldUpdateOperationsInput | number
   }
 
   export type AchievementsUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumAchievementTypeFieldUpdateOperationsInput | $Enums.AchievementType
-    minCriteria?: IntFieldUpdateOperationsInput | number
-    maxCriteria?: IntFieldUpdateOperationsInput | number
   }
 
   export type StudentAchievementsCreateInput = {
-    acquiredOn?: Date | string
+    count: number
     student: StudentCreateNestedOneWithoutStudentAchievementsInput
     achievements: AchievementsCreateNestedOneWithoutStudentAchievementsInput
   }
@@ -14621,11 +15985,11 @@ export namespace Prisma {
     id?: number
     studentId: number
     achievementId: number
-    acquiredOn?: Date | string
+    count: number
   }
 
   export type StudentAchievementsUpdateInput = {
-    acquiredOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    count?: IntFieldUpdateOperationsInput | number
     student?: StudentUpdateOneRequiredWithoutStudentAchievementsNestedInput
     achievements?: AchievementsUpdateOneRequiredWithoutStudentAchievementsNestedInput
   }
@@ -14634,25 +15998,25 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     studentId?: IntFieldUpdateOperationsInput | number
     achievementId?: IntFieldUpdateOperationsInput | number
-    acquiredOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    count?: IntFieldUpdateOperationsInput | number
   }
 
   export type StudentAchievementsCreateManyInput = {
     id?: number
     studentId: number
     achievementId: number
-    acquiredOn?: Date | string
+    count: number
   }
 
   export type StudentAchievementsUpdateManyMutationInput = {
-    acquiredOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    count?: IntFieldUpdateOperationsInput | number
   }
 
   export type StudentAchievementsUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     studentId?: IntFieldUpdateOperationsInput | number
     achievementId?: IntFieldUpdateOperationsInput | number
-    acquiredOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    count?: IntFieldUpdateOperationsInput | number
   }
 
   export type ContestResultCreateInput = {
@@ -14809,7 +16173,7 @@ export namespace Prisma {
 
   export type SessionUncheckedCreateInput = {
     id?: number
-    uname: string
+    studentId: number
     session: string
     expiry: Date | string
   }
@@ -14822,14 +16186,14 @@ export namespace Prisma {
 
   export type SessionUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    uname?: StringFieldUpdateOperationsInput | string
+    studentId?: IntFieldUpdateOperationsInput | number
     session?: StringFieldUpdateOperationsInput | string
     expiry?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SessionCreateManyInput = {
     id?: number
-    uname: string
+    studentId: number
     session: string
     expiry: Date | string
   }
@@ -14841,9 +16205,63 @@ export namespace Prisma {
 
   export type SessionUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    uname?: StringFieldUpdateOperationsInput | string
+    studentId?: IntFieldUpdateOperationsInput | number
     session?: StringFieldUpdateOperationsInput | string
     expiry?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DiscussionsCreateInput = {
+    type?: $Enums.CommentType
+    student: StudentCreateNestedOneWithoutDiscussionInput
+    question?: QuestionsCreateNestedOneWithoutDiscussionInput
+    toWhomIReply?: DiscussionsCreateNestedOneWithoutRepliesIGetInput
+    repliesIGet?: DiscussionsCreateNestedManyWithoutToWhomIReplyInput
+  }
+
+  export type DiscussionsUncheckedCreateInput = {
+    id?: number
+    studentId: number
+    type?: $Enums.CommentType
+    questionId?: number | null
+    repliedTo?: number | null
+    repliesIGet?: DiscussionsUncheckedCreateNestedManyWithoutToWhomIReplyInput
+  }
+
+  export type DiscussionsUpdateInput = {
+    type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+    student?: StudentUpdateOneRequiredWithoutDiscussionNestedInput
+    question?: QuestionsUpdateOneWithoutDiscussionNestedInput
+    toWhomIReply?: DiscussionsUpdateOneWithoutRepliesIGetNestedInput
+    repliesIGet?: DiscussionsUpdateManyWithoutToWhomIReplyNestedInput
+  }
+
+  export type DiscussionsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
+    type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+    questionId?: NullableIntFieldUpdateOperationsInput | number | null
+    repliedTo?: NullableIntFieldUpdateOperationsInput | number | null
+    repliesIGet?: DiscussionsUncheckedUpdateManyWithoutToWhomIReplyNestedInput
+  }
+
+  export type DiscussionsCreateManyInput = {
+    id?: number
+    studentId: number
+    type?: $Enums.CommentType
+    questionId?: number | null
+    repliedTo?: number | null
+  }
+
+  export type DiscussionsUpdateManyMutationInput = {
+    type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+  }
+
+  export type DiscussionsUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
+    type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+    questionId?: NullableIntFieldUpdateOperationsInput | number | null
+    repliedTo?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -14870,17 +16288,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -14921,6 +16328,12 @@ export namespace Prisma {
     isNot?: SessionWhereInput | null
   }
 
+  export type DiscussionsListRelationFilter = {
+    every?: DiscussionsWhereInput
+    some?: DiscussionsWhereInput
+    none?: DiscussionsWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -14938,6 +16351,10 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type DiscussionsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type StudentCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -14946,19 +16363,11 @@ export namespace Prisma {
     leetCodeName?: SortOrder
     salt?: SortOrder
     hash?: SortOrder
-    currStreak?: SortOrder
-    maxStreak?: SortOrder
-    points?: SortOrder
-    lastLogin?: SortOrder
     leetCodeProfile?: SortOrder
-    lastQuestionSolved?: SortOrder
   }
 
   export type StudentAvgOrderByAggregateInput = {
     id?: SortOrder
-    currStreak?: SortOrder
-    maxStreak?: SortOrder
-    points?: SortOrder
   }
 
   export type StudentMaxOrderByAggregateInput = {
@@ -14969,12 +16378,7 @@ export namespace Prisma {
     leetCodeName?: SortOrder
     salt?: SortOrder
     hash?: SortOrder
-    currStreak?: SortOrder
-    maxStreak?: SortOrder
-    points?: SortOrder
-    lastLogin?: SortOrder
     leetCodeProfile?: SortOrder
-    lastQuestionSolved?: SortOrder
   }
 
   export type StudentMinOrderByAggregateInput = {
@@ -14985,19 +16389,11 @@ export namespace Prisma {
     leetCodeName?: SortOrder
     salt?: SortOrder
     hash?: SortOrder
-    currStreak?: SortOrder
-    maxStreak?: SortOrder
-    points?: SortOrder
-    lastLogin?: SortOrder
     leetCodeProfile?: SortOrder
-    lastQuestionSolved?: SortOrder
   }
 
   export type StudentSumOrderByAggregateInput = {
     id?: SortOrder
-    currStreak?: SortOrder
-    maxStreak?: SortOrder
-    points?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -15034,20 +16430,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -15064,6 +16446,27 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type QuestionsListRelationFilter = {
+    every?: QuestionsWhereInput
+    some?: QuestionsWhereInput
+    none?: QuestionsWhereInput
+  }
+
+  export type QuestionsOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type TopicsCountOrderByAggregateInput = {
@@ -15098,6 +16501,20 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type EnumDifficultyTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.DifficultyType | EnumDifficultyTypeFieldRefInput<$PrismaModel>
     in?: $Enums.DifficultyType[] | ListEnumDifficultyTypeFieldRefInput<$PrismaModel>
@@ -15118,6 +16535,11 @@ export namespace Prisma {
     none?: TestCaseWhereInput
   }
 
+  export type TopicsScalarRelationFilter = {
+    is?: TopicsWhereInput
+    isNot?: TopicsWhereInput
+  }
+
   export type TestCaseOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -15126,16 +16548,19 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    topic?: SortOrder
     noOfHiddenTestCases?: SortOrder
     noOfExternalTestCases?: SortOrder
     difficulty?: SortOrder
     pointsPerTestCaseSolved?: SortOrder
     type?: SortOrder
     leetCodeLink?: SortOrder
+    leetCodeTitle?: SortOrder
   }
 
   export type QuestionsAvgOrderByAggregateInput = {
     id?: SortOrder
+    topic?: SortOrder
     noOfHiddenTestCases?: SortOrder
     noOfExternalTestCases?: SortOrder
     pointsPerTestCaseSolved?: SortOrder
@@ -15145,28 +16570,33 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    topic?: SortOrder
     noOfHiddenTestCases?: SortOrder
     noOfExternalTestCases?: SortOrder
     difficulty?: SortOrder
     pointsPerTestCaseSolved?: SortOrder
     type?: SortOrder
     leetCodeLink?: SortOrder
+    leetCodeTitle?: SortOrder
   }
 
   export type QuestionsMinOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    topic?: SortOrder
     noOfHiddenTestCases?: SortOrder
     noOfExternalTestCases?: SortOrder
     difficulty?: SortOrder
     pointsPerTestCaseSolved?: SortOrder
     type?: SortOrder
     leetCodeLink?: SortOrder
+    leetCodeTitle?: SortOrder
   }
 
   export type QuestionsSumOrderByAggregateInput = {
     id?: SortOrder
+    topic?: SortOrder
     noOfHiddenTestCases?: SortOrder
     noOfExternalTestCases?: SortOrder
     pointsPerTestCaseSolved?: SortOrder
@@ -15316,60 +16746,30 @@ export namespace Prisma {
     _max?: NestedEnumSubmissionTypeFilter<$PrismaModel>
   }
 
-  export type EnumAchievementTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.AchievementType | EnumAchievementTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.AchievementType[] | ListEnumAchievementTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.AchievementType[] | ListEnumAchievementTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumAchievementTypeFilter<$PrismaModel> | $Enums.AchievementType
-  }
-
   export type AchievementsCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    type?: SortOrder
-    minCriteria?: SortOrder
-    maxCriteria?: SortOrder
   }
 
   export type AchievementsAvgOrderByAggregateInput = {
     id?: SortOrder
-    minCriteria?: SortOrder
-    maxCriteria?: SortOrder
   }
 
   export type AchievementsMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    type?: SortOrder
-    minCriteria?: SortOrder
-    maxCriteria?: SortOrder
   }
 
   export type AchievementsMinOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    type?: SortOrder
-    minCriteria?: SortOrder
-    maxCriteria?: SortOrder
   }
 
   export type AchievementsSumOrderByAggregateInput = {
     id?: SortOrder
-    minCriteria?: SortOrder
-    maxCriteria?: SortOrder
-  }
-
-  export type EnumAchievementTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.AchievementType | EnumAchievementTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.AchievementType[] | ListEnumAchievementTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.AchievementType[] | ListEnumAchievementTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumAchievementTypeWithAggregatesFilter<$PrismaModel> | $Enums.AchievementType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumAchievementTypeFilter<$PrismaModel>
-    _max?: NestedEnumAchievementTypeFilter<$PrismaModel>
   }
 
   export type AchievementsScalarRelationFilter = {
@@ -15381,38 +16781,35 @@ export namespace Prisma {
     id?: SortOrder
     studentId?: SortOrder
     achievementId?: SortOrder
-    acquiredOn?: SortOrder
+    count?: SortOrder
   }
 
   export type StudentAchievementsAvgOrderByAggregateInput = {
     id?: SortOrder
     studentId?: SortOrder
     achievementId?: SortOrder
+    count?: SortOrder
   }
 
   export type StudentAchievementsMaxOrderByAggregateInput = {
     id?: SortOrder
     studentId?: SortOrder
     achievementId?: SortOrder
-    acquiredOn?: SortOrder
+    count?: SortOrder
   }
 
   export type StudentAchievementsMinOrderByAggregateInput = {
     id?: SortOrder
     studentId?: SortOrder
     achievementId?: SortOrder
-    acquiredOn?: SortOrder
+    count?: SortOrder
   }
 
   export type StudentAchievementsSumOrderByAggregateInput = {
     id?: SortOrder
     studentId?: SortOrder
     achievementId?: SortOrder
-  }
-
-  export type TopicsScalarRelationFilter = {
-    is?: TopicsWhereInput
-    isNot?: TopicsWhereInput
+    count?: SortOrder
   }
 
   export type ContestResultCountOrderByAggregateInput = {
@@ -15522,31 +16919,125 @@ export namespace Prisma {
 
   export type SessionCountOrderByAggregateInput = {
     id?: SortOrder
-    uname?: SortOrder
+    studentId?: SortOrder
     session?: SortOrder
     expiry?: SortOrder
   }
 
   export type SessionAvgOrderByAggregateInput = {
     id?: SortOrder
+    studentId?: SortOrder
   }
 
   export type SessionMaxOrderByAggregateInput = {
     id?: SortOrder
-    uname?: SortOrder
+    studentId?: SortOrder
     session?: SortOrder
     expiry?: SortOrder
   }
 
   export type SessionMinOrderByAggregateInput = {
     id?: SortOrder
-    uname?: SortOrder
+    studentId?: SortOrder
     session?: SortOrder
     expiry?: SortOrder
   }
 
   export type SessionSumOrderByAggregateInput = {
     id?: SortOrder
+    studentId?: SortOrder
+  }
+
+  export type EnumCommentTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.CommentType | EnumCommentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CommentType[] | ListEnumCommentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CommentType[] | ListEnumCommentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCommentTypeFilter<$PrismaModel> | $Enums.CommentType
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type QuestionsNullableScalarRelationFilter = {
+    is?: QuestionsWhereInput | null
+    isNot?: QuestionsWhereInput | null
+  }
+
+  export type DiscussionsNullableScalarRelationFilter = {
+    is?: DiscussionsWhereInput | null
+    isNot?: DiscussionsWhereInput | null
+  }
+
+  export type DiscussionsCountOrderByAggregateInput = {
+    id?: SortOrder
+    studentId?: SortOrder
+    type?: SortOrder
+    questionId?: SortOrder
+    repliedTo?: SortOrder
+  }
+
+  export type DiscussionsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    studentId?: SortOrder
+    questionId?: SortOrder
+    repliedTo?: SortOrder
+  }
+
+  export type DiscussionsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    studentId?: SortOrder
+    type?: SortOrder
+    questionId?: SortOrder
+    repliedTo?: SortOrder
+  }
+
+  export type DiscussionsMinOrderByAggregateInput = {
+    id?: SortOrder
+    studentId?: SortOrder
+    type?: SortOrder
+    questionId?: SortOrder
+    repliedTo?: SortOrder
+  }
+
+  export type DiscussionsSumOrderByAggregateInput = {
+    id?: SortOrder
+    studentId?: SortOrder
+    questionId?: SortOrder
+    repliedTo?: SortOrder
+  }
+
+  export type EnumCommentTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CommentType | EnumCommentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CommentType[] | ListEnumCommentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CommentType[] | ListEnumCommentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCommentTypeWithAggregatesFilter<$PrismaModel> | $Enums.CommentType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCommentTypeFilter<$PrismaModel>
+    _max?: NestedEnumCommentTypeFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type SubmissionCreateNestedManyWithoutStudentInput = {
@@ -15576,6 +17067,13 @@ export namespace Prisma {
     connect?: SessionWhereUniqueInput
   }
 
+  export type DiscussionsCreateNestedManyWithoutStudentInput = {
+    create?: XOR<DiscussionsCreateWithoutStudentInput, DiscussionsUncheckedCreateWithoutStudentInput> | DiscussionsCreateWithoutStudentInput[] | DiscussionsUncheckedCreateWithoutStudentInput[]
+    connectOrCreate?: DiscussionsCreateOrConnectWithoutStudentInput | DiscussionsCreateOrConnectWithoutStudentInput[]
+    createMany?: DiscussionsCreateManyStudentInputEnvelope
+    connect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+  }
+
   export type SubmissionUncheckedCreateNestedManyWithoutStudentInput = {
     create?: XOR<SubmissionCreateWithoutStudentInput, SubmissionUncheckedCreateWithoutStudentInput> | SubmissionCreateWithoutStudentInput[] | SubmissionUncheckedCreateWithoutStudentInput[]
     connectOrCreate?: SubmissionCreateOrConnectWithoutStudentInput | SubmissionCreateOrConnectWithoutStudentInput[]
@@ -15603,20 +17101,15 @@ export namespace Prisma {
     connect?: SessionWhereUniqueInput
   }
 
+  export type DiscussionsUncheckedCreateNestedManyWithoutStudentInput = {
+    create?: XOR<DiscussionsCreateWithoutStudentInput, DiscussionsUncheckedCreateWithoutStudentInput> | DiscussionsCreateWithoutStudentInput[] | DiscussionsUncheckedCreateWithoutStudentInput[]
+    connectOrCreate?: DiscussionsCreateOrConnectWithoutStudentInput | DiscussionsCreateOrConnectWithoutStudentInput[]
+    createMany?: DiscussionsCreateManyStudentInputEnvelope
+    connect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -15675,6 +17168,28 @@ export namespace Prisma {
     update?: XOR<XOR<SessionUpdateToOneWithWhereWithoutStudentInput, SessionUpdateWithoutStudentInput>, SessionUncheckedUpdateWithoutStudentInput>
   }
 
+  export type DiscussionsUpdateManyWithoutStudentNestedInput = {
+    create?: XOR<DiscussionsCreateWithoutStudentInput, DiscussionsUncheckedCreateWithoutStudentInput> | DiscussionsCreateWithoutStudentInput[] | DiscussionsUncheckedCreateWithoutStudentInput[]
+    connectOrCreate?: DiscussionsCreateOrConnectWithoutStudentInput | DiscussionsCreateOrConnectWithoutStudentInput[]
+    upsert?: DiscussionsUpsertWithWhereUniqueWithoutStudentInput | DiscussionsUpsertWithWhereUniqueWithoutStudentInput[]
+    createMany?: DiscussionsCreateManyStudentInputEnvelope
+    set?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    disconnect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    delete?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    connect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    update?: DiscussionsUpdateWithWhereUniqueWithoutStudentInput | DiscussionsUpdateWithWhereUniqueWithoutStudentInput[]
+    updateMany?: DiscussionsUpdateManyWithWhereWithoutStudentInput | DiscussionsUpdateManyWithWhereWithoutStudentInput[]
+    deleteMany?: DiscussionsScalarWhereInput | DiscussionsScalarWhereInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type SubmissionUncheckedUpdateManyWithoutStudentNestedInput = {
     create?: XOR<SubmissionCreateWithoutStudentInput, SubmissionUncheckedCreateWithoutStudentInput> | SubmissionCreateWithoutStudentInput[] | SubmissionUncheckedCreateWithoutStudentInput[]
     connectOrCreate?: SubmissionCreateOrConnectWithoutStudentInput | SubmissionCreateOrConnectWithoutStudentInput[]
@@ -15727,6 +17242,20 @@ export namespace Prisma {
     update?: XOR<XOR<SessionUpdateToOneWithWhereWithoutStudentInput, SessionUpdateWithoutStudentInput>, SessionUncheckedUpdateWithoutStudentInput>
   }
 
+  export type DiscussionsUncheckedUpdateManyWithoutStudentNestedInput = {
+    create?: XOR<DiscussionsCreateWithoutStudentInput, DiscussionsUncheckedCreateWithoutStudentInput> | DiscussionsCreateWithoutStudentInput[] | DiscussionsUncheckedCreateWithoutStudentInput[]
+    connectOrCreate?: DiscussionsCreateOrConnectWithoutStudentInput | DiscussionsCreateOrConnectWithoutStudentInput[]
+    upsert?: DiscussionsUpsertWithWhereUniqueWithoutStudentInput | DiscussionsUpsertWithWhereUniqueWithoutStudentInput[]
+    createMany?: DiscussionsCreateManyStudentInputEnvelope
+    set?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    disconnect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    delete?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    connect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    update?: DiscussionsUpdateWithWhereUniqueWithoutStudentInput | DiscussionsUpdateWithWhereUniqueWithoutStudentInput[]
+    updateMany?: DiscussionsUpdateManyWithWhereWithoutStudentInput | DiscussionsUpdateManyWithWhereWithoutStudentInput[]
+    deleteMany?: DiscussionsScalarWhereInput | DiscussionsScalarWhereInput[]
+  }
+
   export type ContestResultCreateNestedManyWithoutTopicsInput = {
     create?: XOR<ContestResultCreateWithoutTopicsInput, ContestResultUncheckedCreateWithoutTopicsInput> | ContestResultCreateWithoutTopicsInput[] | ContestResultUncheckedCreateWithoutTopicsInput[]
     connectOrCreate?: ContestResultCreateOrConnectWithoutTopicsInput | ContestResultCreateOrConnectWithoutTopicsInput[]
@@ -15734,11 +17263,29 @@ export namespace Prisma {
     connect?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
   }
 
+  export type QuestionsCreateNestedManyWithoutTopicsInput = {
+    create?: XOR<QuestionsCreateWithoutTopicsInput, QuestionsUncheckedCreateWithoutTopicsInput> | QuestionsCreateWithoutTopicsInput[] | QuestionsUncheckedCreateWithoutTopicsInput[]
+    connectOrCreate?: QuestionsCreateOrConnectWithoutTopicsInput | QuestionsCreateOrConnectWithoutTopicsInput[]
+    createMany?: QuestionsCreateManyTopicsInputEnvelope
+    connect?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+  }
+
   export type ContestResultUncheckedCreateNestedManyWithoutTopicsInput = {
     create?: XOR<ContestResultCreateWithoutTopicsInput, ContestResultUncheckedCreateWithoutTopicsInput> | ContestResultCreateWithoutTopicsInput[] | ContestResultUncheckedCreateWithoutTopicsInput[]
     connectOrCreate?: ContestResultCreateOrConnectWithoutTopicsInput | ContestResultCreateOrConnectWithoutTopicsInput[]
     createMany?: ContestResultCreateManyTopicsInputEnvelope
     connect?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
+  }
+
+  export type QuestionsUncheckedCreateNestedManyWithoutTopicsInput = {
+    create?: XOR<QuestionsCreateWithoutTopicsInput, QuestionsUncheckedCreateWithoutTopicsInput> | QuestionsCreateWithoutTopicsInput[] | QuestionsUncheckedCreateWithoutTopicsInput[]
+    connectOrCreate?: QuestionsCreateOrConnectWithoutTopicsInput | QuestionsCreateOrConnectWithoutTopicsInput[]
+    createMany?: QuestionsCreateManyTopicsInputEnvelope
+    connect?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type ContestResultUpdateManyWithoutTopicsNestedInput = {
@@ -15755,6 +17302,20 @@ export namespace Prisma {
     deleteMany?: ContestResultScalarWhereInput | ContestResultScalarWhereInput[]
   }
 
+  export type QuestionsUpdateManyWithoutTopicsNestedInput = {
+    create?: XOR<QuestionsCreateWithoutTopicsInput, QuestionsUncheckedCreateWithoutTopicsInput> | QuestionsCreateWithoutTopicsInput[] | QuestionsUncheckedCreateWithoutTopicsInput[]
+    connectOrCreate?: QuestionsCreateOrConnectWithoutTopicsInput | QuestionsCreateOrConnectWithoutTopicsInput[]
+    upsert?: QuestionsUpsertWithWhereUniqueWithoutTopicsInput | QuestionsUpsertWithWhereUniqueWithoutTopicsInput[]
+    createMany?: QuestionsCreateManyTopicsInputEnvelope
+    set?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+    disconnect?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+    delete?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+    connect?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+    update?: QuestionsUpdateWithWhereUniqueWithoutTopicsInput | QuestionsUpdateWithWhereUniqueWithoutTopicsInput[]
+    updateMany?: QuestionsUpdateManyWithWhereWithoutTopicsInput | QuestionsUpdateManyWithWhereWithoutTopicsInput[]
+    deleteMany?: QuestionsScalarWhereInput | QuestionsScalarWhereInput[]
+  }
+
   export type ContestResultUncheckedUpdateManyWithoutTopicsNestedInput = {
     create?: XOR<ContestResultCreateWithoutTopicsInput, ContestResultUncheckedCreateWithoutTopicsInput> | ContestResultCreateWithoutTopicsInput[] | ContestResultUncheckedCreateWithoutTopicsInput[]
     connectOrCreate?: ContestResultCreateOrConnectWithoutTopicsInput | ContestResultCreateOrConnectWithoutTopicsInput[]
@@ -15767,6 +17328,20 @@ export namespace Prisma {
     update?: ContestResultUpdateWithWhereUniqueWithoutTopicsInput | ContestResultUpdateWithWhereUniqueWithoutTopicsInput[]
     updateMany?: ContestResultUpdateManyWithWhereWithoutTopicsInput | ContestResultUpdateManyWithWhereWithoutTopicsInput[]
     deleteMany?: ContestResultScalarWhereInput | ContestResultScalarWhereInput[]
+  }
+
+  export type QuestionsUncheckedUpdateManyWithoutTopicsNestedInput = {
+    create?: XOR<QuestionsCreateWithoutTopicsInput, QuestionsUncheckedCreateWithoutTopicsInput> | QuestionsCreateWithoutTopicsInput[] | QuestionsUncheckedCreateWithoutTopicsInput[]
+    connectOrCreate?: QuestionsCreateOrConnectWithoutTopicsInput | QuestionsCreateOrConnectWithoutTopicsInput[]
+    upsert?: QuestionsUpsertWithWhereUniqueWithoutTopicsInput | QuestionsUpsertWithWhereUniqueWithoutTopicsInput[]
+    createMany?: QuestionsCreateManyTopicsInputEnvelope
+    set?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+    disconnect?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+    delete?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+    connect?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+    update?: QuestionsUpdateWithWhereUniqueWithoutTopicsInput | QuestionsUpdateWithWhereUniqueWithoutTopicsInput[]
+    updateMany?: QuestionsUpdateManyWithWhereWithoutTopicsInput | QuestionsUpdateManyWithWhereWithoutTopicsInput[]
+    deleteMany?: QuestionsScalarWhereInput | QuestionsScalarWhereInput[]
   }
 
   export type TestCaseCreateNestedManyWithoutQuestionsInput = {
@@ -15783,6 +17358,19 @@ export namespace Prisma {
     connect?: SubmissionWhereUniqueInput | SubmissionWhereUniqueInput[]
   }
 
+  export type DiscussionsCreateNestedManyWithoutQuestionInput = {
+    create?: XOR<DiscussionsCreateWithoutQuestionInput, DiscussionsUncheckedCreateWithoutQuestionInput> | DiscussionsCreateWithoutQuestionInput[] | DiscussionsUncheckedCreateWithoutQuestionInput[]
+    connectOrCreate?: DiscussionsCreateOrConnectWithoutQuestionInput | DiscussionsCreateOrConnectWithoutQuestionInput[]
+    createMany?: DiscussionsCreateManyQuestionInputEnvelope
+    connect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+  }
+
+  export type TopicsCreateNestedOneWithoutQuestionInput = {
+    create?: XOR<TopicsCreateWithoutQuestionInput, TopicsUncheckedCreateWithoutQuestionInput>
+    connectOrCreate?: TopicsCreateOrConnectWithoutQuestionInput
+    connect?: TopicsWhereUniqueInput
+  }
+
   export type TestCaseUncheckedCreateNestedManyWithoutQuestionsInput = {
     create?: XOR<TestCaseCreateWithoutQuestionsInput, TestCaseUncheckedCreateWithoutQuestionsInput> | TestCaseCreateWithoutQuestionsInput[] | TestCaseUncheckedCreateWithoutQuestionsInput[]
     connectOrCreate?: TestCaseCreateOrConnectWithoutQuestionsInput | TestCaseCreateOrConnectWithoutQuestionsInput[]
@@ -15795,6 +17383,13 @@ export namespace Prisma {
     connectOrCreate?: SubmissionCreateOrConnectWithoutQuestionsInput | SubmissionCreateOrConnectWithoutQuestionsInput[]
     createMany?: SubmissionCreateManyQuestionsInputEnvelope
     connect?: SubmissionWhereUniqueInput | SubmissionWhereUniqueInput[]
+  }
+
+  export type DiscussionsUncheckedCreateNestedManyWithoutQuestionInput = {
+    create?: XOR<DiscussionsCreateWithoutQuestionInput, DiscussionsUncheckedCreateWithoutQuestionInput> | DiscussionsCreateWithoutQuestionInput[] | DiscussionsUncheckedCreateWithoutQuestionInput[]
+    connectOrCreate?: DiscussionsCreateOrConnectWithoutQuestionInput | DiscussionsCreateOrConnectWithoutQuestionInput[]
+    createMany?: DiscussionsCreateManyQuestionInputEnvelope
+    connect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
   }
 
   export type EnumDifficultyTypeFieldUpdateOperationsInput = {
@@ -15833,6 +17428,28 @@ export namespace Prisma {
     deleteMany?: SubmissionScalarWhereInput | SubmissionScalarWhereInput[]
   }
 
+  export type DiscussionsUpdateManyWithoutQuestionNestedInput = {
+    create?: XOR<DiscussionsCreateWithoutQuestionInput, DiscussionsUncheckedCreateWithoutQuestionInput> | DiscussionsCreateWithoutQuestionInput[] | DiscussionsUncheckedCreateWithoutQuestionInput[]
+    connectOrCreate?: DiscussionsCreateOrConnectWithoutQuestionInput | DiscussionsCreateOrConnectWithoutQuestionInput[]
+    upsert?: DiscussionsUpsertWithWhereUniqueWithoutQuestionInput | DiscussionsUpsertWithWhereUniqueWithoutQuestionInput[]
+    createMany?: DiscussionsCreateManyQuestionInputEnvelope
+    set?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    disconnect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    delete?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    connect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    update?: DiscussionsUpdateWithWhereUniqueWithoutQuestionInput | DiscussionsUpdateWithWhereUniqueWithoutQuestionInput[]
+    updateMany?: DiscussionsUpdateManyWithWhereWithoutQuestionInput | DiscussionsUpdateManyWithWhereWithoutQuestionInput[]
+    deleteMany?: DiscussionsScalarWhereInput | DiscussionsScalarWhereInput[]
+  }
+
+  export type TopicsUpdateOneRequiredWithoutQuestionNestedInput = {
+    create?: XOR<TopicsCreateWithoutQuestionInput, TopicsUncheckedCreateWithoutQuestionInput>
+    connectOrCreate?: TopicsCreateOrConnectWithoutQuestionInput
+    upsert?: TopicsUpsertWithoutQuestionInput
+    connect?: TopicsWhereUniqueInput
+    update?: XOR<XOR<TopicsUpdateToOneWithWhereWithoutQuestionInput, TopicsUpdateWithoutQuestionInput>, TopicsUncheckedUpdateWithoutQuestionInput>
+  }
+
   export type TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput = {
     create?: XOR<TestCaseCreateWithoutQuestionsInput, TestCaseUncheckedCreateWithoutQuestionsInput> | TestCaseCreateWithoutQuestionsInput[] | TestCaseUncheckedCreateWithoutQuestionsInput[]
     connectOrCreate?: TestCaseCreateOrConnectWithoutQuestionsInput | TestCaseCreateOrConnectWithoutQuestionsInput[]
@@ -15859,6 +17476,20 @@ export namespace Prisma {
     update?: SubmissionUpdateWithWhereUniqueWithoutQuestionsInput | SubmissionUpdateWithWhereUniqueWithoutQuestionsInput[]
     updateMany?: SubmissionUpdateManyWithWhereWithoutQuestionsInput | SubmissionUpdateManyWithWhereWithoutQuestionsInput[]
     deleteMany?: SubmissionScalarWhereInput | SubmissionScalarWhereInput[]
+  }
+
+  export type DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput = {
+    create?: XOR<DiscussionsCreateWithoutQuestionInput, DiscussionsUncheckedCreateWithoutQuestionInput> | DiscussionsCreateWithoutQuestionInput[] | DiscussionsUncheckedCreateWithoutQuestionInput[]
+    connectOrCreate?: DiscussionsCreateOrConnectWithoutQuestionInput | DiscussionsCreateOrConnectWithoutQuestionInput[]
+    upsert?: DiscussionsUpsertWithWhereUniqueWithoutQuestionInput | DiscussionsUpsertWithWhereUniqueWithoutQuestionInput[]
+    createMany?: DiscussionsCreateManyQuestionInputEnvelope
+    set?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    disconnect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    delete?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    connect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    update?: DiscussionsUpdateWithWhereUniqueWithoutQuestionInput | DiscussionsUpdateWithWhereUniqueWithoutQuestionInput[]
+    updateMany?: DiscussionsUpdateManyWithWhereWithoutQuestionInput | DiscussionsUpdateManyWithWhereWithoutQuestionInput[]
+    deleteMany?: DiscussionsScalarWhereInput | DiscussionsScalarWhereInput[]
   }
 
   export type QuestionsCreateNestedOneWithoutTestCaseInput = {
@@ -15923,10 +17554,6 @@ export namespace Prisma {
     connectOrCreate?: StudentAchievementsCreateOrConnectWithoutAchievementsInput | StudentAchievementsCreateOrConnectWithoutAchievementsInput[]
     createMany?: StudentAchievementsCreateManyAchievementsInputEnvelope
     connect?: StudentAchievementsWhereUniqueInput | StudentAchievementsWhereUniqueInput[]
-  }
-
-  export type EnumAchievementTypeFieldUpdateOperationsInput = {
-    set?: $Enums.AchievementType
   }
 
   export type StudentAchievementsUpdateManyWithoutAchievementsNestedInput = {
@@ -16031,6 +17658,106 @@ export namespace Prisma {
     update?: XOR<XOR<StudentUpdateToOneWithWhereWithoutSessionInput, StudentUpdateWithoutSessionInput>, StudentUncheckedUpdateWithoutSessionInput>
   }
 
+  export type StudentCreateNestedOneWithoutDiscussionInput = {
+    create?: XOR<StudentCreateWithoutDiscussionInput, StudentUncheckedCreateWithoutDiscussionInput>
+    connectOrCreate?: StudentCreateOrConnectWithoutDiscussionInput
+    connect?: StudentWhereUniqueInput
+  }
+
+  export type QuestionsCreateNestedOneWithoutDiscussionInput = {
+    create?: XOR<QuestionsCreateWithoutDiscussionInput, QuestionsUncheckedCreateWithoutDiscussionInput>
+    connectOrCreate?: QuestionsCreateOrConnectWithoutDiscussionInput
+    connect?: QuestionsWhereUniqueInput
+  }
+
+  export type DiscussionsCreateNestedOneWithoutRepliesIGetInput = {
+    create?: XOR<DiscussionsCreateWithoutRepliesIGetInput, DiscussionsUncheckedCreateWithoutRepliesIGetInput>
+    connectOrCreate?: DiscussionsCreateOrConnectWithoutRepliesIGetInput
+    connect?: DiscussionsWhereUniqueInput
+  }
+
+  export type DiscussionsCreateNestedManyWithoutToWhomIReplyInput = {
+    create?: XOR<DiscussionsCreateWithoutToWhomIReplyInput, DiscussionsUncheckedCreateWithoutToWhomIReplyInput> | DiscussionsCreateWithoutToWhomIReplyInput[] | DiscussionsUncheckedCreateWithoutToWhomIReplyInput[]
+    connectOrCreate?: DiscussionsCreateOrConnectWithoutToWhomIReplyInput | DiscussionsCreateOrConnectWithoutToWhomIReplyInput[]
+    createMany?: DiscussionsCreateManyToWhomIReplyInputEnvelope
+    connect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+  }
+
+  export type DiscussionsUncheckedCreateNestedManyWithoutToWhomIReplyInput = {
+    create?: XOR<DiscussionsCreateWithoutToWhomIReplyInput, DiscussionsUncheckedCreateWithoutToWhomIReplyInput> | DiscussionsCreateWithoutToWhomIReplyInput[] | DiscussionsUncheckedCreateWithoutToWhomIReplyInput[]
+    connectOrCreate?: DiscussionsCreateOrConnectWithoutToWhomIReplyInput | DiscussionsCreateOrConnectWithoutToWhomIReplyInput[]
+    createMany?: DiscussionsCreateManyToWhomIReplyInputEnvelope
+    connect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+  }
+
+  export type EnumCommentTypeFieldUpdateOperationsInput = {
+    set?: $Enums.CommentType
+  }
+
+  export type StudentUpdateOneRequiredWithoutDiscussionNestedInput = {
+    create?: XOR<StudentCreateWithoutDiscussionInput, StudentUncheckedCreateWithoutDiscussionInput>
+    connectOrCreate?: StudentCreateOrConnectWithoutDiscussionInput
+    upsert?: StudentUpsertWithoutDiscussionInput
+    connect?: StudentWhereUniqueInput
+    update?: XOR<XOR<StudentUpdateToOneWithWhereWithoutDiscussionInput, StudentUpdateWithoutDiscussionInput>, StudentUncheckedUpdateWithoutDiscussionInput>
+  }
+
+  export type QuestionsUpdateOneWithoutDiscussionNestedInput = {
+    create?: XOR<QuestionsCreateWithoutDiscussionInput, QuestionsUncheckedCreateWithoutDiscussionInput>
+    connectOrCreate?: QuestionsCreateOrConnectWithoutDiscussionInput
+    upsert?: QuestionsUpsertWithoutDiscussionInput
+    disconnect?: QuestionsWhereInput | boolean
+    delete?: QuestionsWhereInput | boolean
+    connect?: QuestionsWhereUniqueInput
+    update?: XOR<XOR<QuestionsUpdateToOneWithWhereWithoutDiscussionInput, QuestionsUpdateWithoutDiscussionInput>, QuestionsUncheckedUpdateWithoutDiscussionInput>
+  }
+
+  export type DiscussionsUpdateOneWithoutRepliesIGetNestedInput = {
+    create?: XOR<DiscussionsCreateWithoutRepliesIGetInput, DiscussionsUncheckedCreateWithoutRepliesIGetInput>
+    connectOrCreate?: DiscussionsCreateOrConnectWithoutRepliesIGetInput
+    upsert?: DiscussionsUpsertWithoutRepliesIGetInput
+    disconnect?: DiscussionsWhereInput | boolean
+    delete?: DiscussionsWhereInput | boolean
+    connect?: DiscussionsWhereUniqueInput
+    update?: XOR<XOR<DiscussionsUpdateToOneWithWhereWithoutRepliesIGetInput, DiscussionsUpdateWithoutRepliesIGetInput>, DiscussionsUncheckedUpdateWithoutRepliesIGetInput>
+  }
+
+  export type DiscussionsUpdateManyWithoutToWhomIReplyNestedInput = {
+    create?: XOR<DiscussionsCreateWithoutToWhomIReplyInput, DiscussionsUncheckedCreateWithoutToWhomIReplyInput> | DiscussionsCreateWithoutToWhomIReplyInput[] | DiscussionsUncheckedCreateWithoutToWhomIReplyInput[]
+    connectOrCreate?: DiscussionsCreateOrConnectWithoutToWhomIReplyInput | DiscussionsCreateOrConnectWithoutToWhomIReplyInput[]
+    upsert?: DiscussionsUpsertWithWhereUniqueWithoutToWhomIReplyInput | DiscussionsUpsertWithWhereUniqueWithoutToWhomIReplyInput[]
+    createMany?: DiscussionsCreateManyToWhomIReplyInputEnvelope
+    set?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    disconnect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    delete?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    connect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    update?: DiscussionsUpdateWithWhereUniqueWithoutToWhomIReplyInput | DiscussionsUpdateWithWhereUniqueWithoutToWhomIReplyInput[]
+    updateMany?: DiscussionsUpdateManyWithWhereWithoutToWhomIReplyInput | DiscussionsUpdateManyWithWhereWithoutToWhomIReplyInput[]
+    deleteMany?: DiscussionsScalarWhereInput | DiscussionsScalarWhereInput[]
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type DiscussionsUncheckedUpdateManyWithoutToWhomIReplyNestedInput = {
+    create?: XOR<DiscussionsCreateWithoutToWhomIReplyInput, DiscussionsUncheckedCreateWithoutToWhomIReplyInput> | DiscussionsCreateWithoutToWhomIReplyInput[] | DiscussionsUncheckedCreateWithoutToWhomIReplyInput[]
+    connectOrCreate?: DiscussionsCreateOrConnectWithoutToWhomIReplyInput | DiscussionsCreateOrConnectWithoutToWhomIReplyInput[]
+    upsert?: DiscussionsUpsertWithWhereUniqueWithoutToWhomIReplyInput | DiscussionsUpsertWithWhereUniqueWithoutToWhomIReplyInput[]
+    createMany?: DiscussionsCreateManyToWhomIReplyInputEnvelope
+    set?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    disconnect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    delete?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    connect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+    update?: DiscussionsUpdateWithWhereUniqueWithoutToWhomIReplyInput | DiscussionsUpdateWithWhereUniqueWithoutToWhomIReplyInput[]
+    updateMany?: DiscussionsUpdateManyWithWhereWithoutToWhomIReplyInput | DiscussionsUpdateManyWithWhereWithoutToWhomIReplyInput[]
+    deleteMany?: DiscussionsScalarWhereInput | DiscussionsScalarWhereInput[]
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -16054,17 +17781,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
@@ -16125,20 +17841,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -16165,6 +17867,31 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedEnumDifficultyTypeFilter<$PrismaModel = never> = {
@@ -16235,23 +17962,6 @@ export namespace Prisma {
     _max?: NestedEnumSubmissionTypeFilter<$PrismaModel>
   }
 
-  export type NestedEnumAchievementTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.AchievementType | EnumAchievementTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.AchievementType[] | ListEnumAchievementTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.AchievementType[] | ListEnumAchievementTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumAchievementTypeFilter<$PrismaModel> | $Enums.AchievementType
-  }
-
-  export type NestedEnumAchievementTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.AchievementType | EnumAchievementTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.AchievementType[] | ListEnumAchievementTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.AchievementType[] | ListEnumAchievementTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumAchievementTypeWithAggregatesFilter<$PrismaModel> | $Enums.AchievementType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumAchievementTypeFilter<$PrismaModel>
-    _max?: NestedEnumAchievementTypeFilter<$PrismaModel>
-  }
-
   export type NestedEnumOTPStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.OTPStatus | EnumOTPStatusFieldRefInput<$PrismaModel>
     in?: $Enums.OTPStatus[] | ListEnumOTPStatusFieldRefInput<$PrismaModel>
@@ -16267,6 +17977,50 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumOTPStatusFilter<$PrismaModel>
     _max?: NestedEnumOTPStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumCommentTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.CommentType | EnumCommentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CommentType[] | ListEnumCommentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CommentType[] | ListEnumCommentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCommentTypeFilter<$PrismaModel> | $Enums.CommentType
+  }
+
+  export type NestedEnumCommentTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CommentType | EnumCommentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CommentType[] | ListEnumCommentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CommentType[] | ListEnumCommentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCommentTypeWithAggregatesFilter<$PrismaModel> | $Enums.CommentType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCommentTypeFilter<$PrismaModel>
+    _max?: NestedEnumCommentTypeFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type SubmissionCreateWithoutStudentInput = {
@@ -16299,14 +18053,14 @@ export namespace Prisma {
   }
 
   export type StudentAchievementsCreateWithoutStudentInput = {
-    acquiredOn?: Date | string
+    count: number
     achievements: AchievementsCreateNestedOneWithoutStudentAchievementsInput
   }
 
   export type StudentAchievementsUncheckedCreateWithoutStudentInput = {
     id?: number
     achievementId: number
-    acquiredOn?: Date | string
+    count: number
   }
 
   export type StudentAchievementsCreateOrConnectWithoutStudentInput = {
@@ -16356,6 +18110,31 @@ export namespace Prisma {
   export type SessionCreateOrConnectWithoutStudentInput = {
     where: SessionWhereUniqueInput
     create: XOR<SessionCreateWithoutStudentInput, SessionUncheckedCreateWithoutStudentInput>
+  }
+
+  export type DiscussionsCreateWithoutStudentInput = {
+    type?: $Enums.CommentType
+    question?: QuestionsCreateNestedOneWithoutDiscussionInput
+    toWhomIReply?: DiscussionsCreateNestedOneWithoutRepliesIGetInput
+    repliesIGet?: DiscussionsCreateNestedManyWithoutToWhomIReplyInput
+  }
+
+  export type DiscussionsUncheckedCreateWithoutStudentInput = {
+    id?: number
+    type?: $Enums.CommentType
+    questionId?: number | null
+    repliedTo?: number | null
+    repliesIGet?: DiscussionsUncheckedCreateNestedManyWithoutToWhomIReplyInput
+  }
+
+  export type DiscussionsCreateOrConnectWithoutStudentInput = {
+    where: DiscussionsWhereUniqueInput
+    create: XOR<DiscussionsCreateWithoutStudentInput, DiscussionsUncheckedCreateWithoutStudentInput>
+  }
+
+  export type DiscussionsCreateManyStudentInputEnvelope = {
+    data: DiscussionsCreateManyStudentInput | DiscussionsCreateManyStudentInput[]
+    skipDuplicates?: boolean
   }
 
   export type SubmissionUpsertWithWhereUniqueWithoutStudentInput = {
@@ -16411,7 +18190,7 @@ export namespace Prisma {
     id?: IntFilter<"StudentAchievements"> | number
     studentId?: IntFilter<"StudentAchievements"> | number
     achievementId?: IntFilter<"StudentAchievements"> | number
-    acquiredOn?: DateTimeFilter<"StudentAchievements"> | Date | string
+    count?: IntFilter<"StudentAchievements"> | number
   }
 
   export type ContestResultUpsertWithWhereUniqueWithoutStudentInput = {
@@ -16463,6 +18242,33 @@ export namespace Prisma {
     expiry?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DiscussionsUpsertWithWhereUniqueWithoutStudentInput = {
+    where: DiscussionsWhereUniqueInput
+    update: XOR<DiscussionsUpdateWithoutStudentInput, DiscussionsUncheckedUpdateWithoutStudentInput>
+    create: XOR<DiscussionsCreateWithoutStudentInput, DiscussionsUncheckedCreateWithoutStudentInput>
+  }
+
+  export type DiscussionsUpdateWithWhereUniqueWithoutStudentInput = {
+    where: DiscussionsWhereUniqueInput
+    data: XOR<DiscussionsUpdateWithoutStudentInput, DiscussionsUncheckedUpdateWithoutStudentInput>
+  }
+
+  export type DiscussionsUpdateManyWithWhereWithoutStudentInput = {
+    where: DiscussionsScalarWhereInput
+    data: XOR<DiscussionsUpdateManyMutationInput, DiscussionsUncheckedUpdateManyWithoutStudentInput>
+  }
+
+  export type DiscussionsScalarWhereInput = {
+    AND?: DiscussionsScalarWhereInput | DiscussionsScalarWhereInput[]
+    OR?: DiscussionsScalarWhereInput[]
+    NOT?: DiscussionsScalarWhereInput | DiscussionsScalarWhereInput[]
+    id?: IntFilter<"Discussions"> | number
+    studentId?: IntFilter<"Discussions"> | number
+    type?: EnumCommentTypeFilter<"Discussions"> | $Enums.CommentType
+    questionId?: IntNullableFilter<"Discussions"> | number | null
+    repliedTo?: IntNullableFilter<"Discussions"> | number | null
+  }
+
   export type ContestResultCreateWithoutTopicsInput = {
     timeTaken: Date | string
     totalPoints: number
@@ -16486,6 +18292,47 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type QuestionsCreateWithoutTopicsInput = {
+    title: string
+    description?: string | null
+    noOfHiddenTestCases?: number
+    noOfExternalTestCases?: number
+    difficulty?: $Enums.DifficultyType
+    pointsPerTestCaseSolved: number
+    type?: $Enums.QuestionType
+    leetCodeLink?: string | null
+    leetCodeTitle?: string | null
+    testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
+    submission?: SubmissionCreateNestedManyWithoutQuestionsInput
+    discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
+  }
+
+  export type QuestionsUncheckedCreateWithoutTopicsInput = {
+    id?: number
+    title: string
+    description?: string | null
+    noOfHiddenTestCases?: number
+    noOfExternalTestCases?: number
+    difficulty?: $Enums.DifficultyType
+    pointsPerTestCaseSolved: number
+    type?: $Enums.QuestionType
+    leetCodeLink?: string | null
+    leetCodeTitle?: string | null
+    testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
+    submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
+    discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
+  }
+
+  export type QuestionsCreateOrConnectWithoutTopicsInput = {
+    where: QuestionsWhereUniqueInput
+    create: XOR<QuestionsCreateWithoutTopicsInput, QuestionsUncheckedCreateWithoutTopicsInput>
+  }
+
+  export type QuestionsCreateManyTopicsInputEnvelope = {
+    data: QuestionsCreateManyTopicsInput | QuestionsCreateManyTopicsInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ContestResultUpsertWithWhereUniqueWithoutTopicsInput = {
     where: ContestResultWhereUniqueInput
     update: XOR<ContestResultUpdateWithoutTopicsInput, ContestResultUncheckedUpdateWithoutTopicsInput>
@@ -16500,6 +18347,39 @@ export namespace Prisma {
   export type ContestResultUpdateManyWithWhereWithoutTopicsInput = {
     where: ContestResultScalarWhereInput
     data: XOR<ContestResultUpdateManyMutationInput, ContestResultUncheckedUpdateManyWithoutTopicsInput>
+  }
+
+  export type QuestionsUpsertWithWhereUniqueWithoutTopicsInput = {
+    where: QuestionsWhereUniqueInput
+    update: XOR<QuestionsUpdateWithoutTopicsInput, QuestionsUncheckedUpdateWithoutTopicsInput>
+    create: XOR<QuestionsCreateWithoutTopicsInput, QuestionsUncheckedCreateWithoutTopicsInput>
+  }
+
+  export type QuestionsUpdateWithWhereUniqueWithoutTopicsInput = {
+    where: QuestionsWhereUniqueInput
+    data: XOR<QuestionsUpdateWithoutTopicsInput, QuestionsUncheckedUpdateWithoutTopicsInput>
+  }
+
+  export type QuestionsUpdateManyWithWhereWithoutTopicsInput = {
+    where: QuestionsScalarWhereInput
+    data: XOR<QuestionsUpdateManyMutationInput, QuestionsUncheckedUpdateManyWithoutTopicsInput>
+  }
+
+  export type QuestionsScalarWhereInput = {
+    AND?: QuestionsScalarWhereInput | QuestionsScalarWhereInput[]
+    OR?: QuestionsScalarWhereInput[]
+    NOT?: QuestionsScalarWhereInput | QuestionsScalarWhereInput[]
+    id?: IntFilter<"Questions"> | number
+    title?: StringFilter<"Questions"> | string
+    description?: StringNullableFilter<"Questions"> | string | null
+    topic?: IntFilter<"Questions"> | number
+    noOfHiddenTestCases?: IntFilter<"Questions"> | number
+    noOfExternalTestCases?: IntFilter<"Questions"> | number
+    difficulty?: EnumDifficultyTypeFilter<"Questions"> | $Enums.DifficultyType
+    pointsPerTestCaseSolved?: IntFilter<"Questions"> | number
+    type?: EnumQuestionTypeFilter<"Questions"> | $Enums.QuestionType
+    leetCodeLink?: StringNullableFilter<"Questions"> | string | null
+    leetCodeTitle?: StringNullableFilter<"Questions"> | string | null
   }
 
   export type TestCaseCreateWithoutQuestionsInput = {
@@ -16552,6 +18432,53 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type DiscussionsCreateWithoutQuestionInput = {
+    type?: $Enums.CommentType
+    student: StudentCreateNestedOneWithoutDiscussionInput
+    toWhomIReply?: DiscussionsCreateNestedOneWithoutRepliesIGetInput
+    repliesIGet?: DiscussionsCreateNestedManyWithoutToWhomIReplyInput
+  }
+
+  export type DiscussionsUncheckedCreateWithoutQuestionInput = {
+    id?: number
+    studentId: number
+    type?: $Enums.CommentType
+    repliedTo?: number | null
+    repliesIGet?: DiscussionsUncheckedCreateNestedManyWithoutToWhomIReplyInput
+  }
+
+  export type DiscussionsCreateOrConnectWithoutQuestionInput = {
+    where: DiscussionsWhereUniqueInput
+    create: XOR<DiscussionsCreateWithoutQuestionInput, DiscussionsUncheckedCreateWithoutQuestionInput>
+  }
+
+  export type DiscussionsCreateManyQuestionInputEnvelope = {
+    data: DiscussionsCreateManyQuestionInput | DiscussionsCreateManyQuestionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TopicsCreateWithoutQuestionInput = {
+    name: string
+    description?: string | null
+    notes?: string | null
+    contestDate: Date | string
+    contestResult?: ContestResultCreateNestedManyWithoutTopicsInput
+  }
+
+  export type TopicsUncheckedCreateWithoutQuestionInput = {
+    id?: number
+    name: string
+    description?: string | null
+    notes?: string | null
+    contestDate: Date | string
+    contestResult?: ContestResultUncheckedCreateNestedManyWithoutTopicsInput
+  }
+
+  export type TopicsCreateOrConnectWithoutQuestionInput = {
+    where: TopicsWhereUniqueInput
+    create: XOR<TopicsCreateWithoutQuestionInput, TopicsUncheckedCreateWithoutQuestionInput>
+  }
+
   export type TestCaseUpsertWithWhereUniqueWithoutQuestionsInput = {
     where: TestCaseWhereUniqueInput
     update: XOR<TestCaseUpdateWithoutQuestionsInput, TestCaseUncheckedUpdateWithoutQuestionsInput>
@@ -16594,6 +18521,50 @@ export namespace Prisma {
     data: XOR<SubmissionUpdateManyMutationInput, SubmissionUncheckedUpdateManyWithoutQuestionsInput>
   }
 
+  export type DiscussionsUpsertWithWhereUniqueWithoutQuestionInput = {
+    where: DiscussionsWhereUniqueInput
+    update: XOR<DiscussionsUpdateWithoutQuestionInput, DiscussionsUncheckedUpdateWithoutQuestionInput>
+    create: XOR<DiscussionsCreateWithoutQuestionInput, DiscussionsUncheckedCreateWithoutQuestionInput>
+  }
+
+  export type DiscussionsUpdateWithWhereUniqueWithoutQuestionInput = {
+    where: DiscussionsWhereUniqueInput
+    data: XOR<DiscussionsUpdateWithoutQuestionInput, DiscussionsUncheckedUpdateWithoutQuestionInput>
+  }
+
+  export type DiscussionsUpdateManyWithWhereWithoutQuestionInput = {
+    where: DiscussionsScalarWhereInput
+    data: XOR<DiscussionsUpdateManyMutationInput, DiscussionsUncheckedUpdateManyWithoutQuestionInput>
+  }
+
+  export type TopicsUpsertWithoutQuestionInput = {
+    update: XOR<TopicsUpdateWithoutQuestionInput, TopicsUncheckedUpdateWithoutQuestionInput>
+    create: XOR<TopicsCreateWithoutQuestionInput, TopicsUncheckedCreateWithoutQuestionInput>
+    where?: TopicsWhereInput
+  }
+
+  export type TopicsUpdateToOneWithWhereWithoutQuestionInput = {
+    where?: TopicsWhereInput
+    data: XOR<TopicsUpdateWithoutQuestionInput, TopicsUncheckedUpdateWithoutQuestionInput>
+  }
+
+  export type TopicsUpdateWithoutQuestionInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    contestResult?: ContestResultUpdateManyWithoutTopicsNestedInput
+  }
+
+  export type TopicsUncheckedUpdateWithoutQuestionInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    contestResult?: ContestResultUncheckedUpdateManyWithoutTopicsNestedInput
+  }
+
   export type QuestionsCreateWithoutTestCaseInput = {
     title: string
     description?: string | null
@@ -16603,20 +18574,26 @@ export namespace Prisma {
     pointsPerTestCaseSolved: number
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
+    leetCodeTitle?: string | null
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
+    discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
+    topics: TopicsCreateNestedOneWithoutQuestionInput
   }
 
   export type QuestionsUncheckedCreateWithoutTestCaseInput = {
     id?: number
     title: string
     description?: string | null
+    topic: number
     noOfHiddenTestCases?: number
     noOfExternalTestCases?: number
     difficulty?: $Enums.DifficultyType
     pointsPerTestCaseSolved: number
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
+    leetCodeTitle?: string | null
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
+    discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionsCreateOrConnectWithoutTestCaseInput = {
@@ -16644,20 +18621,26 @@ export namespace Prisma {
     pointsPerTestCaseSolved?: IntFieldUpdateOperationsInput | number
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
+    discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
+    topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
   }
 
   export type QuestionsUncheckedUpdateWithoutTestCaseInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: IntFieldUpdateOperationsInput | number
     noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
     noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
     pointsPerTestCaseSolved?: IntFieldUpdateOperationsInput | number
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
+    discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
   export type QuestionsCreateWithoutSubmissionInput = {
@@ -16669,20 +18652,26 @@ export namespace Prisma {
     pointsPerTestCaseSolved: number
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
+    leetCodeTitle?: string | null
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
+    discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
+    topics: TopicsCreateNestedOneWithoutQuestionInput
   }
 
   export type QuestionsUncheckedCreateWithoutSubmissionInput = {
     id?: number
     title: string
     description?: string | null
+    topic: number
     noOfHiddenTestCases?: number
     noOfExternalTestCases?: number
     difficulty?: $Enums.DifficultyType
     pointsPerTestCaseSolved: number
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
+    leetCodeTitle?: string | null
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
+    discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionsCreateOrConnectWithoutSubmissionInput = {
@@ -16697,15 +18686,11 @@ export namespace Prisma {
     leetCodeName: string
     salt: string
     hash: string
-    currStreak?: number
-    maxStreak?: number
-    points?: number
-    lastLogin?: Date | string
     leetCodeProfile?: string | null
-    lastQuestionSolved: Date | string
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultCreateNestedManyWithoutStudentInput
     session?: SessionCreateNestedOneWithoutStudentInput
+    discussion?: DiscussionsCreateNestedManyWithoutStudentInput
   }
 
   export type StudentUncheckedCreateWithoutSubmissionInput = {
@@ -16716,15 +18701,11 @@ export namespace Prisma {
     leetCodeName: string
     salt: string
     hash: string
-    currStreak?: number
-    maxStreak?: number
-    points?: number
-    lastLogin?: Date | string
     leetCodeProfile?: string | null
-    lastQuestionSolved: Date | string
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
     session?: SessionUncheckedCreateNestedOneWithoutStudentInput
+    discussion?: DiscussionsUncheckedCreateNestedManyWithoutStudentInput
   }
 
   export type StudentCreateOrConnectWithoutSubmissionInput = {
@@ -16752,20 +18733,26 @@ export namespace Prisma {
     pointsPerTestCaseSolved?: IntFieldUpdateOperationsInput | number
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
+    discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
+    topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
   }
 
   export type QuestionsUncheckedUpdateWithoutSubmissionInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: IntFieldUpdateOperationsInput | number
     noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
     noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
     pointsPerTestCaseSolved?: IntFieldUpdateOperationsInput | number
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
+    discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
   export type StudentUpsertWithoutSubmissionInput = {
@@ -16786,15 +18773,11 @@ export namespace Prisma {
     leetCodeName?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    currStreak?: IntFieldUpdateOperationsInput | number
-    maxStreak?: IntFieldUpdateOperationsInput | number
-    points?: IntFieldUpdateOperationsInput | number
-    lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
     session?: SessionUpdateOneWithoutStudentNestedInput
+    discussion?: DiscussionsUpdateManyWithoutStudentNestedInput
   }
 
   export type StudentUncheckedUpdateWithoutSubmissionInput = {
@@ -16805,26 +18788,22 @@ export namespace Prisma {
     leetCodeName?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    currStreak?: IntFieldUpdateOperationsInput | number
-    maxStreak?: IntFieldUpdateOperationsInput | number
-    points?: IntFieldUpdateOperationsInput | number
-    lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
     session?: SessionUncheckedUpdateOneWithoutStudentNestedInput
+    discussion?: DiscussionsUncheckedUpdateManyWithoutStudentNestedInput
   }
 
   export type StudentAchievementsCreateWithoutAchievementsInput = {
-    acquiredOn?: Date | string
+    count: number
     student: StudentCreateNestedOneWithoutStudentAchievementsInput
   }
 
   export type StudentAchievementsUncheckedCreateWithoutAchievementsInput = {
     id?: number
     studentId: number
-    acquiredOn?: Date | string
+    count: number
   }
 
   export type StudentAchievementsCreateOrConnectWithoutAchievementsInput = {
@@ -16860,15 +18839,11 @@ export namespace Prisma {
     leetCodeName: string
     salt: string
     hash: string
-    currStreak?: number
-    maxStreak?: number
-    points?: number
-    lastLogin?: Date | string
     leetCodeProfile?: string | null
-    lastQuestionSolved: Date | string
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultCreateNestedManyWithoutStudentInput
     session?: SessionCreateNestedOneWithoutStudentInput
+    discussion?: DiscussionsCreateNestedManyWithoutStudentInput
   }
 
   export type StudentUncheckedCreateWithoutStudentAchievementsInput = {
@@ -16879,15 +18854,11 @@ export namespace Prisma {
     leetCodeName: string
     salt: string
     hash: string
-    currStreak?: number
-    maxStreak?: number
-    points?: number
-    lastLogin?: Date | string
     leetCodeProfile?: string | null
-    lastQuestionSolved: Date | string
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
     session?: SessionUncheckedCreateNestedOneWithoutStudentInput
+    discussion?: DiscussionsUncheckedCreateNestedManyWithoutStudentInput
   }
 
   export type StudentCreateOrConnectWithoutStudentAchievementsInput = {
@@ -16898,18 +18869,12 @@ export namespace Prisma {
   export type AchievementsCreateWithoutStudentAchievementsInput = {
     title: string
     description?: string | null
-    type?: $Enums.AchievementType
-    minCriteria?: number
-    maxCriteria?: number
   }
 
   export type AchievementsUncheckedCreateWithoutStudentAchievementsInput = {
     id?: number
     title: string
     description?: string | null
-    type?: $Enums.AchievementType
-    minCriteria?: number
-    maxCriteria?: number
   }
 
   export type AchievementsCreateOrConnectWithoutStudentAchievementsInput = {
@@ -16935,15 +18900,11 @@ export namespace Prisma {
     leetCodeName?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    currStreak?: IntFieldUpdateOperationsInput | number
-    maxStreak?: IntFieldUpdateOperationsInput | number
-    points?: IntFieldUpdateOperationsInput | number
-    lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
     session?: SessionUpdateOneWithoutStudentNestedInput
+    discussion?: DiscussionsUpdateManyWithoutStudentNestedInput
   }
 
   export type StudentUncheckedUpdateWithoutStudentAchievementsInput = {
@@ -16954,15 +18915,11 @@ export namespace Prisma {
     leetCodeName?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    currStreak?: IntFieldUpdateOperationsInput | number
-    maxStreak?: IntFieldUpdateOperationsInput | number
-    points?: IntFieldUpdateOperationsInput | number
-    lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
     session?: SessionUncheckedUpdateOneWithoutStudentNestedInput
+    discussion?: DiscussionsUncheckedUpdateManyWithoutStudentNestedInput
   }
 
   export type AchievementsUpsertWithoutStudentAchievementsInput = {
@@ -16979,18 +18936,12 @@ export namespace Prisma {
   export type AchievementsUpdateWithoutStudentAchievementsInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumAchievementTypeFieldUpdateOperationsInput | $Enums.AchievementType
-    minCriteria?: IntFieldUpdateOperationsInput | number
-    maxCriteria?: IntFieldUpdateOperationsInput | number
   }
 
   export type AchievementsUncheckedUpdateWithoutStudentAchievementsInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumAchievementTypeFieldUpdateOperationsInput | $Enums.AchievementType
-    minCriteria?: IntFieldUpdateOperationsInput | number
-    maxCriteria?: IntFieldUpdateOperationsInput | number
   }
 
   export type StudentCreateWithoutContestResultInput = {
@@ -17000,15 +18951,11 @@ export namespace Prisma {
     leetCodeName: string
     salt: string
     hash: string
-    currStreak?: number
-    maxStreak?: number
-    points?: number
-    lastLogin?: Date | string
     leetCodeProfile?: string | null
-    lastQuestionSolved: Date | string
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
     session?: SessionCreateNestedOneWithoutStudentInput
+    discussion?: DiscussionsCreateNestedManyWithoutStudentInput
   }
 
   export type StudentUncheckedCreateWithoutContestResultInput = {
@@ -17019,15 +18966,11 @@ export namespace Prisma {
     leetCodeName: string
     salt: string
     hash: string
-    currStreak?: number
-    maxStreak?: number
-    points?: number
-    lastLogin?: Date | string
     leetCodeProfile?: string | null
-    lastQuestionSolved: Date | string
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
     session?: SessionUncheckedCreateNestedOneWithoutStudentInput
+    discussion?: DiscussionsUncheckedCreateNestedManyWithoutStudentInput
   }
 
   export type StudentCreateOrConnectWithoutContestResultInput = {
@@ -17040,6 +18983,7 @@ export namespace Prisma {
     description?: string | null
     notes?: string | null
     contestDate: Date | string
+    question?: QuestionsCreateNestedManyWithoutTopicsInput
   }
 
   export type TopicsUncheckedCreateWithoutContestResultInput = {
@@ -17048,6 +18992,7 @@ export namespace Prisma {
     description?: string | null
     notes?: string | null
     contestDate: Date | string
+    question?: QuestionsUncheckedCreateNestedManyWithoutTopicsInput
   }
 
   export type TopicsCreateOrConnectWithoutContestResultInput = {
@@ -17073,15 +19018,11 @@ export namespace Prisma {
     leetCodeName?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    currStreak?: IntFieldUpdateOperationsInput | number
-    maxStreak?: IntFieldUpdateOperationsInput | number
-    points?: IntFieldUpdateOperationsInput | number
-    lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
     session?: SessionUpdateOneWithoutStudentNestedInput
+    discussion?: DiscussionsUpdateManyWithoutStudentNestedInput
   }
 
   export type StudentUncheckedUpdateWithoutContestResultInput = {
@@ -17092,15 +19033,11 @@ export namespace Prisma {
     leetCodeName?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    currStreak?: IntFieldUpdateOperationsInput | number
-    maxStreak?: IntFieldUpdateOperationsInput | number
-    points?: IntFieldUpdateOperationsInput | number
-    lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
     session?: SessionUncheckedUpdateOneWithoutStudentNestedInput
+    discussion?: DiscussionsUncheckedUpdateManyWithoutStudentNestedInput
   }
 
   export type TopicsUpsertWithoutContestResultInput = {
@@ -17119,6 +19056,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    question?: QuestionsUpdateManyWithoutTopicsNestedInput
   }
 
   export type TopicsUncheckedUpdateWithoutContestResultInput = {
@@ -17127,6 +19065,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    question?: QuestionsUncheckedUpdateManyWithoutTopicsNestedInput
   }
 
   export type StudentCreateWithoutSessionInput = {
@@ -17136,15 +19075,11 @@ export namespace Prisma {
     leetCodeName: string
     salt: string
     hash: string
-    currStreak?: number
-    maxStreak?: number
-    points?: number
-    lastLogin?: Date | string
     leetCodeProfile?: string | null
-    lastQuestionSolved: Date | string
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultCreateNestedManyWithoutStudentInput
+    discussion?: DiscussionsCreateNestedManyWithoutStudentInput
   }
 
   export type StudentUncheckedCreateWithoutSessionInput = {
@@ -17155,15 +19090,11 @@ export namespace Prisma {
     leetCodeName: string
     salt: string
     hash: string
-    currStreak?: number
-    maxStreak?: number
-    points?: number
-    lastLogin?: Date | string
     leetCodeProfile?: string | null
-    lastQuestionSolved: Date | string
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
+    discussion?: DiscussionsUncheckedCreateNestedManyWithoutStudentInput
   }
 
   export type StudentCreateOrConnectWithoutSessionInput = {
@@ -17189,15 +19120,11 @@ export namespace Prisma {
     leetCodeName?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    currStreak?: IntFieldUpdateOperationsInput | number
-    maxStreak?: IntFieldUpdateOperationsInput | number
-    points?: IntFieldUpdateOperationsInput | number
-    lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
+    discussion?: DiscussionsUpdateManyWithoutStudentNestedInput
   }
 
   export type StudentUncheckedUpdateWithoutSessionInput = {
@@ -17208,15 +19135,250 @@ export namespace Prisma {
     leetCodeName?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    currStreak?: IntFieldUpdateOperationsInput | number
-    maxStreak?: IntFieldUpdateOperationsInput | number
-    points?: IntFieldUpdateOperationsInput | number
-    lastLogin?: DateTimeFieldUpdateOperationsInput | Date | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    lastQuestionSolved?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
+    discussion?: DiscussionsUncheckedUpdateManyWithoutStudentNestedInput
+  }
+
+  export type StudentCreateWithoutDiscussionInput = {
+    name: string
+    rno: string
+    uname: string
+    leetCodeName: string
+    salt: string
+    hash: string
+    leetCodeProfile?: string | null
+    submission?: SubmissionCreateNestedManyWithoutStudentInput
+    studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
+    contestResult?: ContestResultCreateNestedManyWithoutStudentInput
+    session?: SessionCreateNestedOneWithoutStudentInput
+  }
+
+  export type StudentUncheckedCreateWithoutDiscussionInput = {
+    id?: number
+    name: string
+    rno: string
+    uname: string
+    leetCodeName: string
+    salt: string
+    hash: string
+    leetCodeProfile?: string | null
+    submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
+    studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
+    contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
+    session?: SessionUncheckedCreateNestedOneWithoutStudentInput
+  }
+
+  export type StudentCreateOrConnectWithoutDiscussionInput = {
+    where: StudentWhereUniqueInput
+    create: XOR<StudentCreateWithoutDiscussionInput, StudentUncheckedCreateWithoutDiscussionInput>
+  }
+
+  export type QuestionsCreateWithoutDiscussionInput = {
+    title: string
+    description?: string | null
+    noOfHiddenTestCases?: number
+    noOfExternalTestCases?: number
+    difficulty?: $Enums.DifficultyType
+    pointsPerTestCaseSolved: number
+    type?: $Enums.QuestionType
+    leetCodeLink?: string | null
+    leetCodeTitle?: string | null
+    testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
+    submission?: SubmissionCreateNestedManyWithoutQuestionsInput
+    topics: TopicsCreateNestedOneWithoutQuestionInput
+  }
+
+  export type QuestionsUncheckedCreateWithoutDiscussionInput = {
+    id?: number
+    title: string
+    description?: string | null
+    topic: number
+    noOfHiddenTestCases?: number
+    noOfExternalTestCases?: number
+    difficulty?: $Enums.DifficultyType
+    pointsPerTestCaseSolved: number
+    type?: $Enums.QuestionType
+    leetCodeLink?: string | null
+    leetCodeTitle?: string | null
+    testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
+    submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
+  }
+
+  export type QuestionsCreateOrConnectWithoutDiscussionInput = {
+    where: QuestionsWhereUniqueInput
+    create: XOR<QuestionsCreateWithoutDiscussionInput, QuestionsUncheckedCreateWithoutDiscussionInput>
+  }
+
+  export type DiscussionsCreateWithoutRepliesIGetInput = {
+    type?: $Enums.CommentType
+    student: StudentCreateNestedOneWithoutDiscussionInput
+    question?: QuestionsCreateNestedOneWithoutDiscussionInput
+    toWhomIReply?: DiscussionsCreateNestedOneWithoutRepliesIGetInput
+  }
+
+  export type DiscussionsUncheckedCreateWithoutRepliesIGetInput = {
+    id?: number
+    studentId: number
+    type?: $Enums.CommentType
+    questionId?: number | null
+    repliedTo?: number | null
+  }
+
+  export type DiscussionsCreateOrConnectWithoutRepliesIGetInput = {
+    where: DiscussionsWhereUniqueInput
+    create: XOR<DiscussionsCreateWithoutRepliesIGetInput, DiscussionsUncheckedCreateWithoutRepliesIGetInput>
+  }
+
+  export type DiscussionsCreateWithoutToWhomIReplyInput = {
+    type?: $Enums.CommentType
+    student: StudentCreateNestedOneWithoutDiscussionInput
+    question?: QuestionsCreateNestedOneWithoutDiscussionInput
+    repliesIGet?: DiscussionsCreateNestedManyWithoutToWhomIReplyInput
+  }
+
+  export type DiscussionsUncheckedCreateWithoutToWhomIReplyInput = {
+    id?: number
+    studentId: number
+    type?: $Enums.CommentType
+    questionId?: number | null
+    repliesIGet?: DiscussionsUncheckedCreateNestedManyWithoutToWhomIReplyInput
+  }
+
+  export type DiscussionsCreateOrConnectWithoutToWhomIReplyInput = {
+    where: DiscussionsWhereUniqueInput
+    create: XOR<DiscussionsCreateWithoutToWhomIReplyInput, DiscussionsUncheckedCreateWithoutToWhomIReplyInput>
+  }
+
+  export type DiscussionsCreateManyToWhomIReplyInputEnvelope = {
+    data: DiscussionsCreateManyToWhomIReplyInput | DiscussionsCreateManyToWhomIReplyInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type StudentUpsertWithoutDiscussionInput = {
+    update: XOR<StudentUpdateWithoutDiscussionInput, StudentUncheckedUpdateWithoutDiscussionInput>
+    create: XOR<StudentCreateWithoutDiscussionInput, StudentUncheckedCreateWithoutDiscussionInput>
+    where?: StudentWhereInput
+  }
+
+  export type StudentUpdateToOneWithWhereWithoutDiscussionInput = {
+    where?: StudentWhereInput
+    data: XOR<StudentUpdateWithoutDiscussionInput, StudentUncheckedUpdateWithoutDiscussionInput>
+  }
+
+  export type StudentUpdateWithoutDiscussionInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    rno?: StringFieldUpdateOperationsInput | string
+    uname?: StringFieldUpdateOperationsInput | string
+    leetCodeName?: StringFieldUpdateOperationsInput | string
+    salt?: StringFieldUpdateOperationsInput | string
+    hash?: StringFieldUpdateOperationsInput | string
+    leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    submission?: SubmissionUpdateManyWithoutStudentNestedInput
+    studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
+    contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
+    session?: SessionUpdateOneWithoutStudentNestedInput
+  }
+
+  export type StudentUncheckedUpdateWithoutDiscussionInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    rno?: StringFieldUpdateOperationsInput | string
+    uname?: StringFieldUpdateOperationsInput | string
+    leetCodeName?: StringFieldUpdateOperationsInput | string
+    salt?: StringFieldUpdateOperationsInput | string
+    hash?: StringFieldUpdateOperationsInput | string
+    leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
+    studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
+    contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
+    session?: SessionUncheckedUpdateOneWithoutStudentNestedInput
+  }
+
+  export type QuestionsUpsertWithoutDiscussionInput = {
+    update: XOR<QuestionsUpdateWithoutDiscussionInput, QuestionsUncheckedUpdateWithoutDiscussionInput>
+    create: XOR<QuestionsCreateWithoutDiscussionInput, QuestionsUncheckedCreateWithoutDiscussionInput>
+    where?: QuestionsWhereInput
+  }
+
+  export type QuestionsUpdateToOneWithWhereWithoutDiscussionInput = {
+    where?: QuestionsWhereInput
+    data: XOR<QuestionsUpdateWithoutDiscussionInput, QuestionsUncheckedUpdateWithoutDiscussionInput>
+  }
+
+  export type QuestionsUpdateWithoutDiscussionInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
+    noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
+    pointsPerTestCaseSolved?: IntFieldUpdateOperationsInput | number
+    type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
+    leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
+    submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
+    topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
+  }
+
+  export type QuestionsUncheckedUpdateWithoutDiscussionInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: IntFieldUpdateOperationsInput | number
+    noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
+    noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
+    pointsPerTestCaseSolved?: IntFieldUpdateOperationsInput | number
+    type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
+    leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
+    submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
+  }
+
+  export type DiscussionsUpsertWithoutRepliesIGetInput = {
+    update: XOR<DiscussionsUpdateWithoutRepliesIGetInput, DiscussionsUncheckedUpdateWithoutRepliesIGetInput>
+    create: XOR<DiscussionsCreateWithoutRepliesIGetInput, DiscussionsUncheckedCreateWithoutRepliesIGetInput>
+    where?: DiscussionsWhereInput
+  }
+
+  export type DiscussionsUpdateToOneWithWhereWithoutRepliesIGetInput = {
+    where?: DiscussionsWhereInput
+    data: XOR<DiscussionsUpdateWithoutRepliesIGetInput, DiscussionsUncheckedUpdateWithoutRepliesIGetInput>
+  }
+
+  export type DiscussionsUpdateWithoutRepliesIGetInput = {
+    type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+    student?: StudentUpdateOneRequiredWithoutDiscussionNestedInput
+    question?: QuestionsUpdateOneWithoutDiscussionNestedInput
+    toWhomIReply?: DiscussionsUpdateOneWithoutRepliesIGetNestedInput
+  }
+
+  export type DiscussionsUncheckedUpdateWithoutRepliesIGetInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
+    type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+    questionId?: NullableIntFieldUpdateOperationsInput | number | null
+    repliedTo?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type DiscussionsUpsertWithWhereUniqueWithoutToWhomIReplyInput = {
+    where: DiscussionsWhereUniqueInput
+    update: XOR<DiscussionsUpdateWithoutToWhomIReplyInput, DiscussionsUncheckedUpdateWithoutToWhomIReplyInput>
+    create: XOR<DiscussionsCreateWithoutToWhomIReplyInput, DiscussionsUncheckedCreateWithoutToWhomIReplyInput>
+  }
+
+  export type DiscussionsUpdateWithWhereUniqueWithoutToWhomIReplyInput = {
+    where: DiscussionsWhereUniqueInput
+    data: XOR<DiscussionsUpdateWithoutToWhomIReplyInput, DiscussionsUncheckedUpdateWithoutToWhomIReplyInput>
+  }
+
+  export type DiscussionsUpdateManyWithWhereWithoutToWhomIReplyInput = {
+    where: DiscussionsScalarWhereInput
+    data: XOR<DiscussionsUpdateManyMutationInput, DiscussionsUncheckedUpdateManyWithoutToWhomIReplyInput>
   }
 
   export type SubmissionCreateManyStudentInput = {
@@ -17232,7 +19394,7 @@ export namespace Prisma {
   export type StudentAchievementsCreateManyStudentInput = {
     id?: number
     achievementId: number
-    acquiredOn?: Date | string
+    count: number
   }
 
   export type ContestResultCreateManyStudentInput = {
@@ -17240,6 +19402,13 @@ export namespace Prisma {
     timeTaken: Date | string
     totalPoints: number
     topicId: number
+  }
+
+  export type DiscussionsCreateManyStudentInput = {
+    id?: number
+    type?: $Enums.CommentType
+    questionId?: number | null
+    repliedTo?: number | null
   }
 
   export type SubmissionUpdateWithoutStudentInput = {
@@ -17272,20 +19441,20 @@ export namespace Prisma {
   }
 
   export type StudentAchievementsUpdateWithoutStudentInput = {
-    acquiredOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    count?: IntFieldUpdateOperationsInput | number
     achievements?: AchievementsUpdateOneRequiredWithoutStudentAchievementsNestedInput
   }
 
   export type StudentAchievementsUncheckedUpdateWithoutStudentInput = {
     id?: IntFieldUpdateOperationsInput | number
     achievementId?: IntFieldUpdateOperationsInput | number
-    acquiredOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    count?: IntFieldUpdateOperationsInput | number
   }
 
   export type StudentAchievementsUncheckedUpdateManyWithoutStudentInput = {
     id?: IntFieldUpdateOperationsInput | number
     achievementId?: IntFieldUpdateOperationsInput | number
-    acquiredOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    count?: IntFieldUpdateOperationsInput | number
   }
 
   export type ContestResultUpdateWithoutStudentInput = {
@@ -17308,11 +19477,46 @@ export namespace Prisma {
     topicId?: IntFieldUpdateOperationsInput | number
   }
 
+  export type DiscussionsUpdateWithoutStudentInput = {
+    type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+    question?: QuestionsUpdateOneWithoutDiscussionNestedInput
+    toWhomIReply?: DiscussionsUpdateOneWithoutRepliesIGetNestedInput
+    repliesIGet?: DiscussionsUpdateManyWithoutToWhomIReplyNestedInput
+  }
+
+  export type DiscussionsUncheckedUpdateWithoutStudentInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+    questionId?: NullableIntFieldUpdateOperationsInput | number | null
+    repliedTo?: NullableIntFieldUpdateOperationsInput | number | null
+    repliesIGet?: DiscussionsUncheckedUpdateManyWithoutToWhomIReplyNestedInput
+  }
+
+  export type DiscussionsUncheckedUpdateManyWithoutStudentInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+    questionId?: NullableIntFieldUpdateOperationsInput | number | null
+    repliedTo?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
   export type ContestResultCreateManyTopicsInput = {
     id?: number
     studentId: number
     timeTaken: Date | string
     totalPoints: number
+  }
+
+  export type QuestionsCreateManyTopicsInput = {
+    id?: number
+    title: string
+    description?: string | null
+    noOfHiddenTestCases?: number
+    noOfExternalTestCases?: number
+    difficulty?: $Enums.DifficultyType
+    pointsPerTestCaseSolved: number
+    type?: $Enums.QuestionType
+    leetCodeLink?: string | null
+    leetCodeTitle?: string | null
   }
 
   export type ContestResultUpdateWithoutTopicsInput = {
@@ -17335,6 +19539,50 @@ export namespace Prisma {
     totalPoints?: IntFieldUpdateOperationsInput | number
   }
 
+  export type QuestionsUpdateWithoutTopicsInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
+    noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
+    pointsPerTestCaseSolved?: IntFieldUpdateOperationsInput | number
+    type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
+    leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
+    submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
+    discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
+  }
+
+  export type QuestionsUncheckedUpdateWithoutTopicsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
+    noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
+    pointsPerTestCaseSolved?: IntFieldUpdateOperationsInput | number
+    type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
+    leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
+    submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
+    discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
+  }
+
+  export type QuestionsUncheckedUpdateManyWithoutTopicsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
+    noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
+    pointsPerTestCaseSolved?: IntFieldUpdateOperationsInput | number
+    type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
+    leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type TestCaseCreateManyQuestionsInput = {
     id?: number
     inputString: string
@@ -17349,6 +19597,13 @@ export namespace Prisma {
     noOfCasesPassed: number
     pointsSecured: number
     type?: $Enums.SubmissionType
+  }
+
+  export type DiscussionsCreateManyQuestionInput = {
+    id?: number
+    studentId: number
+    type?: $Enums.CommentType
+    repliedTo?: number | null
   }
 
   export type TestCaseUpdateWithoutQuestionsInput = {
@@ -17397,27 +19652,78 @@ export namespace Prisma {
     type?: EnumSubmissionTypeFieldUpdateOperationsInput | $Enums.SubmissionType
   }
 
+  export type DiscussionsUpdateWithoutQuestionInput = {
+    type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+    student?: StudentUpdateOneRequiredWithoutDiscussionNestedInput
+    toWhomIReply?: DiscussionsUpdateOneWithoutRepliesIGetNestedInput
+    repliesIGet?: DiscussionsUpdateManyWithoutToWhomIReplyNestedInput
+  }
+
+  export type DiscussionsUncheckedUpdateWithoutQuestionInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
+    type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+    repliedTo?: NullableIntFieldUpdateOperationsInput | number | null
+    repliesIGet?: DiscussionsUncheckedUpdateManyWithoutToWhomIReplyNestedInput
+  }
+
+  export type DiscussionsUncheckedUpdateManyWithoutQuestionInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
+    type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+    repliedTo?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
   export type StudentAchievementsCreateManyAchievementsInput = {
     id?: number
     studentId: number
-    acquiredOn?: Date | string
+    count: number
   }
 
   export type StudentAchievementsUpdateWithoutAchievementsInput = {
-    acquiredOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    count?: IntFieldUpdateOperationsInput | number
     student?: StudentUpdateOneRequiredWithoutStudentAchievementsNestedInput
   }
 
   export type StudentAchievementsUncheckedUpdateWithoutAchievementsInput = {
     id?: IntFieldUpdateOperationsInput | number
     studentId?: IntFieldUpdateOperationsInput | number
-    acquiredOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    count?: IntFieldUpdateOperationsInput | number
   }
 
   export type StudentAchievementsUncheckedUpdateManyWithoutAchievementsInput = {
     id?: IntFieldUpdateOperationsInput | number
     studentId?: IntFieldUpdateOperationsInput | number
-    acquiredOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    count?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type DiscussionsCreateManyToWhomIReplyInput = {
+    id?: number
+    studentId: number
+    type?: $Enums.CommentType
+    questionId?: number | null
+  }
+
+  export type DiscussionsUpdateWithoutToWhomIReplyInput = {
+    type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+    student?: StudentUpdateOneRequiredWithoutDiscussionNestedInput
+    question?: QuestionsUpdateOneWithoutDiscussionNestedInput
+    repliesIGet?: DiscussionsUpdateManyWithoutToWhomIReplyNestedInput
+  }
+
+  export type DiscussionsUncheckedUpdateWithoutToWhomIReplyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
+    type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+    questionId?: NullableIntFieldUpdateOperationsInput | number | null
+    repliesIGet?: DiscussionsUncheckedUpdateManyWithoutToWhomIReplyNestedInput
+  }
+
+  export type DiscussionsUncheckedUpdateManyWithoutToWhomIReplyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
+    type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+    questionId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
 

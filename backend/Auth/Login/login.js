@@ -42,19 +42,34 @@ async function login(req,res) {
                 })
                 const removeIfExists = await prisma.session.deleteMany({
                     where:{
-                        uname: student.uname
+                        studentId: student.id
                     }
                 })
                 const addSession =  await prisma.session.create({
                     data:{
-                        uname:student.uname,
+                        studentId:student.id,
                         expiry: exp,
                         session: session
                     }
                 }) 
+                const achieve = await prisma.studentAchievements.findMany({
+                    select:{
+                        achievementId: true,
+                        count:true,
+                        achievements:{
+                            select:{
+                                title: true,
+                                description:true,
+                            }
+                        }
+                    },
+                    where:{
+                        studentId:student.id
+                    }
+                })
                 res.status(200).json({
                     msg:"Success",
-                    data:JSON.stringify(student),
+                    data:{"data":JSON.stringify(student),"achievements":JSON.stringify(achieve)},
                     session:session
                 })
             }

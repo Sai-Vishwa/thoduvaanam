@@ -14,6 +14,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum CommentType {
+  GENERAL
+  SPECIFIC
+}
+
 enum TestCaseType {
   OPEN
   HIDDEN
@@ -27,13 +32,9 @@ enum DifficultyType {
 }
 
 enum AcceptedType {
+  PENDING
   ACCEPTED
   REJECTED
-}
-
-enum AchievementType {
-  ONETIME
-  COUNTABLE
 }
 
 enum QuestionType {
@@ -52,25 +53,21 @@ enum OTPStatus {
 }
 
 model Student {
-  id              Int      @id @default(autoincrement())
+  id              Int     @id @default(autoincrement())
   name            String
-  rno             String   @unique
-  uname           String   @unique
+  rno             String  @unique
+  uname           String  @unique
   leetCodeName    String
   salt            String
   hash            String
-  currStreak      Int      @default(0)
-  maxStreak       Int      @default(0)
-  points          Int      @default(0)
-  lastLogin       DateTime @default(now())
   leetCodeProfile String?
 
   //relationships
   submission          Submission[]
   studentAchievements StudentAchievements[]
   contestResult       ContestResult[]
-
-  @@index([points])
+  session             Session?
+  discussion          Discussions[]
 }
 
 model Topics {
@@ -82,22 +79,27 @@ model Topics {
 
   //relationships
   contestResult ContestResult[]
+  question      Questions[]
 }
 
 model Questions {
   id                      Int            @id @default(autoincrement())
   title                   String
   description             String?
+  topic                   Int
   noOfHiddenTestCases     Int            @default(18)
   noOfExternalTestCases   Int            @default(2)
   difficulty              DifficultyType @default(EASY)
   pointsPerTestCaseSolved Int
   type                    QuestionType   @default(PRACTICE)
   leetCodeLink            String?
+  leetCodeTitle           String?
 
   //relationships
   testCase   TestCase[]
   submission Submission[]
+  discussion Discussions[]
+  topics     Topics        @relation(fields: [topic], references: [id])
 }
 
 model TestCase {
@@ -115,7 +117,7 @@ model Submission {
   questionId      Int
   studentId       Int
   solvedOn        DateTime       @default(now())
-  status          AcceptedType   @default(ACCEPTED)
+  status          AcceptedType   @default(PENDING)
   noOfCasesPassed Int
   pointsSecured   Int
   type            SubmissionType @default(WEBSITE)
@@ -126,26 +128,25 @@ model Submission {
 }
 
 model Achievements {
-  id          Int             @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   title       String
   description String?
-  type        AchievementType @default(ONETIME)
-  minCriteria Int             @default(-1)
-  maxCriteria Int             @default(-1)
 
   //relationships
   studentAchievements StudentAchievements[]
 }
 
 model StudentAchievements {
-  id            Int      @id @default(autoincrement())
+  id            Int @id @default(autoincrement())
   studentId     Int
   achievementId Int
-  acquiredOn    DateTime @default(now())
+  count         Int
 
   //relationships
   student      Student      @relation(fields: [studentId], references: [id])
   achievements Achievements @relation(fields: [achievementId], references: [id])
+
+  @@index([count])
 }
 
 model ContestResult {
@@ -174,4 +175,28 @@ model OTPStudent {
   otp             String
   expiry          DateTime
   status          OTPStatus @default(PENDING)
+}
+
+model Session {
+  id        Int      @id @default(autoincrement())
+  studentId Int      @unique
+  session   String
+  expiry    DateTime
+
+  //relationships
+  student Student @relation(fields: [studentId], references: [id])
+}
+
+model Discussions {
+  id         Int         @id @default(autoincrement())
+  studentId  Int
+  type       CommentType @default(GENERAL)
+  questionId Int?
+  repliedTo  Int?
+
+  //relationships
+  student      Student       @relation(fields: [studentId], references: [id])
+  question     Questions?    @relation(fields: [questionId], references: [id])
+  toWhomIReply Discussions?  @relation("SelfMapping", fields: [repliedTo], references: [id])
+  repliesIGet  Discussions[] @relation("SelfMapping")
 }

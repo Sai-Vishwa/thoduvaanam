@@ -125,12 +125,7 @@ exports.Prisma.StudentScalarFieldEnum = {
   leetCodeName: 'leetCodeName',
   salt: 'salt',
   hash: 'hash',
-  currStreak: 'currStreak',
-  maxStreak: 'maxStreak',
-  points: 'points',
-  lastLogin: 'lastLogin',
-  leetCodeProfile: 'leetCodeProfile',
-  lastQuestionSolved: 'lastQuestionSolved'
+  leetCodeProfile: 'leetCodeProfile'
 };
 
 exports.Prisma.TopicsScalarFieldEnum = {
@@ -145,12 +140,14 @@ exports.Prisma.QuestionsScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
+  topic: 'topic',
   noOfHiddenTestCases: 'noOfHiddenTestCases',
   noOfExternalTestCases: 'noOfExternalTestCases',
   difficulty: 'difficulty',
   pointsPerTestCaseSolved: 'pointsPerTestCaseSolved',
   type: 'type',
-  leetCodeLink: 'leetCodeLink'
+  leetCodeLink: 'leetCodeLink',
+  leetCodeTitle: 'leetCodeTitle'
 };
 
 exports.Prisma.TestCaseScalarFieldEnum = {
@@ -174,17 +171,14 @@ exports.Prisma.SubmissionScalarFieldEnum = {
 exports.Prisma.AchievementsScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  description: 'description',
-  type: 'type',
-  minCriteria: 'minCriteria',
-  maxCriteria: 'maxCriteria'
+  description: 'description'
 };
 
 exports.Prisma.StudentAchievementsScalarFieldEnum = {
   id: 'id',
   studentId: 'studentId',
   achievementId: 'achievementId',
-  acquiredOn: 'acquiredOn'
+  count: 'count'
 };
 
 exports.Prisma.ContestResultScalarFieldEnum = {
@@ -211,9 +205,17 @@ exports.Prisma.OTPStudentScalarFieldEnum = {
 
 exports.Prisma.SessionScalarFieldEnum = {
   id: 'id',
-  uname: 'uname',
+  studentId: 'studentId',
   session: 'session',
   expiry: 'expiry'
+};
+
+exports.Prisma.DiscussionsScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  type: 'type',
+  questionId: 'questionId',
+  repliedTo: 'repliedTo'
 };
 
 exports.Prisma.SortOrder = {
@@ -243,6 +245,7 @@ exports.QuestionType = exports.$Enums.QuestionType = {
 };
 
 exports.AcceptedType = exports.$Enums.AcceptedType = {
+  PENDING: 'PENDING',
   ACCEPTED: 'ACCEPTED',
   REJECTED: 'REJECTED'
 };
@@ -252,14 +255,14 @@ exports.SubmissionType = exports.$Enums.SubmissionType = {
   LEETCODE: 'LEETCODE'
 };
 
-exports.AchievementType = exports.$Enums.AchievementType = {
-  ONETIME: 'ONETIME',
-  COUNTABLE: 'COUNTABLE'
-};
-
 exports.OTPStatus = exports.$Enums.OTPStatus = {
   PENDING: 'PENDING',
   APPROVED: 'APPROVED'
+};
+
+exports.CommentType = exports.$Enums.CommentType = {
+  GENERAL: 'GENERAL',
+  SPECIFIC: 'SPECIFIC'
 };
 
 exports.Prisma.ModelName = {
@@ -272,7 +275,8 @@ exports.Prisma.ModelName = {
   StudentAchievements: 'StudentAchievements',
   ContestResult: 'ContestResult',
   OTPStudent: 'OTPStudent',
-  Session: 'Session'
+  Session: 'Session',
+  Discussions: 'Discussions'
 };
 
 /**

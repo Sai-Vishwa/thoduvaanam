@@ -32,18 +32,35 @@ async function verifyOTPforLogin(req,res) {
                 })
                 const del = await prisma.session.deleteMany({
                     where:{
-                        uname:student.uname
+                        studentId:student.id
                     }
                 })
                 const ses = await prisma.session.create({
                     data:{
-                        uname:student.uname,
+                        stduentId:student.id,
                         session:session,
                         expiry: exp
                     }
                 })
+                const achieve = await prisma.studentAchievements.findMany({
+                    select:{
+                        achievementId: true,
+                        count:true,
+                        achievements:{
+                            select:{
+                                title: true,
+                                description:true,
+                            }
+                        }
+                    },
+                    where:{
+                        studentId:student.id
+                    }
+                })
                 res.status(200).json({
-                    msg:"Success"
+                    msg:"Success",
+                    data:{"data":JSON.stringify(student),"achievements":JSON.stringify(achieve)},
+                    session:session
                 })
             }
             else if(student.otp === req.body.otp){
