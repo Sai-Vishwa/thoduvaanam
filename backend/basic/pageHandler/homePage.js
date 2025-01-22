@@ -3,7 +3,7 @@ const { sessionChecker } = require("../../sessionChecker/sessionChecker");
 const prisma = new PrismaClient();
 async function homePage(req,res) {
     try{
-        if(await sessionChecker(req.body.id , req.body.sessionId)==0){
+        if(await sessionChecker(req.cookies.session)==-1){
             res.status(200).json({
                 err:"Invlaid session"
             })

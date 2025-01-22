@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 function SubmitButton({unameOrRno,password,type,data,setOTP,forgotpassword,setUnameError,setPasswordError}){
     const nav = useNavigate;
     function onSubmit(){
@@ -34,7 +35,7 @@ function SubmitButton({unameOrRno,password,type,data,setOTP,forgotpassword,setUn
                     alert(data.err)
                 }
                 else{
-                    document.cookie = `session=${data.session}; max-age=3600; path=/`
+                    Cookies.set('session',data.session,{expires: 5/24})
                     alert("Login successful");
                     nav("/");
                 }

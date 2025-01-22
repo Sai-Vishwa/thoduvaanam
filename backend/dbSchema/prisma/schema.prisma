@@ -61,6 +61,7 @@ model Student {
   salt String
   hash String
   leetCodeProfile String?
+  timeOfLastSolve DateTime
   
   //relationships
   submission Submission[]
@@ -194,6 +195,7 @@ model Discussions {
   type CommentType @default(GENERAL)
   questionId Int?
   repliedTo Int?
+  timeOfComment DateTime
 
   //relationships
   student Student @relation(fields: [studentId],references:[id])

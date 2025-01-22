@@ -2105,6 +2105,7 @@ export namespace Prisma {
     salt: string | null
     hash: string | null
     leetCodeProfile: string | null
+    timeOfLastSolve: Date | null
   }
 
   export type StudentMaxAggregateOutputType = {
@@ -2116,6 +2117,7 @@ export namespace Prisma {
     salt: string | null
     hash: string | null
     leetCodeProfile: string | null
+    timeOfLastSolve: Date | null
   }
 
   export type StudentCountAggregateOutputType = {
@@ -2127,6 +2129,7 @@ export namespace Prisma {
     salt: number
     hash: number
     leetCodeProfile: number
+    timeOfLastSolve: number
     _all: number
   }
 
@@ -2148,6 +2151,7 @@ export namespace Prisma {
     salt?: true
     hash?: true
     leetCodeProfile?: true
+    timeOfLastSolve?: true
   }
 
   export type StudentMaxAggregateInputType = {
@@ -2159,6 +2163,7 @@ export namespace Prisma {
     salt?: true
     hash?: true
     leetCodeProfile?: true
+    timeOfLastSolve?: true
   }
 
   export type StudentCountAggregateInputType = {
@@ -2170,6 +2175,7 @@ export namespace Prisma {
     salt?: true
     hash?: true
     leetCodeProfile?: true
+    timeOfLastSolve?: true
     _all?: true
   }
 
@@ -2268,6 +2274,7 @@ export namespace Prisma {
     salt: string
     hash: string
     leetCodeProfile: string | null
+    timeOfLastSolve: Date
     _count: StudentCountAggregateOutputType | null
     _avg: StudentAvgAggregateOutputType | null
     _sum: StudentSumAggregateOutputType | null
@@ -2298,6 +2305,7 @@ export namespace Prisma {
     salt?: boolean
     hash?: boolean
     leetCodeProfile?: boolean
+    timeOfLastSolve?: boolean
     submission?: boolean | Student$submissionArgs<ExtArgs>
     studentAchievements?: boolean | Student$studentAchievementsArgs<ExtArgs>
     contestResult?: boolean | Student$contestResultArgs<ExtArgs>
@@ -2315,6 +2323,7 @@ export namespace Prisma {
     salt?: boolean
     hash?: boolean
     leetCodeProfile?: boolean
+    timeOfLastSolve?: boolean
   }, ExtArgs["result"]["student"]>
 
   export type StudentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2326,6 +2335,7 @@ export namespace Prisma {
     salt?: boolean
     hash?: boolean
     leetCodeProfile?: boolean
+    timeOfLastSolve?: boolean
   }, ExtArgs["result"]["student"]>
 
   export type StudentSelectScalar = {
@@ -2337,9 +2347,10 @@ export namespace Prisma {
     salt?: boolean
     hash?: boolean
     leetCodeProfile?: boolean
+    timeOfLastSolve?: boolean
   }
 
-  export type StudentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rno" | "uname" | "leetCodeName" | "salt" | "hash" | "leetCodeProfile", ExtArgs["result"]["student"]>
+  export type StudentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rno" | "uname" | "leetCodeName" | "salt" | "hash" | "leetCodeProfile" | "timeOfLastSolve", ExtArgs["result"]["student"]>
   export type StudentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     submission?: boolean | Student$submissionArgs<ExtArgs>
     studentAchievements?: boolean | Student$studentAchievementsArgs<ExtArgs>
@@ -2369,6 +2380,7 @@ export namespace Prisma {
       salt: string
       hash: string
       leetCodeProfile: string | null
+      timeOfLastSolve: Date
     }, ExtArgs["result"]["student"]>
     composites: {}
   }
@@ -2805,6 +2817,7 @@ export namespace Prisma {
     readonly salt: FieldRef<"Student", 'String'>
     readonly hash: FieldRef<"Student", 'String'>
     readonly leetCodeProfile: FieldRef<"Student", 'String'>
+    readonly timeOfLastSolve: FieldRef<"Student", 'DateTime'>
   }
     
 
@@ -13359,6 +13372,7 @@ export namespace Prisma {
     type: $Enums.CommentType | null
     questionId: number | null
     repliedTo: number | null
+    timeOfComment: Date | null
   }
 
   export type DiscussionsMaxAggregateOutputType = {
@@ -13367,6 +13381,7 @@ export namespace Prisma {
     type: $Enums.CommentType | null
     questionId: number | null
     repliedTo: number | null
+    timeOfComment: Date | null
   }
 
   export type DiscussionsCountAggregateOutputType = {
@@ -13375,6 +13390,7 @@ export namespace Prisma {
     type: number
     questionId: number
     repliedTo: number
+    timeOfComment: number
     _all: number
   }
 
@@ -13399,6 +13415,7 @@ export namespace Prisma {
     type?: true
     questionId?: true
     repliedTo?: true
+    timeOfComment?: true
   }
 
   export type DiscussionsMaxAggregateInputType = {
@@ -13407,6 +13424,7 @@ export namespace Prisma {
     type?: true
     questionId?: true
     repliedTo?: true
+    timeOfComment?: true
   }
 
   export type DiscussionsCountAggregateInputType = {
@@ -13415,6 +13433,7 @@ export namespace Prisma {
     type?: true
     questionId?: true
     repliedTo?: true
+    timeOfComment?: true
     _all?: true
   }
 
@@ -13510,6 +13529,7 @@ export namespace Prisma {
     type: $Enums.CommentType
     questionId: number | null
     repliedTo: number | null
+    timeOfComment: Date
     _count: DiscussionsCountAggregateOutputType | null
     _avg: DiscussionsAvgAggregateOutputType | null
     _sum: DiscussionsSumAggregateOutputType | null
@@ -13537,6 +13557,7 @@ export namespace Prisma {
     type?: boolean
     questionId?: boolean
     repliedTo?: boolean
+    timeOfComment?: boolean
     student?: boolean | StudentDefaultArgs<ExtArgs>
     question?: boolean | Discussions$questionArgs<ExtArgs>
     toWhomIReply?: boolean | Discussions$toWhomIReplyArgs<ExtArgs>
@@ -13550,6 +13571,7 @@ export namespace Prisma {
     type?: boolean
     questionId?: boolean
     repliedTo?: boolean
+    timeOfComment?: boolean
     student?: boolean | StudentDefaultArgs<ExtArgs>
     question?: boolean | Discussions$questionArgs<ExtArgs>
     toWhomIReply?: boolean | Discussions$toWhomIReplyArgs<ExtArgs>
@@ -13561,6 +13583,7 @@ export namespace Prisma {
     type?: boolean
     questionId?: boolean
     repliedTo?: boolean
+    timeOfComment?: boolean
     student?: boolean | StudentDefaultArgs<ExtArgs>
     question?: boolean | Discussions$questionArgs<ExtArgs>
     toWhomIReply?: boolean | Discussions$toWhomIReplyArgs<ExtArgs>
@@ -13572,9 +13595,10 @@ export namespace Prisma {
     type?: boolean
     questionId?: boolean
     repliedTo?: boolean
+    timeOfComment?: boolean
   }
 
-  export type DiscussionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "studentId" | "type" | "questionId" | "repliedTo", ExtArgs["result"]["discussions"]>
+  export type DiscussionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "studentId" | "type" | "questionId" | "repliedTo" | "timeOfComment", ExtArgs["result"]["discussions"]>
   export type DiscussionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     student?: boolean | StudentDefaultArgs<ExtArgs>
     question?: boolean | Discussions$questionArgs<ExtArgs>
@@ -13607,6 +13631,7 @@ export namespace Prisma {
       type: $Enums.CommentType
       questionId: number | null
       repliedTo: number | null
+      timeOfComment: Date
     }, ExtArgs["result"]["discussions"]>
     composites: {}
   }
@@ -14039,6 +14064,7 @@ export namespace Prisma {
     readonly type: FieldRef<"Discussions", 'CommentType'>
     readonly questionId: FieldRef<"Discussions", 'Int'>
     readonly repliedTo: FieldRef<"Discussions", 'Int'>
+    readonly timeOfComment: FieldRef<"Discussions", 'DateTime'>
   }
     
 
@@ -14525,7 +14551,8 @@ export namespace Prisma {
     leetCodeName: 'leetCodeName',
     salt: 'salt',
     hash: 'hash',
-    leetCodeProfile: 'leetCodeProfile'
+    leetCodeProfile: 'leetCodeProfile',
+    timeOfLastSolve: 'timeOfLastSolve'
   };
 
   export type StudentScalarFieldEnum = (typeof StudentScalarFieldEnum)[keyof typeof StudentScalarFieldEnum]
@@ -14645,7 +14672,8 @@ export namespace Prisma {
     studentId: 'studentId',
     type: 'type',
     questionId: 'questionId',
-    repliedTo: 'repliedTo'
+    repliedTo: 'repliedTo',
+    timeOfComment: 'timeOfComment'
   };
 
   export type DiscussionsScalarFieldEnum = (typeof DiscussionsScalarFieldEnum)[keyof typeof DiscussionsScalarFieldEnum]
@@ -14835,6 +14863,7 @@ export namespace Prisma {
     salt?: StringFilter<"Student"> | string
     hash?: StringFilter<"Student"> | string
     leetCodeProfile?: StringNullableFilter<"Student"> | string | null
+    timeOfLastSolve?: DateTimeFilter<"Student"> | Date | string
     submission?: SubmissionListRelationFilter
     studentAchievements?: StudentAchievementsListRelationFilter
     contestResult?: ContestResultListRelationFilter
@@ -14851,6 +14880,7 @@ export namespace Prisma {
     salt?: SortOrder
     hash?: SortOrder
     leetCodeProfile?: SortOrderInput | SortOrder
+    timeOfLastSolve?: SortOrder
     submission?: SubmissionOrderByRelationAggregateInput
     studentAchievements?: StudentAchievementsOrderByRelationAggregateInput
     contestResult?: ContestResultOrderByRelationAggregateInput
@@ -14870,6 +14900,7 @@ export namespace Prisma {
     salt?: StringFilter<"Student"> | string
     hash?: StringFilter<"Student"> | string
     leetCodeProfile?: StringNullableFilter<"Student"> | string | null
+    timeOfLastSolve?: DateTimeFilter<"Student"> | Date | string
     submission?: SubmissionListRelationFilter
     studentAchievements?: StudentAchievementsListRelationFilter
     contestResult?: ContestResultListRelationFilter
@@ -14886,6 +14917,7 @@ export namespace Prisma {
     salt?: SortOrder
     hash?: SortOrder
     leetCodeProfile?: SortOrderInput | SortOrder
+    timeOfLastSolve?: SortOrder
     _count?: StudentCountOrderByAggregateInput
     _avg?: StudentAvgOrderByAggregateInput
     _max?: StudentMaxOrderByAggregateInput
@@ -14905,6 +14937,7 @@ export namespace Prisma {
     salt?: StringWithAggregatesFilter<"Student"> | string
     hash?: StringWithAggregatesFilter<"Student"> | string
     leetCodeProfile?: StringNullableWithAggregatesFilter<"Student"> | string | null
+    timeOfLastSolve?: DateTimeWithAggregatesFilter<"Student"> | Date | string
   }
 
   export type TopicsWhereInput = {
@@ -15497,6 +15530,7 @@ export namespace Prisma {
     type?: EnumCommentTypeFilter<"Discussions"> | $Enums.CommentType
     questionId?: IntNullableFilter<"Discussions"> | number | null
     repliedTo?: IntNullableFilter<"Discussions"> | number | null
+    timeOfComment?: DateTimeFilter<"Discussions"> | Date | string
     student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
     question?: XOR<QuestionsNullableScalarRelationFilter, QuestionsWhereInput> | null
     toWhomIReply?: XOR<DiscussionsNullableScalarRelationFilter, DiscussionsWhereInput> | null
@@ -15509,6 +15543,7 @@ export namespace Prisma {
     type?: SortOrder
     questionId?: SortOrderInput | SortOrder
     repliedTo?: SortOrderInput | SortOrder
+    timeOfComment?: SortOrder
     student?: StudentOrderByWithRelationInput
     question?: QuestionsOrderByWithRelationInput
     toWhomIReply?: DiscussionsOrderByWithRelationInput
@@ -15524,6 +15559,7 @@ export namespace Prisma {
     type?: EnumCommentTypeFilter<"Discussions"> | $Enums.CommentType
     questionId?: IntNullableFilter<"Discussions"> | number | null
     repliedTo?: IntNullableFilter<"Discussions"> | number | null
+    timeOfComment?: DateTimeFilter<"Discussions"> | Date | string
     student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
     question?: XOR<QuestionsNullableScalarRelationFilter, QuestionsWhereInput> | null
     toWhomIReply?: XOR<DiscussionsNullableScalarRelationFilter, DiscussionsWhereInput> | null
@@ -15536,6 +15572,7 @@ export namespace Prisma {
     type?: SortOrder
     questionId?: SortOrderInput | SortOrder
     repliedTo?: SortOrderInput | SortOrder
+    timeOfComment?: SortOrder
     _count?: DiscussionsCountOrderByAggregateInput
     _avg?: DiscussionsAvgOrderByAggregateInput
     _max?: DiscussionsMaxOrderByAggregateInput
@@ -15552,6 +15589,7 @@ export namespace Prisma {
     type?: EnumCommentTypeWithAggregatesFilter<"Discussions"> | $Enums.CommentType
     questionId?: IntNullableWithAggregatesFilter<"Discussions"> | number | null
     repliedTo?: IntNullableWithAggregatesFilter<"Discussions"> | number | null
+    timeOfComment?: DateTimeWithAggregatesFilter<"Discussions"> | Date | string
   }
 
   export type StudentCreateInput = {
@@ -15562,6 +15600,7 @@ export namespace Prisma {
     salt: string
     hash: string
     leetCodeProfile?: string | null
+    timeOfLastSolve: Date | string
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultCreateNestedManyWithoutStudentInput
@@ -15578,6 +15617,7 @@ export namespace Prisma {
     salt: string
     hash: string
     leetCodeProfile?: string | null
+    timeOfLastSolve: Date | string
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
@@ -15593,6 +15633,7 @@ export namespace Prisma {
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
@@ -15609,6 +15650,7 @@ export namespace Prisma {
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
@@ -15625,6 +15667,7 @@ export namespace Prisma {
     salt: string
     hash: string
     leetCodeProfile?: string | null
+    timeOfLastSolve: Date | string
   }
 
   export type StudentUpdateManyMutationInput = {
@@ -15635,6 +15678,7 @@ export namespace Prisma {
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StudentUncheckedUpdateManyInput = {
@@ -15646,6 +15690,7 @@ export namespace Prisma {
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TopicsCreateInput = {
@@ -16212,6 +16257,7 @@ export namespace Prisma {
 
   export type DiscussionsCreateInput = {
     type?: $Enums.CommentType
+    timeOfComment: Date | string
     student: StudentCreateNestedOneWithoutDiscussionInput
     question?: QuestionsCreateNestedOneWithoutDiscussionInput
     toWhomIReply?: DiscussionsCreateNestedOneWithoutRepliesIGetInput
@@ -16224,11 +16270,13 @@ export namespace Prisma {
     type?: $Enums.CommentType
     questionId?: number | null
     repliedTo?: number | null
+    timeOfComment: Date | string
     repliesIGet?: DiscussionsUncheckedCreateNestedManyWithoutToWhomIReplyInput
   }
 
   export type DiscussionsUpdateInput = {
     type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+    timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
     student?: StudentUpdateOneRequiredWithoutDiscussionNestedInput
     question?: QuestionsUpdateOneWithoutDiscussionNestedInput
     toWhomIReply?: DiscussionsUpdateOneWithoutRepliesIGetNestedInput
@@ -16241,6 +16289,7 @@ export namespace Prisma {
     type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
     questionId?: NullableIntFieldUpdateOperationsInput | number | null
     repliedTo?: NullableIntFieldUpdateOperationsInput | number | null
+    timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
     repliesIGet?: DiscussionsUncheckedUpdateManyWithoutToWhomIReplyNestedInput
   }
 
@@ -16250,10 +16299,12 @@ export namespace Prisma {
     type?: $Enums.CommentType
     questionId?: number | null
     repliedTo?: number | null
+    timeOfComment: Date | string
   }
 
   export type DiscussionsUpdateManyMutationInput = {
     type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+    timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DiscussionsUncheckedUpdateManyInput = {
@@ -16262,6 +16313,7 @@ export namespace Prisma {
     type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
     questionId?: NullableIntFieldUpdateOperationsInput | number | null
     repliedTo?: NullableIntFieldUpdateOperationsInput | number | null
+    timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -16303,6 +16355,17 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type SubmissionListRelationFilter = {
@@ -16364,6 +16427,7 @@ export namespace Prisma {
     salt?: SortOrder
     hash?: SortOrder
     leetCodeProfile?: SortOrder
+    timeOfLastSolve?: SortOrder
   }
 
   export type StudentAvgOrderByAggregateInput = {
@@ -16379,6 +16443,7 @@ export namespace Prisma {
     salt?: SortOrder
     hash?: SortOrder
     leetCodeProfile?: SortOrder
+    timeOfLastSolve?: SortOrder
   }
 
   export type StudentMinOrderByAggregateInput = {
@@ -16390,6 +16455,7 @@ export namespace Prisma {
     salt?: SortOrder
     hash?: SortOrder
     leetCodeProfile?: SortOrder
+    timeOfLastSolve?: SortOrder
   }
 
   export type StudentSumOrderByAggregateInput = {
@@ -16448,7 +16514,7 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -16456,7 +16522,10 @@ export namespace Prisma {
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type QuestionsListRelationFilter = {
@@ -16499,20 +16568,6 @@ export namespace Prisma {
 
   export type TopicsSumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type EnumDifficultyTypeFilter<$PrismaModel = never> = {
@@ -16982,6 +17037,7 @@ export namespace Prisma {
     type?: SortOrder
     questionId?: SortOrder
     repliedTo?: SortOrder
+    timeOfComment?: SortOrder
   }
 
   export type DiscussionsAvgOrderByAggregateInput = {
@@ -16997,6 +17053,7 @@ export namespace Prisma {
     type?: SortOrder
     questionId?: SortOrder
     repliedTo?: SortOrder
+    timeOfComment?: SortOrder
   }
 
   export type DiscussionsMinOrderByAggregateInput = {
@@ -17005,6 +17062,7 @@ export namespace Prisma {
     type?: SortOrder
     questionId?: SortOrder
     repliedTo?: SortOrder
+    timeOfComment?: SortOrder
   }
 
   export type DiscussionsSumOrderByAggregateInput = {
@@ -17114,6 +17172,10 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type SubmissionUpdateManyWithoutStudentNestedInput = {
@@ -17282,10 +17344,6 @@ export namespace Prisma {
     connectOrCreate?: QuestionsCreateOrConnectWithoutTopicsInput | QuestionsCreateOrConnectWithoutTopicsInput[]
     createMany?: QuestionsCreateManyTopicsInputEnvelope
     connect?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type ContestResultUpdateManyWithoutTopicsNestedInput = {
@@ -17797,6 +17855,17 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -17867,17 +17936,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -18114,6 +18172,7 @@ export namespace Prisma {
 
   export type DiscussionsCreateWithoutStudentInput = {
     type?: $Enums.CommentType
+    timeOfComment: Date | string
     question?: QuestionsCreateNestedOneWithoutDiscussionInput
     toWhomIReply?: DiscussionsCreateNestedOneWithoutRepliesIGetInput
     repliesIGet?: DiscussionsCreateNestedManyWithoutToWhomIReplyInput
@@ -18124,6 +18183,7 @@ export namespace Prisma {
     type?: $Enums.CommentType
     questionId?: number | null
     repliedTo?: number | null
+    timeOfComment: Date | string
     repliesIGet?: DiscussionsUncheckedCreateNestedManyWithoutToWhomIReplyInput
   }
 
@@ -18267,6 +18327,7 @@ export namespace Prisma {
     type?: EnumCommentTypeFilter<"Discussions"> | $Enums.CommentType
     questionId?: IntNullableFilter<"Discussions"> | number | null
     repliedTo?: IntNullableFilter<"Discussions"> | number | null
+    timeOfComment?: DateTimeFilter<"Discussions"> | Date | string
   }
 
   export type ContestResultCreateWithoutTopicsInput = {
@@ -18434,6 +18495,7 @@ export namespace Prisma {
 
   export type DiscussionsCreateWithoutQuestionInput = {
     type?: $Enums.CommentType
+    timeOfComment: Date | string
     student: StudentCreateNestedOneWithoutDiscussionInput
     toWhomIReply?: DiscussionsCreateNestedOneWithoutRepliesIGetInput
     repliesIGet?: DiscussionsCreateNestedManyWithoutToWhomIReplyInput
@@ -18444,6 +18506,7 @@ export namespace Prisma {
     studentId: number
     type?: $Enums.CommentType
     repliedTo?: number | null
+    timeOfComment: Date | string
     repliesIGet?: DiscussionsUncheckedCreateNestedManyWithoutToWhomIReplyInput
   }
 
@@ -18687,6 +18750,7 @@ export namespace Prisma {
     salt: string
     hash: string
     leetCodeProfile?: string | null
+    timeOfLastSolve: Date | string
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultCreateNestedManyWithoutStudentInput
     session?: SessionCreateNestedOneWithoutStudentInput
@@ -18702,6 +18766,7 @@ export namespace Prisma {
     salt: string
     hash: string
     leetCodeProfile?: string | null
+    timeOfLastSolve: Date | string
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
     session?: SessionUncheckedCreateNestedOneWithoutStudentInput
@@ -18774,6 +18839,7 @@ export namespace Prisma {
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
     session?: SessionUpdateOneWithoutStudentNestedInput
@@ -18789,6 +18855,7 @@ export namespace Prisma {
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
     session?: SessionUncheckedUpdateOneWithoutStudentNestedInput
@@ -18840,6 +18907,7 @@ export namespace Prisma {
     salt: string
     hash: string
     leetCodeProfile?: string | null
+    timeOfLastSolve: Date | string
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultCreateNestedManyWithoutStudentInput
     session?: SessionCreateNestedOneWithoutStudentInput
@@ -18855,6 +18923,7 @@ export namespace Prisma {
     salt: string
     hash: string
     leetCodeProfile?: string | null
+    timeOfLastSolve: Date | string
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
     session?: SessionUncheckedCreateNestedOneWithoutStudentInput
@@ -18901,6 +18970,7 @@ export namespace Prisma {
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
     session?: SessionUpdateOneWithoutStudentNestedInput
@@ -18916,6 +18986,7 @@ export namespace Prisma {
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
     session?: SessionUncheckedUpdateOneWithoutStudentNestedInput
@@ -18952,6 +19023,7 @@ export namespace Prisma {
     salt: string
     hash: string
     leetCodeProfile?: string | null
+    timeOfLastSolve: Date | string
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
     session?: SessionCreateNestedOneWithoutStudentInput
@@ -18967,6 +19039,7 @@ export namespace Prisma {
     salt: string
     hash: string
     leetCodeProfile?: string | null
+    timeOfLastSolve: Date | string
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
     session?: SessionUncheckedCreateNestedOneWithoutStudentInput
@@ -19019,6 +19092,7 @@ export namespace Prisma {
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
     session?: SessionUpdateOneWithoutStudentNestedInput
@@ -19034,6 +19108,7 @@ export namespace Prisma {
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
     session?: SessionUncheckedUpdateOneWithoutStudentNestedInput
@@ -19076,6 +19151,7 @@ export namespace Prisma {
     salt: string
     hash: string
     leetCodeProfile?: string | null
+    timeOfLastSolve: Date | string
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultCreateNestedManyWithoutStudentInput
@@ -19091,6 +19167,7 @@ export namespace Prisma {
     salt: string
     hash: string
     leetCodeProfile?: string | null
+    timeOfLastSolve: Date | string
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
@@ -19121,6 +19198,7 @@ export namespace Prisma {
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
@@ -19136,6 +19214,7 @@ export namespace Prisma {
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
@@ -19150,6 +19229,7 @@ export namespace Prisma {
     salt: string
     hash: string
     leetCodeProfile?: string | null
+    timeOfLastSolve: Date | string
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultCreateNestedManyWithoutStudentInput
@@ -19165,6 +19245,7 @@ export namespace Prisma {
     salt: string
     hash: string
     leetCodeProfile?: string | null
+    timeOfLastSolve: Date | string
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
@@ -19214,6 +19295,7 @@ export namespace Prisma {
 
   export type DiscussionsCreateWithoutRepliesIGetInput = {
     type?: $Enums.CommentType
+    timeOfComment: Date | string
     student: StudentCreateNestedOneWithoutDiscussionInput
     question?: QuestionsCreateNestedOneWithoutDiscussionInput
     toWhomIReply?: DiscussionsCreateNestedOneWithoutRepliesIGetInput
@@ -19225,6 +19307,7 @@ export namespace Prisma {
     type?: $Enums.CommentType
     questionId?: number | null
     repliedTo?: number | null
+    timeOfComment: Date | string
   }
 
   export type DiscussionsCreateOrConnectWithoutRepliesIGetInput = {
@@ -19234,6 +19317,7 @@ export namespace Prisma {
 
   export type DiscussionsCreateWithoutToWhomIReplyInput = {
     type?: $Enums.CommentType
+    timeOfComment: Date | string
     student: StudentCreateNestedOneWithoutDiscussionInput
     question?: QuestionsCreateNestedOneWithoutDiscussionInput
     repliesIGet?: DiscussionsCreateNestedManyWithoutToWhomIReplyInput
@@ -19244,6 +19328,7 @@ export namespace Prisma {
     studentId: number
     type?: $Enums.CommentType
     questionId?: number | null
+    timeOfComment: Date | string
     repliesIGet?: DiscussionsUncheckedCreateNestedManyWithoutToWhomIReplyInput
   }
 
@@ -19276,6 +19361,7 @@ export namespace Prisma {
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
@@ -19291,6 +19377,7 @@ export namespace Prisma {
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
+    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
@@ -19352,6 +19439,7 @@ export namespace Prisma {
 
   export type DiscussionsUpdateWithoutRepliesIGetInput = {
     type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+    timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
     student?: StudentUpdateOneRequiredWithoutDiscussionNestedInput
     question?: QuestionsUpdateOneWithoutDiscussionNestedInput
     toWhomIReply?: DiscussionsUpdateOneWithoutRepliesIGetNestedInput
@@ -19363,6 +19451,7 @@ export namespace Prisma {
     type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
     questionId?: NullableIntFieldUpdateOperationsInput | number | null
     repliedTo?: NullableIntFieldUpdateOperationsInput | number | null
+    timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DiscussionsUpsertWithWhereUniqueWithoutToWhomIReplyInput = {
@@ -19409,6 +19498,7 @@ export namespace Prisma {
     type?: $Enums.CommentType
     questionId?: number | null
     repliedTo?: number | null
+    timeOfComment: Date | string
   }
 
   export type SubmissionUpdateWithoutStudentInput = {
@@ -19479,6 +19569,7 @@ export namespace Prisma {
 
   export type DiscussionsUpdateWithoutStudentInput = {
     type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+    timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
     question?: QuestionsUpdateOneWithoutDiscussionNestedInput
     toWhomIReply?: DiscussionsUpdateOneWithoutRepliesIGetNestedInput
     repliesIGet?: DiscussionsUpdateManyWithoutToWhomIReplyNestedInput
@@ -19489,6 +19580,7 @@ export namespace Prisma {
     type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
     questionId?: NullableIntFieldUpdateOperationsInput | number | null
     repliedTo?: NullableIntFieldUpdateOperationsInput | number | null
+    timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
     repliesIGet?: DiscussionsUncheckedUpdateManyWithoutToWhomIReplyNestedInput
   }
 
@@ -19497,6 +19589,7 @@ export namespace Prisma {
     type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
     questionId?: NullableIntFieldUpdateOperationsInput | number | null
     repliedTo?: NullableIntFieldUpdateOperationsInput | number | null
+    timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ContestResultCreateManyTopicsInput = {
@@ -19604,6 +19697,7 @@ export namespace Prisma {
     studentId: number
     type?: $Enums.CommentType
     repliedTo?: number | null
+    timeOfComment: Date | string
   }
 
   export type TestCaseUpdateWithoutQuestionsInput = {
@@ -19654,6 +19748,7 @@ export namespace Prisma {
 
   export type DiscussionsUpdateWithoutQuestionInput = {
     type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+    timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
     student?: StudentUpdateOneRequiredWithoutDiscussionNestedInput
     toWhomIReply?: DiscussionsUpdateOneWithoutRepliesIGetNestedInput
     repliesIGet?: DiscussionsUpdateManyWithoutToWhomIReplyNestedInput
@@ -19664,6 +19759,7 @@ export namespace Prisma {
     studentId?: IntFieldUpdateOperationsInput | number
     type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
     repliedTo?: NullableIntFieldUpdateOperationsInput | number | null
+    timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
     repliesIGet?: DiscussionsUncheckedUpdateManyWithoutToWhomIReplyNestedInput
   }
 
@@ -19672,6 +19768,7 @@ export namespace Prisma {
     studentId?: IntFieldUpdateOperationsInput | number
     type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
     repliedTo?: NullableIntFieldUpdateOperationsInput | number | null
+    timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StudentAchievementsCreateManyAchievementsInput = {
@@ -19702,10 +19799,12 @@ export namespace Prisma {
     studentId: number
     type?: $Enums.CommentType
     questionId?: number | null
+    timeOfComment: Date | string
   }
 
   export type DiscussionsUpdateWithoutToWhomIReplyInput = {
     type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
+    timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
     student?: StudentUpdateOneRequiredWithoutDiscussionNestedInput
     question?: QuestionsUpdateOneWithoutDiscussionNestedInput
     repliesIGet?: DiscussionsUpdateManyWithoutToWhomIReplyNestedInput
@@ -19716,6 +19815,7 @@ export namespace Prisma {
     studentId?: IntFieldUpdateOperationsInput | number
     type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
     questionId?: NullableIntFieldUpdateOperationsInput | number | null
+    timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
     repliesIGet?: DiscussionsUncheckedUpdateManyWithoutToWhomIReplyNestedInput
   }
 
@@ -19724,6 +19824,7 @@ export namespace Prisma {
     studentId?: IntFieldUpdateOperationsInput | number
     type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
     questionId?: NullableIntFieldUpdateOperationsInput | number | null
+    timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

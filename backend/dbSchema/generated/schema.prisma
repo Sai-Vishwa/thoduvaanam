@@ -53,14 +53,15 @@ enum OTPStatus {
 }
 
 model Student {
-  id              Int     @id @default(autoincrement())
+  id              Int      @id @default(autoincrement())
   name            String
-  rno             String  @unique
-  uname           String  @unique
+  rno             String   @unique
+  uname           String   @unique
   leetCodeName    String
   salt            String
   hash            String
   leetCodeProfile String?
+  timeOfLastSolve DateTime
 
   //relationships
   submission          Submission[]
@@ -188,11 +189,12 @@ model Session {
 }
 
 model Discussions {
-  id         Int         @id @default(autoincrement())
-  studentId  Int
-  type       CommentType @default(GENERAL)
-  questionId Int?
-  repliedTo  Int?
+  id            Int         @id @default(autoincrement())
+  studentId     Int
+  type          CommentType @default(GENERAL)
+  questionId    Int?
+  repliedTo     Int?
+  timeOfComment DateTime
 
   //relationships
   student      Student       @relation(fields: [studentId], references: [id])

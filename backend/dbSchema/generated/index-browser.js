@@ -125,7 +125,8 @@ exports.Prisma.StudentScalarFieldEnum = {
   leetCodeName: 'leetCodeName',
   salt: 'salt',
   hash: 'hash',
-  leetCodeProfile: 'leetCodeProfile'
+  leetCodeProfile: 'leetCodeProfile',
+  timeOfLastSolve: 'timeOfLastSolve'
 };
 
 exports.Prisma.TopicsScalarFieldEnum = {
@@ -215,7 +216,8 @@ exports.Prisma.DiscussionsScalarFieldEnum = {
   studentId: 'studentId',
   type: 'type',
   questionId: 'questionId',
-  repliedTo: 'repliedTo'
+  repliedTo: 'repliedTo',
+  timeOfComment: 'timeOfComment'
 };
 
 exports.Prisma.SortOrder = {
