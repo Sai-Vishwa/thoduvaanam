@@ -11,7 +11,7 @@ async function verifySubmission(req,res) {
             +"div:nth-child(1) > "+"div:nth-child(1) > span";
     console.log(divStr)
     try{    
-            const session = await sessionChecker(req.cookies.session);
+            const studentId = await sessionChecker(req.cookies.session);
             const question = await prisma.questions.findUnique({
                 where:{
                     id:req.body.qid
@@ -59,7 +59,7 @@ async function verifySubmission(req,res) {
                     const achievement = await prisma.studentAchievements.update({
                         where:{
                             AND:[
-                                {studentId:req.body.sId},
+                                {studentId:studentId},
                                 {achievementId:1}
                             ]
                         },
