@@ -52,6 +52,18 @@ enum OTPStatus {
   APPROVED
 }
 
+enum LanguageType {
+  PYTHON
+  C
+  JAVA
+}
+
+enum BoilerType {
+  READ
+  FUNCTION_CALL
+  WRITE
+}
+
 model Student {
   id Int @id @default(autoincrement())
   name String 
@@ -95,6 +107,9 @@ model Questions {
   type QuestionType @default(PRACTICE)
   leetCodeLink String?
   leetCodeTitle String?
+  CLangFunction String
+  PyLangFunction String
+  JavsLangFunction String
 
   //relationships
   testCase TestCase[]
@@ -202,4 +217,11 @@ model Discussions {
   question Questions? @relation(fields: [questionId],references:[id])
   toWhomIReply Discussions? @relation("SelfMapping",fields: [repliedTo] , references:[id])
   repliesIGet Discussions[] @relation("SelfMapping")
+}
+
+model BoilerPlate {
+  id Int @id @default(autoincrement())
+  language LanguageType
+  type BoilerType
+  boilerCode String
 }
