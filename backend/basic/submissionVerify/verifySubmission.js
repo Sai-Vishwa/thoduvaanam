@@ -17,12 +17,13 @@ async function verifySubmission(req,res) {
                     id:req.body.qid
                 }
             })
+            const url = "https://leetcode.com/problems/"+question.leetCodeTitle+"/submissions/"+req.body.url
             if(session==-1){
                 res.status(200).json({
                     err:"Login first"
                 })
             }
-            else if(!req.body.url.startsWith(`https://leetcode.com/problems/${question.leetCodeTitle}/submissions/`)){
+            else if(!url.startsWith(`https://leetcode.com/problems/${question.leetCodeTitle}/submissions/`)){
                 res.status(200).josn({
                     err:"Fraud ra mama ivan"
                 })
@@ -39,7 +40,7 @@ async function verifySubmission(req,res) {
                 console.log("new page created")
 
                 
-                await page.goto(req.body.url);
+                await page.goto(url);
                 console.log("webpage is opened")
                 await page.waitForSelector("#qd-content");
                 const status = await page.evaluate(()=>{
@@ -52,7 +53,7 @@ async function verifySubmission(req,res) {
                     const div = document.querySelector("#qd-content > div:nth-child(1) > div:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)");
                     return div?div.textContent():"error"
                 })
-                
+                //no of tc
                 if(status=="Accepted" && name.toLowerCase().trim()===req.body.name.toLowerCase().trim()){
                     //chievement 1
                     //subm 1
@@ -69,8 +70,7 @@ async function verifySubmission(req,res) {
                             }
                         }
                     })
-                    
-                }
+                } 
                 res.status(200).json({
                     msg:status
                 })
