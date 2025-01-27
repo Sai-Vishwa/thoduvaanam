@@ -57,6 +57,7 @@ async function verifySubmission(req,res) {
                 if(status=="Accepted" && name.toLowerCase().trim()===req.body.name.toLowerCase().trim()){
                     //chievement 1
                     //subm 1
+                    //streak
                     const achievement = await prisma.studentAchievements.update({
                         where:{
                             AND:[

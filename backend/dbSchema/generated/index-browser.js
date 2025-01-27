@@ -148,7 +148,10 @@ exports.Prisma.QuestionsScalarFieldEnum = {
   pointsPerTestCaseSolved: 'pointsPerTestCaseSolved',
   type: 'type',
   leetCodeLink: 'leetCodeLink',
-  leetCodeTitle: 'leetCodeTitle'
+  leetCodeTitle: 'leetCodeTitle',
+  CLangFunction: 'CLangFunction',
+  PyLangFunction: 'PyLangFunction',
+  JavsLangFunction: 'JavsLangFunction'
 };
 
 exports.Prisma.TestCaseScalarFieldEnum = {
@@ -166,7 +169,12 @@ exports.Prisma.SubmissionScalarFieldEnum = {
   status: 'status',
   noOfCasesPassed: 'noOfCasesPassed',
   pointsSecured: 'pointsSecured',
-  type: 'type'
+  type: 'type',
+  output1: 'output1',
+  output2: 'output2',
+  isFinal: 'isFinal',
+  code: 'code',
+  leetCodeLink: 'leetCodeLink'
 };
 
 exports.Prisma.AchievementsScalarFieldEnum = {
@@ -220,6 +228,13 @@ exports.Prisma.DiscussionsScalarFieldEnum = {
   timeOfComment: 'timeOfComment'
 };
 
+exports.Prisma.BoilerPlateScalarFieldEnum = {
+  id: 'id',
+  language: 'language',
+  type: 'type',
+  boilerCode: 'boilerCode'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -257,6 +272,11 @@ exports.SubmissionType = exports.$Enums.SubmissionType = {
   LEETCODE: 'LEETCODE'
 };
 
+exports.isFinalType = exports.$Enums.isFinalType = {
+  YES: 'YES',
+  NO: 'NO'
+};
+
 exports.OTPStatus = exports.$Enums.OTPStatus = {
   PENDING: 'PENDING',
   APPROVED: 'APPROVED'
@@ -265,6 +285,18 @@ exports.OTPStatus = exports.$Enums.OTPStatus = {
 exports.CommentType = exports.$Enums.CommentType = {
   GENERAL: 'GENERAL',
   SPECIFIC: 'SPECIFIC'
+};
+
+exports.LanguageType = exports.$Enums.LanguageType = {
+  PYTHON: 'PYTHON',
+  C: 'C',
+  JAVA: 'JAVA'
+};
+
+exports.BoilerType = exports.$Enums.BoilerType = {
+  READ: 'READ',
+  FUNCTION_CALL: 'FUNCTION_CALL',
+  WRITE: 'WRITE'
 };
 
 exports.Prisma.ModelName = {
@@ -278,7 +310,8 @@ exports.Prisma.ModelName = {
   ContestResult: 'ContestResult',
   OTPStudent: 'OTPStudent',
   Session: 'Session',
-  Discussions: 'Discussions'
+  Discussions: 'Discussions',
+  BoilerPlate: 'BoilerPlate'
 };
 
 /**

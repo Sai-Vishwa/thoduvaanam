@@ -1,0 +1,43 @@
+const { PrismaClient } = require("../../dbSchema/generated");
+const { sessionChecker } = require("../../sessionChecker/sessionChecker");
+
+const prisma = new PrismaClient();
+async function profile(req,res) {
+    try{
+        const studentId = sessionChecker(req.cookies.session);
+        let viewMode = false
+        let idToSearch = studentId
+        if(studentId==-1){
+            res.status(200).json({
+                err:"invalid session"
+            })
+        }
+        else{
+            if(req.body.idToSearch !== ""){
+                idToSearch = parseInt(req.body.idToSearch)
+                viewMode = true
+            }
+            const data =  await prisma.student.findFirst({
+                where:{
+                    id:idToSearch
+                },
+                select:{
+                    name: true,
+                    uname: true,
+                    leetCodeProfile: true,
+                    timeOfLastSolve: true
+                }
+            })
+        }
+    }
+    catch(error){
+        console.log(error);
+        res.status(400).json({
+            err:"internal error"
+        })
+    }
+}
+
+module.exports = {
+    profile
+}

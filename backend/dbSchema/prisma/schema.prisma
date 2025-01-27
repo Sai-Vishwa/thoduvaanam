@@ -74,7 +74,7 @@ model Student {
   name String 
   rno String @unique
   uname String @unique
-  leetCodeName String
+  leetCodeName String @unique
   salt String
   hash String
   leetCodeProfile String?
@@ -145,6 +145,8 @@ model Submission {
   output1 String?
   output2 String?
   isFinal isFinalType @default(NO)
+  code String?
+  leetCodeLink String?
 
   //relationships
   questions Questions @relation(fields: [questionId], references: [id])
