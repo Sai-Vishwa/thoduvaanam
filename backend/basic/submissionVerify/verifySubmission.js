@@ -24,7 +24,7 @@ async function verifySubmission(req,res) {
                 })
             }
             else if(!url.startsWith(`https://leetcode.com/problems/${question.leetCodeTitle}/submissions/`)){
-                res.status(200).josn({
+                res.status(200).json({
                     err:"Fraud ra mama ivan"
                 })
             }

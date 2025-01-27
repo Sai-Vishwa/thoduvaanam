@@ -147,6 +147,7 @@ model Submission {
   isFinal isFinalType @default(NO)
   code String?
   leetCodeLink String?
+  language LanguageType
 
   //relationships
   questions Questions @relation(fields: [questionId], references: [id])

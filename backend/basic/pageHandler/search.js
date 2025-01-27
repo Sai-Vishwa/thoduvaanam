@@ -19,7 +19,7 @@ async function search(req,res) {
                     }
                 }
             })
-            res.status(200).josn({
+            res.status(200).json({
                 msg:"successful",
                 data:list
             })

@@ -11,7 +11,7 @@ async function signUp(req,res) {
     const exp = new Date(currTime.getTime()+10*60*1000);
     const saltHash = await hashGenerator(req.body.password);
     if(saltHash.err){
-        res.status(200).josn({...saltHash})
+        res.status(200).json({...saltHash})
     }
     else{
         const otp = OtpGenerator();
