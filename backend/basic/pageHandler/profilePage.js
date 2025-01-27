@@ -25,8 +25,27 @@ async function profile(req,res) {
                     name: true,
                     uname: true,
                     leetCodeProfile: true,
-                    timeOfLastSolve: true
+                    timeOfLastSolve: true,
+                    leetCodeName: true,
+                    rno: true,
+                    studentAchievements:{
+                        select:{
+                            achievementId: true,
+                            count: true,
+                            achievements:{
+                                select:{
+                                    title: true,
+                                    description: true
+                                }
+                            }
+                        }
+                    }
                 }
+            })
+            res.status(200).json({
+                msg:"successful",
+                data:data,
+                viewMode:viewMode
             })
         }
     }
