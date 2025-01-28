@@ -13,7 +13,7 @@ async function profile(req,res) {
             })
         }
         else{
-            if(req.body.idToSearch !== ""){
+            if(req.body.idToSearch != "" && req.body.idToSearch!=studentId){
                 idToSearch = parseInt(req.body.idToSearch)
                 viewMode = true
             }
@@ -22,6 +22,7 @@ async function profile(req,res) {
                     id:idToSearch
                 },
                 select:{
+                    id: true,
                     name: true,
                     uname: true,
                     leetCodeProfile: true,
@@ -45,7 +46,8 @@ async function profile(req,res) {
             res.status(200).json({
                 msg:"successful",
                 data:data,
-                viewMode:viewMode
+                viewMode:viewMode,
+                studentId:idToSearch
             })
         }
     }

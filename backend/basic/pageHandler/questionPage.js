@@ -25,7 +25,7 @@ async function questionPage(req,res) {
                 }
             })
                 res.status(200).json({
-                    msg: "no submissions yet",
+                    msg: "successful",
                     viewMode: viewMode,
                     data: submissions
                 })

@@ -12,9 +12,9 @@ async function homePage(req,res) {
             })
         }
         else{
-            if(req.body.serachId !== ""){
-                idToSearch = parseInt(req.body.serachId)
+            if(req.body.serachId !="" && req.body.serachId!=studentId){
                 viewMode = true
+                idToSearch = parseInt(req.body.serachId)
             }
             const data = await prisma.topics.findMany({
                 select:{
@@ -28,10 +28,12 @@ async function homePage(req,res) {
                             submission:{
                                 select:{
                                     status:true,
-                                    isFinal:"YES"
                                 },
                                 where:{
-                                    studentId:idToSearch
+                                    AND: [
+                                        {studentId: idToSearch},
+                                        {isFinal:"YES"}
+                                    ]
                                 }
                             }
                         }
@@ -41,7 +43,8 @@ async function homePage(req,res) {
             res.status(200).json({
                 msg:"Success",
                 data:data,
-                viewMode: viewMode
+                viewMode: viewMode,
+                studentId: idToSearch
             })
         }
     }
