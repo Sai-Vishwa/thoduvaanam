@@ -30,8 +30,19 @@ async function codeSubmission(req,res) {
             else{
                 const addPoints = await prisma.studentAchievements.update({
                     where:{
-                        id
+                        AND:[
+                            {studentId:sid},
+                            {achievementId:1}
+                        ]
+                    },
+                    data:{
+                        count:{
+                            increment:update[0].pointsSecured
+                        }
                     }
+                })
+                res.status(200).json({
+                    msg:"successful"
                 })
             }
         }
