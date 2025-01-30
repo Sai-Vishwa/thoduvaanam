@@ -114,8 +114,8 @@ export type DifficultyType = (typeof DifficultyType)[keyof typeof DifficultyType
 
 export const AcceptedType: {
   PENDING: 'PENDING',
-  ACCEPTED: 'ACCEPTED',
-  REJECTED: 'REJECTED'
+  COMPLETED: 'COMPLETED',
+  STARTED: 'STARTED'
 };
 
 export type AcceptedType = (typeof AcceptedType)[keyof typeof AcceptedType]
@@ -2098,12 +2098,14 @@ export namespace Prisma {
     testCase: number
     submission: number
     discussion: number
+    boilerPlate: number
   }
 
   export type QuestionsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     testCase?: boolean | QuestionsCountOutputTypeCountTestCaseArgs
     submission?: boolean | QuestionsCountOutputTypeCountSubmissionArgs
     discussion?: boolean | QuestionsCountOutputTypeCountDiscussionArgs
+    boilerPlate?: boolean | QuestionsCountOutputTypeCountBoilerPlateArgs
   }
 
   // Custom InputTypes
@@ -2136,6 +2138,13 @@ export namespace Prisma {
    */
   export type QuestionsCountOutputTypeCountDiscussionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DiscussionsWhereInput
+  }
+
+  /**
+   * QuestionsCountOutputType without action
+   */
+  export type QuestionsCountOutputTypeCountBoilerPlateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BoilerPlateWhereInput
   }
 
 
@@ -4619,6 +4628,7 @@ export namespace Prisma {
     CLangFunction: string | null
     PyLangFunction: string | null
     JavsLangFunction: string | null
+    timeToSolve: Date | null
   }
 
   export type QuestionsMaxAggregateOutputType = {
@@ -4636,6 +4646,7 @@ export namespace Prisma {
     CLangFunction: string | null
     PyLangFunction: string | null
     JavsLangFunction: string | null
+    timeToSolve: Date | null
   }
 
   export type QuestionsCountAggregateOutputType = {
@@ -4653,6 +4664,7 @@ export namespace Prisma {
     CLangFunction: number
     PyLangFunction: number
     JavsLangFunction: number
+    timeToSolve: number
     _all: number
   }
 
@@ -4688,6 +4700,7 @@ export namespace Prisma {
     CLangFunction?: true
     PyLangFunction?: true
     JavsLangFunction?: true
+    timeToSolve?: true
   }
 
   export type QuestionsMaxAggregateInputType = {
@@ -4705,6 +4718,7 @@ export namespace Prisma {
     CLangFunction?: true
     PyLangFunction?: true
     JavsLangFunction?: true
+    timeToSolve?: true
   }
 
   export type QuestionsCountAggregateInputType = {
@@ -4722,6 +4736,7 @@ export namespace Prisma {
     CLangFunction?: true
     PyLangFunction?: true
     JavsLangFunction?: true
+    timeToSolve?: true
     _all?: true
   }
 
@@ -4826,6 +4841,7 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
+    timeToSolve: Date
     _count: QuestionsCountAggregateOutputType | null
     _avg: QuestionsAvgAggregateOutputType | null
     _sum: QuestionsSumAggregateOutputType | null
@@ -4862,9 +4878,11 @@ export namespace Prisma {
     CLangFunction?: boolean
     PyLangFunction?: boolean
     JavsLangFunction?: boolean
+    timeToSolve?: boolean
     testCase?: boolean | Questions$testCaseArgs<ExtArgs>
     submission?: boolean | Questions$submissionArgs<ExtArgs>
     discussion?: boolean | Questions$discussionArgs<ExtArgs>
+    boilerPlate?: boolean | Questions$boilerPlateArgs<ExtArgs>
     topics?: boolean | TopicsDefaultArgs<ExtArgs>
     _count?: boolean | QuestionsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["questions"]>
@@ -4884,6 +4902,7 @@ export namespace Prisma {
     CLangFunction?: boolean
     PyLangFunction?: boolean
     JavsLangFunction?: boolean
+    timeToSolve?: boolean
     topics?: boolean | TopicsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["questions"]>
 
@@ -4902,6 +4921,7 @@ export namespace Prisma {
     CLangFunction?: boolean
     PyLangFunction?: boolean
     JavsLangFunction?: boolean
+    timeToSolve?: boolean
     topics?: boolean | TopicsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["questions"]>
 
@@ -4920,13 +4940,15 @@ export namespace Prisma {
     CLangFunction?: boolean
     PyLangFunction?: boolean
     JavsLangFunction?: boolean
+    timeToSolve?: boolean
   }
 
-  export type QuestionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "topic" | "noOfHiddenTestCases" | "noOfExternalTestCases" | "difficulty" | "pointsPerTestCaseSolved" | "type" | "leetCodeLink" | "leetCodeTitle" | "CLangFunction" | "PyLangFunction" | "JavsLangFunction", ExtArgs["result"]["questions"]>
+  export type QuestionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "topic" | "noOfHiddenTestCases" | "noOfExternalTestCases" | "difficulty" | "pointsPerTestCaseSolved" | "type" | "leetCodeLink" | "leetCodeTitle" | "CLangFunction" | "PyLangFunction" | "JavsLangFunction" | "timeToSolve", ExtArgs["result"]["questions"]>
   export type QuestionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     testCase?: boolean | Questions$testCaseArgs<ExtArgs>
     submission?: boolean | Questions$submissionArgs<ExtArgs>
     discussion?: boolean | Questions$discussionArgs<ExtArgs>
+    boilerPlate?: boolean | Questions$boilerPlateArgs<ExtArgs>
     topics?: boolean | TopicsDefaultArgs<ExtArgs>
     _count?: boolean | QuestionsCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -4943,6 +4965,7 @@ export namespace Prisma {
       testCase: Prisma.$TestCasePayload<ExtArgs>[]
       submission: Prisma.$SubmissionPayload<ExtArgs>[]
       discussion: Prisma.$DiscussionsPayload<ExtArgs>[]
+      boilerPlate: Prisma.$BoilerPlatePayload<ExtArgs>[]
       topics: Prisma.$TopicsPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -4960,6 +4983,7 @@ export namespace Prisma {
       CLangFunction: string
       PyLangFunction: string
       JavsLangFunction: string
+      timeToSolve: Date
     }, ExtArgs["result"]["questions"]>
     composites: {}
   }
@@ -5357,6 +5381,7 @@ export namespace Prisma {
     testCase<T extends Questions$testCaseArgs<ExtArgs> = {}>(args?: Subset<T, Questions$testCaseArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestCasePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     submission<T extends Questions$submissionArgs<ExtArgs> = {}>(args?: Subset<T, Questions$submissionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     discussion<T extends Questions$discussionArgs<ExtArgs> = {}>(args?: Subset<T, Questions$discussionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscussionsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    boilerPlate<T extends Questions$boilerPlateArgs<ExtArgs> = {}>(args?: Subset<T, Questions$boilerPlateArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoilerPlatePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     topics<T extends TopicsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TopicsDefaultArgs<ExtArgs>>): Prisma__TopicsClient<$Result.GetResult<Prisma.$TopicsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5401,6 +5426,7 @@ export namespace Prisma {
     readonly CLangFunction: FieldRef<"Questions", 'String'>
     readonly PyLangFunction: FieldRef<"Questions", 'String'>
     readonly JavsLangFunction: FieldRef<"Questions", 'String'>
+    readonly timeToSolve: FieldRef<"Questions", 'DateTime'>
   }
     
 
@@ -5857,6 +5883,30 @@ export namespace Prisma {
   }
 
   /**
+   * Questions.boilerPlate
+   */
+  export type Questions$boilerPlateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoilerPlate
+     */
+    select?: BoilerPlateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoilerPlate
+     */
+    omit?: BoilerPlateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoilerPlateInclude<ExtArgs> | null
+    where?: BoilerPlateWhereInput
+    orderBy?: BoilerPlateOrderByWithRelationInput | BoilerPlateOrderByWithRelationInput[]
+    cursor?: BoilerPlateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BoilerPlateScalarFieldEnum | BoilerPlateScalarFieldEnum[]
+  }
+
+  /**
    * Questions without action
    */
   export type QuestionsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5902,6 +5952,7 @@ export namespace Prisma {
     inputString: string | null
     outputString: string | null
     questionId: number | null
+    type: $Enums.TestCaseType | null
   }
 
   export type TestCaseMaxAggregateOutputType = {
@@ -5909,6 +5960,7 @@ export namespace Prisma {
     inputString: string | null
     outputString: string | null
     questionId: number | null
+    type: $Enums.TestCaseType | null
   }
 
   export type TestCaseCountAggregateOutputType = {
@@ -5916,6 +5968,7 @@ export namespace Prisma {
     inputString: number
     outputString: number
     questionId: number
+    type: number
     _all: number
   }
 
@@ -5935,6 +5988,7 @@ export namespace Prisma {
     inputString?: true
     outputString?: true
     questionId?: true
+    type?: true
   }
 
   export type TestCaseMaxAggregateInputType = {
@@ -5942,6 +5996,7 @@ export namespace Prisma {
     inputString?: true
     outputString?: true
     questionId?: true
+    type?: true
   }
 
   export type TestCaseCountAggregateInputType = {
@@ -5949,6 +6004,7 @@ export namespace Prisma {
     inputString?: true
     outputString?: true
     questionId?: true
+    type?: true
     _all?: true
   }
 
@@ -6043,6 +6099,7 @@ export namespace Prisma {
     inputString: string
     outputString: string
     questionId: number
+    type: $Enums.TestCaseType
     _count: TestCaseCountAggregateOutputType | null
     _avg: TestCaseAvgAggregateOutputType | null
     _sum: TestCaseSumAggregateOutputType | null
@@ -6069,6 +6126,7 @@ export namespace Prisma {
     inputString?: boolean
     outputString?: boolean
     questionId?: boolean
+    type?: boolean
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["testCase"]>
 
@@ -6077,6 +6135,7 @@ export namespace Prisma {
     inputString?: boolean
     outputString?: boolean
     questionId?: boolean
+    type?: boolean
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["testCase"]>
 
@@ -6085,6 +6144,7 @@ export namespace Prisma {
     inputString?: boolean
     outputString?: boolean
     questionId?: boolean
+    type?: boolean
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["testCase"]>
 
@@ -6093,9 +6153,10 @@ export namespace Prisma {
     inputString?: boolean
     outputString?: boolean
     questionId?: boolean
+    type?: boolean
   }
 
-  export type TestCaseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "inputString" | "outputString" | "questionId", ExtArgs["result"]["testCase"]>
+  export type TestCaseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "inputString" | "outputString" | "questionId" | "type", ExtArgs["result"]["testCase"]>
   export type TestCaseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
   }
@@ -6116,6 +6177,7 @@ export namespace Prisma {
       inputString: string
       outputString: string
       questionId: number
+      type: $Enums.TestCaseType
     }, ExtArgs["result"]["testCase"]>
     composites: {}
   }
@@ -6544,6 +6606,7 @@ export namespace Prisma {
     readonly inputString: FieldRef<"TestCase", 'String'>
     readonly outputString: FieldRef<"TestCase", 'String'>
     readonly questionId: FieldRef<"TestCase", 'Int'>
+    readonly type: FieldRef<"TestCase", 'TestCaseType'>
   }
     
 
@@ -6988,6 +7051,8 @@ export namespace Prisma {
     isFinal: $Enums.isFinalType | null
     code: string | null
     leetCodeLink: string | null
+    language: $Enums.LanguageType | null
+    timeTaken: Date | null
   }
 
   export type SubmissionMaxAggregateOutputType = {
@@ -7004,6 +7069,8 @@ export namespace Prisma {
     isFinal: $Enums.isFinalType | null
     code: string | null
     leetCodeLink: string | null
+    language: $Enums.LanguageType | null
+    timeTaken: Date | null
   }
 
   export type SubmissionCountAggregateOutputType = {
@@ -7020,6 +7087,8 @@ export namespace Prisma {
     isFinal: number
     code: number
     leetCodeLink: number
+    language: number
+    timeTaken: number
     _all: number
   }
 
@@ -7054,6 +7123,8 @@ export namespace Prisma {
     isFinal?: true
     code?: true
     leetCodeLink?: true
+    language?: true
+    timeTaken?: true
   }
 
   export type SubmissionMaxAggregateInputType = {
@@ -7070,6 +7141,8 @@ export namespace Prisma {
     isFinal?: true
     code?: true
     leetCodeLink?: true
+    language?: true
+    timeTaken?: true
   }
 
   export type SubmissionCountAggregateInputType = {
@@ -7086,6 +7159,8 @@ export namespace Prisma {
     isFinal?: true
     code?: true
     leetCodeLink?: true
+    language?: true
+    timeTaken?: true
     _all?: true
   }
 
@@ -7179,7 +7254,7 @@ export namespace Prisma {
     id: number
     questionId: number
     studentId: number
-    solvedOn: Date
+    solvedOn: Date | null
     status: $Enums.AcceptedType
     noOfCasesPassed: number
     pointsSecured: number
@@ -7189,6 +7264,8 @@ export namespace Prisma {
     isFinal: $Enums.isFinalType
     code: string | null
     leetCodeLink: string | null
+    language: $Enums.LanguageType | null
+    timeTaken: Date | null
     _count: SubmissionCountAggregateOutputType | null
     _avg: SubmissionAvgAggregateOutputType | null
     _sum: SubmissionSumAggregateOutputType | null
@@ -7224,6 +7301,8 @@ export namespace Prisma {
     isFinal?: boolean
     code?: boolean
     leetCodeLink?: boolean
+    language?: boolean
+    timeTaken?: boolean
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["submission"]>
@@ -7242,6 +7321,8 @@ export namespace Prisma {
     isFinal?: boolean
     code?: boolean
     leetCodeLink?: boolean
+    language?: boolean
+    timeTaken?: boolean
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["submission"]>
@@ -7260,6 +7341,8 @@ export namespace Prisma {
     isFinal?: boolean
     code?: boolean
     leetCodeLink?: boolean
+    language?: boolean
+    timeTaken?: boolean
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["submission"]>
@@ -7278,9 +7361,11 @@ export namespace Prisma {
     isFinal?: boolean
     code?: boolean
     leetCodeLink?: boolean
+    language?: boolean
+    timeTaken?: boolean
   }
 
-  export type SubmissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "questionId" | "studentId" | "solvedOn" | "status" | "noOfCasesPassed" | "pointsSecured" | "type" | "output1" | "output2" | "isFinal" | "code" | "leetCodeLink", ExtArgs["result"]["submission"]>
+  export type SubmissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "questionId" | "studentId" | "solvedOn" | "status" | "noOfCasesPassed" | "pointsSecured" | "type" | "output1" | "output2" | "isFinal" | "code" | "leetCodeLink" | "language" | "timeTaken", ExtArgs["result"]["submission"]>
   export type SubmissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
@@ -7304,7 +7389,7 @@ export namespace Prisma {
       id: number
       questionId: number
       studentId: number
-      solvedOn: Date
+      solvedOn: Date | null
       status: $Enums.AcceptedType
       noOfCasesPassed: number
       pointsSecured: number
@@ -7314,6 +7399,8 @@ export namespace Prisma {
       isFinal: $Enums.isFinalType
       code: string | null
       leetCodeLink: string | null
+      language: $Enums.LanguageType | null
+      timeTaken: Date | null
     }, ExtArgs["result"]["submission"]>
     composites: {}
   }
@@ -7752,6 +7839,8 @@ export namespace Prisma {
     readonly isFinal: FieldRef<"Submission", 'isFinalType'>
     readonly code: FieldRef<"Submission", 'String'>
     readonly leetCodeLink: FieldRef<"Submission", 'String'>
+    readonly language: FieldRef<"Submission", 'LanguageType'>
+    readonly timeTaken: FieldRef<"Submission", 'DateTime'>
   }
     
 
@@ -14776,10 +14865,12 @@ export namespace Prisma {
 
   export type BoilerPlateAvgAggregateOutputType = {
     id: number | null
+    questionId: number | null
   }
 
   export type BoilerPlateSumAggregateOutputType = {
     id: number | null
+    questionId: number | null
   }
 
   export type BoilerPlateMinAggregateOutputType = {
@@ -14787,6 +14878,7 @@ export namespace Prisma {
     language: $Enums.LanguageType | null
     type: $Enums.BoilerType | null
     boilerCode: string | null
+    questionId: number | null
   }
 
   export type BoilerPlateMaxAggregateOutputType = {
@@ -14794,6 +14886,7 @@ export namespace Prisma {
     language: $Enums.LanguageType | null
     type: $Enums.BoilerType | null
     boilerCode: string | null
+    questionId: number | null
   }
 
   export type BoilerPlateCountAggregateOutputType = {
@@ -14801,16 +14894,19 @@ export namespace Prisma {
     language: number
     type: number
     boilerCode: number
+    questionId: number
     _all: number
   }
 
 
   export type BoilerPlateAvgAggregateInputType = {
     id?: true
+    questionId?: true
   }
 
   export type BoilerPlateSumAggregateInputType = {
     id?: true
+    questionId?: true
   }
 
   export type BoilerPlateMinAggregateInputType = {
@@ -14818,6 +14914,7 @@ export namespace Prisma {
     language?: true
     type?: true
     boilerCode?: true
+    questionId?: true
   }
 
   export type BoilerPlateMaxAggregateInputType = {
@@ -14825,6 +14922,7 @@ export namespace Prisma {
     language?: true
     type?: true
     boilerCode?: true
+    questionId?: true
   }
 
   export type BoilerPlateCountAggregateInputType = {
@@ -14832,6 +14930,7 @@ export namespace Prisma {
     language?: true
     type?: true
     boilerCode?: true
+    questionId?: true
     _all?: true
   }
 
@@ -14926,6 +15025,7 @@ export namespace Prisma {
     language: $Enums.LanguageType
     type: $Enums.BoilerType
     boilerCode: string
+    questionId: number
     _count: BoilerPlateCountAggregateOutputType | null
     _avg: BoilerPlateAvgAggregateOutputType | null
     _sum: BoilerPlateSumAggregateOutputType | null
@@ -14952,6 +15052,8 @@ export namespace Prisma {
     language?: boolean
     type?: boolean
     boilerCode?: boolean
+    questionId?: boolean
+    question?: boolean | QuestionsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["boilerPlate"]>
 
   export type BoilerPlateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -14959,6 +15061,8 @@ export namespace Prisma {
     language?: boolean
     type?: boolean
     boilerCode?: boolean
+    questionId?: boolean
+    question?: boolean | QuestionsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["boilerPlate"]>
 
   export type BoilerPlateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -14966,6 +15070,8 @@ export namespace Prisma {
     language?: boolean
     type?: boolean
     boilerCode?: boolean
+    questionId?: boolean
+    question?: boolean | QuestionsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["boilerPlate"]>
 
   export type BoilerPlateSelectScalar = {
@@ -14973,18 +15079,31 @@ export namespace Prisma {
     language?: boolean
     type?: boolean
     boilerCode?: boolean
+    questionId?: boolean
   }
 
-  export type BoilerPlateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "language" | "type" | "boilerCode", ExtArgs["result"]["boilerPlate"]>
+  export type BoilerPlateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "language" | "type" | "boilerCode" | "questionId", ExtArgs["result"]["boilerPlate"]>
+  export type BoilerPlateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    question?: boolean | QuestionsDefaultArgs<ExtArgs>
+  }
+  export type BoilerPlateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    question?: boolean | QuestionsDefaultArgs<ExtArgs>
+  }
+  export type BoilerPlateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    question?: boolean | QuestionsDefaultArgs<ExtArgs>
+  }
 
   export type $BoilerPlatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "BoilerPlate"
-    objects: {}
+    objects: {
+      question: Prisma.$QuestionsPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       language: $Enums.LanguageType
       type: $Enums.BoilerType
       boilerCode: string
+      questionId: number
     }, ExtArgs["result"]["boilerPlate"]>
     composites: {}
   }
@@ -15379,6 +15498,7 @@ export namespace Prisma {
    */
   export interface Prisma__BoilerPlateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    question<T extends QuestionsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, QuestionsDefaultArgs<ExtArgs>>): Prisma__QuestionsClient<$Result.GetResult<Prisma.$QuestionsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15412,6 +15532,7 @@ export namespace Prisma {
     readonly language: FieldRef<"BoilerPlate", 'LanguageType'>
     readonly type: FieldRef<"BoilerPlate", 'BoilerType'>
     readonly boilerCode: FieldRef<"BoilerPlate", 'String'>
+    readonly questionId: FieldRef<"BoilerPlate", 'Int'>
   }
     
 
@@ -15428,6 +15549,10 @@ export namespace Prisma {
      * Omit specific fields from the BoilerPlate
      */
     omit?: BoilerPlateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoilerPlateInclude<ExtArgs> | null
     /**
      * Filter, which BoilerPlate to fetch.
      */
@@ -15447,6 +15572,10 @@ export namespace Prisma {
      */
     omit?: BoilerPlateOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoilerPlateInclude<ExtArgs> | null
+    /**
      * Filter, which BoilerPlate to fetch.
      */
     where: BoilerPlateWhereUniqueInput
@@ -15464,6 +15593,10 @@ export namespace Prisma {
      * Omit specific fields from the BoilerPlate
      */
     omit?: BoilerPlateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoilerPlateInclude<ExtArgs> | null
     /**
      * Filter, which BoilerPlate to fetch.
      */
@@ -15513,6 +15646,10 @@ export namespace Prisma {
      */
     omit?: BoilerPlateOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoilerPlateInclude<ExtArgs> | null
+    /**
      * Filter, which BoilerPlate to fetch.
      */
     where?: BoilerPlateWhereInput
@@ -15561,6 +15698,10 @@ export namespace Prisma {
      */
     omit?: BoilerPlateOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoilerPlateInclude<ExtArgs> | null
+    /**
      * Filter, which BoilerPlates to fetch.
      */
     where?: BoilerPlateWhereInput
@@ -15604,6 +15745,10 @@ export namespace Prisma {
      */
     omit?: BoilerPlateOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoilerPlateInclude<ExtArgs> | null
+    /**
      * The data needed to create a BoilerPlate.
      */
     data: XOR<BoilerPlateCreateInput, BoilerPlateUncheckedCreateInput>
@@ -15637,6 +15782,10 @@ export namespace Prisma {
      */
     data: BoilerPlateCreateManyInput | BoilerPlateCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoilerPlateIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -15651,6 +15800,10 @@ export namespace Prisma {
      * Omit specific fields from the BoilerPlate
      */
     omit?: BoilerPlateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoilerPlateInclude<ExtArgs> | null
     /**
      * The data needed to update a BoilerPlate.
      */
@@ -15695,6 +15848,10 @@ export namespace Prisma {
      * Filter which BoilerPlates to update
      */
     where?: BoilerPlateWhereInput
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoilerPlateIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -15709,6 +15866,10 @@ export namespace Prisma {
      * Omit specific fields from the BoilerPlate
      */
     omit?: BoilerPlateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoilerPlateInclude<ExtArgs> | null
     /**
      * The filter to search for the BoilerPlate to update in case it exists.
      */
@@ -15735,6 +15896,10 @@ export namespace Prisma {
      * Omit specific fields from the BoilerPlate
      */
     omit?: BoilerPlateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoilerPlateInclude<ExtArgs> | null
     /**
      * Filter which BoilerPlate to delete.
      */
@@ -15763,6 +15928,10 @@ export namespace Prisma {
      * Omit specific fields from the BoilerPlate
      */
     omit?: BoilerPlateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoilerPlateInclude<ExtArgs> | null
   }
 
 
@@ -15820,7 +15989,8 @@ export namespace Prisma {
     leetCodeTitle: 'leetCodeTitle',
     CLangFunction: 'CLangFunction',
     PyLangFunction: 'PyLangFunction',
-    JavsLangFunction: 'JavsLangFunction'
+    JavsLangFunction: 'JavsLangFunction',
+    timeToSolve: 'timeToSolve'
   };
 
   export type QuestionsScalarFieldEnum = (typeof QuestionsScalarFieldEnum)[keyof typeof QuestionsScalarFieldEnum]
@@ -15830,7 +16000,8 @@ export namespace Prisma {
     id: 'id',
     inputString: 'inputString',
     outputString: 'outputString',
-    questionId: 'questionId'
+    questionId: 'questionId',
+    type: 'type'
   };
 
   export type TestCaseScalarFieldEnum = (typeof TestCaseScalarFieldEnum)[keyof typeof TestCaseScalarFieldEnum]
@@ -15849,7 +16020,9 @@ export namespace Prisma {
     output2: 'output2',
     isFinal: 'isFinal',
     code: 'code',
-    leetCodeLink: 'leetCodeLink'
+    leetCodeLink: 'leetCodeLink',
+    language: 'language',
+    timeTaken: 'timeTaken'
   };
 
   export type SubmissionScalarFieldEnum = (typeof SubmissionScalarFieldEnum)[keyof typeof SubmissionScalarFieldEnum]
@@ -15928,7 +16101,8 @@ export namespace Prisma {
     id: 'id',
     language: 'language',
     type: 'type',
-    boilerCode: 'boilerCode'
+    boilerCode: 'boilerCode',
+    questionId: 'questionId'
   };
 
   export type BoilerPlateScalarFieldEnum = (typeof BoilerPlateScalarFieldEnum)[keyof typeof BoilerPlateScalarFieldEnum]
@@ -16034,6 +16208,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'TestCaseType'
+   */
+  export type EnumTestCaseTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TestCaseType'>
+    
+
+
+  /**
+   * Reference to a field of type 'TestCaseType[]'
+   */
+  export type ListEnumTestCaseTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TestCaseType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'AcceptedType'
    */
   export type EnumAcceptedTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AcceptedType'>
@@ -16076,6 +16264,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'LanguageType'
+   */
+  export type EnumLanguageTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LanguageType'>
+    
+
+
+  /**
+   * Reference to a field of type 'LanguageType[]'
+   */
+  export type ListEnumLanguageTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LanguageType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'OTPStatus'
    */
   export type EnumOTPStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OTPStatus'>
@@ -16100,20 +16302,6 @@ export namespace Prisma {
    * Reference to a field of type 'CommentType[]'
    */
   export type ListEnumCommentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CommentType[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'LanguageType'
-   */
-  export type EnumLanguageTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LanguageType'>
-    
-
-
-  /**
-   * Reference to a field of type 'LanguageType[]'
-   */
-  export type ListEnumLanguageTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LanguageType[]'>
     
 
 
@@ -16189,11 +16377,11 @@ export namespace Prisma {
     id?: number
     rno?: string
     uname?: string
+    leetCodeName?: string
     AND?: StudentWhereInput | StudentWhereInput[]
     OR?: StudentWhereInput[]
     NOT?: StudentWhereInput | StudentWhereInput[]
     name?: StringFilter<"Student"> | string
-    leetCodeName?: StringFilter<"Student"> | string
     salt?: StringFilter<"Student"> | string
     hash?: StringFilter<"Student"> | string
     leetCodeProfile?: StringNullableFilter<"Student"> | string | null
@@ -16203,7 +16391,7 @@ export namespace Prisma {
     contestResult?: ContestResultListRelationFilter
     session?: XOR<SessionNullableScalarRelationFilter, SessionWhereInput> | null
     discussion?: DiscussionsListRelationFilter
-  }, "id" | "rno" | "uname">
+  }, "id" | "rno" | "uname" | "leetCodeName">
 
   export type StudentOrderByWithAggregationInput = {
     id?: SortOrder
@@ -16315,9 +16503,11 @@ export namespace Prisma {
     CLangFunction?: StringFilter<"Questions"> | string
     PyLangFunction?: StringFilter<"Questions"> | string
     JavsLangFunction?: StringFilter<"Questions"> | string
+    timeToSolve?: DateTimeFilter<"Questions"> | Date | string
     testCase?: TestCaseListRelationFilter
     submission?: SubmissionListRelationFilter
     discussion?: DiscussionsListRelationFilter
+    boilerPlate?: BoilerPlateListRelationFilter
     topics?: XOR<TopicsScalarRelationFilter, TopicsWhereInput>
   }
 
@@ -16336,9 +16526,11 @@ export namespace Prisma {
     CLangFunction?: SortOrder
     PyLangFunction?: SortOrder
     JavsLangFunction?: SortOrder
+    timeToSolve?: SortOrder
     testCase?: TestCaseOrderByRelationAggregateInput
     submission?: SubmissionOrderByRelationAggregateInput
     discussion?: DiscussionsOrderByRelationAggregateInput
+    boilerPlate?: BoilerPlateOrderByRelationAggregateInput
     topics?: TopicsOrderByWithRelationInput
   }
 
@@ -16360,9 +16552,11 @@ export namespace Prisma {
     CLangFunction?: StringFilter<"Questions"> | string
     PyLangFunction?: StringFilter<"Questions"> | string
     JavsLangFunction?: StringFilter<"Questions"> | string
+    timeToSolve?: DateTimeFilter<"Questions"> | Date | string
     testCase?: TestCaseListRelationFilter
     submission?: SubmissionListRelationFilter
     discussion?: DiscussionsListRelationFilter
+    boilerPlate?: BoilerPlateListRelationFilter
     topics?: XOR<TopicsScalarRelationFilter, TopicsWhereInput>
   }, "id">
 
@@ -16381,6 +16575,7 @@ export namespace Prisma {
     CLangFunction?: SortOrder
     PyLangFunction?: SortOrder
     JavsLangFunction?: SortOrder
+    timeToSolve?: SortOrder
     _count?: QuestionsCountOrderByAggregateInput
     _avg?: QuestionsAvgOrderByAggregateInput
     _max?: QuestionsMaxOrderByAggregateInput
@@ -16406,6 +16601,7 @@ export namespace Prisma {
     CLangFunction?: StringWithAggregatesFilter<"Questions"> | string
     PyLangFunction?: StringWithAggregatesFilter<"Questions"> | string
     JavsLangFunction?: StringWithAggregatesFilter<"Questions"> | string
+    timeToSolve?: DateTimeWithAggregatesFilter<"Questions"> | Date | string
   }
 
   export type TestCaseWhereInput = {
@@ -16416,6 +16612,7 @@ export namespace Prisma {
     inputString?: StringFilter<"TestCase"> | string
     outputString?: StringFilter<"TestCase"> | string
     questionId?: IntFilter<"TestCase"> | number
+    type?: EnumTestCaseTypeFilter<"TestCase"> | $Enums.TestCaseType
     questions?: XOR<QuestionsScalarRelationFilter, QuestionsWhereInput>
   }
 
@@ -16424,6 +16621,7 @@ export namespace Prisma {
     inputString?: SortOrder
     outputString?: SortOrder
     questionId?: SortOrder
+    type?: SortOrder
     questions?: QuestionsOrderByWithRelationInput
   }
 
@@ -16435,6 +16633,7 @@ export namespace Prisma {
     inputString?: StringFilter<"TestCase"> | string
     outputString?: StringFilter<"TestCase"> | string
     questionId?: IntFilter<"TestCase"> | number
+    type?: EnumTestCaseTypeFilter<"TestCase"> | $Enums.TestCaseType
     questions?: XOR<QuestionsScalarRelationFilter, QuestionsWhereInput>
   }, "id">
 
@@ -16443,6 +16642,7 @@ export namespace Prisma {
     inputString?: SortOrder
     outputString?: SortOrder
     questionId?: SortOrder
+    type?: SortOrder
     _count?: TestCaseCountOrderByAggregateInput
     _avg?: TestCaseAvgOrderByAggregateInput
     _max?: TestCaseMaxOrderByAggregateInput
@@ -16458,6 +16658,7 @@ export namespace Prisma {
     inputString?: StringWithAggregatesFilter<"TestCase"> | string
     outputString?: StringWithAggregatesFilter<"TestCase"> | string
     questionId?: IntWithAggregatesFilter<"TestCase"> | number
+    type?: EnumTestCaseTypeWithAggregatesFilter<"TestCase"> | $Enums.TestCaseType
   }
 
   export type SubmissionWhereInput = {
@@ -16467,7 +16668,7 @@ export namespace Prisma {
     id?: IntFilter<"Submission"> | number
     questionId?: IntFilter<"Submission"> | number
     studentId?: IntFilter<"Submission"> | number
-    solvedOn?: DateTimeFilter<"Submission"> | Date | string
+    solvedOn?: DateTimeNullableFilter<"Submission"> | Date | string | null
     status?: EnumAcceptedTypeFilter<"Submission"> | $Enums.AcceptedType
     noOfCasesPassed?: IntFilter<"Submission"> | number
     pointsSecured?: IntFilter<"Submission"> | number
@@ -16477,6 +16678,8 @@ export namespace Prisma {
     isFinal?: EnumisFinalTypeFilter<"Submission"> | $Enums.isFinalType
     code?: StringNullableFilter<"Submission"> | string | null
     leetCodeLink?: StringNullableFilter<"Submission"> | string | null
+    language?: EnumLanguageTypeNullableFilter<"Submission"> | $Enums.LanguageType | null
+    timeTaken?: DateTimeNullableFilter<"Submission"> | Date | string | null
     questions?: XOR<QuestionsScalarRelationFilter, QuestionsWhereInput>
     student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
   }
@@ -16485,7 +16688,7 @@ export namespace Prisma {
     id?: SortOrder
     questionId?: SortOrder
     studentId?: SortOrder
-    solvedOn?: SortOrder
+    solvedOn?: SortOrderInput | SortOrder
     status?: SortOrder
     noOfCasesPassed?: SortOrder
     pointsSecured?: SortOrder
@@ -16495,6 +16698,8 @@ export namespace Prisma {
     isFinal?: SortOrder
     code?: SortOrderInput | SortOrder
     leetCodeLink?: SortOrderInput | SortOrder
+    language?: SortOrderInput | SortOrder
+    timeTaken?: SortOrderInput | SortOrder
     questions?: QuestionsOrderByWithRelationInput
     student?: StudentOrderByWithRelationInput
   }
@@ -16506,7 +16711,7 @@ export namespace Prisma {
     NOT?: SubmissionWhereInput | SubmissionWhereInput[]
     questionId?: IntFilter<"Submission"> | number
     studentId?: IntFilter<"Submission"> | number
-    solvedOn?: DateTimeFilter<"Submission"> | Date | string
+    solvedOn?: DateTimeNullableFilter<"Submission"> | Date | string | null
     status?: EnumAcceptedTypeFilter<"Submission"> | $Enums.AcceptedType
     noOfCasesPassed?: IntFilter<"Submission"> | number
     pointsSecured?: IntFilter<"Submission"> | number
@@ -16516,6 +16721,8 @@ export namespace Prisma {
     isFinal?: EnumisFinalTypeFilter<"Submission"> | $Enums.isFinalType
     code?: StringNullableFilter<"Submission"> | string | null
     leetCodeLink?: StringNullableFilter<"Submission"> | string | null
+    language?: EnumLanguageTypeNullableFilter<"Submission"> | $Enums.LanguageType | null
+    timeTaken?: DateTimeNullableFilter<"Submission"> | Date | string | null
     questions?: XOR<QuestionsScalarRelationFilter, QuestionsWhereInput>
     student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
   }, "id">
@@ -16524,7 +16731,7 @@ export namespace Prisma {
     id?: SortOrder
     questionId?: SortOrder
     studentId?: SortOrder
-    solvedOn?: SortOrder
+    solvedOn?: SortOrderInput | SortOrder
     status?: SortOrder
     noOfCasesPassed?: SortOrder
     pointsSecured?: SortOrder
@@ -16534,6 +16741,8 @@ export namespace Prisma {
     isFinal?: SortOrder
     code?: SortOrderInput | SortOrder
     leetCodeLink?: SortOrderInput | SortOrder
+    language?: SortOrderInput | SortOrder
+    timeTaken?: SortOrderInput | SortOrder
     _count?: SubmissionCountOrderByAggregateInput
     _avg?: SubmissionAvgOrderByAggregateInput
     _max?: SubmissionMaxOrderByAggregateInput
@@ -16548,7 +16757,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Submission"> | number
     questionId?: IntWithAggregatesFilter<"Submission"> | number
     studentId?: IntWithAggregatesFilter<"Submission"> | number
-    solvedOn?: DateTimeWithAggregatesFilter<"Submission"> | Date | string
+    solvedOn?: DateTimeNullableWithAggregatesFilter<"Submission"> | Date | string | null
     status?: EnumAcceptedTypeWithAggregatesFilter<"Submission"> | $Enums.AcceptedType
     noOfCasesPassed?: IntWithAggregatesFilter<"Submission"> | number
     pointsSecured?: IntWithAggregatesFilter<"Submission"> | number
@@ -16558,6 +16767,8 @@ export namespace Prisma {
     isFinal?: EnumisFinalTypeWithAggregatesFilter<"Submission"> | $Enums.isFinalType
     code?: StringNullableWithAggregatesFilter<"Submission"> | string | null
     leetCodeLink?: StringNullableWithAggregatesFilter<"Submission"> | string | null
+    language?: EnumLanguageTypeNullableWithAggregatesFilter<"Submission"> | $Enums.LanguageType | null
+    timeTaken?: DateTimeNullableWithAggregatesFilter<"Submission"> | Date | string | null
   }
 
   export type AchievementsWhereInput = {
@@ -16937,6 +17148,8 @@ export namespace Prisma {
     language?: EnumLanguageTypeFilter<"BoilerPlate"> | $Enums.LanguageType
     type?: EnumBoilerTypeFilter<"BoilerPlate"> | $Enums.BoilerType
     boilerCode?: StringFilter<"BoilerPlate"> | string
+    questionId?: IntFilter<"BoilerPlate"> | number
+    question?: XOR<QuestionsScalarRelationFilter, QuestionsWhereInput>
   }
 
   export type BoilerPlateOrderByWithRelationInput = {
@@ -16944,6 +17157,8 @@ export namespace Prisma {
     language?: SortOrder
     type?: SortOrder
     boilerCode?: SortOrder
+    questionId?: SortOrder
+    question?: QuestionsOrderByWithRelationInput
   }
 
   export type BoilerPlateWhereUniqueInput = Prisma.AtLeast<{
@@ -16954,6 +17169,8 @@ export namespace Prisma {
     language?: EnumLanguageTypeFilter<"BoilerPlate"> | $Enums.LanguageType
     type?: EnumBoilerTypeFilter<"BoilerPlate"> | $Enums.BoilerType
     boilerCode?: StringFilter<"BoilerPlate"> | string
+    questionId?: IntFilter<"BoilerPlate"> | number
+    question?: XOR<QuestionsScalarRelationFilter, QuestionsWhereInput>
   }, "id">
 
   export type BoilerPlateOrderByWithAggregationInput = {
@@ -16961,6 +17178,7 @@ export namespace Prisma {
     language?: SortOrder
     type?: SortOrder
     boilerCode?: SortOrder
+    questionId?: SortOrder
     _count?: BoilerPlateCountOrderByAggregateInput
     _avg?: BoilerPlateAvgOrderByAggregateInput
     _max?: BoilerPlateMaxOrderByAggregateInput
@@ -16976,6 +17194,7 @@ export namespace Prisma {
     language?: EnumLanguageTypeWithAggregatesFilter<"BoilerPlate"> | $Enums.LanguageType
     type?: EnumBoilerTypeWithAggregatesFilter<"BoilerPlate"> | $Enums.BoilerType
     boilerCode?: StringWithAggregatesFilter<"BoilerPlate"> | string
+    questionId?: IntWithAggregatesFilter<"BoilerPlate"> | number
   }
 
   export type StudentCreateInput = {
@@ -17153,9 +17372,11 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
+    timeToSolve: Date | string
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
+    boilerPlate?: BoilerPlateCreateNestedManyWithoutQuestionInput
     topics: TopicsCreateNestedOneWithoutQuestionInput
   }
 
@@ -17174,9 +17395,11 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
+    timeToSolve: Date | string
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
+    boilerPlate?: BoilerPlateUncheckedCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionsUpdateInput = {
@@ -17192,9 +17415,11 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
+    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
+    boilerPlate?: BoilerPlateUpdateManyWithoutQuestionNestedInput
     topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
   }
 
@@ -17213,9 +17438,11 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
+    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
+    boilerPlate?: BoilerPlateUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
   export type QuestionsCreateManyInput = {
@@ -17233,6 +17460,7 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
+    timeToSolve: Date | string
   }
 
   export type QuestionsUpdateManyMutationInput = {
@@ -17248,6 +17476,7 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
+    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type QuestionsUncheckedUpdateManyInput = {
@@ -17265,11 +17494,13 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
+    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TestCaseCreateInput = {
     inputString: string
     outputString: string
+    type?: $Enums.TestCaseType
     questions: QuestionsCreateNestedOneWithoutTestCaseInput
   }
 
@@ -17278,11 +17509,13 @@ export namespace Prisma {
     inputString: string
     outputString: string
     questionId: number
+    type?: $Enums.TestCaseType
   }
 
   export type TestCaseUpdateInput = {
     inputString?: StringFieldUpdateOperationsInput | string
     outputString?: StringFieldUpdateOperationsInput | string
+    type?: EnumTestCaseTypeFieldUpdateOperationsInput | $Enums.TestCaseType
     questions?: QuestionsUpdateOneRequiredWithoutTestCaseNestedInput
   }
 
@@ -17291,6 +17524,7 @@ export namespace Prisma {
     inputString?: StringFieldUpdateOperationsInput | string
     outputString?: StringFieldUpdateOperationsInput | string
     questionId?: IntFieldUpdateOperationsInput | number
+    type?: EnumTestCaseTypeFieldUpdateOperationsInput | $Enums.TestCaseType
   }
 
   export type TestCaseCreateManyInput = {
@@ -17298,11 +17532,13 @@ export namespace Prisma {
     inputString: string
     outputString: string
     questionId: number
+    type?: $Enums.TestCaseType
   }
 
   export type TestCaseUpdateManyMutationInput = {
     inputString?: StringFieldUpdateOperationsInput | string
     outputString?: StringFieldUpdateOperationsInput | string
+    type?: EnumTestCaseTypeFieldUpdateOperationsInput | $Enums.TestCaseType
   }
 
   export type TestCaseUncheckedUpdateManyInput = {
@@ -17310,19 +17546,22 @@ export namespace Prisma {
     inputString?: StringFieldUpdateOperationsInput | string
     outputString?: StringFieldUpdateOperationsInput | string
     questionId?: IntFieldUpdateOperationsInput | number
+    type?: EnumTestCaseTypeFieldUpdateOperationsInput | $Enums.TestCaseType
   }
 
   export type SubmissionCreateInput = {
-    solvedOn?: Date | string
+    solvedOn?: Date | string | null
     status?: $Enums.AcceptedType
-    noOfCasesPassed: number
-    pointsSecured: number
+    noOfCasesPassed?: number
+    pointsSecured?: number
     type?: $Enums.SubmissionType
     output1?: string | null
     output2?: string | null
     isFinal?: $Enums.isFinalType
     code?: string | null
     leetCodeLink?: string | null
+    language?: $Enums.LanguageType | null
+    timeTaken?: Date | string | null
     questions: QuestionsCreateNestedOneWithoutSubmissionInput
     student: StudentCreateNestedOneWithoutSubmissionInput
   }
@@ -17331,20 +17570,22 @@ export namespace Prisma {
     id?: number
     questionId: number
     studentId: number
-    solvedOn?: Date | string
+    solvedOn?: Date | string | null
     status?: $Enums.AcceptedType
-    noOfCasesPassed: number
-    pointsSecured: number
+    noOfCasesPassed?: number
+    pointsSecured?: number
     type?: $Enums.SubmissionType
     output1?: string | null
     output2?: string | null
     isFinal?: $Enums.isFinalType
     code?: string | null
     leetCodeLink?: string | null
+    language?: $Enums.LanguageType | null
+    timeTaken?: Date | string | null
   }
 
   export type SubmissionUpdateInput = {
-    solvedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    solvedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumAcceptedTypeFieldUpdateOperationsInput | $Enums.AcceptedType
     noOfCasesPassed?: IntFieldUpdateOperationsInput | number
     pointsSecured?: IntFieldUpdateOperationsInput | number
@@ -17354,6 +17595,8 @@ export namespace Prisma {
     isFinal?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
+    timeTaken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     questions?: QuestionsUpdateOneRequiredWithoutSubmissionNestedInput
     student?: StudentUpdateOneRequiredWithoutSubmissionNestedInput
   }
@@ -17362,7 +17605,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     questionId?: IntFieldUpdateOperationsInput | number
     studentId?: IntFieldUpdateOperationsInput | number
-    solvedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    solvedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumAcceptedTypeFieldUpdateOperationsInput | $Enums.AcceptedType
     noOfCasesPassed?: IntFieldUpdateOperationsInput | number
     pointsSecured?: IntFieldUpdateOperationsInput | number
@@ -17372,26 +17615,30 @@ export namespace Prisma {
     isFinal?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
+    timeTaken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SubmissionCreateManyInput = {
     id?: number
     questionId: number
     studentId: number
-    solvedOn?: Date | string
+    solvedOn?: Date | string | null
     status?: $Enums.AcceptedType
-    noOfCasesPassed: number
-    pointsSecured: number
+    noOfCasesPassed?: number
+    pointsSecured?: number
     type?: $Enums.SubmissionType
     output1?: string | null
     output2?: string | null
     isFinal?: $Enums.isFinalType
     code?: string | null
     leetCodeLink?: string | null
+    language?: $Enums.LanguageType | null
+    timeTaken?: Date | string | null
   }
 
   export type SubmissionUpdateManyMutationInput = {
-    solvedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    solvedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumAcceptedTypeFieldUpdateOperationsInput | $Enums.AcceptedType
     noOfCasesPassed?: IntFieldUpdateOperationsInput | number
     pointsSecured?: IntFieldUpdateOperationsInput | number
@@ -17401,13 +17648,15 @@ export namespace Prisma {
     isFinal?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
+    timeTaken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SubmissionUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     questionId?: IntFieldUpdateOperationsInput | number
     studentId?: IntFieldUpdateOperationsInput | number
-    solvedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    solvedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumAcceptedTypeFieldUpdateOperationsInput | $Enums.AcceptedType
     noOfCasesPassed?: IntFieldUpdateOperationsInput | number
     pointsSecured?: IntFieldUpdateOperationsInput | number
@@ -17417,6 +17666,8 @@ export namespace Prisma {
     isFinal?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
+    timeTaken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AchievementsCreateInput = {
@@ -17762,6 +18013,7 @@ export namespace Prisma {
     language: $Enums.LanguageType
     type: $Enums.BoilerType
     boilerCode: string
+    question: QuestionsCreateNestedOneWithoutBoilerPlateInput
   }
 
   export type BoilerPlateUncheckedCreateInput = {
@@ -17769,12 +18021,14 @@ export namespace Prisma {
     language: $Enums.LanguageType
     type: $Enums.BoilerType
     boilerCode: string
+    questionId: number
   }
 
   export type BoilerPlateUpdateInput = {
     language?: EnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType
     type?: EnumBoilerTypeFieldUpdateOperationsInput | $Enums.BoilerType
     boilerCode?: StringFieldUpdateOperationsInput | string
+    question?: QuestionsUpdateOneRequiredWithoutBoilerPlateNestedInput
   }
 
   export type BoilerPlateUncheckedUpdateInput = {
@@ -17782,6 +18036,7 @@ export namespace Prisma {
     language?: EnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType
     type?: EnumBoilerTypeFieldUpdateOperationsInput | $Enums.BoilerType
     boilerCode?: StringFieldUpdateOperationsInput | string
+    questionId?: IntFieldUpdateOperationsInput | number
   }
 
   export type BoilerPlateCreateManyInput = {
@@ -17789,6 +18044,7 @@ export namespace Prisma {
     language: $Enums.LanguageType
     type: $Enums.BoilerType
     boilerCode: string
+    questionId: number
   }
 
   export type BoilerPlateUpdateManyMutationInput = {
@@ -17802,6 +18058,7 @@ export namespace Prisma {
     language?: EnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType
     type?: EnumBoilerTypeFieldUpdateOperationsInput | $Enums.BoilerType
     boilerCode?: StringFieldUpdateOperationsInput | string
+    questionId?: IntFieldUpdateOperationsInput | number
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -18078,12 +18335,22 @@ export namespace Prisma {
     none?: TestCaseWhereInput
   }
 
+  export type BoilerPlateListRelationFilter = {
+    every?: BoilerPlateWhereInput
+    some?: BoilerPlateWhereInput
+    none?: BoilerPlateWhereInput
+  }
+
   export type TopicsScalarRelationFilter = {
     is?: TopicsWhereInput
     isNot?: TopicsWhereInput
   }
 
   export type TestCaseOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BoilerPlateOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18102,6 +18369,7 @@ export namespace Prisma {
     CLangFunction?: SortOrder
     PyLangFunction?: SortOrder
     JavsLangFunction?: SortOrder
+    timeToSolve?: SortOrder
   }
 
   export type QuestionsAvgOrderByAggregateInput = {
@@ -18127,6 +18395,7 @@ export namespace Prisma {
     CLangFunction?: SortOrder
     PyLangFunction?: SortOrder
     JavsLangFunction?: SortOrder
+    timeToSolve?: SortOrder
   }
 
   export type QuestionsMinOrderByAggregateInput = {
@@ -18144,6 +18413,7 @@ export namespace Prisma {
     CLangFunction?: SortOrder
     PyLangFunction?: SortOrder
     JavsLangFunction?: SortOrder
+    timeToSolve?: SortOrder
   }
 
   export type QuestionsSumOrderByAggregateInput = {
@@ -18174,6 +18444,13 @@ export namespace Prisma {
     _max?: NestedEnumQuestionTypeFilter<$PrismaModel>
   }
 
+  export type EnumTestCaseTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TestCaseType | EnumTestCaseTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TestCaseType[] | ListEnumTestCaseTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TestCaseType[] | ListEnumTestCaseTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTestCaseTypeFilter<$PrismaModel> | $Enums.TestCaseType
+  }
+
   export type QuestionsScalarRelationFilter = {
     is?: QuestionsWhereInput
     isNot?: QuestionsWhereInput
@@ -18184,6 +18461,7 @@ export namespace Prisma {
     inputString?: SortOrder
     outputString?: SortOrder
     questionId?: SortOrder
+    type?: SortOrder
   }
 
   export type TestCaseAvgOrderByAggregateInput = {
@@ -18196,6 +18474,7 @@ export namespace Prisma {
     inputString?: SortOrder
     outputString?: SortOrder
     questionId?: SortOrder
+    type?: SortOrder
   }
 
   export type TestCaseMinOrderByAggregateInput = {
@@ -18203,11 +18482,33 @@ export namespace Prisma {
     inputString?: SortOrder
     outputString?: SortOrder
     questionId?: SortOrder
+    type?: SortOrder
   }
 
   export type TestCaseSumOrderByAggregateInput = {
     id?: SortOrder
     questionId?: SortOrder
+  }
+
+  export type EnumTestCaseTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TestCaseType | EnumTestCaseTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TestCaseType[] | ListEnumTestCaseTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TestCaseType[] | ListEnumTestCaseTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTestCaseTypeWithAggregatesFilter<$PrismaModel> | $Enums.TestCaseType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTestCaseTypeFilter<$PrismaModel>
+    _max?: NestedEnumTestCaseTypeFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type EnumAcceptedTypeFilter<$PrismaModel = never> = {
@@ -18231,6 +18532,13 @@ export namespace Prisma {
     not?: NestedEnumisFinalTypeFilter<$PrismaModel> | $Enums.isFinalType
   }
 
+  export type EnumLanguageTypeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.LanguageType | EnumLanguageTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.LanguageType[] | ListEnumLanguageTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.LanguageType[] | ListEnumLanguageTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumLanguageTypeNullableFilter<$PrismaModel> | $Enums.LanguageType | null
+  }
+
   export type StudentScalarRelationFilter = {
     is?: StudentWhereInput
     isNot?: StudentWhereInput
@@ -18250,6 +18558,8 @@ export namespace Prisma {
     isFinal?: SortOrder
     code?: SortOrder
     leetCodeLink?: SortOrder
+    language?: SortOrder
+    timeTaken?: SortOrder
   }
 
   export type SubmissionAvgOrderByAggregateInput = {
@@ -18274,6 +18584,8 @@ export namespace Prisma {
     isFinal?: SortOrder
     code?: SortOrder
     leetCodeLink?: SortOrder
+    language?: SortOrder
+    timeTaken?: SortOrder
   }
 
   export type SubmissionMinOrderByAggregateInput = {
@@ -18290,6 +18602,8 @@ export namespace Prisma {
     isFinal?: SortOrder
     code?: SortOrder
     leetCodeLink?: SortOrder
+    language?: SortOrder
+    timeTaken?: SortOrder
   }
 
   export type SubmissionSumOrderByAggregateInput = {
@@ -18298,6 +18612,20 @@ export namespace Prisma {
     studentId?: SortOrder
     noOfCasesPassed?: SortOrder
     pointsSecured?: SortOrder
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type EnumAcceptedTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -18328,6 +18656,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumisFinalTypeFilter<$PrismaModel>
     _max?: NestedEnumisFinalTypeFilter<$PrismaModel>
+  }
+
+  export type EnumLanguageTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.LanguageType | EnumLanguageTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.LanguageType[] | ListEnumLanguageTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.LanguageType[] | ListEnumLanguageTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumLanguageTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.LanguageType | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumLanguageTypeNullableFilter<$PrismaModel>
+    _max?: NestedEnumLanguageTypeNullableFilter<$PrismaModel>
   }
 
   export type AchievementsCountOrderByAggregateInput = {
@@ -18646,10 +18984,12 @@ export namespace Prisma {
     language?: SortOrder
     type?: SortOrder
     boilerCode?: SortOrder
+    questionId?: SortOrder
   }
 
   export type BoilerPlateAvgOrderByAggregateInput = {
     id?: SortOrder
+    questionId?: SortOrder
   }
 
   export type BoilerPlateMaxOrderByAggregateInput = {
@@ -18657,6 +18997,7 @@ export namespace Prisma {
     language?: SortOrder
     type?: SortOrder
     boilerCode?: SortOrder
+    questionId?: SortOrder
   }
 
   export type BoilerPlateMinOrderByAggregateInput = {
@@ -18664,10 +19005,12 @@ export namespace Prisma {
     language?: SortOrder
     type?: SortOrder
     boilerCode?: SortOrder
+    questionId?: SortOrder
   }
 
   export type BoilerPlateSumOrderByAggregateInput = {
     id?: SortOrder
+    questionId?: SortOrder
   }
 
   export type EnumLanguageTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -19015,6 +19358,13 @@ export namespace Prisma {
     connect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
   }
 
+  export type BoilerPlateCreateNestedManyWithoutQuestionInput = {
+    create?: XOR<BoilerPlateCreateWithoutQuestionInput, BoilerPlateUncheckedCreateWithoutQuestionInput> | BoilerPlateCreateWithoutQuestionInput[] | BoilerPlateUncheckedCreateWithoutQuestionInput[]
+    connectOrCreate?: BoilerPlateCreateOrConnectWithoutQuestionInput | BoilerPlateCreateOrConnectWithoutQuestionInput[]
+    createMany?: BoilerPlateCreateManyQuestionInputEnvelope
+    connect?: BoilerPlateWhereUniqueInput | BoilerPlateWhereUniqueInput[]
+  }
+
   export type TopicsCreateNestedOneWithoutQuestionInput = {
     create?: XOR<TopicsCreateWithoutQuestionInput, TopicsUncheckedCreateWithoutQuestionInput>
     connectOrCreate?: TopicsCreateOrConnectWithoutQuestionInput
@@ -19040,6 +19390,13 @@ export namespace Prisma {
     connectOrCreate?: DiscussionsCreateOrConnectWithoutQuestionInput | DiscussionsCreateOrConnectWithoutQuestionInput[]
     createMany?: DiscussionsCreateManyQuestionInputEnvelope
     connect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
+  }
+
+  export type BoilerPlateUncheckedCreateNestedManyWithoutQuestionInput = {
+    create?: XOR<BoilerPlateCreateWithoutQuestionInput, BoilerPlateUncheckedCreateWithoutQuestionInput> | BoilerPlateCreateWithoutQuestionInput[] | BoilerPlateUncheckedCreateWithoutQuestionInput[]
+    connectOrCreate?: BoilerPlateCreateOrConnectWithoutQuestionInput | BoilerPlateCreateOrConnectWithoutQuestionInput[]
+    createMany?: BoilerPlateCreateManyQuestionInputEnvelope
+    connect?: BoilerPlateWhereUniqueInput | BoilerPlateWhereUniqueInput[]
   }
 
   export type EnumDifficultyTypeFieldUpdateOperationsInput = {
@@ -19092,6 +19449,20 @@ export namespace Prisma {
     deleteMany?: DiscussionsScalarWhereInput | DiscussionsScalarWhereInput[]
   }
 
+  export type BoilerPlateUpdateManyWithoutQuestionNestedInput = {
+    create?: XOR<BoilerPlateCreateWithoutQuestionInput, BoilerPlateUncheckedCreateWithoutQuestionInput> | BoilerPlateCreateWithoutQuestionInput[] | BoilerPlateUncheckedCreateWithoutQuestionInput[]
+    connectOrCreate?: BoilerPlateCreateOrConnectWithoutQuestionInput | BoilerPlateCreateOrConnectWithoutQuestionInput[]
+    upsert?: BoilerPlateUpsertWithWhereUniqueWithoutQuestionInput | BoilerPlateUpsertWithWhereUniqueWithoutQuestionInput[]
+    createMany?: BoilerPlateCreateManyQuestionInputEnvelope
+    set?: BoilerPlateWhereUniqueInput | BoilerPlateWhereUniqueInput[]
+    disconnect?: BoilerPlateWhereUniqueInput | BoilerPlateWhereUniqueInput[]
+    delete?: BoilerPlateWhereUniqueInput | BoilerPlateWhereUniqueInput[]
+    connect?: BoilerPlateWhereUniqueInput | BoilerPlateWhereUniqueInput[]
+    update?: BoilerPlateUpdateWithWhereUniqueWithoutQuestionInput | BoilerPlateUpdateWithWhereUniqueWithoutQuestionInput[]
+    updateMany?: BoilerPlateUpdateManyWithWhereWithoutQuestionInput | BoilerPlateUpdateManyWithWhereWithoutQuestionInput[]
+    deleteMany?: BoilerPlateScalarWhereInput | BoilerPlateScalarWhereInput[]
+  }
+
   export type TopicsUpdateOneRequiredWithoutQuestionNestedInput = {
     create?: XOR<TopicsCreateWithoutQuestionInput, TopicsUncheckedCreateWithoutQuestionInput>
     connectOrCreate?: TopicsCreateOrConnectWithoutQuestionInput
@@ -19142,10 +19513,28 @@ export namespace Prisma {
     deleteMany?: DiscussionsScalarWhereInput | DiscussionsScalarWhereInput[]
   }
 
+  export type BoilerPlateUncheckedUpdateManyWithoutQuestionNestedInput = {
+    create?: XOR<BoilerPlateCreateWithoutQuestionInput, BoilerPlateUncheckedCreateWithoutQuestionInput> | BoilerPlateCreateWithoutQuestionInput[] | BoilerPlateUncheckedCreateWithoutQuestionInput[]
+    connectOrCreate?: BoilerPlateCreateOrConnectWithoutQuestionInput | BoilerPlateCreateOrConnectWithoutQuestionInput[]
+    upsert?: BoilerPlateUpsertWithWhereUniqueWithoutQuestionInput | BoilerPlateUpsertWithWhereUniqueWithoutQuestionInput[]
+    createMany?: BoilerPlateCreateManyQuestionInputEnvelope
+    set?: BoilerPlateWhereUniqueInput | BoilerPlateWhereUniqueInput[]
+    disconnect?: BoilerPlateWhereUniqueInput | BoilerPlateWhereUniqueInput[]
+    delete?: BoilerPlateWhereUniqueInput | BoilerPlateWhereUniqueInput[]
+    connect?: BoilerPlateWhereUniqueInput | BoilerPlateWhereUniqueInput[]
+    update?: BoilerPlateUpdateWithWhereUniqueWithoutQuestionInput | BoilerPlateUpdateWithWhereUniqueWithoutQuestionInput[]
+    updateMany?: BoilerPlateUpdateManyWithWhereWithoutQuestionInput | BoilerPlateUpdateManyWithWhereWithoutQuestionInput[]
+    deleteMany?: BoilerPlateScalarWhereInput | BoilerPlateScalarWhereInput[]
+  }
+
   export type QuestionsCreateNestedOneWithoutTestCaseInput = {
     create?: XOR<QuestionsCreateWithoutTestCaseInput, QuestionsUncheckedCreateWithoutTestCaseInput>
     connectOrCreate?: QuestionsCreateOrConnectWithoutTestCaseInput
     connect?: QuestionsWhereUniqueInput
+  }
+
+  export type EnumTestCaseTypeFieldUpdateOperationsInput = {
+    set?: $Enums.TestCaseType
   }
 
   export type QuestionsUpdateOneRequiredWithoutTestCaseNestedInput = {
@@ -19168,6 +19557,10 @@ export namespace Prisma {
     connect?: StudentWhereUniqueInput
   }
 
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
   export type EnumAcceptedTypeFieldUpdateOperationsInput = {
     set?: $Enums.AcceptedType
   }
@@ -19178,6 +19571,10 @@ export namespace Prisma {
 
   export type EnumisFinalTypeFieldUpdateOperationsInput = {
     set?: $Enums.isFinalType
+  }
+
+  export type NullableEnumLanguageTypeFieldUpdateOperationsInput = {
+    set?: $Enums.LanguageType | null
   }
 
   export type QuestionsUpdateOneRequiredWithoutSubmissionNestedInput = {
@@ -19412,12 +19809,26 @@ export namespace Prisma {
     deleteMany?: DiscussionsScalarWhereInput | DiscussionsScalarWhereInput[]
   }
 
+  export type QuestionsCreateNestedOneWithoutBoilerPlateInput = {
+    create?: XOR<QuestionsCreateWithoutBoilerPlateInput, QuestionsUncheckedCreateWithoutBoilerPlateInput>
+    connectOrCreate?: QuestionsCreateOrConnectWithoutBoilerPlateInput
+    connect?: QuestionsWhereUniqueInput
+  }
+
   export type EnumLanguageTypeFieldUpdateOperationsInput = {
     set?: $Enums.LanguageType
   }
 
   export type EnumBoilerTypeFieldUpdateOperationsInput = {
     set?: $Enums.BoilerType
+  }
+
+  export type QuestionsUpdateOneRequiredWithoutBoilerPlateNestedInput = {
+    create?: XOR<QuestionsCreateWithoutBoilerPlateInput, QuestionsUncheckedCreateWithoutBoilerPlateInput>
+    connectOrCreate?: QuestionsCreateOrConnectWithoutBoilerPlateInput
+    upsert?: QuestionsUpsertWithoutBoilerPlateInput
+    connect?: QuestionsWhereUniqueInput
+    update?: XOR<XOR<QuestionsUpdateToOneWithWhereWithoutBoilerPlateInput, QuestionsUpdateWithoutBoilerPlateInput>, QuestionsUncheckedUpdateWithoutBoilerPlateInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -19590,6 +20001,34 @@ export namespace Prisma {
     _max?: NestedEnumQuestionTypeFilter<$PrismaModel>
   }
 
+  export type NestedEnumTestCaseTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TestCaseType | EnumTestCaseTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TestCaseType[] | ListEnumTestCaseTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TestCaseType[] | ListEnumTestCaseTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTestCaseTypeFilter<$PrismaModel> | $Enums.TestCaseType
+  }
+
+  export type NestedEnumTestCaseTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TestCaseType | EnumTestCaseTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TestCaseType[] | ListEnumTestCaseTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TestCaseType[] | ListEnumTestCaseTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTestCaseTypeWithAggregatesFilter<$PrismaModel> | $Enums.TestCaseType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTestCaseTypeFilter<$PrismaModel>
+    _max?: NestedEnumTestCaseTypeFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedEnumAcceptedTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.AcceptedType | EnumAcceptedTypeFieldRefInput<$PrismaModel>
     in?: $Enums.AcceptedType[] | ListEnumAcceptedTypeFieldRefInput<$PrismaModel>
@@ -19609,6 +20048,27 @@ export namespace Prisma {
     in?: $Enums.isFinalType[] | ListEnumisFinalTypeFieldRefInput<$PrismaModel>
     notIn?: $Enums.isFinalType[] | ListEnumisFinalTypeFieldRefInput<$PrismaModel>
     not?: NestedEnumisFinalTypeFilter<$PrismaModel> | $Enums.isFinalType
+  }
+
+  export type NestedEnumLanguageTypeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.LanguageType | EnumLanguageTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.LanguageType[] | ListEnumLanguageTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.LanguageType[] | ListEnumLanguageTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumLanguageTypeNullableFilter<$PrismaModel> | $Enums.LanguageType | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumAcceptedTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -19639,6 +20099,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumisFinalTypeFilter<$PrismaModel>
     _max?: NestedEnumisFinalTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumLanguageTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.LanguageType | EnumLanguageTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.LanguageType[] | ListEnumLanguageTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.LanguageType[] | ListEnumLanguageTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumLanguageTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.LanguageType | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumLanguageTypeNullableFilter<$PrismaModel>
+    _max?: NestedEnumLanguageTypeNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumOTPStatusFilter<$PrismaModel = never> = {
@@ -19737,32 +20207,36 @@ export namespace Prisma {
   }
 
   export type SubmissionCreateWithoutStudentInput = {
-    solvedOn?: Date | string
+    solvedOn?: Date | string | null
     status?: $Enums.AcceptedType
-    noOfCasesPassed: number
-    pointsSecured: number
+    noOfCasesPassed?: number
+    pointsSecured?: number
     type?: $Enums.SubmissionType
     output1?: string | null
     output2?: string | null
     isFinal?: $Enums.isFinalType
     code?: string | null
     leetCodeLink?: string | null
+    language?: $Enums.LanguageType | null
+    timeTaken?: Date | string | null
     questions: QuestionsCreateNestedOneWithoutSubmissionInput
   }
 
   export type SubmissionUncheckedCreateWithoutStudentInput = {
     id?: number
     questionId: number
-    solvedOn?: Date | string
+    solvedOn?: Date | string | null
     status?: $Enums.AcceptedType
-    noOfCasesPassed: number
-    pointsSecured: number
+    noOfCasesPassed?: number
+    pointsSecured?: number
     type?: $Enums.SubmissionType
     output1?: string | null
     output2?: string | null
     isFinal?: $Enums.isFinalType
     code?: string | null
     leetCodeLink?: string | null
+    language?: $Enums.LanguageType | null
+    timeTaken?: Date | string | null
   }
 
   export type SubmissionCreateOrConnectWithoutStudentInput = {
@@ -19885,7 +20359,7 @@ export namespace Prisma {
     id?: IntFilter<"Submission"> | number
     questionId?: IntFilter<"Submission"> | number
     studentId?: IntFilter<"Submission"> | number
-    solvedOn?: DateTimeFilter<"Submission"> | Date | string
+    solvedOn?: DateTimeNullableFilter<"Submission"> | Date | string | null
     status?: EnumAcceptedTypeFilter<"Submission"> | $Enums.AcceptedType
     noOfCasesPassed?: IntFilter<"Submission"> | number
     pointsSecured?: IntFilter<"Submission"> | number
@@ -19895,6 +20369,8 @@ export namespace Prisma {
     isFinal?: EnumisFinalTypeFilter<"Submission"> | $Enums.isFinalType
     code?: StringNullableFilter<"Submission"> | string | null
     leetCodeLink?: StringNullableFilter<"Submission"> | string | null
+    language?: EnumLanguageTypeNullableFilter<"Submission"> | $Enums.LanguageType | null
+    timeTaken?: DateTimeNullableFilter<"Submission"> | Date | string | null
   }
 
   export type StudentAchievementsUpsertWithWhereUniqueWithoutStudentInput = {
@@ -20036,9 +20512,11 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
+    timeToSolve: Date | string
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
+    boilerPlate?: BoilerPlateCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionsUncheckedCreateWithoutTopicsInput = {
@@ -20055,9 +20533,11 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
+    timeToSolve: Date | string
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
+    boilerPlate?: BoilerPlateUncheckedCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionsCreateOrConnectWithoutTopicsInput = {
@@ -20120,17 +20600,20 @@ export namespace Prisma {
     CLangFunction?: StringFilter<"Questions"> | string
     PyLangFunction?: StringFilter<"Questions"> | string
     JavsLangFunction?: StringFilter<"Questions"> | string
+    timeToSolve?: DateTimeFilter<"Questions"> | Date | string
   }
 
   export type TestCaseCreateWithoutQuestionsInput = {
     inputString: string
     outputString: string
+    type?: $Enums.TestCaseType
   }
 
   export type TestCaseUncheckedCreateWithoutQuestionsInput = {
     id?: number
     inputString: string
     outputString: string
+    type?: $Enums.TestCaseType
   }
 
   export type TestCaseCreateOrConnectWithoutQuestionsInput = {
@@ -20144,32 +20627,36 @@ export namespace Prisma {
   }
 
   export type SubmissionCreateWithoutQuestionsInput = {
-    solvedOn?: Date | string
+    solvedOn?: Date | string | null
     status?: $Enums.AcceptedType
-    noOfCasesPassed: number
-    pointsSecured: number
+    noOfCasesPassed?: number
+    pointsSecured?: number
     type?: $Enums.SubmissionType
     output1?: string | null
     output2?: string | null
     isFinal?: $Enums.isFinalType
     code?: string | null
     leetCodeLink?: string | null
+    language?: $Enums.LanguageType | null
+    timeTaken?: Date | string | null
     student: StudentCreateNestedOneWithoutSubmissionInput
   }
 
   export type SubmissionUncheckedCreateWithoutQuestionsInput = {
     id?: number
     studentId: number
-    solvedOn?: Date | string
+    solvedOn?: Date | string | null
     status?: $Enums.AcceptedType
-    noOfCasesPassed: number
-    pointsSecured: number
+    noOfCasesPassed?: number
+    pointsSecured?: number
     type?: $Enums.SubmissionType
     output1?: string | null
     output2?: string | null
     isFinal?: $Enums.isFinalType
     code?: string | null
     leetCodeLink?: string | null
+    language?: $Enums.LanguageType | null
+    timeTaken?: Date | string | null
   }
 
   export type SubmissionCreateOrConnectWithoutQuestionsInput = {
@@ -20206,6 +20693,29 @@ export namespace Prisma {
 
   export type DiscussionsCreateManyQuestionInputEnvelope = {
     data: DiscussionsCreateManyQuestionInput | DiscussionsCreateManyQuestionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BoilerPlateCreateWithoutQuestionInput = {
+    language: $Enums.LanguageType
+    type: $Enums.BoilerType
+    boilerCode: string
+  }
+
+  export type BoilerPlateUncheckedCreateWithoutQuestionInput = {
+    id?: number
+    language: $Enums.LanguageType
+    type: $Enums.BoilerType
+    boilerCode: string
+  }
+
+  export type BoilerPlateCreateOrConnectWithoutQuestionInput = {
+    where: BoilerPlateWhereUniqueInput
+    create: XOR<BoilerPlateCreateWithoutQuestionInput, BoilerPlateUncheckedCreateWithoutQuestionInput>
+  }
+
+  export type BoilerPlateCreateManyQuestionInputEnvelope = {
+    data: BoilerPlateCreateManyQuestionInput | BoilerPlateCreateManyQuestionInput[]
     skipDuplicates?: boolean
   }
 
@@ -20255,6 +20765,7 @@ export namespace Prisma {
     inputString?: StringFilter<"TestCase"> | string
     outputString?: StringFilter<"TestCase"> | string
     questionId?: IntFilter<"TestCase"> | number
+    type?: EnumTestCaseTypeFilter<"TestCase"> | $Enums.TestCaseType
   }
 
   export type SubmissionUpsertWithWhereUniqueWithoutQuestionsInput = {
@@ -20287,6 +20798,33 @@ export namespace Prisma {
   export type DiscussionsUpdateManyWithWhereWithoutQuestionInput = {
     where: DiscussionsScalarWhereInput
     data: XOR<DiscussionsUpdateManyMutationInput, DiscussionsUncheckedUpdateManyWithoutQuestionInput>
+  }
+
+  export type BoilerPlateUpsertWithWhereUniqueWithoutQuestionInput = {
+    where: BoilerPlateWhereUniqueInput
+    update: XOR<BoilerPlateUpdateWithoutQuestionInput, BoilerPlateUncheckedUpdateWithoutQuestionInput>
+    create: XOR<BoilerPlateCreateWithoutQuestionInput, BoilerPlateUncheckedCreateWithoutQuestionInput>
+  }
+
+  export type BoilerPlateUpdateWithWhereUniqueWithoutQuestionInput = {
+    where: BoilerPlateWhereUniqueInput
+    data: XOR<BoilerPlateUpdateWithoutQuestionInput, BoilerPlateUncheckedUpdateWithoutQuestionInput>
+  }
+
+  export type BoilerPlateUpdateManyWithWhereWithoutQuestionInput = {
+    where: BoilerPlateScalarWhereInput
+    data: XOR<BoilerPlateUpdateManyMutationInput, BoilerPlateUncheckedUpdateManyWithoutQuestionInput>
+  }
+
+  export type BoilerPlateScalarWhereInput = {
+    AND?: BoilerPlateScalarWhereInput | BoilerPlateScalarWhereInput[]
+    OR?: BoilerPlateScalarWhereInput[]
+    NOT?: BoilerPlateScalarWhereInput | BoilerPlateScalarWhereInput[]
+    id?: IntFilter<"BoilerPlate"> | number
+    language?: EnumLanguageTypeFilter<"BoilerPlate"> | $Enums.LanguageType
+    type?: EnumBoilerTypeFilter<"BoilerPlate"> | $Enums.BoilerType
+    boilerCode?: StringFilter<"BoilerPlate"> | string
+    questionId?: IntFilter<"BoilerPlate"> | number
   }
 
   export type TopicsUpsertWithoutQuestionInput = {
@@ -20330,8 +20868,10 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
+    timeToSolve: Date | string
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
+    boilerPlate?: BoilerPlateCreateNestedManyWithoutQuestionInput
     topics: TopicsCreateNestedOneWithoutQuestionInput
   }
 
@@ -20350,8 +20890,10 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
+    timeToSolve: Date | string
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
+    boilerPlate?: BoilerPlateUncheckedCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionsCreateOrConnectWithoutTestCaseInput = {
@@ -20383,8 +20925,10 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
+    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
+    boilerPlate?: BoilerPlateUpdateManyWithoutQuestionNestedInput
     topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
   }
 
@@ -20403,8 +20947,10 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
+    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
+    boilerPlate?: BoilerPlateUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
   export type QuestionsCreateWithoutSubmissionInput = {
@@ -20420,8 +20966,10 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
+    timeToSolve: Date | string
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
+    boilerPlate?: BoilerPlateCreateNestedManyWithoutQuestionInput
     topics: TopicsCreateNestedOneWithoutQuestionInput
   }
 
@@ -20440,8 +20988,10 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
+    timeToSolve: Date | string
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
+    boilerPlate?: BoilerPlateUncheckedCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionsCreateOrConnectWithoutSubmissionInput = {
@@ -20509,8 +21059,10 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
+    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
+    boilerPlate?: BoilerPlateUpdateManyWithoutQuestionNestedInput
     topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
   }
 
@@ -20529,8 +21081,10 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
+    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
+    boilerPlate?: BoilerPlateUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
   export type StudentUpsertWithoutSubmissionInput = {
@@ -20983,8 +21537,10 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
+    timeToSolve: Date | string
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
+    boilerPlate?: BoilerPlateCreateNestedManyWithoutQuestionInput
     topics: TopicsCreateNestedOneWithoutQuestionInput
   }
 
@@ -21003,8 +21559,10 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
+    timeToSolve: Date | string
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
+    boilerPlate?: BoilerPlateUncheckedCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionsCreateOrConnectWithoutDiscussionInput = {
@@ -21127,8 +21685,10 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
+    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
+    boilerPlate?: BoilerPlateUpdateManyWithoutQuestionNestedInput
     topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
   }
 
@@ -21147,8 +21707,10 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
+    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
+    boilerPlate?: BoilerPlateUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
   export type DiscussionsUpsertWithoutRepliesIGetInput = {
@@ -21195,19 +21757,119 @@ export namespace Prisma {
     data: XOR<DiscussionsUpdateManyMutationInput, DiscussionsUncheckedUpdateManyWithoutToWhomIReplyInput>
   }
 
+  export type QuestionsCreateWithoutBoilerPlateInput = {
+    title: string
+    description?: string | null
+    noOfHiddenTestCases?: number
+    noOfExternalTestCases?: number
+    difficulty?: $Enums.DifficultyType
+    pointsPerTestCaseSolved: number
+    type?: $Enums.QuestionType
+    leetCodeLink?: string | null
+    leetCodeTitle?: string | null
+    CLangFunction: string
+    PyLangFunction: string
+    JavsLangFunction: string
+    timeToSolve: Date | string
+    testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
+    submission?: SubmissionCreateNestedManyWithoutQuestionsInput
+    discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
+    topics: TopicsCreateNestedOneWithoutQuestionInput
+  }
+
+  export type QuestionsUncheckedCreateWithoutBoilerPlateInput = {
+    id?: number
+    title: string
+    description?: string | null
+    topic: number
+    noOfHiddenTestCases?: number
+    noOfExternalTestCases?: number
+    difficulty?: $Enums.DifficultyType
+    pointsPerTestCaseSolved: number
+    type?: $Enums.QuestionType
+    leetCodeLink?: string | null
+    leetCodeTitle?: string | null
+    CLangFunction: string
+    PyLangFunction: string
+    JavsLangFunction: string
+    timeToSolve: Date | string
+    testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
+    submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
+    discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
+  }
+
+  export type QuestionsCreateOrConnectWithoutBoilerPlateInput = {
+    where: QuestionsWhereUniqueInput
+    create: XOR<QuestionsCreateWithoutBoilerPlateInput, QuestionsUncheckedCreateWithoutBoilerPlateInput>
+  }
+
+  export type QuestionsUpsertWithoutBoilerPlateInput = {
+    update: XOR<QuestionsUpdateWithoutBoilerPlateInput, QuestionsUncheckedUpdateWithoutBoilerPlateInput>
+    create: XOR<QuestionsCreateWithoutBoilerPlateInput, QuestionsUncheckedCreateWithoutBoilerPlateInput>
+    where?: QuestionsWhereInput
+  }
+
+  export type QuestionsUpdateToOneWithWhereWithoutBoilerPlateInput = {
+    where?: QuestionsWhereInput
+    data: XOR<QuestionsUpdateWithoutBoilerPlateInput, QuestionsUncheckedUpdateWithoutBoilerPlateInput>
+  }
+
+  export type QuestionsUpdateWithoutBoilerPlateInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
+    noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
+    pointsPerTestCaseSolved?: IntFieldUpdateOperationsInput | number
+    type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
+    leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    CLangFunction?: StringFieldUpdateOperationsInput | string
+    PyLangFunction?: StringFieldUpdateOperationsInput | string
+    JavsLangFunction?: StringFieldUpdateOperationsInput | string
+    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
+    submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
+    discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
+    topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
+  }
+
+  export type QuestionsUncheckedUpdateWithoutBoilerPlateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: IntFieldUpdateOperationsInput | number
+    noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
+    noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
+    pointsPerTestCaseSolved?: IntFieldUpdateOperationsInput | number
+    type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
+    leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    CLangFunction?: StringFieldUpdateOperationsInput | string
+    PyLangFunction?: StringFieldUpdateOperationsInput | string
+    JavsLangFunction?: StringFieldUpdateOperationsInput | string
+    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
+    submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
+    discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
+  }
+
   export type SubmissionCreateManyStudentInput = {
     id?: number
     questionId: number
-    solvedOn?: Date | string
+    solvedOn?: Date | string | null
     status?: $Enums.AcceptedType
-    noOfCasesPassed: number
-    pointsSecured: number
+    noOfCasesPassed?: number
+    pointsSecured?: number
     type?: $Enums.SubmissionType
     output1?: string | null
     output2?: string | null
     isFinal?: $Enums.isFinalType
     code?: string | null
     leetCodeLink?: string | null
+    language?: $Enums.LanguageType | null
+    timeTaken?: Date | string | null
   }
 
   export type StudentAchievementsCreateManyStudentInput = {
@@ -21232,7 +21894,7 @@ export namespace Prisma {
   }
 
   export type SubmissionUpdateWithoutStudentInput = {
-    solvedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    solvedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumAcceptedTypeFieldUpdateOperationsInput | $Enums.AcceptedType
     noOfCasesPassed?: IntFieldUpdateOperationsInput | number
     pointsSecured?: IntFieldUpdateOperationsInput | number
@@ -21242,13 +21904,15 @@ export namespace Prisma {
     isFinal?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
+    timeTaken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     questions?: QuestionsUpdateOneRequiredWithoutSubmissionNestedInput
   }
 
   export type SubmissionUncheckedUpdateWithoutStudentInput = {
     id?: IntFieldUpdateOperationsInput | number
     questionId?: IntFieldUpdateOperationsInput | number
-    solvedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    solvedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumAcceptedTypeFieldUpdateOperationsInput | $Enums.AcceptedType
     noOfCasesPassed?: IntFieldUpdateOperationsInput | number
     pointsSecured?: IntFieldUpdateOperationsInput | number
@@ -21258,12 +21922,14 @@ export namespace Prisma {
     isFinal?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
+    timeTaken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SubmissionUncheckedUpdateManyWithoutStudentInput = {
     id?: IntFieldUpdateOperationsInput | number
     questionId?: IntFieldUpdateOperationsInput | number
-    solvedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    solvedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumAcceptedTypeFieldUpdateOperationsInput | $Enums.AcceptedType
     noOfCasesPassed?: IntFieldUpdateOperationsInput | number
     pointsSecured?: IntFieldUpdateOperationsInput | number
@@ -21273,6 +21939,8 @@ export namespace Prisma {
     isFinal?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
+    timeTaken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type StudentAchievementsUpdateWithoutStudentInput = {
@@ -21358,6 +22026,7 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
+    timeToSolve: Date | string
   }
 
   export type ContestResultUpdateWithoutTopicsInput = {
@@ -21393,9 +22062,11 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
+    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
+    boilerPlate?: BoilerPlateUpdateManyWithoutQuestionNestedInput
   }
 
   export type QuestionsUncheckedUpdateWithoutTopicsInput = {
@@ -21412,9 +22083,11 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
+    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
+    boilerPlate?: BoilerPlateUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
   export type QuestionsUncheckedUpdateManyWithoutTopicsInput = {
@@ -21431,27 +22104,31 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
+    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TestCaseCreateManyQuestionsInput = {
     id?: number
     inputString: string
     outputString: string
+    type?: $Enums.TestCaseType
   }
 
   export type SubmissionCreateManyQuestionsInput = {
     id?: number
     studentId: number
-    solvedOn?: Date | string
+    solvedOn?: Date | string | null
     status?: $Enums.AcceptedType
-    noOfCasesPassed: number
-    pointsSecured: number
+    noOfCasesPassed?: number
+    pointsSecured?: number
     type?: $Enums.SubmissionType
     output1?: string | null
     output2?: string | null
     isFinal?: $Enums.isFinalType
     code?: string | null
     leetCodeLink?: string | null
+    language?: $Enums.LanguageType | null
+    timeTaken?: Date | string | null
   }
 
   export type DiscussionsCreateManyQuestionInput = {
@@ -21462,25 +22139,35 @@ export namespace Prisma {
     timeOfComment: Date | string
   }
 
+  export type BoilerPlateCreateManyQuestionInput = {
+    id?: number
+    language: $Enums.LanguageType
+    type: $Enums.BoilerType
+    boilerCode: string
+  }
+
   export type TestCaseUpdateWithoutQuestionsInput = {
     inputString?: StringFieldUpdateOperationsInput | string
     outputString?: StringFieldUpdateOperationsInput | string
+    type?: EnumTestCaseTypeFieldUpdateOperationsInput | $Enums.TestCaseType
   }
 
   export type TestCaseUncheckedUpdateWithoutQuestionsInput = {
     id?: IntFieldUpdateOperationsInput | number
     inputString?: StringFieldUpdateOperationsInput | string
     outputString?: StringFieldUpdateOperationsInput | string
+    type?: EnumTestCaseTypeFieldUpdateOperationsInput | $Enums.TestCaseType
   }
 
   export type TestCaseUncheckedUpdateManyWithoutQuestionsInput = {
     id?: IntFieldUpdateOperationsInput | number
     inputString?: StringFieldUpdateOperationsInput | string
     outputString?: StringFieldUpdateOperationsInput | string
+    type?: EnumTestCaseTypeFieldUpdateOperationsInput | $Enums.TestCaseType
   }
 
   export type SubmissionUpdateWithoutQuestionsInput = {
-    solvedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    solvedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumAcceptedTypeFieldUpdateOperationsInput | $Enums.AcceptedType
     noOfCasesPassed?: IntFieldUpdateOperationsInput | number
     pointsSecured?: IntFieldUpdateOperationsInput | number
@@ -21490,13 +22177,15 @@ export namespace Prisma {
     isFinal?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
+    timeTaken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     student?: StudentUpdateOneRequiredWithoutSubmissionNestedInput
   }
 
   export type SubmissionUncheckedUpdateWithoutQuestionsInput = {
     id?: IntFieldUpdateOperationsInput | number
     studentId?: IntFieldUpdateOperationsInput | number
-    solvedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    solvedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumAcceptedTypeFieldUpdateOperationsInput | $Enums.AcceptedType
     noOfCasesPassed?: IntFieldUpdateOperationsInput | number
     pointsSecured?: IntFieldUpdateOperationsInput | number
@@ -21506,12 +22195,14 @@ export namespace Prisma {
     isFinal?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
+    timeTaken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SubmissionUncheckedUpdateManyWithoutQuestionsInput = {
     id?: IntFieldUpdateOperationsInput | number
     studentId?: IntFieldUpdateOperationsInput | number
-    solvedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    solvedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumAcceptedTypeFieldUpdateOperationsInput | $Enums.AcceptedType
     noOfCasesPassed?: IntFieldUpdateOperationsInput | number
     pointsSecured?: IntFieldUpdateOperationsInput | number
@@ -21521,6 +22212,8 @@ export namespace Prisma {
     isFinal?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
+    timeTaken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type DiscussionsUpdateWithoutQuestionInput = {
@@ -21546,6 +22239,26 @@ export namespace Prisma {
     type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
     repliedTo?: NullableIntFieldUpdateOperationsInput | number | null
     timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BoilerPlateUpdateWithoutQuestionInput = {
+    language?: EnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType
+    type?: EnumBoilerTypeFieldUpdateOperationsInput | $Enums.BoilerType
+    boilerCode?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type BoilerPlateUncheckedUpdateWithoutQuestionInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    language?: EnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType
+    type?: EnumBoilerTypeFieldUpdateOperationsInput | $Enums.BoilerType
+    boilerCode?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type BoilerPlateUncheckedUpdateManyWithoutQuestionInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    language?: EnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType
+    type?: EnumBoilerTypeFieldUpdateOperationsInput | $Enums.BoilerType
+    boilerCode?: StringFieldUpdateOperationsInput | string
   }
 
   export type StudentAchievementsCreateManyAchievementsInput = {

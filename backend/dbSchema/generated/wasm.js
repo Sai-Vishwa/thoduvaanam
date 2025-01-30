@@ -151,14 +151,16 @@ exports.Prisma.QuestionsScalarFieldEnum = {
   leetCodeTitle: 'leetCodeTitle',
   CLangFunction: 'CLangFunction',
   PyLangFunction: 'PyLangFunction',
-  JavsLangFunction: 'JavsLangFunction'
+  JavsLangFunction: 'JavsLangFunction',
+  timeToSolve: 'timeToSolve'
 };
 
 exports.Prisma.TestCaseScalarFieldEnum = {
   id: 'id',
   inputString: 'inputString',
   outputString: 'outputString',
-  questionId: 'questionId'
+  questionId: 'questionId',
+  type: 'type'
 };
 
 exports.Prisma.SubmissionScalarFieldEnum = {
@@ -174,7 +176,9 @@ exports.Prisma.SubmissionScalarFieldEnum = {
   output2: 'output2',
   isFinal: 'isFinal',
   code: 'code',
-  leetCodeLink: 'leetCodeLink'
+  leetCodeLink: 'leetCodeLink',
+  language: 'language',
+  timeTaken: 'timeTaken'
 };
 
 exports.Prisma.AchievementsScalarFieldEnum = {
@@ -232,7 +236,8 @@ exports.Prisma.BoilerPlateScalarFieldEnum = {
   id: 'id',
   language: 'language',
   type: 'type',
-  boilerCode: 'boilerCode'
+  boilerCode: 'boilerCode',
+  questionId: 'questionId'
 };
 
 exports.Prisma.SortOrder = {
@@ -261,10 +266,15 @@ exports.QuestionType = exports.$Enums.QuestionType = {
   CONTEST: 'CONTEST'
 };
 
+exports.TestCaseType = exports.$Enums.TestCaseType = {
+  OPEN: 'OPEN',
+  HIDDEN: 'HIDDEN'
+};
+
 exports.AcceptedType = exports.$Enums.AcceptedType = {
   PENDING: 'PENDING',
-  ACCEPTED: 'ACCEPTED',
-  REJECTED: 'REJECTED'
+  COMPLETED: 'COMPLETED',
+  STARTED: 'STARTED'
 };
 
 exports.SubmissionType = exports.$Enums.SubmissionType = {
@@ -277,6 +287,12 @@ exports.isFinalType = exports.$Enums.isFinalType = {
   NO: 'NO'
 };
 
+exports.LanguageType = exports.$Enums.LanguageType = {
+  PYTHON: 'PYTHON',
+  C: 'C',
+  JAVA: 'JAVA'
+};
+
 exports.OTPStatus = exports.$Enums.OTPStatus = {
   PENDING: 'PENDING',
   APPROVED: 'APPROVED'
@@ -285,12 +301,6 @@ exports.OTPStatus = exports.$Enums.OTPStatus = {
 exports.CommentType = exports.$Enums.CommentType = {
   GENERAL: 'GENERAL',
   SPECIFIC: 'SPECIFIC'
-};
-
-exports.LanguageType = exports.$Enums.LanguageType = {
-  PYTHON: 'PYTHON',
-  C: 'C',
-  JAVA: 'JAVA'
 };
 
 exports.BoilerType = exports.$Enums.BoilerType = {

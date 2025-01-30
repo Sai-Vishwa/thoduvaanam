@@ -121,6 +121,7 @@ model Questions {
   testCase TestCase[]
   submission Submission[]
   discussion Discussions[]
+  boilerPlate BoilerPlate[]
   topics Topics @relation(fields: [topic],references:[id])
 }
 
@@ -129,6 +130,7 @@ model TestCase {
   inputString String 
   outputString String
   questionId Int
+  type TestCaseType @default(OPEN)
 
   //relationships
   questions Questions @relation(fields: [questionId], references: [id])
@@ -237,4 +239,8 @@ model BoilerPlate {
   language LanguageType
   type BoilerType
   boilerCode String
+  questionId Int 
+
+  //relationships
+  question Questions @relation(fields:[questionId],references:[id])
 }

@@ -38,8 +38,8 @@ enum DifficultyType {
 
 enum AcceptedType {
   PENDING
-  ACCEPTED
-  REJECTED
+  COMPLETED
+  STARTED
 }
 
 enum QuestionType {
@@ -74,7 +74,7 @@ model Student {
   name            String
   rno             String   @unique
   uname           String   @unique
-  leetCodeName    String
+  leetCodeName    String   @unique
   salt            String
   hash            String
   leetCodeProfile String?
@@ -115,19 +115,22 @@ model Questions {
   CLangFunction           String
   PyLangFunction          String
   JavsLangFunction        String
+  timeToSolve             DateTime
 
   //relationships
-  testCase   TestCase[]
-  submission Submission[]
-  discussion Discussions[]
-  topics     Topics        @relation(fields: [topic], references: [id])
+  testCase    TestCase[]
+  submission  Submission[]
+  discussion  Discussions[]
+  boilerPlate BoilerPlate[]
+  topics      Topics        @relation(fields: [topic], references: [id])
 }
 
 model TestCase {
-  id           Int    @id @default(autoincrement())
+  id           Int          @id @default(autoincrement())
   inputString  String
   outputString String
   questionId   Int
+  type         TestCaseType @default(OPEN)
 
   //relationships
   questions Questions @relation(fields: [questionId], references: [id])
@@ -137,16 +140,18 @@ model Submission {
   id              Int            @id @default(autoincrement())
   questionId      Int
   studentId       Int
-  solvedOn        DateTime       @default(now())
-  status          AcceptedType   @default(PENDING)
-  noOfCasesPassed Int
-  pointsSecured   Int
+  solvedOn        DateTime?
+  status          AcceptedType   @default(STARTED)
+  noOfCasesPassed Int            @default(0)
+  pointsSecured   Int            @default(0)
   type            SubmissionType @default(WEBSITE)
   output1         String?
   output2         String?
   isFinal         isFinalType    @default(NO)
   code            String?
   leetCodeLink    String?
+  language        LanguageType?
+  timeTaken       DateTime?
 
   //relationships
   questions Questions @relation(fields: [questionId], references: [id])
@@ -233,4 +238,8 @@ model BoilerPlate {
   language   LanguageType
   type       BoilerType
   boilerCode String
+  questionId Int
+
+  //relationships
+  question Questions @relation(fields: [questionId], references: [id])
 }
