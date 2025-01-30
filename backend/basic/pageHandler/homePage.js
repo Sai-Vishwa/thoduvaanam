@@ -25,6 +25,7 @@ async function homePage(req,res) {
                             id:true,
                             title:true,
                             difficulty:true,
+                            type:true,
                             submission:{
                                 select:{
                                     status:true,
