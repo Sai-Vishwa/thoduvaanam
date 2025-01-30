@@ -38,8 +38,8 @@ enum DifficultyType {
 
 enum AcceptedType {
   PENDING
-  ACCEPTED
-  REJECTED
+  COMPLETED
+  STARTED
 }
 
 enum QuestionType {
@@ -139,7 +139,7 @@ model Submission {
   questionId Int
   studentId Int
   solvedOn DateTime?
-  status AcceptedType @default(PENDING)
+  status AcceptedType @default(STARTED)
   noOfCasesPassed Int @default(0)
   pointsSecured Int @default(0)  
   type SubmissionType @default(WEBSITE)

@@ -1,7 +1,10 @@
 const { PrismaClient } = require("../../dbSchema/generated");
 const { sessionChecker } = require("../../sessionChecker/sessionChecker");
+const { CMain } = require("../C/CMain");
 const { pythonMain } = require("../python/pythonMain");
 const prisma = new PrismaClient();
+const files = require('fs');
+
 async function check(req,res) {
     try{
         const studentId = sessionChecker(req.cookies.session)
@@ -9,7 +12,7 @@ async function check(req,res) {
         const lang = req.body.lang
         const qid = req.body.qid
         if(studentId == -1){
-            res.status(200).josn({
+            res.status(200).json({
                 err:"invalid session"
             })
         }
@@ -24,38 +27,38 @@ async function check(req,res) {
                     lang: lang
                 },
                 where:{
-                    studentId:studentId,
-                    questionId:qid,
-                    isFinal:"NO",
-                    status:"PENDING"
+                    AND:[
+                        {studentId:studentId},
+                        {questionId:qid},
+                        {isFinal:"NO"},
+                        {status:"PENDING"}
+                    ]
                 }
             })
             if(upd.count == 0){
-                res.status(200).josn({
+                res.status(200).json({
                     err:"dai faker odra..."
                 })
+                return
             }
-            else{
-                if(lang==="C"){
+            if(lang==="C"){
+                const outcome = await CMain(req.body);
+                if(outcome.status==-1){
+                    res.status(400).json({
+                        err:"internal error"
+                    })
+                    return
+                }
+                res.status(200).json({
+                    msg:"Naama jeichittom maara",
+                    ...outcome
+                })
+            }
+            else if(lang==="Python"){
+                
+            }
+            else if(lang==="Java"){
 
-                }
-                else if(lang==="Python"){
-                    const outcome = await pythonMain({});
-                    if(outcome.status == -1){
-                        res.status(200).json({
-                            err:"Thothukitte irukkiye da..."
-                        })
-                    }
-                    else{
-                        res.status(200).json({
-                            msg:"ithu namma kaalam kabila...",
-                            data:outcome
-                        })
-                    }
-                }
-                else if(lang==="Java"){
-    
-                }
             }
         }
     }
