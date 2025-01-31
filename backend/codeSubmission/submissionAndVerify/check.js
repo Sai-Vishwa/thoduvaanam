@@ -24,14 +24,15 @@ async function check(req,res) {
                     output1: "",
                     output2: "",
                     code: code,
-                    lang: lang
+                    lang: lang,
+                    status:"COMPUTING"
                 },
                 where:{
                     AND:[
                         {studentId:studentId},
                         {questionId:qid},
                         {isFinal:"NO"},
-                        {status:"PENDING"}
+                        {status:"WAITING"}
                     ]
                 }
             })

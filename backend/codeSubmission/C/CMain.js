@@ -5,6 +5,7 @@ const { error } = require('console');
 const { stdout, stderr } = require('process');
 const { copy } = require('./copy');
 const { compile } = require('./compile');
+const { run } = require('./run');
 const prisma = new PrismaClient();
 
 async function CMain(allData) {
@@ -37,9 +38,25 @@ async function CMain(allData) {
         if(comp==-1){
             return {status:-1}
         }
-
-        
-
+        let count = 0, op1 = "",op2 =""
+        testCases.forEach(testcase =>{
+            const result = run(fileName,testcase.inputString,testcase.outputString);
+            count += parseInt(result.count)
+            if(testcase.type == "OPEN1"){
+                op1 = result.op
+            }
+            else if(testcase.type == "OPEN2"){
+                op2 = result.op
+            }
+        })
+        const upd = await prisma.submission.update({
+            where:{
+                id:allData.submissionId
+            },
+            data:{
+                code:allData.code
+            }
+        })
     }
     catch(error){
         console.log(error)

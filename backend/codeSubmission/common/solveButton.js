@@ -12,11 +12,15 @@ async function solveButton(req,res) {
             })
             return
         }
-        const add = await prisma.submission.createMany({
+        const add = await prisma.submission.createManyAndReturn({
             data:{
                 studentId:studentId,
                 ...req.body.data
             }
+        })
+        let ids = [];
+        add.forEach(sub =>{
+            ids.push(sub.id)
         })
 
         res.status(200).json({
@@ -25,13 +29,13 @@ async function solveButton(req,res) {
 
         setTimeout(async ()=>{
             const now = new Date();
-            const val = await prisma.submission.update({
+            const val = await prisma.submission.updateManyAndReturn({
                 where:{
                     AND:[
-                        {studentId:studentId},
-                        {questionId:qid},
-                        {isFinal:"NO"},
-                        {status:"PENDING"}
+                        {id:{
+                            in:ids
+                        }},
+                        {status:"WAITING"}
                     ]
                 },
                 data:{
@@ -39,6 +43,23 @@ async function solveButton(req,res) {
                     status:"COMPLETED",
                     timeTaken:90*60*1000,
                     solvedOn: now
+                }
+            });
+            let sum = 0;
+            val.forEach(v =>{
+                sum += parseInt(v.pointsSecured)
+            })
+            const addPoints = await prisma.studentAchievements.update({
+                where:{
+                    AND:[
+                        {studentId:studentId},
+                        {achievementId:1}
+                    ]
+                },
+                data:{
+                    count:{
+                        increment:sum
+                    }
                 }
             })
         },90*60*1000)

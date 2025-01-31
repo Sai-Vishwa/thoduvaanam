@@ -25,7 +25,8 @@ enum isFinalType {
 }
 
 enum TestCaseType {
-  OPEN
+  OPEN1
+  OPEN2
   HIDDEN
 }
 
@@ -37,9 +38,9 @@ enum DifficultyType {
 }
 
 enum AcceptedType {
-  PENDING
+  COMPUTING
   COMPLETED
-  STARTED
+  WAITING
 }
 
 enum QuestionType {
@@ -141,7 +142,7 @@ model Submission {
   questionId Int
   studentId Int
   solvedOn DateTime?
-  status AcceptedType @default(STARTED)
+  status AcceptedType @default(WAITING)
   noOfCasesPassed Int @default(0)
   pointsSecured Int @default(0)  
   type SubmissionType @default(WEBSITE)
