@@ -28,13 +28,17 @@ async function CMain(allData) {
             }
         })
         const fileName = `Submission_${allData.submissionId}`;
-        const success = copy(allData)
+        const success = copy(allData,fileName)
         if(success == -1){
             return {status:-1}
         }
 
-        const comp = await compile(allData,fileName)
+        const comp = compile(allData,fileName)
+        if(comp==-1){
+            return {status:-1}
+        }
 
+        
 
     }
     catch(error){

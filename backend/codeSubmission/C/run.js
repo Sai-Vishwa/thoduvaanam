@@ -1,32 +1,37 @@
-const { exec } = require('child_process');
-const { count } = require('console');
-const { stderr, stdout } = require('process');
-async function run(fileName,testcaseInput , testCaseType,testCaseOutput) {
-    await exec(`docker exec c_container ./${fileName}`,(error,stdout,stderr)=>{
-        if(error){
-            return {err:"error in execution try again"}
-        }
-        if(stderr){
-            if(testCaseType=="OPEN"){
-                return({
-                    err:"run time error",
-                    stderr: stderr,
-                    count: 0
-                })
-            }
-            return({
-                err:"run time error",
+const { spawnSync } = require('child_process');
+
+function run(fileName, testcaseInput, testCaseType, testCaseOutput) {
+
+    const result = spawnSync("docker", ["exec", "c_container", `./${fileName}`], {
+        input: testcaseInput,
+        encoding: "utf-8"
+    });
+
+    if (result.error) {
+        return { err: "Error in execution, try again" };
+    }
+
+    if (result.stderr) {
+        if (testCaseType === "OPEN") {
+            return {
+                err: "Runtime error",
+                stderr: result.stderr,
                 count: 0
-            })
+            };
         }
-        return({
-            msg:"successful",
-            count: stdout==testCaseOutput?1:0,
-            stdout: testCaseType=="OPEN"?stdout:null
-        })
-    })
+        return {
+            err: "Runtime error",
+            count: 0
+        };
+    }
+
+    return {
+        msg: "Successful",
+        count: result.stdout === testCaseOutput ? 1 : 0,
+        stdout: testCaseType === "OPEN" ? result.stdout : null
+    };
 }
 
 module.exports = {
     run
-}
+};
