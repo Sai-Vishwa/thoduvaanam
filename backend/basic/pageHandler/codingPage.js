@@ -16,12 +16,15 @@ async function codingPage(req,res) {
                 const data = await prisma.questions.findFirst({
                     where:{
                         id: questionId
+                    },
+                    include:{
+                        boilerPlate:true
                     }
                 })
                 res.status(200).json({
                     msg:"Successful",
                     data:data,
-                    type:"loaded"
+                    type:"loaded",
                 })
             }
             else{
