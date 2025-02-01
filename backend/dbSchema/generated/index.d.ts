@@ -95,7 +95,8 @@ export type isFinalType = (typeof isFinalType)[keyof typeof isFinalType]
 
 
 export const TestCaseType: {
-  OPEN: 'OPEN',
+  OPEN1: 'OPEN1',
+  OPEN2: 'OPEN2',
   HIDDEN: 'HIDDEN'
 };
 
@@ -113,9 +114,9 @@ export type DifficultyType = (typeof DifficultyType)[keyof typeof DifficultyType
 
 
 export const AcceptedType: {
-  PENDING: 'PENDING',
+  COMPUTING: 'COMPUTING',
   COMPLETED: 'COMPLETED',
-  STARTED: 'STARTED'
+  WAITING: 'WAITING'
 };
 
 export type AcceptedType = (typeof AcceptedType)[keyof typeof AcceptedType]

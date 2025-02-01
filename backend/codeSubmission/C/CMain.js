@@ -29,8 +29,8 @@ async function CMain(allData) {
             }
         })
         const fileName = `Submission_${allData.submissionId}`;
-        const success = copy(allData,fileName)
-        if(success == -1){
+        const cp = copy(allData,fileName)
+        if(cp == -1){
             return {status:-1}
         }
 
@@ -39,22 +39,26 @@ async function CMain(allData) {
             return {status:-1}
         }
         let count = 0, op1 = "",op2 =""
-        testCases.forEach(testcase =>{
-            const result = run(fileName,testcase.inputString,testcase.outputString);
-            count += parseInt(result.count)
+        for(const testcase of testCases){
+            const runOP = await run(fileName,testcase.inputString,testcase.outputString);
+            count += parseInt(runOP.count)
             if(testcase.type == "OPEN1"){
-                op1 = result.op
+                op1 = runOP.op
             }
             else if(testcase.type == "OPEN2"){
-                op2 = result.op
+                op2 = runOP.op
             }
-        })
+        }
         const upd = await prisma.submission.update({
             where:{
                 id:allData.submissionId
             },
             data:{
-                code:allData.code
+                noOfCasesPassed:count,
+                output1:op1,
+                output2:op2,
+                pointsSecured:question.pointsPerTestCaseSolved*count,
+                status:'WAITING'
             }
         })
     }

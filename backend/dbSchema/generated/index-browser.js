@@ -267,14 +267,15 @@ exports.QuestionType = exports.$Enums.QuestionType = {
 };
 
 exports.TestCaseType = exports.$Enums.TestCaseType = {
-  OPEN: 'OPEN',
+  OPEN1: 'OPEN1',
+  OPEN2: 'OPEN2',
   HIDDEN: 'HIDDEN'
 };
 
 exports.AcceptedType = exports.$Enums.AcceptedType = {
-  PENDING: 'PENDING',
+  COMPUTING: 'COMPUTING',
   COMPLETED: 'COMPLETED',
-  STARTED: 'STARTED'
+  WAITING: 'WAITING'
 };
 
 exports.SubmissionType = exports.$Enums.SubmissionType = {

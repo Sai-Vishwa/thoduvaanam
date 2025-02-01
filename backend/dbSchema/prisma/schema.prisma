@@ -131,7 +131,7 @@ model TestCase {
   inputString String 
   outputString String
   questionId Int
-  type TestCaseType @default(OPEN)
+  type TestCaseType @default(OPEN1)
 
   //relationships
   questions Questions @relation(fields: [questionId], references: [id])
