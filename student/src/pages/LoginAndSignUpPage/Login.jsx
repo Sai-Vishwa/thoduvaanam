@@ -44,9 +44,10 @@ function LoginAndSignUpPage(){
                                 unameError={unameError}
                                 passwordError={passwordError}
                                 setPasswordError={setPasswordError} />
-                                <div className="SubmitBtn">
+                                <SubmitButton />
+                                {/* <div className="SubmitBtn">
                                 <button type="submit" className={`${SubmitButton}`}> Submit</button>
-                                </div>
+                                </div> */}
                                 <p className="pt-3 pb-3">Don't have an account ? <span  onClick={()=>{setLogin("hidden");setSignup("bold");}} className={`${loginStyle} w-1/2  p-2 cursor-pointer bg-transparent`}>Sign Up</span></p>
                   </div>
                               
@@ -61,9 +62,12 @@ function LoginAndSignUpPage(){
                     <Signup 
                                 signupData={signupData}
                                 setSignupData={setSignupData}/>
-                                 <div className="SubmitBtn">
+
+                                <SubmitButton />
+
+                                 {/* <div className="SubmitBtn">
                                 <button type="submit" className={`${SubmitButton}`}> Submit</button>
-                                </div>
+                                </div> */}
                                 <div className="Signin pt-3 pb-2"> <p>Already have an account ? <span  onClick={()=>{setLogin("block");setSignup("hidden");}} className={`${loginStyle} w-1/2 bg-transparent p-2 cursor-pointer pb-3`}>Sign In</span></p></div>
                     </div>
                              

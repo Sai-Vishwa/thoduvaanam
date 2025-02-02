@@ -7,9 +7,6 @@ function Login({setName , setPassword ,forgotpassword , setForgotPassword,unameE
     return(
     <div className=" block mt-4 mb-6 relative">
         <input type="text" placeholder="Enter uname/email" onChange={(e)=>{setName(e.target.value)}} className="p-2 w-full mb-0 mt-2"/>
-        <div className="flex items-baseline mb-3">
-        <p className={`text-sm ${unameError.style}`}>{unameError.val}</p>
-        </div>
         <input type="password" placeholder="Enter Password" onChange={(e)=>{setPassword(e.target.value)}} className={`p-2 w-full mb-0 ${forgotpassword.style}`}/>
         <div className="flex items-baseline mb-3">
         <p className={`text-sm ${passwordError.style} ${forgotpassword.style}`}>{passwordError.val}</p>

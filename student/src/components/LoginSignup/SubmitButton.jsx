@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import './login.css'
 function SubmitButton({unameOrRno,password,type,data,setOTP,forgotpassword,setUnameError,setPasswordError}){
     const nav = useNavigate;
     function onSubmit(){
@@ -76,7 +77,7 @@ function SubmitButton({unameOrRno,password,type,data,setOTP,forgotpassword,setUn
         }
     }
     return(<>
-    <button onClick={onSubmit}>
+    <button onClick={onSubmit} className='SubmitButton'>
         Submit
     </button>
     </>)

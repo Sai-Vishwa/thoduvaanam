@@ -20,3 +20,17 @@ width: 100%;
   .signupdiv{
     width:30vw;
   }
+
+  .SubmitButton{
+    padding: 11px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #040130e6;
+    margin:auto;
+    text-align:center;
+    margin-top:0;
+  }
