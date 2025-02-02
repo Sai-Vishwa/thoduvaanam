@@ -1,6 +1,7 @@
 function CodingPage({questionId}){
-    return (<>
-    This is where i code</>)
+    return (
+    <p>
+    This is where i code</p>)
 }
 
 export default CodingPage;
