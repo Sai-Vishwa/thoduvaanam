@@ -17,6 +17,7 @@ function Login({setName , setPassword ,forgotpassword , setForgotPassword,unameE
         <div className="text-blue text-md hover:underline" onClick={()=>{
             if(forgotpassword.style=="block"){
                 setForgotPassword({"val":"remember password?","style":"hidden"});setPasswordError({"style":"text-black"});
+                <button >Get OTP</button>
             }
             else{
                 setForgotPassword({"val":"forgot password ?","style":"block"});
