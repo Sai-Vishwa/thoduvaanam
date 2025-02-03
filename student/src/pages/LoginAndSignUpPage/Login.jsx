@@ -7,7 +7,6 @@ import './index.css'
 function LoginAndSignUpPage(){
     const [login,setLogin] = useState("block");
     const [signup, setSignup] = useState("hidden");
-    const [loginStyle,setLoginStyle] = useState("t");
     const [OTP,setOTP] = useState("hidden");
     const [signupData , setSignupData] = useState({
         "name":"",
@@ -18,38 +17,47 @@ function LoginAndSignUpPage(){
         "password":"",
         "verifyPassword":""
     })
-    const [name,setName] = useState("");
-    const [password,setPassword] = useState("");
-    const [unameError , setUnameError] = useState({"val":"username"});
-    const [passwordError , setPasswordError] = useState({});
+    const [loginData,setLoginData] = useState({
+      "uname":"",
+      "password":""
+    })
+    const [otpData,setOtpData] = useState({
+      "value":""
+    })
+    const [otpError,setOtpError] = useState({
+      "otpError":""
+    })
+    const [loginError,setLoginError] = useState({
+      "unameError":"",
+      "passwordError":""
+    })
+    const [signupError,setSignupError] = useState({
+        "nameError":"",
+        "unameError" : "",
+        "rnoError":"",
+        "leetCodeNameError":"",
+        "leetCodeProfileError":"",
+        "passwordError":"",
+        "verifyPasswordError":""
+    })
     const [forgotpassword,setForgotPassword] = useState({"val":"forgot password?","style":"block"});
 
     return (
         <div className="Container">
             <div className="BoxContainer">
                     
-                    <div className={`${login}`}>
-                    <div className="heading">
-                    <h1>Welcome</h1>
-                  <h1>Back ,</h1>
-                  <h3>Please sign-in to continue !</h3>
-                    </div>
-                  <div className="login">
-                  <Login 
-                                setName = {setName}
-                                setPassword = {setPassword}
-                                forgotpassword={forgotpassword}
-                                setForgotPassword={setForgotPassword}
-                                setuname={setUnameError}
-                                unameError={unameError}
-                                passwordError={passwordError}
-                                setPasswordError={setPasswordError} />
-                                <SubmitButton />
-                                {/* <div className="SubmitBtn">
-                                <button type="submit" className={`${SubmitButton}`}> Submit</button>
-                                </div> */}
-                                <p className="pt-3 pb-3">Don't have an account ? <span  onClick={()=>{setLogin("hidden");setSignup("bold");}} className={`${loginStyle} w-1/2  p-2 cursor-pointer bg-transparent`}>Sign Up</span></p>
-                  </div>
+              <div className={`${login}`}>
+              <div className="heading">
+              <h1>Welcome</h1>
+              <h1>Back ,</h1>
+              <h3>Please sign-in to continue !</h3>
+              </div>
+              <div className="login">
+                <Login 
+                   />
+                <SubmitButton />
+                <p className="pt-3 pb-3">Don't have an account ? <span  onClick={()=>{setLogin("hidden");setSignup("bold");}} className={`${loginStyle} w-1/2  p-2 cursor-pointer bg-transparent`}>Sign Up</span></p>
+              </div>
                               
                     </div>
                     <div className={`${signup}`}>

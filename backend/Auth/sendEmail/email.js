@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer")
+require('dotenv').config()
 
 async function SendEmail(toAddr , otp) {
     try{
@@ -25,6 +26,12 @@ async function SendEmail(toAddr , otp) {
         return 0;
     }
 }
+
+// async function run() {
+//     const status = await SendEmail('saivishwaram.ramkumar@gmail.com','325225')
+//     console.log(status)
+// }
+// run()
 
 module.exports = {
     SendEmail

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import './login.css'
 
-function Login({setName , setPassword ,forgotpassword , setForgotPassword,unameError,passwordError ,setPasswordError}){
+function Login({forgotPassword , loginData , setLoginData , loginError , setLoginError}){
 
     
     return(
