@@ -1,26 +1,29 @@
 import { useState } from "react";
 import './login.css'
 
-function Login({forgotPassword , loginData , setLoginData , loginError , setLoginError}){
+function Login({forgotPassword , loginData , setLoginData , loginError ,setForgotPassword ,setLoginError}){
 
     
     return(
     <div className=" block mt-4 mb-6 relative">
-        <input type="text" placeholder="Enter uname/email" onChange={(e)=>{setName(e.target.value)}} className="p-2 w-full mb-0 mt-2"/>
-        <input type="password" placeholder="Enter Password" onChange={(e)=>{setPassword(e.target.value)}} className={`p-2 w-full mb-0 ${forgotpassword.style}`}/>
-        <div className="flex items-baseline mb-3">
-        <p className={`text-sm ${passwordError.style} ${forgotpassword.style}`}>{passwordError.val}</p>
+        <input type="text" placeholder="Enter uname/email" onChange={(e)=>{setLoginData({...loginData , "uname":e.target.value})}} className="p-2 w-full mb-0 mt-2"/>
+        <div className="text-red-500 text-xs mb-3 p-0 flex items-baseline">
+            <p>{loginError.unameError}</p>
+        </div>
+        <input type="password" placeholder="Enter Password" onChange={(e)=>{setLoginData({...loginData , "password":e.target.value})}} className={`p-2 w-full mb-0 ${forgotPassword.style}`}/>
+        <div className="flex items-baseline mb-3 text-red-500">
+            <p className={`text-sm`}>{loginError.passwordError}</p>
         </div>
         <div className="text-blue text-md hover:underline" onClick={()=>{
-            if(forgotpassword.style=="block"){
-                setForgotPassword({"val":"remember password?","style":"hidden"});setPasswordError({"style":"text-black"});
+            if(forgotPassword.style=="block"){
+                setForgotPassword({"val":"remember password?","style":"hidden"});setLoginError({...loginError,"passwordError":""});
             }
             else{
                 setForgotPassword({"val":"forgot password ?","style":"block"});
             }
         }
         }>
-        {forgotpassword.val}
+        {forgotPassword.val}
         </div>
     </div>)
 }

@@ -8,6 +8,7 @@ function LoginAndSignUpPage(){
     const [login,setLogin] = useState("block");
     const [signup, setSignup] = useState("hidden");
     const [OTP,setOTP] = useState("hidden");
+    const [OTPVerify , setOTPVerify] = useState(false)
     const [signupData , setSignupData] = useState({
         "name":"",
         "uname" : "",
@@ -54,9 +55,15 @@ function LoginAndSignUpPage(){
               </div>
               <div className="login">
                 <Login 
+                  forgotPassword={forgotpassword}
+                  loginData={loginData}
+                  loginError={loginError}
+                  setForgotPassword={setForgotPassword}
+                  setLoginData={setLoginData}
+                  setLoginError={setLoginError}
                    />
                 <SubmitButton />
-                <p className="pt-3 pb-3">Don't have an account ? <span  onClick={()=>{setLogin("hidden");setSignup("bold");}} className={`${loginStyle} w-1/2  p-2 cursor-pointer bg-transparent`}>Sign Up</span></p>
+                <p className="pt-3 pb-3">Don't have an account ? <span  onClick={()=>{setLogin("hidden");setSignup("bold");}} className={` w-1/2  p-2 cursor-pointer bg-transparent`}>Sign Up</span></p>
               </div>
                               
                     </div>
@@ -76,7 +83,7 @@ function LoginAndSignUpPage(){
                                  {/* <div className="SubmitBtn">
                                 <button type="submit" className={`${SubmitButton}`}> Submit</button>
                                 </div> */}
-                                <div className="Signin pt-3 pb-2"> <p>Already have an account ? <span  onClick={()=>{setLogin("block");setSignup("hidden");}} className={`${loginStyle} w-1/2 bg-transparent p-2 cursor-pointer pb-3`}>Sign In</span></p></div>
+                                <div className="Signin pt-3 pb-2"> <p>Already have an account ? <span  onClick={()=>{setLogin("block");setSignup("hidden");}} className={` w-1/2 bg-transparent p-2 cursor-pointer pb-3`}>Sign In</span></p></div>
                     </div>
                              
                     </div>

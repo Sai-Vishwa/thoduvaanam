@@ -10,10 +10,7 @@ async function login(req,res) {
     try{
         const student = await prisma.student.findFirst({
             where:{
-                OR: [
-                    {uname: req.body.unameOrRno},
-                    {rno:req.body.unameOrRno}
-                ]
+                rno:req.body.rno
             }
         })
         if(!student){
@@ -32,14 +29,7 @@ async function login(req,res) {
                 const now = new Date();
                 const exp = new Date(now.getTime()+60*60*1000);
                 const session = hashGenerator(student.uname)
-                const updateLogin = prisma.student.update({
-                    where:{
-                        uname:student.uname
-                    },
-                    data:{
-                        lastLogin: now
-                    }
-                })
+                
                 const removeIfExists = await prisma.session.deleteMany({
                     where:{
                         studentId: student.id
@@ -52,24 +42,9 @@ async function login(req,res) {
                         session: session
                     }
                 }) 
-                const achieve = await prisma.studentAchievements.findMany({
-                    select:{
-                        achievementId: true,
-                        count:true,
-                        achievements:{
-                            select:{
-                                title: true,
-                                description:true,
-                            }
-                        }
-                    },
-                    where:{
-                        studentId:student.id
-                    }
-                })
+                
                 res.status(200).json({
                     msg:"Success",
-                    data:{"data":JSON.stringify(student),"achievements":JSON.stringify(achieve)},
                     session:session
                 })
             }

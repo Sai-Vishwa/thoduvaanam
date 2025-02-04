@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import './login.css'
-function SubmitButton({unameOrRno,password,type,data,setOTP,forgotpassword,setUnameError,setPasswordError}){
-    const nav = useNavigate;
+function SubmitButton({OTPverify ,login,forgotPassword, loginData , signupData , loginError , setLoginError , signupError , setSignupError}){
+    const nav = useNavigate();
     function onSubmit(){
-        if(type=="block" && forgotpassword.val=="forgot password?"){
+        if(OTPverify == false && login=="block"){
             let flag=0;
             if(unameOrRno==""){
                 setUnameError({"val":"*Username cannot be empty"})
