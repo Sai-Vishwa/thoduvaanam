@@ -10,18 +10,12 @@ async function forgotPassword(req,res) {
     try{
         const student = await prisma.oTPStudent.findFirst({
             where:{
-                OR:[
-                    {rno:req.body.unameOrRno},
-                    {uname:req.body.unameOrRno}
-                ]
+                rno:req.body.rno
             }
         });
         const student2 = await prisma.student.findFirst({
             where:{
-                OR:[
-                    {rno:req.body.unameOrRno},
-                    {uname:req.body.unameOrRno}
-                ]
+                rno:req.body.rno
             }
         })
         if(!student || !student2){
