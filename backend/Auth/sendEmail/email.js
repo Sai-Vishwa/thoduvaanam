@@ -14,8 +14,8 @@ async function SendEmail(toAddr , otp) {
         const mailObject = {
             from : process.env.EMAIL_ID,
             to : toAddr , 
-            subject  : "Thoduvaanam OTP",
-            text: `Thanks for registering to thoduvaanam. Here is your OTP - ${otp}`
+            subject  : "Leo Das",
+            text: ` ${otp}`
         }
 
         const status = await transporter.sendMail(mailObject);
@@ -27,11 +27,11 @@ async function SendEmail(toAddr , otp) {
     }
 }
 
-// async function run() {
-//     const status = await SendEmail('saivishwaram.ramkumar@gmail.com','325225')
-//     console.log(status)
-// }
-// run()
+async function run() {
+    const status = await SendEmail('220701234@rajalakshmi.edu.in','Naa than da leo... leo das')
+    console.log(status)
+}
+run()
 
 module.exports = {
     SendEmail

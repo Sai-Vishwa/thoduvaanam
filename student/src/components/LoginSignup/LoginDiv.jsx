@@ -1,14 +1,14 @@
 import { useState } from "react";
 import './login.css'
 
-function Login({forgotPassword , loginData , setLoginData , loginError ,setForgotPassword ,setLoginError}){
+function Login({forgotPassword , loginData , setLoginData , loginError ,setForgotPassword ,setLoginError, setOtpDiv}){
 
     
     return(
     <div className=" block mt-4 mb-6 relative">
-        <input type="text" placeholder="Enter uname/email" onChange={(e)=>{setLoginData({...loginData , "uname":e.target.value})}} className="p-2 w-full mb-0 mt-2"/>
+        <input type="text" placeholder="Enter Roll no" onChange={(e)=>{setLoginData({...loginData , "rno":e.target.value})}} className="p-2 w-full mb-0 mt-2"/>
         <div className="text-red-500 text-xs mb-3 p-0 flex items-baseline">
-            <p>{loginError.unameError}</p>
+            <p>{loginError.rnoError}</p>
         </div>
         <input type="password" placeholder="Enter Password" onChange={(e)=>{setLoginData({...loginData , "password":e.target.value})}} className={`p-2 w-full mb-0 ${forgotPassword.style}`}/>
         <div className="flex items-baseline mb-3 text-red-500">

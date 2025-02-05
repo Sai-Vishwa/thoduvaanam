@@ -4,7 +4,7 @@ const { SendEmail } = require('../sendEmail/email');
 
 const prisma = new PrismaClient();
 
-async function resendOtp(req,rse) {
+async function resendOtp(req,res) {
     const currTime = new Date();
     const exp = new Date(currTime.getTime()+10*60*1000);
     const otp = OtpGenerator();
