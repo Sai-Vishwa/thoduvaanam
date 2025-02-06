@@ -1,15 +1,22 @@
 import { useState } from "react";
 import ResendButton from "./resendButton";
+import VerifyButton from "./verifyButton";
 
-function OtpDiv(OtpDiv){
+function OtpDiv({OtpDiv , otp , setOtp , otpError ,setOtpError }){
      
     return (
         <div className={`${OtpDiv}`}>
-                <input type="text" placeholder="Enter Roll no" onChange={(e)=>{setLoginData({...loginData , "rno":e.target.value})}} className="p-2 w-full mb-0 mt-2"/>
+                <input type="text" onChange={(e)=>{setOtp(otp + e)}} className="p-2 w-full mb-0 mt-2" maxLength={1}/>
+                <input type="text" onChange={(e)=>{setOtp(otp + e)}} className="p-2 w-full mb-0 mt-2" maxLength={1}/>
+                <input type="text" onChange={(e)=>{setOtp(otp + e)}} className="p-2 w-full mb-0 mt-2" maxLength={1}/>
+                <input type="text" onChange={(e)=>{setOtp(otp + e)}} className="p-2 w-full mb-0 mt-2" maxLength={1}/>
+                <input type="text" onChange={(e)=>{setOtp(otp + e)}} className="p-2 w-full mb-0 mt-2" maxLength={1}/>
+                <input type="text" onChange={(e)=>{setOtp(otp + e)}} className="p-2 w-full mb-0 mt-2" maxLength={1}/>
                 <div className="text-red-500 text-xs mb-3 p-0 flex items-baseline">
-                    <p>{loginError.rnoError}</p>
+                    <p>{otpError}</p>
                 </div>
                 <ResendButton />
+                <VerifyButton />
         </div>
     )
 }

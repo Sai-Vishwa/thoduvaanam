@@ -1,9 +1,14 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import SignUpButton from "../../components/LoginSignup/signupButton";
+import OtpDiv from "../../components/LoginSignup/otp/OtpDiv";
+import Signup from "../../components/LoginSignup/SignupDiv";
 
 function SignUpPage(){
     const nav = useNavigate();
+    const [otpDiv , setOtpDiv] = useState("hidden")
+    const [otpData,setOtpData] = useState("");
+    const [otpError,setOtpError] = useState("");
     const [signupData , setSignupData] = useState({
             "name":"",
             "uname" : "",
@@ -11,7 +16,8 @@ function SignUpPage(){
             "leetCodeName":"",
             "leetCodeProfile":"",
             "password":"",
-            "verifyPassword":""
+            "verifyPassword":"",
+            "isVerified":false
         })
         const [signupError,setSignupError] = useState({
             "nameError":"",
@@ -22,8 +28,10 @@ function SignUpPage(){
             "passwordError":"",
             "verifyPasswordError":""
         })
-        return (<>
-        <div className="heading">
+        return (
+        <div className="Container">
+            <div className="BoxContainer">
+            <div className="heading">
                       <h1>Create</h1>
                       <h1>Account,</h1>
                       <h3>Please sign-up to continue !</h3>
@@ -31,10 +39,27 @@ function SignUpPage(){
                     <div className="signup">
                         <Signup 
                             signupData={signupData}
-                            setSignupData={setSignupData}/>
-                        <SignUpButton />
+                            setSignupData={setSignupData}
+                            signUpError={signupError}
+                            setSignUpError={setSignupError}
+                            />
+                        <SignUpButton 
+                        setOtpDiv={setOtpDiv}
+                        setSignUpError={setSignupError}
+                        signUpError={signupError}
+                        signUpData={signupData}/>
+                        <OtpDiv 
+                            otp={otpData}
+                            setOtp={setOtpData}
+                            otpError={otpError}
+                            setOtpError={setOtpError}
+                            OtpDiv={otpDiv}
+                        />
                         <div className="Signin pt-3 pb-2"> <p>Already have an account ? <span  onClick={()=>{nav("/login")}} className={` w-1/2 bg-transparent p-2 cursor-pointer pb-3`}>Login</span></p></div>
                     </div>
-        </>)
+            </div>
+        </div>
+        
+        )
 }
 export default SignUpPage

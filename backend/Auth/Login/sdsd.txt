@@ -1,0 +1,15 @@
+const achieve = await prisma.studentAchievements.findMany({
+                    select:{
+                        achievementId: true,
+                        count:true,
+                        achievements:{
+                            select:{
+                                title: true,
+                                description:true,
+                            }
+                        }
+                    },
+                    where:{
+                        studentId:student.id
+                    }
+                })

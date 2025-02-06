@@ -18,7 +18,7 @@ function ResendButton({rno}){
             }
         }
         catch(error){
-            alert(error.message)
+            alert(JSON.stringify(error.message))
         }
     }
  return(

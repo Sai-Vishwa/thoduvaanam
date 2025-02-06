@@ -5,21 +5,23 @@ function LoginButton({forgotPassword ,loginData , loginError , setLoginError , s
     const name = forgotPassword.style!=="hidden"?"Login":"Send Otp"
     const nav = useNavigate();
     async function onSubmit(){
+        console.log("im getting called")
         let flag = true
         if(name === "Login"){
-            if(loginData.rno){
-                // yet to do
-                // manage the if
-                setLoginError({...loginError , "rnoError":"val"})
-                flag = false
-            }
-            if(loginData.password){
-                // yet to do
-                // manage the if
-                setLoginError({...loginError , "password":"val"})
-                flag = false
-            }
+            // if(loginData.rno){
+            //     // yet to do
+            //     // manage the if
+            //     setLoginError({...loginError , "rnoError":"val"})
+            //     flag = false
+            // }
+            // if(loginData.password){
+            //     // yet to do
+            //     // manage the if
+            //     setLoginError({...loginError , "password":"val"})
+            //     flag = false
+            // }
             if (flag){
+                console.log("inside if")
                 try{
                     const submit = await fetch("http://localhost:4000/login-signup/login",{
                         method:"POST",
@@ -40,7 +42,8 @@ function LoginButton({forgotPassword ,loginData , loginError , setLoginError , s
                     }
                 }
                 catch(error){
-                    alert(error.message);
+                    console.log(JSON.stringify(error.message))
+                    alert(JSON.stringify(error.message));
                 }
             }
         }
@@ -67,7 +70,7 @@ function LoginButton({forgotPassword ,loginData , loginError , setLoginError , s
                 }
             }
             catch(error){
-                alert(error.message)
+                alert(JSON.stringify(error.message))
             }
             
         }

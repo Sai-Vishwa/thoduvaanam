@@ -11,7 +11,7 @@ function LoginPage(){
 
     const nav = useNavigate();
     const [OTPdiv,setOTPdiv] = useState("hidden");
-
+    const [inp , setInp] = useState(true)
     const [otpData,setOtpData] = useState("");
     const [otpError,setOtpError] = useState("");
     
@@ -53,7 +53,12 @@ function LoginPage(){
                 setLoginError={setLoginError}
                 setOtpDiv={setOTPdiv}/>
 
-                <OtpDiv />
+                <OtpDiv 
+                otp={otpData}
+                OtpDiv={OTPdiv}
+                setOtp={setOtpData}
+                otpError={otpError}
+                setOtpError={setOtpError}/>
                 <div className={`${OTPdiv}`}>
                     This is the otp div
                 </div>

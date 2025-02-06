@@ -42,21 +42,7 @@ async function verifyOTPforLogin(req,res) {
                         expiry: exp
                     }
                 })
-                const achieve = await prisma.studentAchievements.findMany({
-                    select:{
-                        achievementId: true,
-                        count:true,
-                        achievements:{
-                            select:{
-                                title: true,
-                                description:true,
-                            }
-                        }
-                    },
-                    where:{
-                        studentId:student.id
-                    }
-                })
+                
                 res.status(200).json({
                     msg:"Success",
                     data:{"data":JSON.stringify(student),"achievements":JSON.stringify(achieve)},
