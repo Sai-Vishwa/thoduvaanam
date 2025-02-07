@@ -7,21 +7,19 @@ async function questionPage(req,res) {
     try{
         const studentId = await sessionChecker(req.cokkies.session);
         const qid = req.body.qid
-        let idToSearch = studentId
-        let viewMode = false
+        let viewMode = true
         if(studentId == -1){
             res.status(200).json({
                 err: "invalid session"
             })
         }
         else{
-            if(req.body.idToSearch !== ""){
-                idToSearch = parseInt(req.body.idToSearch)
-                viewMode = true
+            if(req.body.uname === studentId.uname){
+                viewMode = false
             }
             const submissions = await prisma.submission.findMany({
                 where:{
-                    studentId: idToSearch
+                    
                 }
             })
                 res.status(200).json({

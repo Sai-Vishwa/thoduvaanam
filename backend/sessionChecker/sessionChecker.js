@@ -7,10 +7,15 @@ async function sessionChecker(sessionId) {
                 session:sessionId
         }
     })
-    if(session){
+    const uname = await prisma.student.findFirst({
+        where:{
+            id:session.id
+        }
+    })
+    if(session && uname){
         const expiry = new Date(session.expiry);
         if(expiry>now){
-            return session.studentId;
+            return {id:session.studentId , uname:uname.uname};
         }
         else{
             const del = await prisma.session.delete({
@@ -18,11 +23,11 @@ async function sessionChecker(sessionId) {
                     id:session.id
                 }
             })
-            return -1;
+            return {err:-1};
         }
     }
     else{
-        return -1;
+        return {err:-1};
     }
 }
 module.exports = {

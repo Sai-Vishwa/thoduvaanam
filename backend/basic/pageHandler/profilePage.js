@@ -4,22 +4,20 @@ const { sessionChecker } = require("../../sessionChecker/sessionChecker");
 const prisma = new PrismaClient();
 async function profile(req,res) {
     try{
-        const studentId = sessionChecker(req.cookies.session);
-        let viewMode = false
-        let idToSearch = studentId
-        if(studentId==-1){
+        const studentId = await sessionChecker(req.cookies.session);
+        let viewMode = true
+        if(studentId.err==-1){
             res.status(200).json({
                 err:"invalid session"
             })
         }
         else{
-            if(req.body.idToSearch != "" && req.body.idToSearch!=studentId){
-                idToSearch = parseInt(req.body.idToSearch)
-                viewMode = true
+            if(req.body.uname === studentId.uname){
+                viewMode = false
             }
             const data =  await prisma.student.findFirst({
                 where:{
-                    id:idToSearch
+                    uname:req.body.uname
                 },
                 select:{
                     id: true,
@@ -47,7 +45,6 @@ async function profile(req,res) {
                 msg:"successful",
                 data:data,
                 viewMode:viewMode,
-                studentId:idToSearch
             })
         }
     }

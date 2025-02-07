@@ -42,6 +42,10 @@ const asyncHandler = (fn) => (req, res, next) => {
     await verifyOTPforLogin(req,res);
   }));
 
+  router.post('/force-quit-signup', asyncHandler(async (req, res) => {
+    await forcequit(req,res);
+  }));
+
   router.get("/",asyncHandler(async (req,res)=>{
     console.log("auth is working");
     res.status(200).send("HI IAM WORKING");

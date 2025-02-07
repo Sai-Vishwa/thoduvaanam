@@ -3,18 +3,16 @@ const { sessionChecker } = require("../../sessionChecker/sessionChecker");
 const prisma = new PrismaClient();
 async function homePage(req,res) {
     try{
+        let viewMode = true
         const studentId = await sessionChecker(req.cookies.session)
-        let viewMode = false
-        let idToSearch = studentId
-        if(studentId==-1){
+        if(studentId.err){
             res.status(200).json({
                 err:"Invlaid session"
             })
         }
         else{
-            if(req.body.serachId !="" && req.body.serachId!=studentId){
-                viewMode = true
-                idToSearch = parseInt(req.body.serachId)
+            if(studentId.uname == req.body.uname){
+                viewMode = false
             }
             const data = await prisma.topics.findMany({
                 select:{
@@ -32,7 +30,7 @@ async function homePage(req,res) {
                                 },
                                 where:{
                                     AND: [
-                                        {studentId: idToSearch},
+                                        {studentId: studentId.id},
                                         {isFinal:"YES"}
                                     ]
                                 }
@@ -45,7 +43,6 @@ async function homePage(req,res) {
                 msg:"Success",
                 data:data,
                 viewMode: viewMode,
-                studentId: idToSearch
             })
         }
     }

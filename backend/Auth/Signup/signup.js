@@ -30,7 +30,7 @@ async function signUp(req,res) {
                 status: "PENDING"
             }
         })
-        const sendEmail = SendEmail(req.body.rno+"@rajalakshmi.edu.in" , otp);
+        const sendEmail = await SendEmail(req.body.rno+"@rajalakshmi.edu.in" , otp);
         if(sendEmail==1){
             res.status(200).json({
                 msg:"OTP is resent successfully"

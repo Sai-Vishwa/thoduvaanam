@@ -4,6 +4,7 @@ const { hashGenerator } = require('../hashAndOtp/hashGenerator');
 const prisma = new PrismaClient();
 
 async function verifyOTPforSignUp(req,res) {
+    console.log("im here haha")
     try{    
         const student = await prisma.oTPStudent.findUnique({
             where:{
@@ -11,14 +12,14 @@ async function verifyOTPforSignUp(req,res) {
             }
         })
         if(!student){
-            res.status(400).json({
+            res.status(200).json({
                 err:"User does not exist"
             })
         }
         else{
         const otpTime = new Date(student.expiry);
         const currTime = new Date();
-        const exp = new Date(now.getTime()+60*60*1000);
+        const exp = new Date(currTime.getTime()+60*60*1000);
         const data = {
             name: student.name,
             rno: student.rno,
@@ -100,7 +101,7 @@ async function verifyOTPforSignUp(req,res) {
         }}}
     catch(error){
         console.log(error)
-        res.status(400).json({
+        res.status(200).json({
             err: "Internal error"
         })
     }

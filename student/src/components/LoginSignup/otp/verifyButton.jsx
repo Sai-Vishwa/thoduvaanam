@@ -3,7 +3,8 @@ function VerifyButton({type,rno,otp}){
 
     async function verify(){
         try{
-            const verification = await fetch(`http://localhost:4000/login-signup/${type}`,{
+            console.log(JSON.stringify(otp))
+            const verification = await fetch(`http://localhost:4000/login-signup/otp-verify-${type}`,{
                 method:"POST",
                 body: JSON.stringify({rno:rno,otp:otp}),
                 headers:{
@@ -16,6 +17,9 @@ function VerifyButton({type,rno,otp}){
                 alert("Otp verified successfully")
                 Cookies.set('session',data.session,{expires: 5/24})
                 nav("/")
+            }
+            else{
+                throw new Error(JSON.stringify(data))
             }
         }
         catch(error){

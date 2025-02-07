@@ -1,33 +1,31 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useParams } from "react-router-dom";
 import "./index.css"
 import searchlogo from "../../assets/image.png"
 function HomePage({}){
+    const {uname} = useParams();  
     const nav = useNavigate();
     const [allData,setAllData] = useState({});
-    // useEffect(()=>{
-    //     const session = Cookies.get("session");
-    //     if(!session){
-    //         alert("first login to access this route");
-    //         nav("/login-signup")
-    //     }
-    //     else if(allData=={}){
-    //         fetch("http://localhost:4000/basic/home",{credentials:'include'})
-    //           .then((resp)=>{return resp.json()})
-    //           .then(data =>{
-    //             if(data.err){
-    //                 alert(data.err)
-    //             }
-    //             else{
-    //                 setAllData(data)
-    //             }
-    //           }
-    //         ).catch(err =>{
-    //             console.log(err);
-    //             alert("Some error")
-    //         })
-    //     }
-    // },[])
+    useEffect(()=>{
+        const session = Cookies.get("session");
+        const fetchData = async () =>{
+          const result = await fetch("http://localhost:4000/basic/home",{
+            method:"POST",
+            body: JSON.stringify({uname:uname}),
+            headers:{
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
+        }
+        if(!session){
+            alert("first login to access this route");
+            nav("/login-signup")
+        }
+        else if(allData=={}){
+            
+        }
+    },[])
     const topics = [
         { name: "Data Structures", notesLink: "/notes/dsa" },
         { name: "Algorithms", notesLink: "/notes/algo" },
