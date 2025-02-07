@@ -18,7 +18,7 @@ async function verifySubmission(req,res) {
                 }
             })
             const url = "https://leetcode.com/problems/"+question.leetCodeTitle+"/submissions/"+req.body.url
-            if(session==-1){
+            if(studentId.err==-1){
                 res.status(200).json({
                     err:"Login first"
                 })

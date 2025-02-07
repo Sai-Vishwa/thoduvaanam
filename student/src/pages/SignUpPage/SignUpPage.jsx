@@ -12,7 +12,7 @@ function SignUpPage(){
               event.preventDefault();
               event.returnValue = "";
             } else {
-              fetch("http://localhost:5000/api/exit", { method: "POST" });
+              fetch("http://localhost:4000/login-signup/force-quit-signup", { method: "POST" });
             }
           };
       

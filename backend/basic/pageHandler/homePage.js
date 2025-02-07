@@ -13,6 +13,14 @@ async function homePage(req,res) {
         else{
             if(studentId.uname == req.body.uname){
                 viewMode = false
+                const searchid = await prisma.student.findFirst({
+                    where:{
+                        uname:req.body.uname
+                    }
+                })
+            }
+            else{
+                const searchid = studentId.id
             }
             const data = await prisma.topics.findMany({
                 select:{

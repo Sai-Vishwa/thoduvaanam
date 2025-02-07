@@ -1,7 +1,8 @@
 const {PrismaClient} = require("../dbSchema/generated");
 const prisma = new PrismaClient();
 async function sessionChecker(sessionId) {
-    const now = new Date();
+    const utc = new Date();
+    const now = new Date(utc.getTime()+5.5*60*60*1000);
     const session = await prisma.session.findFirst({
         where:{
                 session:sessionId

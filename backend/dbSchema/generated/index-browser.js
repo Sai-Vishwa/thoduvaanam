@@ -125,7 +125,6 @@ exports.Prisma.StudentScalarFieldEnum = {
   leetCodeName: 'leetCodeName',
   salt: 'salt',
   hash: 'hash',
-  leetCodeProfile: 'leetCodeProfile',
   timeOfLastSolve: 'timeOfLastSolve'
 };
 
@@ -152,7 +151,7 @@ exports.Prisma.QuestionsScalarFieldEnum = {
   CLangFunction: 'CLangFunction',
   PyLangFunction: 'PyLangFunction',
   JavsLangFunction: 'JavsLangFunction',
-  timeToSolve: 'timeToSolve'
+  timeToSolveInHours: 'timeToSolveInHours'
 };
 
 exports.Prisma.TestCaseScalarFieldEnum = {

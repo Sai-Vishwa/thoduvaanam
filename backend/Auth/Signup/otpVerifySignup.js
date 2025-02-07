@@ -18,7 +18,8 @@ async function verifyOTPforSignUp(req,res) {
         }
         else{
         const otpTime = new Date(student.expiry);
-        const currTime = new Date();
+        const utc = new Date();
+        const currTime = new Date(utc.getTime()+5.5*60*60*1000);
         const exp = new Date(currTime.getTime()+60*60*1000);
         const data = {
             name: student.name,
@@ -29,8 +30,8 @@ async function verifyOTPforSignUp(req,res) {
             hash: student.hash,
             leetCodeProfile: student.leetCodeProfile,
         }
-        const session = hashGenerator(student.uname)
-        if(student["otp"]==req.body.otp && otpTime<currTime){
+        const session = await hashGenerator(student.uname)
+        if(student["otp"]==req.body.otp && currTime<exp){
             const std = await prisma.student.create({
                 data: data
             })
@@ -50,7 +51,7 @@ async function verifyOTPforSignUp(req,res) {
             const ses = await prisma.session.create({
                 data:{
                     studentId:student.id,
-                    session:session,
+                    session:session.hash,
                     expiry: exp
                 }
             })

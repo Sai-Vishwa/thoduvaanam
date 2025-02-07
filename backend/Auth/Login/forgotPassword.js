@@ -25,6 +25,8 @@ async function forgotPassword(req,res) {
         }
         else{
             const otp = OtpGenerator();
+            const utc = new Date();
+            const now = new Date(utc.getTime()+5.5*60*60*1000);
             const exp = new Date(now.getTime()+60*60*1000);
             const email = SendEmail(student.rno+"@rajalakshmi.edu.in",otp);
             if(email==0){

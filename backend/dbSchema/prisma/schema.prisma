@@ -75,11 +75,10 @@ model Student {
   name String 
   rno String @unique
   uname String @unique
-  leetCodeName String @unique
+  leetCodeName String? @unique
   salt String
   hash String
-  leetCodeProfile String?
-  timeOfLastSolve DateTime
+  timeOfLastSolve DateTime?
   
   //relationships
   submission Submission[]
@@ -116,7 +115,7 @@ model Questions {
   CLangFunction String
   PyLangFunction String
   JavsLangFunction String
-  timeToSolve DateTime
+  timeToSolveInHours Int
 
   //relationships
   testCase TestCase[]

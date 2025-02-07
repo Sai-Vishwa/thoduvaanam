@@ -1,0 +1,97 @@
+
+
+INSERT INTO "Topics" ("name", "description", "notes", "contestDate") VALUES
+('Dynamic Programming', 'Techniques for solving complex problems by breaking them into simpler subproblems', NULL, '2025-03-01'),
+('Sliding Window', 'Optimized approach for handling subarray problems efficiently', NULL, '2025-03-02'),
+('Graph Theory', 'Study of graphs and their applications in computing', NULL, '2025-03-03'),
+('Binary Search', 'Efficient searching technique on sorted data', NULL, '2025-03-04'),
+('Greedy Algorithms', 'Approach to solve problems step by step with local optimization', NULL, '2025-03-05'),
+('Recursion & Backtracking', 'Problem-solving approach using recursion and exploring all possibilities', NULL, '2025-03-06'),
+('Bit Manipulation', 'Techniques to optimize computations using bitwise operations', NULL, '2025-03-07'),
+('Trie Data Structure', 'Efficient data structure for searching and prefix matching', NULL, '2025-03-08'),
+('Segment Tree', 'Data structure for range queries and updates', NULL, '2025-03-09'),
+('Union-Find', 'Disjoint set data structure for connectivity problems', NULL, '2025-03-10');
+
+
+
+
+INSERT INTO "Questions" ("title", "description", "topic", "noOfHiddenTestCases", "noOfExternalTestCases", "difficulty", "pointsPerTestCaseSolved", "type", "leetCodeLink", "leetCodeTitle", "CLangFunction", "PyLangFunction", "JavsLangFunction", "timeToSolveInHours") VALUES
+('Longest Increasing Subsequence', 'Find the length of the longest increasing subsequence in an array.', 1, 18, 2, 'BALANCED', 10, 'PRACTICE', 'https://leetcode.com/problems/longest-increasing-subsequence/', 'Longest Increasing Subsequence', 'int LIS(int arr[], int n);', 'def LIS(arr: List[int]) -> int:', 'public int LIS(int[] arr);', '1'),
+('Sliding Window Maximum', 'Find the maximum value in each window of size k in an array.', 2, 18, 2, 'HELL', 15, 'CONTEST', 'https://leetcode.com/problems/sliding-window-maximum/', 'Sliding Window Maximum', 'int* maxSlidingWindow(int* nums, int numsSize, int k, int* returnSize);', 'def maxSlidingWindow(nums: List[int], k: int) -> List[int]:', 'public int[] maxSlidingWindow(int[] nums, int k);', '2'),
+('Dijkstra’s Algorithm', 'Find the shortest path from a source to all vertices in a graph.', 3, 18, 2, 'BALANCED', 12, 'PRACTICE', 'https://leetcode.com/problems/network-delay-time/', 'Network Delay Time', 'void dijkstra(int graph[V][V], int src);', 'def dijkstra(graph: List[List[int]], src: int) -> List[int]:', 'public void dijkstra(int[][] graph, int src);', '1'),
+('Binary Search in Rotated Array', 'Search for a target in a rotated sorted array.', 4, 18, 2, 'BALANCED', 10, 'PRACTICE', 'https://leetcode.com/problems/search-in-rotated-sorted-array/', 'Search in Rotated Sorted Array', 'int search(int* nums, int numsSize, int target);', 'def search(nums: List[int], target: int) -> int:', 'public int search(int[] nums, int target);', '1'),
+('Activity Selection', 'Select the maximum number of non-overlapping activities.', 5, 18, 2, 'EASY', 8, 'CONTEST', 'https://leetcode.com/problems/non-overlapping-intervals/', 'Non-overlapping Intervals', 'int activitySelection(int start[], int end[], int n);', 'def activitySelection(start: List[int], end: List[int], n: int) -> int:', 'public int activitySelection(int[] start, int[] end, int n);', '2'),
+('N-Queens', 'Place N queens on an N×N chessboard without attacking each other.', 6, 18, 2, 'HELL', 15, 'PRACTICE', 'https://leetcode.com/problems/n-queens/', 'N-Queens', 'void solveNQueens(int n);', 'def solveNQueens(n: int) -> List[List[str]]:', 'public List<List<String>> solveNQueens(int n);', '1'),
+('Counting Set Bits', 'Count the number of 1s in the binary representation of a number.', 7, 18, 2, 'EASY', 5, 'PRACTICE', 'https://leetcode.com/problems/number-of-1-bits/', 'Number of 1 Bits', 'int countSetBits(int n);', 'def countSetBits(n: int) -> int:', 'public int countSetBits(int n);', '1'),
+('Implement Trie', 'Design a Trie (prefix tree) with insert, search, and startsWith operations.', 8, 18, 2, 'BALANCED', 10, 'CONTEST', 'https://leetcode.com/problems/implement-trie-prefix-tree/', 'Implement Trie (Prefix Tree)', 'struct Trie { void insert(char* word); bool search(char* word); bool startsWith(char* prefix); };', 'class Trie: def insert(self, word: str): pass def search(self, word: str) -> bool: pass def startsWith(self, prefix: str) -> bool: pass', 'class Trie { public void insert(String word); public boolean search(String word); public boolean startsWith(String prefix); }', '2'),
+('Range Sum Query', 'Given an array, handle sum queries efficiently.', 9, 18, 2, 'BALANCED', 12, 'PRACTICE', 'https://leetcode.com/problems/range-sum-query-mutable/', 'Range Sum Query - Mutable', 'int sumRange(int i, int j);', 'def sumRange(i: int, j: int) -> int:', 'public int sumRange(int i, int j);', '1'),
+('Connected Components', 'Find the number of connected components in an undirected graph.', 10, 18, 2, 'EASY', 8, 'CONTEST', 'https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/', 'Number of Connected Components', 'int countComponents(int n, int** edges, int edgesSize, int* edgesColSize);', 'def countComponents(n: int, edges: List[List[int]]) -> int:', 'public int countComponents(int n, int[][] edges);', '2');
+
+
+
+
+
+INSERT INTO "TestCase" ("inputString", "outputString", "questionId", "type") VALUES
+-- Longest Increasing Subsequence
+('[10,9,2,5,3,7,101,18]', '4', 1, 'OPEN1'),
+('[0,1,0,3,2,3]', '4', 1, 'OPEN2'),
+('[7,7,7,7,7,7,7]', '1', 1, 'HIDDEN'),
+
+-- Sliding Window Maximum
+('[1,3,-1,-3,5,3,6,7]', '3,3,5,5,6,7', 2, 'OPEN1'),
+('[9,11,8,5,7,10]', '11,11,8,10', 2, 'OPEN2'),
+('[4,3,2,1]', '4', 2, 'HIDDEN'),
+
+-- Dijkstra’s Algorithm
+('[4, [[0,1,1],[0,2,4],[1,2,2],[1,3,5],[2,3,1]], 0]', '[0,1,3,4]', 3, 'OPEN1'),
+('[3, [[0,1,5],[1,2,2],[0,2,9]], 0]', '[0,5,7]', 3, 'OPEN2'),
+('[5, [[0,1,2],[1,2,4],[2,3,6],[3,4,8]], 0]', '[0,2,6,12,20]', 3, 'HIDDEN'),
+
+-- Binary Search in Rotated Array
+('[4,5,6,7,0,1,2], 0', '4', 4, 'OPEN1'),
+('[3,4,5,1,2], 1', '3', 4, 'OPEN2'),
+('[6,7,1,2,3,4,5], 9', '-1', 4, 'HIDDEN'),
+
+-- Activity Selection
+('[3, [1,3,2], [2,4,3]]', '2', 5, 'OPEN1'),
+('[4, [1,2,3,4], [2,3,4,5]]', '4', 5, 'OPEN2'),
+('[5, [5,6,7,8,9], [6,7,8,9,10]]', '5', 5, 'HIDDEN'),
+
+-- N-Queens
+('4', '[[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]]', 6, 'OPEN1'),
+('1', '[["Q"]]', 6, 'OPEN2'),
+('8', '[HIDDEN OUTPUT]', 6, 'HIDDEN'),
+
+-- Counting Set Bits
+('5', '2', 7, 'OPEN1'),
+('10', '2', 7, 'OPEN2'),
+('1023', '10', 7, 'HIDDEN'),
+
+-- Implement Trie
+('["insert", "search", "search", "startsWith"] [["apple"], ["apple"], ["app"], ["app"]]', '[null, true, false, true]', 8, 'OPEN1'),
+('["insert", "insert", "search"] [["dog"], ["door"], ["do"]]', '[null, null, false]', 8, 'OPEN2'),
+('["insert", "search", "insert", "search"] [["abc"], ["abc"], ["abcd"], ["abcd"]]', '[null, true, null, true]', 8, 'HIDDEN'),
+
+-- Range Sum Query
+('["NumArray", "sumRange", "update", "sumRange"] [[[-2, 0, 3, -5, 2, -1]], [0, 2], [1, 2], [0, 2]]', '[null, 1, null, 3]', 9, 'OPEN1'),
+('["NumArray", "sumRange"] [[[1,2,3,4,5]], [1,3]]', '[null, 9]', 9, 'OPEN2'),
+('["NumArray", "sumRange", "update", "sumRange"] [[[1,3,5,7,9]], [0,3], [2,6], [0,3]]', '[null, 16, null, 18]', 9, 'HIDDEN'),
+
+-- Connected Components
+('[5, [[0,1],[1,2],[3,4]]]', '2', 10, 'OPEN1'),
+('[6, [[0,1],[1,2],[2,3],[4,5]]]', '2', 10, 'OPEN2'),
+('[10, [[0,1],[2,3],[4,5],[6,7],[8,9]]]', '5', 10, 'HIDDEN');
+
+
+
+
+INSERT INTO "Achievements" ("title", "description") VALUES
+('Points Secured', 'Total points earned by the student in contests and practice questions.'),
+('Questions Solved', 'Total number of questions successfully solved by the student.'),
+('Contests Participated', 'Number of contests the student has taken part in.'),
+('Contests Won', 'Number of contests the student has won.'),
+('Highest Streak', 'The longest consecutive streak of daily problem-solving.'),
+('Current Streak', 'The number of consecutive days the student has solved problems.'),
+('Fastest Submission', 'The fastest correct submission in a contest.'),
+('Top Rank Achieved', 'Highest rank obtained in any contest.'),
+('First Problem Solved', 'Achievement for solving the first problem on the platform.');

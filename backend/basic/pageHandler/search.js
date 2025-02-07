@@ -6,7 +6,7 @@ async function search(req,res) {
     try{
         const uname = req.body.uname.toLowerCase()
         const myId = await sessionChecker(req.cookies.session)
-        if(myId == -1){
+        if(myId.err == -1){
             res.status(200).json({
                 err:"invalid session"
             })

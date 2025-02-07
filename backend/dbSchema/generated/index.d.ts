@@ -2243,7 +2243,6 @@ export namespace Prisma {
     leetCodeName: string | null
     salt: string | null
     hash: string | null
-    leetCodeProfile: string | null
     timeOfLastSolve: Date | null
   }
 
@@ -2255,7 +2254,6 @@ export namespace Prisma {
     leetCodeName: string | null
     salt: string | null
     hash: string | null
-    leetCodeProfile: string | null
     timeOfLastSolve: Date | null
   }
 
@@ -2267,7 +2265,6 @@ export namespace Prisma {
     leetCodeName: number
     salt: number
     hash: number
-    leetCodeProfile: number
     timeOfLastSolve: number
     _all: number
   }
@@ -2289,7 +2286,6 @@ export namespace Prisma {
     leetCodeName?: true
     salt?: true
     hash?: true
-    leetCodeProfile?: true
     timeOfLastSolve?: true
   }
 
@@ -2301,7 +2297,6 @@ export namespace Prisma {
     leetCodeName?: true
     salt?: true
     hash?: true
-    leetCodeProfile?: true
     timeOfLastSolve?: true
   }
 
@@ -2313,7 +2308,6 @@ export namespace Prisma {
     leetCodeName?: true
     salt?: true
     hash?: true
-    leetCodeProfile?: true
     timeOfLastSolve?: true
     _all?: true
   }
@@ -2409,11 +2403,10 @@ export namespace Prisma {
     name: string
     rno: string
     uname: string
-    leetCodeName: string
+    leetCodeName: string | null
     salt: string
     hash: string
-    leetCodeProfile: string | null
-    timeOfLastSolve: Date
+    timeOfLastSolve: Date | null
     _count: StudentCountAggregateOutputType | null
     _avg: StudentAvgAggregateOutputType | null
     _sum: StudentSumAggregateOutputType | null
@@ -2443,7 +2436,6 @@ export namespace Prisma {
     leetCodeName?: boolean
     salt?: boolean
     hash?: boolean
-    leetCodeProfile?: boolean
     timeOfLastSolve?: boolean
     submission?: boolean | Student$submissionArgs<ExtArgs>
     studentAchievements?: boolean | Student$studentAchievementsArgs<ExtArgs>
@@ -2461,7 +2453,6 @@ export namespace Prisma {
     leetCodeName?: boolean
     salt?: boolean
     hash?: boolean
-    leetCodeProfile?: boolean
     timeOfLastSolve?: boolean
   }, ExtArgs["result"]["student"]>
 
@@ -2473,7 +2464,6 @@ export namespace Prisma {
     leetCodeName?: boolean
     salt?: boolean
     hash?: boolean
-    leetCodeProfile?: boolean
     timeOfLastSolve?: boolean
   }, ExtArgs["result"]["student"]>
 
@@ -2485,11 +2475,10 @@ export namespace Prisma {
     leetCodeName?: boolean
     salt?: boolean
     hash?: boolean
-    leetCodeProfile?: boolean
     timeOfLastSolve?: boolean
   }
 
-  export type StudentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rno" | "uname" | "leetCodeName" | "salt" | "hash" | "leetCodeProfile" | "timeOfLastSolve", ExtArgs["result"]["student"]>
+  export type StudentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rno" | "uname" | "leetCodeName" | "salt" | "hash" | "timeOfLastSolve", ExtArgs["result"]["student"]>
   export type StudentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     submission?: boolean | Student$submissionArgs<ExtArgs>
     studentAchievements?: boolean | Student$studentAchievementsArgs<ExtArgs>
@@ -2515,11 +2504,10 @@ export namespace Prisma {
       name: string
       rno: string
       uname: string
-      leetCodeName: string
+      leetCodeName: string | null
       salt: string
       hash: string
-      leetCodeProfile: string | null
-      timeOfLastSolve: Date
+      timeOfLastSolve: Date | null
     }, ExtArgs["result"]["student"]>
     composites: {}
   }
@@ -2955,7 +2943,6 @@ export namespace Prisma {
     readonly leetCodeName: FieldRef<"Student", 'String'>
     readonly salt: FieldRef<"Student", 'String'>
     readonly hash: FieldRef<"Student", 'String'>
-    readonly leetCodeProfile: FieldRef<"Student", 'String'>
     readonly timeOfLastSolve: FieldRef<"Student", 'DateTime'>
   }
     
@@ -4604,6 +4591,7 @@ export namespace Prisma {
     noOfHiddenTestCases: number | null
     noOfExternalTestCases: number | null
     pointsPerTestCaseSolved: number | null
+    timeToSolveInHours: number | null
   }
 
   export type QuestionsSumAggregateOutputType = {
@@ -4612,6 +4600,7 @@ export namespace Prisma {
     noOfHiddenTestCases: number | null
     noOfExternalTestCases: number | null
     pointsPerTestCaseSolved: number | null
+    timeToSolveInHours: number | null
   }
 
   export type QuestionsMinAggregateOutputType = {
@@ -4629,7 +4618,7 @@ export namespace Prisma {
     CLangFunction: string | null
     PyLangFunction: string | null
     JavsLangFunction: string | null
-    timeToSolve: Date | null
+    timeToSolveInHours: number | null
   }
 
   export type QuestionsMaxAggregateOutputType = {
@@ -4647,7 +4636,7 @@ export namespace Prisma {
     CLangFunction: string | null
     PyLangFunction: string | null
     JavsLangFunction: string | null
-    timeToSolve: Date | null
+    timeToSolveInHours: number | null
   }
 
   export type QuestionsCountAggregateOutputType = {
@@ -4665,7 +4654,7 @@ export namespace Prisma {
     CLangFunction: number
     PyLangFunction: number
     JavsLangFunction: number
-    timeToSolve: number
+    timeToSolveInHours: number
     _all: number
   }
 
@@ -4676,6 +4665,7 @@ export namespace Prisma {
     noOfHiddenTestCases?: true
     noOfExternalTestCases?: true
     pointsPerTestCaseSolved?: true
+    timeToSolveInHours?: true
   }
 
   export type QuestionsSumAggregateInputType = {
@@ -4684,6 +4674,7 @@ export namespace Prisma {
     noOfHiddenTestCases?: true
     noOfExternalTestCases?: true
     pointsPerTestCaseSolved?: true
+    timeToSolveInHours?: true
   }
 
   export type QuestionsMinAggregateInputType = {
@@ -4701,7 +4692,7 @@ export namespace Prisma {
     CLangFunction?: true
     PyLangFunction?: true
     JavsLangFunction?: true
-    timeToSolve?: true
+    timeToSolveInHours?: true
   }
 
   export type QuestionsMaxAggregateInputType = {
@@ -4719,7 +4710,7 @@ export namespace Prisma {
     CLangFunction?: true
     PyLangFunction?: true
     JavsLangFunction?: true
-    timeToSolve?: true
+    timeToSolveInHours?: true
   }
 
   export type QuestionsCountAggregateInputType = {
@@ -4737,7 +4728,7 @@ export namespace Prisma {
     CLangFunction?: true
     PyLangFunction?: true
     JavsLangFunction?: true
-    timeToSolve?: true
+    timeToSolveInHours?: true
     _all?: true
   }
 
@@ -4842,7 +4833,7 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolve: Date
+    timeToSolveInHours: number
     _count: QuestionsCountAggregateOutputType | null
     _avg: QuestionsAvgAggregateOutputType | null
     _sum: QuestionsSumAggregateOutputType | null
@@ -4879,7 +4870,7 @@ export namespace Prisma {
     CLangFunction?: boolean
     PyLangFunction?: boolean
     JavsLangFunction?: boolean
-    timeToSolve?: boolean
+    timeToSolveInHours?: boolean
     testCase?: boolean | Questions$testCaseArgs<ExtArgs>
     submission?: boolean | Questions$submissionArgs<ExtArgs>
     discussion?: boolean | Questions$discussionArgs<ExtArgs>
@@ -4903,7 +4894,7 @@ export namespace Prisma {
     CLangFunction?: boolean
     PyLangFunction?: boolean
     JavsLangFunction?: boolean
-    timeToSolve?: boolean
+    timeToSolveInHours?: boolean
     topics?: boolean | TopicsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["questions"]>
 
@@ -4922,7 +4913,7 @@ export namespace Prisma {
     CLangFunction?: boolean
     PyLangFunction?: boolean
     JavsLangFunction?: boolean
-    timeToSolve?: boolean
+    timeToSolveInHours?: boolean
     topics?: boolean | TopicsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["questions"]>
 
@@ -4941,10 +4932,10 @@ export namespace Prisma {
     CLangFunction?: boolean
     PyLangFunction?: boolean
     JavsLangFunction?: boolean
-    timeToSolve?: boolean
+    timeToSolveInHours?: boolean
   }
 
-  export type QuestionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "topic" | "noOfHiddenTestCases" | "noOfExternalTestCases" | "difficulty" | "pointsPerTestCaseSolved" | "type" | "leetCodeLink" | "leetCodeTitle" | "CLangFunction" | "PyLangFunction" | "JavsLangFunction" | "timeToSolve", ExtArgs["result"]["questions"]>
+  export type QuestionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "topic" | "noOfHiddenTestCases" | "noOfExternalTestCases" | "difficulty" | "pointsPerTestCaseSolved" | "type" | "leetCodeLink" | "leetCodeTitle" | "CLangFunction" | "PyLangFunction" | "JavsLangFunction" | "timeToSolveInHours", ExtArgs["result"]["questions"]>
   export type QuestionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     testCase?: boolean | Questions$testCaseArgs<ExtArgs>
     submission?: boolean | Questions$submissionArgs<ExtArgs>
@@ -4984,7 +4975,7 @@ export namespace Prisma {
       CLangFunction: string
       PyLangFunction: string
       JavsLangFunction: string
-      timeToSolve: Date
+      timeToSolveInHours: number
     }, ExtArgs["result"]["questions"]>
     composites: {}
   }
@@ -5427,7 +5418,7 @@ export namespace Prisma {
     readonly CLangFunction: FieldRef<"Questions", 'String'>
     readonly PyLangFunction: FieldRef<"Questions", 'String'>
     readonly JavsLangFunction: FieldRef<"Questions", 'String'>
-    readonly timeToSolve: FieldRef<"Questions", 'DateTime'>
+    readonly timeToSolveInHours: FieldRef<"Questions", 'Int'>
   }
     
 
@@ -15958,7 +15949,6 @@ export namespace Prisma {
     leetCodeName: 'leetCodeName',
     salt: 'salt',
     hash: 'hash',
-    leetCodeProfile: 'leetCodeProfile',
     timeOfLastSolve: 'timeOfLastSolve'
   };
 
@@ -15991,7 +15981,7 @@ export namespace Prisma {
     CLangFunction: 'CLangFunction',
     PyLangFunction: 'PyLangFunction',
     JavsLangFunction: 'JavsLangFunction',
-    timeToSolve: 'timeToSolve'
+    timeToSolveInHours: 'timeToSolveInHours'
   };
 
   export type QuestionsScalarFieldEnum = (typeof QuestionsScalarFieldEnum)[keyof typeof QuestionsScalarFieldEnum]
@@ -16345,11 +16335,10 @@ export namespace Prisma {
     name?: StringFilter<"Student"> | string
     rno?: StringFilter<"Student"> | string
     uname?: StringFilter<"Student"> | string
-    leetCodeName?: StringFilter<"Student"> | string
+    leetCodeName?: StringNullableFilter<"Student"> | string | null
     salt?: StringFilter<"Student"> | string
     hash?: StringFilter<"Student"> | string
-    leetCodeProfile?: StringNullableFilter<"Student"> | string | null
-    timeOfLastSolve?: DateTimeFilter<"Student"> | Date | string
+    timeOfLastSolve?: DateTimeNullableFilter<"Student"> | Date | string | null
     submission?: SubmissionListRelationFilter
     studentAchievements?: StudentAchievementsListRelationFilter
     contestResult?: ContestResultListRelationFilter
@@ -16362,11 +16351,10 @@ export namespace Prisma {
     name?: SortOrder
     rno?: SortOrder
     uname?: SortOrder
-    leetCodeName?: SortOrder
+    leetCodeName?: SortOrderInput | SortOrder
     salt?: SortOrder
     hash?: SortOrder
-    leetCodeProfile?: SortOrderInput | SortOrder
-    timeOfLastSolve?: SortOrder
+    timeOfLastSolve?: SortOrderInput | SortOrder
     submission?: SubmissionOrderByRelationAggregateInput
     studentAchievements?: StudentAchievementsOrderByRelationAggregateInput
     contestResult?: ContestResultOrderByRelationAggregateInput
@@ -16385,8 +16373,7 @@ export namespace Prisma {
     name?: StringFilter<"Student"> | string
     salt?: StringFilter<"Student"> | string
     hash?: StringFilter<"Student"> | string
-    leetCodeProfile?: StringNullableFilter<"Student"> | string | null
-    timeOfLastSolve?: DateTimeFilter<"Student"> | Date | string
+    timeOfLastSolve?: DateTimeNullableFilter<"Student"> | Date | string | null
     submission?: SubmissionListRelationFilter
     studentAchievements?: StudentAchievementsListRelationFilter
     contestResult?: ContestResultListRelationFilter
@@ -16399,11 +16386,10 @@ export namespace Prisma {
     name?: SortOrder
     rno?: SortOrder
     uname?: SortOrder
-    leetCodeName?: SortOrder
+    leetCodeName?: SortOrderInput | SortOrder
     salt?: SortOrder
     hash?: SortOrder
-    leetCodeProfile?: SortOrderInput | SortOrder
-    timeOfLastSolve?: SortOrder
+    timeOfLastSolve?: SortOrderInput | SortOrder
     _count?: StudentCountOrderByAggregateInput
     _avg?: StudentAvgOrderByAggregateInput
     _max?: StudentMaxOrderByAggregateInput
@@ -16419,11 +16405,10 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Student"> | string
     rno?: StringWithAggregatesFilter<"Student"> | string
     uname?: StringWithAggregatesFilter<"Student"> | string
-    leetCodeName?: StringWithAggregatesFilter<"Student"> | string
+    leetCodeName?: StringNullableWithAggregatesFilter<"Student"> | string | null
     salt?: StringWithAggregatesFilter<"Student"> | string
     hash?: StringWithAggregatesFilter<"Student"> | string
-    leetCodeProfile?: StringNullableWithAggregatesFilter<"Student"> | string | null
-    timeOfLastSolve?: DateTimeWithAggregatesFilter<"Student"> | Date | string
+    timeOfLastSolve?: DateTimeNullableWithAggregatesFilter<"Student"> | Date | string | null
   }
 
   export type TopicsWhereInput = {
@@ -16504,7 +16489,7 @@ export namespace Prisma {
     CLangFunction?: StringFilter<"Questions"> | string
     PyLangFunction?: StringFilter<"Questions"> | string
     JavsLangFunction?: StringFilter<"Questions"> | string
-    timeToSolve?: DateTimeFilter<"Questions"> | Date | string
+    timeToSolveInHours?: IntFilter<"Questions"> | number
     testCase?: TestCaseListRelationFilter
     submission?: SubmissionListRelationFilter
     discussion?: DiscussionsListRelationFilter
@@ -16527,7 +16512,7 @@ export namespace Prisma {
     CLangFunction?: SortOrder
     PyLangFunction?: SortOrder
     JavsLangFunction?: SortOrder
-    timeToSolve?: SortOrder
+    timeToSolveInHours?: SortOrder
     testCase?: TestCaseOrderByRelationAggregateInput
     submission?: SubmissionOrderByRelationAggregateInput
     discussion?: DiscussionsOrderByRelationAggregateInput
@@ -16553,7 +16538,7 @@ export namespace Prisma {
     CLangFunction?: StringFilter<"Questions"> | string
     PyLangFunction?: StringFilter<"Questions"> | string
     JavsLangFunction?: StringFilter<"Questions"> | string
-    timeToSolve?: DateTimeFilter<"Questions"> | Date | string
+    timeToSolveInHours?: IntFilter<"Questions"> | number
     testCase?: TestCaseListRelationFilter
     submission?: SubmissionListRelationFilter
     discussion?: DiscussionsListRelationFilter
@@ -16576,7 +16561,7 @@ export namespace Prisma {
     CLangFunction?: SortOrder
     PyLangFunction?: SortOrder
     JavsLangFunction?: SortOrder
-    timeToSolve?: SortOrder
+    timeToSolveInHours?: SortOrder
     _count?: QuestionsCountOrderByAggregateInput
     _avg?: QuestionsAvgOrderByAggregateInput
     _max?: QuestionsMaxOrderByAggregateInput
@@ -16602,7 +16587,7 @@ export namespace Prisma {
     CLangFunction?: StringWithAggregatesFilter<"Questions"> | string
     PyLangFunction?: StringWithAggregatesFilter<"Questions"> | string
     JavsLangFunction?: StringWithAggregatesFilter<"Questions"> | string
-    timeToSolve?: DateTimeWithAggregatesFilter<"Questions"> | Date | string
+    timeToSolveInHours?: IntWithAggregatesFilter<"Questions"> | number
   }
 
   export type TestCaseWhereInput = {
@@ -17202,11 +17187,10 @@ export namespace Prisma {
     name: string
     rno: string
     uname: string
-    leetCodeName: string
+    leetCodeName?: string | null
     salt: string
     hash: string
-    leetCodeProfile?: string | null
-    timeOfLastSolve: Date | string
+    timeOfLastSolve?: Date | string | null
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultCreateNestedManyWithoutStudentInput
@@ -17219,11 +17203,10 @@ export namespace Prisma {
     name: string
     rno: string
     uname: string
-    leetCodeName: string
+    leetCodeName?: string | null
     salt: string
     hash: string
-    leetCodeProfile?: string | null
-    timeOfLastSolve: Date | string
+    timeOfLastSolve?: Date | string | null
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
@@ -17235,11 +17218,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     rno?: StringFieldUpdateOperationsInput | string
     uname?: StringFieldUpdateOperationsInput | string
-    leetCodeName?: StringFieldUpdateOperationsInput | string
+    leetCodeName?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
@@ -17252,11 +17234,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     rno?: StringFieldUpdateOperationsInput | string
     uname?: StringFieldUpdateOperationsInput | string
-    leetCodeName?: StringFieldUpdateOperationsInput | string
+    leetCodeName?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
@@ -17269,22 +17250,20 @@ export namespace Prisma {
     name: string
     rno: string
     uname: string
-    leetCodeName: string
+    leetCodeName?: string | null
     salt: string
     hash: string
-    leetCodeProfile?: string | null
-    timeOfLastSolve: Date | string
+    timeOfLastSolve?: Date | string | null
   }
 
   export type StudentUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     rno?: StringFieldUpdateOperationsInput | string
     uname?: StringFieldUpdateOperationsInput | string
-    leetCodeName?: StringFieldUpdateOperationsInput | string
+    leetCodeName?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type StudentUncheckedUpdateManyInput = {
@@ -17292,11 +17271,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     rno?: StringFieldUpdateOperationsInput | string
     uname?: StringFieldUpdateOperationsInput | string
-    leetCodeName?: StringFieldUpdateOperationsInput | string
+    leetCodeName?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type TopicsCreateInput = {
@@ -17373,7 +17351,7 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolve: Date | string
+    timeToSolveInHours: number
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
@@ -17396,7 +17374,7 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolve: Date | string
+    timeToSolveInHours: number
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
@@ -17416,7 +17394,7 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
@@ -17439,7 +17417,7 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
@@ -17461,7 +17439,7 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolve: Date | string
+    timeToSolveInHours: number
   }
 
   export type QuestionsUpdateManyMutationInput = {
@@ -17477,7 +17455,7 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
   }
 
   export type QuestionsUncheckedUpdateManyInput = {
@@ -17495,7 +17473,7 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
   }
 
   export type TestCaseCreateInput = {
@@ -18103,15 +18081,15 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type SubmissionListRelationFilter = {
@@ -18172,7 +18150,6 @@ export namespace Prisma {
     leetCodeName?: SortOrder
     salt?: SortOrder
     hash?: SortOrder
-    leetCodeProfile?: SortOrder
     timeOfLastSolve?: SortOrder
   }
 
@@ -18188,7 +18165,6 @@ export namespace Prisma {
     leetCodeName?: SortOrder
     salt?: SortOrder
     hash?: SortOrder
-    leetCodeProfile?: SortOrder
     timeOfLastSolve?: SortOrder
   }
 
@@ -18200,7 +18176,6 @@ export namespace Prisma {
     leetCodeName?: SortOrder
     salt?: SortOrder
     hash?: SortOrder
-    leetCodeProfile?: SortOrder
     timeOfLastSolve?: SortOrder
   }
 
@@ -18260,7 +18235,21 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -18268,10 +18257,7 @@ export namespace Prisma {
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type QuestionsListRelationFilter = {
@@ -18314,6 +18300,20 @@ export namespace Prisma {
 
   export type TopicsSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type EnumDifficultyTypeFilter<$PrismaModel = never> = {
@@ -18370,7 +18370,7 @@ export namespace Prisma {
     CLangFunction?: SortOrder
     PyLangFunction?: SortOrder
     JavsLangFunction?: SortOrder
-    timeToSolve?: SortOrder
+    timeToSolveInHours?: SortOrder
   }
 
   export type QuestionsAvgOrderByAggregateInput = {
@@ -18379,6 +18379,7 @@ export namespace Prisma {
     noOfHiddenTestCases?: SortOrder
     noOfExternalTestCases?: SortOrder
     pointsPerTestCaseSolved?: SortOrder
+    timeToSolveInHours?: SortOrder
   }
 
   export type QuestionsMaxOrderByAggregateInput = {
@@ -18396,7 +18397,7 @@ export namespace Prisma {
     CLangFunction?: SortOrder
     PyLangFunction?: SortOrder
     JavsLangFunction?: SortOrder
-    timeToSolve?: SortOrder
+    timeToSolveInHours?: SortOrder
   }
 
   export type QuestionsMinOrderByAggregateInput = {
@@ -18414,7 +18415,7 @@ export namespace Prisma {
     CLangFunction?: SortOrder
     PyLangFunction?: SortOrder
     JavsLangFunction?: SortOrder
-    timeToSolve?: SortOrder
+    timeToSolveInHours?: SortOrder
   }
 
   export type QuestionsSumOrderByAggregateInput = {
@@ -18423,6 +18424,7 @@ export namespace Prisma {
     noOfHiddenTestCases?: SortOrder
     noOfExternalTestCases?: SortOrder
     pointsPerTestCaseSolved?: SortOrder
+    timeToSolveInHours?: SortOrder
   }
 
   export type EnumDifficultyTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -18499,17 +18501,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTestCaseTypeFilter<$PrismaModel>
     _max?: NestedEnumTestCaseTypeFilter<$PrismaModel>
-  }
-
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type EnumAcceptedTypeFilter<$PrismaModel = never> = {
@@ -18613,20 +18604,6 @@ export namespace Prisma {
     studentId?: SortOrder
     noOfCasesPassed?: SortOrder
     pointsSecured?: SortOrder
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type EnumAcceptedTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -19110,8 +19087,8 @@ export namespace Prisma {
     set?: string | null
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type SubmissionUpdateManyWithoutStudentNestedInput = {
@@ -19280,6 +19257,10 @@ export namespace Prisma {
     connectOrCreate?: QuestionsCreateOrConnectWithoutTopicsInput | QuestionsCreateOrConnectWithoutTopicsInput[]
     createMany?: QuestionsCreateManyTopicsInputEnvelope
     connect?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type ContestResultUpdateManyWithoutTopicsNestedInput = {
@@ -19556,10 +19537,6 @@ export namespace Prisma {
     create?: XOR<StudentCreateWithoutSubmissionInput, StudentUncheckedCreateWithoutSubmissionInput>
     connectOrCreate?: StudentCreateOrConnectWithoutSubmissionInput
     connect?: StudentWhereUniqueInput
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type EnumAcceptedTypeFieldUpdateOperationsInput = {
@@ -19871,15 +19848,15 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -19954,6 +19931,31 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -20019,17 +20021,6 @@ export namespace Prisma {
     _max?: NestedEnumTestCaseTypeFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type NestedEnumAcceptedTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.AcceptedType | EnumAcceptedTypeFieldRefInput<$PrismaModel>
     in?: $Enums.AcceptedType[] | ListEnumAcceptedTypeFieldRefInput<$PrismaModel>
@@ -20056,20 +20047,6 @@ export namespace Prisma {
     in?: $Enums.LanguageType[] | ListEnumLanguageTypeFieldRefInput<$PrismaModel> | null
     notIn?: $Enums.LanguageType[] | ListEnumLanguageTypeFieldRefInput<$PrismaModel> | null
     not?: NestedEnumLanguageTypeNullableFilter<$PrismaModel> | $Enums.LanguageType | null
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumAcceptedTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -20513,7 +20490,7 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolve: Date | string
+    timeToSolveInHours: number
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
@@ -20534,7 +20511,7 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolve: Date | string
+    timeToSolveInHours: number
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
@@ -20601,7 +20578,7 @@ export namespace Prisma {
     CLangFunction?: StringFilter<"Questions"> | string
     PyLangFunction?: StringFilter<"Questions"> | string
     JavsLangFunction?: StringFilter<"Questions"> | string
-    timeToSolve?: DateTimeFilter<"Questions"> | Date | string
+    timeToSolveInHours?: IntFilter<"Questions"> | number
   }
 
   export type TestCaseCreateWithoutQuestionsInput = {
@@ -20869,7 +20846,7 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolve: Date | string
+    timeToSolveInHours: number
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
     boilerPlate?: BoilerPlateCreateNestedManyWithoutQuestionInput
@@ -20891,7 +20868,7 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolve: Date | string
+    timeToSolveInHours: number
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
     boilerPlate?: BoilerPlateUncheckedCreateNestedManyWithoutQuestionInput
@@ -20926,7 +20903,7 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
     boilerPlate?: BoilerPlateUpdateManyWithoutQuestionNestedInput
@@ -20948,7 +20925,7 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
     boilerPlate?: BoilerPlateUncheckedUpdateManyWithoutQuestionNestedInput
@@ -20967,7 +20944,7 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolve: Date | string
+    timeToSolveInHours: number
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
     boilerPlate?: BoilerPlateCreateNestedManyWithoutQuestionInput
@@ -20989,7 +20966,7 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolve: Date | string
+    timeToSolveInHours: number
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
     boilerPlate?: BoilerPlateUncheckedCreateNestedManyWithoutQuestionInput
@@ -21004,11 +20981,10 @@ export namespace Prisma {
     name: string
     rno: string
     uname: string
-    leetCodeName: string
+    leetCodeName?: string | null
     salt: string
     hash: string
-    leetCodeProfile?: string | null
-    timeOfLastSolve: Date | string
+    timeOfLastSolve?: Date | string | null
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultCreateNestedManyWithoutStudentInput
     session?: SessionCreateNestedOneWithoutStudentInput
@@ -21020,11 +20996,10 @@ export namespace Prisma {
     name: string
     rno: string
     uname: string
-    leetCodeName: string
+    leetCodeName?: string | null
     salt: string
     hash: string
-    leetCodeProfile?: string | null
-    timeOfLastSolve: Date | string
+    timeOfLastSolve?: Date | string | null
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
     session?: SessionUncheckedCreateNestedOneWithoutStudentInput
@@ -21060,7 +21035,7 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
     boilerPlate?: BoilerPlateUpdateManyWithoutQuestionNestedInput
@@ -21082,7 +21057,7 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
     boilerPlate?: BoilerPlateUncheckedUpdateManyWithoutQuestionNestedInput
@@ -21103,11 +21078,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     rno?: StringFieldUpdateOperationsInput | string
     uname?: StringFieldUpdateOperationsInput | string
-    leetCodeName?: StringFieldUpdateOperationsInput | string
+    leetCodeName?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
     session?: SessionUpdateOneWithoutStudentNestedInput
@@ -21119,11 +21093,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     rno?: StringFieldUpdateOperationsInput | string
     uname?: StringFieldUpdateOperationsInput | string
-    leetCodeName?: StringFieldUpdateOperationsInput | string
+    leetCodeName?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
     session?: SessionUncheckedUpdateOneWithoutStudentNestedInput
@@ -21171,11 +21144,10 @@ export namespace Prisma {
     name: string
     rno: string
     uname: string
-    leetCodeName: string
+    leetCodeName?: string | null
     salt: string
     hash: string
-    leetCodeProfile?: string | null
-    timeOfLastSolve: Date | string
+    timeOfLastSolve?: Date | string | null
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultCreateNestedManyWithoutStudentInput
     session?: SessionCreateNestedOneWithoutStudentInput
@@ -21187,11 +21159,10 @@ export namespace Prisma {
     name: string
     rno: string
     uname: string
-    leetCodeName: string
+    leetCodeName?: string | null
     salt: string
     hash: string
-    leetCodeProfile?: string | null
-    timeOfLastSolve: Date | string
+    timeOfLastSolve?: Date | string | null
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
     session?: SessionUncheckedCreateNestedOneWithoutStudentInput
@@ -21234,11 +21205,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     rno?: StringFieldUpdateOperationsInput | string
     uname?: StringFieldUpdateOperationsInput | string
-    leetCodeName?: StringFieldUpdateOperationsInput | string
+    leetCodeName?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
     session?: SessionUpdateOneWithoutStudentNestedInput
@@ -21250,11 +21220,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     rno?: StringFieldUpdateOperationsInput | string
     uname?: StringFieldUpdateOperationsInput | string
-    leetCodeName?: StringFieldUpdateOperationsInput | string
+    leetCodeName?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
     session?: SessionUncheckedUpdateOneWithoutStudentNestedInput
@@ -21287,11 +21256,10 @@ export namespace Prisma {
     name: string
     rno: string
     uname: string
-    leetCodeName: string
+    leetCodeName?: string | null
     salt: string
     hash: string
-    leetCodeProfile?: string | null
-    timeOfLastSolve: Date | string
+    timeOfLastSolve?: Date | string | null
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
     session?: SessionCreateNestedOneWithoutStudentInput
@@ -21303,11 +21271,10 @@ export namespace Prisma {
     name: string
     rno: string
     uname: string
-    leetCodeName: string
+    leetCodeName?: string | null
     salt: string
     hash: string
-    leetCodeProfile?: string | null
-    timeOfLastSolve: Date | string
+    timeOfLastSolve?: Date | string | null
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
     session?: SessionUncheckedCreateNestedOneWithoutStudentInput
@@ -21356,11 +21323,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     rno?: StringFieldUpdateOperationsInput | string
     uname?: StringFieldUpdateOperationsInput | string
-    leetCodeName?: StringFieldUpdateOperationsInput | string
+    leetCodeName?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
     session?: SessionUpdateOneWithoutStudentNestedInput
@@ -21372,11 +21338,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     rno?: StringFieldUpdateOperationsInput | string
     uname?: StringFieldUpdateOperationsInput | string
-    leetCodeName?: StringFieldUpdateOperationsInput | string
+    leetCodeName?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
     session?: SessionUncheckedUpdateOneWithoutStudentNestedInput
@@ -21415,11 +21380,10 @@ export namespace Prisma {
     name: string
     rno: string
     uname: string
-    leetCodeName: string
+    leetCodeName?: string | null
     salt: string
     hash: string
-    leetCodeProfile?: string | null
-    timeOfLastSolve: Date | string
+    timeOfLastSolve?: Date | string | null
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultCreateNestedManyWithoutStudentInput
@@ -21431,11 +21395,10 @@ export namespace Prisma {
     name: string
     rno: string
     uname: string
-    leetCodeName: string
+    leetCodeName?: string | null
     salt: string
     hash: string
-    leetCodeProfile?: string | null
-    timeOfLastSolve: Date | string
+    timeOfLastSolve?: Date | string | null
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
@@ -21462,11 +21425,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     rno?: StringFieldUpdateOperationsInput | string
     uname?: StringFieldUpdateOperationsInput | string
-    leetCodeName?: StringFieldUpdateOperationsInput | string
+    leetCodeName?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
@@ -21478,11 +21440,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     rno?: StringFieldUpdateOperationsInput | string
     uname?: StringFieldUpdateOperationsInput | string
-    leetCodeName?: StringFieldUpdateOperationsInput | string
+    leetCodeName?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
@@ -21493,11 +21454,10 @@ export namespace Prisma {
     name: string
     rno: string
     uname: string
-    leetCodeName: string
+    leetCodeName?: string | null
     salt: string
     hash: string
-    leetCodeProfile?: string | null
-    timeOfLastSolve: Date | string
+    timeOfLastSolve?: Date | string | null
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultCreateNestedManyWithoutStudentInput
@@ -21509,11 +21469,10 @@ export namespace Prisma {
     name: string
     rno: string
     uname: string
-    leetCodeName: string
+    leetCodeName?: string | null
     salt: string
     hash: string
-    leetCodeProfile?: string | null
-    timeOfLastSolve: Date | string
+    timeOfLastSolve?: Date | string | null
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
@@ -21538,7 +21497,7 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolve: Date | string
+    timeToSolveInHours: number
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     boilerPlate?: BoilerPlateCreateNestedManyWithoutQuestionInput
@@ -21560,7 +21519,7 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolve: Date | string
+    timeToSolveInHours: number
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     boilerPlate?: BoilerPlateUncheckedCreateNestedManyWithoutQuestionInput
@@ -21635,11 +21594,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     rno?: StringFieldUpdateOperationsInput | string
     uname?: StringFieldUpdateOperationsInput | string
-    leetCodeName?: StringFieldUpdateOperationsInput | string
+    leetCodeName?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
@@ -21651,11 +21609,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     rno?: StringFieldUpdateOperationsInput | string
     uname?: StringFieldUpdateOperationsInput | string
-    leetCodeName?: StringFieldUpdateOperationsInput | string
+    leetCodeName?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
-    leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
-    timeOfLastSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
     contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
@@ -21686,7 +21643,7 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     boilerPlate?: BoilerPlateUpdateManyWithoutQuestionNestedInput
@@ -21708,7 +21665,7 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     boilerPlate?: BoilerPlateUncheckedUpdateManyWithoutQuestionNestedInput
@@ -21771,7 +21728,7 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolve: Date | string
+    timeToSolveInHours: number
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
@@ -21793,7 +21750,7 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolve: Date | string
+    timeToSolveInHours: number
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
@@ -21828,7 +21785,7 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
@@ -21850,7 +21807,7 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
@@ -22027,7 +21984,7 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolve: Date | string
+    timeToSolveInHours: number
   }
 
   export type ContestResultUpdateWithoutTopicsInput = {
@@ -22063,7 +22020,7 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
@@ -22084,7 +22041,7 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
@@ -22105,7 +22062,7 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
   }
 
   export type TestCaseCreateManyQuestionsInput = {

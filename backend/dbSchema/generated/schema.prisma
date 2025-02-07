@@ -71,15 +71,14 @@ enum BoilerType {
 }
 
 model Student {
-  id              Int      @id @default(autoincrement())
+  id              Int       @id @default(autoincrement())
   name            String
-  rno             String   @unique
-  uname           String   @unique
-  leetCodeName    String   @unique
+  rno             String    @unique
+  uname           String    @unique
+  leetCodeName    String?   @unique
   salt            String
   hash            String
-  leetCodeProfile String?
-  timeOfLastSolve DateTime
+  timeOfLastSolve DateTime?
 
   //relationships
   submission          Submission[]
@@ -116,7 +115,7 @@ model Questions {
   CLangFunction           String
   PyLangFunction          String
   JavsLangFunction        String
-  timeToSolve             DateTime
+  timeToSolveInHours      Int
 
   //relationships
   testCase    TestCase[]

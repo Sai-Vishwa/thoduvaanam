@@ -1,18 +1,5 @@
-const { Router } = require("express");
-const { spawnSync, spawn } = require("child_process");
-
-
-
-const router = new Router();
-
-router.post('/b', asyncHandler(async (req, res) => {
-spawnSync("sleep 10")
-  }));
-
-  router.post('/a', asyncHandler(async (req, res) => {
-    spawnSync("sleep 10")
-      }));
-
-
-
-// broooo try running this router. post to /a and then post to /b. You'll understand what i'm trying to say.
+const utc = new Date();
+const now = new Date(utc.getTime()+5.5*60*60*1000);
+console.log(now)
+const tenmins = new Date(now.getTime()+10*60*1000)
+console.log(now<tenmins)

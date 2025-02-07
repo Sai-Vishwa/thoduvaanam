@@ -3,7 +3,7 @@ const { resendOtp } = require("../Signup/resendOtp");
 const { login } = require("../Login/login");
 const { signUp } = require("../Signup/signup");
 const { unameVerify } = require("../Signup/unameVerify");
-const { verifyOTPforSignUp } = require("../Signup/otpVerifySignUp");
+const { verifyOTPforSignUp } = require("../Signup/otpVerifySignup");
 const { forgotPassword } = require("../Login/forgotPassword");
 const { verifyOTPforLogin } = require("../Login/otpVerfiyLogin");
 

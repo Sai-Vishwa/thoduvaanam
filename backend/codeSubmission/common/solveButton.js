@@ -28,7 +28,8 @@ async function solveButton(req,res) {
         })
 
         setTimeout(async ()=>{
-            const now = new Date();
+            const utc = new Date();
+            const now = new Date(utc.getTime()+5.5*60*60*1000);
             const val = await prisma.submission.updateManyAndReturn({
                 where:{
                     AND:[
