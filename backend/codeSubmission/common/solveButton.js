@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 async function solveButton(req,res) {
     try{
-        const studentId = await sessionChecker(req.cookies.session)
+        const studentId = await sessionChecker(req.body.session)
         if(studentId==-1){
             res.status(200).json({
                 err:"invlaid session"

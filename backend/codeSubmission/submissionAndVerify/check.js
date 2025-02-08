@@ -7,7 +7,7 @@ const files = require('fs');
 
 async function check(req,res) {
     try{
-        const studentId = sessionChecker(req.cookies.session)
+        const studentId = sessionChecker(req.body.session)
         const code = req.body.code
         const lang = req.body.lang
         const qid = req.body.qid

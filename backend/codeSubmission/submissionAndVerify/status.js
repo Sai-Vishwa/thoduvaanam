@@ -3,7 +3,7 @@ const {PrismaClient} = require("../../dbSchema/generated")
 const prisma = new PrismaClient();
 async function submissionStatus(req,res) {
     try{
-        const id = sessionChecker(req.cookies.session);
+        const id = sessionChecker(req.body.session);
         if(id==-1){
             res.status(200).json({
                 err:"session error"

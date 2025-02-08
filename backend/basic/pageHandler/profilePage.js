@@ -4,7 +4,7 @@ const { sessionChecker } = require("../../sessionChecker/sessionChecker");
 const prisma = new PrismaClient();
 async function profile(req,res) {
     try{
-        const studentId = await sessionChecker(req.cookies.session);
+        const studentId = await sessionChecker(req.body.session);
         let viewMode = true
         if(studentId.err==-1){
             res.status(200).json({

@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 async function codeSubmission(req,res) {
     try{
-        const sid = sessionChecker(req.cookies.session)
+        const sid = sessionChecker(req.body.session)
         if(sid==-1){
             res.status(200).json({
                 err:"invalid session"

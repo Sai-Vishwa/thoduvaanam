@@ -11,7 +11,7 @@ async function verifySubmission(req,res) {
             +"div:nth-child(1) > "+"div:nth-child(1) > span";
     console.log(divStr)
     try{    
-            const studentId = await sessionChecker(req.cookies.session);
+            const studentId = await sessionChecker(req.body.session);
             const question = await prisma.questions.findUnique({
                 where:{
                     id:req.body.qid

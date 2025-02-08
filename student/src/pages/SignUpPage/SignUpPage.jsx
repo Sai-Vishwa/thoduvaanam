@@ -5,7 +5,6 @@ import OtpDiv from "../../components/LoginSignup/otp/OtpDiv";
 import Signup from "../../components/LoginSignup/SignupDiv";
 
 function SignUpPage(){
-
     useEffect(()=>{
         const handleBeforeUnload = (event) => {
             if (!window.confirm("All your data will be lost.. Sure wanna continue???")) {

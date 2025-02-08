@@ -27,8 +27,7 @@ async function verifyOTPforSignUp(req,res) {
             uname: student.uname,
             leetCodeName: student.leetCodeName,
             salt: student.salt,
-            hash: student.hash,
-            leetCodeProfile: student.leetCodeProfile,
+            hash: student.hash
         }
         const session = await hashGenerator(student.uname)
         if(student["otp"]==req.body.otp && currTime<exp){
@@ -45,39 +44,39 @@ async function verifyOTPforSignUp(req,res) {
             })
             const del = await prisma.session.deleteMany({
                 where:{
-                    studentId:student.id
+                    studentId:std.id
                 }
             })
             const ses = await prisma.session.create({
                 data:{
-                    studentId:student.id,
+                    studentId:std.id,
                     session:session.hash,
                     expiry: exp
                 }
             })
             const achievements = await prisma.studentAchievements.createMany({
                 data:[{
-                    studentId: student.id,
+                    studentId: std.id,
                     achievementId: 1,
                     count: 0
                 },{
-                    studentId: student.id,
+                    studentId: std.id,
                     achievementId: 2,
                     count: 0
                 },{
-                    studentId: student.id,
+                    studentId: std.id,
                     achievementId: 3,
                     count: 0
                 },{
-                    studentId: student.id,
+                    studentId: std.id,
                     achievementId: 4,
                     count: 0
                 },{
-                    studentId: student.id,
+                    studentId: std.id,
                     achievementId: 5,
                     count: 0
                 },{
-                    studentId: student.id,
+                    studentId: std.id,
                     achievementId: 6,
                     count: 0
                 },]
@@ -85,8 +84,8 @@ async function verifyOTPforSignUp(req,res) {
             
             res.status(200).json({
                 msg:"Success",
-                data:{"data":JSON.stringify(student),"achievements":JSON.stringify(achieve)},
-                session:session
+                session:session.hash,
+                uname:std.uname
             })
 
         }

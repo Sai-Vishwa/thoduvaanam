@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 function VerifyButton({type,rno,otp}){
-
+    const nav = useNavigate();
     async function verify(){
         try{
             console.log(JSON.stringify(otp))
@@ -15,8 +16,10 @@ function VerifyButton({type,rno,otp}){
             const data = await verification.json()
             if(data.msg){
                 alert("Otp verified successfully")
+                console.log(data.session);
+                console.log(JSON.stringify(data))
                 Cookies.set('session',data.session,{expires: 5/24})
-                nav("/")
+                nav(`/home/:${data.uname}`)
             }
             else{
                 throw new Error(JSON.stringify(data))

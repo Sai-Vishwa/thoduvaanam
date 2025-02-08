@@ -29,7 +29,7 @@ async function login(req,res) {
                 const utc = new Date();
                 const now = new Date(utc.getTime()+5.5*60*60*1000);
                 const exp = new Date(now.getTime()+60*60*1000);
-                const session = hashGenerator(student.uname)
+                const session = await hashGenerator(student.uname)
                 
                 const removeIfExists = await prisma.session.deleteMany({
                     where:{
@@ -40,13 +40,14 @@ async function login(req,res) {
                     data:{
                         studentId:student.id,
                         expiry: exp,
-                        session: session
+                        session: session.hash
                     }
                 }) 
                 
                 res.status(200).json({
                     msg:"Success",
-                    session:session
+                    session:session.hash,
+                    uname: student.uname
                 })
             }
         }

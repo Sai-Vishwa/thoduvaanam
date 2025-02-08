@@ -22,6 +22,7 @@ const asyncHandler = (fn) => (req, res, next) => {
   }));
   
   router.get('/', asyncHandler(async (req, res) => {
+    console.log("im called")
     res.status(200).json({
         msg:"Hi Iam working"
     })

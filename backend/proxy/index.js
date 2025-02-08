@@ -13,7 +13,10 @@ const limiter = rateLimit({
     message: "1000 requests inside 20 minutes?!?! Are u seriously intrested in this shit I built?!?!Man u need a break for sure. Wait are u DOS Attacker?? IS THIS CRAP THAT IMPORTANT TO IMPLEMENT A DOS ATTACK.. man I did a pretty good job ig **sob sob.."
 })
 
-app.use(cors());
+app.use(cors({
+    origin:"http://localhost:5173",
+    credentials:true,
+}));
 app.use(express.json());
 app.use(limiter);
 
@@ -21,8 +24,8 @@ app.use((req, res, next) => {
     console.log("Yo this request is now getting called - " + req.path);
     next();
   })
-app.use(authProxy);
-app.use(basicProxy);
+app.use("/login-signup",authProxy);
+app.use("/basic",basicProxy);
 
 
 app.listen(port, () => {

@@ -4,7 +4,9 @@ const prisma = new PrismaClient();
 async function homePage(req,res) {
     try{
         let viewMode = true
-        const studentId = await sessionChecker(req.cookies.session)
+        let searchid
+        console.log(req.body.session)
+        const studentId = await sessionChecker(req.body.session)
         if(studentId.err){
             res.status(200).json({
                 err:"Invlaid session"
@@ -13,14 +15,15 @@ async function homePage(req,res) {
         else{
             if(studentId.uname == req.body.uname){
                 viewMode = false
-                const searchid = await prisma.student.findFirst({
+                searchid = studentId.id
+            }
+            else{
+                const search = await prisma.student.findFirst({
                     where:{
                         uname:req.body.uname
                     }
                 })
-            }
-            else{
-                const searchid = studentId.id
+                searchid = search.id
             }
             const data = await prisma.topics.findMany({
                 select:{
@@ -38,7 +41,7 @@ async function homePage(req,res) {
                                 },
                                 where:{
                                     AND: [
-                                        {studentId: studentId.id},
+                                        {studentId: searchid},
                                         {isFinal:"YES"}
                                     ]
                                 }
@@ -47,9 +50,27 @@ async function homePage(req,res) {
                     }
                 }
             });
+            const myData = await prisma.student.findFirst({
+                where:{
+                    id:searchid
+                },
+                select:{
+                    name:true,
+                    rno:true,
+                    uname:true,
+                    leetCodeName:true,
+                    studentAchievements:{
+                        select:{
+                            achievementId:true,
+                            count:true
+                        }
+                    }
+                }
+            })
             res.status(200).json({
                 msg:"Success",
                 data:data,
+                myData:myData,
                 viewMode: viewMode,
             })
         }

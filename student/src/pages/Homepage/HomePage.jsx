@@ -2,29 +2,36 @@ import { useEffect, useState } from "react";
 import { useNavigate , useParams } from "react-router-dom";
 import "./index.css"
 import searchlogo from "../../assets/image.png"
-function HomePage({}){
-    const {uname} = useParams();  
+import Cookies from 'js-cookie';
+
+function HomePage(){
+    const {uname} = useParams()
+    const ne = uname.slice(1)
+    console.log(ne); 
     const nav = useNavigate();
     const [allData,setAllData] = useState({});
     useEffect(()=>{
         const session = Cookies.get("session");
+        if(!session){
+          alert("first login to access this route");
+          nav("/login-signup")
+      }
         const fetchData = async () =>{
+          const session = Cookies.get("session");
           const result = await fetch("http://localhost:4000/basic/home",{
             method:"POST",
-            body: JSON.stringify({uname:uname}),
+            body: JSON.stringify({uname:ne , session: session}),
             headers:{
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
         })
+          const data = await result.json()
+          console.log(JSON.stringify(data))
         }
-        if(!session){
-            alert("first login to access this route");
-            nav("/login-signup")
-        }
-        else if(allData=={}){
-            
-        }
+        fetchData();
+        
+        
     },[])
     const topics = [
         { name: "Data Structures", notesLink: "/notes/dsa" },

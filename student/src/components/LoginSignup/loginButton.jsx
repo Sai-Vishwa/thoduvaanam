@@ -35,7 +35,7 @@ function LoginButton({forgotPassword ,loginData , loginError , setLoginError , s
                     if(data.msg){
                         Cookies.set('session',data.session,{expires: 5/24})
                         alert("login successful")
-                        nav("/")
+                        nav(`/home/:${data.uname}`)
                     }
                     else {
                         throw new Error(JSON.stringify(data))

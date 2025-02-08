@@ -5,7 +5,7 @@ async function codingPage(req,res) {
     try{
         const submissionId = req.body.submissionId;
         const questionId = req.body.questionId;
-        const studentId = await sessionChecker(req.cookies.session)
+        const studentId = await sessionChecker(req.body.session)
         if(studentId.err == -1){
             res.status(200).json({
                 err:"invalid login"
