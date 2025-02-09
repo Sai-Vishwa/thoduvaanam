@@ -166,7 +166,9 @@ exports.Prisma.SubmissionScalarFieldEnum = {
   id: 'id',
   questionId: 'questionId',
   studentId: 'studentId',
-  solvedOn: 'solvedOn',
+  startTime: 'startTime',
+  maxTimeToSolve: 'maxTimeToSolve',
+  submittedOn: 'submittedOn',
   status: 'status',
   noOfCasesPassed: 'noOfCasesPassed',
   pointsSecured: 'pointsSecured',
@@ -176,8 +178,7 @@ exports.Prisma.SubmissionScalarFieldEnum = {
   isFinal: 'isFinal',
   code: 'code',
   leetCodeLink: 'leetCodeLink',
-  language: 'language',
-  timeTaken: 'timeTaken'
+  language: 'language'
 };
 
 exports.Prisma.AchievementsScalarFieldEnum = {

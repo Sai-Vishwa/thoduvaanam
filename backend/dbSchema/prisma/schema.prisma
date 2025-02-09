@@ -115,7 +115,7 @@ model Questions {
   CLangFunction String
   PyLangFunction String
   JavsLangFunction String
-  timeToSolveInHours Int
+  timeToSolveInMinutes Int
 
   //relationships
   testCase TestCase[]
@@ -140,7 +140,9 @@ model Submission {
   id Int @id @default(autoincrement()) 
   questionId Int
   studentId Int
-  solvedOn DateTime?
+  startTime DateTime
+  maxTimeToSolve DateTime
+  submittedOn DateTime?
   status AcceptedType @default(WAITING)
   noOfCasesPassed Int @default(0)
   pointsSecured Int @default(0)  
@@ -151,7 +153,6 @@ model Submission {
   code String?
   leetCodeLink String?
   language LanguageType?
-  timeTaken DateTime?
 
   //relationships
   questions Questions @relation(fields: [questionId], references: [id])
