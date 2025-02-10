@@ -1,7 +1,7 @@
 function Profile ({profileData}){
     return (
         <div>
-            {profileData}
+            {JSON.stringify(profileData)}
         </div>
     )
 }

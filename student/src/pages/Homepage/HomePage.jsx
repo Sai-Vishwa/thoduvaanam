@@ -9,53 +9,57 @@ import Topic from "../../components/HomePageComponents/Topic";
 import Profile from "../../components/HomePageComponents/Profile";
 
 function HomePage(){
+
+  const fetchData = async () =>{
+    const session = Cookies.get("session");
+    console.log("sending a post req")
+    const result = await fetch("http://localhost:4000/basic/home",{
+      method:"POST",
+      body: JSON.stringify({uname:uname , session: session}),
+      headers:{
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+      }
+    })
+    console.log("sent req and recieved response")
+    const data = await result.json()
+    setAllData(data)
+} 
     const {uname} = useParams()
-    const ne = uname.slice(1)
-    console.log(ne); 
     const nav = useNavigate();
     const [allData,setAllData] = useState({});
+
+
     useEffect(()=>{
         const session = Cookies.get("session");
         if(!session){
           alert("first login to access this route");
           nav("/login-signup")
-      }
-      const fetchData = async () =>{
-        const session = Cookies.get("session");
-        const result = await fetch("http://localhost:4000/basic/home",{
-          method:"POST",
-          body: JSON.stringify({uname:ne , session: session}),
-          headers:{
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-          }
-        })
-        const data = await result.json()
-        setAllData(data)
-        console.log(JSON.stringify(data))
-      }
-        if(allData == {}){
-          fetchData();
         }
-        
-        
-        
+
+        if(Object.keys(allData).length == 0){
+          fetchData()
+         }  
     },[])
 
     return (
-      <div>
+      <>
+        <div>
+          {/* {JSON.stringify(allData)} */}
         <Header />
         <Profile 
-        profileData={allData.myData}/>
+        profileData={allData?.myData || {}}/>
         {
-          allData.data.map((topic) =>{
+          
+          allData?.data?.map((topic) =>(
             <Topic 
             topic={topic}
-            uname={ne}/>
-          })
+            uname={uname}/>
+          )) || (<>Hi</>)
         }
         <Footer />
       </div>
+      </>
     )
   }
 

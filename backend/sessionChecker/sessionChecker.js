@@ -3,6 +3,8 @@ const prisma = new PrismaClient();
 async function sessionChecker(sessionId) {
     const utc = new Date();
     const now = new Date(utc.getTime()+5.5*60*60*1000);
+    console.log(sessionId)
+    console.log(now)
     const session = await prisma.session.findFirst({
         where:{
                 session:sessionId
@@ -10,7 +12,7 @@ async function sessionChecker(sessionId) {
     })
     const uname = await prisma.student.findFirst({
         where:{
-            id:session.id
+            id:session.studentId
         }
     })
     if(session && uname){

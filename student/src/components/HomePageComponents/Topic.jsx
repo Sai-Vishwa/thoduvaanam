@@ -6,12 +6,13 @@ function Topic({topic , uname}){
     const nav = useNavigate()
     return (
         <div>
+
             <h2>{topic.id}{topic.name}</h2>
-            {topic.question.map((question) =>{
+            {topic.question.map((question) =>(
                 <Question 
                 question={question}
                 uname={uname}/>
-            })}
+            ))}
             <div onClick={()=>{
                 nav(`/${uname}/contest/${topic.name}`)
             }}>
