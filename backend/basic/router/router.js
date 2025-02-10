@@ -2,6 +2,7 @@ const { Router } = require("express");
 const { update } = require("../update/updateProfile");
 const { verifySubmission } = require("../submissionVerify/verifySubmission");
 const { homePage } = require("../pageHandler/homePage");
+const { questionPage } = require("../pageHandler/questionPage");
 
 const router =  new Router();
 
@@ -19,6 +20,10 @@ const asyncHandler = (fn) => (req, res, next) => {
 
   router.post('/home', asyncHandler(async (req, res) => {
     await homePage(req,res);
+  }));
+
+  router.post('/question', asyncHandler(async (req, res) => {
+    await questionPage(req,res);
   }));
   
   router.get('/', asyncHandler(async (req, res) => {

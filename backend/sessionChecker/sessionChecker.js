@@ -24,7 +24,7 @@ async function sessionChecker(sessionId) {
             const del = await prisma.session.deleteMany({
                 where:{
                     id:session.id
-                }
+                }       
             })
             return {err:-1};
         }

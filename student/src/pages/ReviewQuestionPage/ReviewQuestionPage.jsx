@@ -1,8 +1,8 @@
-function ReviewPage(){
+function ReviewQuestionPage(){
     return (
         <div>
             review page
         </div>
     )
 }
-export default ReviewPage
+export default ReviewQuestionPage

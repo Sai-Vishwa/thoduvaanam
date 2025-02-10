@@ -45,7 +45,7 @@ function HomePage(){
     return (
       <>
         <div>
-          {/* {JSON.stringify(allData)} */}
+          {JSON.stringify(allData)}
         <Header />
         <Profile 
         profileData={allData?.myData || {}}/>
@@ -55,7 +55,7 @@ function HomePage(){
             <Topic 
             topic={topic}
             uname={uname}/>
-          )) || (<>Hi</>)
+          )) || (<></>)
         }
         <Footer />
       </div>

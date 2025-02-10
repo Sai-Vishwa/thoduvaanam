@@ -5,14 +5,15 @@ import Header from "../../components/Common/Header";
 function QuestionPage(){
     const {uname,qname}= useParams();
     const [questionData , setQuestionData] = useState({})
-    const [attempt , setAttempt] = useState("Attempt Problem")
+    const [attempt , setAttempt] = useState("Start New Attempt")
+    const [reviewDiv , setReviewDiv] = useState(false)
     const nav = useNavigate();
 
     async function toCodePage(){
 
         try{
-            if(attempt === "Attempt Problem" || attempt === "Re-Attempt Problem"){
-                const flag = window.confirm("Sure to start an attempt????")
+            if(attempt === "Start New Attempt"){
+                const flag = window.confirm("Sure to start a new attempt????")
                 if(flag){
                     const createSubmission =  await fetch("http://localhost:4000/submission/solve-question",{
                         method:"POST",
@@ -51,7 +52,7 @@ function QuestionPage(){
 
     useEffect(()=>{
         const isSubmittedFunc = async () => {
-            const submissionData = await fetch("http://localhost:4000/basic/login",{
+            const submissionData = await fetch("http://localhost:4000/basic/question",{
                 method:"POST",
                 body: JSON.stringify({session:Cookies.get("session"),uname:uname , qname:qname}),
                 headers:{
@@ -60,10 +61,27 @@ function QuestionPage(){
                 }
             })
             const data = await submissionData.json()
+            let flag = false
+            let flag2 = false
+            data.submissionData.map((submission)=>{
+                if(submission.status!=="COMPLETED"){
+                    flag = true
+                }
+                else{
+                    flag2 = true
+                }
+            })
+            if (flag && attempt!=="Continue Last Attempt"){
+                setAttempt("Continue Last Attempt")
+            }
+            if(flag2 && reviewDiv === false){
+                setReviewDiv(true)
+            }
+            console.log(JSON.stringify(data))
             setQuestionData(data)
             
         }
-        if(questionData=={}){
+        if(Object.keys(questionData).length == 0){
             isSubmittedFunc()
         }
     },[])
@@ -76,9 +94,10 @@ function QuestionPage(){
             This is a practice question 
             n no of attempts etc....
             </p>
-            {questionData.submissionData.length == 0?
-            <button onClick={toCodePage}>Attempt Question</button>:<button onClick={toCodePage}>Re-Attempt Question</button>}
-
+            <button onClick={toCodePage}>{attempt}</button>
+            {reviewDiv?(
+                {}
+            ):(<></>)}
 
         </div>
     )

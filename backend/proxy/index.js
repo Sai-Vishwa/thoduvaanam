@@ -5,7 +5,7 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 4000;
 const rateLimit = require("express-rate-limit");
-const { authProxy, basicProxy } = require('./proxy');
+const { authProxy, basicProxy, submissionProxy } = require('./proxy');
 
 const limiter = rateLimit({
     windowMs: 20 * 60 * 1000,
@@ -26,6 +26,7 @@ app.use((req, res, next) => {
   })
 app.use("/login-signup",authProxy);
 app.use("/basic",basicProxy);
+app.use("/submission",submissionProxy)
 
 
 app.listen(port, () => {

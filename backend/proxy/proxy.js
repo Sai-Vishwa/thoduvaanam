@@ -40,6 +40,19 @@ const setRequestBodydata = (proxyReq, req, res) => {
     }
   });
 
+  const submissionProxy = createProxyMiddleware({
+    target: 'http://localhost:4003/api/v1/submission',
+    changeOrigin: true,
+    pathRewrite: {
+      '^/submission': ''
+    },
+    on: {
+      proxyReq: (proxyReq, req, res) => setRequestBodydata(proxyReq, req, res),
+      proxyRes: (proxyRes, req, res) => responseHandle(proxyRes, req, res),
+      error: (err, req, res) => proxyError(err, req, res)
+    }
+  });
+
   module.exports = { 
-    authProxy,basicProxy
+    authProxy,basicProxy,submissionProxy
   }
