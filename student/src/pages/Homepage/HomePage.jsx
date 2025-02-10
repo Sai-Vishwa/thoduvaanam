@@ -14,7 +14,7 @@ function HomePage(){
         const session = Cookies.get("session");
         if(!session){
           alert("first login to access this route");
-          nav("/login-signup")
+          nav("/login")
       }
         const fetchData = async () =>{
           const session = Cookies.get("session");
@@ -66,7 +66,9 @@ function HomePage(){
         <a href="#"><img src="https://th.bing.com/th/id/OIP.TN84RunoeQpTrZvWEAFfFQHaHw?rs=1&pid=ImgDetMain"/></a>
         <p>Username</p>
     </div>
-    <div  className="topic animate-[bounce_2s]"><h1>Transform your coding journey !🚀</h1></div>
+    <div  className="topic animate-[bounce_2s]">
+    <h1>Transform your coding journey !🚀</h1>
+    </div>
     
     <div className="search">
          <input type="search" placeholder="search here" />
@@ -74,7 +76,11 @@ function HomePage(){
     </div>
   </nav>
   <div className="min-h-screen ">
-
+<select>
+  <option>C</option>
+  <option>C</option>
+  <option>C</option>
+</select>
       <div className="p-6 topic-container">
         {/* Topics & Notes */}
         <div className=" sub-topic">

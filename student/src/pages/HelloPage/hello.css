@@ -1,0 +1,471 @@
+.background {
+    background-image: linear-gradient(270deg, #000203, #06253e, #091925, #00345E, #000203);
+    background-size: 200% 200%;
+    display: flex;
+    align-items: center;
+    height: 100vh; /* Ensure the background takes the full height of the viewport */
+    animation: backgroundAnimation 5s ease infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.background .particle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: particleAnimation 10s linear infinite;
+}
+
+.background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    animation: pulse 3s infinite;
+}
+
+@keyframes backgroundAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.2;
+    }
+    50% {
+        opacity: 0.4;
+    }
+    100% {
+        opacity: 0.2;
+    }
+}
+
+.particle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: particleAnimation 10s linear infinite;
+}
+
+@keyframes particleAnimation {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) scale(0);
+        opacity: 0;
+    }
+}
+
+.illustration {
+    display: block;
+    margin-left:40px;
+    width: 110%;
+    height: 100%;
+    animation: hover 3s ease-in infinite;
+    animation-fill-mode: forwards;
+    margin-top:90px;
+
+  }
+  
+  .number-one {
+    transform: translateY(-10px) translateZ(0);
+    opacity: 0;
+    animation: fadeNumberDown-10 5290ms ease-in-out infinite;
+    animation-fill-mode: forwards;
+}
+  
+  .number-two {
+    transform: translateY(-20px) translateZ(0);
+    opacity: 0;
+    animation: fadeNumberDown-20 4011ms ease-in-out infinite;
+    animation-delay: 4874ms;
+    animation-fill-mode: forwards;
+  }
+  
+  .number-three {
+    transform: translateY(-30px) translateZ(0);
+    opacity: 0;
+    animation: fadeNumberDown-30 2591ms ease-in-out infinite;
+    animation-delay: 2195ms;
+    animation-fill-mode: forwards;
+  }
+  
+  .number-four {
+    transform: translateY(-50px) translateZ(0);
+    opacity: 0;
+    animation: fadeNumberDown-50 5738ms ease-in-out infinite;
+    animation-delay: 767ms;
+    animation-fill-mode: forwards;
+  }
+  .number-five {
+    transform: translateY(-60px) translateZ(0);
+    opacity: 0;
+    animation: fadeNumberDown-60 5950ms ease-in-out infinite;
+    animation-delay: 5516ms;
+    animation-fill-mode: forwards;
+  }
+  
+  .number-six {
+    transform: translateY(-70px) translateZ(0);
+    opacity: 0;
+    animation: fadeNumberDown-70 3401ms ease-in-out infinite;
+    animation-delay: 2517ms;
+    animation-fill-mode: forwards;
+  }
+  
+  .number-seven {
+    transform: translateY(-80px) translateZ(0);
+    opacity: 0;
+    animation: fadeNumberDown-80 2712ms ease-in-out infinite;
+    animation-delay: 2644ms;
+    animation-fill-mode: forwards;
+  }
+  
+  .number-eight {
+    transform: translateY(-90px) translateZ(0);
+    opacity: 0;
+    animation: fadeNumberDown-90 4744ms ease-in-out infinite;
+    animation-delay: 5565ms;
+    animation-fill-mode: forwards;
+  }
+
+  .number-nine {
+    transform: translateY(-100px) translateZ(0);
+    opacity: 0;
+    animation: fadeNumberDown-100 2702ms ease-in-out infinite;
+    animation-delay: 2249ms;
+    animation-fill-mode: forwards;
+  }
+  
+  .number-ten {
+    transform: translateY(-110px) translateZ(0);
+    opacity: 0;
+    animation: fadeNumberDown-110 3714ms ease-in-out infinite;
+    animation-delay: 2016ms;
+    animation-fill-mode: forwards;
+  }
+  
+  .number-eleven {
+    transform: translateY(-120px) translateZ(0);
+    opacity: 0;
+    animation: fadeNumberDown-120 2015ms ease-in-out infinite;
+    animation-delay: 4998ms;
+    animation-fill-mode: forwards;
+  }
+  
+  .number-twelve {
+    transform: translateY(-150px) translateZ(0);
+    opacity: 0;
+    animation: fadeNumberDown-150 4236ms ease-in-out infinite;
+    animation-delay: 5917ms;
+    animation-fill-mode: forwards;
+  }
+  
+  .number-thirteen {
+    transform: translateY(-160px) translateZ(0);
+    opacity: 0;
+    animation: fadeNumberDown-160 2088ms ease-in-out infinite;
+    animation-delay: 204ms;
+    animation-fill-mode: forwards;
+  }
+  
+  @keyframes hover {
+    0% {
+      transform: translateY(0);
+    }
+    25% {
+      transform: translateY(-13px);
+    }
+    75% {
+      transform: translateY(13px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes fadeNumberDown-10 {
+    0% {
+      transform: translateY(-10px) translateZ(0);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.4;
+    }
+    60% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateY(140px) translateZ(0);
+      opacity: 0;
+    }
+  }
+  @keyframes fadeNumberDown-20 {
+    0% {
+      transform: translateY(-20px) translateZ(0);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.4;
+    }
+    60% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateY(140px) translateZ(0);
+      opacity: 0;
+    }
+  }
+  @keyframes fadeNumberDown-30 {
+    0% {
+      transform: translateY(-30px) translateZ(0);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.4;
+    }
+    60% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateY(130px) translateZ(0);
+      opacity: 0;
+    }
+  }
+  @keyframes fadeNumberDown-50 {
+    0% {
+      transform: translateY(-50px) translateZ(0);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.4;
+    }
+    60% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateY(110px) translateZ(0);
+      opacity: 0;
+    }
+  }
+  @keyframes fadeNumberDown-60 {
+    0% {
+      transform: translateY(-60px) translateZ(0);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.4;
+    }
+    60% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateY(90px) translateZ(0);
+      opacity: 0;
+    }
+  }
+  @keyframes fadeNumberDown-70 {
+    0% {
+      transform: translateY(-70px) translateZ(0);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.4;
+    }
+    60% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateY(80px) translateZ(0);
+      opacity: 0;
+    }
+  }
+  @keyframes fadeNumberDown-80 {
+    0% {
+      transform: translateY(-80px) translateZ(0);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.4;
+    }
+    60% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateY(80px) translateZ(0);
+      opacity: 0;
+    }
+  }
+  @keyframes fadeNumberDown-90 {
+    0% {
+      transform: translateY(-90px) translateZ(0);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.4;
+    }
+    60% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateY(60px) translateZ(0);
+      opacity: 0;
+    }
+  }
+  @keyframes fadeNumberDown-100 {
+    0% {
+      transform: translateY(-100px) translateZ(0);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.4;
+    }
+    60% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateY(60px) translateZ(0);
+      opacity: 0;
+    }
+  }
+  @keyframes fadeNumberDown-110 {
+    0% {
+      transform: translateY(-110px) translateZ(0);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.4;
+    }
+    60% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateY(30px) translateZ(0);
+      opacity: 0;
+    }
+  }
+  @keyframes fadeNumberDown-120 {
+    0% {
+      transform: translateY(-120px) translateZ(0);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.4;
+    }
+    60% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateY(20px) translateZ(0);
+      opacity: 0;
+    }
+  }
+  @keyframes fadeNumberDown-150 {
+    0% {
+      transform: translateY(-150px) translateZ(0);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.4;
+    }
+    60% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateY(10px) translateZ(0);
+      opacity: 0;
+    }
+  }
+  @keyframes fadeNumberDown-160 {
+    0% {
+      transform: translateY(-160px) translateZ(0);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.4;
+    }
+    60% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateY(10px) translateZ(0);
+      opacity: 0;
+    }
+  }
+.eventName {
+    font-family: "monospace";
+    text-wrap: nowrap;
+    overflow: hidden;
+    background-image: linear-gradient(to right, #f5b44a, #FFE1BE, #ff9102, #B3B3B3, #ee9c32, #d96805, #A0A0A0);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    font-weight: 800;
+    font-size: 90px;
+    padding: 10px;
+    margin-left: 120px;
+    animation: typing 2s steps(95);
+    text-shadow: 0 0 10px rgba(245, 194, 54, 0.7), 0 0 20px rgba(236, 200, 36, 0.7), 0 0 30px rgba(201, 160, 47, 0.7);
+}
+
+@keyframes typing {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+  .buttons{
+    margin-left:120px;
+    display:flex;
+    justify-content:center;
+
+  }
+.btn {
+    background-color: rgba(10, 11, 66, 0.631);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    border: 1px solid rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 18px;
+    margin: 20px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-image: linear-gradient(to top, #f5b44a, #FFE1BE, #ff9102);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    border: 1px solid rgb(0, 0, 0);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease-in-out;
+}
+
+.btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 1);
+}
