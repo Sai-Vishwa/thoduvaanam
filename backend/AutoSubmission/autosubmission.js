@@ -12,11 +12,11 @@ const autoSubmit = async () =>{
         })
         const utc = new Date();
         const now = new Date(utc.getTime()+5.5*60*60*1000);
-        await Promise.all(allSubmissions.map((submission)=>{
+        allSubmissions.map(async (submission)=>{
             console.log(submission)
             if(submission.maxTimeToSolve <= now){
                 console.log("see i update")
-                prisma.submission.update({
+                const res = await prisma.submission.updateManyAndReturn({
                     where:{
                         id:submission.id
                     },
@@ -25,8 +25,9 @@ const autoSubmit = async () =>{
                         isFinal:"YES"
                     }
                 })
+                console.log(res)
             }
-        }))
+        })
         console.log("I run every 2 mins and do auto submission")
 }
 

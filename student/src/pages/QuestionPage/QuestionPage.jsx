@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Cookies from 'js-cookie'
 import Header from "../../components/Common/Header";
+import ReviewDiv from "../../components/QuestionPageComponents/ReviewDiv";
 function QuestionPage(){
     const {uname,qname}= useParams();
     const [questionData , setQuestionData] = useState({})
     const [attempt , setAttempt] = useState("Start New Attempt")
-    const [reviewDiv , setReviewDiv] = useState(false)
+    const [reviewDiv , setReviewDiv] = useState("hidden")
     const nav = useNavigate();
 
     async function toCodePage(){
@@ -74,8 +75,8 @@ function QuestionPage(){
             if (flag && attempt!=="Continue Last Attempt"){
                 setAttempt("Continue Last Attempt")
             }
-            if(flag2 && reviewDiv === false){
-                setReviewDiv(true)
+            if(flag2 && reviewDiv === "hidden"){
+                setReviewDiv("block")
             }
             console.log(JSON.stringify(data))
             setQuestionData(data)
@@ -95,9 +96,16 @@ function QuestionPage(){
             n no of attempts etc....
             </p>
             <button onClick={toCodePage}>{attempt}</button>
-            {reviewDiv?(
-                {}
-            ):(<></>)}
+            <div className={`${reviewDiv}`}>
+            {questionData?.submissionData?.map((submission)=>(
+                    <ReviewDiv 
+                    submission={submission}
+                    uname={uname}
+                    qname={qname}/>
+                ))}
+            </div>
+                
+            
 
         </div>
     )
