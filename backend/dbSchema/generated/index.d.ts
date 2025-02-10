@@ -73,6 +73,11 @@ export type Discussions = $Result.DefaultSelection<Prisma.$DiscussionsPayload>
  * 
  */
 export type BoilerPlate = $Result.DefaultSelection<Prisma.$BoilerPlatePayload>
+/**
+ * Model Contest
+ * 
+ */
+export type Contest = $Result.DefaultSelection<Prisma.$ContestPayload>
 
 /**
  * Enums
@@ -449,6 +454,16 @@ export class PrismaClient<
     * ```
     */
   get boilerPlate(): Prisma.BoilerPlateDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.contest`: Exposes CRUD operations for the **Contest** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Contests
+    * const contests = await prisma.contest.findMany()
+    * ```
+    */
+  get contest(): Prisma.ContestDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -900,7 +915,8 @@ export namespace Prisma {
     OTPStudent: 'OTPStudent',
     Session: 'Session',
     Discussions: 'Discussions',
-    BoilerPlate: 'BoilerPlate'
+    BoilerPlate: 'BoilerPlate',
+    Contest: 'Contest'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -916,7 +932,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "student" | "topics" | "questions" | "testCase" | "submission" | "achievements" | "studentAchievements" | "contestResult" | "oTPStudent" | "session" | "discussions" | "boilerPlate"
+      modelProps: "student" | "topics" | "questions" | "testCase" | "submission" | "achievements" | "studentAchievements" | "contestResult" | "oTPStudent" | "session" | "discussions" | "boilerPlate" | "contest"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1808,6 +1824,80 @@ export namespace Prisma {
           }
         }
       }
+      Contest: {
+        payload: Prisma.$ContestPayload<ExtArgs>
+        fields: Prisma.ContestFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ContestFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ContestFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload>
+          }
+          findFirst: {
+            args: Prisma.ContestFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ContestFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload>
+          }
+          findMany: {
+            args: Prisma.ContestFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload>[]
+          }
+          create: {
+            args: Prisma.ContestCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload>
+          }
+          createMany: {
+            args: Prisma.ContestCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ContestCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload>[]
+          }
+          delete: {
+            args: Prisma.ContestDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload>
+          }
+          update: {
+            args: Prisma.ContestUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload>
+          }
+          deleteMany: {
+            args: Prisma.ContestDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ContestUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ContestUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload>[]
+          }
+          upsert: {
+            args: Prisma.ContestUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload>
+          }
+          aggregate: {
+            args: Prisma.ContestAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContest>
+          }
+          groupBy: {
+            args: Prisma.ContestGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContestGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ContestCountArgs<ExtArgs>
+            result: $Utils.Optional<ContestCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1904,6 +1994,7 @@ export namespace Prisma {
     session?: SessionOmit
     discussions?: DiscussionsOmit
     boilerPlate?: BoilerPlateOmit
+    contest?: ContestOmit
   }
 
   /* Types for Logging */
@@ -2208,6 +2299,37 @@ export namespace Prisma {
    */
   export type DiscussionsCountOutputTypeCountRepliesIGetArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DiscussionsWhereInput
+  }
+
+
+  /**
+   * Count Type ContestCountOutputType
+   */
+
+  export type ContestCountOutputType = {
+    question: number
+  }
+
+  export type ContestCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    question?: boolean | ContestCountOutputTypeCountQuestionArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ContestCountOutputType without action
+   */
+  export type ContestCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestCountOutputType
+     */
+    select?: ContestCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ContestCountOutputType without action
+   */
+  export type ContestCountOutputTypeCountQuestionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuestionsWhereInput
   }
 
 
@@ -3653,6 +3775,7 @@ export namespace Prisma {
     contestDate?: boolean
     contestResult?: boolean | Topics$contestResultArgs<ExtArgs>
     question?: boolean | Topics$questionArgs<ExtArgs>
+    contest?: boolean | Topics$contestArgs<ExtArgs>
     _count?: boolean | TopicsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["topics"]>
 
@@ -3684,6 +3807,7 @@ export namespace Prisma {
   export type TopicsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     contestResult?: boolean | Topics$contestResultArgs<ExtArgs>
     question?: boolean | Topics$questionArgs<ExtArgs>
+    contest?: boolean | Topics$contestArgs<ExtArgs>
     _count?: boolean | TopicsCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TopicsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3694,6 +3818,7 @@ export namespace Prisma {
     objects: {
       contestResult: Prisma.$ContestResultPayload<ExtArgs>[]
       question: Prisma.$QuestionsPayload<ExtArgs>[]
+      contest: Prisma.$ContestPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -4097,6 +4222,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     contestResult<T extends Topics$contestResultArgs<ExtArgs> = {}>(args?: Subset<T, Topics$contestResultArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestResultPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     question<T extends Topics$questionArgs<ExtArgs> = {}>(args?: Subset<T, Topics$questionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestionsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    contest<T extends Topics$contestArgs<ExtArgs> = {}>(args?: Subset<T, Topics$contestArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4555,6 +4681,25 @@ export namespace Prisma {
   }
 
   /**
+   * Topics.contest
+   */
+  export type Topics$contestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+    where?: ContestWhereInput
+  }
+
+  /**
    * Topics without action
    */
   export type TopicsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4591,7 +4736,8 @@ export namespace Prisma {
     noOfHiddenTestCases: number | null
     noOfExternalTestCases: number | null
     pointsPerTestCaseSolved: number | null
-    timeToSolveInHours: number | null
+    timeToSolveInMinutes: number | null
+    contestId: number | null
   }
 
   export type QuestionsSumAggregateOutputType = {
@@ -4600,7 +4746,8 @@ export namespace Prisma {
     noOfHiddenTestCases: number | null
     noOfExternalTestCases: number | null
     pointsPerTestCaseSolved: number | null
-    timeToSolveInHours: number | null
+    timeToSolveInMinutes: number | null
+    contestId: number | null
   }
 
   export type QuestionsMinAggregateOutputType = {
@@ -4618,7 +4765,8 @@ export namespace Prisma {
     CLangFunction: string | null
     PyLangFunction: string | null
     JavsLangFunction: string | null
-    timeToSolveInHours: number | null
+    timeToSolveInMinutes: number | null
+    contestId: number | null
   }
 
   export type QuestionsMaxAggregateOutputType = {
@@ -4636,7 +4784,8 @@ export namespace Prisma {
     CLangFunction: string | null
     PyLangFunction: string | null
     JavsLangFunction: string | null
-    timeToSolveInHours: number | null
+    timeToSolveInMinutes: number | null
+    contestId: number | null
   }
 
   export type QuestionsCountAggregateOutputType = {
@@ -4654,7 +4803,8 @@ export namespace Prisma {
     CLangFunction: number
     PyLangFunction: number
     JavsLangFunction: number
-    timeToSolveInHours: number
+    timeToSolveInMinutes: number
+    contestId: number
     _all: number
   }
 
@@ -4665,7 +4815,8 @@ export namespace Prisma {
     noOfHiddenTestCases?: true
     noOfExternalTestCases?: true
     pointsPerTestCaseSolved?: true
-    timeToSolveInHours?: true
+    timeToSolveInMinutes?: true
+    contestId?: true
   }
 
   export type QuestionsSumAggregateInputType = {
@@ -4674,7 +4825,8 @@ export namespace Prisma {
     noOfHiddenTestCases?: true
     noOfExternalTestCases?: true
     pointsPerTestCaseSolved?: true
-    timeToSolveInHours?: true
+    timeToSolveInMinutes?: true
+    contestId?: true
   }
 
   export type QuestionsMinAggregateInputType = {
@@ -4692,7 +4844,8 @@ export namespace Prisma {
     CLangFunction?: true
     PyLangFunction?: true
     JavsLangFunction?: true
-    timeToSolveInHours?: true
+    timeToSolveInMinutes?: true
+    contestId?: true
   }
 
   export type QuestionsMaxAggregateInputType = {
@@ -4710,7 +4863,8 @@ export namespace Prisma {
     CLangFunction?: true
     PyLangFunction?: true
     JavsLangFunction?: true
-    timeToSolveInHours?: true
+    timeToSolveInMinutes?: true
+    contestId?: true
   }
 
   export type QuestionsCountAggregateInputType = {
@@ -4728,7 +4882,8 @@ export namespace Prisma {
     CLangFunction?: true
     PyLangFunction?: true
     JavsLangFunction?: true
-    timeToSolveInHours?: true
+    timeToSolveInMinutes?: true
+    contestId?: true
     _all?: true
   }
 
@@ -4833,7 +4988,8 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolveInHours: number
+    timeToSolveInMinutes: number
+    contestId: number | null
     _count: QuestionsCountAggregateOutputType | null
     _avg: QuestionsAvgAggregateOutputType | null
     _sum: QuestionsSumAggregateOutputType | null
@@ -4870,12 +5026,14 @@ export namespace Prisma {
     CLangFunction?: boolean
     PyLangFunction?: boolean
     JavsLangFunction?: boolean
-    timeToSolveInHours?: boolean
+    timeToSolveInMinutes?: boolean
+    contestId?: boolean
     testCase?: boolean | Questions$testCaseArgs<ExtArgs>
     submission?: boolean | Questions$submissionArgs<ExtArgs>
     discussion?: boolean | Questions$discussionArgs<ExtArgs>
     boilerPlate?: boolean | Questions$boilerPlateArgs<ExtArgs>
     topics?: boolean | TopicsDefaultArgs<ExtArgs>
+    contest?: boolean | Questions$contestArgs<ExtArgs>
     _count?: boolean | QuestionsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["questions"]>
 
@@ -4894,8 +5052,10 @@ export namespace Prisma {
     CLangFunction?: boolean
     PyLangFunction?: boolean
     JavsLangFunction?: boolean
-    timeToSolveInHours?: boolean
+    timeToSolveInMinutes?: boolean
+    contestId?: boolean
     topics?: boolean | TopicsDefaultArgs<ExtArgs>
+    contest?: boolean | Questions$contestArgs<ExtArgs>
   }, ExtArgs["result"]["questions"]>
 
   export type QuestionsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4913,8 +5073,10 @@ export namespace Prisma {
     CLangFunction?: boolean
     PyLangFunction?: boolean
     JavsLangFunction?: boolean
-    timeToSolveInHours?: boolean
+    timeToSolveInMinutes?: boolean
+    contestId?: boolean
     topics?: boolean | TopicsDefaultArgs<ExtArgs>
+    contest?: boolean | Questions$contestArgs<ExtArgs>
   }, ExtArgs["result"]["questions"]>
 
   export type QuestionsSelectScalar = {
@@ -4932,23 +5094,27 @@ export namespace Prisma {
     CLangFunction?: boolean
     PyLangFunction?: boolean
     JavsLangFunction?: boolean
-    timeToSolveInHours?: boolean
+    timeToSolveInMinutes?: boolean
+    contestId?: boolean
   }
 
-  export type QuestionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "topic" | "noOfHiddenTestCases" | "noOfExternalTestCases" | "difficulty" | "pointsPerTestCaseSolved" | "type" | "leetCodeLink" | "leetCodeTitle" | "CLangFunction" | "PyLangFunction" | "JavsLangFunction" | "timeToSolveInHours", ExtArgs["result"]["questions"]>
+  export type QuestionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "topic" | "noOfHiddenTestCases" | "noOfExternalTestCases" | "difficulty" | "pointsPerTestCaseSolved" | "type" | "leetCodeLink" | "leetCodeTitle" | "CLangFunction" | "PyLangFunction" | "JavsLangFunction" | "timeToSolveInMinutes" | "contestId", ExtArgs["result"]["questions"]>
   export type QuestionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     testCase?: boolean | Questions$testCaseArgs<ExtArgs>
     submission?: boolean | Questions$submissionArgs<ExtArgs>
     discussion?: boolean | Questions$discussionArgs<ExtArgs>
     boilerPlate?: boolean | Questions$boilerPlateArgs<ExtArgs>
     topics?: boolean | TopicsDefaultArgs<ExtArgs>
+    contest?: boolean | Questions$contestArgs<ExtArgs>
     _count?: boolean | QuestionsCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type QuestionsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     topics?: boolean | TopicsDefaultArgs<ExtArgs>
+    contest?: boolean | Questions$contestArgs<ExtArgs>
   }
   export type QuestionsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     topics?: boolean | TopicsDefaultArgs<ExtArgs>
+    contest?: boolean | Questions$contestArgs<ExtArgs>
   }
 
   export type $QuestionsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4959,6 +5125,7 @@ export namespace Prisma {
       discussion: Prisma.$DiscussionsPayload<ExtArgs>[]
       boilerPlate: Prisma.$BoilerPlatePayload<ExtArgs>[]
       topics: Prisma.$TopicsPayload<ExtArgs>
+      contest: Prisma.$ContestPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -4975,7 +5142,8 @@ export namespace Prisma {
       CLangFunction: string
       PyLangFunction: string
       JavsLangFunction: string
-      timeToSolveInHours: number
+      timeToSolveInMinutes: number
+      contestId: number | null
     }, ExtArgs["result"]["questions"]>
     composites: {}
   }
@@ -5375,6 +5543,7 @@ export namespace Prisma {
     discussion<T extends Questions$discussionArgs<ExtArgs> = {}>(args?: Subset<T, Questions$discussionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscussionsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     boilerPlate<T extends Questions$boilerPlateArgs<ExtArgs> = {}>(args?: Subset<T, Questions$boilerPlateArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoilerPlatePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     topics<T extends TopicsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TopicsDefaultArgs<ExtArgs>>): Prisma__TopicsClient<$Result.GetResult<Prisma.$TopicsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    contest<T extends Questions$contestArgs<ExtArgs> = {}>(args?: Subset<T, Questions$contestArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5418,7 +5587,8 @@ export namespace Prisma {
     readonly CLangFunction: FieldRef<"Questions", 'String'>
     readonly PyLangFunction: FieldRef<"Questions", 'String'>
     readonly JavsLangFunction: FieldRef<"Questions", 'String'>
-    readonly timeToSolveInHours: FieldRef<"Questions", 'Int'>
+    readonly timeToSolveInMinutes: FieldRef<"Questions", 'Int'>
+    readonly contestId: FieldRef<"Questions", 'Int'>
   }
     
 
@@ -5896,6 +6066,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: BoilerPlateScalarFieldEnum | BoilerPlateScalarFieldEnum[]
+  }
+
+  /**
+   * Questions.contest
+   */
+  export type Questions$contestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+    where?: ContestWhereInput
   }
 
   /**
@@ -15941,6 +16130,1158 @@ export namespace Prisma {
 
 
   /**
+   * Model Contest
+   */
+
+  export type AggregateContest = {
+    _count: ContestCountAggregateOutputType | null
+    _avg: ContestAvgAggregateOutputType | null
+    _sum: ContestSumAggregateOutputType | null
+    _min: ContestMinAggregateOutputType | null
+    _max: ContestMaxAggregateOutputType | null
+  }
+
+  export type ContestAvgAggregateOutputType = {
+    id: number | null
+    timeToSolveInMinutes: number | null
+    totalPoints: number | null
+    totalNoOfQuestions: number | null
+    topicId: number | null
+  }
+
+  export type ContestSumAggregateOutputType = {
+    id: number | null
+    timeToSolveInMinutes: number | null
+    totalPoints: number | null
+    totalNoOfQuestions: number | null
+    topicId: number | null
+  }
+
+  export type ContestMinAggregateOutputType = {
+    id: number | null
+    opensOn: Date | null
+    closesOn: Date | null
+    timeToSolveInMinutes: number | null
+    totalPoints: number | null
+    totalNoOfQuestions: number | null
+    topicId: number | null
+  }
+
+  export type ContestMaxAggregateOutputType = {
+    id: number | null
+    opensOn: Date | null
+    closesOn: Date | null
+    timeToSolveInMinutes: number | null
+    totalPoints: number | null
+    totalNoOfQuestions: number | null
+    topicId: number | null
+  }
+
+  export type ContestCountAggregateOutputType = {
+    id: number
+    opensOn: number
+    closesOn: number
+    timeToSolveInMinutes: number
+    totalPoints: number
+    totalNoOfQuestions: number
+    topicId: number
+    _all: number
+  }
+
+
+  export type ContestAvgAggregateInputType = {
+    id?: true
+    timeToSolveInMinutes?: true
+    totalPoints?: true
+    totalNoOfQuestions?: true
+    topicId?: true
+  }
+
+  export type ContestSumAggregateInputType = {
+    id?: true
+    timeToSolveInMinutes?: true
+    totalPoints?: true
+    totalNoOfQuestions?: true
+    topicId?: true
+  }
+
+  export type ContestMinAggregateInputType = {
+    id?: true
+    opensOn?: true
+    closesOn?: true
+    timeToSolveInMinutes?: true
+    totalPoints?: true
+    totalNoOfQuestions?: true
+    topicId?: true
+  }
+
+  export type ContestMaxAggregateInputType = {
+    id?: true
+    opensOn?: true
+    closesOn?: true
+    timeToSolveInMinutes?: true
+    totalPoints?: true
+    totalNoOfQuestions?: true
+    topicId?: true
+  }
+
+  export type ContestCountAggregateInputType = {
+    id?: true
+    opensOn?: true
+    closesOn?: true
+    timeToSolveInMinutes?: true
+    totalPoints?: true
+    totalNoOfQuestions?: true
+    topicId?: true
+    _all?: true
+  }
+
+  export type ContestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Contest to aggregate.
+     */
+    where?: ContestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Contests to fetch.
+     */
+    orderBy?: ContestOrderByWithRelationInput | ContestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ContestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Contests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Contests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Contests
+    **/
+    _count?: true | ContestCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ContestAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ContestSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContestMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContestMaxAggregateInputType
+  }
+
+  export type GetContestAggregateType<T extends ContestAggregateArgs> = {
+        [P in keyof T & keyof AggregateContest]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContest[P]>
+      : GetScalarType<T[P], AggregateContest[P]>
+  }
+
+
+
+
+  export type ContestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContestWhereInput
+    orderBy?: ContestOrderByWithAggregationInput | ContestOrderByWithAggregationInput[]
+    by: ContestScalarFieldEnum[] | ContestScalarFieldEnum
+    having?: ContestScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContestCountAggregateInputType | true
+    _avg?: ContestAvgAggregateInputType
+    _sum?: ContestSumAggregateInputType
+    _min?: ContestMinAggregateInputType
+    _max?: ContestMaxAggregateInputType
+  }
+
+  export type ContestGroupByOutputType = {
+    id: number
+    opensOn: Date
+    closesOn: Date
+    timeToSolveInMinutes: number
+    totalPoints: number
+    totalNoOfQuestions: number
+    topicId: number
+    _count: ContestCountAggregateOutputType | null
+    _avg: ContestAvgAggregateOutputType | null
+    _sum: ContestSumAggregateOutputType | null
+    _min: ContestMinAggregateOutputType | null
+    _max: ContestMaxAggregateOutputType | null
+  }
+
+  type GetContestGroupByPayload<T extends ContestGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContestGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContestGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContestGroupByOutputType[P]>
+            : GetScalarType<T[P], ContestGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ContestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    opensOn?: boolean
+    closesOn?: boolean
+    timeToSolveInMinutes?: boolean
+    totalPoints?: boolean
+    totalNoOfQuestions?: boolean
+    topicId?: boolean
+    question?: boolean | Contest$questionArgs<ExtArgs>
+    topic?: boolean | TopicsDefaultArgs<ExtArgs>
+    _count?: boolean | ContestCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contest"]>
+
+  export type ContestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    opensOn?: boolean
+    closesOn?: boolean
+    timeToSolveInMinutes?: boolean
+    totalPoints?: boolean
+    totalNoOfQuestions?: boolean
+    topicId?: boolean
+    topic?: boolean | TopicsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contest"]>
+
+  export type ContestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    opensOn?: boolean
+    closesOn?: boolean
+    timeToSolveInMinutes?: boolean
+    totalPoints?: boolean
+    totalNoOfQuestions?: boolean
+    topicId?: boolean
+    topic?: boolean | TopicsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contest"]>
+
+  export type ContestSelectScalar = {
+    id?: boolean
+    opensOn?: boolean
+    closesOn?: boolean
+    timeToSolveInMinutes?: boolean
+    totalPoints?: boolean
+    totalNoOfQuestions?: boolean
+    topicId?: boolean
+  }
+
+  export type ContestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "opensOn" | "closesOn" | "timeToSolveInMinutes" | "totalPoints" | "totalNoOfQuestions" | "topicId", ExtArgs["result"]["contest"]>
+  export type ContestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    question?: boolean | Contest$questionArgs<ExtArgs>
+    topic?: boolean | TopicsDefaultArgs<ExtArgs>
+    _count?: boolean | ContestCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ContestIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    topic?: boolean | TopicsDefaultArgs<ExtArgs>
+  }
+  export type ContestIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    topic?: boolean | TopicsDefaultArgs<ExtArgs>
+  }
+
+  export type $ContestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Contest"
+    objects: {
+      question: Prisma.$QuestionsPayload<ExtArgs>[]
+      topic: Prisma.$TopicsPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      opensOn: Date
+      closesOn: Date
+      timeToSolveInMinutes: number
+      totalPoints: number
+      totalNoOfQuestions: number
+      topicId: number
+    }, ExtArgs["result"]["contest"]>
+    composites: {}
+  }
+
+  type ContestGetPayload<S extends boolean | null | undefined | ContestDefaultArgs> = $Result.GetResult<Prisma.$ContestPayload, S>
+
+  type ContestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ContestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ContestCountAggregateInputType | true
+    }
+
+  export interface ContestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Contest'], meta: { name: 'Contest' } }
+    /**
+     * Find zero or one Contest that matches the filter.
+     * @param {ContestFindUniqueArgs} args - Arguments to find a Contest
+     * @example
+     * // Get one Contest
+     * const contest = await prisma.contest.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ContestFindUniqueArgs>(args: SelectSubset<T, ContestFindUniqueArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one Contest that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ContestFindUniqueOrThrowArgs} args - Arguments to find a Contest
+     * @example
+     * // Get one Contest
+     * const contest = await prisma.contest.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ContestFindUniqueOrThrowArgs>(args: SelectSubset<T, ContestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Contest that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestFindFirstArgs} args - Arguments to find a Contest
+     * @example
+     * // Get one Contest
+     * const contest = await prisma.contest.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ContestFindFirstArgs>(args?: SelectSubset<T, ContestFindFirstArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Contest that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestFindFirstOrThrowArgs} args - Arguments to find a Contest
+     * @example
+     * // Get one Contest
+     * const contest = await prisma.contest.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ContestFindFirstOrThrowArgs>(args?: SelectSubset<T, ContestFindFirstOrThrowArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more Contests that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Contests
+     * const contests = await prisma.contest.findMany()
+     * 
+     * // Get first 10 Contests
+     * const contests = await prisma.contest.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const contestWithIdOnly = await prisma.contest.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ContestFindManyArgs>(args?: SelectSubset<T, ContestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a Contest.
+     * @param {ContestCreateArgs} args - Arguments to create a Contest.
+     * @example
+     * // Create one Contest
+     * const Contest = await prisma.contest.create({
+     *   data: {
+     *     // ... data to create a Contest
+     *   }
+     * })
+     * 
+     */
+    create<T extends ContestCreateArgs>(args: SelectSubset<T, ContestCreateArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many Contests.
+     * @param {ContestCreateManyArgs} args - Arguments to create many Contests.
+     * @example
+     * // Create many Contests
+     * const contest = await prisma.contest.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ContestCreateManyArgs>(args?: SelectSubset<T, ContestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Contests and returns the data saved in the database.
+     * @param {ContestCreateManyAndReturnArgs} args - Arguments to create many Contests.
+     * @example
+     * // Create many Contests
+     * const contest = await prisma.contest.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Contests and only return the `id`
+     * const contestWithIdOnly = await prisma.contest.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ContestCreateManyAndReturnArgs>(args?: SelectSubset<T, ContestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a Contest.
+     * @param {ContestDeleteArgs} args - Arguments to delete one Contest.
+     * @example
+     * // Delete one Contest
+     * const Contest = await prisma.contest.delete({
+     *   where: {
+     *     // ... filter to delete one Contest
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ContestDeleteArgs>(args: SelectSubset<T, ContestDeleteArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one Contest.
+     * @param {ContestUpdateArgs} args - Arguments to update one Contest.
+     * @example
+     * // Update one Contest
+     * const contest = await prisma.contest.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ContestUpdateArgs>(args: SelectSubset<T, ContestUpdateArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more Contests.
+     * @param {ContestDeleteManyArgs} args - Arguments to filter Contests to delete.
+     * @example
+     * // Delete a few Contests
+     * const { count } = await prisma.contest.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ContestDeleteManyArgs>(args?: SelectSubset<T, ContestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Contests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Contests
+     * const contest = await prisma.contest.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ContestUpdateManyArgs>(args: SelectSubset<T, ContestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Contests and returns the data updated in the database.
+     * @param {ContestUpdateManyAndReturnArgs} args - Arguments to update many Contests.
+     * @example
+     * // Update many Contests
+     * const contest = await prisma.contest.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Contests and only return the `id`
+     * const contestWithIdOnly = await prisma.contest.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ContestUpdateManyAndReturnArgs>(args: SelectSubset<T, ContestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one Contest.
+     * @param {ContestUpsertArgs} args - Arguments to update or create a Contest.
+     * @example
+     * // Update or create a Contest
+     * const contest = await prisma.contest.upsert({
+     *   create: {
+     *     // ... data to create a Contest
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Contest we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ContestUpsertArgs>(args: SelectSubset<T, ContestUpsertArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of Contests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestCountArgs} args - Arguments to filter Contests to count.
+     * @example
+     * // Count the number of Contests
+     * const count = await prisma.contest.count({
+     *   where: {
+     *     // ... the filter for the Contests we want to count
+     *   }
+     * })
+    **/
+    count<T extends ContestCountArgs>(
+      args?: Subset<T, ContestCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContestCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Contest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContestAggregateArgs>(args: Subset<T, ContestAggregateArgs>): Prisma.PrismaPromise<GetContestAggregateType<T>>
+
+    /**
+     * Group by Contest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ContestGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ContestGroupByArgs['orderBy'] }
+        : { orderBy?: ContestGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ContestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Contest model
+   */
+  readonly fields: ContestFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Contest.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ContestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    question<T extends Contest$questionArgs<ExtArgs> = {}>(args?: Subset<T, Contest$questionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestionsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    topic<T extends TopicsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TopicsDefaultArgs<ExtArgs>>): Prisma__TopicsClient<$Result.GetResult<Prisma.$TopicsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Contest model
+   */ 
+  interface ContestFieldRefs {
+    readonly id: FieldRef<"Contest", 'Int'>
+    readonly opensOn: FieldRef<"Contest", 'DateTime'>
+    readonly closesOn: FieldRef<"Contest", 'DateTime'>
+    readonly timeToSolveInMinutes: FieldRef<"Contest", 'Int'>
+    readonly totalPoints: FieldRef<"Contest", 'Int'>
+    readonly totalNoOfQuestions: FieldRef<"Contest", 'Int'>
+    readonly topicId: FieldRef<"Contest", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Contest findUnique
+   */
+  export type ContestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+    /**
+     * Filter, which Contest to fetch.
+     */
+    where: ContestWhereUniqueInput
+  }
+
+  /**
+   * Contest findUniqueOrThrow
+   */
+  export type ContestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+    /**
+     * Filter, which Contest to fetch.
+     */
+    where: ContestWhereUniqueInput
+  }
+
+  /**
+   * Contest findFirst
+   */
+  export type ContestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+    /**
+     * Filter, which Contest to fetch.
+     */
+    where?: ContestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Contests to fetch.
+     */
+    orderBy?: ContestOrderByWithRelationInput | ContestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Contests.
+     */
+    cursor?: ContestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Contests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Contests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Contests.
+     */
+    distinct?: ContestScalarFieldEnum | ContestScalarFieldEnum[]
+  }
+
+  /**
+   * Contest findFirstOrThrow
+   */
+  export type ContestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+    /**
+     * Filter, which Contest to fetch.
+     */
+    where?: ContestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Contests to fetch.
+     */
+    orderBy?: ContestOrderByWithRelationInput | ContestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Contests.
+     */
+    cursor?: ContestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Contests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Contests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Contests.
+     */
+    distinct?: ContestScalarFieldEnum | ContestScalarFieldEnum[]
+  }
+
+  /**
+   * Contest findMany
+   */
+  export type ContestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+    /**
+     * Filter, which Contests to fetch.
+     */
+    where?: ContestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Contests to fetch.
+     */
+    orderBy?: ContestOrderByWithRelationInput | ContestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Contests.
+     */
+    cursor?: ContestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Contests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Contests.
+     */
+    skip?: number
+    distinct?: ContestScalarFieldEnum | ContestScalarFieldEnum[]
+  }
+
+  /**
+   * Contest create
+   */
+  export type ContestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Contest.
+     */
+    data: XOR<ContestCreateInput, ContestUncheckedCreateInput>
+  }
+
+  /**
+   * Contest createMany
+   */
+  export type ContestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Contests.
+     */
+    data: ContestCreateManyInput | ContestCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Contest createManyAndReturn
+   */
+  export type ContestCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * The data used to create many Contests.
+     */
+    data: ContestCreateManyInput | ContestCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Contest update
+   */
+  export type ContestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Contest.
+     */
+    data: XOR<ContestUpdateInput, ContestUncheckedUpdateInput>
+    /**
+     * Choose, which Contest to update.
+     */
+    where: ContestWhereUniqueInput
+  }
+
+  /**
+   * Contest updateMany
+   */
+  export type ContestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Contests.
+     */
+    data: XOR<ContestUpdateManyMutationInput, ContestUncheckedUpdateManyInput>
+    /**
+     * Filter which Contests to update
+     */
+    where?: ContestWhereInput
+  }
+
+  /**
+   * Contest updateManyAndReturn
+   */
+  export type ContestUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * The data used to update Contests.
+     */
+    data: XOR<ContestUpdateManyMutationInput, ContestUncheckedUpdateManyInput>
+    /**
+     * Filter which Contests to update
+     */
+    where?: ContestWhereInput
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Contest upsert
+   */
+  export type ContestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Contest to update in case it exists.
+     */
+    where: ContestWhereUniqueInput
+    /**
+     * In case the Contest found by the `where` argument doesn't exist, create a new Contest with this data.
+     */
+    create: XOR<ContestCreateInput, ContestUncheckedCreateInput>
+    /**
+     * In case the Contest was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ContestUpdateInput, ContestUncheckedUpdateInput>
+  }
+
+  /**
+   * Contest delete
+   */
+  export type ContestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+    /**
+     * Filter which Contest to delete.
+     */
+    where: ContestWhereUniqueInput
+  }
+
+  /**
+   * Contest deleteMany
+   */
+  export type ContestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Contests to delete
+     */
+    where?: ContestWhereInput
+  }
+
+  /**
+   * Contest.question
+   */
+  export type Contest$questionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Questions
+     */
+    select?: QuestionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Questions
+     */
+    omit?: QuestionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestionsInclude<ExtArgs> | null
+    where?: QuestionsWhereInput
+    orderBy?: QuestionsOrderByWithRelationInput | QuestionsOrderByWithRelationInput[]
+    cursor?: QuestionsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: QuestionsScalarFieldEnum | QuestionsScalarFieldEnum[]
+  }
+
+  /**
+   * Contest without action
+   */
+  export type ContestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -15994,7 +17335,8 @@ export namespace Prisma {
     CLangFunction: 'CLangFunction',
     PyLangFunction: 'PyLangFunction',
     JavsLangFunction: 'JavsLangFunction',
-    timeToSolveInHours: 'timeToSolveInHours'
+    timeToSolveInMinutes: 'timeToSolveInMinutes',
+    contestId: 'contestId'
   };
 
   export type QuestionsScalarFieldEnum = (typeof QuestionsScalarFieldEnum)[keyof typeof QuestionsScalarFieldEnum]
@@ -16111,6 +17453,19 @@ export namespace Prisma {
   };
 
   export type BoilerPlateScalarFieldEnum = (typeof BoilerPlateScalarFieldEnum)[keyof typeof BoilerPlateScalarFieldEnum]
+
+
+  export const ContestScalarFieldEnum: {
+    id: 'id',
+    opensOn: 'opensOn',
+    closesOn: 'closesOn',
+    timeToSolveInMinutes: 'timeToSolveInMinutes',
+    totalPoints: 'totalPoints',
+    totalNoOfQuestions: 'totalNoOfQuestions',
+    topicId: 'topicId'
+  };
+
+  export type ContestScalarFieldEnum = (typeof ContestScalarFieldEnum)[keyof typeof ContestScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -16436,6 +17791,7 @@ export namespace Prisma {
     contestDate?: DateTimeFilter<"Topics"> | Date | string
     contestResult?: ContestResultListRelationFilter
     question?: QuestionsListRelationFilter
+    contest?: XOR<ContestNullableScalarRelationFilter, ContestWhereInput> | null
   }
 
   export type TopicsOrderByWithRelationInput = {
@@ -16446,6 +17802,7 @@ export namespace Prisma {
     contestDate?: SortOrder
     contestResult?: ContestResultOrderByRelationAggregateInput
     question?: QuestionsOrderByRelationAggregateInput
+    contest?: ContestOrderByWithRelationInput
   }
 
   export type TopicsWhereUniqueInput = Prisma.AtLeast<{
@@ -16459,6 +17816,7 @@ export namespace Prisma {
     contestDate?: DateTimeFilter<"Topics"> | Date | string
     contestResult?: ContestResultListRelationFilter
     question?: QuestionsListRelationFilter
+    contest?: XOR<ContestNullableScalarRelationFilter, ContestWhereInput> | null
   }, "id" | "name" | "notes">
 
   export type TopicsOrderByWithAggregationInput = {
@@ -16503,12 +17861,14 @@ export namespace Prisma {
     CLangFunction?: StringFilter<"Questions"> | string
     PyLangFunction?: StringFilter<"Questions"> | string
     JavsLangFunction?: StringFilter<"Questions"> | string
-    timeToSolveInHours?: IntFilter<"Questions"> | number
+    timeToSolveInMinutes?: IntFilter<"Questions"> | number
+    contestId?: IntNullableFilter<"Questions"> | number | null
     testCase?: TestCaseListRelationFilter
     submission?: SubmissionListRelationFilter
     discussion?: DiscussionsListRelationFilter
     boilerPlate?: BoilerPlateListRelationFilter
     topics?: XOR<TopicsScalarRelationFilter, TopicsWhereInput>
+    contest?: XOR<ContestNullableScalarRelationFilter, ContestWhereInput> | null
   }
 
   export type QuestionsOrderByWithRelationInput = {
@@ -16526,12 +17886,14 @@ export namespace Prisma {
     CLangFunction?: SortOrder
     PyLangFunction?: SortOrder
     JavsLangFunction?: SortOrder
-    timeToSolveInHours?: SortOrder
+    timeToSolveInMinutes?: SortOrder
+    contestId?: SortOrderInput | SortOrder
     testCase?: TestCaseOrderByRelationAggregateInput
     submission?: SubmissionOrderByRelationAggregateInput
     discussion?: DiscussionsOrderByRelationAggregateInput
     boilerPlate?: BoilerPlateOrderByRelationAggregateInput
     topics?: TopicsOrderByWithRelationInput
+    contest?: ContestOrderByWithRelationInput
   }
 
   export type QuestionsWhereUniqueInput = Prisma.AtLeast<{
@@ -16552,12 +17914,14 @@ export namespace Prisma {
     CLangFunction?: StringFilter<"Questions"> | string
     PyLangFunction?: StringFilter<"Questions"> | string
     JavsLangFunction?: StringFilter<"Questions"> | string
-    timeToSolveInHours?: IntFilter<"Questions"> | number
+    timeToSolveInMinutes?: IntFilter<"Questions"> | number
+    contestId?: IntNullableFilter<"Questions"> | number | null
     testCase?: TestCaseListRelationFilter
     submission?: SubmissionListRelationFilter
     discussion?: DiscussionsListRelationFilter
     boilerPlate?: BoilerPlateListRelationFilter
     topics?: XOR<TopicsScalarRelationFilter, TopicsWhereInput>
+    contest?: XOR<ContestNullableScalarRelationFilter, ContestWhereInput> | null
   }, "id">
 
   export type QuestionsOrderByWithAggregationInput = {
@@ -16575,7 +17939,8 @@ export namespace Prisma {
     CLangFunction?: SortOrder
     PyLangFunction?: SortOrder
     JavsLangFunction?: SortOrder
-    timeToSolveInHours?: SortOrder
+    timeToSolveInMinutes?: SortOrder
+    contestId?: SortOrderInput | SortOrder
     _count?: QuestionsCountOrderByAggregateInput
     _avg?: QuestionsAvgOrderByAggregateInput
     _max?: QuestionsMaxOrderByAggregateInput
@@ -16601,7 +17966,8 @@ export namespace Prisma {
     CLangFunction?: StringWithAggregatesFilter<"Questions"> | string
     PyLangFunction?: StringWithAggregatesFilter<"Questions"> | string
     JavsLangFunction?: StringWithAggregatesFilter<"Questions"> | string
-    timeToSolveInHours?: IntWithAggregatesFilter<"Questions"> | number
+    timeToSolveInMinutes?: IntWithAggregatesFilter<"Questions"> | number
+    contestId?: IntNullableWithAggregatesFilter<"Questions"> | number | null
   }
 
   export type TestCaseWhereInput = {
@@ -17202,6 +18568,76 @@ export namespace Prisma {
     questionId?: IntWithAggregatesFilter<"BoilerPlate"> | number
   }
 
+  export type ContestWhereInput = {
+    AND?: ContestWhereInput | ContestWhereInput[]
+    OR?: ContestWhereInput[]
+    NOT?: ContestWhereInput | ContestWhereInput[]
+    id?: IntFilter<"Contest"> | number
+    opensOn?: DateTimeFilter<"Contest"> | Date | string
+    closesOn?: DateTimeFilter<"Contest"> | Date | string
+    timeToSolveInMinutes?: IntFilter<"Contest"> | number
+    totalPoints?: IntFilter<"Contest"> | number
+    totalNoOfQuestions?: IntFilter<"Contest"> | number
+    topicId?: IntFilter<"Contest"> | number
+    question?: QuestionsListRelationFilter
+    topic?: XOR<TopicsScalarRelationFilter, TopicsWhereInput>
+  }
+
+  export type ContestOrderByWithRelationInput = {
+    id?: SortOrder
+    opensOn?: SortOrder
+    closesOn?: SortOrder
+    timeToSolveInMinutes?: SortOrder
+    totalPoints?: SortOrder
+    totalNoOfQuestions?: SortOrder
+    topicId?: SortOrder
+    question?: QuestionsOrderByRelationAggregateInput
+    topic?: TopicsOrderByWithRelationInput
+  }
+
+  export type ContestWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    topicId?: number
+    AND?: ContestWhereInput | ContestWhereInput[]
+    OR?: ContestWhereInput[]
+    NOT?: ContestWhereInput | ContestWhereInput[]
+    opensOn?: DateTimeFilter<"Contest"> | Date | string
+    closesOn?: DateTimeFilter<"Contest"> | Date | string
+    timeToSolveInMinutes?: IntFilter<"Contest"> | number
+    totalPoints?: IntFilter<"Contest"> | number
+    totalNoOfQuestions?: IntFilter<"Contest"> | number
+    question?: QuestionsListRelationFilter
+    topic?: XOR<TopicsScalarRelationFilter, TopicsWhereInput>
+  }, "id" | "topicId">
+
+  export type ContestOrderByWithAggregationInput = {
+    id?: SortOrder
+    opensOn?: SortOrder
+    closesOn?: SortOrder
+    timeToSolveInMinutes?: SortOrder
+    totalPoints?: SortOrder
+    totalNoOfQuestions?: SortOrder
+    topicId?: SortOrder
+    _count?: ContestCountOrderByAggregateInput
+    _avg?: ContestAvgOrderByAggregateInput
+    _max?: ContestMaxOrderByAggregateInput
+    _min?: ContestMinOrderByAggregateInput
+    _sum?: ContestSumOrderByAggregateInput
+  }
+
+  export type ContestScalarWhereWithAggregatesInput = {
+    AND?: ContestScalarWhereWithAggregatesInput | ContestScalarWhereWithAggregatesInput[]
+    OR?: ContestScalarWhereWithAggregatesInput[]
+    NOT?: ContestScalarWhereWithAggregatesInput | ContestScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Contest"> | number
+    opensOn?: DateTimeWithAggregatesFilter<"Contest"> | Date | string
+    closesOn?: DateTimeWithAggregatesFilter<"Contest"> | Date | string
+    timeToSolveInMinutes?: IntWithAggregatesFilter<"Contest"> | number
+    totalPoints?: IntWithAggregatesFilter<"Contest"> | number
+    totalNoOfQuestions?: IntWithAggregatesFilter<"Contest"> | number
+    topicId?: IntWithAggregatesFilter<"Contest"> | number
+  }
+
   export type StudentCreateInput = {
     name: string
     rno: string
@@ -17303,6 +18739,7 @@ export namespace Prisma {
     contestDate: Date | string
     contestResult?: ContestResultCreateNestedManyWithoutTopicsInput
     question?: QuestionsCreateNestedManyWithoutTopicsInput
+    contest?: ContestCreateNestedOneWithoutTopicInput
   }
 
   export type TopicsUncheckedCreateInput = {
@@ -17313,6 +18750,7 @@ export namespace Prisma {
     contestDate: Date | string
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutTopicsInput
     question?: QuestionsUncheckedCreateNestedManyWithoutTopicsInput
+    contest?: ContestUncheckedCreateNestedOneWithoutTopicInput
   }
 
   export type TopicsUpdateInput = {
@@ -17322,6 +18760,7 @@ export namespace Prisma {
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
     contestResult?: ContestResultUpdateManyWithoutTopicsNestedInput
     question?: QuestionsUpdateManyWithoutTopicsNestedInput
+    contest?: ContestUpdateOneWithoutTopicNestedInput
   }
 
   export type TopicsUncheckedUpdateInput = {
@@ -17332,6 +18771,7 @@ export namespace Prisma {
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
     contestResult?: ContestResultUncheckedUpdateManyWithoutTopicsNestedInput
     question?: QuestionsUncheckedUpdateManyWithoutTopicsNestedInput
+    contest?: ContestUncheckedUpdateOneWithoutTopicNestedInput
   }
 
   export type TopicsCreateManyInput = {
@@ -17370,12 +18810,13 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolveInHours: number
+    timeToSolveInMinutes: number
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
     boilerPlate?: BoilerPlateCreateNestedManyWithoutQuestionInput
     topics: TopicsCreateNestedOneWithoutQuestionInput
+    contest?: ContestCreateNestedOneWithoutQuestionInput
   }
 
   export type QuestionsUncheckedCreateInput = {
@@ -17393,7 +18834,8 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolveInHours: number
+    timeToSolveInMinutes: number
+    contestId?: number | null
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
@@ -17413,12 +18855,13 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
     boilerPlate?: BoilerPlateUpdateManyWithoutQuestionNestedInput
     topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
+    contest?: ContestUpdateOneWithoutQuestionNestedInput
   }
 
   export type QuestionsUncheckedUpdateInput = {
@@ -17436,7 +18879,8 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    contestId?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
@@ -17458,7 +18902,8 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolveInHours: number
+    timeToSolveInMinutes: number
+    contestId?: number | null
   }
 
   export type QuestionsUpdateManyMutationInput = {
@@ -17474,7 +18919,7 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
   }
 
   export type QuestionsUncheckedUpdateManyInput = {
@@ -17492,7 +18937,8 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    contestId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type TestCaseCreateInput = {
@@ -18066,6 +19512,76 @@ export namespace Prisma {
     questionId?: IntFieldUpdateOperationsInput | number
   }
 
+  export type ContestCreateInput = {
+    opensOn: Date | string
+    closesOn: Date | string
+    timeToSolveInMinutes: number
+    totalPoints: number
+    totalNoOfQuestions: number
+    question?: QuestionsCreateNestedManyWithoutContestInput
+    topic: TopicsCreateNestedOneWithoutContestInput
+  }
+
+  export type ContestUncheckedCreateInput = {
+    id?: number
+    opensOn: Date | string
+    closesOn: Date | string
+    timeToSolveInMinutes: number
+    totalPoints: number
+    totalNoOfQuestions: number
+    topicId: number
+    question?: QuestionsUncheckedCreateNestedManyWithoutContestInput
+  }
+
+  export type ContestUpdateInput = {
+    opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    totalPoints?: IntFieldUpdateOperationsInput | number
+    totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
+    question?: QuestionsUpdateManyWithoutContestNestedInput
+    topic?: TopicsUpdateOneRequiredWithoutContestNestedInput
+  }
+
+  export type ContestUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    totalPoints?: IntFieldUpdateOperationsInput | number
+    totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
+    topicId?: IntFieldUpdateOperationsInput | number
+    question?: QuestionsUncheckedUpdateManyWithoutContestNestedInput
+  }
+
+  export type ContestCreateManyInput = {
+    id?: number
+    opensOn: Date | string
+    closesOn: Date | string
+    timeToSolveInMinutes: number
+    totalPoints: number
+    totalNoOfQuestions: number
+    topicId: number
+  }
+
+  export type ContestUpdateManyMutationInput = {
+    opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    totalPoints?: IntFieldUpdateOperationsInput | number
+    totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ContestUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    totalPoints?: IntFieldUpdateOperationsInput | number
+    totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
+    topicId?: IntFieldUpdateOperationsInput | number
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -18292,6 +19808,11 @@ export namespace Prisma {
     none?: QuestionsWhereInput
   }
 
+  export type ContestNullableScalarRelationFilter = {
+    is?: ContestWhereInput | null
+    isNot?: ContestWhereInput | null
+  }
+
   export type QuestionsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -18356,6 +19877,17 @@ export namespace Prisma {
     not?: NestedEnumQuestionTypeFilter<$PrismaModel> | $Enums.QuestionType
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type TestCaseListRelationFilter = {
     every?: TestCaseWhereInput
     some?: TestCaseWhereInput
@@ -18396,7 +19928,8 @@ export namespace Prisma {
     CLangFunction?: SortOrder
     PyLangFunction?: SortOrder
     JavsLangFunction?: SortOrder
-    timeToSolveInHours?: SortOrder
+    timeToSolveInMinutes?: SortOrder
+    contestId?: SortOrder
   }
 
   export type QuestionsAvgOrderByAggregateInput = {
@@ -18405,7 +19938,8 @@ export namespace Prisma {
     noOfHiddenTestCases?: SortOrder
     noOfExternalTestCases?: SortOrder
     pointsPerTestCaseSolved?: SortOrder
-    timeToSolveInHours?: SortOrder
+    timeToSolveInMinutes?: SortOrder
+    contestId?: SortOrder
   }
 
   export type QuestionsMaxOrderByAggregateInput = {
@@ -18423,7 +19957,8 @@ export namespace Prisma {
     CLangFunction?: SortOrder
     PyLangFunction?: SortOrder
     JavsLangFunction?: SortOrder
-    timeToSolveInHours?: SortOrder
+    timeToSolveInMinutes?: SortOrder
+    contestId?: SortOrder
   }
 
   export type QuestionsMinOrderByAggregateInput = {
@@ -18441,7 +19976,8 @@ export namespace Prisma {
     CLangFunction?: SortOrder
     PyLangFunction?: SortOrder
     JavsLangFunction?: SortOrder
-    timeToSolveInHours?: SortOrder
+    timeToSolveInMinutes?: SortOrder
+    contestId?: SortOrder
   }
 
   export type QuestionsSumOrderByAggregateInput = {
@@ -18450,7 +19986,8 @@ export namespace Prisma {
     noOfHiddenTestCases?: SortOrder
     noOfExternalTestCases?: SortOrder
     pointsPerTestCaseSolved?: SortOrder
-    timeToSolveInHours?: SortOrder
+    timeToSolveInMinutes?: SortOrder
+    contestId?: SortOrder
   }
 
   export type EnumDifficultyTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -18471,6 +20008,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumQuestionTypeFilter<$PrismaModel>
     _max?: NestedEnumQuestionTypeFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type EnumTestCaseTypeFilter<$PrismaModel = never> = {
@@ -18884,17 +20437,6 @@ export namespace Prisma {
     not?: NestedEnumCommentTypeFilter<$PrismaModel> | $Enums.CommentType
   }
 
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type QuestionsNullableScalarRelationFilter = {
     is?: QuestionsWhereInput | null
     isNot?: QuestionsWhereInput | null
@@ -18954,22 +20496,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumCommentTypeFilter<$PrismaModel>
     _max?: NestedEnumCommentTypeFilter<$PrismaModel>
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type EnumLanguageTypeFilter<$PrismaModel = never> = {
@@ -19038,6 +20564,52 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumBoilerTypeFilter<$PrismaModel>
     _max?: NestedEnumBoilerTypeFilter<$PrismaModel>
+  }
+
+  export type ContestCountOrderByAggregateInput = {
+    id?: SortOrder
+    opensOn?: SortOrder
+    closesOn?: SortOrder
+    timeToSolveInMinutes?: SortOrder
+    totalPoints?: SortOrder
+    totalNoOfQuestions?: SortOrder
+    topicId?: SortOrder
+  }
+
+  export type ContestAvgOrderByAggregateInput = {
+    id?: SortOrder
+    timeToSolveInMinutes?: SortOrder
+    totalPoints?: SortOrder
+    totalNoOfQuestions?: SortOrder
+    topicId?: SortOrder
+  }
+
+  export type ContestMaxOrderByAggregateInput = {
+    id?: SortOrder
+    opensOn?: SortOrder
+    closesOn?: SortOrder
+    timeToSolveInMinutes?: SortOrder
+    totalPoints?: SortOrder
+    totalNoOfQuestions?: SortOrder
+    topicId?: SortOrder
+  }
+
+  export type ContestMinOrderByAggregateInput = {
+    id?: SortOrder
+    opensOn?: SortOrder
+    closesOn?: SortOrder
+    timeToSolveInMinutes?: SortOrder
+    totalPoints?: SortOrder
+    totalNoOfQuestions?: SortOrder
+    topicId?: SortOrder
+  }
+
+  export type ContestSumOrderByAggregateInput = {
+    id?: SortOrder
+    timeToSolveInMinutes?: SortOrder
+    totalPoints?: SortOrder
+    totalNoOfQuestions?: SortOrder
+    topicId?: SortOrder
   }
 
   export type SubmissionCreateNestedManyWithoutStudentInput = {
@@ -19274,6 +20846,12 @@ export namespace Prisma {
     connect?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
   }
 
+  export type ContestCreateNestedOneWithoutTopicInput = {
+    create?: XOR<ContestCreateWithoutTopicInput, ContestUncheckedCreateWithoutTopicInput>
+    connectOrCreate?: ContestCreateOrConnectWithoutTopicInput
+    connect?: ContestWhereUniqueInput
+  }
+
   export type ContestResultUncheckedCreateNestedManyWithoutTopicsInput = {
     create?: XOR<ContestResultCreateWithoutTopicsInput, ContestResultUncheckedCreateWithoutTopicsInput> | ContestResultCreateWithoutTopicsInput[] | ContestResultUncheckedCreateWithoutTopicsInput[]
     connectOrCreate?: ContestResultCreateOrConnectWithoutTopicsInput | ContestResultCreateOrConnectWithoutTopicsInput[]
@@ -19286,6 +20864,12 @@ export namespace Prisma {
     connectOrCreate?: QuestionsCreateOrConnectWithoutTopicsInput | QuestionsCreateOrConnectWithoutTopicsInput[]
     createMany?: QuestionsCreateManyTopicsInputEnvelope
     connect?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+  }
+
+  export type ContestUncheckedCreateNestedOneWithoutTopicInput = {
+    create?: XOR<ContestCreateWithoutTopicInput, ContestUncheckedCreateWithoutTopicInput>
+    connectOrCreate?: ContestCreateOrConnectWithoutTopicInput
+    connect?: ContestWhereUniqueInput
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -19320,6 +20904,16 @@ export namespace Prisma {
     deleteMany?: QuestionsScalarWhereInput | QuestionsScalarWhereInput[]
   }
 
+  export type ContestUpdateOneWithoutTopicNestedInput = {
+    create?: XOR<ContestCreateWithoutTopicInput, ContestUncheckedCreateWithoutTopicInput>
+    connectOrCreate?: ContestCreateOrConnectWithoutTopicInput
+    upsert?: ContestUpsertWithoutTopicInput
+    disconnect?: ContestWhereInput | boolean
+    delete?: ContestWhereInput | boolean
+    connect?: ContestWhereUniqueInput
+    update?: XOR<XOR<ContestUpdateToOneWithWhereWithoutTopicInput, ContestUpdateWithoutTopicInput>, ContestUncheckedUpdateWithoutTopicInput>
+  }
+
   export type ContestResultUncheckedUpdateManyWithoutTopicsNestedInput = {
     create?: XOR<ContestResultCreateWithoutTopicsInput, ContestResultUncheckedCreateWithoutTopicsInput> | ContestResultCreateWithoutTopicsInput[] | ContestResultUncheckedCreateWithoutTopicsInput[]
     connectOrCreate?: ContestResultCreateOrConnectWithoutTopicsInput | ContestResultCreateOrConnectWithoutTopicsInput[]
@@ -19346,6 +20940,16 @@ export namespace Prisma {
     update?: QuestionsUpdateWithWhereUniqueWithoutTopicsInput | QuestionsUpdateWithWhereUniqueWithoutTopicsInput[]
     updateMany?: QuestionsUpdateManyWithWhereWithoutTopicsInput | QuestionsUpdateManyWithWhereWithoutTopicsInput[]
     deleteMany?: QuestionsScalarWhereInput | QuestionsScalarWhereInput[]
+  }
+
+  export type ContestUncheckedUpdateOneWithoutTopicNestedInput = {
+    create?: XOR<ContestCreateWithoutTopicInput, ContestUncheckedCreateWithoutTopicInput>
+    connectOrCreate?: ContestCreateOrConnectWithoutTopicInput
+    upsert?: ContestUpsertWithoutTopicInput
+    disconnect?: ContestWhereInput | boolean
+    delete?: ContestWhereInput | boolean
+    connect?: ContestWhereUniqueInput
+    update?: XOR<XOR<ContestUpdateToOneWithWhereWithoutTopicInput, ContestUpdateWithoutTopicInput>, ContestUncheckedUpdateWithoutTopicInput>
   }
 
   export type TestCaseCreateNestedManyWithoutQuestionsInput = {
@@ -19380,6 +20984,12 @@ export namespace Prisma {
     create?: XOR<TopicsCreateWithoutQuestionInput, TopicsUncheckedCreateWithoutQuestionInput>
     connectOrCreate?: TopicsCreateOrConnectWithoutQuestionInput
     connect?: TopicsWhereUniqueInput
+  }
+
+  export type ContestCreateNestedOneWithoutQuestionInput = {
+    create?: XOR<ContestCreateWithoutQuestionInput, ContestUncheckedCreateWithoutQuestionInput>
+    connectOrCreate?: ContestCreateOrConnectWithoutQuestionInput
+    connect?: ContestWhereUniqueInput
   }
 
   export type TestCaseUncheckedCreateNestedManyWithoutQuestionsInput = {
@@ -19480,6 +21090,24 @@ export namespace Prisma {
     upsert?: TopicsUpsertWithoutQuestionInput
     connect?: TopicsWhereUniqueInput
     update?: XOR<XOR<TopicsUpdateToOneWithWhereWithoutQuestionInput, TopicsUpdateWithoutQuestionInput>, TopicsUncheckedUpdateWithoutQuestionInput>
+  }
+
+  export type ContestUpdateOneWithoutQuestionNestedInput = {
+    create?: XOR<ContestCreateWithoutQuestionInput, ContestUncheckedCreateWithoutQuestionInput>
+    connectOrCreate?: ContestCreateOrConnectWithoutQuestionInput
+    upsert?: ContestUpsertWithoutQuestionInput
+    disconnect?: ContestWhereInput | boolean
+    delete?: ContestWhereInput | boolean
+    connect?: ContestWhereUniqueInput
+    update?: XOR<XOR<ContestUpdateToOneWithWhereWithoutQuestionInput, ContestUpdateWithoutQuestionInput>, ContestUncheckedUpdateWithoutQuestionInput>
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput = {
@@ -19794,14 +21422,6 @@ export namespace Prisma {
     deleteMany?: DiscussionsScalarWhereInput | DiscussionsScalarWhereInput[]
   }
 
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type DiscussionsUncheckedUpdateManyWithoutToWhomIReplyNestedInput = {
     create?: XOR<DiscussionsCreateWithoutToWhomIReplyInput, DiscussionsUncheckedCreateWithoutToWhomIReplyInput> | DiscussionsCreateWithoutToWhomIReplyInput[] | DiscussionsUncheckedCreateWithoutToWhomIReplyInput[]
     connectOrCreate?: DiscussionsCreateOrConnectWithoutToWhomIReplyInput | DiscussionsCreateOrConnectWithoutToWhomIReplyInput[]
@@ -19836,6 +21456,62 @@ export namespace Prisma {
     upsert?: QuestionsUpsertWithoutBoilerPlateInput
     connect?: QuestionsWhereUniqueInput
     update?: XOR<XOR<QuestionsUpdateToOneWithWhereWithoutBoilerPlateInput, QuestionsUpdateWithoutBoilerPlateInput>, QuestionsUncheckedUpdateWithoutBoilerPlateInput>
+  }
+
+  export type QuestionsCreateNestedManyWithoutContestInput = {
+    create?: XOR<QuestionsCreateWithoutContestInput, QuestionsUncheckedCreateWithoutContestInput> | QuestionsCreateWithoutContestInput[] | QuestionsUncheckedCreateWithoutContestInput[]
+    connectOrCreate?: QuestionsCreateOrConnectWithoutContestInput | QuestionsCreateOrConnectWithoutContestInput[]
+    createMany?: QuestionsCreateManyContestInputEnvelope
+    connect?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+  }
+
+  export type TopicsCreateNestedOneWithoutContestInput = {
+    create?: XOR<TopicsCreateWithoutContestInput, TopicsUncheckedCreateWithoutContestInput>
+    connectOrCreate?: TopicsCreateOrConnectWithoutContestInput
+    connect?: TopicsWhereUniqueInput
+  }
+
+  export type QuestionsUncheckedCreateNestedManyWithoutContestInput = {
+    create?: XOR<QuestionsCreateWithoutContestInput, QuestionsUncheckedCreateWithoutContestInput> | QuestionsCreateWithoutContestInput[] | QuestionsUncheckedCreateWithoutContestInput[]
+    connectOrCreate?: QuestionsCreateOrConnectWithoutContestInput | QuestionsCreateOrConnectWithoutContestInput[]
+    createMany?: QuestionsCreateManyContestInputEnvelope
+    connect?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+  }
+
+  export type QuestionsUpdateManyWithoutContestNestedInput = {
+    create?: XOR<QuestionsCreateWithoutContestInput, QuestionsUncheckedCreateWithoutContestInput> | QuestionsCreateWithoutContestInput[] | QuestionsUncheckedCreateWithoutContestInput[]
+    connectOrCreate?: QuestionsCreateOrConnectWithoutContestInput | QuestionsCreateOrConnectWithoutContestInput[]
+    upsert?: QuestionsUpsertWithWhereUniqueWithoutContestInput | QuestionsUpsertWithWhereUniqueWithoutContestInput[]
+    createMany?: QuestionsCreateManyContestInputEnvelope
+    set?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+    disconnect?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+    delete?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+    connect?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+    update?: QuestionsUpdateWithWhereUniqueWithoutContestInput | QuestionsUpdateWithWhereUniqueWithoutContestInput[]
+    updateMany?: QuestionsUpdateManyWithWhereWithoutContestInput | QuestionsUpdateManyWithWhereWithoutContestInput[]
+    deleteMany?: QuestionsScalarWhereInput | QuestionsScalarWhereInput[]
+  }
+
+  export type TopicsUpdateOneRequiredWithoutContestNestedInput = {
+    create?: XOR<TopicsCreateWithoutContestInput, TopicsUncheckedCreateWithoutContestInput>
+    connectOrCreate?: TopicsCreateOrConnectWithoutContestInput
+    upsert?: TopicsUpsertWithoutContestInput
+    connect?: TopicsWhereUniqueInput
+    update?: XOR<XOR<TopicsUpdateToOneWithWhereWithoutContestInput, TopicsUpdateWithoutContestInput>, TopicsUncheckedUpdateWithoutContestInput>
+  }
+
+  export type QuestionsUncheckedUpdateManyWithoutContestNestedInput = {
+    create?: XOR<QuestionsCreateWithoutContestInput, QuestionsUncheckedCreateWithoutContestInput> | QuestionsCreateWithoutContestInput[] | QuestionsUncheckedCreateWithoutContestInput[]
+    connectOrCreate?: QuestionsCreateOrConnectWithoutContestInput | QuestionsCreateOrConnectWithoutContestInput[]
+    upsert?: QuestionsUpsertWithWhereUniqueWithoutContestInput | QuestionsUpsertWithWhereUniqueWithoutContestInput[]
+    createMany?: QuestionsCreateManyContestInputEnvelope
+    set?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+    disconnect?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+    delete?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+    connect?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
+    update?: QuestionsUpdateWithWhereUniqueWithoutContestInput | QuestionsUpdateWithWhereUniqueWithoutContestInput[]
+    updateMany?: QuestionsUpdateManyWithWhereWithoutContestInput | QuestionsUpdateManyWithWhereWithoutContestInput[]
+    deleteMany?: QuestionsScalarWhereInput | QuestionsScalarWhereInput[]
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -20033,6 +21709,33 @@ export namespace Prisma {
     _max?: NestedEnumQuestionTypeFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedEnumTestCaseTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.TestCaseType | EnumTestCaseTypeFieldRefInput<$PrismaModel>
     in?: $Enums.TestCaseType[] | ListEnumTestCaseTypeFieldRefInput<$PrismaModel>
@@ -20150,33 +21853,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumCommentTypeFilter<$PrismaModel>
     _max?: NestedEnumCommentTypeFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedEnumLanguageTypeFilter<$PrismaModel = never> = {
@@ -20522,11 +22198,12 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolveInHours: number
+    timeToSolveInMinutes: number
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
     boilerPlate?: BoilerPlateCreateNestedManyWithoutQuestionInput
+    contest?: ContestCreateNestedOneWithoutQuestionInput
   }
 
   export type QuestionsUncheckedCreateWithoutTopicsInput = {
@@ -20543,7 +22220,8 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolveInHours: number
+    timeToSolveInMinutes: number
+    contestId?: number | null
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
@@ -20558,6 +22236,30 @@ export namespace Prisma {
   export type QuestionsCreateManyTopicsInputEnvelope = {
     data: QuestionsCreateManyTopicsInput | QuestionsCreateManyTopicsInput[]
     skipDuplicates?: boolean
+  }
+
+  export type ContestCreateWithoutTopicInput = {
+    opensOn: Date | string
+    closesOn: Date | string
+    timeToSolveInMinutes: number
+    totalPoints: number
+    totalNoOfQuestions: number
+    question?: QuestionsCreateNestedManyWithoutContestInput
+  }
+
+  export type ContestUncheckedCreateWithoutTopicInput = {
+    id?: number
+    opensOn: Date | string
+    closesOn: Date | string
+    timeToSolveInMinutes: number
+    totalPoints: number
+    totalNoOfQuestions: number
+    question?: QuestionsUncheckedCreateNestedManyWithoutContestInput
+  }
+
+  export type ContestCreateOrConnectWithoutTopicInput = {
+    where: ContestWhereUniqueInput
+    create: XOR<ContestCreateWithoutTopicInput, ContestUncheckedCreateWithoutTopicInput>
   }
 
   export type ContestResultUpsertWithWhereUniqueWithoutTopicsInput = {
@@ -20610,7 +22312,38 @@ export namespace Prisma {
     CLangFunction?: StringFilter<"Questions"> | string
     PyLangFunction?: StringFilter<"Questions"> | string
     JavsLangFunction?: StringFilter<"Questions"> | string
-    timeToSolveInHours?: IntFilter<"Questions"> | number
+    timeToSolveInMinutes?: IntFilter<"Questions"> | number
+    contestId?: IntNullableFilter<"Questions"> | number | null
+  }
+
+  export type ContestUpsertWithoutTopicInput = {
+    update: XOR<ContestUpdateWithoutTopicInput, ContestUncheckedUpdateWithoutTopicInput>
+    create: XOR<ContestCreateWithoutTopicInput, ContestUncheckedCreateWithoutTopicInput>
+    where?: ContestWhereInput
+  }
+
+  export type ContestUpdateToOneWithWhereWithoutTopicInput = {
+    where?: ContestWhereInput
+    data: XOR<ContestUpdateWithoutTopicInput, ContestUncheckedUpdateWithoutTopicInput>
+  }
+
+  export type ContestUpdateWithoutTopicInput = {
+    opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    totalPoints?: IntFieldUpdateOperationsInput | number
+    totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
+    question?: QuestionsUpdateManyWithoutContestNestedInput
+  }
+
+  export type ContestUncheckedUpdateWithoutTopicInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    totalPoints?: IntFieldUpdateOperationsInput | number
+    totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
+    question?: QuestionsUncheckedUpdateManyWithoutContestNestedInput
   }
 
   export type TestCaseCreateWithoutQuestionsInput = {
@@ -20737,6 +22470,7 @@ export namespace Prisma {
     notes?: string | null
     contestDate: Date | string
     contestResult?: ContestResultCreateNestedManyWithoutTopicsInput
+    contest?: ContestCreateNestedOneWithoutTopicInput
   }
 
   export type TopicsUncheckedCreateWithoutQuestionInput = {
@@ -20746,11 +22480,36 @@ export namespace Prisma {
     notes?: string | null
     contestDate: Date | string
     contestResult?: ContestResultUncheckedCreateNestedManyWithoutTopicsInput
+    contest?: ContestUncheckedCreateNestedOneWithoutTopicInput
   }
 
   export type TopicsCreateOrConnectWithoutQuestionInput = {
     where: TopicsWhereUniqueInput
     create: XOR<TopicsCreateWithoutQuestionInput, TopicsUncheckedCreateWithoutQuestionInput>
+  }
+
+  export type ContestCreateWithoutQuestionInput = {
+    opensOn: Date | string
+    closesOn: Date | string
+    timeToSolveInMinutes: number
+    totalPoints: number
+    totalNoOfQuestions: number
+    topic: TopicsCreateNestedOneWithoutContestInput
+  }
+
+  export type ContestUncheckedCreateWithoutQuestionInput = {
+    id?: number
+    opensOn: Date | string
+    closesOn: Date | string
+    timeToSolveInMinutes: number
+    totalPoints: number
+    totalNoOfQuestions: number
+    topicId: number
+  }
+
+  export type ContestCreateOrConnectWithoutQuestionInput = {
+    where: ContestWhereUniqueInput
+    create: XOR<ContestCreateWithoutQuestionInput, ContestUncheckedCreateWithoutQuestionInput>
   }
 
   export type TestCaseUpsertWithWhereUniqueWithoutQuestionsInput = {
@@ -20856,6 +22615,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
     contestResult?: ContestResultUpdateManyWithoutTopicsNestedInput
+    contest?: ContestUpdateOneWithoutTopicNestedInput
   }
 
   export type TopicsUncheckedUpdateWithoutQuestionInput = {
@@ -20865,6 +22625,37 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
     contestResult?: ContestResultUncheckedUpdateManyWithoutTopicsNestedInput
+    contest?: ContestUncheckedUpdateOneWithoutTopicNestedInput
+  }
+
+  export type ContestUpsertWithoutQuestionInput = {
+    update: XOR<ContestUpdateWithoutQuestionInput, ContestUncheckedUpdateWithoutQuestionInput>
+    create: XOR<ContestCreateWithoutQuestionInput, ContestUncheckedCreateWithoutQuestionInput>
+    where?: ContestWhereInput
+  }
+
+  export type ContestUpdateToOneWithWhereWithoutQuestionInput = {
+    where?: ContestWhereInput
+    data: XOR<ContestUpdateWithoutQuestionInput, ContestUncheckedUpdateWithoutQuestionInput>
+  }
+
+  export type ContestUpdateWithoutQuestionInput = {
+    opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    totalPoints?: IntFieldUpdateOperationsInput | number
+    totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
+    topic?: TopicsUpdateOneRequiredWithoutContestNestedInput
+  }
+
+  export type ContestUncheckedUpdateWithoutQuestionInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    totalPoints?: IntFieldUpdateOperationsInput | number
+    totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
+    topicId?: IntFieldUpdateOperationsInput | number
   }
 
   export type QuestionsCreateWithoutTestCaseInput = {
@@ -20880,11 +22671,12 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolveInHours: number
+    timeToSolveInMinutes: number
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
     boilerPlate?: BoilerPlateCreateNestedManyWithoutQuestionInput
     topics: TopicsCreateNestedOneWithoutQuestionInput
+    contest?: ContestCreateNestedOneWithoutQuestionInput
   }
 
   export type QuestionsUncheckedCreateWithoutTestCaseInput = {
@@ -20902,7 +22694,8 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolveInHours: number
+    timeToSolveInMinutes: number
+    contestId?: number | null
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
     boilerPlate?: BoilerPlateUncheckedCreateNestedManyWithoutQuestionInput
@@ -20937,11 +22730,12 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
     boilerPlate?: BoilerPlateUpdateManyWithoutQuestionNestedInput
     topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
+    contest?: ContestUpdateOneWithoutQuestionNestedInput
   }
 
   export type QuestionsUncheckedUpdateWithoutTestCaseInput = {
@@ -20959,7 +22753,8 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    contestId?: NullableIntFieldUpdateOperationsInput | number | null
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
     boilerPlate?: BoilerPlateUncheckedUpdateManyWithoutQuestionNestedInput
@@ -20978,11 +22773,12 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolveInHours: number
+    timeToSolveInMinutes: number
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
     boilerPlate?: BoilerPlateCreateNestedManyWithoutQuestionInput
     topics: TopicsCreateNestedOneWithoutQuestionInput
+    contest?: ContestCreateNestedOneWithoutQuestionInput
   }
 
   export type QuestionsUncheckedCreateWithoutSubmissionInput = {
@@ -21000,7 +22796,8 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolveInHours: number
+    timeToSolveInMinutes: number
+    contestId?: number | null
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
     boilerPlate?: BoilerPlateUncheckedCreateNestedManyWithoutQuestionInput
@@ -21069,11 +22866,12 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
     boilerPlate?: BoilerPlateUpdateManyWithoutQuestionNestedInput
     topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
+    contest?: ContestUpdateOneWithoutQuestionNestedInput
   }
 
   export type QuestionsUncheckedUpdateWithoutSubmissionInput = {
@@ -21091,7 +22889,8 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    contestId?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
     boilerPlate?: BoilerPlateUncheckedUpdateManyWithoutQuestionNestedInput
@@ -21326,6 +23125,7 @@ export namespace Prisma {
     notes?: string | null
     contestDate: Date | string
     question?: QuestionsCreateNestedManyWithoutTopicsInput
+    contest?: ContestCreateNestedOneWithoutTopicInput
   }
 
   export type TopicsUncheckedCreateWithoutContestResultInput = {
@@ -21335,6 +23135,7 @@ export namespace Prisma {
     notes?: string | null
     contestDate: Date | string
     question?: QuestionsUncheckedCreateNestedManyWithoutTopicsInput
+    contest?: ContestUncheckedCreateNestedOneWithoutTopicInput
   }
 
   export type TopicsCreateOrConnectWithoutContestResultInput = {
@@ -21399,6 +23200,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
     question?: QuestionsUpdateManyWithoutTopicsNestedInput
+    contest?: ContestUpdateOneWithoutTopicNestedInput
   }
 
   export type TopicsUncheckedUpdateWithoutContestResultInput = {
@@ -21408,6 +23210,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
     question?: QuestionsUncheckedUpdateManyWithoutTopicsNestedInput
+    contest?: ContestUncheckedUpdateOneWithoutTopicNestedInput
   }
 
   export type StudentCreateWithoutSessionInput = {
@@ -21531,11 +23334,12 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolveInHours: number
+    timeToSolveInMinutes: number
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     boilerPlate?: BoilerPlateCreateNestedManyWithoutQuestionInput
     topics: TopicsCreateNestedOneWithoutQuestionInput
+    contest?: ContestCreateNestedOneWithoutQuestionInput
   }
 
   export type QuestionsUncheckedCreateWithoutDiscussionInput = {
@@ -21553,7 +23357,8 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolveInHours: number
+    timeToSolveInMinutes: number
+    contestId?: number | null
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     boilerPlate?: BoilerPlateUncheckedCreateNestedManyWithoutQuestionInput
@@ -21677,11 +23482,12 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     boilerPlate?: BoilerPlateUpdateManyWithoutQuestionNestedInput
     topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
+    contest?: ContestUpdateOneWithoutQuestionNestedInput
   }
 
   export type QuestionsUncheckedUpdateWithoutDiscussionInput = {
@@ -21699,7 +23505,8 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    contestId?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     boilerPlate?: BoilerPlateUncheckedUpdateManyWithoutQuestionNestedInput
@@ -21762,11 +23569,12 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolveInHours: number
+    timeToSolveInMinutes: number
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
     topics: TopicsCreateNestedOneWithoutQuestionInput
+    contest?: ContestCreateNestedOneWithoutQuestionInput
   }
 
   export type QuestionsUncheckedCreateWithoutBoilerPlateInput = {
@@ -21784,7 +23592,8 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolveInHours: number
+    timeToSolveInMinutes: number
+    contestId?: number | null
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
@@ -21819,11 +23628,12 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
     topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
+    contest?: ContestUpdateOneWithoutQuestionNestedInput
   }
 
   export type QuestionsUncheckedUpdateWithoutBoilerPlateInput = {
@@ -21841,10 +23651,134 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    contestId?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
+  }
+
+  export type QuestionsCreateWithoutContestInput = {
+    title: string
+    description?: string | null
+    noOfHiddenTestCases?: number
+    noOfExternalTestCases?: number
+    difficulty?: $Enums.DifficultyType
+    pointsPerTestCaseSolved: number
+    type?: $Enums.QuestionType
+    leetCodeLink?: string | null
+    leetCodeTitle?: string | null
+    CLangFunction: string
+    PyLangFunction: string
+    JavsLangFunction: string
+    timeToSolveInMinutes: number
+    testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
+    submission?: SubmissionCreateNestedManyWithoutQuestionsInput
+    discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
+    boilerPlate?: BoilerPlateCreateNestedManyWithoutQuestionInput
+    topics: TopicsCreateNestedOneWithoutQuestionInput
+  }
+
+  export type QuestionsUncheckedCreateWithoutContestInput = {
+    id?: number
+    title: string
+    description?: string | null
+    topic: number
+    noOfHiddenTestCases?: number
+    noOfExternalTestCases?: number
+    difficulty?: $Enums.DifficultyType
+    pointsPerTestCaseSolved: number
+    type?: $Enums.QuestionType
+    leetCodeLink?: string | null
+    leetCodeTitle?: string | null
+    CLangFunction: string
+    PyLangFunction: string
+    JavsLangFunction: string
+    timeToSolveInMinutes: number
+    testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
+    submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
+    discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
+    boilerPlate?: BoilerPlateUncheckedCreateNestedManyWithoutQuestionInput
+  }
+
+  export type QuestionsCreateOrConnectWithoutContestInput = {
+    where: QuestionsWhereUniqueInput
+    create: XOR<QuestionsCreateWithoutContestInput, QuestionsUncheckedCreateWithoutContestInput>
+  }
+
+  export type QuestionsCreateManyContestInputEnvelope = {
+    data: QuestionsCreateManyContestInput | QuestionsCreateManyContestInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TopicsCreateWithoutContestInput = {
+    name: string
+    description?: string | null
+    notes?: string | null
+    contestDate: Date | string
+    contestResult?: ContestResultCreateNestedManyWithoutTopicsInput
+    question?: QuestionsCreateNestedManyWithoutTopicsInput
+  }
+
+  export type TopicsUncheckedCreateWithoutContestInput = {
+    id?: number
+    name: string
+    description?: string | null
+    notes?: string | null
+    contestDate: Date | string
+    contestResult?: ContestResultUncheckedCreateNestedManyWithoutTopicsInput
+    question?: QuestionsUncheckedCreateNestedManyWithoutTopicsInput
+  }
+
+  export type TopicsCreateOrConnectWithoutContestInput = {
+    where: TopicsWhereUniqueInput
+    create: XOR<TopicsCreateWithoutContestInput, TopicsUncheckedCreateWithoutContestInput>
+  }
+
+  export type QuestionsUpsertWithWhereUniqueWithoutContestInput = {
+    where: QuestionsWhereUniqueInput
+    update: XOR<QuestionsUpdateWithoutContestInput, QuestionsUncheckedUpdateWithoutContestInput>
+    create: XOR<QuestionsCreateWithoutContestInput, QuestionsUncheckedCreateWithoutContestInput>
+  }
+
+  export type QuestionsUpdateWithWhereUniqueWithoutContestInput = {
+    where: QuestionsWhereUniqueInput
+    data: XOR<QuestionsUpdateWithoutContestInput, QuestionsUncheckedUpdateWithoutContestInput>
+  }
+
+  export type QuestionsUpdateManyWithWhereWithoutContestInput = {
+    where: QuestionsScalarWhereInput
+    data: XOR<QuestionsUpdateManyMutationInput, QuestionsUncheckedUpdateManyWithoutContestInput>
+  }
+
+  export type TopicsUpsertWithoutContestInput = {
+    update: XOR<TopicsUpdateWithoutContestInput, TopicsUncheckedUpdateWithoutContestInput>
+    create: XOR<TopicsCreateWithoutContestInput, TopicsUncheckedCreateWithoutContestInput>
+    where?: TopicsWhereInput
+  }
+
+  export type TopicsUpdateToOneWithWhereWithoutContestInput = {
+    where?: TopicsWhereInput
+    data: XOR<TopicsUpdateWithoutContestInput, TopicsUncheckedUpdateWithoutContestInput>
+  }
+
+  export type TopicsUpdateWithoutContestInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    contestResult?: ContestResultUpdateManyWithoutTopicsNestedInput
+    question?: QuestionsUpdateManyWithoutTopicsNestedInput
+  }
+
+  export type TopicsUncheckedUpdateWithoutContestInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    contestResult?: ContestResultUncheckedUpdateManyWithoutTopicsNestedInput
+    question?: QuestionsUncheckedUpdateManyWithoutTopicsNestedInput
   }
 
   export type SubmissionCreateManyStudentInput = {
@@ -22022,7 +23956,8 @@ export namespace Prisma {
     CLangFunction: string
     PyLangFunction: string
     JavsLangFunction: string
-    timeToSolveInHours: number
+    timeToSolveInMinutes: number
+    contestId?: number | null
   }
 
   export type ContestResultUpdateWithoutTopicsInput = {
@@ -22058,11 +23993,12 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
     boilerPlate?: BoilerPlateUpdateManyWithoutQuestionNestedInput
+    contest?: ContestUpdateOneWithoutQuestionNestedInput
   }
 
   export type QuestionsUncheckedUpdateWithoutTopicsInput = {
@@ -22079,7 +24015,8 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    contestId?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
@@ -22100,7 +24037,8 @@ export namespace Prisma {
     CLangFunction?: StringFieldUpdateOperationsInput | string
     PyLangFunction?: StringFieldUpdateOperationsInput | string
     JavsLangFunction?: StringFieldUpdateOperationsInput | string
-    timeToSolveInHours?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    contestId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type TestCaseCreateManyQuestionsInput = {
@@ -22315,6 +24253,85 @@ export namespace Prisma {
     type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
     questionId?: NullableIntFieldUpdateOperationsInput | number | null
     timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuestionsCreateManyContestInput = {
+    id?: number
+    title: string
+    description?: string | null
+    topic: number
+    noOfHiddenTestCases?: number
+    noOfExternalTestCases?: number
+    difficulty?: $Enums.DifficultyType
+    pointsPerTestCaseSolved: number
+    type?: $Enums.QuestionType
+    leetCodeLink?: string | null
+    leetCodeTitle?: string | null
+    CLangFunction: string
+    PyLangFunction: string
+    JavsLangFunction: string
+    timeToSolveInMinutes: number
+  }
+
+  export type QuestionsUpdateWithoutContestInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
+    noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
+    pointsPerTestCaseSolved?: IntFieldUpdateOperationsInput | number
+    type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
+    leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    CLangFunction?: StringFieldUpdateOperationsInput | string
+    PyLangFunction?: StringFieldUpdateOperationsInput | string
+    JavsLangFunction?: StringFieldUpdateOperationsInput | string
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
+    submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
+    discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
+    boilerPlate?: BoilerPlateUpdateManyWithoutQuestionNestedInput
+    topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
+  }
+
+  export type QuestionsUncheckedUpdateWithoutContestInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: IntFieldUpdateOperationsInput | number
+    noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
+    noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
+    pointsPerTestCaseSolved?: IntFieldUpdateOperationsInput | number
+    type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
+    leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    CLangFunction?: StringFieldUpdateOperationsInput | string
+    PyLangFunction?: StringFieldUpdateOperationsInput | string
+    JavsLangFunction?: StringFieldUpdateOperationsInput | string
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
+    submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
+    discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
+    boilerPlate?: BoilerPlateUncheckedUpdateManyWithoutQuestionNestedInput
+  }
+
+  export type QuestionsUncheckedUpdateManyWithoutContestInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: IntFieldUpdateOperationsInput | number
+    noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
+    noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
+    pointsPerTestCaseSolved?: IntFieldUpdateOperationsInput | number
+    type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
+    leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
+    leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    CLangFunction?: StringFieldUpdateOperationsInput | string
+    PyLangFunction?: StringFieldUpdateOperationsInput | string
+    JavsLangFunction?: StringFieldUpdateOperationsInput | string
+    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
   }
 
 

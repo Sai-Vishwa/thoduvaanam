@@ -151,7 +151,8 @@ exports.Prisma.QuestionsScalarFieldEnum = {
   CLangFunction: 'CLangFunction',
   PyLangFunction: 'PyLangFunction',
   JavsLangFunction: 'JavsLangFunction',
-  timeToSolveInHours: 'timeToSolveInHours'
+  timeToSolveInMinutes: 'timeToSolveInMinutes',
+  contestId: 'contestId'
 };
 
 exports.Prisma.TestCaseScalarFieldEnum = {
@@ -240,6 +241,16 @@ exports.Prisma.BoilerPlateScalarFieldEnum = {
   questionId: 'questionId'
 };
 
+exports.Prisma.ContestScalarFieldEnum = {
+  id: 'id',
+  opensOn: 'opensOn',
+  closesOn: 'closesOn',
+  timeToSolveInMinutes: 'timeToSolveInMinutes',
+  totalPoints: 'totalPoints',
+  totalNoOfQuestions: 'totalNoOfQuestions',
+  topicId: 'topicId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -322,7 +333,8 @@ exports.Prisma.ModelName = {
   OTPStudent: 'OTPStudent',
   Session: 'Session',
   Discussions: 'Discussions',
-  BoilerPlate: 'BoilerPlate'
+  BoilerPlate: 'BoilerPlate',
+  Contest: 'Contest'
 };
 
 /**

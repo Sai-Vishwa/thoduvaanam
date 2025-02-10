@@ -98,6 +98,7 @@ model Topics {
   //relationships
   contestResult ContestResult[]
   question      Questions[]
+  contest       Contest?
 }
 
 model Questions {
@@ -115,7 +116,8 @@ model Questions {
   CLangFunction           String
   PyLangFunction          String
   JavsLangFunction        String
-  timeToSolveInHours      Int
+  timeToSolveInMinutes    Int
+  contestId               Int?
 
   //relationships
   testCase    TestCase[]
@@ -123,6 +125,7 @@ model Questions {
   discussion  Discussions[]
   boilerPlate BoilerPlate[]
   topics      Topics        @relation(fields: [topic], references: [id])
+  contest     Contest?      @relation(fields: [contestId], references: [id])
 }
 
 model TestCase {
@@ -243,4 +246,18 @@ model BoilerPlate {
 
   //relationships
   question Questions @relation(fields: [questionId], references: [id])
+}
+
+model Contest {
+  id                   Int      @id @default(autoincrement())
+  opensOn              DateTime
+  closesOn             DateTime
+  timeToSolveInMinutes Int
+  totalPoints          Int
+  totalNoOfQuestions   Int
+  topicId              Int      @unique
+
+  //relationships
+  question Questions[]
+  topic    Topics      @relation(fields: [topicId], references: [id])
 }
