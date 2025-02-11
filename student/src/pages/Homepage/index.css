@@ -1,132 +1,132 @@
 
 .body{
-    background-image: linear-gradient(to bottom, rgb(1, 9, 26), rgb(4, 23, 58), #051a40);
-     padding: 10px;
-     justify-content: space-around;
-     align-items: center;
-     height:100vh;
+  background-image: linear-gradient(to bottom, rgb(1, 9, 26), rgb(4, 23, 58), #051a40);
+   padding: 10px;
+   justify-content: space-around;
+   align-items: center;
+   height:100vh;
 }
 
 li{
-  width:100%;
-  height:6vh;
-  background-color: rgb(237, 235, 235);
-  margin:10px;
-  border-radius: 10px;;
+width:100%;
+height:6vh;
+background-color: rgb(237, 235, 235);
+margin:10px;
+border-radius: 10px;;
 }
 
 
 .circles{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+overflow: hidden;
 }
 
 .circles li{
-  position: absolute;
-  display: block;
-  list-style: none;
-  width: 20px;
-  height: 20px;
-  background: rgba(80, 76, 152, 0.36);
-  animation: animate 3s linear infinite;
-  bottom: -150px;
-  
+position: absolute;
+display: block;
+list-style: none;
+width: 20px;
+height: 20px;
+background: rgba(80, 76, 152, 0.36);
+animation: animate 3s linear infinite;
+bottom: -150px;
+
 }
 
 .circles li:nth-child(1){
-  left: 5%;
-  width: 80px;
-  height: 80px;
-  animation-delay: 0s;
+left: 5%;
+width: 80px;
+height: 80px;
+animation-delay: 0s;
 }
 
 
 .circles li:nth-child(2){
-  left: 10%;
-  width: 40px;
-  height: 40px;
-  animation-delay: 2s;
-  animation-duration: 2s;
+left: 10%;
+width: 40px;
+height: 40px;
+animation-delay: 2s;
+animation-duration: 2s;
 }
 
 .circles li:nth-child(3){
-  left: 70%;
-  width: 20px;
-  height: 20px;
-  animation-delay: 4s;
+left: 70%;
+width: 20px;
+height: 20px;
+animation-delay: 4s;
 }
 
 .circles li:nth-child(4){
-  left: 40%;
-  width: 60px;
-  height: 60px;
-  animation-delay: 0s;
-  animation-duration: 8s;
+left: 40%;
+width: 60px;
+height: 60px;
+animation-delay: 0s;
+animation-duration: 8s;
 }
 
 .circles li:nth-child(5){
-  left: 65%;
-  width: 20px;
-  height: 20px;
-  animation-delay: 0s;
+left: 65%;
+width: 20px;
+height: 20px;
+animation-delay: 0s;
 }
 
 .circles li:nth-child(6){
-  left: 75%;
-  width: 110px;
-  height: 110px;
-  animation-delay: 3s;
+left: 75%;
+width: 110px;
+height: 110px;
+animation-delay: 3s;
 }
 
 .circles li:nth-child(7){
-  left: 35%;
-  width: 150px;
-  height: 150px;
-  animation-delay: 7s;
+left: 35%;
+width: 150px;
+height: 150px;
+animation-delay: 7s;
 }
 
 .circles li:nth-child(8){
-  left: 50%;
-  width: 25px;
-  height: 25px;
-  animation-delay: 5s;
-  animation-duration: 5s;
+left: 50%;
+width: 25px;
+height: 25px;
+animation-delay: 5s;
+animation-duration: 5s;
 }
 
 .circles li:nth-child(9){
-  left: 5%;
-  width: 25px;
-  height: 25px;
-  animation-delay: 2s;
-  animation-duration: 5s;
+left: 5%;
+width: 25px;
+height: 25px;
+animation-delay: 2s;
+animation-duration: 5s;
 }
 
 .circles li:nth-child(10){
-  left: 85%;
-  width: 150px;
-  height: 150px;
-  animation-delay: 0s;
-  animation-duration: 5s;
+left: 85%;
+width: 150px;
+height: 150px;
+animation-delay: 0s;
+animation-duration: 5s;
 }
 
 
 
 @keyframes animate {
 
-  0%{
-      transform: translateY(0) rotate(0deg);
-      opacity: 1;
-      border-radius: 0;
-  }
+0%{
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+    border-radius: 0;
+}
 
-  100%{
-      transform: translateY(-1000px) rotate(720deg);
-      opacity: 0;
-      border-radius: 50%;
-  }
+100%{
+    transform: translateY(-1000px) rotate(720deg);
+    opacity: 0;
+    border-radius: 50%;
+}
 
 }
