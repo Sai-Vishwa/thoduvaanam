@@ -46,6 +46,9 @@ async function homePage(req,res) {
                                     ]
                                 }
                             }
+                        },
+                        where:{
+                            type:"PRACTICE"
                         }
                     }
                 }

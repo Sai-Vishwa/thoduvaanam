@@ -5,8 +5,13 @@ const prisma = new PrismaClient();
 
 async function questionPage(req,res) {
     try{
-        const studentId = await sessionChecker(req.cokkies.session);
-        const qid = req.body.qid
+        const studentId = await sessionChecker(req.body.session);
+        const qname = req.body.qname
+        const qid = await prisma.questions.findFirst({
+            where:{
+                title:qname
+            }
+        })
         let viewMode = true
         let idToSearch = {id:""}
         if(studentId == -1){
@@ -28,13 +33,17 @@ async function questionPage(req,res) {
             }
             const submissions = await prisma.submission.findMany({
                 where:{
-                    studentId: idToSearch.id
+                    AND:[
+                        {studentId: idToSearch.id},
+                        {questionId:qid.id}
+                    ]
                 }
             })
                 res.status(200).json({
                     msg: "successful",
                     viewMode: viewMode,
-                    data: submissions
+                    submissionData: submissions,
+                    questionData : qid
                 })
             
         }

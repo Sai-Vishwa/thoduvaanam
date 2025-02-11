@@ -19,7 +19,7 @@ async function sessionChecker(sessionId) {
             return {id:session.studentId , uname:uname.uname};
         }
         else{
-            const del = await prisma.session.delete({
+            const del = await prisma.session.deleteMany({
                 where:{
                     id:session.id
                 }

@@ -7033,7 +7033,9 @@ export namespace Prisma {
     id: number | null
     questionId: number | null
     studentId: number | null
-    solvedOn: Date | null
+    startTime: Date | null
+    maxTimeToSolve: Date | null
+    submittedOn: Date | null
     status: $Enums.AcceptedType | null
     noOfCasesPassed: number | null
     pointsSecured: number | null
@@ -7044,14 +7046,15 @@ export namespace Prisma {
     code: string | null
     leetCodeLink: string | null
     language: $Enums.LanguageType | null
-    timeTaken: Date | null
   }
 
   export type SubmissionMaxAggregateOutputType = {
     id: number | null
     questionId: number | null
     studentId: number | null
-    solvedOn: Date | null
+    startTime: Date | null
+    maxTimeToSolve: Date | null
+    submittedOn: Date | null
     status: $Enums.AcceptedType | null
     noOfCasesPassed: number | null
     pointsSecured: number | null
@@ -7062,14 +7065,15 @@ export namespace Prisma {
     code: string | null
     leetCodeLink: string | null
     language: $Enums.LanguageType | null
-    timeTaken: Date | null
   }
 
   export type SubmissionCountAggregateOutputType = {
     id: number
     questionId: number
     studentId: number
-    solvedOn: number
+    startTime: number
+    maxTimeToSolve: number
+    submittedOn: number
     status: number
     noOfCasesPassed: number
     pointsSecured: number
@@ -7080,7 +7084,6 @@ export namespace Prisma {
     code: number
     leetCodeLink: number
     language: number
-    timeTaken: number
     _all: number
   }
 
@@ -7105,7 +7108,9 @@ export namespace Prisma {
     id?: true
     questionId?: true
     studentId?: true
-    solvedOn?: true
+    startTime?: true
+    maxTimeToSolve?: true
+    submittedOn?: true
     status?: true
     noOfCasesPassed?: true
     pointsSecured?: true
@@ -7116,14 +7121,15 @@ export namespace Prisma {
     code?: true
     leetCodeLink?: true
     language?: true
-    timeTaken?: true
   }
 
   export type SubmissionMaxAggregateInputType = {
     id?: true
     questionId?: true
     studentId?: true
-    solvedOn?: true
+    startTime?: true
+    maxTimeToSolve?: true
+    submittedOn?: true
     status?: true
     noOfCasesPassed?: true
     pointsSecured?: true
@@ -7134,14 +7140,15 @@ export namespace Prisma {
     code?: true
     leetCodeLink?: true
     language?: true
-    timeTaken?: true
   }
 
   export type SubmissionCountAggregateInputType = {
     id?: true
     questionId?: true
     studentId?: true
-    solvedOn?: true
+    startTime?: true
+    maxTimeToSolve?: true
+    submittedOn?: true
     status?: true
     noOfCasesPassed?: true
     pointsSecured?: true
@@ -7152,7 +7159,6 @@ export namespace Prisma {
     code?: true
     leetCodeLink?: true
     language?: true
-    timeTaken?: true
     _all?: true
   }
 
@@ -7246,7 +7252,9 @@ export namespace Prisma {
     id: number
     questionId: number
     studentId: number
-    solvedOn: Date | null
+    startTime: Date
+    maxTimeToSolve: Date
+    submittedOn: Date | null
     status: $Enums.AcceptedType
     noOfCasesPassed: number
     pointsSecured: number
@@ -7257,7 +7265,6 @@ export namespace Prisma {
     code: string | null
     leetCodeLink: string | null
     language: $Enums.LanguageType | null
-    timeTaken: Date | null
     _count: SubmissionCountAggregateOutputType | null
     _avg: SubmissionAvgAggregateOutputType | null
     _sum: SubmissionSumAggregateOutputType | null
@@ -7283,7 +7290,9 @@ export namespace Prisma {
     id?: boolean
     questionId?: boolean
     studentId?: boolean
-    solvedOn?: boolean
+    startTime?: boolean
+    maxTimeToSolve?: boolean
+    submittedOn?: boolean
     status?: boolean
     noOfCasesPassed?: boolean
     pointsSecured?: boolean
@@ -7294,7 +7303,6 @@ export namespace Prisma {
     code?: boolean
     leetCodeLink?: boolean
     language?: boolean
-    timeTaken?: boolean
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["submission"]>
@@ -7303,7 +7311,9 @@ export namespace Prisma {
     id?: boolean
     questionId?: boolean
     studentId?: boolean
-    solvedOn?: boolean
+    startTime?: boolean
+    maxTimeToSolve?: boolean
+    submittedOn?: boolean
     status?: boolean
     noOfCasesPassed?: boolean
     pointsSecured?: boolean
@@ -7314,7 +7324,6 @@ export namespace Prisma {
     code?: boolean
     leetCodeLink?: boolean
     language?: boolean
-    timeTaken?: boolean
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["submission"]>
@@ -7323,7 +7332,9 @@ export namespace Prisma {
     id?: boolean
     questionId?: boolean
     studentId?: boolean
-    solvedOn?: boolean
+    startTime?: boolean
+    maxTimeToSolve?: boolean
+    submittedOn?: boolean
     status?: boolean
     noOfCasesPassed?: boolean
     pointsSecured?: boolean
@@ -7334,7 +7345,6 @@ export namespace Prisma {
     code?: boolean
     leetCodeLink?: boolean
     language?: boolean
-    timeTaken?: boolean
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["submission"]>
@@ -7343,7 +7353,9 @@ export namespace Prisma {
     id?: boolean
     questionId?: boolean
     studentId?: boolean
-    solvedOn?: boolean
+    startTime?: boolean
+    maxTimeToSolve?: boolean
+    submittedOn?: boolean
     status?: boolean
     noOfCasesPassed?: boolean
     pointsSecured?: boolean
@@ -7354,10 +7366,9 @@ export namespace Prisma {
     code?: boolean
     leetCodeLink?: boolean
     language?: boolean
-    timeTaken?: boolean
   }
 
-  export type SubmissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "questionId" | "studentId" | "solvedOn" | "status" | "noOfCasesPassed" | "pointsSecured" | "type" | "output1" | "output2" | "isFinal" | "code" | "leetCodeLink" | "language" | "timeTaken", ExtArgs["result"]["submission"]>
+  export type SubmissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "questionId" | "studentId" | "startTime" | "maxTimeToSolve" | "submittedOn" | "status" | "noOfCasesPassed" | "pointsSecured" | "type" | "output1" | "output2" | "isFinal" | "code" | "leetCodeLink" | "language", ExtArgs["result"]["submission"]>
   export type SubmissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
@@ -7381,7 +7392,9 @@ export namespace Prisma {
       id: number
       questionId: number
       studentId: number
-      solvedOn: Date | null
+      startTime: Date
+      maxTimeToSolve: Date
+      submittedOn: Date | null
       status: $Enums.AcceptedType
       noOfCasesPassed: number
       pointsSecured: number
@@ -7392,7 +7405,6 @@ export namespace Prisma {
       code: string | null
       leetCodeLink: string | null
       language: $Enums.LanguageType | null
-      timeTaken: Date | null
     }, ExtArgs["result"]["submission"]>
     composites: {}
   }
@@ -7821,7 +7833,9 @@ export namespace Prisma {
     readonly id: FieldRef<"Submission", 'Int'>
     readonly questionId: FieldRef<"Submission", 'Int'>
     readonly studentId: FieldRef<"Submission", 'Int'>
-    readonly solvedOn: FieldRef<"Submission", 'DateTime'>
+    readonly startTime: FieldRef<"Submission", 'DateTime'>
+    readonly maxTimeToSolve: FieldRef<"Submission", 'DateTime'>
+    readonly submittedOn: FieldRef<"Submission", 'DateTime'>
     readonly status: FieldRef<"Submission", 'AcceptedType'>
     readonly noOfCasesPassed: FieldRef<"Submission", 'Int'>
     readonly pointsSecured: FieldRef<"Submission", 'Int'>
@@ -7832,7 +7846,6 @@ export namespace Prisma {
     readonly code: FieldRef<"Submission", 'String'>
     readonly leetCodeLink: FieldRef<"Submission", 'String'>
     readonly language: FieldRef<"Submission", 'LanguageType'>
-    readonly timeTaken: FieldRef<"Submission", 'DateTime'>
   }
     
 
@@ -16002,7 +16015,9 @@ export namespace Prisma {
     id: 'id',
     questionId: 'questionId',
     studentId: 'studentId',
-    solvedOn: 'solvedOn',
+    startTime: 'startTime',
+    maxTimeToSolve: 'maxTimeToSolve',
+    submittedOn: 'submittedOn',
     status: 'status',
     noOfCasesPassed: 'noOfCasesPassed',
     pointsSecured: 'pointsSecured',
@@ -16012,8 +16027,7 @@ export namespace Prisma {
     isFinal: 'isFinal',
     code: 'code',
     leetCodeLink: 'leetCodeLink',
-    language: 'language',
-    timeTaken: 'timeTaken'
+    language: 'language'
   };
 
   export type SubmissionScalarFieldEnum = (typeof SubmissionScalarFieldEnum)[keyof typeof SubmissionScalarFieldEnum]
@@ -16654,7 +16668,9 @@ export namespace Prisma {
     id?: IntFilter<"Submission"> | number
     questionId?: IntFilter<"Submission"> | number
     studentId?: IntFilter<"Submission"> | number
-    solvedOn?: DateTimeNullableFilter<"Submission"> | Date | string | null
+    startTime?: DateTimeFilter<"Submission"> | Date | string
+    maxTimeToSolve?: DateTimeFilter<"Submission"> | Date | string
+    submittedOn?: DateTimeNullableFilter<"Submission"> | Date | string | null
     status?: EnumAcceptedTypeFilter<"Submission"> | $Enums.AcceptedType
     noOfCasesPassed?: IntFilter<"Submission"> | number
     pointsSecured?: IntFilter<"Submission"> | number
@@ -16665,7 +16681,6 @@ export namespace Prisma {
     code?: StringNullableFilter<"Submission"> | string | null
     leetCodeLink?: StringNullableFilter<"Submission"> | string | null
     language?: EnumLanguageTypeNullableFilter<"Submission"> | $Enums.LanguageType | null
-    timeTaken?: DateTimeNullableFilter<"Submission"> | Date | string | null
     questions?: XOR<QuestionsScalarRelationFilter, QuestionsWhereInput>
     student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
   }
@@ -16674,7 +16689,9 @@ export namespace Prisma {
     id?: SortOrder
     questionId?: SortOrder
     studentId?: SortOrder
-    solvedOn?: SortOrderInput | SortOrder
+    startTime?: SortOrder
+    maxTimeToSolve?: SortOrder
+    submittedOn?: SortOrderInput | SortOrder
     status?: SortOrder
     noOfCasesPassed?: SortOrder
     pointsSecured?: SortOrder
@@ -16685,7 +16702,6 @@ export namespace Prisma {
     code?: SortOrderInput | SortOrder
     leetCodeLink?: SortOrderInput | SortOrder
     language?: SortOrderInput | SortOrder
-    timeTaken?: SortOrderInput | SortOrder
     questions?: QuestionsOrderByWithRelationInput
     student?: StudentOrderByWithRelationInput
   }
@@ -16697,7 +16713,9 @@ export namespace Prisma {
     NOT?: SubmissionWhereInput | SubmissionWhereInput[]
     questionId?: IntFilter<"Submission"> | number
     studentId?: IntFilter<"Submission"> | number
-    solvedOn?: DateTimeNullableFilter<"Submission"> | Date | string | null
+    startTime?: DateTimeFilter<"Submission"> | Date | string
+    maxTimeToSolve?: DateTimeFilter<"Submission"> | Date | string
+    submittedOn?: DateTimeNullableFilter<"Submission"> | Date | string | null
     status?: EnumAcceptedTypeFilter<"Submission"> | $Enums.AcceptedType
     noOfCasesPassed?: IntFilter<"Submission"> | number
     pointsSecured?: IntFilter<"Submission"> | number
@@ -16708,7 +16726,6 @@ export namespace Prisma {
     code?: StringNullableFilter<"Submission"> | string | null
     leetCodeLink?: StringNullableFilter<"Submission"> | string | null
     language?: EnumLanguageTypeNullableFilter<"Submission"> | $Enums.LanguageType | null
-    timeTaken?: DateTimeNullableFilter<"Submission"> | Date | string | null
     questions?: XOR<QuestionsScalarRelationFilter, QuestionsWhereInput>
     student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
   }, "id">
@@ -16717,7 +16734,9 @@ export namespace Prisma {
     id?: SortOrder
     questionId?: SortOrder
     studentId?: SortOrder
-    solvedOn?: SortOrderInput | SortOrder
+    startTime?: SortOrder
+    maxTimeToSolve?: SortOrder
+    submittedOn?: SortOrderInput | SortOrder
     status?: SortOrder
     noOfCasesPassed?: SortOrder
     pointsSecured?: SortOrder
@@ -16728,7 +16747,6 @@ export namespace Prisma {
     code?: SortOrderInput | SortOrder
     leetCodeLink?: SortOrderInput | SortOrder
     language?: SortOrderInput | SortOrder
-    timeTaken?: SortOrderInput | SortOrder
     _count?: SubmissionCountOrderByAggregateInput
     _avg?: SubmissionAvgOrderByAggregateInput
     _max?: SubmissionMaxOrderByAggregateInput
@@ -16743,7 +16761,9 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Submission"> | number
     questionId?: IntWithAggregatesFilter<"Submission"> | number
     studentId?: IntWithAggregatesFilter<"Submission"> | number
-    solvedOn?: DateTimeNullableWithAggregatesFilter<"Submission"> | Date | string | null
+    startTime?: DateTimeWithAggregatesFilter<"Submission"> | Date | string
+    maxTimeToSolve?: DateTimeWithAggregatesFilter<"Submission"> | Date | string
+    submittedOn?: DateTimeNullableWithAggregatesFilter<"Submission"> | Date | string | null
     status?: EnumAcceptedTypeWithAggregatesFilter<"Submission"> | $Enums.AcceptedType
     noOfCasesPassed?: IntWithAggregatesFilter<"Submission"> | number
     pointsSecured?: IntWithAggregatesFilter<"Submission"> | number
@@ -16754,7 +16774,6 @@ export namespace Prisma {
     code?: StringNullableWithAggregatesFilter<"Submission"> | string | null
     leetCodeLink?: StringNullableWithAggregatesFilter<"Submission"> | string | null
     language?: EnumLanguageTypeNullableWithAggregatesFilter<"Submission"> | $Enums.LanguageType | null
-    timeTaken?: DateTimeNullableWithAggregatesFilter<"Submission"> | Date | string | null
   }
 
   export type AchievementsWhereInput = {
@@ -17529,7 +17548,9 @@ export namespace Prisma {
   }
 
   export type SubmissionCreateInput = {
-    solvedOn?: Date | string | null
+    startTime: Date | string
+    maxTimeToSolve: Date | string
+    submittedOn?: Date | string | null
     status?: $Enums.AcceptedType
     noOfCasesPassed?: number
     pointsSecured?: number
@@ -17540,7 +17561,6 @@ export namespace Prisma {
     code?: string | null
     leetCodeLink?: string | null
     language?: $Enums.LanguageType | null
-    timeTaken?: Date | string | null
     questions: QuestionsCreateNestedOneWithoutSubmissionInput
     student: StudentCreateNestedOneWithoutSubmissionInput
   }
@@ -17549,7 +17569,9 @@ export namespace Prisma {
     id?: number
     questionId: number
     studentId: number
-    solvedOn?: Date | string | null
+    startTime: Date | string
+    maxTimeToSolve: Date | string
+    submittedOn?: Date | string | null
     status?: $Enums.AcceptedType
     noOfCasesPassed?: number
     pointsSecured?: number
@@ -17560,11 +17582,12 @@ export namespace Prisma {
     code?: string | null
     leetCodeLink?: string | null
     language?: $Enums.LanguageType | null
-    timeTaken?: Date | string | null
   }
 
   export type SubmissionUpdateInput = {
-    solvedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    maxTimeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    submittedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumAcceptedTypeFieldUpdateOperationsInput | $Enums.AcceptedType
     noOfCasesPassed?: IntFieldUpdateOperationsInput | number
     pointsSecured?: IntFieldUpdateOperationsInput | number
@@ -17575,7 +17598,6 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
-    timeTaken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     questions?: QuestionsUpdateOneRequiredWithoutSubmissionNestedInput
     student?: StudentUpdateOneRequiredWithoutSubmissionNestedInput
   }
@@ -17584,7 +17606,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     questionId?: IntFieldUpdateOperationsInput | number
     studentId?: IntFieldUpdateOperationsInput | number
-    solvedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    maxTimeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    submittedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumAcceptedTypeFieldUpdateOperationsInput | $Enums.AcceptedType
     noOfCasesPassed?: IntFieldUpdateOperationsInput | number
     pointsSecured?: IntFieldUpdateOperationsInput | number
@@ -17595,14 +17619,15 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
-    timeTaken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SubmissionCreateManyInput = {
     id?: number
     questionId: number
     studentId: number
-    solvedOn?: Date | string | null
+    startTime: Date | string
+    maxTimeToSolve: Date | string
+    submittedOn?: Date | string | null
     status?: $Enums.AcceptedType
     noOfCasesPassed?: number
     pointsSecured?: number
@@ -17613,11 +17638,12 @@ export namespace Prisma {
     code?: string | null
     leetCodeLink?: string | null
     language?: $Enums.LanguageType | null
-    timeTaken?: Date | string | null
   }
 
   export type SubmissionUpdateManyMutationInput = {
-    solvedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    maxTimeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    submittedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumAcceptedTypeFieldUpdateOperationsInput | $Enums.AcceptedType
     noOfCasesPassed?: IntFieldUpdateOperationsInput | number
     pointsSecured?: IntFieldUpdateOperationsInput | number
@@ -17628,14 +17654,15 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
-    timeTaken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SubmissionUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     questionId?: IntFieldUpdateOperationsInput | number
     studentId?: IntFieldUpdateOperationsInput | number
-    solvedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    maxTimeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    submittedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumAcceptedTypeFieldUpdateOperationsInput | $Enums.AcceptedType
     noOfCasesPassed?: IntFieldUpdateOperationsInput | number
     pointsSecured?: IntFieldUpdateOperationsInput | number
@@ -17646,7 +17673,6 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
-    timeTaken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AchievementsCreateInput = {
@@ -18540,7 +18566,9 @@ export namespace Prisma {
     id?: SortOrder
     questionId?: SortOrder
     studentId?: SortOrder
-    solvedOn?: SortOrder
+    startTime?: SortOrder
+    maxTimeToSolve?: SortOrder
+    submittedOn?: SortOrder
     status?: SortOrder
     noOfCasesPassed?: SortOrder
     pointsSecured?: SortOrder
@@ -18551,7 +18579,6 @@ export namespace Prisma {
     code?: SortOrder
     leetCodeLink?: SortOrder
     language?: SortOrder
-    timeTaken?: SortOrder
   }
 
   export type SubmissionAvgOrderByAggregateInput = {
@@ -18566,7 +18593,9 @@ export namespace Prisma {
     id?: SortOrder
     questionId?: SortOrder
     studentId?: SortOrder
-    solvedOn?: SortOrder
+    startTime?: SortOrder
+    maxTimeToSolve?: SortOrder
+    submittedOn?: SortOrder
     status?: SortOrder
     noOfCasesPassed?: SortOrder
     pointsSecured?: SortOrder
@@ -18577,14 +18606,15 @@ export namespace Prisma {
     code?: SortOrder
     leetCodeLink?: SortOrder
     language?: SortOrder
-    timeTaken?: SortOrder
   }
 
   export type SubmissionMinOrderByAggregateInput = {
     id?: SortOrder
     questionId?: SortOrder
     studentId?: SortOrder
-    solvedOn?: SortOrder
+    startTime?: SortOrder
+    maxTimeToSolve?: SortOrder
+    submittedOn?: SortOrder
     status?: SortOrder
     noOfCasesPassed?: SortOrder
     pointsSecured?: SortOrder
@@ -18595,7 +18625,6 @@ export namespace Prisma {
     code?: SortOrder
     leetCodeLink?: SortOrder
     language?: SortOrder
-    timeTaken?: SortOrder
   }
 
   export type SubmissionSumOrderByAggregateInput = {
@@ -20185,7 +20214,9 @@ export namespace Prisma {
   }
 
   export type SubmissionCreateWithoutStudentInput = {
-    solvedOn?: Date | string | null
+    startTime: Date | string
+    maxTimeToSolve: Date | string
+    submittedOn?: Date | string | null
     status?: $Enums.AcceptedType
     noOfCasesPassed?: number
     pointsSecured?: number
@@ -20196,14 +20227,15 @@ export namespace Prisma {
     code?: string | null
     leetCodeLink?: string | null
     language?: $Enums.LanguageType | null
-    timeTaken?: Date | string | null
     questions: QuestionsCreateNestedOneWithoutSubmissionInput
   }
 
   export type SubmissionUncheckedCreateWithoutStudentInput = {
     id?: number
     questionId: number
-    solvedOn?: Date | string | null
+    startTime: Date | string
+    maxTimeToSolve: Date | string
+    submittedOn?: Date | string | null
     status?: $Enums.AcceptedType
     noOfCasesPassed?: number
     pointsSecured?: number
@@ -20214,7 +20246,6 @@ export namespace Prisma {
     code?: string | null
     leetCodeLink?: string | null
     language?: $Enums.LanguageType | null
-    timeTaken?: Date | string | null
   }
 
   export type SubmissionCreateOrConnectWithoutStudentInput = {
@@ -20337,7 +20368,9 @@ export namespace Prisma {
     id?: IntFilter<"Submission"> | number
     questionId?: IntFilter<"Submission"> | number
     studentId?: IntFilter<"Submission"> | number
-    solvedOn?: DateTimeNullableFilter<"Submission"> | Date | string | null
+    startTime?: DateTimeFilter<"Submission"> | Date | string
+    maxTimeToSolve?: DateTimeFilter<"Submission"> | Date | string
+    submittedOn?: DateTimeNullableFilter<"Submission"> | Date | string | null
     status?: EnumAcceptedTypeFilter<"Submission"> | $Enums.AcceptedType
     noOfCasesPassed?: IntFilter<"Submission"> | number
     pointsSecured?: IntFilter<"Submission"> | number
@@ -20348,7 +20381,6 @@ export namespace Prisma {
     code?: StringNullableFilter<"Submission"> | string | null
     leetCodeLink?: StringNullableFilter<"Submission"> | string | null
     language?: EnumLanguageTypeNullableFilter<"Submission"> | $Enums.LanguageType | null
-    timeTaken?: DateTimeNullableFilter<"Submission"> | Date | string | null
   }
 
   export type StudentAchievementsUpsertWithWhereUniqueWithoutStudentInput = {
@@ -20605,7 +20637,9 @@ export namespace Prisma {
   }
 
   export type SubmissionCreateWithoutQuestionsInput = {
-    solvedOn?: Date | string | null
+    startTime: Date | string
+    maxTimeToSolve: Date | string
+    submittedOn?: Date | string | null
     status?: $Enums.AcceptedType
     noOfCasesPassed?: number
     pointsSecured?: number
@@ -20616,14 +20650,15 @@ export namespace Prisma {
     code?: string | null
     leetCodeLink?: string | null
     language?: $Enums.LanguageType | null
-    timeTaken?: Date | string | null
     student: StudentCreateNestedOneWithoutSubmissionInput
   }
 
   export type SubmissionUncheckedCreateWithoutQuestionsInput = {
     id?: number
     studentId: number
-    solvedOn?: Date | string | null
+    startTime: Date | string
+    maxTimeToSolve: Date | string
+    submittedOn?: Date | string | null
     status?: $Enums.AcceptedType
     noOfCasesPassed?: number
     pointsSecured?: number
@@ -20634,7 +20669,6 @@ export namespace Prisma {
     code?: string | null
     leetCodeLink?: string | null
     language?: $Enums.LanguageType | null
-    timeTaken?: Date | string | null
   }
 
   export type SubmissionCreateOrConnectWithoutQuestionsInput = {
@@ -21816,7 +21850,9 @@ export namespace Prisma {
   export type SubmissionCreateManyStudentInput = {
     id?: number
     questionId: number
-    solvedOn?: Date | string | null
+    startTime: Date | string
+    maxTimeToSolve: Date | string
+    submittedOn?: Date | string | null
     status?: $Enums.AcceptedType
     noOfCasesPassed?: number
     pointsSecured?: number
@@ -21827,7 +21863,6 @@ export namespace Prisma {
     code?: string | null
     leetCodeLink?: string | null
     language?: $Enums.LanguageType | null
-    timeTaken?: Date | string | null
   }
 
   export type StudentAchievementsCreateManyStudentInput = {
@@ -21852,7 +21887,9 @@ export namespace Prisma {
   }
 
   export type SubmissionUpdateWithoutStudentInput = {
-    solvedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    maxTimeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    submittedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumAcceptedTypeFieldUpdateOperationsInput | $Enums.AcceptedType
     noOfCasesPassed?: IntFieldUpdateOperationsInput | number
     pointsSecured?: IntFieldUpdateOperationsInput | number
@@ -21863,14 +21900,15 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
-    timeTaken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     questions?: QuestionsUpdateOneRequiredWithoutSubmissionNestedInput
   }
 
   export type SubmissionUncheckedUpdateWithoutStudentInput = {
     id?: IntFieldUpdateOperationsInput | number
     questionId?: IntFieldUpdateOperationsInput | number
-    solvedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    maxTimeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    submittedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumAcceptedTypeFieldUpdateOperationsInput | $Enums.AcceptedType
     noOfCasesPassed?: IntFieldUpdateOperationsInput | number
     pointsSecured?: IntFieldUpdateOperationsInput | number
@@ -21881,13 +21919,14 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
-    timeTaken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SubmissionUncheckedUpdateManyWithoutStudentInput = {
     id?: IntFieldUpdateOperationsInput | number
     questionId?: IntFieldUpdateOperationsInput | number
-    solvedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    maxTimeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    submittedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumAcceptedTypeFieldUpdateOperationsInput | $Enums.AcceptedType
     noOfCasesPassed?: IntFieldUpdateOperationsInput | number
     pointsSecured?: IntFieldUpdateOperationsInput | number
@@ -21898,7 +21937,6 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
-    timeTaken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type StudentAchievementsUpdateWithoutStudentInput = {
@@ -22075,7 +22113,9 @@ export namespace Prisma {
   export type SubmissionCreateManyQuestionsInput = {
     id?: number
     studentId: number
-    solvedOn?: Date | string | null
+    startTime: Date | string
+    maxTimeToSolve: Date | string
+    submittedOn?: Date | string | null
     status?: $Enums.AcceptedType
     noOfCasesPassed?: number
     pointsSecured?: number
@@ -22086,7 +22126,6 @@ export namespace Prisma {
     code?: string | null
     leetCodeLink?: string | null
     language?: $Enums.LanguageType | null
-    timeTaken?: Date | string | null
   }
 
   export type DiscussionsCreateManyQuestionInput = {
@@ -22125,7 +22164,9 @@ export namespace Prisma {
   }
 
   export type SubmissionUpdateWithoutQuestionsInput = {
-    solvedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    maxTimeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    submittedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumAcceptedTypeFieldUpdateOperationsInput | $Enums.AcceptedType
     noOfCasesPassed?: IntFieldUpdateOperationsInput | number
     pointsSecured?: IntFieldUpdateOperationsInput | number
@@ -22136,14 +22177,15 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
-    timeTaken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     student?: StudentUpdateOneRequiredWithoutSubmissionNestedInput
   }
 
   export type SubmissionUncheckedUpdateWithoutQuestionsInput = {
     id?: IntFieldUpdateOperationsInput | number
     studentId?: IntFieldUpdateOperationsInput | number
-    solvedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    maxTimeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    submittedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumAcceptedTypeFieldUpdateOperationsInput | $Enums.AcceptedType
     noOfCasesPassed?: IntFieldUpdateOperationsInput | number
     pointsSecured?: IntFieldUpdateOperationsInput | number
@@ -22154,13 +22196,14 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
-    timeTaken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SubmissionUncheckedUpdateManyWithoutQuestionsInput = {
     id?: IntFieldUpdateOperationsInput | number
     studentId?: IntFieldUpdateOperationsInput | number
-    solvedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    maxTimeToSolve?: DateTimeFieldUpdateOperationsInput | Date | string
+    submittedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumAcceptedTypeFieldUpdateOperationsInput | $Enums.AcceptedType
     noOfCasesPassed?: IntFieldUpdateOperationsInput | number
     pointsSecured?: IntFieldUpdateOperationsInput | number
@@ -22171,7 +22214,6 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
-    timeTaken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type DiscussionsUpdateWithoutQuestionInput = {
