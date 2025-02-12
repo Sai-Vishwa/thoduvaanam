@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import profile from "../../assets/profile.webp";
 import "./common.css";
-function Header() {
+function Header({data}) {
     const [showProfileOptions, setShowProfileOptions] = useState(false);
 
         const toggleProfileOptions = () => {
@@ -10,6 +10,7 @@ function Header() {
 
         return (
             <div>
+                {JSON.stringify(data)}
             <div className="header flex">
                
             <div className="search-section" style={{ flexGrow: 1 }}>
@@ -34,7 +35,7 @@ function Header() {
             </div>
             )}
             <div className="user-details" style={{ color: '#fff', textAlign: 'center' }}>
-            <h2 style={{ color: '#4CAF50', margin: 0 }}>User Name</h2>
+            <h2 style={{ color: '#4CAF50', margin: 0 }}>uedehu</h2>
             <p style={{ color: '#ddd', margin: 0 }}>user@example.com</p>
             </div>
              </div>

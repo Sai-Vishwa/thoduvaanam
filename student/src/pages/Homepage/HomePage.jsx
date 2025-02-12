@@ -9,8 +9,6 @@ import Profile from "../../components/HomePageComponents/Profile";
 
 function HomePage() {
   const { uname } = useParams();
-  const ne = uname.slice(1);
-  console.log(ne);
   const nav = useNavigate();
   const [allData, setAllData] = useState({});
   const [selectedTopic, setSelectedTopic] = useState(null);
@@ -29,6 +27,7 @@ function HomePage() {
     console.log("sent req and recieved response")
     const data = await result.json()
     setAllData(data)
+    console.log(JSON.stringify(allData) + "all data")
   }
 
 
@@ -73,18 +72,19 @@ function HomePage() {
           <li></li>
         </ul>
       </div>
-      <Header />
+      <Header 
+      data={allData.myData}/>
       <Profile profileData={allData.myData} />
       {allData.data &&
         allData.data.map((topic) => (
-          <Topic key={topic.id} topic={topic} uname={ne} />
+          <Topic key={topic.id} topic={topic} uname={uname} />
         ))}
       <div style={{ display: "flex", height: "80%", padding: "16px" }}>
         {/* Sidebar */}
         <div style={{ width: "30%", backgroundColor: "rgba(80, 76, 152, 0.36)", color: "white", borderRadius: "12px", padding: "16px", overflowY: "auto", textAlign: "left", marginLeft: "100px" }}>
           <h2 style={{ fontSize: "25px", fontWeight: "bold", marginBottom: "16px", textAlign: "center", textDecoration: "underline" }}>Topics</h2>
           <ul style={{ listStyleType: "none", padding: 0 }}>
-            {topics.map((topic) => (
+            {allData?.data?.map((topic) => (
               <li
                 key={topic.id}
                 style={{

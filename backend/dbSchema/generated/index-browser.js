@@ -243,6 +243,7 @@ exports.Prisma.BoilerPlateScalarFieldEnum = {
 
 exports.Prisma.ContestScalarFieldEnum = {
   id: 'id',
+  title: 'title',
   opensOn: 'opensOn',
   closesOn: 'closesOn',
   timeToSolveInMinutes: 'timeToSolveInMinutes',

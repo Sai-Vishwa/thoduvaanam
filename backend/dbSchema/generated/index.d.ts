@@ -16159,6 +16159,7 @@ export namespace Prisma {
 
   export type ContestMinAggregateOutputType = {
     id: number | null
+    title: string | null
     opensOn: Date | null
     closesOn: Date | null
     timeToSolveInMinutes: number | null
@@ -16169,6 +16170,7 @@ export namespace Prisma {
 
   export type ContestMaxAggregateOutputType = {
     id: number | null
+    title: string | null
     opensOn: Date | null
     closesOn: Date | null
     timeToSolveInMinutes: number | null
@@ -16179,6 +16181,7 @@ export namespace Prisma {
 
   export type ContestCountAggregateOutputType = {
     id: number
+    title: number
     opensOn: number
     closesOn: number
     timeToSolveInMinutes: number
@@ -16207,6 +16210,7 @@ export namespace Prisma {
 
   export type ContestMinAggregateInputType = {
     id?: true
+    title?: true
     opensOn?: true
     closesOn?: true
     timeToSolveInMinutes?: true
@@ -16217,6 +16221,7 @@ export namespace Prisma {
 
   export type ContestMaxAggregateInputType = {
     id?: true
+    title?: true
     opensOn?: true
     closesOn?: true
     timeToSolveInMinutes?: true
@@ -16227,6 +16232,7 @@ export namespace Prisma {
 
   export type ContestCountAggregateInputType = {
     id?: true
+    title?: true
     opensOn?: true
     closesOn?: true
     timeToSolveInMinutes?: true
@@ -16324,6 +16330,7 @@ export namespace Prisma {
 
   export type ContestGroupByOutputType = {
     id: number
+    title: string
     opensOn: Date
     closesOn: Date
     timeToSolveInMinutes: number
@@ -16353,6 +16360,7 @@ export namespace Prisma {
 
   export type ContestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    title?: boolean
     opensOn?: boolean
     closesOn?: boolean
     timeToSolveInMinutes?: boolean
@@ -16366,6 +16374,7 @@ export namespace Prisma {
 
   export type ContestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    title?: boolean
     opensOn?: boolean
     closesOn?: boolean
     timeToSolveInMinutes?: boolean
@@ -16377,6 +16386,7 @@ export namespace Prisma {
 
   export type ContestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    title?: boolean
     opensOn?: boolean
     closesOn?: boolean
     timeToSolveInMinutes?: boolean
@@ -16388,6 +16398,7 @@ export namespace Prisma {
 
   export type ContestSelectScalar = {
     id?: boolean
+    title?: boolean
     opensOn?: boolean
     closesOn?: boolean
     timeToSolveInMinutes?: boolean
@@ -16396,7 +16407,7 @@ export namespace Prisma {
     topicId?: boolean
   }
 
-  export type ContestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "opensOn" | "closesOn" | "timeToSolveInMinutes" | "totalPoints" | "totalNoOfQuestions" | "topicId", ExtArgs["result"]["contest"]>
+  export type ContestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "opensOn" | "closesOn" | "timeToSolveInMinutes" | "totalPoints" | "totalNoOfQuestions" | "topicId", ExtArgs["result"]["contest"]>
   export type ContestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     question?: boolean | Contest$questionArgs<ExtArgs>
     topic?: boolean | TopicsDefaultArgs<ExtArgs>
@@ -16417,6 +16428,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      title: string
       opensOn: Date
       closesOn: Date
       timeToSolveInMinutes: number
@@ -16849,6 +16861,7 @@ export namespace Prisma {
    */ 
   interface ContestFieldRefs {
     readonly id: FieldRef<"Contest", 'Int'>
+    readonly title: FieldRef<"Contest", 'String'>
     readonly opensOn: FieldRef<"Contest", 'DateTime'>
     readonly closesOn: FieldRef<"Contest", 'DateTime'>
     readonly timeToSolveInMinutes: FieldRef<"Contest", 'Int'>
@@ -17457,6 +17470,7 @@ export namespace Prisma {
 
   export const ContestScalarFieldEnum: {
     id: 'id',
+    title: 'title',
     opensOn: 'opensOn',
     closesOn: 'closesOn',
     timeToSolveInMinutes: 'timeToSolveInMinutes',
@@ -18573,6 +18587,7 @@ export namespace Prisma {
     OR?: ContestWhereInput[]
     NOT?: ContestWhereInput | ContestWhereInput[]
     id?: IntFilter<"Contest"> | number
+    title?: StringFilter<"Contest"> | string
     opensOn?: DateTimeFilter<"Contest"> | Date | string
     closesOn?: DateTimeFilter<"Contest"> | Date | string
     timeToSolveInMinutes?: IntFilter<"Contest"> | number
@@ -18585,6 +18600,7 @@ export namespace Prisma {
 
   export type ContestOrderByWithRelationInput = {
     id?: SortOrder
+    title?: SortOrder
     opensOn?: SortOrder
     closesOn?: SortOrder
     timeToSolveInMinutes?: SortOrder
@@ -18597,6 +18613,7 @@ export namespace Prisma {
 
   export type ContestWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    title?: string
     topicId?: number
     AND?: ContestWhereInput | ContestWhereInput[]
     OR?: ContestWhereInput[]
@@ -18608,10 +18625,11 @@ export namespace Prisma {
     totalNoOfQuestions?: IntFilter<"Contest"> | number
     question?: QuestionsListRelationFilter
     topic?: XOR<TopicsScalarRelationFilter, TopicsWhereInput>
-  }, "id" | "topicId">
+  }, "id" | "title" | "topicId">
 
   export type ContestOrderByWithAggregationInput = {
     id?: SortOrder
+    title?: SortOrder
     opensOn?: SortOrder
     closesOn?: SortOrder
     timeToSolveInMinutes?: SortOrder
@@ -18630,6 +18648,7 @@ export namespace Prisma {
     OR?: ContestScalarWhereWithAggregatesInput[]
     NOT?: ContestScalarWhereWithAggregatesInput | ContestScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Contest"> | number
+    title?: StringWithAggregatesFilter<"Contest"> | string
     opensOn?: DateTimeWithAggregatesFilter<"Contest"> | Date | string
     closesOn?: DateTimeWithAggregatesFilter<"Contest"> | Date | string
     timeToSolveInMinutes?: IntWithAggregatesFilter<"Contest"> | number
@@ -19513,6 +19532,7 @@ export namespace Prisma {
   }
 
   export type ContestCreateInput = {
+    title: string
     opensOn: Date | string
     closesOn: Date | string
     timeToSolveInMinutes: number
@@ -19524,6 +19544,7 @@ export namespace Prisma {
 
   export type ContestUncheckedCreateInput = {
     id?: number
+    title: string
     opensOn: Date | string
     closesOn: Date | string
     timeToSolveInMinutes: number
@@ -19534,6 +19555,7 @@ export namespace Prisma {
   }
 
   export type ContestUpdateInput = {
+    title?: StringFieldUpdateOperationsInput | string
     opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
     closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
@@ -19545,6 +19567,7 @@ export namespace Prisma {
 
   export type ContestUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
     opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
     closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
@@ -19556,6 +19579,7 @@ export namespace Prisma {
 
   export type ContestCreateManyInput = {
     id?: number
+    title: string
     opensOn: Date | string
     closesOn: Date | string
     timeToSolveInMinutes: number
@@ -19565,6 +19589,7 @@ export namespace Prisma {
   }
 
   export type ContestUpdateManyMutationInput = {
+    title?: StringFieldUpdateOperationsInput | string
     opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
     closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
@@ -19574,6 +19599,7 @@ export namespace Prisma {
 
   export type ContestUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
     opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
     closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
@@ -20568,6 +20594,7 @@ export namespace Prisma {
 
   export type ContestCountOrderByAggregateInput = {
     id?: SortOrder
+    title?: SortOrder
     opensOn?: SortOrder
     closesOn?: SortOrder
     timeToSolveInMinutes?: SortOrder
@@ -20586,6 +20613,7 @@ export namespace Prisma {
 
   export type ContestMaxOrderByAggregateInput = {
     id?: SortOrder
+    title?: SortOrder
     opensOn?: SortOrder
     closesOn?: SortOrder
     timeToSolveInMinutes?: SortOrder
@@ -20596,6 +20624,7 @@ export namespace Prisma {
 
   export type ContestMinOrderByAggregateInput = {
     id?: SortOrder
+    title?: SortOrder
     opensOn?: SortOrder
     closesOn?: SortOrder
     timeToSolveInMinutes?: SortOrder
@@ -22239,6 +22268,7 @@ export namespace Prisma {
   }
 
   export type ContestCreateWithoutTopicInput = {
+    title: string
     opensOn: Date | string
     closesOn: Date | string
     timeToSolveInMinutes: number
@@ -22249,6 +22279,7 @@ export namespace Prisma {
 
   export type ContestUncheckedCreateWithoutTopicInput = {
     id?: number
+    title: string
     opensOn: Date | string
     closesOn: Date | string
     timeToSolveInMinutes: number
@@ -22328,6 +22359,7 @@ export namespace Prisma {
   }
 
   export type ContestUpdateWithoutTopicInput = {
+    title?: StringFieldUpdateOperationsInput | string
     opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
     closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
@@ -22338,6 +22370,7 @@ export namespace Prisma {
 
   export type ContestUncheckedUpdateWithoutTopicInput = {
     id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
     opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
     closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
@@ -22489,6 +22522,7 @@ export namespace Prisma {
   }
 
   export type ContestCreateWithoutQuestionInput = {
+    title: string
     opensOn: Date | string
     closesOn: Date | string
     timeToSolveInMinutes: number
@@ -22499,6 +22533,7 @@ export namespace Prisma {
 
   export type ContestUncheckedCreateWithoutQuestionInput = {
     id?: number
+    title: string
     opensOn: Date | string
     closesOn: Date | string
     timeToSolveInMinutes: number
@@ -22640,6 +22675,7 @@ export namespace Prisma {
   }
 
   export type ContestUpdateWithoutQuestionInput = {
+    title?: StringFieldUpdateOperationsInput | string
     opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
     closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
@@ -22650,6 +22686,7 @@ export namespace Prisma {
 
   export type ContestUncheckedUpdateWithoutQuestionInput = {
     id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
     opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
     closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
