@@ -1,38 +1,34 @@
 .Container{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center; 
-}
+    height:100vh;
+    background-color: transparent;
+  }
 .BoxContainer{
-    background-color: #fff;
-    margin:auto;
+    background-color: transparent;
+    margin:10px;
+    display:flex;
     box-shadow: 5px 5px 5px 5px rgba(15, 15, 15, 0.479);
      text-align:center;
      border-radius:20px;
-     width:auto;
+     height:96%;
 }
 .heading{
-    background-color:  rgba(4, 1, 48, 0.905);
-    padding:40px;
+    background-color:  rgba(4, 1, 38, 0.905);
     color:white;
-    height:30vh;
     text-align:center;
-    border-bottom-left-radius: 300%;
-    border-bottom-right-radius: 300%;
+    width:55%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    border-top-right-radius: 60%;
+    border-bottom-left-radius: 60%;
+    border-bottom-right-radius: 5%;
+    border-top-left-radius: 5%;
 }
-.heading h1{
-    font-style:bold;
-    font-size:25px;
-    font-weight:700;
-}
-.login{
-    margin:40px;
-    margin-bottom:10px;
+.login, .signup{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    margin:auto;
+    width:30%;
 }
 
-.signup{
-    padding:10px;
-    padding-bottom:10px;
-    text-align:center;
-}

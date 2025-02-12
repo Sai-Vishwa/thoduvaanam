@@ -10,7 +10,7 @@ function Login({forgotPassword , loginData , setLoginData , loginError ,setForgo
         <div className="text-red-500 text-xs mb-3 p-0 flex items-baseline">
             <p>{loginError.rnoError}</p>
         </div>
-        <input type="password" placeholder="Enter Password" onChange={(e)=>{setLoginData({...loginData , "password":e.target.value})}} className={`p-2 w-full mb-0 ${forgotPassword.style}`}/>
+        <input type="password" placeholder="Enter Password" onChange={(e)=>{setLoginData({...loginData , "password":e.target.value})}} className={`p-2 w-full mb-1 ${forgotPassword.style}`}/>
         <div className="flex items-baseline mb-3 text-red-500">
             <p className={`text-sm`}>{loginError.passwordError}</p>
         </div>

@@ -45,9 +45,9 @@ function SignUpPage(){
         <div className="Container">
             <div className="BoxContainer">
             <div className="heading">
-                      <h1>Create</h1>
-                      <h1>Account,</h1>
-                      <h3>Please sign-up to continue !</h3>
+                      <h1 className="font-extrabold text-5xl">Create</h1>
+                      <h1 className="font-extrabold text-5xl">Account,</h1>
+                      <h3 className="font-bold text-xl">Please sign-up to continue !</h3>
                     </div>
                     <div className="signup">
                         <Signup 

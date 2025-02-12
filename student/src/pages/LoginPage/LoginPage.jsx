@@ -30,11 +30,11 @@ function LoginPage(){
 
     return (
         <div className="Container">
-            <div className="BoxContainer">
+            <div className="BoxContainer ">
                 <div className="heading">
-                  <h1>Welcome</h1>
-                  <h1>Back ,</h1>
-                  <h3>Please sign-in to continue !</h3>
+                  <h1 className="font-extrabold text-5xl">Welcome</h1>
+                  <h1 className="font-extrabold text-5xl">Back ,</h1>
+                  <h3 className="font-bold text-xl">Please sign-in to continue !</h3>
                 </div>
             <div className="login">
                 <Login 
