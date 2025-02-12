@@ -1,21 +1,25 @@
-const file = require("fs");
-const { spawnSync } = require("child_process");
+const fs = require("fs");
+const { spawn } = require("child_process");
 
 async function copy(allData, fileName) {
+    return new Promise((resolve, reject) => {
+        fs.writeFile(`${fileName}.${allData.lang}`, allData.code, "utf-8", (err) => {
+            if (err) return reject(err);
 
-    file.writeFile(`${fileName}.${allData.lang}`, allData.code, "utf-8");
+            const process = spawn("docker", ["cp", `${fileName}.${allData.lang}`, "c_container:/app/"]);
 
-    const result = spawnSync("docker", ["cp", `${fileName}.${allData.lang}`, "c_container:/app/"], {
-        encoding: "utf-8"
+            process.stderr.on("data", (data) => {
+            console.error("Error:", data.toString());
+            reject(-1);
+             });
+            
+                process.on("close", (code) => {
+                resolve(code === 0 ? 0 : -1);
+            });
+
+            process.on("error", (err) => reject(err));
+         });
     });
-
-    if (result.error || result.stderr) {
-        console.log(result.error, result.stderr);
-        return -1;
-    }
-    return 0;
 }
 
-module.exports = {
-    copy
-};
+module.exports = { copy };

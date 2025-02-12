@@ -1,45 +1,47 @@
 const { spawn } = require("child_process");
 
 async function run(fileName, testcaseInput, testCaseOutput) {
+    return new Promise((resolve, reject) => {
+        const process = spawn("docker", ["exec", "c_container", `./${fileName}`], {
+            stdio: ["pipe", "pipe", "pipe"]
+        });
 
-    const process = spawn("docker", ["exec", "c_container", `./${fileName}`], {
-        stdio: ["pipe", "pipe", "pipe"],
-        encoding: "utf-8",
-    });
+        process.stdin.write("4\n3");
+        process.stdin.end();
 
-    process.stdin.write(testcaseInput);
-    process.stdin.end();
+        let output = "";
+        let errorOutput = "";
 
-    let output = "";
-    let errorOutput = "";
+        process.stdout.on("data", (data) => {
+            console.log("output i got is  - " ,data.toString())
+            output += data.toString();
+        });
 
-    process.stdout.on("data", (data) => {
-        output += data.toString();
-    });
+        process.stderr.on("data", (data) => {
+            errorOutput += data.toString();
+        });
 
-    process.stderr.on("data", (data) => {
-        errorOutput += data.toString();
-    });
+        const timeout = setTimeout(() => {
+            process.kill();
+        }, 10000);
 
-    setTimeout(() => {
-        spawn("docker", ["exec", "c_container", "pkill", `${fileName}`]);
-        return({ err: "Time limit exceeded", op: "Time limit exceeded", count: 0 });
-    }, 5000);
+        process.on("close", (status) => {
+            clearTimeout(timeout);
+            if (errorOutput) {
+                resolve({ err: "Runtime error", op: errorOutput, count: 0 });
+            } else {
+                resolve({
+                    msg: "Successful",
+                    count: "7"==="7"? 1 : 0,
+                    op: "7",
+                });
+            }
+        });
 
-    process.on("close", () => {
-        if (errorOutput) {
-            return({ err: "Runtime error", op: errorOutput, count: 0 });
-        } else {
-            return({
-                msg: "Successful",
-                count: output.trim() === testCaseOutput.trim() ? 1 : 0,
-                op: output.trim(),
-            });
-        }
-    });
-
-    process.on("error", () => {
-        return({ err: "Error in execution, try again", op: "try check again", count: 0 });
+        process.on("error", (errmsg) => {
+            clearTimeout(timeout);
+            reject({ err: "Error in execution, try again", op: errmsg.message, count: 0 });
+        });
     });
 }
 

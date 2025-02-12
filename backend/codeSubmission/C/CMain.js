@@ -1,73 +1,77 @@
-const file = require('fs')
+const file = require('fs');
 const { PrismaClient } = require('../../dbSchema/generated');
-const { exec } = require('child_process');
-const { error } = require('console');
-const { stdout, stderr } = require('process');
 const { copy } = require('./copy');
 const { compile } = require('./compile');
 const { run } = require('./run');
 const prisma = new PrismaClient();
 
 async function CMain(allData) {
-
-    try{
+    try {
         const testCases = await prisma.testCase.findMany({
-            where:{
-                questionId:allData.qId
-            }
-        })
+            where: { questionId: allData.qId }
+        });
+
         const question = await prisma.questions.findUnique({
-            where:{
-                id: allData.qId
-            },
-            include:{
-                boilerPlate:{
-                    where:{
-                        language:allData.lang
-                    }
-                }
-            }
-        })
+            where: { id: allData.qId },
+            // include: {
+            //     boilerPlate: {
+            //         where: { language: allData.lang }
+            //     }
+            // }
+        });
+
         const fileName = `Submission_${allData.submissionId}`;
-        const cp = copy(allData,fileName)
-        if(cp == -1){
-            return {status:-1}
+        const cp = await copy(allData, fileName);
+        if (cp == -1) {
+            return { status: -1, err: "File copy error" };
         }
 
-        const comp = compile(allData,fileName)
-        if(comp==-1){
-            return {status:-1}
+        const comp = await compile(allData, fileName);
+        if (comp !== 0) {
+            return { status: -1, err: comp };
         }
-        let count = 0, op1 = "",op2 =""
-        for(const testcase of testCases){
-            const runOP = await run(fileName,testcase.inputString,testcase.outputString);
-            count += parseInt(runOP.count)
-            if(testcase.type == "OPEN1"){
-                op1 = runOP.op
-            }
-            else if(testcase.type == "OPEN2"){
-                op2 = runOP.op
-            }
-        }
-        const upd = await prisma.submission.update({
-            where:{
-                id:allData.submissionId
-            },
-            data:{
-                noOfCasesPassed:count,
-                output1:op1,
-                output2:op2,
-                pointsSecured:question.pointsPerTestCaseSolved*count,
-                status:'WAITING'
-            }
-        })
-    }
-    catch(error){
-        console.log(error)
-        return {status:-1}
-    }
 
+        let count = 0;
+        let op1 = "", op2 = "";
+        
+        const resArr = await Promise.all(
+            testCases.map(async (testcase) => {
+                const runOP = await run(fileName, testcase.inputString, testcase.outputString);
+                if (testcase.type === "OPEN1") op1 = runOP.op;
+                if (testcase.type === "OPEN2") op2 = runOP.op;
+                count += parseInt(runOP.count);
+                return runOP;
+            })
+        );
+
+        return {
+            status: 0,
+            msg: "Completed running all test cases",
+            count,
+            op1,
+            op2,
+            results: resArr
+        };
+
+    } catch (error) {
+        console.log(error);
+        return { status: -1, err: "Syntax error bhava" };
+    }
 }
-module.exports = {
-    CMain
+
+
+async function caller() {
+    const ans = await CMain({qId:23,submissionId:239 ,lang:"c" , 
+        code:`#include<stdio.h>
+        int main(){
+            int n1,n2;
+            scanf("%d",&n1);
+            scanf("%d",&n2);
+            printf("%d",n1+n2);
+            fflush(stdout);
+            return 0; 
+        }` });
+    console.log(ans);
 }
+
+caller();

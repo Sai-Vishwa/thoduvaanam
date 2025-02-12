@@ -13,3 +13,18 @@ const achieve = await prisma.studentAchievements.findMany({
                         studentId:student.id
                     }
                 })
+
+
+
+                // const upd = await prisma.submission.update({
+        //     where:{
+        //         id:allData.submissionId
+        //     },
+        //     data:{
+        //         noOfCasesPassed:count,
+        //         output1:op1,
+        //         output2:op2,
+        //         pointsSecured:question.pointsPerTestCaseSolved*count,
+        //         status:'WAITING'
+        //     }
+        // })

@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const {startSolvingQuestion} = require("../submissionAndVerify/startSolvingQuestion");
 const { startSolvingContest } = require("../submissionAndVerify/startSolvingContest");
+const { check } = require("../submissionAndVerify/check");
 
 const router = new Router();
 
@@ -15,6 +16,10 @@ const asyncHandler = (fn) => (req, res, next) => {
 
   router.post('/solve-contest', asyncHandler(async (req, res) => {
     await startSolvingContest(req,res)
+  }));
+
+  router.post('/check-submission', asyncHandler(async (req, res) => {
+    await check(req,res)
   }));
 
 module.exports = {
