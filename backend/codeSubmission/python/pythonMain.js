@@ -55,10 +55,13 @@ async function PythonMain(allData) {
 
 
 async function caller() {
-    const ans = await PythonMain({qId:23,submissionId:239 ,lang:"py" , 
+    const ans = await PythonMain({qId:23,submissionId:201 ,lang:"py" , 
         code:`
-a = int(input())
-print(a)` });
+a = eval(input())
+s=0
+for i in a:
+        s+=int(i)
+print(s)` });
     console.log(ans);
 }
 

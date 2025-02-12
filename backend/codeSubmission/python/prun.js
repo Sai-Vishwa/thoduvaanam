@@ -2,12 +2,12 @@ const  spawn  = require("child_process").spawn;
 
 async function prun(fileName, testcaseInput, testCaseOutput) {
     return new Promise((resolve, reject) => {
-        const child = spawn("docker", ["exec", "-it", "python_container", `python ${fileName}.py`]);
+        const child = spawn("docker", ["exec", "-i", "python_container", `python`, `${fileName}.py`]);
 
         var utfEncoder = new TextEncoder("utf-8");
         var utfDecoder = new TextDecoder("utf-8");
 
-        child.stdin.write("5\n");
+        child.stdin.write("[1,2,3]");
         
         child.stdin.end();
 
