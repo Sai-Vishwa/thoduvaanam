@@ -13,8 +13,7 @@ async function leaderBoard(req,res) {
                     select:{
                         uname:true,
                         name:true,
-                        rno:true,
-                        timeOfLastSolve:true
+                        rno:true
                     }
                 },
                 achievements:{
@@ -23,11 +22,14 @@ async function leaderBoard(req,res) {
                         title:true
                     }
                 }
+            },
+            where:{
+                achievementId:1
             }
         })
         res.status(200).json({
             msg:"successful",
-            studentAchievements:studentAchievements
+            data:studentAchievements
         })
     }
     catch(error){

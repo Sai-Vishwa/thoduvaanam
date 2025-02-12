@@ -71,3 +71,7 @@ async function caller() {
 }
 
 caller();
+
+module.exports = {
+    JavaMain
+}

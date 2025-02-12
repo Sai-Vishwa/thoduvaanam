@@ -4,24 +4,29 @@ import { motion } from "framer-motion";
 import goldMedal from "../../assets/goldmedal.png";
 import silverMedal from "../../assets/silvermedal.png";
 import bronzeMedal from "../../assets/bronzemedal.webp";
+import { useNavigate } from "react-router-dom";
 
 function LeaderBoardPage() {
+  const nav = useNavigate();
   const [leaderBoard, setLeaderBoard] = useState([]);
 
+  async function fetchdata() {
+      const lb = await fetch("http://localhost:4000/basic/leaderboard",{
+        method:"POST",
+        body: "{}",
+        headers:{
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    })
+    const data = await lb.json()
+    setLeaderBoard(data)
+  }
+
   useEffect(() => {
-    setTimeout(() => {
-        setLeaderBoard([
-            { id: 1, name: "Alice", score: 95 },
-            { id: 2, name: "Bob", score: 90 },
-            { id: 3, name: "Charlie", score: 85 },
-            { id: 4, name: "David", score: 100 },
-            { id: 5, name: "Eve", score: 75 },
-            { id: 6, name: "Frank", score: 720 },
-            { id: 7, name: "Grace", score: 65 },
-            { id: 8, name: "Hank", score: 60 },
-            { id: 9, name: "Ivy", score: 255 },
-          ].sort((a, b) => b.score - a.score));
-        }, 1000);
+      if(Object.keys(leaderBoard)===0){
+        fetchdata()
+      }
   }, []);
   const getMedalImage = (rank) => {
     if (rank === 1) return goldMedal;
@@ -86,8 +91,10 @@ function LeaderBoardPage() {
               </motion.tr>
             </thead>
             <tbody>
-              {leaderBoard.map((player, index) => (
+              {leaderBoard?.data?.map((player, index) => (
                 <motion.tr 
+                className="cursor-pointer"
+                onClick={()=>{nav(`/${player.uname}`)}}
                   key={player.id} 
                   initial={{ x: -50, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}

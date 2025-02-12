@@ -3,6 +3,7 @@ const { update } = require("../update/updateProfile");
 const { verifySubmission } = require("../submissionVerify/verifySubmission");
 const { homePage } = require("../pageHandler/homePage");
 const { questionPage } = require("../pageHandler/questionPage");
+const { leaderBoard } = require("../pageHandler/leaderBoard");
 
 const router =  new Router();
 
@@ -26,6 +27,10 @@ const asyncHandler = (fn) => (req, res, next) => {
     await questionPage(req,res);
   }));
   
+  router.post('/leaderboard', asyncHandler(async (req, res) => {
+    await leaderBoard(req,res);
+  }));
+
   router.get('/', asyncHandler(async (req, res) => {
     console.log("im called")
     res.status(200).json({

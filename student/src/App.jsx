@@ -11,6 +11,7 @@ import QuestionPage from './pages/QuestionPage/QuestionPage'
 import ContestBasicPage from './pages/ContestBasicPage/ContestBasicPage'
 import ReviewQuestionPage from './pages/ReviewQuestionPage/ReviewQuestionPage'
 import ReviewContestPage from './pages/ReviewContestPage/ReviewContestPage'
+import ContestHandlerPage from './pages/ContestHandlerPage/ContestHandlerPage'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         <Route path='/' element={<HelloPage />} />
         <Route path='/:uname/question/:qname' element={<QuestionPage />} />
         <Route path='/:uname/contest/:tname' element={<ContestBasicPage />} />
+        <Route path='/:uname/contest/:tname' element={<ContestHandlerPage />} />
         <Route path='/:uname/review-question/:qname' element={<ReviewQuestionPage />} />
         <Route path='/:uname/review-contest/:cname' element={<ReviewContestPage />} />
         <Route path='*' element={<Navigate to={"/"} />} />

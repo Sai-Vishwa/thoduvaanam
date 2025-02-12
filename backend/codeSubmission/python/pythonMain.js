@@ -66,3 +66,7 @@ print(s)` });
 }
 
 caller();
+
+module.exports = {
+    PythonMain
+}

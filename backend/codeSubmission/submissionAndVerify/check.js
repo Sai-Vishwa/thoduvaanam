@@ -1,7 +1,8 @@
 const { PrismaClient } = require("../../dbSchema/generated");
 const { sessionChecker } = require("../../sessionChecker/sessionChecker");
 const { CMain } = require("../C/CMain");
-const { pythonMain } = require("../python/pythonMain");
+const { JavaMain } = require("../java/javaMain");
+const {  PythonMain } = require("../python/pythonMain");
 const prisma = new PrismaClient();
 const files = require('fs');
 
@@ -42,8 +43,22 @@ async function check(req,res) {
                 })
                 return
             }
-            if(lang==="C"){
+            if(lang==="c"){
                 const outcome = await CMain(req.body);
+                if(outcome.status==-1){
+                    res.status(400).json({
+                        err:"internal error"
+                    })
+                    return
+                }
+                
+                res.status(200).json({
+                    msg:"Naama jeichittom maara",
+                    ...outcome
+                })
+            }
+            else if(lang==="Python"){
+                const outcome = await PythonMain(req.body);
                 if(outcome.status==-1){
                     res.status(400).json({
                         err:"internal error"
@@ -55,11 +70,18 @@ async function check(req,res) {
                     ...outcome
                 })
             }
-            else if(lang==="Python"){
-                
-            }
             else if(lang==="Java"){
-
+                const outcome = await JavaMain(req.body);
+                if(outcome.status==-1){
+                    res.status(400).json({
+                        err:"internal error"
+                    })
+                    return
+                }
+                res.status(200).json({
+                    msg:"Naama jeichittom maara",
+                    ...outcome
+                })
             }
         }
     }
