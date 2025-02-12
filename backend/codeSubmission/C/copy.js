@@ -1,9 +1,9 @@
 const file = require("fs");
 const { spawnSync } = require("child_process");
 
-function copy(allData, fileName) {
+async function copy(allData, fileName) {
 
-    file.writeFileSync(`${fileName}.${allData.lang}`, allData.code, "utf-8");
+    file.writeFile(`${fileName}.${allData.lang}`, allData.code, "utf-8");
 
     const result = spawnSync("docker", ["cp", `${fileName}.${allData.lang}`, "c_container:/app/"], {
         encoding: "utf-8"

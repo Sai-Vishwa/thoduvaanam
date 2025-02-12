@@ -25,6 +25,11 @@ const autoSubmit = async () =>{
                         isFinal:"YES"
                     }
                 })
+                const achieve = await prisma.achievements.update({
+                    where:{
+                        
+                    }
+                })
                 console.log(res)
             }
         })
