@@ -7,9 +7,39 @@ function ContestBasicPage(){
 
     const [contestDetails , setContestDetails] = useState({});
     const [attemptButton , setAttemptButton] = useState("Start New Attempt")
+    const [disabled , setDisabled] = useState(false);
     const nav = useNavigate();
     const {uname , tname} = useParams();
     const [reviewDiv , setReviewDiv] = useState(false);
+
+
+    async function toContestHandler(){
+        if(attemptButton === "CONTINUE LAST ATTEMPT"){
+            nav(`/${uname}/contest-handler/${tname}`)
+        }
+        else if(attemptButton === "START NEW ATTEMPT"){
+            try{
+                const startAttempt = await fetch("http://localhost:4000/submission/start-contest",{
+                    method:"POST",
+                    body: JSON.stringify({uname:uname , session : Cookies.get("session") , tname:tname}),
+                    headers:{
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                })
+                const data = await startAttempt.json();
+                if(data.msg){
+                    nav(`/${uname}/contest-handler/${tname}`)
+                }
+                else{
+                    throw new Error(data.err)
+                }
+            }
+            catch(error){
+                alert(error.message);
+            }
+        }
+    }
 
 
     async function fetchData() {
@@ -31,24 +61,11 @@ function ContestBasicPage(){
             else{
                 setContestDetails(data.data)
 
-                
-                let flag = false
-                let flag2 = false
-                if(data.submission == "COMPLETED"){
-                    setAttemptButton("Contest attended")
+                setAttemptButton(data.status)
+                if(data.status === "COMPLETED" || data.status === "ENDED" || data.status === "NOT STARTED"){
+                    setDisabled(true)
                 }
-                data.submission.map((sub)=>{
-                    if(sub.status!=="COMPLETED"){
-                        flag = true
-                    }
-                    else{
-                        flag2 = true
-                    }
-                })
-                if(flag){
-                    setAttemptButton("Continue Last Attempt")
-                }
-                if(flag2){
+                if(data.status === "COMPLETED"){
                     setReviewDiv(true)
                 }
             }
@@ -67,7 +84,7 @@ function ContestBasicPage(){
     return(<>
             {JSON.stringify(contestDetails)}
             <button onClick={()=>{nav(`/${uname}`)}}>Back</button>
-            <button onClick={toContest}>{attemptButton}</button>
+            <button onClick={toContestHandler} className={`disabled:${disabled}`}>{attemptButton}</button>
     </>)
 }
 export default ContestBasicPage

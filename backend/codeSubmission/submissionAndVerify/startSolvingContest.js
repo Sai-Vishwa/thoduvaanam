@@ -20,11 +20,12 @@ async function startSolvingContest(req,res) {
         }
         const contestAndQuestions = await prisma.contest.findFirst({
             where:{
-                id: req.body.cname
+                title:req.body.tname
             },
             select:{
                 opensOn:true,
                 closesOn:true,
+                totalNoOfQuestions:true,
                 timeToSolveInMinutes:true,
                 question:{
                     select:{
@@ -58,14 +59,24 @@ async function startSolvingContest(req,res) {
             }
         })
         let flag = false
+        let count = 0;
         submissions.map(submission =>{
             if(submission.status !== "COMPLETED"){
                 flag = true
+            }
+            else{
+                count+=1
             }
         })
         if(flag){
             res.status(200).json({
                 err:"There is already an attempt going on vro"
+            })
+            return
+        }
+        if(count === contestAndQuestions.totalNoOfQuestions){
+            res.status(200).json({
+                err:"The contest is already completed by you"
             })
             return
         }
