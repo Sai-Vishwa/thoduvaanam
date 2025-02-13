@@ -12,6 +12,7 @@ function ContestBasicPage() {
   const [reviewDiv, setReviewDiv] = useState(false)
 
   async function toContestHandler() {
+    console.log("im here")
     if (attemptButton === "CONTINUE LAST ATTEMPT") {
       nav(`/${uname}/contest-handler/${tname}`)
     } else if (attemptButton === "START NEW ATTEMPT") {
@@ -26,6 +27,7 @@ function ContestBasicPage() {
         })
         const data = await startAttempt.json()
         if (data.msg) {
+            alert(JSON.stringify(data))
           nav(`/${uname}/contest-handler/${tname}`)
         } else {
           throw new Error(data.err)

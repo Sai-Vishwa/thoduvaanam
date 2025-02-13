@@ -40,10 +40,11 @@ function ContestHandlerPage(){
         {JSON.stringify(questionDetails)}
 
         <Timer 
-        minutes={questionDetails.time}/>
+        minutes={questionDetails?.time || 0}/>
+        {/* {JSON.stringify(questionDetails)} */}
 
         {
-            questionDetails.questions.map((ques)=>(
+            questionDetails?.questions?.map((ques)=>(
                 <QuestionInfo 
                 question={ques}/>
             ))

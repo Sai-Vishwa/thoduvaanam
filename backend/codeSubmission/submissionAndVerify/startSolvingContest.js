@@ -4,6 +4,7 @@ const { sessionChecker } = require("../../sessionChecker/sessionChecker");
 const prisma = new PrismaClient();
 
 async function startSolvingContest(req,res) {
+    console.log("here")
     try{
         const session =  await sessionChecker(req.body.session)
         if(session.err){
@@ -35,6 +36,8 @@ async function startSolvingContest(req,res) {
                 }
             }
         })
+        console.log("see here")
+        console.log(contestAndQuestions)
         const utc = new Date();
         const now = new Date(utc.getTime()+5.5*60*60*1000);
         let arr = [];
@@ -87,8 +90,8 @@ async function startSolvingContest(req,res) {
         
         const end = new Date(now.getTime()+contestAndQuestions.timeToSolveInMinutes*60*1000)
 
-        await Promise.all(contestAndQuestions.question.map((q)=>{
-            prisma.submission.create({
+        await Promise.all(contestAndQuestions.question.map(async (q)=>{
+            await prisma.submission.create({
                 data:{
                     questionId:q.id,
                     studentId:session.id,
