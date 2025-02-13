@@ -182,7 +182,7 @@ function ContestBasicPage() {
 
             {reviewDiv && (
               <button
-                onClick={() => nav(`/${uname}/review/${tname}`)}
+                onClick={() => nav(`/${uname}/review-contest/${tname}`)}
                 className="px-6 py-3 rounded-lg font-medium bg-green-600 hover:bg-green-700 transition-colors"
               >
                 Review Submission

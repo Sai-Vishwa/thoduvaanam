@@ -35,10 +35,13 @@ async function submitContest(req,res) {
         questions.question.map((q)=>{
             qids.push(q.id)
         })
+        const utc = new Date();
+        const now = new Date(utc.getTime()+5.5*60*60*1000)
         const submit = await prisma.submission.updateManyAndReturn({
             data:{
                 isFinal:"YES",
-                status:"COMPLETED"
+                status:"COMPLETED",
+                submittedOn:now
             },
             where:{
                 AND:[

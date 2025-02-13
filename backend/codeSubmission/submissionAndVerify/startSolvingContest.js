@@ -4,7 +4,7 @@ const { sessionChecker } = require("../../sessionChecker/sessionChecker");
 const prisma = new PrismaClient();
 
 async function startSolvingContest(req,res) {
-    console.log("here")
+    // console.log("here")
     try{
         const session =  await sessionChecker(req.body.session)
         if(session.err){
@@ -31,12 +31,20 @@ async function startSolvingContest(req,res) {
                 question:{
                     select:{
                         id:true,
-                        title:true
+                        title:true,
+                        boilerPlate:{
+                            select:{
+                                java:true,
+                            },
+                            where:{
+                                type:"TO_USER"
+                            }
+                        }
                     }
                 }
             }
         })
-        console.log("see here")
+        // console.log("see here")
         console.log(contestAndQuestions)
         const utc = new Date();
         const now = new Date(utc.getTime()+5.5*60*60*1000);
@@ -90,14 +98,21 @@ async function startSolvingContest(req,res) {
         
         const end = new Date(now.getTime()+contestAndQuestions.timeToSolveInMinutes*60*1000)
 
+        // console.log(contestAndQuestions)
+
         await Promise.all(contestAndQuestions.question.map(async (q)=>{
+            const data = {
+                questionId:q.id,
+                studentId:session.id,
+                startTime:now,
+                maxTimeToSolve:end,
+                code:q.boilerPlate[0].java,
+                language:"JAVA"
+                    
+            }
+            console.log(data)
             await prisma.submission.create({
-                data:{
-                    questionId:q.id,
-                    studentId:session.id,
-                    startTime:now,
-                    maxTimeToSolve:end,
-                }
+                data:data
             })
         }))
         
