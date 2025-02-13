@@ -7,6 +7,7 @@ const { leaderBoard } = require("../pageHandler/leaderBoard");
 const { ContestBasicPage } = require("../pageHandler/contestBasicPage");
 const { contestHandlerPage } = require("../pageHandler/contestHandlerPage");
 const { contestReviewPage } = require("../pageHandler/contestReviewPage");
+const { codingPage } = require("../pageHandler/codingPage");
 
 const router =  new Router();
 
@@ -44,6 +45,10 @@ const asyncHandler = (fn) => (req, res, next) => {
 
   router.post('/leaderboard', asyncHandler(async (req, res) => {
     await leaderBoard(req,res);
+  }));
+
+  router.post('/coding-page', asyncHandler(async (req, res) => {
+    await codingPage(req,res);
   }));
 
   router.get('/', asyncHandler(async (req, res) => {

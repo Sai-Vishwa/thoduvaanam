@@ -171,7 +171,7 @@ const ContestHandlerPage = () => {
                     </div>
                   </div>
                   <button 
-                    onClick={() => {}}
+                    onClick={() => {nav(`/${uname}/code/${tname}/${ques.title}`)}}
                     className="mt-6 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
                   >
                     Solve Question

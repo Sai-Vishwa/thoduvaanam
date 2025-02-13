@@ -57,9 +57,9 @@ async function contestHandlerPage(req,res) {
             const st = new Date(details.question[0].submission[0].startTime)
             const end = new Date(details.question[0].submission[0].maxTimeToSolve)
             console.log(st);
-            const diffSeconds = Math.floor((end-now) / 1000); // Convert ms to seconds
-            const diffMinutes = Math.floor(diffSeconds / 60); // Convert seconds to minutes
-            const remainingSeconds = diffSeconds % 60; // Remaining seconds
+            const diffSeconds = Math.floor((end-now) / 1000); 
+            const diffMinutes = Math.floor(diffSeconds / 60);
+            const remainingSeconds = diffSeconds % 60
 
             // console.log(`Minutes: ${diffMinutes}, Seconds: ${remainingSeconds}`);
             if(end<now){
