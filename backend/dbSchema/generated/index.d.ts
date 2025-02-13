@@ -49,11 +49,6 @@ export type Achievements = $Result.DefaultSelection<Prisma.$AchievementsPayload>
  */
 export type StudentAchievements = $Result.DefaultSelection<Prisma.$StudentAchievementsPayload>
 /**
- * Model ContestResult
- * 
- */
-export type ContestResult = $Result.DefaultSelection<Prisma.$ContestResultPayload>
-/**
  * Model OTPStudent
  * 
  */
@@ -154,16 +149,16 @@ export type OTPStatus = (typeof OTPStatus)[keyof typeof OTPStatus]
 export const LanguageType: {
   PYTHON: 'PYTHON',
   C: 'C',
-  JAVA: 'JAVA'
+  JAVA: 'JAVA',
+  CPP: 'CPP'
 };
 
 export type LanguageType = (typeof LanguageType)[keyof typeof LanguageType]
 
 
 export const BoilerType: {
-  READ: 'READ',
-  FUNCTION_CALL: 'FUNCTION_CALL',
-  WRITE: 'WRITE'
+  TO_USER: 'TO_USER',
+  MAIN: 'MAIN'
 };
 
 export type BoilerType = (typeof BoilerType)[keyof typeof BoilerType]
@@ -404,16 +399,6 @@ export class PrismaClient<
     * ```
     */
   get studentAchievements(): Prisma.StudentAchievementsDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.contestResult`: Exposes CRUD operations for the **ContestResult** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more ContestResults
-    * const contestResults = await prisma.contestResult.findMany()
-    * ```
-    */
-  get contestResult(): Prisma.ContestResultDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.oTPStudent`: Exposes CRUD operations for the **OTPStudent** model.
@@ -911,7 +896,6 @@ export namespace Prisma {
     Submission: 'Submission',
     Achievements: 'Achievements',
     StudentAchievements: 'StudentAchievements',
-    ContestResult: 'ContestResult',
     OTPStudent: 'OTPStudent',
     Session: 'Session',
     Discussions: 'Discussions',
@@ -932,7 +916,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "student" | "topics" | "questions" | "testCase" | "submission" | "achievements" | "studentAchievements" | "contestResult" | "oTPStudent" | "session" | "discussions" | "boilerPlate" | "contest"
+      modelProps: "student" | "topics" | "questions" | "testCase" | "submission" | "achievements" | "studentAchievements" | "oTPStudent" | "session" | "discussions" | "boilerPlate" | "contest"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1454,80 +1438,6 @@ export namespace Prisma {
           }
         }
       }
-      ContestResult: {
-        payload: Prisma.$ContestResultPayload<ExtArgs>
-        fields: Prisma.ContestResultFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ContestResultFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ContestResultPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ContestResultFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ContestResultPayload>
-          }
-          findFirst: {
-            args: Prisma.ContestResultFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ContestResultPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ContestResultFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ContestResultPayload>
-          }
-          findMany: {
-            args: Prisma.ContestResultFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ContestResultPayload>[]
-          }
-          create: {
-            args: Prisma.ContestResultCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ContestResultPayload>
-          }
-          createMany: {
-            args: Prisma.ContestResultCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.ContestResultCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ContestResultPayload>[]
-          }
-          delete: {
-            args: Prisma.ContestResultDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ContestResultPayload>
-          }
-          update: {
-            args: Prisma.ContestResultUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ContestResultPayload>
-          }
-          deleteMany: {
-            args: Prisma.ContestResultDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ContestResultUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.ContestResultUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ContestResultPayload>[]
-          }
-          upsert: {
-            args: Prisma.ContestResultUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ContestResultPayload>
-          }
-          aggregate: {
-            args: Prisma.ContestResultAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateContestResult>
-          }
-          groupBy: {
-            args: Prisma.ContestResultGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ContestResultGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.ContestResultCountArgs<ExtArgs>
-            result: $Utils.Optional<ContestResultCountAggregateOutputType> | number
-          }
-        }
-      }
       OTPStudent: {
         payload: Prisma.$OTPStudentPayload<ExtArgs>
         fields: Prisma.OTPStudentFieldRefs
@@ -1989,7 +1899,6 @@ export namespace Prisma {
     submission?: SubmissionOmit
     achievements?: AchievementsOmit
     studentAchievements?: StudentAchievementsOmit
-    contestResult?: ContestResultOmit
     oTPStudent?: OTPStudentOmit
     session?: SessionOmit
     discussions?: DiscussionsOmit
@@ -2091,14 +2000,12 @@ export namespace Prisma {
   export type StudentCountOutputType = {
     submission: number
     studentAchievements: number
-    contestResult: number
     discussion: number
   }
 
   export type StudentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     submission?: boolean | StudentCountOutputTypeCountSubmissionArgs
     studentAchievements?: boolean | StudentCountOutputTypeCountStudentAchievementsArgs
-    contestResult?: boolean | StudentCountOutputTypeCountContestResultArgs
     discussion?: boolean | StudentCountOutputTypeCountDiscussionArgs
   }
 
@@ -2130,13 +2037,6 @@ export namespace Prisma {
   /**
    * StudentCountOutputType without action
    */
-  export type StudentCountOutputTypeCountContestResultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ContestResultWhereInput
-  }
-
-  /**
-   * StudentCountOutputType without action
-   */
   export type StudentCountOutputTypeCountDiscussionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DiscussionsWhereInput
   }
@@ -2147,12 +2047,10 @@ export namespace Prisma {
    */
 
   export type TopicsCountOutputType = {
-    contestResult: number
     question: number
   }
 
   export type TopicsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    contestResult?: boolean | TopicsCountOutputTypeCountContestResultArgs
     question?: boolean | TopicsCountOutputTypeCountQuestionArgs
   }
 
@@ -2165,13 +2063,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the TopicsCountOutputType
      */
     select?: TopicsCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * TopicsCountOutputType without action
-   */
-  export type TopicsCountOutputTypeCountContestResultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ContestResultWhereInput
   }
 
   /**
@@ -2561,7 +2452,6 @@ export namespace Prisma {
     timeOfLastSolve?: boolean
     submission?: boolean | Student$submissionArgs<ExtArgs>
     studentAchievements?: boolean | Student$studentAchievementsArgs<ExtArgs>
-    contestResult?: boolean | Student$contestResultArgs<ExtArgs>
     session?: boolean | Student$sessionArgs<ExtArgs>
     discussion?: boolean | Student$discussionArgs<ExtArgs>
     _count?: boolean | StudentCountOutputTypeDefaultArgs<ExtArgs>
@@ -2604,7 +2494,6 @@ export namespace Prisma {
   export type StudentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     submission?: boolean | Student$submissionArgs<ExtArgs>
     studentAchievements?: boolean | Student$studentAchievementsArgs<ExtArgs>
-    contestResult?: boolean | Student$contestResultArgs<ExtArgs>
     session?: boolean | Student$sessionArgs<ExtArgs>
     discussion?: boolean | Student$discussionArgs<ExtArgs>
     _count?: boolean | StudentCountOutputTypeDefaultArgs<ExtArgs>
@@ -2617,7 +2506,6 @@ export namespace Prisma {
     objects: {
       submission: Prisma.$SubmissionPayload<ExtArgs>[]
       studentAchievements: Prisma.$StudentAchievementsPayload<ExtArgs>[]
-      contestResult: Prisma.$ContestResultPayload<ExtArgs>[]
       session: Prisma.$SessionPayload<ExtArgs> | null
       discussion: Prisma.$DiscussionsPayload<ExtArgs>[]
     }
@@ -3026,7 +2914,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     submission<T extends Student$submissionArgs<ExtArgs> = {}>(args?: Subset<T, Student$submissionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     studentAchievements<T extends Student$studentAchievementsArgs<ExtArgs> = {}>(args?: Subset<T, Student$studentAchievementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudentAchievementsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    contestResult<T extends Student$contestResultArgs<ExtArgs> = {}>(args?: Subset<T, Student$contestResultArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestResultPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     session<T extends Student$sessionArgs<ExtArgs> = {}>(args?: Subset<T, Student$sessionArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     discussion<T extends Student$discussionArgs<ExtArgs> = {}>(args?: Subset<T, Student$discussionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscussionsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
@@ -3490,30 +3377,6 @@ export namespace Prisma {
   }
 
   /**
-   * Student.contestResult
-   */
-  export type Student$contestResultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ContestResult
-     */
-    select?: ContestResultSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ContestResult
-     */
-    omit?: ContestResultOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ContestResultInclude<ExtArgs> | null
-    where?: ContestResultWhereInput
-    orderBy?: ContestResultOrderByWithRelationInput | ContestResultOrderByWithRelationInput[]
-    cursor?: ContestResultWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ContestResultScalarFieldEnum | ContestResultScalarFieldEnum[]
-  }
-
-  /**
    * Student.session
    */
   export type Student$sessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3773,7 +3636,6 @@ export namespace Prisma {
     description?: boolean
     notes?: boolean
     contestDate?: boolean
-    contestResult?: boolean | Topics$contestResultArgs<ExtArgs>
     question?: boolean | Topics$questionArgs<ExtArgs>
     contest?: boolean | Topics$contestArgs<ExtArgs>
     _count?: boolean | TopicsCountOutputTypeDefaultArgs<ExtArgs>
@@ -3805,7 +3667,6 @@ export namespace Prisma {
 
   export type TopicsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "notes" | "contestDate", ExtArgs["result"]["topics"]>
   export type TopicsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    contestResult?: boolean | Topics$contestResultArgs<ExtArgs>
     question?: boolean | Topics$questionArgs<ExtArgs>
     contest?: boolean | Topics$contestArgs<ExtArgs>
     _count?: boolean | TopicsCountOutputTypeDefaultArgs<ExtArgs>
@@ -3816,7 +3677,6 @@ export namespace Prisma {
   export type $TopicsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Topics"
     objects: {
-      contestResult: Prisma.$ContestResultPayload<ExtArgs>[]
       question: Prisma.$QuestionsPayload<ExtArgs>[]
       contest: Prisma.$ContestPayload<ExtArgs> | null
     }
@@ -4220,7 +4080,6 @@ export namespace Prisma {
    */
   export interface Prisma__TopicsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    contestResult<T extends Topics$contestResultArgs<ExtArgs> = {}>(args?: Subset<T, Topics$contestResultArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestResultPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     question<T extends Topics$questionArgs<ExtArgs> = {}>(args?: Subset<T, Topics$questionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestionsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     contest<T extends Topics$contestArgs<ExtArgs> = {}>(args?: Subset<T, Topics$contestArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     /**
@@ -4633,30 +4492,6 @@ export namespace Prisma {
   }
 
   /**
-   * Topics.contestResult
-   */
-  export type Topics$contestResultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ContestResult
-     */
-    select?: ContestResultSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ContestResult
-     */
-    omit?: ContestResultOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ContestResultInclude<ExtArgs> | null
-    where?: ContestResultWhereInput
-    orderBy?: ContestResultOrderByWithRelationInput | ContestResultOrderByWithRelationInput[]
-    cursor?: ContestResultWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ContestResultScalarFieldEnum | ContestResultScalarFieldEnum[]
-  }
-
-  /**
    * Topics.question
    */
   export type Topics$questionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4762,9 +4597,6 @@ export namespace Prisma {
     type: $Enums.QuestionType | null
     leetCodeLink: string | null
     leetCodeTitle: string | null
-    CLangFunction: string | null
-    PyLangFunction: string | null
-    JavsLangFunction: string | null
     timeToSolveInMinutes: number | null
     contestId: number | null
   }
@@ -4781,9 +4613,6 @@ export namespace Prisma {
     type: $Enums.QuestionType | null
     leetCodeLink: string | null
     leetCodeTitle: string | null
-    CLangFunction: string | null
-    PyLangFunction: string | null
-    JavsLangFunction: string | null
     timeToSolveInMinutes: number | null
     contestId: number | null
   }
@@ -4800,9 +4629,6 @@ export namespace Prisma {
     type: number
     leetCodeLink: number
     leetCodeTitle: number
-    CLangFunction: number
-    PyLangFunction: number
-    JavsLangFunction: number
     timeToSolveInMinutes: number
     contestId: number
     _all: number
@@ -4841,9 +4667,6 @@ export namespace Prisma {
     type?: true
     leetCodeLink?: true
     leetCodeTitle?: true
-    CLangFunction?: true
-    PyLangFunction?: true
-    JavsLangFunction?: true
     timeToSolveInMinutes?: true
     contestId?: true
   }
@@ -4860,9 +4683,6 @@ export namespace Prisma {
     type?: true
     leetCodeLink?: true
     leetCodeTitle?: true
-    CLangFunction?: true
-    PyLangFunction?: true
-    JavsLangFunction?: true
     timeToSolveInMinutes?: true
     contestId?: true
   }
@@ -4879,9 +4699,6 @@ export namespace Prisma {
     type?: true
     leetCodeLink?: true
     leetCodeTitle?: true
-    CLangFunction?: true
-    PyLangFunction?: true
-    JavsLangFunction?: true
     timeToSolveInMinutes?: true
     contestId?: true
     _all?: true
@@ -4985,9 +4802,6 @@ export namespace Prisma {
     type: $Enums.QuestionType
     leetCodeLink: string | null
     leetCodeTitle: string | null
-    CLangFunction: string
-    PyLangFunction: string
-    JavsLangFunction: string
     timeToSolveInMinutes: number
     contestId: number | null
     _count: QuestionsCountAggregateOutputType | null
@@ -5023,9 +4837,6 @@ export namespace Prisma {
     type?: boolean
     leetCodeLink?: boolean
     leetCodeTitle?: boolean
-    CLangFunction?: boolean
-    PyLangFunction?: boolean
-    JavsLangFunction?: boolean
     timeToSolveInMinutes?: boolean
     contestId?: boolean
     testCase?: boolean | Questions$testCaseArgs<ExtArgs>
@@ -5049,9 +4860,6 @@ export namespace Prisma {
     type?: boolean
     leetCodeLink?: boolean
     leetCodeTitle?: boolean
-    CLangFunction?: boolean
-    PyLangFunction?: boolean
-    JavsLangFunction?: boolean
     timeToSolveInMinutes?: boolean
     contestId?: boolean
     topics?: boolean | TopicsDefaultArgs<ExtArgs>
@@ -5070,9 +4878,6 @@ export namespace Prisma {
     type?: boolean
     leetCodeLink?: boolean
     leetCodeTitle?: boolean
-    CLangFunction?: boolean
-    PyLangFunction?: boolean
-    JavsLangFunction?: boolean
     timeToSolveInMinutes?: boolean
     contestId?: boolean
     topics?: boolean | TopicsDefaultArgs<ExtArgs>
@@ -5091,14 +4896,11 @@ export namespace Prisma {
     type?: boolean
     leetCodeLink?: boolean
     leetCodeTitle?: boolean
-    CLangFunction?: boolean
-    PyLangFunction?: boolean
-    JavsLangFunction?: boolean
     timeToSolveInMinutes?: boolean
     contestId?: boolean
   }
 
-  export type QuestionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "topic" | "noOfHiddenTestCases" | "noOfExternalTestCases" | "difficulty" | "pointsPerTestCaseSolved" | "type" | "leetCodeLink" | "leetCodeTitle" | "CLangFunction" | "PyLangFunction" | "JavsLangFunction" | "timeToSolveInMinutes" | "contestId", ExtArgs["result"]["questions"]>
+  export type QuestionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "topic" | "noOfHiddenTestCases" | "noOfExternalTestCases" | "difficulty" | "pointsPerTestCaseSolved" | "type" | "leetCodeLink" | "leetCodeTitle" | "timeToSolveInMinutes" | "contestId", ExtArgs["result"]["questions"]>
   export type QuestionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     testCase?: boolean | Questions$testCaseArgs<ExtArgs>
     submission?: boolean | Questions$submissionArgs<ExtArgs>
@@ -5139,9 +4941,6 @@ export namespace Prisma {
       type: $Enums.QuestionType
       leetCodeLink: string | null
       leetCodeTitle: string | null
-      CLangFunction: string
-      PyLangFunction: string
-      JavsLangFunction: string
       timeToSolveInMinutes: number
       contestId: number | null
     }, ExtArgs["result"]["questions"]>
@@ -5584,9 +5383,6 @@ export namespace Prisma {
     readonly type: FieldRef<"Questions", 'QuestionType'>
     readonly leetCodeLink: FieldRef<"Questions", 'String'>
     readonly leetCodeTitle: FieldRef<"Questions", 'String'>
-    readonly CLangFunction: FieldRef<"Questions", 'String'>
-    readonly PyLangFunction: FieldRef<"Questions", 'String'>
-    readonly JavsLangFunction: FieldRef<"Questions", 'String'>
     readonly timeToSolveInMinutes: FieldRef<"Questions", 'Int'>
     readonly contestId: FieldRef<"Questions", 'Int'>
   }
@@ -10587,1106 +10383,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: StudentAchievementsInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model ContestResult
-   */
-
-  export type AggregateContestResult = {
-    _count: ContestResultCountAggregateOutputType | null
-    _avg: ContestResultAvgAggregateOutputType | null
-    _sum: ContestResultSumAggregateOutputType | null
-    _min: ContestResultMinAggregateOutputType | null
-    _max: ContestResultMaxAggregateOutputType | null
-  }
-
-  export type ContestResultAvgAggregateOutputType = {
-    id: number | null
-    studentId: number | null
-    totalPoints: number | null
-    topicId: number | null
-  }
-
-  export type ContestResultSumAggregateOutputType = {
-    id: number | null
-    studentId: number | null
-    totalPoints: number | null
-    topicId: number | null
-  }
-
-  export type ContestResultMinAggregateOutputType = {
-    id: number | null
-    studentId: number | null
-    timeTaken: Date | null
-    totalPoints: number | null
-    topicId: number | null
-  }
-
-  export type ContestResultMaxAggregateOutputType = {
-    id: number | null
-    studentId: number | null
-    timeTaken: Date | null
-    totalPoints: number | null
-    topicId: number | null
-  }
-
-  export type ContestResultCountAggregateOutputType = {
-    id: number
-    studentId: number
-    timeTaken: number
-    totalPoints: number
-    topicId: number
-    _all: number
-  }
-
-
-  export type ContestResultAvgAggregateInputType = {
-    id?: true
-    studentId?: true
-    totalPoints?: true
-    topicId?: true
-  }
-
-  export type ContestResultSumAggregateInputType = {
-    id?: true
-    studentId?: true
-    totalPoints?: true
-    topicId?: true
-  }
-
-  export type ContestResultMinAggregateInputType = {
-    id?: true
-    studentId?: true
-    timeTaken?: true
-    totalPoints?: true
-    topicId?: true
-  }
-
-  export type ContestResultMaxAggregateInputType = {
-    id?: true
-    studentId?: true
-    timeTaken?: true
-    totalPoints?: true
-    topicId?: true
-  }
-
-  export type ContestResultCountAggregateInputType = {
-    id?: true
-    studentId?: true
-    timeTaken?: true
-    totalPoints?: true
-    topicId?: true
-    _all?: true
-  }
-
-  export type ContestResultAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which ContestResult to aggregate.
-     */
-    where?: ContestResultWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ContestResults to fetch.
-     */
-    orderBy?: ContestResultOrderByWithRelationInput | ContestResultOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: ContestResultWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ContestResults from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ContestResults.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned ContestResults
-    **/
-    _count?: true | ContestResultCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: ContestResultAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: ContestResultSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: ContestResultMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: ContestResultMaxAggregateInputType
-  }
-
-  export type GetContestResultAggregateType<T extends ContestResultAggregateArgs> = {
-        [P in keyof T & keyof AggregateContestResult]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateContestResult[P]>
-      : GetScalarType<T[P], AggregateContestResult[P]>
-  }
-
-
-
-
-  export type ContestResultGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ContestResultWhereInput
-    orderBy?: ContestResultOrderByWithAggregationInput | ContestResultOrderByWithAggregationInput[]
-    by: ContestResultScalarFieldEnum[] | ContestResultScalarFieldEnum
-    having?: ContestResultScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ContestResultCountAggregateInputType | true
-    _avg?: ContestResultAvgAggregateInputType
-    _sum?: ContestResultSumAggregateInputType
-    _min?: ContestResultMinAggregateInputType
-    _max?: ContestResultMaxAggregateInputType
-  }
-
-  export type ContestResultGroupByOutputType = {
-    id: number
-    studentId: number
-    timeTaken: Date
-    totalPoints: number
-    topicId: number
-    _count: ContestResultCountAggregateOutputType | null
-    _avg: ContestResultAvgAggregateOutputType | null
-    _sum: ContestResultSumAggregateOutputType | null
-    _min: ContestResultMinAggregateOutputType | null
-    _max: ContestResultMaxAggregateOutputType | null
-  }
-
-  type GetContestResultGroupByPayload<T extends ContestResultGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ContestResultGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ContestResultGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ContestResultGroupByOutputType[P]>
-            : GetScalarType<T[P], ContestResultGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type ContestResultSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    studentId?: boolean
-    timeTaken?: boolean
-    totalPoints?: boolean
-    topicId?: boolean
-    student?: boolean | StudentDefaultArgs<ExtArgs>
-    topics?: boolean | TopicsDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["contestResult"]>
-
-  export type ContestResultSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    studentId?: boolean
-    timeTaken?: boolean
-    totalPoints?: boolean
-    topicId?: boolean
-    student?: boolean | StudentDefaultArgs<ExtArgs>
-    topics?: boolean | TopicsDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["contestResult"]>
-
-  export type ContestResultSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    studentId?: boolean
-    timeTaken?: boolean
-    totalPoints?: boolean
-    topicId?: boolean
-    student?: boolean | StudentDefaultArgs<ExtArgs>
-    topics?: boolean | TopicsDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["contestResult"]>
-
-  export type ContestResultSelectScalar = {
-    id?: boolean
-    studentId?: boolean
-    timeTaken?: boolean
-    totalPoints?: boolean
-    topicId?: boolean
-  }
-
-  export type ContestResultOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "studentId" | "timeTaken" | "totalPoints" | "topicId", ExtArgs["result"]["contestResult"]>
-  export type ContestResultInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    student?: boolean | StudentDefaultArgs<ExtArgs>
-    topics?: boolean | TopicsDefaultArgs<ExtArgs>
-  }
-  export type ContestResultIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    student?: boolean | StudentDefaultArgs<ExtArgs>
-    topics?: boolean | TopicsDefaultArgs<ExtArgs>
-  }
-  export type ContestResultIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    student?: boolean | StudentDefaultArgs<ExtArgs>
-    topics?: boolean | TopicsDefaultArgs<ExtArgs>
-  }
-
-  export type $ContestResultPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "ContestResult"
-    objects: {
-      student: Prisma.$StudentPayload<ExtArgs>
-      topics: Prisma.$TopicsPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      studentId: number
-      timeTaken: Date
-      totalPoints: number
-      topicId: number
-    }, ExtArgs["result"]["contestResult"]>
-    composites: {}
-  }
-
-  type ContestResultGetPayload<S extends boolean | null | undefined | ContestResultDefaultArgs> = $Result.GetResult<Prisma.$ContestResultPayload, S>
-
-  type ContestResultCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ContestResultFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ContestResultCountAggregateInputType | true
-    }
-
-  export interface ContestResultDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ContestResult'], meta: { name: 'ContestResult' } }
-    /**
-     * Find zero or one ContestResult that matches the filter.
-     * @param {ContestResultFindUniqueArgs} args - Arguments to find a ContestResult
-     * @example
-     * // Get one ContestResult
-     * const contestResult = await prisma.contestResult.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends ContestResultFindUniqueArgs>(args: SelectSubset<T, ContestResultFindUniqueArgs<ExtArgs>>): Prisma__ContestResultClient<$Result.GetResult<Prisma.$ContestResultPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find one ContestResult that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {ContestResultFindUniqueOrThrowArgs} args - Arguments to find a ContestResult
-     * @example
-     * // Get one ContestResult
-     * const contestResult = await prisma.contestResult.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends ContestResultFindUniqueOrThrowArgs>(args: SelectSubset<T, ContestResultFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ContestResultClient<$Result.GetResult<Prisma.$ContestResultPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first ContestResult that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ContestResultFindFirstArgs} args - Arguments to find a ContestResult
-     * @example
-     * // Get one ContestResult
-     * const contestResult = await prisma.contestResult.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends ContestResultFindFirstArgs>(args?: SelectSubset<T, ContestResultFindFirstArgs<ExtArgs>>): Prisma__ContestResultClient<$Result.GetResult<Prisma.$ContestResultPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first ContestResult that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ContestResultFindFirstOrThrowArgs} args - Arguments to find a ContestResult
-     * @example
-     * // Get one ContestResult
-     * const contestResult = await prisma.contestResult.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends ContestResultFindFirstOrThrowArgs>(args?: SelectSubset<T, ContestResultFindFirstOrThrowArgs<ExtArgs>>): Prisma__ContestResultClient<$Result.GetResult<Prisma.$ContestResultPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find zero or more ContestResults that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ContestResultFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all ContestResults
-     * const contestResults = await prisma.contestResult.findMany()
-     * 
-     * // Get first 10 ContestResults
-     * const contestResults = await prisma.contestResult.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const contestResultWithIdOnly = await prisma.contestResult.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends ContestResultFindManyArgs>(args?: SelectSubset<T, ContestResultFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestResultPayload<ExtArgs>, T, "findMany", ClientOptions>>
-
-    /**
-     * Create a ContestResult.
-     * @param {ContestResultCreateArgs} args - Arguments to create a ContestResult.
-     * @example
-     * // Create one ContestResult
-     * const ContestResult = await prisma.contestResult.create({
-     *   data: {
-     *     // ... data to create a ContestResult
-     *   }
-     * })
-     * 
-     */
-    create<T extends ContestResultCreateArgs>(args: SelectSubset<T, ContestResultCreateArgs<ExtArgs>>): Prisma__ContestResultClient<$Result.GetResult<Prisma.$ContestResultPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Create many ContestResults.
-     * @param {ContestResultCreateManyArgs} args - Arguments to create many ContestResults.
-     * @example
-     * // Create many ContestResults
-     * const contestResult = await prisma.contestResult.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends ContestResultCreateManyArgs>(args?: SelectSubset<T, ContestResultCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many ContestResults and returns the data saved in the database.
-     * @param {ContestResultCreateManyAndReturnArgs} args - Arguments to create many ContestResults.
-     * @example
-     * // Create many ContestResults
-     * const contestResult = await prisma.contestResult.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many ContestResults and only return the `id`
-     * const contestResultWithIdOnly = await prisma.contestResult.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends ContestResultCreateManyAndReturnArgs>(args?: SelectSubset<T, ContestResultCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestResultPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
-
-    /**
-     * Delete a ContestResult.
-     * @param {ContestResultDeleteArgs} args - Arguments to delete one ContestResult.
-     * @example
-     * // Delete one ContestResult
-     * const ContestResult = await prisma.contestResult.delete({
-     *   where: {
-     *     // ... filter to delete one ContestResult
-     *   }
-     * })
-     * 
-     */
-    delete<T extends ContestResultDeleteArgs>(args: SelectSubset<T, ContestResultDeleteArgs<ExtArgs>>): Prisma__ContestResultClient<$Result.GetResult<Prisma.$ContestResultPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Update one ContestResult.
-     * @param {ContestResultUpdateArgs} args - Arguments to update one ContestResult.
-     * @example
-     * // Update one ContestResult
-     * const contestResult = await prisma.contestResult.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends ContestResultUpdateArgs>(args: SelectSubset<T, ContestResultUpdateArgs<ExtArgs>>): Prisma__ContestResultClient<$Result.GetResult<Prisma.$ContestResultPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Delete zero or more ContestResults.
-     * @param {ContestResultDeleteManyArgs} args - Arguments to filter ContestResults to delete.
-     * @example
-     * // Delete a few ContestResults
-     * const { count } = await prisma.contestResult.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends ContestResultDeleteManyArgs>(args?: SelectSubset<T, ContestResultDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more ContestResults.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ContestResultUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many ContestResults
-     * const contestResult = await prisma.contestResult.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends ContestResultUpdateManyArgs>(args: SelectSubset<T, ContestResultUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more ContestResults and returns the data updated in the database.
-     * @param {ContestResultUpdateManyAndReturnArgs} args - Arguments to update many ContestResults.
-     * @example
-     * // Update many ContestResults
-     * const contestResult = await prisma.contestResult.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more ContestResults and only return the `id`
-     * const contestResultWithIdOnly = await prisma.contestResult.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends ContestResultUpdateManyAndReturnArgs>(args: SelectSubset<T, ContestResultUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestResultPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
-
-    /**
-     * Create or update one ContestResult.
-     * @param {ContestResultUpsertArgs} args - Arguments to update or create a ContestResult.
-     * @example
-     * // Update or create a ContestResult
-     * const contestResult = await prisma.contestResult.upsert({
-     *   create: {
-     *     // ... data to create a ContestResult
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the ContestResult we want to update
-     *   }
-     * })
-     */
-    upsert<T extends ContestResultUpsertArgs>(args: SelectSubset<T, ContestResultUpsertArgs<ExtArgs>>): Prisma__ContestResultClient<$Result.GetResult<Prisma.$ContestResultPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
-
-
-    /**
-     * Count the number of ContestResults.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ContestResultCountArgs} args - Arguments to filter ContestResults to count.
-     * @example
-     * // Count the number of ContestResults
-     * const count = await prisma.contestResult.count({
-     *   where: {
-     *     // ... the filter for the ContestResults we want to count
-     *   }
-     * })
-    **/
-    count<T extends ContestResultCountArgs>(
-      args?: Subset<T, ContestResultCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], ContestResultCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a ContestResult.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ContestResultAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends ContestResultAggregateArgs>(args: Subset<T, ContestResultAggregateArgs>): Prisma.PrismaPromise<GetContestResultAggregateType<T>>
-
-    /**
-     * Group by ContestResult.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ContestResultGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends ContestResultGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ContestResultGroupByArgs['orderBy'] }
-        : { orderBy?: ContestResultGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, ContestResultGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContestResultGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the ContestResult model
-   */
-  readonly fields: ContestResultFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for ContestResult.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__ContestResultClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    student<T extends StudentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StudentDefaultArgs<ExtArgs>>): Prisma__StudentClient<$Result.GetResult<Prisma.$StudentPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    topics<T extends TopicsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TopicsDefaultArgs<ExtArgs>>): Prisma__TopicsClient<$Result.GetResult<Prisma.$TopicsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the ContestResult model
-   */ 
-  interface ContestResultFieldRefs {
-    readonly id: FieldRef<"ContestResult", 'Int'>
-    readonly studentId: FieldRef<"ContestResult", 'Int'>
-    readonly timeTaken: FieldRef<"ContestResult", 'DateTime'>
-    readonly totalPoints: FieldRef<"ContestResult", 'Int'>
-    readonly topicId: FieldRef<"ContestResult", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * ContestResult findUnique
-   */
-  export type ContestResultFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ContestResult
-     */
-    select?: ContestResultSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ContestResult
-     */
-    omit?: ContestResultOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ContestResultInclude<ExtArgs> | null
-    /**
-     * Filter, which ContestResult to fetch.
-     */
-    where: ContestResultWhereUniqueInput
-  }
-
-  /**
-   * ContestResult findUniqueOrThrow
-   */
-  export type ContestResultFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ContestResult
-     */
-    select?: ContestResultSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ContestResult
-     */
-    omit?: ContestResultOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ContestResultInclude<ExtArgs> | null
-    /**
-     * Filter, which ContestResult to fetch.
-     */
-    where: ContestResultWhereUniqueInput
-  }
-
-  /**
-   * ContestResult findFirst
-   */
-  export type ContestResultFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ContestResult
-     */
-    select?: ContestResultSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ContestResult
-     */
-    omit?: ContestResultOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ContestResultInclude<ExtArgs> | null
-    /**
-     * Filter, which ContestResult to fetch.
-     */
-    where?: ContestResultWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ContestResults to fetch.
-     */
-    orderBy?: ContestResultOrderByWithRelationInput | ContestResultOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for ContestResults.
-     */
-    cursor?: ContestResultWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ContestResults from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ContestResults.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of ContestResults.
-     */
-    distinct?: ContestResultScalarFieldEnum | ContestResultScalarFieldEnum[]
-  }
-
-  /**
-   * ContestResult findFirstOrThrow
-   */
-  export type ContestResultFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ContestResult
-     */
-    select?: ContestResultSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ContestResult
-     */
-    omit?: ContestResultOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ContestResultInclude<ExtArgs> | null
-    /**
-     * Filter, which ContestResult to fetch.
-     */
-    where?: ContestResultWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ContestResults to fetch.
-     */
-    orderBy?: ContestResultOrderByWithRelationInput | ContestResultOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for ContestResults.
-     */
-    cursor?: ContestResultWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ContestResults from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ContestResults.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of ContestResults.
-     */
-    distinct?: ContestResultScalarFieldEnum | ContestResultScalarFieldEnum[]
-  }
-
-  /**
-   * ContestResult findMany
-   */
-  export type ContestResultFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ContestResult
-     */
-    select?: ContestResultSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ContestResult
-     */
-    omit?: ContestResultOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ContestResultInclude<ExtArgs> | null
-    /**
-     * Filter, which ContestResults to fetch.
-     */
-    where?: ContestResultWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ContestResults to fetch.
-     */
-    orderBy?: ContestResultOrderByWithRelationInput | ContestResultOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing ContestResults.
-     */
-    cursor?: ContestResultWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ContestResults from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ContestResults.
-     */
-    skip?: number
-    distinct?: ContestResultScalarFieldEnum | ContestResultScalarFieldEnum[]
-  }
-
-  /**
-   * ContestResult create
-   */
-  export type ContestResultCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ContestResult
-     */
-    select?: ContestResultSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ContestResult
-     */
-    omit?: ContestResultOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ContestResultInclude<ExtArgs> | null
-    /**
-     * The data needed to create a ContestResult.
-     */
-    data: XOR<ContestResultCreateInput, ContestResultUncheckedCreateInput>
-  }
-
-  /**
-   * ContestResult createMany
-   */
-  export type ContestResultCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many ContestResults.
-     */
-    data: ContestResultCreateManyInput | ContestResultCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * ContestResult createManyAndReturn
-   */
-  export type ContestResultCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ContestResult
-     */
-    select?: ContestResultSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the ContestResult
-     */
-    omit?: ContestResultOmit<ExtArgs> | null
-    /**
-     * The data used to create many ContestResults.
-     */
-    data: ContestResultCreateManyInput | ContestResultCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ContestResultIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * ContestResult update
-   */
-  export type ContestResultUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ContestResult
-     */
-    select?: ContestResultSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ContestResult
-     */
-    omit?: ContestResultOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ContestResultInclude<ExtArgs> | null
-    /**
-     * The data needed to update a ContestResult.
-     */
-    data: XOR<ContestResultUpdateInput, ContestResultUncheckedUpdateInput>
-    /**
-     * Choose, which ContestResult to update.
-     */
-    where: ContestResultWhereUniqueInput
-  }
-
-  /**
-   * ContestResult updateMany
-   */
-  export type ContestResultUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update ContestResults.
-     */
-    data: XOR<ContestResultUpdateManyMutationInput, ContestResultUncheckedUpdateManyInput>
-    /**
-     * Filter which ContestResults to update
-     */
-    where?: ContestResultWhereInput
-  }
-
-  /**
-   * ContestResult updateManyAndReturn
-   */
-  export type ContestResultUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ContestResult
-     */
-    select?: ContestResultSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the ContestResult
-     */
-    omit?: ContestResultOmit<ExtArgs> | null
-    /**
-     * The data used to update ContestResults.
-     */
-    data: XOR<ContestResultUpdateManyMutationInput, ContestResultUncheckedUpdateManyInput>
-    /**
-     * Filter which ContestResults to update
-     */
-    where?: ContestResultWhereInput
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ContestResultIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * ContestResult upsert
-   */
-  export type ContestResultUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ContestResult
-     */
-    select?: ContestResultSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ContestResult
-     */
-    omit?: ContestResultOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ContestResultInclude<ExtArgs> | null
-    /**
-     * The filter to search for the ContestResult to update in case it exists.
-     */
-    where: ContestResultWhereUniqueInput
-    /**
-     * In case the ContestResult found by the `where` argument doesn't exist, create a new ContestResult with this data.
-     */
-    create: XOR<ContestResultCreateInput, ContestResultUncheckedCreateInput>
-    /**
-     * In case the ContestResult was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<ContestResultUpdateInput, ContestResultUncheckedUpdateInput>
-  }
-
-  /**
-   * ContestResult delete
-   */
-  export type ContestResultDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ContestResult
-     */
-    select?: ContestResultSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ContestResult
-     */
-    omit?: ContestResultOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ContestResultInclude<ExtArgs> | null
-    /**
-     * Filter which ContestResult to delete.
-     */
-    where: ContestResultWhereUniqueInput
-  }
-
-  /**
-   * ContestResult deleteMany
-   */
-  export type ContestResultDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which ContestResults to delete
-     */
-    where?: ContestResultWhereInput
-  }
-
-  /**
-   * ContestResult without action
-   */
-  export type ContestResultDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ContestResult
-     */
-    select?: ContestResultSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ContestResult
-     */
-    omit?: ContestResultOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ContestResultInclude<ExtArgs> | null
   }
 
 
@@ -17345,9 +16041,6 @@ export namespace Prisma {
     type: 'type',
     leetCodeLink: 'leetCodeLink',
     leetCodeTitle: 'leetCodeTitle',
-    CLangFunction: 'CLangFunction',
-    PyLangFunction: 'PyLangFunction',
-    JavsLangFunction: 'JavsLangFunction',
     timeToSolveInMinutes: 'timeToSolveInMinutes',
     contestId: 'contestId'
   };
@@ -17405,17 +16098,6 @@ export namespace Prisma {
   };
 
   export type StudentAchievementsScalarFieldEnum = (typeof StudentAchievementsScalarFieldEnum)[keyof typeof StudentAchievementsScalarFieldEnum]
-
-
-  export const ContestResultScalarFieldEnum: {
-    id: 'id',
-    studentId: 'studentId',
-    timeTaken: 'timeTaken',
-    totalPoints: 'totalPoints',
-    topicId: 'topicId'
-  };
-
-  export type ContestResultScalarFieldEnum = (typeof ContestResultScalarFieldEnum)[keyof typeof ContestResultScalarFieldEnum]
 
 
   export const OTPStudentScalarFieldEnum: {
@@ -17724,7 +16406,6 @@ export namespace Prisma {
     timeOfLastSolve?: DateTimeNullableFilter<"Student"> | Date | string | null
     submission?: SubmissionListRelationFilter
     studentAchievements?: StudentAchievementsListRelationFilter
-    contestResult?: ContestResultListRelationFilter
     session?: XOR<SessionNullableScalarRelationFilter, SessionWhereInput> | null
     discussion?: DiscussionsListRelationFilter
   }
@@ -17740,7 +16421,6 @@ export namespace Prisma {
     timeOfLastSolve?: SortOrderInput | SortOrder
     submission?: SubmissionOrderByRelationAggregateInput
     studentAchievements?: StudentAchievementsOrderByRelationAggregateInput
-    contestResult?: ContestResultOrderByRelationAggregateInput
     session?: SessionOrderByWithRelationInput
     discussion?: DiscussionsOrderByRelationAggregateInput
   }
@@ -17759,7 +16439,6 @@ export namespace Prisma {
     timeOfLastSolve?: DateTimeNullableFilter<"Student"> | Date | string | null
     submission?: SubmissionListRelationFilter
     studentAchievements?: StudentAchievementsListRelationFilter
-    contestResult?: ContestResultListRelationFilter
     session?: XOR<SessionNullableScalarRelationFilter, SessionWhereInput> | null
     discussion?: DiscussionsListRelationFilter
   }, "id" | "rno" | "uname" | "leetCodeName">
@@ -17803,7 +16482,6 @@ export namespace Prisma {
     description?: StringNullableFilter<"Topics"> | string | null
     notes?: StringNullableFilter<"Topics"> | string | null
     contestDate?: DateTimeFilter<"Topics"> | Date | string
-    contestResult?: ContestResultListRelationFilter
     question?: QuestionsListRelationFilter
     contest?: XOR<ContestNullableScalarRelationFilter, ContestWhereInput> | null
   }
@@ -17814,7 +16492,6 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
     contestDate?: SortOrder
-    contestResult?: ContestResultOrderByRelationAggregateInput
     question?: QuestionsOrderByRelationAggregateInput
     contest?: ContestOrderByWithRelationInput
   }
@@ -17828,7 +16505,6 @@ export namespace Prisma {
     NOT?: TopicsWhereInput | TopicsWhereInput[]
     description?: StringNullableFilter<"Topics"> | string | null
     contestDate?: DateTimeFilter<"Topics"> | Date | string
-    contestResult?: ContestResultListRelationFilter
     question?: QuestionsListRelationFilter
     contest?: XOR<ContestNullableScalarRelationFilter, ContestWhereInput> | null
   }, "id" | "name" | "notes">
@@ -17872,9 +16548,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFilter<"Questions"> | $Enums.QuestionType
     leetCodeLink?: StringNullableFilter<"Questions"> | string | null
     leetCodeTitle?: StringNullableFilter<"Questions"> | string | null
-    CLangFunction?: StringFilter<"Questions"> | string
-    PyLangFunction?: StringFilter<"Questions"> | string
-    JavsLangFunction?: StringFilter<"Questions"> | string
     timeToSolveInMinutes?: IntFilter<"Questions"> | number
     contestId?: IntNullableFilter<"Questions"> | number | null
     testCase?: TestCaseListRelationFilter
@@ -17897,9 +16570,6 @@ export namespace Prisma {
     type?: SortOrder
     leetCodeLink?: SortOrderInput | SortOrder
     leetCodeTitle?: SortOrderInput | SortOrder
-    CLangFunction?: SortOrder
-    PyLangFunction?: SortOrder
-    JavsLangFunction?: SortOrder
     timeToSolveInMinutes?: SortOrder
     contestId?: SortOrderInput | SortOrder
     testCase?: TestCaseOrderByRelationAggregateInput
@@ -17925,9 +16595,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFilter<"Questions"> | $Enums.QuestionType
     leetCodeLink?: StringNullableFilter<"Questions"> | string | null
     leetCodeTitle?: StringNullableFilter<"Questions"> | string | null
-    CLangFunction?: StringFilter<"Questions"> | string
-    PyLangFunction?: StringFilter<"Questions"> | string
-    JavsLangFunction?: StringFilter<"Questions"> | string
     timeToSolveInMinutes?: IntFilter<"Questions"> | number
     contestId?: IntNullableFilter<"Questions"> | number | null
     testCase?: TestCaseListRelationFilter
@@ -17950,9 +16617,6 @@ export namespace Prisma {
     type?: SortOrder
     leetCodeLink?: SortOrderInput | SortOrder
     leetCodeTitle?: SortOrderInput | SortOrder
-    CLangFunction?: SortOrder
-    PyLangFunction?: SortOrder
-    JavsLangFunction?: SortOrder
     timeToSolveInMinutes?: SortOrder
     contestId?: SortOrderInput | SortOrder
     _count?: QuestionsCountOrderByAggregateInput
@@ -17977,9 +16641,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeWithAggregatesFilter<"Questions"> | $Enums.QuestionType
     leetCodeLink?: StringNullableWithAggregatesFilter<"Questions"> | string | null
     leetCodeTitle?: StringNullableWithAggregatesFilter<"Questions"> | string | null
-    CLangFunction?: StringWithAggregatesFilter<"Questions"> | string
-    PyLangFunction?: StringWithAggregatesFilter<"Questions"> | string
-    JavsLangFunction?: StringWithAggregatesFilter<"Questions"> | string
     timeToSolveInMinutes?: IntWithAggregatesFilter<"Questions"> | number
     contestId?: IntNullableWithAggregatesFilter<"Questions"> | number | null
   }
@@ -18256,66 +16917,6 @@ export namespace Prisma {
     studentId?: IntWithAggregatesFilter<"StudentAchievements"> | number
     achievementId?: IntWithAggregatesFilter<"StudentAchievements"> | number
     count?: IntWithAggregatesFilter<"StudentAchievements"> | number
-  }
-
-  export type ContestResultWhereInput = {
-    AND?: ContestResultWhereInput | ContestResultWhereInput[]
-    OR?: ContestResultWhereInput[]
-    NOT?: ContestResultWhereInput | ContestResultWhereInput[]
-    id?: IntFilter<"ContestResult"> | number
-    studentId?: IntFilter<"ContestResult"> | number
-    timeTaken?: DateTimeFilter<"ContestResult"> | Date | string
-    totalPoints?: IntFilter<"ContestResult"> | number
-    topicId?: IntFilter<"ContestResult"> | number
-    student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
-    topics?: XOR<TopicsScalarRelationFilter, TopicsWhereInput>
-  }
-
-  export type ContestResultOrderByWithRelationInput = {
-    id?: SortOrder
-    studentId?: SortOrder
-    timeTaken?: SortOrder
-    totalPoints?: SortOrder
-    topicId?: SortOrder
-    student?: StudentOrderByWithRelationInput
-    topics?: TopicsOrderByWithRelationInput
-  }
-
-  export type ContestResultWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: ContestResultWhereInput | ContestResultWhereInput[]
-    OR?: ContestResultWhereInput[]
-    NOT?: ContestResultWhereInput | ContestResultWhereInput[]
-    studentId?: IntFilter<"ContestResult"> | number
-    timeTaken?: DateTimeFilter<"ContestResult"> | Date | string
-    totalPoints?: IntFilter<"ContestResult"> | number
-    topicId?: IntFilter<"ContestResult"> | number
-    student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
-    topics?: XOR<TopicsScalarRelationFilter, TopicsWhereInput>
-  }, "id">
-
-  export type ContestResultOrderByWithAggregationInput = {
-    id?: SortOrder
-    studentId?: SortOrder
-    timeTaken?: SortOrder
-    totalPoints?: SortOrder
-    topicId?: SortOrder
-    _count?: ContestResultCountOrderByAggregateInput
-    _avg?: ContestResultAvgOrderByAggregateInput
-    _max?: ContestResultMaxOrderByAggregateInput
-    _min?: ContestResultMinOrderByAggregateInput
-    _sum?: ContestResultSumOrderByAggregateInput
-  }
-
-  export type ContestResultScalarWhereWithAggregatesInput = {
-    AND?: ContestResultScalarWhereWithAggregatesInput | ContestResultScalarWhereWithAggregatesInput[]
-    OR?: ContestResultScalarWhereWithAggregatesInput[]
-    NOT?: ContestResultScalarWhereWithAggregatesInput | ContestResultScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"ContestResult"> | number
-    studentId?: IntWithAggregatesFilter<"ContestResult"> | number
-    timeTaken?: DateTimeWithAggregatesFilter<"ContestResult"> | Date | string
-    totalPoints?: IntWithAggregatesFilter<"ContestResult"> | number
-    topicId?: IntWithAggregatesFilter<"ContestResult"> | number
   }
 
   export type OTPStudentWhereInput = {
@@ -18667,7 +17268,6 @@ export namespace Prisma {
     timeOfLastSolve?: Date | string | null
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
-    contestResult?: ContestResultCreateNestedManyWithoutStudentInput
     session?: SessionCreateNestedOneWithoutStudentInput
     discussion?: DiscussionsCreateNestedManyWithoutStudentInput
   }
@@ -18683,7 +17283,6 @@ export namespace Prisma {
     timeOfLastSolve?: Date | string | null
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
-    contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
     session?: SessionUncheckedCreateNestedOneWithoutStudentInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutStudentInput
   }
@@ -18698,7 +17297,6 @@ export namespace Prisma {
     timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
-    contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
     session?: SessionUpdateOneWithoutStudentNestedInput
     discussion?: DiscussionsUpdateManyWithoutStudentNestedInput
   }
@@ -18714,7 +17312,6 @@ export namespace Prisma {
     timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
-    contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
     session?: SessionUncheckedUpdateOneWithoutStudentNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutStudentNestedInput
   }
@@ -18756,7 +17353,6 @@ export namespace Prisma {
     description?: string | null
     notes?: string | null
     contestDate: Date | string
-    contestResult?: ContestResultCreateNestedManyWithoutTopicsInput
     question?: QuestionsCreateNestedManyWithoutTopicsInput
     contest?: ContestCreateNestedOneWithoutTopicInput
   }
@@ -18767,7 +17363,6 @@ export namespace Prisma {
     description?: string | null
     notes?: string | null
     contestDate: Date | string
-    contestResult?: ContestResultUncheckedCreateNestedManyWithoutTopicsInput
     question?: QuestionsUncheckedCreateNestedManyWithoutTopicsInput
     contest?: ContestUncheckedCreateNestedOneWithoutTopicInput
   }
@@ -18777,7 +17372,6 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    contestResult?: ContestResultUpdateManyWithoutTopicsNestedInput
     question?: QuestionsUpdateManyWithoutTopicsNestedInput
     contest?: ContestUpdateOneWithoutTopicNestedInput
   }
@@ -18788,7 +17382,6 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    contestResult?: ContestResultUncheckedUpdateManyWithoutTopicsNestedInput
     question?: QuestionsUncheckedUpdateManyWithoutTopicsNestedInput
     contest?: ContestUncheckedUpdateOneWithoutTopicNestedInput
   }
@@ -18826,9 +17419,6 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    CLangFunction: string
-    PyLangFunction: string
-    JavsLangFunction: string
     timeToSolveInMinutes: number
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
@@ -18850,9 +17440,6 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    CLangFunction: string
-    PyLangFunction: string
-    JavsLangFunction: string
     timeToSolveInMinutes: number
     contestId?: number | null
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
@@ -18871,9 +17458,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    CLangFunction?: StringFieldUpdateOperationsInput | string
-    PyLangFunction?: StringFieldUpdateOperationsInput | string
-    JavsLangFunction?: StringFieldUpdateOperationsInput | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
@@ -18895,9 +17479,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    CLangFunction?: StringFieldUpdateOperationsInput | string
-    PyLangFunction?: StringFieldUpdateOperationsInput | string
-    JavsLangFunction?: StringFieldUpdateOperationsInput | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
@@ -18918,9 +17499,6 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    CLangFunction: string
-    PyLangFunction: string
-    JavsLangFunction: string
     timeToSolveInMinutes: number
     contestId?: number | null
   }
@@ -18935,9 +17513,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    CLangFunction?: StringFieldUpdateOperationsInput | string
-    PyLangFunction?: StringFieldUpdateOperationsInput | string
-    JavsLangFunction?: StringFieldUpdateOperationsInput | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
   }
 
@@ -18953,9 +17528,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    CLangFunction?: StringFieldUpdateOperationsInput | string
-    PyLangFunction?: StringFieldUpdateOperationsInput | string
-    JavsLangFunction?: StringFieldUpdateOperationsInput | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
   }
@@ -19225,57 +17797,6 @@ export namespace Prisma {
     studentId?: IntFieldUpdateOperationsInput | number
     achievementId?: IntFieldUpdateOperationsInput | number
     count?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type ContestResultCreateInput = {
-    timeTaken: Date | string
-    totalPoints: number
-    student: StudentCreateNestedOneWithoutContestResultInput
-    topics: TopicsCreateNestedOneWithoutContestResultInput
-  }
-
-  export type ContestResultUncheckedCreateInput = {
-    id?: number
-    studentId: number
-    timeTaken: Date | string
-    totalPoints: number
-    topicId: number
-  }
-
-  export type ContestResultUpdateInput = {
-    timeTaken?: DateTimeFieldUpdateOperationsInput | Date | string
-    totalPoints?: IntFieldUpdateOperationsInput | number
-    student?: StudentUpdateOneRequiredWithoutContestResultNestedInput
-    topics?: TopicsUpdateOneRequiredWithoutContestResultNestedInput
-  }
-
-  export type ContestResultUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    studentId?: IntFieldUpdateOperationsInput | number
-    timeTaken?: DateTimeFieldUpdateOperationsInput | Date | string
-    totalPoints?: IntFieldUpdateOperationsInput | number
-    topicId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type ContestResultCreateManyInput = {
-    id?: number
-    studentId: number
-    timeTaken: Date | string
-    totalPoints: number
-    topicId: number
-  }
-
-  export type ContestResultUpdateManyMutationInput = {
-    timeTaken?: DateTimeFieldUpdateOperationsInput | Date | string
-    totalPoints?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type ContestResultUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    studentId?: IntFieldUpdateOperationsInput | number
-    timeTaken?: DateTimeFieldUpdateOperationsInput | Date | string
-    totalPoints?: IntFieldUpdateOperationsInput | number
-    topicId?: IntFieldUpdateOperationsInput | number
   }
 
   export type OTPStudentCreateInput = {
@@ -19672,12 +18193,6 @@ export namespace Prisma {
     none?: StudentAchievementsWhereInput
   }
 
-  export type ContestResultListRelationFilter = {
-    every?: ContestResultWhereInput
-    some?: ContestResultWhereInput
-    none?: ContestResultWhereInput
-  }
-
   export type SessionNullableScalarRelationFilter = {
     is?: SessionWhereInput | null
     isNot?: SessionWhereInput | null
@@ -19699,10 +18214,6 @@ export namespace Prisma {
   }
 
   export type StudentAchievementsOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type ContestResultOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -19951,9 +18462,6 @@ export namespace Prisma {
     type?: SortOrder
     leetCodeLink?: SortOrder
     leetCodeTitle?: SortOrder
-    CLangFunction?: SortOrder
-    PyLangFunction?: SortOrder
-    JavsLangFunction?: SortOrder
     timeToSolveInMinutes?: SortOrder
     contestId?: SortOrder
   }
@@ -19980,9 +18488,6 @@ export namespace Prisma {
     type?: SortOrder
     leetCodeLink?: SortOrder
     leetCodeTitle?: SortOrder
-    CLangFunction?: SortOrder
-    PyLangFunction?: SortOrder
-    JavsLangFunction?: SortOrder
     timeToSolveInMinutes?: SortOrder
     contestId?: SortOrder
   }
@@ -19999,9 +18504,6 @@ export namespace Prisma {
     type?: SortOrder
     leetCodeLink?: SortOrder
     leetCodeTitle?: SortOrder
-    CLangFunction?: SortOrder
-    PyLangFunction?: SortOrder
-    JavsLangFunction?: SortOrder
     timeToSolveInMinutes?: SortOrder
     contestId?: SortOrder
   }
@@ -20320,44 +18822,6 @@ export namespace Prisma {
     count?: SortOrder
   }
 
-  export type ContestResultCountOrderByAggregateInput = {
-    id?: SortOrder
-    studentId?: SortOrder
-    timeTaken?: SortOrder
-    totalPoints?: SortOrder
-    topicId?: SortOrder
-  }
-
-  export type ContestResultAvgOrderByAggregateInput = {
-    id?: SortOrder
-    studentId?: SortOrder
-    totalPoints?: SortOrder
-    topicId?: SortOrder
-  }
-
-  export type ContestResultMaxOrderByAggregateInput = {
-    id?: SortOrder
-    studentId?: SortOrder
-    timeTaken?: SortOrder
-    totalPoints?: SortOrder
-    topicId?: SortOrder
-  }
-
-  export type ContestResultMinOrderByAggregateInput = {
-    id?: SortOrder
-    studentId?: SortOrder
-    timeTaken?: SortOrder
-    totalPoints?: SortOrder
-    topicId?: SortOrder
-  }
-
-  export type ContestResultSumOrderByAggregateInput = {
-    id?: SortOrder
-    studentId?: SortOrder
-    totalPoints?: SortOrder
-    topicId?: SortOrder
-  }
-
   export type EnumOTPStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.OTPStatus | EnumOTPStatusFieldRefInput<$PrismaModel>
     in?: $Enums.OTPStatus[] | ListEnumOTPStatusFieldRefInput<$PrismaModel>
@@ -20655,13 +19119,6 @@ export namespace Prisma {
     connect?: StudentAchievementsWhereUniqueInput | StudentAchievementsWhereUniqueInput[]
   }
 
-  export type ContestResultCreateNestedManyWithoutStudentInput = {
-    create?: XOR<ContestResultCreateWithoutStudentInput, ContestResultUncheckedCreateWithoutStudentInput> | ContestResultCreateWithoutStudentInput[] | ContestResultUncheckedCreateWithoutStudentInput[]
-    connectOrCreate?: ContestResultCreateOrConnectWithoutStudentInput | ContestResultCreateOrConnectWithoutStudentInput[]
-    createMany?: ContestResultCreateManyStudentInputEnvelope
-    connect?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
-  }
-
   export type SessionCreateNestedOneWithoutStudentInput = {
     create?: XOR<SessionCreateWithoutStudentInput, SessionUncheckedCreateWithoutStudentInput>
     connectOrCreate?: SessionCreateOrConnectWithoutStudentInput
@@ -20687,13 +19144,6 @@ export namespace Prisma {
     connectOrCreate?: StudentAchievementsCreateOrConnectWithoutStudentInput | StudentAchievementsCreateOrConnectWithoutStudentInput[]
     createMany?: StudentAchievementsCreateManyStudentInputEnvelope
     connect?: StudentAchievementsWhereUniqueInput | StudentAchievementsWhereUniqueInput[]
-  }
-
-  export type ContestResultUncheckedCreateNestedManyWithoutStudentInput = {
-    create?: XOR<ContestResultCreateWithoutStudentInput, ContestResultUncheckedCreateWithoutStudentInput> | ContestResultCreateWithoutStudentInput[] | ContestResultUncheckedCreateWithoutStudentInput[]
-    connectOrCreate?: ContestResultCreateOrConnectWithoutStudentInput | ContestResultCreateOrConnectWithoutStudentInput[]
-    createMany?: ContestResultCreateManyStudentInputEnvelope
-    connect?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
   }
 
   export type SessionUncheckedCreateNestedOneWithoutStudentInput = {
@@ -20747,20 +19197,6 @@ export namespace Prisma {
     update?: StudentAchievementsUpdateWithWhereUniqueWithoutStudentInput | StudentAchievementsUpdateWithWhereUniqueWithoutStudentInput[]
     updateMany?: StudentAchievementsUpdateManyWithWhereWithoutStudentInput | StudentAchievementsUpdateManyWithWhereWithoutStudentInput[]
     deleteMany?: StudentAchievementsScalarWhereInput | StudentAchievementsScalarWhereInput[]
-  }
-
-  export type ContestResultUpdateManyWithoutStudentNestedInput = {
-    create?: XOR<ContestResultCreateWithoutStudentInput, ContestResultUncheckedCreateWithoutStudentInput> | ContestResultCreateWithoutStudentInput[] | ContestResultUncheckedCreateWithoutStudentInput[]
-    connectOrCreate?: ContestResultCreateOrConnectWithoutStudentInput | ContestResultCreateOrConnectWithoutStudentInput[]
-    upsert?: ContestResultUpsertWithWhereUniqueWithoutStudentInput | ContestResultUpsertWithWhereUniqueWithoutStudentInput[]
-    createMany?: ContestResultCreateManyStudentInputEnvelope
-    set?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
-    disconnect?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
-    delete?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
-    connect?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
-    update?: ContestResultUpdateWithWhereUniqueWithoutStudentInput | ContestResultUpdateWithWhereUniqueWithoutStudentInput[]
-    updateMany?: ContestResultUpdateManyWithWhereWithoutStudentInput | ContestResultUpdateManyWithWhereWithoutStudentInput[]
-    deleteMany?: ContestResultScalarWhereInput | ContestResultScalarWhereInput[]
   }
 
   export type SessionUpdateOneWithoutStudentNestedInput = {
@@ -20823,20 +19259,6 @@ export namespace Prisma {
     deleteMany?: StudentAchievementsScalarWhereInput | StudentAchievementsScalarWhereInput[]
   }
 
-  export type ContestResultUncheckedUpdateManyWithoutStudentNestedInput = {
-    create?: XOR<ContestResultCreateWithoutStudentInput, ContestResultUncheckedCreateWithoutStudentInput> | ContestResultCreateWithoutStudentInput[] | ContestResultUncheckedCreateWithoutStudentInput[]
-    connectOrCreate?: ContestResultCreateOrConnectWithoutStudentInput | ContestResultCreateOrConnectWithoutStudentInput[]
-    upsert?: ContestResultUpsertWithWhereUniqueWithoutStudentInput | ContestResultUpsertWithWhereUniqueWithoutStudentInput[]
-    createMany?: ContestResultCreateManyStudentInputEnvelope
-    set?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
-    disconnect?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
-    delete?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
-    connect?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
-    update?: ContestResultUpdateWithWhereUniqueWithoutStudentInput | ContestResultUpdateWithWhereUniqueWithoutStudentInput[]
-    updateMany?: ContestResultUpdateManyWithWhereWithoutStudentInput | ContestResultUpdateManyWithWhereWithoutStudentInput[]
-    deleteMany?: ContestResultScalarWhereInput | ContestResultScalarWhereInput[]
-  }
-
   export type SessionUncheckedUpdateOneWithoutStudentNestedInput = {
     create?: XOR<SessionCreateWithoutStudentInput, SessionUncheckedCreateWithoutStudentInput>
     connectOrCreate?: SessionCreateOrConnectWithoutStudentInput
@@ -20861,13 +19283,6 @@ export namespace Prisma {
     deleteMany?: DiscussionsScalarWhereInput | DiscussionsScalarWhereInput[]
   }
 
-  export type ContestResultCreateNestedManyWithoutTopicsInput = {
-    create?: XOR<ContestResultCreateWithoutTopicsInput, ContestResultUncheckedCreateWithoutTopicsInput> | ContestResultCreateWithoutTopicsInput[] | ContestResultUncheckedCreateWithoutTopicsInput[]
-    connectOrCreate?: ContestResultCreateOrConnectWithoutTopicsInput | ContestResultCreateOrConnectWithoutTopicsInput[]
-    createMany?: ContestResultCreateManyTopicsInputEnvelope
-    connect?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
-  }
-
   export type QuestionsCreateNestedManyWithoutTopicsInput = {
     create?: XOR<QuestionsCreateWithoutTopicsInput, QuestionsUncheckedCreateWithoutTopicsInput> | QuestionsCreateWithoutTopicsInput[] | QuestionsUncheckedCreateWithoutTopicsInput[]
     connectOrCreate?: QuestionsCreateOrConnectWithoutTopicsInput | QuestionsCreateOrConnectWithoutTopicsInput[]
@@ -20879,13 +19294,6 @@ export namespace Prisma {
     create?: XOR<ContestCreateWithoutTopicInput, ContestUncheckedCreateWithoutTopicInput>
     connectOrCreate?: ContestCreateOrConnectWithoutTopicInput
     connect?: ContestWhereUniqueInput
-  }
-
-  export type ContestResultUncheckedCreateNestedManyWithoutTopicsInput = {
-    create?: XOR<ContestResultCreateWithoutTopicsInput, ContestResultUncheckedCreateWithoutTopicsInput> | ContestResultCreateWithoutTopicsInput[] | ContestResultUncheckedCreateWithoutTopicsInput[]
-    connectOrCreate?: ContestResultCreateOrConnectWithoutTopicsInput | ContestResultCreateOrConnectWithoutTopicsInput[]
-    createMany?: ContestResultCreateManyTopicsInputEnvelope
-    connect?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
   }
 
   export type QuestionsUncheckedCreateNestedManyWithoutTopicsInput = {
@@ -20903,20 +19311,6 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
-  }
-
-  export type ContestResultUpdateManyWithoutTopicsNestedInput = {
-    create?: XOR<ContestResultCreateWithoutTopicsInput, ContestResultUncheckedCreateWithoutTopicsInput> | ContestResultCreateWithoutTopicsInput[] | ContestResultUncheckedCreateWithoutTopicsInput[]
-    connectOrCreate?: ContestResultCreateOrConnectWithoutTopicsInput | ContestResultCreateOrConnectWithoutTopicsInput[]
-    upsert?: ContestResultUpsertWithWhereUniqueWithoutTopicsInput | ContestResultUpsertWithWhereUniqueWithoutTopicsInput[]
-    createMany?: ContestResultCreateManyTopicsInputEnvelope
-    set?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
-    disconnect?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
-    delete?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
-    connect?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
-    update?: ContestResultUpdateWithWhereUniqueWithoutTopicsInput | ContestResultUpdateWithWhereUniqueWithoutTopicsInput[]
-    updateMany?: ContestResultUpdateManyWithWhereWithoutTopicsInput | ContestResultUpdateManyWithWhereWithoutTopicsInput[]
-    deleteMany?: ContestResultScalarWhereInput | ContestResultScalarWhereInput[]
   }
 
   export type QuestionsUpdateManyWithoutTopicsNestedInput = {
@@ -20941,20 +19335,6 @@ export namespace Prisma {
     delete?: ContestWhereInput | boolean
     connect?: ContestWhereUniqueInput
     update?: XOR<XOR<ContestUpdateToOneWithWhereWithoutTopicInput, ContestUpdateWithoutTopicInput>, ContestUncheckedUpdateWithoutTopicInput>
-  }
-
-  export type ContestResultUncheckedUpdateManyWithoutTopicsNestedInput = {
-    create?: XOR<ContestResultCreateWithoutTopicsInput, ContestResultUncheckedCreateWithoutTopicsInput> | ContestResultCreateWithoutTopicsInput[] | ContestResultUncheckedCreateWithoutTopicsInput[]
-    connectOrCreate?: ContestResultCreateOrConnectWithoutTopicsInput | ContestResultCreateOrConnectWithoutTopicsInput[]
-    upsert?: ContestResultUpsertWithWhereUniqueWithoutTopicsInput | ContestResultUpsertWithWhereUniqueWithoutTopicsInput[]
-    createMany?: ContestResultCreateManyTopicsInputEnvelope
-    set?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
-    disconnect?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
-    delete?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
-    connect?: ContestResultWhereUniqueInput | ContestResultWhereUniqueInput[]
-    update?: ContestResultUpdateWithWhereUniqueWithoutTopicsInput | ContestResultUpdateWithWhereUniqueWithoutTopicsInput[]
-    updateMany?: ContestResultUpdateManyWithWhereWithoutTopicsInput | ContestResultUpdateManyWithWhereWithoutTopicsInput[]
-    deleteMany?: ContestResultScalarWhereInput | ContestResultScalarWhereInput[]
   }
 
   export type QuestionsUncheckedUpdateManyWithoutTopicsNestedInput = {
@@ -21325,34 +19705,6 @@ export namespace Prisma {
     upsert?: AchievementsUpsertWithoutStudentAchievementsInput
     connect?: AchievementsWhereUniqueInput
     update?: XOR<XOR<AchievementsUpdateToOneWithWhereWithoutStudentAchievementsInput, AchievementsUpdateWithoutStudentAchievementsInput>, AchievementsUncheckedUpdateWithoutStudentAchievementsInput>
-  }
-
-  export type StudentCreateNestedOneWithoutContestResultInput = {
-    create?: XOR<StudentCreateWithoutContestResultInput, StudentUncheckedCreateWithoutContestResultInput>
-    connectOrCreate?: StudentCreateOrConnectWithoutContestResultInput
-    connect?: StudentWhereUniqueInput
-  }
-
-  export type TopicsCreateNestedOneWithoutContestResultInput = {
-    create?: XOR<TopicsCreateWithoutContestResultInput, TopicsUncheckedCreateWithoutContestResultInput>
-    connectOrCreate?: TopicsCreateOrConnectWithoutContestResultInput
-    connect?: TopicsWhereUniqueInput
-  }
-
-  export type StudentUpdateOneRequiredWithoutContestResultNestedInput = {
-    create?: XOR<StudentCreateWithoutContestResultInput, StudentUncheckedCreateWithoutContestResultInput>
-    connectOrCreate?: StudentCreateOrConnectWithoutContestResultInput
-    upsert?: StudentUpsertWithoutContestResultInput
-    connect?: StudentWhereUniqueInput
-    update?: XOR<XOR<StudentUpdateToOneWithWhereWithoutContestResultInput, StudentUpdateWithoutContestResultInput>, StudentUncheckedUpdateWithoutContestResultInput>
-  }
-
-  export type TopicsUpdateOneRequiredWithoutContestResultNestedInput = {
-    create?: XOR<TopicsCreateWithoutContestResultInput, TopicsUncheckedCreateWithoutContestResultInput>
-    connectOrCreate?: TopicsCreateOrConnectWithoutContestResultInput
-    upsert?: TopicsUpsertWithoutContestResultInput
-    connect?: TopicsWhereUniqueInput
-    update?: XOR<XOR<TopicsUpdateToOneWithWhereWithoutContestResultInput, TopicsUpdateWithoutContestResultInput>, TopicsUncheckedUpdateWithoutContestResultInput>
   }
 
   export type EnumOTPStatusFieldUpdateOperationsInput = {
@@ -21984,29 +20336,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ContestResultCreateWithoutStudentInput = {
-    timeTaken: Date | string
-    totalPoints: number
-    topics: TopicsCreateNestedOneWithoutContestResultInput
-  }
-
-  export type ContestResultUncheckedCreateWithoutStudentInput = {
-    id?: number
-    timeTaken: Date | string
-    totalPoints: number
-    topicId: number
-  }
-
-  export type ContestResultCreateOrConnectWithoutStudentInput = {
-    where: ContestResultWhereUniqueInput
-    create: XOR<ContestResultCreateWithoutStudentInput, ContestResultUncheckedCreateWithoutStudentInput>
-  }
-
-  export type ContestResultCreateManyStudentInputEnvelope = {
-    data: ContestResultCreateManyStudentInput | ContestResultCreateManyStudentInput[]
-    skipDuplicates?: boolean
-  }
-
   export type SessionCreateWithoutStudentInput = {
     session: string
     expiry: Date | string
@@ -22114,33 +20443,6 @@ export namespace Prisma {
     count?: IntFilter<"StudentAchievements"> | number
   }
 
-  export type ContestResultUpsertWithWhereUniqueWithoutStudentInput = {
-    where: ContestResultWhereUniqueInput
-    update: XOR<ContestResultUpdateWithoutStudentInput, ContestResultUncheckedUpdateWithoutStudentInput>
-    create: XOR<ContestResultCreateWithoutStudentInput, ContestResultUncheckedCreateWithoutStudentInput>
-  }
-
-  export type ContestResultUpdateWithWhereUniqueWithoutStudentInput = {
-    where: ContestResultWhereUniqueInput
-    data: XOR<ContestResultUpdateWithoutStudentInput, ContestResultUncheckedUpdateWithoutStudentInput>
-  }
-
-  export type ContestResultUpdateManyWithWhereWithoutStudentInput = {
-    where: ContestResultScalarWhereInput
-    data: XOR<ContestResultUpdateManyMutationInput, ContestResultUncheckedUpdateManyWithoutStudentInput>
-  }
-
-  export type ContestResultScalarWhereInput = {
-    AND?: ContestResultScalarWhereInput | ContestResultScalarWhereInput[]
-    OR?: ContestResultScalarWhereInput[]
-    NOT?: ContestResultScalarWhereInput | ContestResultScalarWhereInput[]
-    id?: IntFilter<"ContestResult"> | number
-    studentId?: IntFilter<"ContestResult"> | number
-    timeTaken?: DateTimeFilter<"ContestResult"> | Date | string
-    totalPoints?: IntFilter<"ContestResult"> | number
-    topicId?: IntFilter<"ContestResult"> | number
-  }
-
   export type SessionUpsertWithoutStudentInput = {
     update: XOR<SessionUpdateWithoutStudentInput, SessionUncheckedUpdateWithoutStudentInput>
     create: XOR<SessionCreateWithoutStudentInput, SessionUncheckedCreateWithoutStudentInput>
@@ -22191,29 +20493,6 @@ export namespace Prisma {
     timeOfComment?: DateTimeFilter<"Discussions"> | Date | string
   }
 
-  export type ContestResultCreateWithoutTopicsInput = {
-    timeTaken: Date | string
-    totalPoints: number
-    student: StudentCreateNestedOneWithoutContestResultInput
-  }
-
-  export type ContestResultUncheckedCreateWithoutTopicsInput = {
-    id?: number
-    studentId: number
-    timeTaken: Date | string
-    totalPoints: number
-  }
-
-  export type ContestResultCreateOrConnectWithoutTopicsInput = {
-    where: ContestResultWhereUniqueInput
-    create: XOR<ContestResultCreateWithoutTopicsInput, ContestResultUncheckedCreateWithoutTopicsInput>
-  }
-
-  export type ContestResultCreateManyTopicsInputEnvelope = {
-    data: ContestResultCreateManyTopicsInput | ContestResultCreateManyTopicsInput[]
-    skipDuplicates?: boolean
-  }
-
   export type QuestionsCreateWithoutTopicsInput = {
     title: string
     description?: string | null
@@ -22224,9 +20503,6 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    CLangFunction: string
-    PyLangFunction: string
-    JavsLangFunction: string
     timeToSolveInMinutes: number
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
@@ -22246,9 +20522,6 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    CLangFunction: string
-    PyLangFunction: string
-    JavsLangFunction: string
     timeToSolveInMinutes: number
     contestId?: number | null
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
@@ -22293,22 +20566,6 @@ export namespace Prisma {
     create: XOR<ContestCreateWithoutTopicInput, ContestUncheckedCreateWithoutTopicInput>
   }
 
-  export type ContestResultUpsertWithWhereUniqueWithoutTopicsInput = {
-    where: ContestResultWhereUniqueInput
-    update: XOR<ContestResultUpdateWithoutTopicsInput, ContestResultUncheckedUpdateWithoutTopicsInput>
-    create: XOR<ContestResultCreateWithoutTopicsInput, ContestResultUncheckedCreateWithoutTopicsInput>
-  }
-
-  export type ContestResultUpdateWithWhereUniqueWithoutTopicsInput = {
-    where: ContestResultWhereUniqueInput
-    data: XOR<ContestResultUpdateWithoutTopicsInput, ContestResultUncheckedUpdateWithoutTopicsInput>
-  }
-
-  export type ContestResultUpdateManyWithWhereWithoutTopicsInput = {
-    where: ContestResultScalarWhereInput
-    data: XOR<ContestResultUpdateManyMutationInput, ContestResultUncheckedUpdateManyWithoutTopicsInput>
-  }
-
   export type QuestionsUpsertWithWhereUniqueWithoutTopicsInput = {
     where: QuestionsWhereUniqueInput
     update: XOR<QuestionsUpdateWithoutTopicsInput, QuestionsUncheckedUpdateWithoutTopicsInput>
@@ -22340,9 +20597,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFilter<"Questions"> | $Enums.QuestionType
     leetCodeLink?: StringNullableFilter<"Questions"> | string | null
     leetCodeTitle?: StringNullableFilter<"Questions"> | string | null
-    CLangFunction?: StringFilter<"Questions"> | string
-    PyLangFunction?: StringFilter<"Questions"> | string
-    JavsLangFunction?: StringFilter<"Questions"> | string
     timeToSolveInMinutes?: IntFilter<"Questions"> | number
     contestId?: IntNullableFilter<"Questions"> | number | null
   }
@@ -22502,7 +20756,6 @@ export namespace Prisma {
     description?: string | null
     notes?: string | null
     contestDate: Date | string
-    contestResult?: ContestResultCreateNestedManyWithoutTopicsInput
     contest?: ContestCreateNestedOneWithoutTopicInput
   }
 
@@ -22512,7 +20765,6 @@ export namespace Prisma {
     description?: string | null
     notes?: string | null
     contestDate: Date | string
-    contestResult?: ContestResultUncheckedCreateNestedManyWithoutTopicsInput
     contest?: ContestUncheckedCreateNestedOneWithoutTopicInput
   }
 
@@ -22649,7 +20901,6 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    contestResult?: ContestResultUpdateManyWithoutTopicsNestedInput
     contest?: ContestUpdateOneWithoutTopicNestedInput
   }
 
@@ -22659,7 +20910,6 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    contestResult?: ContestResultUncheckedUpdateManyWithoutTopicsNestedInput
     contest?: ContestUncheckedUpdateOneWithoutTopicNestedInput
   }
 
@@ -22705,9 +20955,6 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    CLangFunction: string
-    PyLangFunction: string
-    JavsLangFunction: string
     timeToSolveInMinutes: number
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
@@ -22728,9 +20975,6 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    CLangFunction: string
-    PyLangFunction: string
-    JavsLangFunction: string
     timeToSolveInMinutes: number
     contestId?: number | null
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
@@ -22764,9 +21008,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    CLangFunction?: StringFieldUpdateOperationsInput | string
-    PyLangFunction?: StringFieldUpdateOperationsInput | string
-    JavsLangFunction?: StringFieldUpdateOperationsInput | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
@@ -22787,9 +21028,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    CLangFunction?: StringFieldUpdateOperationsInput | string
-    PyLangFunction?: StringFieldUpdateOperationsInput | string
-    JavsLangFunction?: StringFieldUpdateOperationsInput | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
@@ -22807,9 +21045,6 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    CLangFunction: string
-    PyLangFunction: string
-    JavsLangFunction: string
     timeToSolveInMinutes: number
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
@@ -22830,9 +21065,6 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    CLangFunction: string
-    PyLangFunction: string
-    JavsLangFunction: string
     timeToSolveInMinutes: number
     contestId?: number | null
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
@@ -22854,7 +21086,6 @@ export namespace Prisma {
     hash: string
     timeOfLastSolve?: Date | string | null
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
-    contestResult?: ContestResultCreateNestedManyWithoutStudentInput
     session?: SessionCreateNestedOneWithoutStudentInput
     discussion?: DiscussionsCreateNestedManyWithoutStudentInput
   }
@@ -22869,7 +21100,6 @@ export namespace Prisma {
     hash: string
     timeOfLastSolve?: Date | string | null
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
-    contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
     session?: SessionUncheckedCreateNestedOneWithoutStudentInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutStudentInput
   }
@@ -22900,9 +21130,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    CLangFunction?: StringFieldUpdateOperationsInput | string
-    PyLangFunction?: StringFieldUpdateOperationsInput | string
-    JavsLangFunction?: StringFieldUpdateOperationsInput | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
@@ -22923,9 +21150,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    CLangFunction?: StringFieldUpdateOperationsInput | string
-    PyLangFunction?: StringFieldUpdateOperationsInput | string
-    JavsLangFunction?: StringFieldUpdateOperationsInput | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
@@ -22953,7 +21177,6 @@ export namespace Prisma {
     hash?: StringFieldUpdateOperationsInput | string
     timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
-    contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
     session?: SessionUpdateOneWithoutStudentNestedInput
     discussion?: DiscussionsUpdateManyWithoutStudentNestedInput
   }
@@ -22968,7 +21191,6 @@ export namespace Prisma {
     hash?: StringFieldUpdateOperationsInput | string
     timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
-    contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
     session?: SessionUncheckedUpdateOneWithoutStudentNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutStudentNestedInput
   }
@@ -23019,7 +21241,6 @@ export namespace Prisma {
     hash: string
     timeOfLastSolve?: Date | string | null
     submission?: SubmissionCreateNestedManyWithoutStudentInput
-    contestResult?: ContestResultCreateNestedManyWithoutStudentInput
     session?: SessionCreateNestedOneWithoutStudentInput
     discussion?: DiscussionsCreateNestedManyWithoutStudentInput
   }
@@ -23034,7 +21255,6 @@ export namespace Prisma {
     hash: string
     timeOfLastSolve?: Date | string | null
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
-    contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
     session?: SessionUncheckedCreateNestedOneWithoutStudentInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutStudentInput
   }
@@ -23080,7 +21300,6 @@ export namespace Prisma {
     hash?: StringFieldUpdateOperationsInput | string
     timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
-    contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
     session?: SessionUpdateOneWithoutStudentNestedInput
     discussion?: DiscussionsUpdateManyWithoutStudentNestedInput
   }
@@ -23095,7 +21314,6 @@ export namespace Prisma {
     hash?: StringFieldUpdateOperationsInput | string
     timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
-    contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
     session?: SessionUncheckedUpdateOneWithoutStudentNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutStudentNestedInput
   }
@@ -23122,134 +21340,6 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type StudentCreateWithoutContestResultInput = {
-    name: string
-    rno: string
-    uname: string
-    leetCodeName?: string | null
-    salt: string
-    hash: string
-    timeOfLastSolve?: Date | string | null
-    submission?: SubmissionCreateNestedManyWithoutStudentInput
-    studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
-    session?: SessionCreateNestedOneWithoutStudentInput
-    discussion?: DiscussionsCreateNestedManyWithoutStudentInput
-  }
-
-  export type StudentUncheckedCreateWithoutContestResultInput = {
-    id?: number
-    name: string
-    rno: string
-    uname: string
-    leetCodeName?: string | null
-    salt: string
-    hash: string
-    timeOfLastSolve?: Date | string | null
-    submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
-    studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
-    session?: SessionUncheckedCreateNestedOneWithoutStudentInput
-    discussion?: DiscussionsUncheckedCreateNestedManyWithoutStudentInput
-  }
-
-  export type StudentCreateOrConnectWithoutContestResultInput = {
-    where: StudentWhereUniqueInput
-    create: XOR<StudentCreateWithoutContestResultInput, StudentUncheckedCreateWithoutContestResultInput>
-  }
-
-  export type TopicsCreateWithoutContestResultInput = {
-    name: string
-    description?: string | null
-    notes?: string | null
-    contestDate: Date | string
-    question?: QuestionsCreateNestedManyWithoutTopicsInput
-    contest?: ContestCreateNestedOneWithoutTopicInput
-  }
-
-  export type TopicsUncheckedCreateWithoutContestResultInput = {
-    id?: number
-    name: string
-    description?: string | null
-    notes?: string | null
-    contestDate: Date | string
-    question?: QuestionsUncheckedCreateNestedManyWithoutTopicsInput
-    contest?: ContestUncheckedCreateNestedOneWithoutTopicInput
-  }
-
-  export type TopicsCreateOrConnectWithoutContestResultInput = {
-    where: TopicsWhereUniqueInput
-    create: XOR<TopicsCreateWithoutContestResultInput, TopicsUncheckedCreateWithoutContestResultInput>
-  }
-
-  export type StudentUpsertWithoutContestResultInput = {
-    update: XOR<StudentUpdateWithoutContestResultInput, StudentUncheckedUpdateWithoutContestResultInput>
-    create: XOR<StudentCreateWithoutContestResultInput, StudentUncheckedCreateWithoutContestResultInput>
-    where?: StudentWhereInput
-  }
-
-  export type StudentUpdateToOneWithWhereWithoutContestResultInput = {
-    where?: StudentWhereInput
-    data: XOR<StudentUpdateWithoutContestResultInput, StudentUncheckedUpdateWithoutContestResultInput>
-  }
-
-  export type StudentUpdateWithoutContestResultInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    rno?: StringFieldUpdateOperationsInput | string
-    uname?: StringFieldUpdateOperationsInput | string
-    leetCodeName?: NullableStringFieldUpdateOperationsInput | string | null
-    salt?: StringFieldUpdateOperationsInput | string
-    hash?: StringFieldUpdateOperationsInput | string
-    timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    submission?: SubmissionUpdateManyWithoutStudentNestedInput
-    studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
-    session?: SessionUpdateOneWithoutStudentNestedInput
-    discussion?: DiscussionsUpdateManyWithoutStudentNestedInput
-  }
-
-  export type StudentUncheckedUpdateWithoutContestResultInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    rno?: StringFieldUpdateOperationsInput | string
-    uname?: StringFieldUpdateOperationsInput | string
-    leetCodeName?: NullableStringFieldUpdateOperationsInput | string | null
-    salt?: StringFieldUpdateOperationsInput | string
-    hash?: StringFieldUpdateOperationsInput | string
-    timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
-    studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
-    session?: SessionUncheckedUpdateOneWithoutStudentNestedInput
-    discussion?: DiscussionsUncheckedUpdateManyWithoutStudentNestedInput
-  }
-
-  export type TopicsUpsertWithoutContestResultInput = {
-    update: XOR<TopicsUpdateWithoutContestResultInput, TopicsUncheckedUpdateWithoutContestResultInput>
-    create: XOR<TopicsCreateWithoutContestResultInput, TopicsUncheckedCreateWithoutContestResultInput>
-    where?: TopicsWhereInput
-  }
-
-  export type TopicsUpdateToOneWithWhereWithoutContestResultInput = {
-    where?: TopicsWhereInput
-    data: XOR<TopicsUpdateWithoutContestResultInput, TopicsUncheckedUpdateWithoutContestResultInput>
-  }
-
-  export type TopicsUpdateWithoutContestResultInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    question?: QuestionsUpdateManyWithoutTopicsNestedInput
-    contest?: ContestUpdateOneWithoutTopicNestedInput
-  }
-
-  export type TopicsUncheckedUpdateWithoutContestResultInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    question?: QuestionsUncheckedUpdateManyWithoutTopicsNestedInput
-    contest?: ContestUncheckedUpdateOneWithoutTopicNestedInput
-  }
-
   export type StudentCreateWithoutSessionInput = {
     name: string
     rno: string
@@ -23260,7 +21350,6 @@ export namespace Prisma {
     timeOfLastSolve?: Date | string | null
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
-    contestResult?: ContestResultCreateNestedManyWithoutStudentInput
     discussion?: DiscussionsCreateNestedManyWithoutStudentInput
   }
 
@@ -23275,7 +21364,6 @@ export namespace Prisma {
     timeOfLastSolve?: Date | string | null
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
-    contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutStudentInput
   }
 
@@ -23305,7 +21393,6 @@ export namespace Prisma {
     timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
-    contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
     discussion?: DiscussionsUpdateManyWithoutStudentNestedInput
   }
 
@@ -23320,7 +21407,6 @@ export namespace Prisma {
     timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
-    contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutStudentNestedInput
   }
 
@@ -23334,7 +21420,6 @@ export namespace Prisma {
     timeOfLastSolve?: Date | string | null
     submission?: SubmissionCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsCreateNestedManyWithoutStudentInput
-    contestResult?: ContestResultCreateNestedManyWithoutStudentInput
     session?: SessionCreateNestedOneWithoutStudentInput
   }
 
@@ -23349,7 +21434,6 @@ export namespace Prisma {
     timeOfLastSolve?: Date | string | null
     submission?: SubmissionUncheckedCreateNestedManyWithoutStudentInput
     studentAchievements?: StudentAchievementsUncheckedCreateNestedManyWithoutStudentInput
-    contestResult?: ContestResultUncheckedCreateNestedManyWithoutStudentInput
     session?: SessionUncheckedCreateNestedOneWithoutStudentInput
   }
 
@@ -23368,9 +21452,6 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    CLangFunction: string
-    PyLangFunction: string
-    JavsLangFunction: string
     timeToSolveInMinutes: number
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
@@ -23391,9 +21472,6 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    CLangFunction: string
-    PyLangFunction: string
-    JavsLangFunction: string
     timeToSolveInMinutes: number
     contestId?: number | null
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
@@ -23476,7 +21554,6 @@ export namespace Prisma {
     timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submission?: SubmissionUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUpdateManyWithoutStudentNestedInput
-    contestResult?: ContestResultUpdateManyWithoutStudentNestedInput
     session?: SessionUpdateOneWithoutStudentNestedInput
   }
 
@@ -23491,7 +21568,6 @@ export namespace Prisma {
     timeOfLastSolve?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submission?: SubmissionUncheckedUpdateManyWithoutStudentNestedInput
     studentAchievements?: StudentAchievementsUncheckedUpdateManyWithoutStudentNestedInput
-    contestResult?: ContestResultUncheckedUpdateManyWithoutStudentNestedInput
     session?: SessionUncheckedUpdateOneWithoutStudentNestedInput
   }
 
@@ -23516,9 +21592,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    CLangFunction?: StringFieldUpdateOperationsInput | string
-    PyLangFunction?: StringFieldUpdateOperationsInput | string
-    JavsLangFunction?: StringFieldUpdateOperationsInput | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
@@ -23539,9 +21612,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    CLangFunction?: StringFieldUpdateOperationsInput | string
-    PyLangFunction?: StringFieldUpdateOperationsInput | string
-    JavsLangFunction?: StringFieldUpdateOperationsInput | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
@@ -23603,9 +21673,6 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    CLangFunction: string
-    PyLangFunction: string
-    JavsLangFunction: string
     timeToSolveInMinutes: number
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
@@ -23626,9 +21693,6 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    CLangFunction: string
-    PyLangFunction: string
-    JavsLangFunction: string
     timeToSolveInMinutes: number
     contestId?: number | null
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
@@ -23662,9 +21726,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    CLangFunction?: StringFieldUpdateOperationsInput | string
-    PyLangFunction?: StringFieldUpdateOperationsInput | string
-    JavsLangFunction?: StringFieldUpdateOperationsInput | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
@@ -23685,9 +21746,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    CLangFunction?: StringFieldUpdateOperationsInput | string
-    PyLangFunction?: StringFieldUpdateOperationsInput | string
-    JavsLangFunction?: StringFieldUpdateOperationsInput | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
@@ -23705,9 +21763,6 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    CLangFunction: string
-    PyLangFunction: string
-    JavsLangFunction: string
     timeToSolveInMinutes: number
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
@@ -23728,9 +21783,6 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    CLangFunction: string
-    PyLangFunction: string
-    JavsLangFunction: string
     timeToSolveInMinutes: number
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
@@ -23753,7 +21805,6 @@ export namespace Prisma {
     description?: string | null
     notes?: string | null
     contestDate: Date | string
-    contestResult?: ContestResultCreateNestedManyWithoutTopicsInput
     question?: QuestionsCreateNestedManyWithoutTopicsInput
   }
 
@@ -23763,7 +21814,6 @@ export namespace Prisma {
     description?: string | null
     notes?: string | null
     contestDate: Date | string
-    contestResult?: ContestResultUncheckedCreateNestedManyWithoutTopicsInput
     question?: QuestionsUncheckedCreateNestedManyWithoutTopicsInput
   }
 
@@ -23804,7 +21854,6 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    contestResult?: ContestResultUpdateManyWithoutTopicsNestedInput
     question?: QuestionsUpdateManyWithoutTopicsNestedInput
   }
 
@@ -23814,7 +21863,6 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    contestResult?: ContestResultUncheckedUpdateManyWithoutTopicsNestedInput
     question?: QuestionsUncheckedUpdateManyWithoutTopicsNestedInput
   }
 
@@ -23840,13 +21888,6 @@ export namespace Prisma {
     id?: number
     achievementId: number
     count: number
-  }
-
-  export type ContestResultCreateManyStudentInput = {
-    id?: number
-    timeTaken: Date | string
-    totalPoints: number
-    topicId: number
   }
 
   export type DiscussionsCreateManyStudentInput = {
@@ -23927,26 +21968,6 @@ export namespace Prisma {
     count?: IntFieldUpdateOperationsInput | number
   }
 
-  export type ContestResultUpdateWithoutStudentInput = {
-    timeTaken?: DateTimeFieldUpdateOperationsInput | Date | string
-    totalPoints?: IntFieldUpdateOperationsInput | number
-    topics?: TopicsUpdateOneRequiredWithoutContestResultNestedInput
-  }
-
-  export type ContestResultUncheckedUpdateWithoutStudentInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    timeTaken?: DateTimeFieldUpdateOperationsInput | Date | string
-    totalPoints?: IntFieldUpdateOperationsInput | number
-    topicId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type ContestResultUncheckedUpdateManyWithoutStudentInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    timeTaken?: DateTimeFieldUpdateOperationsInput | Date | string
-    totalPoints?: IntFieldUpdateOperationsInput | number
-    topicId?: IntFieldUpdateOperationsInput | number
-  }
-
   export type DiscussionsUpdateWithoutStudentInput = {
     type?: EnumCommentTypeFieldUpdateOperationsInput | $Enums.CommentType
     timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23972,13 +21993,6 @@ export namespace Prisma {
     timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ContestResultCreateManyTopicsInput = {
-    id?: number
-    studentId: number
-    timeTaken: Date | string
-    totalPoints: number
-  }
-
   export type QuestionsCreateManyTopicsInput = {
     id?: number
     title: string
@@ -23990,31 +22004,8 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    CLangFunction: string
-    PyLangFunction: string
-    JavsLangFunction: string
     timeToSolveInMinutes: number
     contestId?: number | null
-  }
-
-  export type ContestResultUpdateWithoutTopicsInput = {
-    timeTaken?: DateTimeFieldUpdateOperationsInput | Date | string
-    totalPoints?: IntFieldUpdateOperationsInput | number
-    student?: StudentUpdateOneRequiredWithoutContestResultNestedInput
-  }
-
-  export type ContestResultUncheckedUpdateWithoutTopicsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    studentId?: IntFieldUpdateOperationsInput | number
-    timeTaken?: DateTimeFieldUpdateOperationsInput | Date | string
-    totalPoints?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type ContestResultUncheckedUpdateManyWithoutTopicsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    studentId?: IntFieldUpdateOperationsInput | number
-    timeTaken?: DateTimeFieldUpdateOperationsInput | Date | string
-    totalPoints?: IntFieldUpdateOperationsInput | number
   }
 
   export type QuestionsUpdateWithoutTopicsInput = {
@@ -24027,9 +22018,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    CLangFunction?: StringFieldUpdateOperationsInput | string
-    PyLangFunction?: StringFieldUpdateOperationsInput | string
-    JavsLangFunction?: StringFieldUpdateOperationsInput | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
@@ -24049,9 +22037,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    CLangFunction?: StringFieldUpdateOperationsInput | string
-    PyLangFunction?: StringFieldUpdateOperationsInput | string
-    JavsLangFunction?: StringFieldUpdateOperationsInput | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
@@ -24071,9 +22056,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    CLangFunction?: StringFieldUpdateOperationsInput | string
-    PyLangFunction?: StringFieldUpdateOperationsInput | string
-    JavsLangFunction?: StringFieldUpdateOperationsInput | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
   }
@@ -24304,9 +22286,6 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    CLangFunction: string
-    PyLangFunction: string
-    JavsLangFunction: string
     timeToSolveInMinutes: number
   }
 
@@ -24320,9 +22299,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    CLangFunction?: StringFieldUpdateOperationsInput | string
-    PyLangFunction?: StringFieldUpdateOperationsInput | string
-    JavsLangFunction?: StringFieldUpdateOperationsInput | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
@@ -24343,9 +22319,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    CLangFunction?: StringFieldUpdateOperationsInput | string
-    PyLangFunction?: StringFieldUpdateOperationsInput | string
-    JavsLangFunction?: StringFieldUpdateOperationsInput | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
@@ -24365,9 +22338,6 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    CLangFunction?: StringFieldUpdateOperationsInput | string
-    PyLangFunction?: StringFieldUpdateOperationsInput | string
-    JavsLangFunction?: StringFieldUpdateOperationsInput | string
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
   }
 

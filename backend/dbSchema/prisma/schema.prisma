@@ -62,12 +62,12 @@ enum LanguageType {
   PYTHON
   C
   JAVA
+  CPP
 }
 
 enum BoilerType {
-  READ
-  FUNCTION_CALL
-  WRITE
+  TO_USER
+  MAIN
 }
 
 model Student {
@@ -83,7 +83,6 @@ model Student {
   //relationships
   submission Submission[]
   studentAchievements StudentAchievements[]
-  contestResult ContestResult[]
   session Session?
   discussion Discussions[]
 }
@@ -96,7 +95,6 @@ model Topics {
   contestDate DateTime
 
   //relationships
-  contestResult ContestResult[]
   question Questions[]
   contest Contest?
 }
@@ -113,9 +111,6 @@ model Questions {
   type QuestionType @default(PRACTICE)
   leetCodeLink String?
   leetCodeTitle String?
-  CLangFunction String
-  PyLangFunction String
-  JavsLangFunction String
   timeToSolveInMinutes Int
   contestId Int?
 

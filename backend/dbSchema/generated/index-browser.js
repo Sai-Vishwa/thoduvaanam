@@ -148,9 +148,6 @@ exports.Prisma.QuestionsScalarFieldEnum = {
   type: 'type',
   leetCodeLink: 'leetCodeLink',
   leetCodeTitle: 'leetCodeTitle',
-  CLangFunction: 'CLangFunction',
-  PyLangFunction: 'PyLangFunction',
-  JavsLangFunction: 'JavsLangFunction',
   timeToSolveInMinutes: 'timeToSolveInMinutes',
   contestId: 'contestId'
 };
@@ -193,14 +190,6 @@ exports.Prisma.StudentAchievementsScalarFieldEnum = {
   studentId: 'studentId',
   achievementId: 'achievementId',
   count: 'count'
-};
-
-exports.Prisma.ContestResultScalarFieldEnum = {
-  id: 'id',
-  studentId: 'studentId',
-  timeTaken: 'timeTaken',
-  totalPoints: 'totalPoints',
-  topicId: 'topicId'
 };
 
 exports.Prisma.OTPStudentScalarFieldEnum = {
@@ -303,7 +292,8 @@ exports.isFinalType = exports.$Enums.isFinalType = {
 exports.LanguageType = exports.$Enums.LanguageType = {
   PYTHON: 'PYTHON',
   C: 'C',
-  JAVA: 'JAVA'
+  JAVA: 'JAVA',
+  CPP: 'CPP'
 };
 
 exports.OTPStatus = exports.$Enums.OTPStatus = {
@@ -317,9 +307,8 @@ exports.CommentType = exports.$Enums.CommentType = {
 };
 
 exports.BoilerType = exports.$Enums.BoilerType = {
-  READ: 'READ',
-  FUNCTION_CALL: 'FUNCTION_CALL',
-  WRITE: 'WRITE'
+  TO_USER: 'TO_USER',
+  MAIN: 'MAIN'
 };
 
 exports.Prisma.ModelName = {
@@ -330,7 +319,6 @@ exports.Prisma.ModelName = {
   Submission: 'Submission',
   Achievements: 'Achievements',
   StudentAchievements: 'StudentAchievements',
-  ContestResult: 'ContestResult',
   OTPStudent: 'OTPStudent',
   Session: 'Session',
   Discussions: 'Discussions',

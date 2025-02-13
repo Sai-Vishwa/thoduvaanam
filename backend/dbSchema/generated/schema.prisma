@@ -62,12 +62,12 @@ enum LanguageType {
   PYTHON
   C
   JAVA
+  CPP
 }
 
 enum BoilerType {
-  READ
-  FUNCTION_CALL
-  WRITE
+  TO_USER
+  MAIN
 }
 
 model Student {
@@ -83,7 +83,6 @@ model Student {
   //relationships
   submission          Submission[]
   studentAchievements StudentAchievements[]
-  contestResult       ContestResult[]
   session             Session?
   discussion          Discussions[]
 }
@@ -96,9 +95,8 @@ model Topics {
   contestDate DateTime
 
   //relationships
-  contestResult ContestResult[]
-  question      Questions[]
-  contest       Contest?
+  question Questions[]
+  contest  Contest?
 }
 
 model Questions {
@@ -113,9 +111,6 @@ model Questions {
   type                    QuestionType   @default(PRACTICE)
   leetCodeLink            String?
   leetCodeTitle           String?
-  CLangFunction           String
-  PyLangFunction          String
-  JavsLangFunction        String
   timeToSolveInMinutes    Int
   contestId               Int?
 
@@ -184,20 +179,6 @@ model StudentAchievements {
   @@index([count])
 }
 
-model ContestResult {
-  id          Int      @id @default(autoincrement())
-  studentId   Int
-  timeTaken   DateTime
-  totalPoints Int
-  topicId     Int
-
-  //relationships
-  student Student @relation(fields: [studentId], references: [id])
-  topics  Topics  @relation(fields: [topicId], references: [id])
-
-  @@index([totalPoints, timeTaken])
-}
-
 model OTPStudent {
   id              Int       @id @default(autoincrement())
   name            String
@@ -250,6 +231,7 @@ model BoilerPlate {
 
 model Contest {
   id                   Int      @id @default(autoincrement())
+  title                String   @unique
   opensOn              DateTime
   closesOn             DateTime
   timeToSolveInMinutes Int
