@@ -74,4 +74,8 @@ async function caller() {
     console.log(ans);
 }
 
-caller();
+module.exports = {
+    CMain
+}
+
+// caller();

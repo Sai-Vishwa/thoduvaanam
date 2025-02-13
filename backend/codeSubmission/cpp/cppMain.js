@@ -86,4 +86,8 @@ int main() {
     console.log(ans);
 }
 
-caller();
+
+module.exports = {
+    cppMain
+}
+// caller();

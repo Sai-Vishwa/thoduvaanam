@@ -70,7 +70,7 @@ async function caller() {
     console.log(ans);
 }
 
-caller();
+// caller();
 
 module.exports = {
     JavaMain
