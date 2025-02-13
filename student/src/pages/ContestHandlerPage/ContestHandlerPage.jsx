@@ -22,6 +22,12 @@ function ContestHandlerPage(){
                 }
             })
             const data = await details.json()
+            if(data.msg){
+                setQuestionDetails(data.data)
+            }
+            else{
+                throw new Error(data.err)
+            }
         }
         catch(error){
             alert(error.message);
