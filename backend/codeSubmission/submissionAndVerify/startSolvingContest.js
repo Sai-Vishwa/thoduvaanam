@@ -37,6 +37,10 @@ async function startSolvingContest(req,res) {
         })
         const utc = new Date();
         const now = new Date(utc.getTime()+5.5*60*60*1000);
+        let arr = [];
+        contestAndQuestions.question.map((ques)=>{
+            arr.push(ques.id)
+        })
         if(now<contestAndQuestions.opensOn){
             res.status(200).json({
                 err:"Contest is not started yet"
@@ -54,7 +58,7 @@ async function startSolvingContest(req,res) {
             where:{
                 AND:[
                     {studentId:session.id},
-                    {questionId:{in:contestAndQuestions.question}}
+                    {questionId:{in:arr}}
                 ]
             }
         })

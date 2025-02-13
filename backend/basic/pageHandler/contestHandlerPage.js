@@ -56,5 +56,5 @@ async function contestHandlerPage(req,res) {
     }
 }
 module.exports = {
-    questionPage
+    contestHandlerPage
 }

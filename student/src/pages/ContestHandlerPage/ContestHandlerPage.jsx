@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Cookies from 'js-cookie';
 import { useNavigate, useParams } from "react-router-dom";
 import QuestionInfo from "../../components/ContestHandler/QuestionInfo";
+import Timer from "../../components/CodingPageComponents/Timer";
 
 
 function ContestHandlerPage(){
@@ -20,6 +21,7 @@ function ContestHandlerPage(){
                     'Accept': 'application/json'
                 }
             })
+            const data = await details.json()
         }
         catch(error){
             alert(error.message);
@@ -36,6 +38,9 @@ function ContestHandlerPage(){
     return(
         <>
         {JSON.stringify(questionDetails)}
+
+        <Timer 
+        minutes={questionDetails.time}/>
 
         {
             questionDetails.questions.map((ques)=>(
