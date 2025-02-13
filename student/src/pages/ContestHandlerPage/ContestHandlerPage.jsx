@@ -43,7 +43,7 @@ function ContestHandlerPage(){
         minutes={questionDetails.time}/>
 
         {
-            questionDetails.questions.map((ques)=>(
+            questionDetails?.questions?.map((ques)=>(
                 <QuestionInfo 
                 question={ques}/>
             ))
