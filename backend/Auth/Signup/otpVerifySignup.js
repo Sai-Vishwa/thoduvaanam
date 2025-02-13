@@ -54,32 +54,12 @@ async function verifyOTPforSignUp(req,res) {
                     expiry: exp
                 }
             })
-            const achievements = await prisma.studentAchievements.createMany({
-                data:[{
+            const achievements = await prisma.studentAchievements.create({
+                data:{
                     studentId: std.id,
                     achievementId: 1,
                     count: 0
-                },{
-                    studentId: std.id,
-                    achievementId: 2,
-                    count: 0
-                },{
-                    studentId: std.id,
-                    achievementId: 3,
-                    count: 0
-                },{
-                    studentId: std.id,
-                    achievementId: 4,
-                    count: 0
-                },{
-                    studentId: std.id,
-                    achievementId: 5,
-                    count: 0
-                },{
-                    studentId: std.id,
-                    achievementId: 6,
-                    count: 0
-                },]
+                }
             })
             
             res.status(200).json({

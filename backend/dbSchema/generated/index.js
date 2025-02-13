@@ -308,7 +308,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\SaivishwaramRamkumar\\OneDrive\\Desktop\\dsa30\\backend\\dbSchema\\generated",
+      "value": "C:\\Users\\prasa\\thoduvaanam\\backend\\dbSchema\\generated",
       "fromEnvVar": null
     },
     "config": {
@@ -322,11 +322,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\SaivishwaramRamkumar\\OneDrive\\Desktop\\dsa30\\backend\\dbSchema\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\prasa\\thoduvaanam\\backend\\dbSchema\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
+    "rootEnvPath": "../.env",
     "schemaEnvPath": "../.env"
   },
   "relativePath": "../prisma",
