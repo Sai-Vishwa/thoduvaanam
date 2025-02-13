@@ -219,10 +219,12 @@ model Discussions {
 }
 
 model BoilerPlate {
-  id         Int          @id @default(autoincrement())
-  language   LanguageType
+  id         Int        @id @default(autoincrement())
   type       BoilerType
-  boilerCode String
+  c          String
+  java       String
+  python     String
+  cpp        String
   questionId Int
 
   //relationships

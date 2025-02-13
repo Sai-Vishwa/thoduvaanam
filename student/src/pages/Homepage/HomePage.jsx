@@ -39,7 +39,7 @@ const TopicCard = ({ topic, isSelected, onTopicClick }) => {
               onClick={handleContestClick}
               className="border border-white/10 px-5 py-3 rounded-2xl hover:bg-black/20 relative z-[1000] transition-colors duration-200"
             >
-              Attend Contest
+              View Contest
             </button>
           </div>
           <div>
@@ -115,10 +115,10 @@ function HomePage() {
       nav("/login-signup")
     }
 
-    if (allData.data.length === 0) {
+    if (allData?.data?.length === 0) {
       fetchData()
     }
-  }, [allData.data.length, nav])
+  }, [allData?.data?.length, nav])
 
   const handleTopicClick = (topic) => {
     setSelectedTopic(topic.id === selectedTopic?.id ? null : topic)
@@ -136,7 +136,7 @@ function HomePage() {
         </div>
 
         <div className="space-y-4">
-          {allData.data.map((topic) => (
+          {allData?.data?.map((topic) => (
             <div key={topic.id}>
               <TopicCard 
                 topic={topic}

@@ -224,9 +224,11 @@ exports.Prisma.DiscussionsScalarFieldEnum = {
 
 exports.Prisma.BoilerPlateScalarFieldEnum = {
   id: 'id',
-  language: 'language',
   type: 'type',
-  boilerCode: 'boilerCode',
+  c: 'c',
+  java: 'java',
+  python: 'python',
+  cpp: 'cpp',
   questionId: 'questionId'
 };
 

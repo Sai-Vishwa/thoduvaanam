@@ -222,9 +222,11 @@ model Discussions {
 
 model BoilerPlate {
   id Int @id @default(autoincrement())
-  language LanguageType
   type BoilerType
-  boilerCode String
+  c String
+  java String
+  python String
+  cpp String
   questionId Int 
 
   //relationships

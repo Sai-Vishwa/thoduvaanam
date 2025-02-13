@@ -14,8 +14,10 @@ function ContestBasicPage() {
   async function toContestHandler() {
     console.log("im here")
     if (attemptButton === "CONTINUE LAST ATTEMPT") {
-      nav(`/${uname}/contest-handler/${tname}`)
-    } else if (attemptButton === "START NEW ATTEMPT") {
+      console.log("ithu enna da")
+      nav(`/${uname}/contest-handler/${tname}`);
+    } 
+    else if (attemptButton === "START NEW ATTEMPT") {
       try {
         const startAttempt = await fetch("http://localhost:4000/submission/solve-contest", {
           method: "POST",

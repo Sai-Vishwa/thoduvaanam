@@ -12,7 +12,7 @@ async function hashGenerator(password) {
       }
 }
 // async function run(){
-//   const data = await hashGenerator("MyPassword")
+//   const data = await hashGenerator("kanguva")
 //   console.log(data)
 // }
 // run()

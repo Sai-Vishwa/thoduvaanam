@@ -13765,25 +13765,31 @@ export namespace Prisma {
 
   export type BoilerPlateMinAggregateOutputType = {
     id: number | null
-    language: $Enums.LanguageType | null
     type: $Enums.BoilerType | null
-    boilerCode: string | null
+    c: string | null
+    java: string | null
+    python: string | null
+    cpp: string | null
     questionId: number | null
   }
 
   export type BoilerPlateMaxAggregateOutputType = {
     id: number | null
-    language: $Enums.LanguageType | null
     type: $Enums.BoilerType | null
-    boilerCode: string | null
+    c: string | null
+    java: string | null
+    python: string | null
+    cpp: string | null
     questionId: number | null
   }
 
   export type BoilerPlateCountAggregateOutputType = {
     id: number
-    language: number
     type: number
-    boilerCode: number
+    c: number
+    java: number
+    python: number
+    cpp: number
     questionId: number
     _all: number
   }
@@ -13801,25 +13807,31 @@ export namespace Prisma {
 
   export type BoilerPlateMinAggregateInputType = {
     id?: true
-    language?: true
     type?: true
-    boilerCode?: true
+    c?: true
+    java?: true
+    python?: true
+    cpp?: true
     questionId?: true
   }
 
   export type BoilerPlateMaxAggregateInputType = {
     id?: true
-    language?: true
     type?: true
-    boilerCode?: true
+    c?: true
+    java?: true
+    python?: true
+    cpp?: true
     questionId?: true
   }
 
   export type BoilerPlateCountAggregateInputType = {
     id?: true
-    language?: true
     type?: true
-    boilerCode?: true
+    c?: true
+    java?: true
+    python?: true
+    cpp?: true
     questionId?: true
     _all?: true
   }
@@ -13912,9 +13924,11 @@ export namespace Prisma {
 
   export type BoilerPlateGroupByOutputType = {
     id: number
-    language: $Enums.LanguageType
     type: $Enums.BoilerType
-    boilerCode: string
+    c: string
+    java: string
+    python: string
+    cpp: string
     questionId: number
     _count: BoilerPlateCountAggregateOutputType | null
     _avg: BoilerPlateAvgAggregateOutputType | null
@@ -13939,40 +13953,48 @@ export namespace Prisma {
 
   export type BoilerPlateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    language?: boolean
     type?: boolean
-    boilerCode?: boolean
+    c?: boolean
+    java?: boolean
+    python?: boolean
+    cpp?: boolean
     questionId?: boolean
     question?: boolean | QuestionsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["boilerPlate"]>
 
   export type BoilerPlateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    language?: boolean
     type?: boolean
-    boilerCode?: boolean
+    c?: boolean
+    java?: boolean
+    python?: boolean
+    cpp?: boolean
     questionId?: boolean
     question?: boolean | QuestionsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["boilerPlate"]>
 
   export type BoilerPlateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    language?: boolean
     type?: boolean
-    boilerCode?: boolean
+    c?: boolean
+    java?: boolean
+    python?: boolean
+    cpp?: boolean
     questionId?: boolean
     question?: boolean | QuestionsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["boilerPlate"]>
 
   export type BoilerPlateSelectScalar = {
     id?: boolean
-    language?: boolean
     type?: boolean
-    boilerCode?: boolean
+    c?: boolean
+    java?: boolean
+    python?: boolean
+    cpp?: boolean
     questionId?: boolean
   }
 
-  export type BoilerPlateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "language" | "type" | "boilerCode" | "questionId", ExtArgs["result"]["boilerPlate"]>
+  export type BoilerPlateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "c" | "java" | "python" | "cpp" | "questionId", ExtArgs["result"]["boilerPlate"]>
   export type BoilerPlateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     question?: boolean | QuestionsDefaultArgs<ExtArgs>
   }
@@ -13990,9 +14012,11 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      language: $Enums.LanguageType
       type: $Enums.BoilerType
-      boilerCode: string
+      c: string
+      java: string
+      python: string
+      cpp: string
       questionId: number
     }, ExtArgs["result"]["boilerPlate"]>
     composites: {}
@@ -14419,9 +14443,11 @@ export namespace Prisma {
    */ 
   interface BoilerPlateFieldRefs {
     readonly id: FieldRef<"BoilerPlate", 'Int'>
-    readonly language: FieldRef<"BoilerPlate", 'LanguageType'>
     readonly type: FieldRef<"BoilerPlate", 'BoilerType'>
-    readonly boilerCode: FieldRef<"BoilerPlate", 'String'>
+    readonly c: FieldRef<"BoilerPlate", 'String'>
+    readonly java: FieldRef<"BoilerPlate", 'String'>
+    readonly python: FieldRef<"BoilerPlate", 'String'>
+    readonly cpp: FieldRef<"BoilerPlate", 'String'>
     readonly questionId: FieldRef<"BoilerPlate", 'Int'>
   }
     
@@ -16141,9 +16167,11 @@ export namespace Prisma {
 
   export const BoilerPlateScalarFieldEnum: {
     id: 'id',
-    language: 'language',
     type: 'type',
-    boilerCode: 'boilerCode',
+    c: 'c',
+    java: 'java',
+    python: 'python',
+    cpp: 'cpp',
     questionId: 'questionId'
   };
 
@@ -17131,18 +17159,22 @@ export namespace Prisma {
     OR?: BoilerPlateWhereInput[]
     NOT?: BoilerPlateWhereInput | BoilerPlateWhereInput[]
     id?: IntFilter<"BoilerPlate"> | number
-    language?: EnumLanguageTypeFilter<"BoilerPlate"> | $Enums.LanguageType
     type?: EnumBoilerTypeFilter<"BoilerPlate"> | $Enums.BoilerType
-    boilerCode?: StringFilter<"BoilerPlate"> | string
+    c?: StringFilter<"BoilerPlate"> | string
+    java?: StringFilter<"BoilerPlate"> | string
+    python?: StringFilter<"BoilerPlate"> | string
+    cpp?: StringFilter<"BoilerPlate"> | string
     questionId?: IntFilter<"BoilerPlate"> | number
     question?: XOR<QuestionsScalarRelationFilter, QuestionsWhereInput>
   }
 
   export type BoilerPlateOrderByWithRelationInput = {
     id?: SortOrder
-    language?: SortOrder
     type?: SortOrder
-    boilerCode?: SortOrder
+    c?: SortOrder
+    java?: SortOrder
+    python?: SortOrder
+    cpp?: SortOrder
     questionId?: SortOrder
     question?: QuestionsOrderByWithRelationInput
   }
@@ -17152,18 +17184,22 @@ export namespace Prisma {
     AND?: BoilerPlateWhereInput | BoilerPlateWhereInput[]
     OR?: BoilerPlateWhereInput[]
     NOT?: BoilerPlateWhereInput | BoilerPlateWhereInput[]
-    language?: EnumLanguageTypeFilter<"BoilerPlate"> | $Enums.LanguageType
     type?: EnumBoilerTypeFilter<"BoilerPlate"> | $Enums.BoilerType
-    boilerCode?: StringFilter<"BoilerPlate"> | string
+    c?: StringFilter<"BoilerPlate"> | string
+    java?: StringFilter<"BoilerPlate"> | string
+    python?: StringFilter<"BoilerPlate"> | string
+    cpp?: StringFilter<"BoilerPlate"> | string
     questionId?: IntFilter<"BoilerPlate"> | number
     question?: XOR<QuestionsScalarRelationFilter, QuestionsWhereInput>
   }, "id">
 
   export type BoilerPlateOrderByWithAggregationInput = {
     id?: SortOrder
-    language?: SortOrder
     type?: SortOrder
-    boilerCode?: SortOrder
+    c?: SortOrder
+    java?: SortOrder
+    python?: SortOrder
+    cpp?: SortOrder
     questionId?: SortOrder
     _count?: BoilerPlateCountOrderByAggregateInput
     _avg?: BoilerPlateAvgOrderByAggregateInput
@@ -17177,9 +17213,11 @@ export namespace Prisma {
     OR?: BoilerPlateScalarWhereWithAggregatesInput[]
     NOT?: BoilerPlateScalarWhereWithAggregatesInput | BoilerPlateScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"BoilerPlate"> | number
-    language?: EnumLanguageTypeWithAggregatesFilter<"BoilerPlate"> | $Enums.LanguageType
     type?: EnumBoilerTypeWithAggregatesFilter<"BoilerPlate"> | $Enums.BoilerType
-    boilerCode?: StringWithAggregatesFilter<"BoilerPlate"> | string
+    c?: StringWithAggregatesFilter<"BoilerPlate"> | string
+    java?: StringWithAggregatesFilter<"BoilerPlate"> | string
+    python?: StringWithAggregatesFilter<"BoilerPlate"> | string
+    cpp?: StringWithAggregatesFilter<"BoilerPlate"> | string
     questionId?: IntWithAggregatesFilter<"BoilerPlate"> | number
   }
 
@@ -18001,54 +18039,68 @@ export namespace Prisma {
   }
 
   export type BoilerPlateCreateInput = {
-    language: $Enums.LanguageType
     type: $Enums.BoilerType
-    boilerCode: string
+    c: string
+    java: string
+    python: string
+    cpp: string
     question: QuestionsCreateNestedOneWithoutBoilerPlateInput
   }
 
   export type BoilerPlateUncheckedCreateInput = {
     id?: number
-    language: $Enums.LanguageType
     type: $Enums.BoilerType
-    boilerCode: string
+    c: string
+    java: string
+    python: string
+    cpp: string
     questionId: number
   }
 
   export type BoilerPlateUpdateInput = {
-    language?: EnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType
     type?: EnumBoilerTypeFieldUpdateOperationsInput | $Enums.BoilerType
-    boilerCode?: StringFieldUpdateOperationsInput | string
+    c?: StringFieldUpdateOperationsInput | string
+    java?: StringFieldUpdateOperationsInput | string
+    python?: StringFieldUpdateOperationsInput | string
+    cpp?: StringFieldUpdateOperationsInput | string
     question?: QuestionsUpdateOneRequiredWithoutBoilerPlateNestedInput
   }
 
   export type BoilerPlateUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    language?: EnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType
     type?: EnumBoilerTypeFieldUpdateOperationsInput | $Enums.BoilerType
-    boilerCode?: StringFieldUpdateOperationsInput | string
+    c?: StringFieldUpdateOperationsInput | string
+    java?: StringFieldUpdateOperationsInput | string
+    python?: StringFieldUpdateOperationsInput | string
+    cpp?: StringFieldUpdateOperationsInput | string
     questionId?: IntFieldUpdateOperationsInput | number
   }
 
   export type BoilerPlateCreateManyInput = {
     id?: number
-    language: $Enums.LanguageType
     type: $Enums.BoilerType
-    boilerCode: string
+    c: string
+    java: string
+    python: string
+    cpp: string
     questionId: number
   }
 
   export type BoilerPlateUpdateManyMutationInput = {
-    language?: EnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType
     type?: EnumBoilerTypeFieldUpdateOperationsInput | $Enums.BoilerType
-    boilerCode?: StringFieldUpdateOperationsInput | string
+    c?: StringFieldUpdateOperationsInput | string
+    java?: StringFieldUpdateOperationsInput | string
+    python?: StringFieldUpdateOperationsInput | string
+    cpp?: StringFieldUpdateOperationsInput | string
   }
 
   export type BoilerPlateUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    language?: EnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType
     type?: EnumBoilerTypeFieldUpdateOperationsInput | $Enums.BoilerType
-    boilerCode?: StringFieldUpdateOperationsInput | string
+    c?: StringFieldUpdateOperationsInput | string
+    java?: StringFieldUpdateOperationsInput | string
+    python?: StringFieldUpdateOperationsInput | string
+    cpp?: StringFieldUpdateOperationsInput | string
     questionId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -18988,13 +19040,6 @@ export namespace Prisma {
     _max?: NestedEnumCommentTypeFilter<$PrismaModel>
   }
 
-  export type EnumLanguageTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.LanguageType | EnumLanguageTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.LanguageType[] | ListEnumLanguageTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.LanguageType[] | ListEnumLanguageTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumLanguageTypeFilter<$PrismaModel> | $Enums.LanguageType
-  }
-
   export type EnumBoilerTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.BoilerType | EnumBoilerTypeFieldRefInput<$PrismaModel>
     in?: $Enums.BoilerType[] | ListEnumBoilerTypeFieldRefInput<$PrismaModel>
@@ -19004,9 +19049,11 @@ export namespace Prisma {
 
   export type BoilerPlateCountOrderByAggregateInput = {
     id?: SortOrder
-    language?: SortOrder
     type?: SortOrder
-    boilerCode?: SortOrder
+    c?: SortOrder
+    java?: SortOrder
+    python?: SortOrder
+    cpp?: SortOrder
     questionId?: SortOrder
   }
 
@@ -19017,33 +19064,27 @@ export namespace Prisma {
 
   export type BoilerPlateMaxOrderByAggregateInput = {
     id?: SortOrder
-    language?: SortOrder
     type?: SortOrder
-    boilerCode?: SortOrder
+    c?: SortOrder
+    java?: SortOrder
+    python?: SortOrder
+    cpp?: SortOrder
     questionId?: SortOrder
   }
 
   export type BoilerPlateMinOrderByAggregateInput = {
     id?: SortOrder
-    language?: SortOrder
     type?: SortOrder
-    boilerCode?: SortOrder
+    c?: SortOrder
+    java?: SortOrder
+    python?: SortOrder
+    cpp?: SortOrder
     questionId?: SortOrder
   }
 
   export type BoilerPlateSumOrderByAggregateInput = {
     id?: SortOrder
     questionId?: SortOrder
-  }
-
-  export type EnumLanguageTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.LanguageType | EnumLanguageTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.LanguageType[] | ListEnumLanguageTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.LanguageType[] | ListEnumLanguageTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumLanguageTypeWithAggregatesFilter<$PrismaModel> | $Enums.LanguageType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumLanguageTypeFilter<$PrismaModel>
-    _max?: NestedEnumLanguageTypeFilter<$PrismaModel>
   }
 
   export type EnumBoilerTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -19823,10 +19864,6 @@ export namespace Prisma {
     connect?: QuestionsWhereUniqueInput
   }
 
-  export type EnumLanguageTypeFieldUpdateOperationsInput = {
-    set?: $Enums.LanguageType
-  }
-
   export type EnumBoilerTypeFieldUpdateOperationsInput = {
     set?: $Enums.BoilerType
   }
@@ -20236,28 +20273,11 @@ export namespace Prisma {
     _max?: NestedEnumCommentTypeFilter<$PrismaModel>
   }
 
-  export type NestedEnumLanguageTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.LanguageType | EnumLanguageTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.LanguageType[] | ListEnumLanguageTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.LanguageType[] | ListEnumLanguageTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumLanguageTypeFilter<$PrismaModel> | $Enums.LanguageType
-  }
-
   export type NestedEnumBoilerTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.BoilerType | EnumBoilerTypeFieldRefInput<$PrismaModel>
     in?: $Enums.BoilerType[] | ListEnumBoilerTypeFieldRefInput<$PrismaModel>
     notIn?: $Enums.BoilerType[] | ListEnumBoilerTypeFieldRefInput<$PrismaModel>
     not?: NestedEnumBoilerTypeFilter<$PrismaModel> | $Enums.BoilerType
-  }
-
-  export type NestedEnumLanguageTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.LanguageType | EnumLanguageTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.LanguageType[] | ListEnumLanguageTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.LanguageType[] | ListEnumLanguageTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumLanguageTypeWithAggregatesFilter<$PrismaModel> | $Enums.LanguageType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumLanguageTypeFilter<$PrismaModel>
-    _max?: NestedEnumLanguageTypeFilter<$PrismaModel>
   }
 
   export type NestedEnumBoilerTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -20729,16 +20749,20 @@ export namespace Prisma {
   }
 
   export type BoilerPlateCreateWithoutQuestionInput = {
-    language: $Enums.LanguageType
     type: $Enums.BoilerType
-    boilerCode: string
+    c: string
+    java: string
+    python: string
+    cpp: string
   }
 
   export type BoilerPlateUncheckedCreateWithoutQuestionInput = {
     id?: number
-    language: $Enums.LanguageType
     type: $Enums.BoilerType
-    boilerCode: string
+    c: string
+    java: string
+    python: string
+    cpp: string
   }
 
   export type BoilerPlateCreateOrConnectWithoutQuestionInput = {
@@ -20879,9 +20903,11 @@ export namespace Prisma {
     OR?: BoilerPlateScalarWhereInput[]
     NOT?: BoilerPlateScalarWhereInput | BoilerPlateScalarWhereInput[]
     id?: IntFilter<"BoilerPlate"> | number
-    language?: EnumLanguageTypeFilter<"BoilerPlate"> | $Enums.LanguageType
     type?: EnumBoilerTypeFilter<"BoilerPlate"> | $Enums.BoilerType
-    boilerCode?: StringFilter<"BoilerPlate"> | string
+    c?: StringFilter<"BoilerPlate"> | string
+    java?: StringFilter<"BoilerPlate"> | string
+    python?: StringFilter<"BoilerPlate"> | string
+    cpp?: StringFilter<"BoilerPlate"> | string
     questionId?: IntFilter<"BoilerPlate"> | number
   }
 
@@ -22095,9 +22121,11 @@ export namespace Prisma {
 
   export type BoilerPlateCreateManyQuestionInput = {
     id?: number
-    language: $Enums.LanguageType
     type: $Enums.BoilerType
-    boilerCode: string
+    c: string
+    java: string
+    python: string
+    cpp: string
   }
 
   export type TestCaseUpdateWithoutQuestionsInput = {
@@ -22199,23 +22227,29 @@ export namespace Prisma {
   }
 
   export type BoilerPlateUpdateWithoutQuestionInput = {
-    language?: EnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType
     type?: EnumBoilerTypeFieldUpdateOperationsInput | $Enums.BoilerType
-    boilerCode?: StringFieldUpdateOperationsInput | string
+    c?: StringFieldUpdateOperationsInput | string
+    java?: StringFieldUpdateOperationsInput | string
+    python?: StringFieldUpdateOperationsInput | string
+    cpp?: StringFieldUpdateOperationsInput | string
   }
 
   export type BoilerPlateUncheckedUpdateWithoutQuestionInput = {
     id?: IntFieldUpdateOperationsInput | number
-    language?: EnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType
     type?: EnumBoilerTypeFieldUpdateOperationsInput | $Enums.BoilerType
-    boilerCode?: StringFieldUpdateOperationsInput | string
+    c?: StringFieldUpdateOperationsInput | string
+    java?: StringFieldUpdateOperationsInput | string
+    python?: StringFieldUpdateOperationsInput | string
+    cpp?: StringFieldUpdateOperationsInput | string
   }
 
   export type BoilerPlateUncheckedUpdateManyWithoutQuestionInput = {
     id?: IntFieldUpdateOperationsInput | number
-    language?: EnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType
     type?: EnumBoilerTypeFieldUpdateOperationsInput | $Enums.BoilerType
-    boilerCode?: StringFieldUpdateOperationsInput | string
+    c?: StringFieldUpdateOperationsInput | string
+    java?: StringFieldUpdateOperationsInput | string
+    python?: StringFieldUpdateOperationsInput | string
+    cpp?: StringFieldUpdateOperationsInput | string
   }
 
   export type StudentAchievementsCreateManyAchievementsInput = {
