@@ -1,8 +1,8 @@
 const  spawn  = require("child_process").spawn;
 
-async function run(fileName, testcaseInput, testCaseOutput) {
+async function cppRun(fileName, testcaseInput, testCaseOutput) {
     return new Promise((resolve, reject) => {
-        const child = spawn("docker", ["exec", "-i" ,"c_container", `./${fileName}`],{
+        const child = spawn("docker", ["exec", "-i" ,"cpp_container", `./${fileName}`],{
             stdio:["pipe","pipe","pipe"]
         });
 
@@ -57,5 +57,5 @@ async function run(fileName, testcaseInput, testCaseOutput) {
 }
 
 module.exports = {
-    run,
+    cppRun,
 };
