@@ -39,12 +39,15 @@ async function contestHandlerPage(req,res) {
                     ]
                 }
             })
-                res.status(200).json({
+            const op = {
                     msg: "successful",
                     viewMode: viewMode,
                     submissionData: submissions,
                     questionData : qid
-                })
+            }
+            console.log("hey - ")
+            console.log(op)
+                return res.status(200).json(op)
             
         }
     }

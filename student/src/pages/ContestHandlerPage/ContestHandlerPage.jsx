@@ -22,6 +22,7 @@ function ContestHandlerPage(){
                 }
             })
             const data = await details.json()
+            setQuestionDetails(data)
         }
         catch(error){
             alert(error.message);
@@ -31,6 +32,7 @@ function ContestHandlerPage(){
 
     useEffect(()=>{
         if(Object.keys(questionDetails)==0){
+            console.log("called")
             fetchData()
         }
     },[])
@@ -41,7 +43,7 @@ function ContestHandlerPage(){
 
         <Timer 
         minutes={questionDetails?.time || 0}/>
-        {/* {JSON.stringify(questionDetails)} */}
+        {JSON.stringify(questionDetails)}
 
         {
             questionDetails?.questions?.map((ques)=>(
