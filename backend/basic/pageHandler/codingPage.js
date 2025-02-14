@@ -68,7 +68,15 @@ async function codingPage(req,res) {
         const diffSeconds = Math.floor((end-now) / 1000); 
         const diffMinutes = Math.floor(diffSeconds / 60);
         const remainingSeconds = diffSeconds % 60
-        console.log(boiler)
+        const d ={
+            msg:"Successful",
+            data:details,
+            minutes:diffMinutes,
+            seconds:remainingSeconds,
+            testCase:tc,
+            boiler:boiler
+        }
+        console.log(d)
         res.status(200).json({
             msg:"Successful",
             data:details,

@@ -25,11 +25,13 @@ const autoSubmit = async () =>{
                         isFinal:"YES"
                     }
                 })
-                const achieve = await prisma.achievements.update({
-                    where:{
-                        
-                    }
-                })
+                // const achieve = await prisma.studentAchievements.update({
+                //     where:{
+                //         AND:[
+                //             {st}
+                //         ]
+                //     }
+                // })
                 console.log(res)
             }
         })

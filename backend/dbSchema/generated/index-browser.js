@@ -222,16 +222,6 @@ exports.Prisma.DiscussionsScalarFieldEnum = {
   timeOfComment: 'timeOfComment'
 };
 
-exports.Prisma.BoilerPlateScalarFieldEnum = {
-  id: 'id',
-  type: 'type',
-  c: 'c',
-  java: 'java',
-  python: 'python',
-  cpp: 'cpp',
-  questionId: 'questionId'
-};
-
 exports.Prisma.ContestScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -308,11 +298,6 @@ exports.CommentType = exports.$Enums.CommentType = {
   SPECIFIC: 'SPECIFIC'
 };
 
-exports.BoilerType = exports.$Enums.BoilerType = {
-  TO_USER: 'TO_USER',
-  MAIN: 'MAIN'
-};
-
 exports.Prisma.ModelName = {
   Student: 'Student',
   Topics: 'Topics',
@@ -324,7 +309,6 @@ exports.Prisma.ModelName = {
   OTPStudent: 'OTPStudent',
   Session: 'Session',
   Discussions: 'Discussions',
-  BoilerPlate: 'BoilerPlate',
   Contest: 'Contest'
 };
 

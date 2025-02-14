@@ -18,7 +18,7 @@ app.use(cors({
     credentials:true,
 }));
 app.use(express.json());
-app.use(limiter);
+// app.use(limiter);
 
 app.use((req, res, next) => {
     console.log("Yo this request is now getting called - " + req.path);

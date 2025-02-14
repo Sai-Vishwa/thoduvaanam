@@ -33,7 +33,7 @@ function LoginButton({forgotPassword ,loginData , loginError , setLoginError , s
                     })
                     const data = await submit.json()
                     if(data.msg){
-                        Cookies.set('session',data.session,{expires: 5/24})
+                        Cookies.set('session',data.session,{expires: 10/24})
                         alert("login successful")
                         nav(`/${data.uname}`)
                     }

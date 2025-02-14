@@ -24,7 +24,7 @@ async function leaderBoard(req,res) {
                 }
             },
             where:{
-                achievementId:1
+                achievementId:34
             }
         })
         res.status(200).json({

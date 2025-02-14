@@ -12,6 +12,7 @@ import ContestBasicPage from './pages/ContestBasicPage/ContestBasicPage'
 import ReviewQuestionPage from './pages/ReviewQuestionPage/ReviewQuestionPage'
 import ReviewContestPage from './pages/ReviewContestPage/ReviewContestPage'
 import ContestHandlerPage from './pages/ContestHandlerPage/ContestHandlerPage'
+import DummyPage from './pages/CodingPage/dummy'
 
 function App() {
 
@@ -29,7 +30,8 @@ function App() {
         <Route path='/:uname/contest-handler/:tname' element={<ContestHandlerPage />} />
         <Route path='/:uname/review-question/:qname' element={<ReviewQuestionPage />} />
         <Route path='/:uname/review-contest/:tname' element={<ReviewContestPage />} />
-        <Route path='*' element={<Navigate to={"/"} />} />
+        <Route path='*' element={<Navigate to={"/:uname"} />} />
+        <Route path='/:uname/dummy/:tname/:qname' element={<DummyPage />} />
       </Routes>
     </BrowserRouter>
   )

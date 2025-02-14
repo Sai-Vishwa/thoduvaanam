@@ -118,7 +118,6 @@ model Questions {
   testCase TestCase[]
   submission Submission[]
   discussion Discussions[]
-  boilerPlate BoilerPlate[]
   topics Topics @relation(fields: [topic],references:[id])
   contest Contest? @relation(fields: [contestId],references:[id])
 }
@@ -220,18 +219,7 @@ model Discussions {
   repliesIGet Discussions[] @relation("SelfMapping")
 }
 
-model BoilerPlate {
-  id Int @id @default(autoincrement())
-  type BoilerType
-  c String
-  java String
-  python String
-  cpp String
-  questionId Int 
 
-  //relationships
-  question Questions @relation(fields:[questionId],references:[id])
-}
 
 model Contest {
   id Int @id @default(autoincrement())

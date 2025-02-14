@@ -71,7 +71,9 @@ const ContestHandlerPage = () => {
       const timer = setInterval(() => {
         setTimeLeft(prev => Math.max(0, prev - 1));
       }, 1000);
-
+      if (timeLeft == 0){
+        alert 
+      }
       return () => clearInterval(timer);
     }, []);
 

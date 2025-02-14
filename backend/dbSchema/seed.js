@@ -3,13 +3,13 @@ const prisma = new PrismaClient();
 
 async function main() {
     //Insert students
-    // await prisma.student.create({
-    //     data: 
-    //         { name: 'Sharan', rno: '220701264', uname: 'Sharan', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
-    //         // { name: 'Rakul', rno: '220701216', uname: 'Rakul', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
-    //         // { name: 'Shanto', rno: '220701263', uname: 'Shanto', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' }
+    await prisma.student.create({
+        data: 
+            { name: 'Raj', rno: '221001031', uname: 'Raj', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' }
+    // //         // { name: 'Rakul', rno: '220701216', uname: 'Rakul', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
+    // //         // { name: 'Shanto', rno: '220701263', uname: 'Shanto', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' }
         
-    // });
+    });
 
 //     // console.log('Students inserted successfully');
 
@@ -31,13 +31,13 @@ async function main() {
 //     const today = new Date();
 //     const opensOn = new Date(today.setHours(10, 0, 0, 0)); // Today 10 AM
 //     const closesOn = new Date(today.setHours(23, 0, 0, 0)); // Today 11 PM
-    const utc = new Date();
-    const now = new Date(utc.getTime()+12.5*60*60*1000);
-    await prisma.contest.updateMany({
-        data:{
-            closesOn:now
-        }
-    })
+    // const utc = new Date();
+    // const now = new Date(utc.getTime()+12.5*60*60*1000);
+    // await prisma.contest.updateMany({
+    //     data:{
+    //         closesOn:now
+    //     }
+    // })
 
 //     // await prisma.contest.createMany({
 //     //     data: [

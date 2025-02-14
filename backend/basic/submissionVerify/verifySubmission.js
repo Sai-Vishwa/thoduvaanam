@@ -62,7 +62,7 @@ async function verifySubmission(req,res) {
                         where:{
                             AND:[
                                 {studentId:studentId},
-                                {achievementId:1}
+                                {achievementId:34}
                             ]
                         },
                         data:{

@@ -7,7 +7,7 @@ async function prun(fileName, testcaseInput, testCaseOutput) {
         var utfEncoder = new TextEncoder("utf-8");
         var utfDecoder = new TextDecoder("utf-8");
 
-        child.stdin.write("[1,2,3]");
+        child.stdin.write("1 2");
         
         child.stdin.end();
 

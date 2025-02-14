@@ -64,11 +64,6 @@ export type Session = $Result.DefaultSelection<Prisma.$SessionPayload>
  */
 export type Discussions = $Result.DefaultSelection<Prisma.$DiscussionsPayload>
 /**
- * Model BoilerPlate
- * 
- */
-export type BoilerPlate = $Result.DefaultSelection<Prisma.$BoilerPlatePayload>
-/**
  * Model Contest
  * 
  */
@@ -429,16 +424,6 @@ export class PrismaClient<
     * ```
     */
   get discussions(): Prisma.DiscussionsDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.boilerPlate`: Exposes CRUD operations for the **BoilerPlate** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more BoilerPlates
-    * const boilerPlates = await prisma.boilerPlate.findMany()
-    * ```
-    */
-  get boilerPlate(): Prisma.BoilerPlateDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.contest`: Exposes CRUD operations for the **Contest** model.
@@ -899,7 +884,6 @@ export namespace Prisma {
     OTPStudent: 'OTPStudent',
     Session: 'Session',
     Discussions: 'Discussions',
-    BoilerPlate: 'BoilerPlate',
     Contest: 'Contest'
   };
 
@@ -916,7 +900,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "student" | "topics" | "questions" | "testCase" | "submission" | "achievements" | "studentAchievements" | "oTPStudent" | "session" | "discussions" | "boilerPlate" | "contest"
+      modelProps: "student" | "topics" | "questions" | "testCase" | "submission" | "achievements" | "studentAchievements" | "oTPStudent" | "session" | "discussions" | "contest"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1660,80 +1644,6 @@ export namespace Prisma {
           }
         }
       }
-      BoilerPlate: {
-        payload: Prisma.$BoilerPlatePayload<ExtArgs>
-        fields: Prisma.BoilerPlateFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.BoilerPlateFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoilerPlatePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.BoilerPlateFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoilerPlatePayload>
-          }
-          findFirst: {
-            args: Prisma.BoilerPlateFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoilerPlatePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.BoilerPlateFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoilerPlatePayload>
-          }
-          findMany: {
-            args: Prisma.BoilerPlateFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoilerPlatePayload>[]
-          }
-          create: {
-            args: Prisma.BoilerPlateCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoilerPlatePayload>
-          }
-          createMany: {
-            args: Prisma.BoilerPlateCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.BoilerPlateCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoilerPlatePayload>[]
-          }
-          delete: {
-            args: Prisma.BoilerPlateDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoilerPlatePayload>
-          }
-          update: {
-            args: Prisma.BoilerPlateUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoilerPlatePayload>
-          }
-          deleteMany: {
-            args: Prisma.BoilerPlateDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.BoilerPlateUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.BoilerPlateUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoilerPlatePayload>[]
-          }
-          upsert: {
-            args: Prisma.BoilerPlateUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoilerPlatePayload>
-          }
-          aggregate: {
-            args: Prisma.BoilerPlateAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateBoilerPlate>
-          }
-          groupBy: {
-            args: Prisma.BoilerPlateGroupByArgs<ExtArgs>
-            result: $Utils.Optional<BoilerPlateGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.BoilerPlateCountArgs<ExtArgs>
-            result: $Utils.Optional<BoilerPlateCountAggregateOutputType> | number
-          }
-        }
-      }
       Contest: {
         payload: Prisma.$ContestPayload<ExtArgs>
         fields: Prisma.ContestFieldRefs
@@ -1902,7 +1812,6 @@ export namespace Prisma {
     oTPStudent?: OTPStudentOmit
     session?: SessionOmit
     discussions?: DiscussionsOmit
-    boilerPlate?: BoilerPlateOmit
     contest?: ContestOmit
   }
 
@@ -2081,14 +1990,12 @@ export namespace Prisma {
     testCase: number
     submission: number
     discussion: number
-    boilerPlate: number
   }
 
   export type QuestionsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     testCase?: boolean | QuestionsCountOutputTypeCountTestCaseArgs
     submission?: boolean | QuestionsCountOutputTypeCountSubmissionArgs
     discussion?: boolean | QuestionsCountOutputTypeCountDiscussionArgs
-    boilerPlate?: boolean | QuestionsCountOutputTypeCountBoilerPlateArgs
   }
 
   // Custom InputTypes
@@ -2121,13 +2028,6 @@ export namespace Prisma {
    */
   export type QuestionsCountOutputTypeCountDiscussionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DiscussionsWhereInput
-  }
-
-  /**
-   * QuestionsCountOutputType without action
-   */
-  export type QuestionsCountOutputTypeCountBoilerPlateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BoilerPlateWhereInput
   }
 
 
@@ -4842,7 +4742,6 @@ export namespace Prisma {
     testCase?: boolean | Questions$testCaseArgs<ExtArgs>
     submission?: boolean | Questions$submissionArgs<ExtArgs>
     discussion?: boolean | Questions$discussionArgs<ExtArgs>
-    boilerPlate?: boolean | Questions$boilerPlateArgs<ExtArgs>
     topics?: boolean | TopicsDefaultArgs<ExtArgs>
     contest?: boolean | Questions$contestArgs<ExtArgs>
     _count?: boolean | QuestionsCountOutputTypeDefaultArgs<ExtArgs>
@@ -4905,7 +4804,6 @@ export namespace Prisma {
     testCase?: boolean | Questions$testCaseArgs<ExtArgs>
     submission?: boolean | Questions$submissionArgs<ExtArgs>
     discussion?: boolean | Questions$discussionArgs<ExtArgs>
-    boilerPlate?: boolean | Questions$boilerPlateArgs<ExtArgs>
     topics?: boolean | TopicsDefaultArgs<ExtArgs>
     contest?: boolean | Questions$contestArgs<ExtArgs>
     _count?: boolean | QuestionsCountOutputTypeDefaultArgs<ExtArgs>
@@ -4925,7 +4823,6 @@ export namespace Prisma {
       testCase: Prisma.$TestCasePayload<ExtArgs>[]
       submission: Prisma.$SubmissionPayload<ExtArgs>[]
       discussion: Prisma.$DiscussionsPayload<ExtArgs>[]
-      boilerPlate: Prisma.$BoilerPlatePayload<ExtArgs>[]
       topics: Prisma.$TopicsPayload<ExtArgs>
       contest: Prisma.$ContestPayload<ExtArgs> | null
     }
@@ -5340,7 +5237,6 @@ export namespace Prisma {
     testCase<T extends Questions$testCaseArgs<ExtArgs> = {}>(args?: Subset<T, Questions$testCaseArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestCasePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     submission<T extends Questions$submissionArgs<ExtArgs> = {}>(args?: Subset<T, Questions$submissionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     discussion<T extends Questions$discussionArgs<ExtArgs> = {}>(args?: Subset<T, Questions$discussionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscussionsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    boilerPlate<T extends Questions$boilerPlateArgs<ExtArgs> = {}>(args?: Subset<T, Questions$boilerPlateArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoilerPlatePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     topics<T extends TopicsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TopicsDefaultArgs<ExtArgs>>): Prisma__TopicsClient<$Result.GetResult<Prisma.$TopicsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
     contest<T extends Questions$contestArgs<ExtArgs> = {}>(args?: Subset<T, Questions$contestArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     /**
@@ -5838,30 +5734,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DiscussionsScalarFieldEnum | DiscussionsScalarFieldEnum[]
-  }
-
-  /**
-   * Questions.boilerPlate
-   */
-  export type Questions$boilerPlateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoilerPlate
-     */
-    select?: BoilerPlateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoilerPlate
-     */
-    omit?: BoilerPlateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoilerPlateInclude<ExtArgs> | null
-    where?: BoilerPlateWhereInput
-    orderBy?: BoilerPlateOrderByWithRelationInput | BoilerPlateOrderByWithRelationInput[]
-    cursor?: BoilerPlateWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: BoilerPlateScalarFieldEnum | BoilerPlateScalarFieldEnum[]
   }
 
   /**
@@ -13742,1116 +13614,6 @@ export namespace Prisma {
 
 
   /**
-   * Model BoilerPlate
-   */
-
-  export type AggregateBoilerPlate = {
-    _count: BoilerPlateCountAggregateOutputType | null
-    _avg: BoilerPlateAvgAggregateOutputType | null
-    _sum: BoilerPlateSumAggregateOutputType | null
-    _min: BoilerPlateMinAggregateOutputType | null
-    _max: BoilerPlateMaxAggregateOutputType | null
-  }
-
-  export type BoilerPlateAvgAggregateOutputType = {
-    id: number | null
-    questionId: number | null
-  }
-
-  export type BoilerPlateSumAggregateOutputType = {
-    id: number | null
-    questionId: number | null
-  }
-
-  export type BoilerPlateMinAggregateOutputType = {
-    id: number | null
-    type: $Enums.BoilerType | null
-    c: string | null
-    java: string | null
-    python: string | null
-    cpp: string | null
-    questionId: number | null
-  }
-
-  export type BoilerPlateMaxAggregateOutputType = {
-    id: number | null
-    type: $Enums.BoilerType | null
-    c: string | null
-    java: string | null
-    python: string | null
-    cpp: string | null
-    questionId: number | null
-  }
-
-  export type BoilerPlateCountAggregateOutputType = {
-    id: number
-    type: number
-    c: number
-    java: number
-    python: number
-    cpp: number
-    questionId: number
-    _all: number
-  }
-
-
-  export type BoilerPlateAvgAggregateInputType = {
-    id?: true
-    questionId?: true
-  }
-
-  export type BoilerPlateSumAggregateInputType = {
-    id?: true
-    questionId?: true
-  }
-
-  export type BoilerPlateMinAggregateInputType = {
-    id?: true
-    type?: true
-    c?: true
-    java?: true
-    python?: true
-    cpp?: true
-    questionId?: true
-  }
-
-  export type BoilerPlateMaxAggregateInputType = {
-    id?: true
-    type?: true
-    c?: true
-    java?: true
-    python?: true
-    cpp?: true
-    questionId?: true
-  }
-
-  export type BoilerPlateCountAggregateInputType = {
-    id?: true
-    type?: true
-    c?: true
-    java?: true
-    python?: true
-    cpp?: true
-    questionId?: true
-    _all?: true
-  }
-
-  export type BoilerPlateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which BoilerPlate to aggregate.
-     */
-    where?: BoilerPlateWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BoilerPlates to fetch.
-     */
-    orderBy?: BoilerPlateOrderByWithRelationInput | BoilerPlateOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: BoilerPlateWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BoilerPlates from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BoilerPlates.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned BoilerPlates
-    **/
-    _count?: true | BoilerPlateCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: BoilerPlateAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: BoilerPlateSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: BoilerPlateMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: BoilerPlateMaxAggregateInputType
-  }
-
-  export type GetBoilerPlateAggregateType<T extends BoilerPlateAggregateArgs> = {
-        [P in keyof T & keyof AggregateBoilerPlate]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateBoilerPlate[P]>
-      : GetScalarType<T[P], AggregateBoilerPlate[P]>
-  }
-
-
-
-
-  export type BoilerPlateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BoilerPlateWhereInput
-    orderBy?: BoilerPlateOrderByWithAggregationInput | BoilerPlateOrderByWithAggregationInput[]
-    by: BoilerPlateScalarFieldEnum[] | BoilerPlateScalarFieldEnum
-    having?: BoilerPlateScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: BoilerPlateCountAggregateInputType | true
-    _avg?: BoilerPlateAvgAggregateInputType
-    _sum?: BoilerPlateSumAggregateInputType
-    _min?: BoilerPlateMinAggregateInputType
-    _max?: BoilerPlateMaxAggregateInputType
-  }
-
-  export type BoilerPlateGroupByOutputType = {
-    id: number
-    type: $Enums.BoilerType
-    c: string
-    java: string
-    python: string
-    cpp: string
-    questionId: number
-    _count: BoilerPlateCountAggregateOutputType | null
-    _avg: BoilerPlateAvgAggregateOutputType | null
-    _sum: BoilerPlateSumAggregateOutputType | null
-    _min: BoilerPlateMinAggregateOutputType | null
-    _max: BoilerPlateMaxAggregateOutputType | null
-  }
-
-  type GetBoilerPlateGroupByPayload<T extends BoilerPlateGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<BoilerPlateGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof BoilerPlateGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], BoilerPlateGroupByOutputType[P]>
-            : GetScalarType<T[P], BoilerPlateGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type BoilerPlateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    type?: boolean
-    c?: boolean
-    java?: boolean
-    python?: boolean
-    cpp?: boolean
-    questionId?: boolean
-    question?: boolean | QuestionsDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["boilerPlate"]>
-
-  export type BoilerPlateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    type?: boolean
-    c?: boolean
-    java?: boolean
-    python?: boolean
-    cpp?: boolean
-    questionId?: boolean
-    question?: boolean | QuestionsDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["boilerPlate"]>
-
-  export type BoilerPlateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    type?: boolean
-    c?: boolean
-    java?: boolean
-    python?: boolean
-    cpp?: boolean
-    questionId?: boolean
-    question?: boolean | QuestionsDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["boilerPlate"]>
-
-  export type BoilerPlateSelectScalar = {
-    id?: boolean
-    type?: boolean
-    c?: boolean
-    java?: boolean
-    python?: boolean
-    cpp?: boolean
-    questionId?: boolean
-  }
-
-  export type BoilerPlateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "c" | "java" | "python" | "cpp" | "questionId", ExtArgs["result"]["boilerPlate"]>
-  export type BoilerPlateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    question?: boolean | QuestionsDefaultArgs<ExtArgs>
-  }
-  export type BoilerPlateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    question?: boolean | QuestionsDefaultArgs<ExtArgs>
-  }
-  export type BoilerPlateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    question?: boolean | QuestionsDefaultArgs<ExtArgs>
-  }
-
-  export type $BoilerPlatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "BoilerPlate"
-    objects: {
-      question: Prisma.$QuestionsPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      type: $Enums.BoilerType
-      c: string
-      java: string
-      python: string
-      cpp: string
-      questionId: number
-    }, ExtArgs["result"]["boilerPlate"]>
-    composites: {}
-  }
-
-  type BoilerPlateGetPayload<S extends boolean | null | undefined | BoilerPlateDefaultArgs> = $Result.GetResult<Prisma.$BoilerPlatePayload, S>
-
-  type BoilerPlateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<BoilerPlateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: BoilerPlateCountAggregateInputType | true
-    }
-
-  export interface BoilerPlateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BoilerPlate'], meta: { name: 'BoilerPlate' } }
-    /**
-     * Find zero or one BoilerPlate that matches the filter.
-     * @param {BoilerPlateFindUniqueArgs} args - Arguments to find a BoilerPlate
-     * @example
-     * // Get one BoilerPlate
-     * const boilerPlate = await prisma.boilerPlate.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends BoilerPlateFindUniqueArgs>(args: SelectSubset<T, BoilerPlateFindUniqueArgs<ExtArgs>>): Prisma__BoilerPlateClient<$Result.GetResult<Prisma.$BoilerPlatePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find one BoilerPlate that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {BoilerPlateFindUniqueOrThrowArgs} args - Arguments to find a BoilerPlate
-     * @example
-     * // Get one BoilerPlate
-     * const boilerPlate = await prisma.boilerPlate.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends BoilerPlateFindUniqueOrThrowArgs>(args: SelectSubset<T, BoilerPlateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BoilerPlateClient<$Result.GetResult<Prisma.$BoilerPlatePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first BoilerPlate that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoilerPlateFindFirstArgs} args - Arguments to find a BoilerPlate
-     * @example
-     * // Get one BoilerPlate
-     * const boilerPlate = await prisma.boilerPlate.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends BoilerPlateFindFirstArgs>(args?: SelectSubset<T, BoilerPlateFindFirstArgs<ExtArgs>>): Prisma__BoilerPlateClient<$Result.GetResult<Prisma.$BoilerPlatePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first BoilerPlate that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoilerPlateFindFirstOrThrowArgs} args - Arguments to find a BoilerPlate
-     * @example
-     * // Get one BoilerPlate
-     * const boilerPlate = await prisma.boilerPlate.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends BoilerPlateFindFirstOrThrowArgs>(args?: SelectSubset<T, BoilerPlateFindFirstOrThrowArgs<ExtArgs>>): Prisma__BoilerPlateClient<$Result.GetResult<Prisma.$BoilerPlatePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find zero or more BoilerPlates that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoilerPlateFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all BoilerPlates
-     * const boilerPlates = await prisma.boilerPlate.findMany()
-     * 
-     * // Get first 10 BoilerPlates
-     * const boilerPlates = await prisma.boilerPlate.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const boilerPlateWithIdOnly = await prisma.boilerPlate.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends BoilerPlateFindManyArgs>(args?: SelectSubset<T, BoilerPlateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoilerPlatePayload<ExtArgs>, T, "findMany", ClientOptions>>
-
-    /**
-     * Create a BoilerPlate.
-     * @param {BoilerPlateCreateArgs} args - Arguments to create a BoilerPlate.
-     * @example
-     * // Create one BoilerPlate
-     * const BoilerPlate = await prisma.boilerPlate.create({
-     *   data: {
-     *     // ... data to create a BoilerPlate
-     *   }
-     * })
-     * 
-     */
-    create<T extends BoilerPlateCreateArgs>(args: SelectSubset<T, BoilerPlateCreateArgs<ExtArgs>>): Prisma__BoilerPlateClient<$Result.GetResult<Prisma.$BoilerPlatePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Create many BoilerPlates.
-     * @param {BoilerPlateCreateManyArgs} args - Arguments to create many BoilerPlates.
-     * @example
-     * // Create many BoilerPlates
-     * const boilerPlate = await prisma.boilerPlate.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends BoilerPlateCreateManyArgs>(args?: SelectSubset<T, BoilerPlateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many BoilerPlates and returns the data saved in the database.
-     * @param {BoilerPlateCreateManyAndReturnArgs} args - Arguments to create many BoilerPlates.
-     * @example
-     * // Create many BoilerPlates
-     * const boilerPlate = await prisma.boilerPlate.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many BoilerPlates and only return the `id`
-     * const boilerPlateWithIdOnly = await prisma.boilerPlate.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends BoilerPlateCreateManyAndReturnArgs>(args?: SelectSubset<T, BoilerPlateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoilerPlatePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
-
-    /**
-     * Delete a BoilerPlate.
-     * @param {BoilerPlateDeleteArgs} args - Arguments to delete one BoilerPlate.
-     * @example
-     * // Delete one BoilerPlate
-     * const BoilerPlate = await prisma.boilerPlate.delete({
-     *   where: {
-     *     // ... filter to delete one BoilerPlate
-     *   }
-     * })
-     * 
-     */
-    delete<T extends BoilerPlateDeleteArgs>(args: SelectSubset<T, BoilerPlateDeleteArgs<ExtArgs>>): Prisma__BoilerPlateClient<$Result.GetResult<Prisma.$BoilerPlatePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Update one BoilerPlate.
-     * @param {BoilerPlateUpdateArgs} args - Arguments to update one BoilerPlate.
-     * @example
-     * // Update one BoilerPlate
-     * const boilerPlate = await prisma.boilerPlate.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends BoilerPlateUpdateArgs>(args: SelectSubset<T, BoilerPlateUpdateArgs<ExtArgs>>): Prisma__BoilerPlateClient<$Result.GetResult<Prisma.$BoilerPlatePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Delete zero or more BoilerPlates.
-     * @param {BoilerPlateDeleteManyArgs} args - Arguments to filter BoilerPlates to delete.
-     * @example
-     * // Delete a few BoilerPlates
-     * const { count } = await prisma.boilerPlate.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends BoilerPlateDeleteManyArgs>(args?: SelectSubset<T, BoilerPlateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more BoilerPlates.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoilerPlateUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many BoilerPlates
-     * const boilerPlate = await prisma.boilerPlate.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends BoilerPlateUpdateManyArgs>(args: SelectSubset<T, BoilerPlateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more BoilerPlates and returns the data updated in the database.
-     * @param {BoilerPlateUpdateManyAndReturnArgs} args - Arguments to update many BoilerPlates.
-     * @example
-     * // Update many BoilerPlates
-     * const boilerPlate = await prisma.boilerPlate.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more BoilerPlates and only return the `id`
-     * const boilerPlateWithIdOnly = await prisma.boilerPlate.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends BoilerPlateUpdateManyAndReturnArgs>(args: SelectSubset<T, BoilerPlateUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoilerPlatePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
-
-    /**
-     * Create or update one BoilerPlate.
-     * @param {BoilerPlateUpsertArgs} args - Arguments to update or create a BoilerPlate.
-     * @example
-     * // Update or create a BoilerPlate
-     * const boilerPlate = await prisma.boilerPlate.upsert({
-     *   create: {
-     *     // ... data to create a BoilerPlate
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the BoilerPlate we want to update
-     *   }
-     * })
-     */
-    upsert<T extends BoilerPlateUpsertArgs>(args: SelectSubset<T, BoilerPlateUpsertArgs<ExtArgs>>): Prisma__BoilerPlateClient<$Result.GetResult<Prisma.$BoilerPlatePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
-
-
-    /**
-     * Count the number of BoilerPlates.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoilerPlateCountArgs} args - Arguments to filter BoilerPlates to count.
-     * @example
-     * // Count the number of BoilerPlates
-     * const count = await prisma.boilerPlate.count({
-     *   where: {
-     *     // ... the filter for the BoilerPlates we want to count
-     *   }
-     * })
-    **/
-    count<T extends BoilerPlateCountArgs>(
-      args?: Subset<T, BoilerPlateCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], BoilerPlateCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a BoilerPlate.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoilerPlateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends BoilerPlateAggregateArgs>(args: Subset<T, BoilerPlateAggregateArgs>): Prisma.PrismaPromise<GetBoilerPlateAggregateType<T>>
-
-    /**
-     * Group by BoilerPlate.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoilerPlateGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends BoilerPlateGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: BoilerPlateGroupByArgs['orderBy'] }
-        : { orderBy?: BoilerPlateGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, BoilerPlateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBoilerPlateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the BoilerPlate model
-   */
-  readonly fields: BoilerPlateFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for BoilerPlate.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__BoilerPlateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    question<T extends QuestionsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, QuestionsDefaultArgs<ExtArgs>>): Prisma__QuestionsClient<$Result.GetResult<Prisma.$QuestionsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the BoilerPlate model
-   */ 
-  interface BoilerPlateFieldRefs {
-    readonly id: FieldRef<"BoilerPlate", 'Int'>
-    readonly type: FieldRef<"BoilerPlate", 'BoilerType'>
-    readonly c: FieldRef<"BoilerPlate", 'String'>
-    readonly java: FieldRef<"BoilerPlate", 'String'>
-    readonly python: FieldRef<"BoilerPlate", 'String'>
-    readonly cpp: FieldRef<"BoilerPlate", 'String'>
-    readonly questionId: FieldRef<"BoilerPlate", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * BoilerPlate findUnique
-   */
-  export type BoilerPlateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoilerPlate
-     */
-    select?: BoilerPlateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoilerPlate
-     */
-    omit?: BoilerPlateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoilerPlateInclude<ExtArgs> | null
-    /**
-     * Filter, which BoilerPlate to fetch.
-     */
-    where: BoilerPlateWhereUniqueInput
-  }
-
-  /**
-   * BoilerPlate findUniqueOrThrow
-   */
-  export type BoilerPlateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoilerPlate
-     */
-    select?: BoilerPlateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoilerPlate
-     */
-    omit?: BoilerPlateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoilerPlateInclude<ExtArgs> | null
-    /**
-     * Filter, which BoilerPlate to fetch.
-     */
-    where: BoilerPlateWhereUniqueInput
-  }
-
-  /**
-   * BoilerPlate findFirst
-   */
-  export type BoilerPlateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoilerPlate
-     */
-    select?: BoilerPlateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoilerPlate
-     */
-    omit?: BoilerPlateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoilerPlateInclude<ExtArgs> | null
-    /**
-     * Filter, which BoilerPlate to fetch.
-     */
-    where?: BoilerPlateWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BoilerPlates to fetch.
-     */
-    orderBy?: BoilerPlateOrderByWithRelationInput | BoilerPlateOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for BoilerPlates.
-     */
-    cursor?: BoilerPlateWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BoilerPlates from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BoilerPlates.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of BoilerPlates.
-     */
-    distinct?: BoilerPlateScalarFieldEnum | BoilerPlateScalarFieldEnum[]
-  }
-
-  /**
-   * BoilerPlate findFirstOrThrow
-   */
-  export type BoilerPlateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoilerPlate
-     */
-    select?: BoilerPlateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoilerPlate
-     */
-    omit?: BoilerPlateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoilerPlateInclude<ExtArgs> | null
-    /**
-     * Filter, which BoilerPlate to fetch.
-     */
-    where?: BoilerPlateWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BoilerPlates to fetch.
-     */
-    orderBy?: BoilerPlateOrderByWithRelationInput | BoilerPlateOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for BoilerPlates.
-     */
-    cursor?: BoilerPlateWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BoilerPlates from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BoilerPlates.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of BoilerPlates.
-     */
-    distinct?: BoilerPlateScalarFieldEnum | BoilerPlateScalarFieldEnum[]
-  }
-
-  /**
-   * BoilerPlate findMany
-   */
-  export type BoilerPlateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoilerPlate
-     */
-    select?: BoilerPlateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoilerPlate
-     */
-    omit?: BoilerPlateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoilerPlateInclude<ExtArgs> | null
-    /**
-     * Filter, which BoilerPlates to fetch.
-     */
-    where?: BoilerPlateWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BoilerPlates to fetch.
-     */
-    orderBy?: BoilerPlateOrderByWithRelationInput | BoilerPlateOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing BoilerPlates.
-     */
-    cursor?: BoilerPlateWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BoilerPlates from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BoilerPlates.
-     */
-    skip?: number
-    distinct?: BoilerPlateScalarFieldEnum | BoilerPlateScalarFieldEnum[]
-  }
-
-  /**
-   * BoilerPlate create
-   */
-  export type BoilerPlateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoilerPlate
-     */
-    select?: BoilerPlateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoilerPlate
-     */
-    omit?: BoilerPlateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoilerPlateInclude<ExtArgs> | null
-    /**
-     * The data needed to create a BoilerPlate.
-     */
-    data: XOR<BoilerPlateCreateInput, BoilerPlateUncheckedCreateInput>
-  }
-
-  /**
-   * BoilerPlate createMany
-   */
-  export type BoilerPlateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many BoilerPlates.
-     */
-    data: BoilerPlateCreateManyInput | BoilerPlateCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * BoilerPlate createManyAndReturn
-   */
-  export type BoilerPlateCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoilerPlate
-     */
-    select?: BoilerPlateSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoilerPlate
-     */
-    omit?: BoilerPlateOmit<ExtArgs> | null
-    /**
-     * The data used to create many BoilerPlates.
-     */
-    data: BoilerPlateCreateManyInput | BoilerPlateCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoilerPlateIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * BoilerPlate update
-   */
-  export type BoilerPlateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoilerPlate
-     */
-    select?: BoilerPlateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoilerPlate
-     */
-    omit?: BoilerPlateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoilerPlateInclude<ExtArgs> | null
-    /**
-     * The data needed to update a BoilerPlate.
-     */
-    data: XOR<BoilerPlateUpdateInput, BoilerPlateUncheckedUpdateInput>
-    /**
-     * Choose, which BoilerPlate to update.
-     */
-    where: BoilerPlateWhereUniqueInput
-  }
-
-  /**
-   * BoilerPlate updateMany
-   */
-  export type BoilerPlateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update BoilerPlates.
-     */
-    data: XOR<BoilerPlateUpdateManyMutationInput, BoilerPlateUncheckedUpdateManyInput>
-    /**
-     * Filter which BoilerPlates to update
-     */
-    where?: BoilerPlateWhereInput
-  }
-
-  /**
-   * BoilerPlate updateManyAndReturn
-   */
-  export type BoilerPlateUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoilerPlate
-     */
-    select?: BoilerPlateSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoilerPlate
-     */
-    omit?: BoilerPlateOmit<ExtArgs> | null
-    /**
-     * The data used to update BoilerPlates.
-     */
-    data: XOR<BoilerPlateUpdateManyMutationInput, BoilerPlateUncheckedUpdateManyInput>
-    /**
-     * Filter which BoilerPlates to update
-     */
-    where?: BoilerPlateWhereInput
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoilerPlateIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * BoilerPlate upsert
-   */
-  export type BoilerPlateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoilerPlate
-     */
-    select?: BoilerPlateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoilerPlate
-     */
-    omit?: BoilerPlateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoilerPlateInclude<ExtArgs> | null
-    /**
-     * The filter to search for the BoilerPlate to update in case it exists.
-     */
-    where: BoilerPlateWhereUniqueInput
-    /**
-     * In case the BoilerPlate found by the `where` argument doesn't exist, create a new BoilerPlate with this data.
-     */
-    create: XOR<BoilerPlateCreateInput, BoilerPlateUncheckedCreateInput>
-    /**
-     * In case the BoilerPlate was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<BoilerPlateUpdateInput, BoilerPlateUncheckedUpdateInput>
-  }
-
-  /**
-   * BoilerPlate delete
-   */
-  export type BoilerPlateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoilerPlate
-     */
-    select?: BoilerPlateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoilerPlate
-     */
-    omit?: BoilerPlateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoilerPlateInclude<ExtArgs> | null
-    /**
-     * Filter which BoilerPlate to delete.
-     */
-    where: BoilerPlateWhereUniqueInput
-  }
-
-  /**
-   * BoilerPlate deleteMany
-   */
-  export type BoilerPlateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which BoilerPlates to delete
-     */
-    where?: BoilerPlateWhereInput
-  }
-
-  /**
-   * BoilerPlate without action
-   */
-  export type BoilerPlateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoilerPlate
-     */
-    select?: BoilerPlateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoilerPlate
-     */
-    omit?: BoilerPlateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoilerPlateInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Contest
    */
 
@@ -16165,19 +14927,6 @@ export namespace Prisma {
   export type DiscussionsScalarFieldEnum = (typeof DiscussionsScalarFieldEnum)[keyof typeof DiscussionsScalarFieldEnum]
 
 
-  export const BoilerPlateScalarFieldEnum: {
-    id: 'id',
-    type: 'type',
-    c: 'c',
-    java: 'java',
-    python: 'python',
-    cpp: 'cpp',
-    questionId: 'questionId'
-  };
-
-  export type BoilerPlateScalarFieldEnum = (typeof BoilerPlateScalarFieldEnum)[keyof typeof BoilerPlateScalarFieldEnum]
-
-
   export const ContestScalarFieldEnum: {
     id: 'id',
     title: 'title',
@@ -16390,20 +15139,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'BoilerType'
-   */
-  export type EnumBoilerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoilerType'>
-    
-
-
-  /**
-   * Reference to a field of type 'BoilerType[]'
-   */
-  export type ListEnumBoilerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoilerType[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -16581,7 +15316,6 @@ export namespace Prisma {
     testCase?: TestCaseListRelationFilter
     submission?: SubmissionListRelationFilter
     discussion?: DiscussionsListRelationFilter
-    boilerPlate?: BoilerPlateListRelationFilter
     topics?: XOR<TopicsScalarRelationFilter, TopicsWhereInput>
     contest?: XOR<ContestNullableScalarRelationFilter, ContestWhereInput> | null
   }
@@ -16603,7 +15337,6 @@ export namespace Prisma {
     testCase?: TestCaseOrderByRelationAggregateInput
     submission?: SubmissionOrderByRelationAggregateInput
     discussion?: DiscussionsOrderByRelationAggregateInput
-    boilerPlate?: BoilerPlateOrderByRelationAggregateInput
     topics?: TopicsOrderByWithRelationInput
     contest?: ContestOrderByWithRelationInput
   }
@@ -16628,7 +15361,6 @@ export namespace Prisma {
     testCase?: TestCaseListRelationFilter
     submission?: SubmissionListRelationFilter
     discussion?: DiscussionsListRelationFilter
-    boilerPlate?: BoilerPlateListRelationFilter
     topics?: XOR<TopicsScalarRelationFilter, TopicsWhereInput>
     contest?: XOR<ContestNullableScalarRelationFilter, ContestWhereInput> | null
   }, "id">
@@ -17154,73 +15886,6 @@ export namespace Prisma {
     timeOfComment?: DateTimeWithAggregatesFilter<"Discussions"> | Date | string
   }
 
-  export type BoilerPlateWhereInput = {
-    AND?: BoilerPlateWhereInput | BoilerPlateWhereInput[]
-    OR?: BoilerPlateWhereInput[]
-    NOT?: BoilerPlateWhereInput | BoilerPlateWhereInput[]
-    id?: IntFilter<"BoilerPlate"> | number
-    type?: EnumBoilerTypeFilter<"BoilerPlate"> | $Enums.BoilerType
-    c?: StringFilter<"BoilerPlate"> | string
-    java?: StringFilter<"BoilerPlate"> | string
-    python?: StringFilter<"BoilerPlate"> | string
-    cpp?: StringFilter<"BoilerPlate"> | string
-    questionId?: IntFilter<"BoilerPlate"> | number
-    question?: XOR<QuestionsScalarRelationFilter, QuestionsWhereInput>
-  }
-
-  export type BoilerPlateOrderByWithRelationInput = {
-    id?: SortOrder
-    type?: SortOrder
-    c?: SortOrder
-    java?: SortOrder
-    python?: SortOrder
-    cpp?: SortOrder
-    questionId?: SortOrder
-    question?: QuestionsOrderByWithRelationInput
-  }
-
-  export type BoilerPlateWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: BoilerPlateWhereInput | BoilerPlateWhereInput[]
-    OR?: BoilerPlateWhereInput[]
-    NOT?: BoilerPlateWhereInput | BoilerPlateWhereInput[]
-    type?: EnumBoilerTypeFilter<"BoilerPlate"> | $Enums.BoilerType
-    c?: StringFilter<"BoilerPlate"> | string
-    java?: StringFilter<"BoilerPlate"> | string
-    python?: StringFilter<"BoilerPlate"> | string
-    cpp?: StringFilter<"BoilerPlate"> | string
-    questionId?: IntFilter<"BoilerPlate"> | number
-    question?: XOR<QuestionsScalarRelationFilter, QuestionsWhereInput>
-  }, "id">
-
-  export type BoilerPlateOrderByWithAggregationInput = {
-    id?: SortOrder
-    type?: SortOrder
-    c?: SortOrder
-    java?: SortOrder
-    python?: SortOrder
-    cpp?: SortOrder
-    questionId?: SortOrder
-    _count?: BoilerPlateCountOrderByAggregateInput
-    _avg?: BoilerPlateAvgOrderByAggregateInput
-    _max?: BoilerPlateMaxOrderByAggregateInput
-    _min?: BoilerPlateMinOrderByAggregateInput
-    _sum?: BoilerPlateSumOrderByAggregateInput
-  }
-
-  export type BoilerPlateScalarWhereWithAggregatesInput = {
-    AND?: BoilerPlateScalarWhereWithAggregatesInput | BoilerPlateScalarWhereWithAggregatesInput[]
-    OR?: BoilerPlateScalarWhereWithAggregatesInput[]
-    NOT?: BoilerPlateScalarWhereWithAggregatesInput | BoilerPlateScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"BoilerPlate"> | number
-    type?: EnumBoilerTypeWithAggregatesFilter<"BoilerPlate"> | $Enums.BoilerType
-    c?: StringWithAggregatesFilter<"BoilerPlate"> | string
-    java?: StringWithAggregatesFilter<"BoilerPlate"> | string
-    python?: StringWithAggregatesFilter<"BoilerPlate"> | string
-    cpp?: StringWithAggregatesFilter<"BoilerPlate"> | string
-    questionId?: IntWithAggregatesFilter<"BoilerPlate"> | number
-  }
-
   export type ContestWhereInput = {
     AND?: ContestWhereInput | ContestWhereInput[]
     OR?: ContestWhereInput[]
@@ -17461,7 +16126,6 @@ export namespace Prisma {
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
-    boilerPlate?: BoilerPlateCreateNestedManyWithoutQuestionInput
     topics: TopicsCreateNestedOneWithoutQuestionInput
     contest?: ContestCreateNestedOneWithoutQuestionInput
   }
@@ -17483,7 +16147,6 @@ export namespace Prisma {
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
-    boilerPlate?: BoilerPlateUncheckedCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionsUpdateInput = {
@@ -17500,7 +16163,6 @@ export namespace Prisma {
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
-    boilerPlate?: BoilerPlateUpdateManyWithoutQuestionNestedInput
     topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
     contest?: ContestUpdateOneWithoutQuestionNestedInput
   }
@@ -17522,7 +16184,6 @@ export namespace Prisma {
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
-    boilerPlate?: BoilerPlateUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
   export type QuestionsCreateManyInput = {
@@ -18038,72 +16699,6 @@ export namespace Prisma {
     timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type BoilerPlateCreateInput = {
-    type: $Enums.BoilerType
-    c: string
-    java: string
-    python: string
-    cpp: string
-    question: QuestionsCreateNestedOneWithoutBoilerPlateInput
-  }
-
-  export type BoilerPlateUncheckedCreateInput = {
-    id?: number
-    type: $Enums.BoilerType
-    c: string
-    java: string
-    python: string
-    cpp: string
-    questionId: number
-  }
-
-  export type BoilerPlateUpdateInput = {
-    type?: EnumBoilerTypeFieldUpdateOperationsInput | $Enums.BoilerType
-    c?: StringFieldUpdateOperationsInput | string
-    java?: StringFieldUpdateOperationsInput | string
-    python?: StringFieldUpdateOperationsInput | string
-    cpp?: StringFieldUpdateOperationsInput | string
-    question?: QuestionsUpdateOneRequiredWithoutBoilerPlateNestedInput
-  }
-
-  export type BoilerPlateUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    type?: EnumBoilerTypeFieldUpdateOperationsInput | $Enums.BoilerType
-    c?: StringFieldUpdateOperationsInput | string
-    java?: StringFieldUpdateOperationsInput | string
-    python?: StringFieldUpdateOperationsInput | string
-    cpp?: StringFieldUpdateOperationsInput | string
-    questionId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type BoilerPlateCreateManyInput = {
-    id?: number
-    type: $Enums.BoilerType
-    c: string
-    java: string
-    python: string
-    cpp: string
-    questionId: number
-  }
-
-  export type BoilerPlateUpdateManyMutationInput = {
-    type?: EnumBoilerTypeFieldUpdateOperationsInput | $Enums.BoilerType
-    c?: StringFieldUpdateOperationsInput | string
-    java?: StringFieldUpdateOperationsInput | string
-    python?: StringFieldUpdateOperationsInput | string
-    cpp?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type BoilerPlateUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    type?: EnumBoilerTypeFieldUpdateOperationsInput | $Enums.BoilerType
-    c?: StringFieldUpdateOperationsInput | string
-    java?: StringFieldUpdateOperationsInput | string
-    python?: StringFieldUpdateOperationsInput | string
-    cpp?: StringFieldUpdateOperationsInput | string
-    questionId?: IntFieldUpdateOperationsInput | number
-  }
-
   export type ContestCreateInput = {
     title: string
     opensOn: Date | string
@@ -18483,22 +17078,12 @@ export namespace Prisma {
     none?: TestCaseWhereInput
   }
 
-  export type BoilerPlateListRelationFilter = {
-    every?: BoilerPlateWhereInput
-    some?: BoilerPlateWhereInput
-    none?: BoilerPlateWhereInput
-  }
-
   export type TopicsScalarRelationFilter = {
     is?: TopicsWhereInput
     isNot?: TopicsWhereInput
   }
 
   export type TestCaseOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type BoilerPlateOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -19040,63 +17625,6 @@ export namespace Prisma {
     _max?: NestedEnumCommentTypeFilter<$PrismaModel>
   }
 
-  export type EnumBoilerTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.BoilerType | EnumBoilerTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.BoilerType[] | ListEnumBoilerTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.BoilerType[] | ListEnumBoilerTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumBoilerTypeFilter<$PrismaModel> | $Enums.BoilerType
-  }
-
-  export type BoilerPlateCountOrderByAggregateInput = {
-    id?: SortOrder
-    type?: SortOrder
-    c?: SortOrder
-    java?: SortOrder
-    python?: SortOrder
-    cpp?: SortOrder
-    questionId?: SortOrder
-  }
-
-  export type BoilerPlateAvgOrderByAggregateInput = {
-    id?: SortOrder
-    questionId?: SortOrder
-  }
-
-  export type BoilerPlateMaxOrderByAggregateInput = {
-    id?: SortOrder
-    type?: SortOrder
-    c?: SortOrder
-    java?: SortOrder
-    python?: SortOrder
-    cpp?: SortOrder
-    questionId?: SortOrder
-  }
-
-  export type BoilerPlateMinOrderByAggregateInput = {
-    id?: SortOrder
-    type?: SortOrder
-    c?: SortOrder
-    java?: SortOrder
-    python?: SortOrder
-    cpp?: SortOrder
-    questionId?: SortOrder
-  }
-
-  export type BoilerPlateSumOrderByAggregateInput = {
-    id?: SortOrder
-    questionId?: SortOrder
-  }
-
-  export type EnumBoilerTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.BoilerType | EnumBoilerTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.BoilerType[] | ListEnumBoilerTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.BoilerType[] | ListEnumBoilerTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumBoilerTypeWithAggregatesFilter<$PrismaModel> | $Enums.BoilerType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumBoilerTypeFilter<$PrismaModel>
-    _max?: NestedEnumBoilerTypeFilter<$PrismaModel>
-  }
-
   export type ContestCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
@@ -19423,13 +17951,6 @@ export namespace Prisma {
     connect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
   }
 
-  export type BoilerPlateCreateNestedManyWithoutQuestionInput = {
-    create?: XOR<BoilerPlateCreateWithoutQuestionInput, BoilerPlateUncheckedCreateWithoutQuestionInput> | BoilerPlateCreateWithoutQuestionInput[] | BoilerPlateUncheckedCreateWithoutQuestionInput[]
-    connectOrCreate?: BoilerPlateCreateOrConnectWithoutQuestionInput | BoilerPlateCreateOrConnectWithoutQuestionInput[]
-    createMany?: BoilerPlateCreateManyQuestionInputEnvelope
-    connect?: BoilerPlateWhereUniqueInput | BoilerPlateWhereUniqueInput[]
-  }
-
   export type TopicsCreateNestedOneWithoutQuestionInput = {
     create?: XOR<TopicsCreateWithoutQuestionInput, TopicsUncheckedCreateWithoutQuestionInput>
     connectOrCreate?: TopicsCreateOrConnectWithoutQuestionInput
@@ -19461,13 +17982,6 @@ export namespace Prisma {
     connectOrCreate?: DiscussionsCreateOrConnectWithoutQuestionInput | DiscussionsCreateOrConnectWithoutQuestionInput[]
     createMany?: DiscussionsCreateManyQuestionInputEnvelope
     connect?: DiscussionsWhereUniqueInput | DiscussionsWhereUniqueInput[]
-  }
-
-  export type BoilerPlateUncheckedCreateNestedManyWithoutQuestionInput = {
-    create?: XOR<BoilerPlateCreateWithoutQuestionInput, BoilerPlateUncheckedCreateWithoutQuestionInput> | BoilerPlateCreateWithoutQuestionInput[] | BoilerPlateUncheckedCreateWithoutQuestionInput[]
-    connectOrCreate?: BoilerPlateCreateOrConnectWithoutQuestionInput | BoilerPlateCreateOrConnectWithoutQuestionInput[]
-    createMany?: BoilerPlateCreateManyQuestionInputEnvelope
-    connect?: BoilerPlateWhereUniqueInput | BoilerPlateWhereUniqueInput[]
   }
 
   export type EnumDifficultyTypeFieldUpdateOperationsInput = {
@@ -19518,20 +18032,6 @@ export namespace Prisma {
     update?: DiscussionsUpdateWithWhereUniqueWithoutQuestionInput | DiscussionsUpdateWithWhereUniqueWithoutQuestionInput[]
     updateMany?: DiscussionsUpdateManyWithWhereWithoutQuestionInput | DiscussionsUpdateManyWithWhereWithoutQuestionInput[]
     deleteMany?: DiscussionsScalarWhereInput | DiscussionsScalarWhereInput[]
-  }
-
-  export type BoilerPlateUpdateManyWithoutQuestionNestedInput = {
-    create?: XOR<BoilerPlateCreateWithoutQuestionInput, BoilerPlateUncheckedCreateWithoutQuestionInput> | BoilerPlateCreateWithoutQuestionInput[] | BoilerPlateUncheckedCreateWithoutQuestionInput[]
-    connectOrCreate?: BoilerPlateCreateOrConnectWithoutQuestionInput | BoilerPlateCreateOrConnectWithoutQuestionInput[]
-    upsert?: BoilerPlateUpsertWithWhereUniqueWithoutQuestionInput | BoilerPlateUpsertWithWhereUniqueWithoutQuestionInput[]
-    createMany?: BoilerPlateCreateManyQuestionInputEnvelope
-    set?: BoilerPlateWhereUniqueInput | BoilerPlateWhereUniqueInput[]
-    disconnect?: BoilerPlateWhereUniqueInput | BoilerPlateWhereUniqueInput[]
-    delete?: BoilerPlateWhereUniqueInput | BoilerPlateWhereUniqueInput[]
-    connect?: BoilerPlateWhereUniqueInput | BoilerPlateWhereUniqueInput[]
-    update?: BoilerPlateUpdateWithWhereUniqueWithoutQuestionInput | BoilerPlateUpdateWithWhereUniqueWithoutQuestionInput[]
-    updateMany?: BoilerPlateUpdateManyWithWhereWithoutQuestionInput | BoilerPlateUpdateManyWithWhereWithoutQuestionInput[]
-    deleteMany?: BoilerPlateScalarWhereInput | BoilerPlateScalarWhereInput[]
   }
 
   export type TopicsUpdateOneRequiredWithoutQuestionNestedInput = {
@@ -19600,20 +18100,6 @@ export namespace Prisma {
     update?: DiscussionsUpdateWithWhereUniqueWithoutQuestionInput | DiscussionsUpdateWithWhereUniqueWithoutQuestionInput[]
     updateMany?: DiscussionsUpdateManyWithWhereWithoutQuestionInput | DiscussionsUpdateManyWithWhereWithoutQuestionInput[]
     deleteMany?: DiscussionsScalarWhereInput | DiscussionsScalarWhereInput[]
-  }
-
-  export type BoilerPlateUncheckedUpdateManyWithoutQuestionNestedInput = {
-    create?: XOR<BoilerPlateCreateWithoutQuestionInput, BoilerPlateUncheckedCreateWithoutQuestionInput> | BoilerPlateCreateWithoutQuestionInput[] | BoilerPlateUncheckedCreateWithoutQuestionInput[]
-    connectOrCreate?: BoilerPlateCreateOrConnectWithoutQuestionInput | BoilerPlateCreateOrConnectWithoutQuestionInput[]
-    upsert?: BoilerPlateUpsertWithWhereUniqueWithoutQuestionInput | BoilerPlateUpsertWithWhereUniqueWithoutQuestionInput[]
-    createMany?: BoilerPlateCreateManyQuestionInputEnvelope
-    set?: BoilerPlateWhereUniqueInput | BoilerPlateWhereUniqueInput[]
-    disconnect?: BoilerPlateWhereUniqueInput | BoilerPlateWhereUniqueInput[]
-    delete?: BoilerPlateWhereUniqueInput | BoilerPlateWhereUniqueInput[]
-    connect?: BoilerPlateWhereUniqueInput | BoilerPlateWhereUniqueInput[]
-    update?: BoilerPlateUpdateWithWhereUniqueWithoutQuestionInput | BoilerPlateUpdateWithWhereUniqueWithoutQuestionInput[]
-    updateMany?: BoilerPlateUpdateManyWithWhereWithoutQuestionInput | BoilerPlateUpdateManyWithWhereWithoutQuestionInput[]
-    deleteMany?: BoilerPlateScalarWhereInput | BoilerPlateScalarWhereInput[]
   }
 
   export type QuestionsCreateNestedOneWithoutTestCaseInput = {
@@ -19856,24 +18342,6 @@ export namespace Prisma {
     update?: DiscussionsUpdateWithWhereUniqueWithoutToWhomIReplyInput | DiscussionsUpdateWithWhereUniqueWithoutToWhomIReplyInput[]
     updateMany?: DiscussionsUpdateManyWithWhereWithoutToWhomIReplyInput | DiscussionsUpdateManyWithWhereWithoutToWhomIReplyInput[]
     deleteMany?: DiscussionsScalarWhereInput | DiscussionsScalarWhereInput[]
-  }
-
-  export type QuestionsCreateNestedOneWithoutBoilerPlateInput = {
-    create?: XOR<QuestionsCreateWithoutBoilerPlateInput, QuestionsUncheckedCreateWithoutBoilerPlateInput>
-    connectOrCreate?: QuestionsCreateOrConnectWithoutBoilerPlateInput
-    connect?: QuestionsWhereUniqueInput
-  }
-
-  export type EnumBoilerTypeFieldUpdateOperationsInput = {
-    set?: $Enums.BoilerType
-  }
-
-  export type QuestionsUpdateOneRequiredWithoutBoilerPlateNestedInput = {
-    create?: XOR<QuestionsCreateWithoutBoilerPlateInput, QuestionsUncheckedCreateWithoutBoilerPlateInput>
-    connectOrCreate?: QuestionsCreateOrConnectWithoutBoilerPlateInput
-    upsert?: QuestionsUpsertWithoutBoilerPlateInput
-    connect?: QuestionsWhereUniqueInput
-    update?: XOR<XOR<QuestionsUpdateToOneWithWhereWithoutBoilerPlateInput, QuestionsUpdateWithoutBoilerPlateInput>, QuestionsUncheckedUpdateWithoutBoilerPlateInput>
   }
 
   export type QuestionsCreateNestedManyWithoutContestInput = {
@@ -20273,23 +18741,6 @@ export namespace Prisma {
     _max?: NestedEnumCommentTypeFilter<$PrismaModel>
   }
 
-  export type NestedEnumBoilerTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.BoilerType | EnumBoilerTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.BoilerType[] | ListEnumBoilerTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.BoilerType[] | ListEnumBoilerTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumBoilerTypeFilter<$PrismaModel> | $Enums.BoilerType
-  }
-
-  export type NestedEnumBoilerTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.BoilerType | EnumBoilerTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.BoilerType[] | ListEnumBoilerTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.BoilerType[] | ListEnumBoilerTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumBoilerTypeWithAggregatesFilter<$PrismaModel> | $Enums.BoilerType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumBoilerTypeFilter<$PrismaModel>
-    _max?: NestedEnumBoilerTypeFilter<$PrismaModel>
-  }
-
   export type SubmissionCreateWithoutStudentInput = {
     startTime: Date | string
     maxTimeToSolve: Date | string
@@ -20527,7 +18978,6 @@ export namespace Prisma {
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
-    boilerPlate?: BoilerPlateCreateNestedManyWithoutQuestionInput
     contest?: ContestCreateNestedOneWithoutQuestionInput
   }
 
@@ -20547,7 +18997,6 @@ export namespace Prisma {
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
-    boilerPlate?: BoilerPlateUncheckedCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionsCreateOrConnectWithoutTopicsInput = {
@@ -20748,33 +19197,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type BoilerPlateCreateWithoutQuestionInput = {
-    type: $Enums.BoilerType
-    c: string
-    java: string
-    python: string
-    cpp: string
-  }
-
-  export type BoilerPlateUncheckedCreateWithoutQuestionInput = {
-    id?: number
-    type: $Enums.BoilerType
-    c: string
-    java: string
-    python: string
-    cpp: string
-  }
-
-  export type BoilerPlateCreateOrConnectWithoutQuestionInput = {
-    where: BoilerPlateWhereUniqueInput
-    create: XOR<BoilerPlateCreateWithoutQuestionInput, BoilerPlateUncheckedCreateWithoutQuestionInput>
-  }
-
-  export type BoilerPlateCreateManyQuestionInputEnvelope = {
-    data: BoilerPlateCreateManyQuestionInput | BoilerPlateCreateManyQuestionInput[]
-    skipDuplicates?: boolean
-  }
-
   export type TopicsCreateWithoutQuestionInput = {
     name: string
     description?: string | null
@@ -20882,35 +19304,6 @@ export namespace Prisma {
     data: XOR<DiscussionsUpdateManyMutationInput, DiscussionsUncheckedUpdateManyWithoutQuestionInput>
   }
 
-  export type BoilerPlateUpsertWithWhereUniqueWithoutQuestionInput = {
-    where: BoilerPlateWhereUniqueInput
-    update: XOR<BoilerPlateUpdateWithoutQuestionInput, BoilerPlateUncheckedUpdateWithoutQuestionInput>
-    create: XOR<BoilerPlateCreateWithoutQuestionInput, BoilerPlateUncheckedCreateWithoutQuestionInput>
-  }
-
-  export type BoilerPlateUpdateWithWhereUniqueWithoutQuestionInput = {
-    where: BoilerPlateWhereUniqueInput
-    data: XOR<BoilerPlateUpdateWithoutQuestionInput, BoilerPlateUncheckedUpdateWithoutQuestionInput>
-  }
-
-  export type BoilerPlateUpdateManyWithWhereWithoutQuestionInput = {
-    where: BoilerPlateScalarWhereInput
-    data: XOR<BoilerPlateUpdateManyMutationInput, BoilerPlateUncheckedUpdateManyWithoutQuestionInput>
-  }
-
-  export type BoilerPlateScalarWhereInput = {
-    AND?: BoilerPlateScalarWhereInput | BoilerPlateScalarWhereInput[]
-    OR?: BoilerPlateScalarWhereInput[]
-    NOT?: BoilerPlateScalarWhereInput | BoilerPlateScalarWhereInput[]
-    id?: IntFilter<"BoilerPlate"> | number
-    type?: EnumBoilerTypeFilter<"BoilerPlate"> | $Enums.BoilerType
-    c?: StringFilter<"BoilerPlate"> | string
-    java?: StringFilter<"BoilerPlate"> | string
-    python?: StringFilter<"BoilerPlate"> | string
-    cpp?: StringFilter<"BoilerPlate"> | string
-    questionId?: IntFilter<"BoilerPlate"> | number
-  }
-
   export type TopicsUpsertWithoutQuestionInput = {
     update: XOR<TopicsUpdateWithoutQuestionInput, TopicsUncheckedUpdateWithoutQuestionInput>
     create: XOR<TopicsCreateWithoutQuestionInput, TopicsUncheckedCreateWithoutQuestionInput>
@@ -20984,7 +19377,6 @@ export namespace Prisma {
     timeToSolveInMinutes: number
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
-    boilerPlate?: BoilerPlateCreateNestedManyWithoutQuestionInput
     topics: TopicsCreateNestedOneWithoutQuestionInput
     contest?: ContestCreateNestedOneWithoutQuestionInput
   }
@@ -21005,7 +19397,6 @@ export namespace Prisma {
     contestId?: number | null
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
-    boilerPlate?: BoilerPlateUncheckedCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionsCreateOrConnectWithoutTestCaseInput = {
@@ -21037,7 +19428,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
-    boilerPlate?: BoilerPlateUpdateManyWithoutQuestionNestedInput
     topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
     contest?: ContestUpdateOneWithoutQuestionNestedInput
   }
@@ -21058,7 +19448,6 @@ export namespace Prisma {
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
-    boilerPlate?: BoilerPlateUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
   export type QuestionsCreateWithoutSubmissionInput = {
@@ -21074,7 +19463,6 @@ export namespace Prisma {
     timeToSolveInMinutes: number
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
-    boilerPlate?: BoilerPlateCreateNestedManyWithoutQuestionInput
     topics: TopicsCreateNestedOneWithoutQuestionInput
     contest?: ContestCreateNestedOneWithoutQuestionInput
   }
@@ -21095,7 +19483,6 @@ export namespace Prisma {
     contestId?: number | null
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
-    boilerPlate?: BoilerPlateUncheckedCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionsCreateOrConnectWithoutSubmissionInput = {
@@ -21159,7 +19546,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
-    boilerPlate?: BoilerPlateUpdateManyWithoutQuestionNestedInput
     topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
     contest?: ContestUpdateOneWithoutQuestionNestedInput
   }
@@ -21180,7 +19566,6 @@ export namespace Prisma {
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
-    boilerPlate?: BoilerPlateUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
   export type StudentUpsertWithoutSubmissionInput = {
@@ -21481,7 +19866,6 @@ export namespace Prisma {
     timeToSolveInMinutes: number
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
-    boilerPlate?: BoilerPlateCreateNestedManyWithoutQuestionInput
     topics: TopicsCreateNestedOneWithoutQuestionInput
     contest?: ContestCreateNestedOneWithoutQuestionInput
   }
@@ -21502,7 +19886,6 @@ export namespace Prisma {
     contestId?: number | null
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
-    boilerPlate?: BoilerPlateUncheckedCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionsCreateOrConnectWithoutDiscussionInput = {
@@ -21621,7 +20004,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
-    boilerPlate?: BoilerPlateUpdateManyWithoutQuestionNestedInput
     topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
     contest?: ContestUpdateOneWithoutQuestionNestedInput
   }
@@ -21642,7 +20024,6 @@ export namespace Prisma {
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
-    boilerPlate?: BoilerPlateUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
   export type DiscussionsUpsertWithoutRepliesIGetInput = {
@@ -21689,96 +20070,6 @@ export namespace Prisma {
     data: XOR<DiscussionsUpdateManyMutationInput, DiscussionsUncheckedUpdateManyWithoutToWhomIReplyInput>
   }
 
-  export type QuestionsCreateWithoutBoilerPlateInput = {
-    title: string
-    description?: string | null
-    noOfHiddenTestCases?: number
-    noOfExternalTestCases?: number
-    difficulty?: $Enums.DifficultyType
-    pointsPerTestCaseSolved: number
-    type?: $Enums.QuestionType
-    leetCodeLink?: string | null
-    leetCodeTitle?: string | null
-    timeToSolveInMinutes: number
-    testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
-    submission?: SubmissionCreateNestedManyWithoutQuestionsInput
-    discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
-    topics: TopicsCreateNestedOneWithoutQuestionInput
-    contest?: ContestCreateNestedOneWithoutQuestionInput
-  }
-
-  export type QuestionsUncheckedCreateWithoutBoilerPlateInput = {
-    id?: number
-    title: string
-    description?: string | null
-    topic: number
-    noOfHiddenTestCases?: number
-    noOfExternalTestCases?: number
-    difficulty?: $Enums.DifficultyType
-    pointsPerTestCaseSolved: number
-    type?: $Enums.QuestionType
-    leetCodeLink?: string | null
-    leetCodeTitle?: string | null
-    timeToSolveInMinutes: number
-    contestId?: number | null
-    testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
-    submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
-    discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
-  }
-
-  export type QuestionsCreateOrConnectWithoutBoilerPlateInput = {
-    where: QuestionsWhereUniqueInput
-    create: XOR<QuestionsCreateWithoutBoilerPlateInput, QuestionsUncheckedCreateWithoutBoilerPlateInput>
-  }
-
-  export type QuestionsUpsertWithoutBoilerPlateInput = {
-    update: XOR<QuestionsUpdateWithoutBoilerPlateInput, QuestionsUncheckedUpdateWithoutBoilerPlateInput>
-    create: XOR<QuestionsCreateWithoutBoilerPlateInput, QuestionsUncheckedCreateWithoutBoilerPlateInput>
-    where?: QuestionsWhereInput
-  }
-
-  export type QuestionsUpdateToOneWithWhereWithoutBoilerPlateInput = {
-    where?: QuestionsWhereInput
-    data: XOR<QuestionsUpdateWithoutBoilerPlateInput, QuestionsUncheckedUpdateWithoutBoilerPlateInput>
-  }
-
-  export type QuestionsUpdateWithoutBoilerPlateInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
-    noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
-    difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
-    pointsPerTestCaseSolved?: IntFieldUpdateOperationsInput | number
-    type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
-    leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
-    leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
-    testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
-    submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
-    discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
-    topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
-    contest?: ContestUpdateOneWithoutQuestionNestedInput
-  }
-
-  export type QuestionsUncheckedUpdateWithoutBoilerPlateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    topic?: IntFieldUpdateOperationsInput | number
-    noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
-    noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
-    difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
-    pointsPerTestCaseSolved?: IntFieldUpdateOperationsInput | number
-    type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
-    leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
-    leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
-    contestId?: NullableIntFieldUpdateOperationsInput | number | null
-    testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
-    submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
-    discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
-  }
-
   export type QuestionsCreateWithoutContestInput = {
     title: string
     description?: string | null
@@ -21793,7 +20084,6 @@ export namespace Prisma {
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
-    boilerPlate?: BoilerPlateCreateNestedManyWithoutQuestionInput
     topics: TopicsCreateNestedOneWithoutQuestionInput
   }
 
@@ -21813,7 +20103,6 @@ export namespace Prisma {
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
-    boilerPlate?: BoilerPlateUncheckedCreateNestedManyWithoutQuestionInput
   }
 
   export type QuestionsCreateOrConnectWithoutContestInput = {
@@ -22048,7 +20337,6 @@ export namespace Prisma {
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
-    boilerPlate?: BoilerPlateUpdateManyWithoutQuestionNestedInput
     contest?: ContestUpdateOneWithoutQuestionNestedInput
   }
 
@@ -22068,7 +20356,6 @@ export namespace Prisma {
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
-    boilerPlate?: BoilerPlateUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
   export type QuestionsUncheckedUpdateManyWithoutTopicsInput = {
@@ -22117,15 +20404,6 @@ export namespace Prisma {
     type?: $Enums.CommentType
     repliedTo?: number | null
     timeOfComment: Date | string
-  }
-
-  export type BoilerPlateCreateManyQuestionInput = {
-    id?: number
-    type: $Enums.BoilerType
-    c: string
-    java: string
-    python: string
-    cpp: string
   }
 
   export type TestCaseUpdateWithoutQuestionsInput = {
@@ -22226,32 +20504,6 @@ export namespace Prisma {
     timeOfComment?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type BoilerPlateUpdateWithoutQuestionInput = {
-    type?: EnumBoilerTypeFieldUpdateOperationsInput | $Enums.BoilerType
-    c?: StringFieldUpdateOperationsInput | string
-    java?: StringFieldUpdateOperationsInput | string
-    python?: StringFieldUpdateOperationsInput | string
-    cpp?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type BoilerPlateUncheckedUpdateWithoutQuestionInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    type?: EnumBoilerTypeFieldUpdateOperationsInput | $Enums.BoilerType
-    c?: StringFieldUpdateOperationsInput | string
-    java?: StringFieldUpdateOperationsInput | string
-    python?: StringFieldUpdateOperationsInput | string
-    cpp?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type BoilerPlateUncheckedUpdateManyWithoutQuestionInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    type?: EnumBoilerTypeFieldUpdateOperationsInput | $Enums.BoilerType
-    c?: StringFieldUpdateOperationsInput | string
-    java?: StringFieldUpdateOperationsInput | string
-    python?: StringFieldUpdateOperationsInput | string
-    cpp?: StringFieldUpdateOperationsInput | string
-  }
-
   export type StudentAchievementsCreateManyAchievementsInput = {
     id?: number
     studentId: number
@@ -22337,7 +20589,6 @@ export namespace Prisma {
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
-    boilerPlate?: BoilerPlateUpdateManyWithoutQuestionNestedInput
     topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
   }
 
@@ -22357,7 +20608,6 @@ export namespace Prisma {
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
-    boilerPlate?: BoilerPlateUncheckedUpdateManyWithoutQuestionNestedInput
   }
 
   export type QuestionsUncheckedUpdateManyWithoutContestInput = {

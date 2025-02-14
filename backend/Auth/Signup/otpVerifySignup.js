@@ -57,7 +57,7 @@ async function verifyOTPforSignUp(req,res) {
             const achievements = await prisma.studentAchievements.create({
                 data:{
                     studentId: std.id,
-                    achievementId: 1,
+                    achievementId: 34,
                     count: 0
                 }
             })

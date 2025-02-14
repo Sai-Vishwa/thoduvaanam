@@ -5,26 +5,33 @@ const { prun } = require('./prun');
 const prisma = new PrismaClient();
 
 async function PythonMain(allData) {
+    console.log("inside py main -")
     try {
         const testCases = await prisma.testCase.findMany({
             where: { questionId: allData.qId }
         });
 
-        const question = await prisma.questions.findUnique({
+        const question = await prisma.questions.findFirst({
             where: { id: allData.qId },
-            // include: {
-            //     boilerPlate: {
-            //         where: { language: allData.lang }
-            //     }
-            // }
+            include: {
+                boilerPlate: {
+                    where: {
+                        type:"MAIN"
+                    },
+                    select:{
+                        python:true
+                    }
+                }
+            }
         });
 
-        const fileName = `Submission_${allData.submissionId}`;
-        const cp = await pcopy(allData, fileName);
+        const fileName = `Submission_${allData.uname}_${allData.qname}`;
+        console.log("gonna copy")
+        const cp = await pcopy(allData, fileName , question.boilerPlate[0].python);
         if (cp == -1) {
             return { status: -1, err: "File copy error" };
         }
-
+        console.log("copy success")
         let count = 0;
         let op1 = "", op2 = "";
         
@@ -37,6 +44,7 @@ async function PythonMain(allData) {
                 return runOP;
             })
         );
+        console.log("run success")
 
         return {
             status: 0,
@@ -57,15 +65,15 @@ async function PythonMain(allData) {
 async function caller() {
     const ans = await PythonMain({qId:23,submissionId:201 ,lang:"py" , 
         code:`
-a = eval(input())
-s=0
-for i in a:
-        s+=int(i)
-print(s)` });
+a = int(input())
+b = int(input())
+s= a+b
+print(s)
+` });
     console.log(ans);
 }
 
-// caller();
+caller();
 
 module.exports = {
     PythonMain

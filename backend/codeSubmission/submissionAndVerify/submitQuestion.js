@@ -32,7 +32,7 @@ async function codeSubmission(req,res) {
                     where:{
                         AND:[
                             {studentId:sid},
-                            {achievementId:1}
+                            {achievementId:34}
                         ]
                     },
                     data:{

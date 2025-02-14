@@ -19,7 +19,7 @@ async function JavaMain(allData) {
             // }
         });
 
-        const fileName = `Submission_${allData.submissionId}`;
+        const fileName = `Submission_${allData.uname}_${allData.qname}`;
         const cp = await jcopy(allData, fileName);
         if (cp == -1) {
             return { status: -1, err: "File copy error" };
