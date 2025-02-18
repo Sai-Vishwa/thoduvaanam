@@ -32,14 +32,6 @@ async function startSolvingContest(req,res) {
                     select:{
                         id:true,
                         title:true,
-                        boilerPlate:{
-                            select:{
-                                java:true,
-                            },
-                            where:{
-                                type:"TO_USER"
-                            }
-                        }
                     }
                 }
             }
@@ -106,7 +98,7 @@ async function startSolvingContest(req,res) {
                 studentId:session.id,
                 startTime:now,
                 maxTimeToSolve:end,
-                code:q.boilerPlate[0].java,
+                code:"",
                 language:"JAVA"
                     
             }

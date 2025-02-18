@@ -111,7 +111,7 @@ model Questions {
   type QuestionType @default(PRACTICE)
   leetCodeLink String?
   leetCodeTitle String?
-  timeToSolveInMinutes Int
+  timeToSolveInMinutes Int?
   contestId Int?
 
   //relationships

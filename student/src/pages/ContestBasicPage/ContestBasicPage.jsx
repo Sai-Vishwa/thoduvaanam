@@ -77,7 +77,10 @@ function ContestBasicPage() {
   }, [])
 
   const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleString('en-US', {
+
+    const wr = new Date(dateString)
+    
+    return new Date(wr.getTime()-5.5*60*60*1000).toLocaleString('en-US', {
       dateStyle: 'medium',
       timeStyle: 'short'
     })

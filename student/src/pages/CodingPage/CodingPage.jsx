@@ -21,7 +21,7 @@ const CodingPage = () => {
     minutes: 0,
     seconds: 0,
     testCase: [],
-    boiler: []
+    boiler:[]
   });
 
   // Fetch initial data

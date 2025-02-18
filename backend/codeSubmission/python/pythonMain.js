@@ -13,21 +13,12 @@ async function PythonMain(allData) {
 
         const question = await prisma.questions.findFirst({
             where: { id: allData.qId },
-            include: {
-                boilerPlate: {
-                    where: {
-                        type:"MAIN"
-                    },
-                    select:{
-                        python:true
-                    }
-                }
-            }
+            
         });
 
         const fileName = `Submission_${allData.uname}_${allData.qname}`;
         console.log("gonna copy")
-        const cp = await pcopy(allData, fileName , question.boilerPlate[0].python);
+        const cp = await pcopy(allData, fileName );
         if (cp == -1) {
             return { status: -1, err: "File copy error" };
         }

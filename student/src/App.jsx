@@ -13,6 +13,7 @@ import ReviewQuestionPage from './pages/ReviewQuestionPage/ReviewQuestionPage'
 import ReviewContestPage from './pages/ReviewContestPage/ReviewContestPage'
 import ContestHandlerPage from './pages/ContestHandlerPage/ContestHandlerPage'
 import DummyPage from './pages/CodingPage/dummy'
+import TextScramble from './pages/dummy'
 
 function App() {
 
@@ -32,6 +33,8 @@ function App() {
         <Route path='/:uname/review-contest/:tname' element={<ReviewContestPage />} />
         <Route path='*' element={<Navigate to={"/:uname"} />} />
         <Route path='/:uname/dummy/:tname/:qname' element={<DummyPage />} />
+        <Route path='/hi' element={<TextScramble />} />
+
       </Routes>
     </BrowserRouter>
   )

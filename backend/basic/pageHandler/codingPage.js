@@ -33,14 +33,7 @@ async function codingPage(req,res) {
                 ]
             }
         })
-        const boiler = await prisma.boilerPlate.findMany({
-            where:{
-                AND:[
-                    {questionId:qid.id},
-                    {type:"TO_USER"}
-                ]
-            }
-        })
+        // 
         const tc = await prisma.testCase.findMany({
             where:{
                 AND:[
@@ -74,7 +67,7 @@ async function codingPage(req,res) {
             minutes:diffMinutes,
             seconds:remainingSeconds,
             testCase:tc,
-            boiler:boiler
+            
         }
         console.log(d)
         res.status(200).json({
@@ -83,7 +76,7 @@ async function codingPage(req,res) {
             minutes:diffMinutes,
             seconds:remainingSeconds,
             testCase:tc,
-            boiler:boiler
+            
         })
     }
     catch(error){

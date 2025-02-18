@@ -30,7 +30,7 @@ const TopicCard = ({ topic, isSelected, onTopicClick }) => {
         <div>
           <h3 className="text-xl font-semibold text-white mb-2">{topic.name}</h3>
           <p className="text-gray-400 text-sm">
-            {topic.question.length} Questions Available
+            3 Questions Available
           </p>
         </div>
         <div className="flex space-x-2 items-center">
@@ -131,7 +131,7 @@ function HomePage() {
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-center mb-2">Available Topics</h1>
           <p className="text-gray-400 text-center">
-            Select a topic to view its questions or attend a contest
+            Select a topic to attend its contest
           </p>
         </div>
 

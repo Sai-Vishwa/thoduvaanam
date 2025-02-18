@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+
+:root,
+
+
+.out {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.in {
+  background: 50% 100% / 0% 0% no-repeat
+              radial-gradient(ellipse at bottom, #000015 20%, rgba(255, 255, 255, 0.5) 50%, transparent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: "Source Sans Pro", sans-serif;
+  animation: reveal 4000ms ease-in-out forwards 200ms,
+             glow 2500ms linear infinite 2000ms;
+}
+
+@keyframes reveal {
+  80% {
+    letter-spacing: 8px;
+  }
+  100% {
+    background-size: 1000% 1000%;
+  }
+}

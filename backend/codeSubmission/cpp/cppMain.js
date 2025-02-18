@@ -13,11 +13,7 @@ async function cppMain(allData) {
 
         const question = await prisma.questions.findUnique({
             where: { id: allData.qId },
-            // include: {
-            //     boilerPlate: {
-            //         where: { language: allData.lang }
-            //     }
-            // }
+            //
         });
 
         const fileName = `Submission_${allData.submissionId}`;
