@@ -5,7 +5,7 @@ import Button from "../../components/HelloPageComponents/Buttons/Button";
 
 function HelloPage() {
   return (
-    <div className="w-screen h-screen min-h-[220px] overflow-hidden bg-white flex justify-around lg:items-center lg:p-0 md:items-center xs:p-[80px] xs:items-start   text-[#000015]">
+    <div className="w-screen h-screen min-h-[220px] overflow-hidden bg-white flex justify-evenly lg:items-center lg:p-0 md:items-center xs:p-[80px] xs:items-start   text-[#000015]">
        
         <div className="block">
             
@@ -29,7 +29,7 @@ function HelloPage() {
             <Button />
 
         </div>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center mb-12 ">
             
             <motion.img
                 src="jiji2.png"

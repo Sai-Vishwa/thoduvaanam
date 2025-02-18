@@ -1,6 +1,6 @@
 .Container{
     height:100vh;
-    background-color: transparent;
+    background-color: #fff;
   }
 .BoxContainer{
     background-color: transparent;
@@ -12,7 +12,7 @@
      height:96%;
 }
 .heading{
-    background-color:  rgba(4, 1, 38, 0.905);
+    background-color: #fff;
     color:white;
     text-align:center;
     width:55%;
