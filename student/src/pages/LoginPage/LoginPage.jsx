@@ -105,13 +105,17 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen min-w-screen overflow-hidden bg-white flex items-center justify-center font-mono re">
+    <div className="min-h-screen min-w-screen overflow-hidden bg-white flex items-center justify-center font-mono">
+      
       <motion.div 
-        className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full border-2 border-[#000015]"
+        className="bg-white p-8 rounded-lg shadow-lg mx-10 max-w-md w-full border-2 border-[#000015] border-t-[6px] relative"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
+        <motion.div className='absolute transform top-0 right-0 translate-x-0 -translate-y-[70px]'>
+          <img src="/download__5_-removebg-preview.png" alt="" className='w-[120px]'/>
+        </motion.div>
         <div className="text-center mb-8">
           <motion.h1 
             className="text-4xl font-bold text-[#000015]"

@@ -85,7 +85,7 @@ const SubTitle = () => {
 
   return (
     <div className="container mt-0">
-      <div className="text " ref={textRef}></div>
+      <div className="text text-nowrap" ref={textRef}></div>
     </div>
   );
 };

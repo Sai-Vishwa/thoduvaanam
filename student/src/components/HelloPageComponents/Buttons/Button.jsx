@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Button() {
     const nav = useNavigate();
     return (
-        <div className="flex w-full h-full items-center justify-between">
+        <div className="flex w-full h-full items-center ">
             <motion.div 
                 className="button-container-2"
                 initial={{ x: -100, opacity: 0 }}
