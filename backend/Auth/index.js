@@ -16,3 +16,9 @@ app.listen(port, () => {
   console.log(`Signup and Login is running at http://localhost:${port}`);
 })
 
+app.post("/hi",(req,res)=>{
+  res.status(200).json({
+    hi:"hi"
+  })
+})
+

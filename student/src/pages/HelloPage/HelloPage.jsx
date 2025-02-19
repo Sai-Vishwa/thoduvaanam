@@ -8,6 +8,18 @@ function HelloPage() {
     <div className="w-screen h-screen min-h-[220px] overflow-hidden bg-white flex justify-evenly lg:items-center lg:p-0 md:items-center xs:p-[80px] xs:items-start   text-[#000015]">
        
         <div className="block">
+
+        <div className="flex items-center justify-center mb-12 xl:hidden lg:hidden md:hidden">
+            
+            <motion.img
+                src="jiji2.png"
+                alt="Your Image"
+                className="w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 object-cover"
+                initial={{ opacity: 0, y: "-100vw" }} // Start completely outside (right)
+                animate={{ opacity: 1, y: 0 }} // Move to center
+                transition={{ duration: 3, ease: "easeOut" ,}} // Smooth movement
+            />
+        </div>
             
                 <motion.div
                 className="w-full flex items-center justify-center lg:text-8xl xs:text-5xl md:text-6xl sm:text-5xl"
@@ -29,7 +41,7 @@ function HelloPage() {
             <Button />
 
         </div>
-        <div className="flex items-center justify-center mb-12 ">
+        <div className="flex items-center justify-center mb-12 xs:hidden sm:hidden md:flex">
             
             <motion.img
                 src="jiji2.png"

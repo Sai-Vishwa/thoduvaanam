@@ -10,7 +10,7 @@ function Button() {
                 className="button-container-2"
                 initial={{ x: -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.6, ease: "easeInOut", delay: 4 }}
+                transition={{ duration: 1, ease: "easeInOut", delay: 3 }}
             >
                 <span className="mas">LOGIN</span>
                 <button type="button" name="Hover" onClick={()=>{nav("/login")}}>LOGIN</button>
@@ -20,7 +20,7 @@ function Button() {
                 className="button-container-2"
                 initial={{ x: 100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.6, ease: "easeInOut", delay: 4 }}
+                transition={{ duration: 1, ease: "easeInOut", delay: 3 }}
             >
                 <span className="mas">SIGN UP</span>
                 <button type="button" name="Hover" onClick={()=>{nav("/signup")}}>SIGN UP</button>
