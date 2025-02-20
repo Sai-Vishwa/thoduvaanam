@@ -185,7 +185,6 @@ model OTPStudent {
   name String 
   rno String @unique
   uname String @unique
-  leetCodeName String
   salt String
   hash String
   leetCodeProfile String?

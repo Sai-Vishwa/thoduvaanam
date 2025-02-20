@@ -8,17 +8,13 @@ const prisma = new PrismaClient();
 
 async function forgotPassword(req,res) {
     try{
-        const student = await prisma.oTPStudent.findFirst({
-            where:{
-                rno:req.body.rno
-            }
-        });
+        
         const student2 = await prisma.student.findFirst({
             where:{
                 rno:req.body.rno
             }
         })
-        if(!student || !student2){
+        if(!student2){
             res.status(200).json({
                 err:"Wrong user name or Rno"
             })
@@ -28,21 +24,27 @@ async function forgotPassword(req,res) {
             const utc = new Date();
             const now = new Date(utc.getTime()+5.5*60*60*1000);
             const exp = new Date(now.getTime()+60*60*1000);
-            const email = SendEmail(student.rno+"@rajalakshmi.edu.in",otp);
+            const email = await SendEmail(student2.rno+"@rajalakshmi.edu.in",otp);
+            delete student2.id
+            delete student2.leetCodeName
+            delete student2.timeOfLastSolve
             if(email==0){
                 res.status(400).json({
                     err:"Error sending email try again"
                 })
             }
             else{
-                const update = await prisma.oTPStudent.update({
+                const del = await prisma.oTPStudent.deleteMany({
                     where:{
-                        id:student.id
-                    },
+                        uname:student2.uname
+                    }
+                })
+                const update = await prisma.oTPStudent.create({
                     data:{
                         expiry:exp,
                         otp:otp,
-                        status:"PENDING"
+                        status:"PENDING",
+                        ...student2,
                     }
                 });
                 res.status(200).json({

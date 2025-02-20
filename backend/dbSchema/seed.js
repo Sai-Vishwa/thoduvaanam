@@ -3,21 +3,21 @@ const prisma = new PrismaClient();
 
 async function main() {
     //Insert students
-    // await prisma.student.create({
-    //     data: 
-    //         { name: 'Raj', rno: '221001031', uname: 'Raj', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' }
-    // // //         // { name: 'Rakul', rno: '220701216', uname: 'Rakul', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
-    // // //         // { name: 'Shanto', rno: '220701263', uname: 'Shanto', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' }
+    await prisma.student.create({
+        data: 
+            { name: 'Sai', rno: '220701239', uname: 'Sai', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' }
+    // //         // { name: 'Rakul', rno: '220701216', uname: 'Rakul', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
+    // //         // { name: 'Shanto', rno: '220701263', uname: 'Shanto', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' }
         
-    // });
+    });
 
 //     // console.log('Students inserted successfully');
 
     // Insert topics
-    const tomorrow830AM = new Date();
-    tomorrow830AM.setDate(tomorrow830AM.getDate() + 1);
-    tomorrow830AM.setHours(14, 0, 0, 0);
-    const now = new Date()
+    // const tomorrow830AM = new Date();
+    // tomorrow830AM.setDate(tomorrow830AM.getDate() + 1);
+    // tomorrow830AM.setHours(14, 0, 0, 0);
+    // const now = new Date()
 
     // await prisma.topics.createMany({
     //     data: [
@@ -29,359 +29,359 @@ async function main() {
 //     // console.log('Topics inserted successfully');
 
     // Fetch topics
-    const topics = await prisma.topics.findMany({ select: { id: true, name: true } });
-    const topicMap = Object.fromEntries(topics.map(t => [t.name, t.id]));
+    // const topics = await prisma.topics.findMany({ select: { id: true, name: true } });
+    // const topicMap = Object.fromEntries(topics.map(t => [t.name, t.id]));
 
 //     // Insert contests
-    const today = new Date();
-    const opensOn1 = new Date(today.setHours(14, 0, 0, 0)); // Today 10 AM
-    const closesOn1 = new Date(today.setHours(15,30, 0, 0)); // Today 11 PM
+    // const today = new Date();
+    // const opensOn1 = new Date(today.setHours(14, 0, 0, 0)); // Today 10 AM
+    // const closesOn1 = new Date(today.setHours(15,30, 0, 0)); // Today 11 PM
 
-    const opensOn2 = new Date(); // Today 10 AM
-    const closesOn2 = new Date(today.setHours(22,30, 0, 0)); // Today 11 PM
-    // const utc = new Date();
-    // const now = new Date(utc.getTime()+12.5*60*60*1000);
-    // await prisma.contest.updateMany({
-    //     data:{
-    //         closesOn:now
-    //     }
-    // })
+//     const opensOn2 = new Date(); // Today 10 AM
+//     const closesOn2 = new Date(today.setHours(22,30, 0, 0)); // Today 11 PM
+//     // const utc = new Date();
+//     // const now = new Date(utc.getTime()+12.5*60*60*1000);
+//     // await prisma.contest.updateMany({
+//     //     data:{
+//     //         closesOn:now
+//     //     }
+//     // })
 
-    await prisma.contest.createMany({
-        data: [
-            { title: 'Aadukalam_Round_2', topicId: topicMap['Aadukalam_Round_2'],opensOn: opensOn1,closesOn:closesOn1,timeToSolveInMinutes:90 , totalNoOfQuestions:3 ,totalPoints:120 },
-            { title: 'sample_test', topicId: topicMap['sample_test'], opensOn:opensOn2,closesOn: closesOn2 ,timeToSolveInMinutes:90,totalNoOfQuestions:3,totalPoints:120}
-        ]
-    });
+//     await prisma.contest.createMany({
+//         data: [
+//             { title: 'Aadukalam_Round_2', topicId: topicMap['Aadukalam_Round_2'],opensOn: opensOn1,closesOn:closesOn1,timeToSolveInMinutes:90 , totalNoOfQuestions:3 ,totalPoints:120 },
+//             { title: 'sample_test', topicId: topicMap['sample_test'], opensOn:opensOn2,closesOn: closesOn2 ,timeToSolveInMinutes:90,totalNoOfQuestions:3,totalPoints:120}
+//         ]
+//     });
 
-//     // console.log('Contests inserted successfully');
+// //     // console.log('Contests inserted successfully');
 
-//     // Fetch questions
+// //     // Fetch questions
 
-//     const topics = await prisma.topics.findMany({ select: { id: true, name: true } });
-//     const topicMap = Object.fromEntries(topics.map(t => [t.name, t.id]));
+// //     const topics = await prisma.topics.findMany({ select: { id: true, name: true } });
+// //     const topicMap = Object.fromEntries(topics.map(t => [t.name, t.id]));
 
-    const contests = await prisma.contest.findMany({ select: { id: true, title: true } });
-    const contestMap = Object.fromEntries(contests.map(t => [t.title, t.id]));
+//     const contests = await prisma.contest.findMany({ select: { id: true, title: true } });
+//     const contestMap = Object.fromEntries(contests.map(t => [t.title, t.id]));
 
-    // Insert questions
-    const questions = await prisma.questions.createMany({
-        data: [
-            { title: 'Game', description: `Alice and Bob are playing a game. There are n (n is even) integers written on a blackboard, represented by x1,x2,…,xn. There is also a given integer k and an integer score that is initially 0. The game lasts for n2 turns, in which the following events happen sequentially:
+//     // Insert questions
+//     const questions = await prisma.questions.createMany({
+//         data: [
+//             { title: 'Game', description: `Alice and Bob are playing a game. There are n (n is even) integers written on a blackboard, represented by x1,x2,…,xn. There is also a given integer k and an integer score that is initially 0. The game lasts for n2 turns, in which the following events happen sequentially:
 
-Alice selects an integer from the blackboard and erases it. Let's call Alice's chosen integer a.
-Bob selects an integer from the blackboard and erases it. Let's call Bob's chosen integer b.
-If a+b=k, add 1 to score.
-Alice is playing to minimize the score while Bob is playing to maximize the score. Assuming both players use optimal strategies, what is the score after the game ends?
+// Alice selects an integer from the blackboard and erases it. Let's call Alice's chosen integer a.
+// Bob selects an integer from the blackboard and erases it. Let's call Bob's chosen integer b.
+// If a+b=k, add 1 to score.
+// Alice is playing to minimize the score while Bob is playing to maximize the score. Assuming both players use optimal strategies, what is the score after the game ends?
 
-Input
+// Input
 
-The first line of each test case contains two integers n and k (2≤n≤2⋅105,1≤k≤2⋅n, n is even).
+// The first line of each test case contains two integers n and k (2≤n≤2⋅105,1≤k≤2⋅n, n is even).
 
-The second line of each test case contains n integers x1,x2,…,xn (1≤xi≤n) — the integers on the blackboard.
+// The second line of each test case contains n integers x1,x2,…,xn (1≤xi≤n) — the integers on the blackboard.
 
-It is guaranteed that the sum of n over all test cases does not exceed 2⋅105.
+// It is guaranteed that the sum of n over all test cases does not exceed 2⋅105.
 
-Output
-For each test case, output the score if both players play optimally.
+// Output
+// For each test case, output the score if both players play optimally.
 
-Input:
+// Input:
 
 
-4 4
-1 2 3 2
+// 4 4
+// 1 2 3 2
 
-8 15
-1 2 3 4 5 6 7 8
+// 8 15
+// 1 2 3 4 5 6 7 8
 
-6 1
-1 1 1 1 1 1
+// 6 1
+// 1 1 1 1 1 1
 
-16 9
-3 1 4 1 5 9 2 6 5 3 5 8 9 7 9 3
+// 16 9
+// 3 1 4 1 5 9 2 6 5 3 5 8 9 7 9 3
 
-Output 
+// Output 
 
-2
+// 2
 
-1
+// 1
 
-0
+// 0
 
-4
-`, topic: topicMap["sample_test"], type:"CONTEST", pointsPerTestCaseSolved:5,timeToSolveInMinutes:90, contestId:contestMap['sample_test'] },
-{ title: 'Game', description: `Alice and Bob are playing a game. There are n (n is even) integers written on a blackboard, represented by x1,x2,…,xn. There is also a given integer k and an integer score that is initially 0. The game lasts for n2 turns, in which the following events happen sequentially:
+// 4
+// `, topic: topicMap["sample_test"], type:"CONTEST", pointsPerTestCaseSolved:5,timeToSolveInMinutes:90, contestId:contestMap['sample_test'] },
+// { title: 'Game', description: `Alice and Bob are playing a game. There are n (n is even) integers written on a blackboard, represented by x1,x2,…,xn. There is also a given integer k and an integer score that is initially 0. The game lasts for n2 turns, in which the following events happen sequentially:
 
-    Alice selects an integer from the blackboard and erases it. Let's call Alice's chosen integer a.
-    Bob selects an integer from the blackboard and erases it. Let's call Bob's chosen integer b.
-    If a+b=k, add 1 to score.
-    Alice is playing to minimize the score while Bob is playing to maximize the score. Assuming both players use optimal strategies, what is the score after the game ends?
+//     Alice selects an integer from the blackboard and erases it. Let's call Alice's chosen integer a.
+//     Bob selects an integer from the blackboard and erases it. Let's call Bob's chosen integer b.
+//     If a+b=k, add 1 to score.
+//     Alice is playing to minimize the score while Bob is playing to maximize the score. Assuming both players use optimal strategies, what is the score after the game ends?
     
-    Input
+//     Input
     
-    The first line of each test case contains two integers n and k (2≤n≤2⋅105,1≤k≤2⋅n, n is even).
+//     The first line of each test case contains two integers n and k (2≤n≤2⋅105,1≤k≤2⋅n, n is even).
     
-    The second line of each test case contains n integers x1,x2,…,xn (1≤xi≤n) — the integers on the blackboard.
+//     The second line of each test case contains n integers x1,x2,…,xn (1≤xi≤n) — the integers on the blackboard.
     
-    It is guaranteed that the sum of n over all test cases does not exceed 2⋅105.
+//     It is guaranteed that the sum of n over all test cases does not exceed 2⋅105.
     
-    Output
-    For each test case, output the score if both players play optimally.
+//     Output
+//     For each test case, output the score if both players play optimally.
     
-    Input:
-    
-    
-    4 4
-    1 2 3 2
-    
-    8 15
-    1 2 3 4 5 6 7 8
-    
-    6 1
-    1 1 1 1 1 1
-    
-    16 9
-    3 1 4 1 5 9 2 6 5 3 5 8 9 7 9 3
-    
-    Output 
-    
-    2
-    
-    1
-    
-    0
-    
-    4
-    `, topic: topicMap["Aadukalam_Round_2"], type:"CONTEST", pointsPerTestCaseSolved:5,timeToSolveInMinutes:90,contestId: contestMap['sample_test'] },
-    { title: 'Direction', description: `You are given a list of spatial rules describing the relative positions of points in a 2D plane. Each rule follows the format:
-
-A <direction> B
-
-A and B are distinct points.
-<direction> is one of:
-N (North) → A is north of B
-S (South) → A is south of B
-E (East) → A is east of B
-W (West) → A is west of B
-NE (Northeast) → A is northeast of B
-NW (Northwest) → A is northwest of B
-SE (Southeast) → A is southeast of B
-SW (Southwest) → A is southwest of B
-
-Determine whether the given rules are consistent (i.e., there are no contradictions).
-If a contradiction is found, return the 1-based index of the first rule that causes the inconsistency.
-
-If all rules are consistent, return -1.
-
-Example
-Input:
-
-rules = ["A NE B", "B NE C", "C S A"]
-Explanation:
-"A NE B" → A is Northeast of B
-"B NE C" → B is Northeast of C
-"C S A" → C is South of A (Contradiction!)
-A was placed Northeast of B, which was Northeast of C.
-But C is given as South of A, which contradicts A NE B and B NE C.
-
-Output:
-
-3
-
-
-TestCase 1:
-
-rules = ["A N B", "B N C", "C N D"]
-
-Output: -1
-
-
-TestCase 2:
-
-rules = ["A N B", "B N C", "C N D"]
-Otupt
-
-2
-
-testcase:
-
-reules = ["A NE B", "B NE C", "C S A"]
-
-Output: 3
-
-TestCase:
-
-rules = ["A NW B", "B SW C", "C SE D", "D NE A"]
-
-Output: 4
-
-TestCase
-
-rules = ["X E Y", "Y E Z", "Z N W", "W W X"]
-
-Otuput: -1`, topic: topicMap['sample_test'], type: 'CONTEST' ,pointsPerTestCaseSolved:5,timeToSolveInMinutes:90,contestId: contestMap['sample_test']},
-{ title: 'Direction', description: `You are given a list of spatial rules describing the relative positions of points in a 2D plane. Each rule follows the format:
-
-    A <direction> B
-    
-    A and B are distinct points.
-    <direction> is one of:
-    N (North) → A is north of B
-    S (South) → A is south of B
-    E (East) → A is east of B
-    W (West) → A is west of B
-    NE (Northeast) → A is northeast of B
-    NW (Northwest) → A is northwest of B
-    SE (Southeast) → A is southeast of B
-    SW (Southwest) → A is southwest of B
-    
-    Determine whether the given rules are consistent (i.e., there are no contradictions).
-    If a contradiction is found, return the 1-based index of the first rule that causes the inconsistency.
-    
-    If all rules are consistent, return -1.
-    
-    Example
-    Input:
-    
-    rules = ["A NE B", "B NE C", "C S A"]
-    Explanation:
-    "A NE B" → A is Northeast of B
-    "B NE C" → B is Northeast of C
-    "C S A" → C is South of A (Contradiction!)
-    A was placed Northeast of B, which was Northeast of C.
-    But C is given as South of A, which contradicts A NE B and B NE C.
-    
-    Output:
-    
-    3
+//     Input:
     
     
-    TestCase 1:
+//     4 4
+//     1 2 3 2
     
-    rules = ["A N B", "B N C", "C N D"]
+//     8 15
+//     1 2 3 4 5 6 7 8
     
-    Output: -1
+//     6 1
+//     1 1 1 1 1 1
     
+//     16 9
+//     3 1 4 1 5 9 2 6 5 3 5 8 9 7 9 3
     
-    TestCase 2:
+//     Output 
     
-    rules = ["A N B", "B N C", "C N D"]
-    Otupt
+//     2
     
-    2
+//     1
     
-    testcase:
+//     0
     
-    reules = ["A NE B", "B NE C", "C S A"]
-    
-    Output: 3
-    
-    TestCase:
-    
-    rules = ["A NW B", "B SW C", "C SE D", "D NE A"]
-    
-    Output: 4
-    
-    TestCase
-    
-    rules = ["X E Y", "Y E Z", "Z N W", "W W X"]
-    
-    Otuput: -1`, topic: topicMap['Aadukalam_Round_2'], type: 'CONTEST' ,pointsPerTestCaseSolved:5,timeToSolveInMinutes:90,contestId: contestMap['Aadukalam_Round_2']},
-            { title: 'Balance', description: `You are given a string s of length n containing only four kinds of characters: 'Q', 'W', 'E', 'R'.
+//     4
+//     `, topic: topicMap["Aadukalam_Round_2"], type:"CONTEST", pointsPerTestCaseSolved:5,timeToSolveInMinutes:90,contestId: contestMap['sample_test'] },
+//     { title: 'Direction', description: `You are given a list of spatial rules describing the relative positions of points in a 2D plane. Each rule follows the format:
 
-A string is said to be balanced if each of its characters appears n / 4 times where n is the length of the string.
+// A <direction> B
 
-Return the minimum length of the substring that can be replaced with any other string of the same length to make s balanced. If s is already balanced, return 0.
+// A and B are distinct points.
+// <direction> is one of:
+// N (North) → A is north of B
+// S (South) → A is south of B
+// E (East) → A is east of B
+// W (West) → A is west of B
+// NE (Northeast) → A is northeast of B
+// NW (Northwest) → A is northwest of B
+// SE (Southeast) → A is southeast of B
+// SW (Southwest) → A is southwest of B
 
-Test Case 1: Already Balanced String
+// Determine whether the given rules are consistent (i.e., there are no contradictions).
+// If a contradiction is found, return the 1-based index of the first rule that causes the inconsistency.
 
-Input:
+// If all rules are consistent, return -1.
 
-s = "QWER"
-Explanation:
-Since all characters already appear exactly n/4 = 1 times, no replacement is needed. ✅
+// Example
+// Input:
 
-Expected Output:
+// rules = ["A NE B", "B NE C", "C S A"]
+// Explanation:
+// "A NE B" → A is Northeast of B
+// "B NE C" → B is Northeast of C
+// "C S A" → C is South of A (Contradiction!)
+// A was placed Northeast of B, which was Northeast of C.
+// But C is given as South of A, which contradicts A NE B and B NE C.
 
-0
+// Output:
 
-Test Case 2: One Replacement Needed
+// 3
 
-Input:
 
-s = "QQWE"
-Explanation:
+// TestCase 1:
 
-Ideal frequency: {Q: 1, W: 1, E: 1, R: 1}
-Actual frequency: {Q: 2, W: 1, E: 1, R: 0}
-Replace one Q with R, such as "RQWE" or "QRWE", to balance the string.  Expected Output:
+// rules = ["A N B", "B N C", "C N D"]
 
-1
+// Output: -1
 
-Test Case 3: Only One Character in Excess
 
-Input:
+// TestCase 2:
 
-s = "QQQQ"
+// rules = ["A N B", "B N C", "C N D"]
+// Otupt
 
-Explanation:
-Ideal frequency: {Q: 1, W: 1, E: 1, R: 1}
-Actual frequency: {Q: 4, W: 0, E: 0, R: 0}
-Replace three Qs (substring "QQQ") to obtain "QWER".  Expected Output:
+// 2
 
-3
-`, topic: topicMap['sample_test'], type: 'CONTEST',pointsPerTestCaseSolved:2,timeToSolveInMinutes:90 , contestId: contestMap["sample_test"] },
-{ title: 'Balance', description: `You are given a string s of length n containing only four kinds of characters: 'Q', 'W', 'E', 'R'.
+// testcase:
 
-    A string is said to be balanced if each of its characters appears n / 4 times where n is the length of the string.
+// reules = ["A NE B", "B NE C", "C S A"]
+
+// Output: 3
+
+// TestCase:
+
+// rules = ["A NW B", "B SW C", "C SE D", "D NE A"]
+
+// Output: 4
+
+// TestCase
+
+// rules = ["X E Y", "Y E Z", "Z N W", "W W X"]
+
+// Otuput: -1`, topic: topicMap['sample_test'], type: 'CONTEST' ,pointsPerTestCaseSolved:5,timeToSolveInMinutes:90,contestId: contestMap['sample_test']},
+// { title: 'Direction', description: `You are given a list of spatial rules describing the relative positions of points in a 2D plane. Each rule follows the format:
+
+//     A <direction> B
     
-    Return the minimum length of the substring that can be replaced with any other string of the same length to make s balanced. If s is already balanced, return 0.
+//     A and B are distinct points.
+//     <direction> is one of:
+//     N (North) → A is north of B
+//     S (South) → A is south of B
+//     E (East) → A is east of B
+//     W (West) → A is west of B
+//     NE (Northeast) → A is northeast of B
+//     NW (Northwest) → A is northwest of B
+//     SE (Southeast) → A is southeast of B
+//     SW (Southwest) → A is southwest of B
     
-    Test Case 1: Already Balanced String
+//     Determine whether the given rules are consistent (i.e., there are no contradictions).
+//     If a contradiction is found, return the 1-based index of the first rule that causes the inconsistency.
     
-    Input:
+//     If all rules are consistent, return -1.
     
-    s = "QWER"
-    Explanation:
-    Since all characters already appear exactly n/4 = 1 times, no replacement is needed. ✅
+//     Example
+//     Input:
     
-    Expected Output:
+//     rules = ["A NE B", "B NE C", "C S A"]
+//     Explanation:
+//     "A NE B" → A is Northeast of B
+//     "B NE C" → B is Northeast of C
+//     "C S A" → C is South of A (Contradiction!)
+//     A was placed Northeast of B, which was Northeast of C.
+//     But C is given as South of A, which contradicts A NE B and B NE C.
     
-    0
+//     Output:
     
-    Test Case 2: One Replacement Needed
+//     3
     
-    Input:
     
-    s = "QQWE"
-    Explanation:
+//     TestCase 1:
     
-    Ideal frequency: {Q: 1, W: 1, E: 1, R: 1}
-    Actual frequency: {Q: 2, W: 1, E: 1, R: 0}
-    Replace one Q with R, such as "RQWE" or "QRWE", to balance the string.  Expected Output:
+//     rules = ["A N B", "B N C", "C N D"]
     
-    1
+//     Output: -1
     
-    Test Case 3: Only One Character in Excess
     
-    Input:
+//     TestCase 2:
     
-    s = "QQQQ"
+//     rules = ["A N B", "B N C", "C N D"]
+//     Otupt
     
-    Explanation:
-    Ideal frequency: {Q: 1, W: 1, E: 1, R: 1}
-    Actual frequency: {Q: 4, W: 0, E: 0, R: 0}
-    Replace three Qs (substring "QQQ") to obtain "QWER".  Expected Output:
+//     2
     
-    3
-    `, topic: topicMap['Aadukalam_Round_2'], type: 'CONTEST',pointsPerTestCaseSolved:2,timeToSolveInMinutes:90 , contestId: contestMap["Aadukalam_Round_2"] }
-        ]
-    });
+//     testcase:
+    
+//     reules = ["A NE B", "B NE C", "C S A"]
+    
+//     Output: 3
+    
+//     TestCase:
+    
+//     rules = ["A NW B", "B SW C", "C SE D", "D NE A"]
+    
+//     Output: 4
+    
+//     TestCase
+    
+//     rules = ["X E Y", "Y E Z", "Z N W", "W W X"]
+    
+//     Otuput: -1`, topic: topicMap['Aadukalam_Round_2'], type: 'CONTEST' ,pointsPerTestCaseSolved:5,timeToSolveInMinutes:90,contestId: contestMap['Aadukalam_Round_2']},
+//             { title: 'Balance', description: `You are given a string s of length n containing only four kinds of characters: 'Q', 'W', 'E', 'R'.
+
+// A string is said to be balanced if each of its characters appears n / 4 times where n is the length of the string.
+
+// Return the minimum length of the substring that can be replaced with any other string of the same length to make s balanced. If s is already balanced, return 0.
+
+// Test Case 1: Already Balanced String
+
+// Input:
+
+// s = "QWER"
+// Explanation:
+// Since all characters already appear exactly n/4 = 1 times, no replacement is needed. ✅
+
+// Expected Output:
+
+// 0
+
+// Test Case 2: One Replacement Needed
+
+// Input:
+
+// s = "QQWE"
+// Explanation:
+
+// Ideal frequency: {Q: 1, W: 1, E: 1, R: 1}
+// Actual frequency: {Q: 2, W: 1, E: 1, R: 0}
+// Replace one Q with R, such as "RQWE" or "QRWE", to balance the string.  Expected Output:
+
+// 1
+
+// Test Case 3: Only One Character in Excess
+
+// Input:
+
+// s = "QQQQ"
+
+// Explanation:
+// Ideal frequency: {Q: 1, W: 1, E: 1, R: 1}
+// Actual frequency: {Q: 4, W: 0, E: 0, R: 0}
+// Replace three Qs (substring "QQQ") to obtain "QWER".  Expected Output:
+
+// 3
+// `, topic: topicMap['sample_test'], type: 'CONTEST',pointsPerTestCaseSolved:2,timeToSolveInMinutes:90 , contestId: contestMap["sample_test"] },
+// { title: 'Balance', description: `You are given a string s of length n containing only four kinds of characters: 'Q', 'W', 'E', 'R'.
+
+//     A string is said to be balanced if each of its characters appears n / 4 times where n is the length of the string.
+    
+//     Return the minimum length of the substring that can be replaced with any other string of the same length to make s balanced. If s is already balanced, return 0.
+    
+//     Test Case 1: Already Balanced String
+    
+//     Input:
+    
+//     s = "QWER"
+//     Explanation:
+//     Since all characters already appear exactly n/4 = 1 times, no replacement is needed. ✅
+    
+//     Expected Output:
+    
+//     0
+    
+//     Test Case 2: One Replacement Needed
+    
+//     Input:
+    
+//     s = "QQWE"
+//     Explanation:
+    
+//     Ideal frequency: {Q: 1, W: 1, E: 1, R: 1}
+//     Actual frequency: {Q: 2, W: 1, E: 1, R: 0}
+//     Replace one Q with R, such as "RQWE" or "QRWE", to balance the string.  Expected Output:
+    
+//     1
+    
+//     Test Case 3: Only One Character in Excess
+    
+//     Input:
+    
+//     s = "QQQQ"
+    
+//     Explanation:
+//     Ideal frequency: {Q: 1, W: 1, E: 1, R: 1}
+//     Actual frequency: {Q: 4, W: 0, E: 0, R: 0}
+//     Replace three Qs (substring "QQQ") to obtain "QWER".  Expected Output:
+    
+//     3
+//     `, topic: topicMap['Aadukalam_Round_2'], type: 'CONTEST',pointsPerTestCaseSolved:2,timeToSolveInMinutes:90 , contestId: contestMap["Aadukalam_Round_2"] }
+//         ]
+//     });
 
 //     // console.log('Questions inserted successfully');
 
-    const questionList = await prisma.questions.findMany({ select: { id: true, title: true } });
-    const questionMap = Object.fromEntries(questionList.map(q => [q.title, q.id]));
+    // const questionList = await prisma.questions.findMany({ select: { id: true, title: true } });
+    // const questionMap = Object.fromEntries(questionList.map(q => [q.title, q.id]));
 
 //     // Insert test cases
 //     // const testCases = [
@@ -404,14 +404,14 @@ Replace three Qs (substring "QQQ") to obtain "QWER".  Expected Output:
 //     //     }))
 //     // );
 
-    await prisma.testCase.createMany({ data: [
-        {
-            inputString:"",
-            outputString:"",
-            questionId:"",
-            type:"HIDDEN"
-        }
-    ] });
+    // await prisma.testCase.createMany({ data: [
+    //     {
+    //         inputString:"",
+    //         outputString:"",
+    //         questionId:"",
+    //         type:"HIDDEN"
+    //     }
+    // ] });
 
 //     // console.log('Test cases inserted successfully');
 

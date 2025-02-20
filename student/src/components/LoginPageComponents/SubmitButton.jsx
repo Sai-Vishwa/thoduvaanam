@@ -5,7 +5,7 @@ import { Toaster, toast } from "sonner";
 import Cookies from "js-cookie"
 
 
-function SubmitButton({loginData , loginError , setLoginError , setLoading , forgotPassword}){
+function SubmitButton({loginData , loginError , setLoginError , setLoading , forgotPassword , setOTPdiv}){
 
     const nav = useNavigate();
 
@@ -84,35 +84,63 @@ function SubmitButton({loginData , loginError , setLoginError , setLoading , for
       };
 
       const handleSendOTP = async () => {
-        if (!/^2[234]\d{7}$/.test(loginData.rno)) {
-          setLoginError({ ...loginError, rnoError: "*Enter a valid Roll no" });
-          return;
-        }
-    
-        try {
-            setLoading(true)
-          const response = await fetch("http://localhost:4000/login-signup/forgot-password", {
-            method: "POST",
-            body: JSON.stringify(loginData),
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            }
-          });
-          
-          const status = await response.json();
-          if (status.msg) {
-            alert("OTP sent successfully");
-            setLoading(false)
-            setOTPdiv("block");
-          }
-          else{
-            throw new Error(data.err)
-          }
-        } catch (error) {
-            setLoading(false)
 
-          alert(error.message);
+
+        if (!/^2[234]\d{7}$/.test(loginData.rno)) {
+          toast.error("Enter a valid username",{
+            style: {
+              fontSize:"1.125rem",
+              fontWeight:300,
+              padding:20
+            }
+          })
+          return
+        }
+
+
+        let status = false
+        let dt = {};
+
+        const dummy =  await new Promise ((resolve)=>{
+          toast.promise(new Promise((resolve,reject)=>{
+            fetch("http://localhost:4000/login-signup/forgot-password", {
+              method: "POST",
+              body: JSON.stringify(loginData),
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              }
+            }).then((resp) => resp.json())
+            .then((data)=>{
+              if(data.err){
+                throw new Error(data.err)
+              }
+              resolve(data)
+            })
+            .catch((err)=> reject(err))
+          }),{
+            loading: "Loading...",
+            success: (data)=>{
+              status = true
+              dt = data
+              console.log("i must be first")
+              resolve()
+              return (`OTP sent successfully`)
+            },
+            error: (err) => {
+              resolve()
+              return (`${err}`)
+            },
+            style: {
+              fontSize:"1.125rem",
+              fontWeight:300,
+              padding:20
+            }
+          })
+        }) 
+        console.log("i must be second")
+        if(status){
+          setOTPdiv("block")
         }
       };
 

@@ -197,7 +197,6 @@ exports.Prisma.OTPStudentScalarFieldEnum = {
   name: 'name',
   rno: 'rno',
   uname: 'uname',
-  leetCodeName: 'leetCodeName',
   salt: 'salt',
   hash: 'hash',
   leetCodeProfile: 'leetCodeProfile',

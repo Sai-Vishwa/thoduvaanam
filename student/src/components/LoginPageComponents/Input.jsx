@@ -1,7 +1,7 @@
 import SubmitButton from "./SubmitButton";
 import { motion , AnimatePresence } from "framer-motion";
 
-function Input({setLoginData , loginData , loginError , forgotPassword , setLoginError , setLoading}){
+function Input({setLoginData , loginData , loginError , forgotPassword , setLoginError , setLoading , setForgotPassword, setOTPdiv}){
 
 
     const toggleForgotPassword = () => {
@@ -63,7 +63,8 @@ function Input({setLoginData , loginData , loginError , forgotPassword , setLogi
             loginError={loginError}
             setLoading={setLoading}
             setLoginError={setLoginError}
-            forgotPassword={forgotPassword}/>
+            forgotPassword={forgotPassword}
+            setOTPdiv={setOTPdiv}/>
 
           <motion.button
             layout

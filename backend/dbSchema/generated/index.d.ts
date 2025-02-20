@@ -4702,7 +4702,7 @@ export namespace Prisma {
     type: $Enums.QuestionType
     leetCodeLink: string | null
     leetCodeTitle: string | null
-    timeToSolveInMinutes: number
+    timeToSolveInMinutes: number | null
     contestId: number | null
     _count: QuestionsCountAggregateOutputType | null
     _avg: QuestionsAvgAggregateOutputType | null
@@ -4838,7 +4838,7 @@ export namespace Prisma {
       type: $Enums.QuestionType
       leetCodeLink: string | null
       leetCodeTitle: string | null
-      timeToSolveInMinutes: number
+      timeToSolveInMinutes: number | null
       contestId: number | null
     }, ExtArgs["result"]["questions"]>
     composites: {}
@@ -10283,7 +10283,6 @@ export namespace Prisma {
     name: string | null
     rno: string | null
     uname: string | null
-    leetCodeName: string | null
     salt: string | null
     hash: string | null
     leetCodeProfile: string | null
@@ -10297,7 +10296,6 @@ export namespace Prisma {
     name: string | null
     rno: string | null
     uname: string | null
-    leetCodeName: string | null
     salt: string | null
     hash: string | null
     leetCodeProfile: string | null
@@ -10311,7 +10309,6 @@ export namespace Prisma {
     name: number
     rno: number
     uname: number
-    leetCodeName: number
     salt: number
     hash: number
     leetCodeProfile: number
@@ -10335,7 +10332,6 @@ export namespace Prisma {
     name?: true
     rno?: true
     uname?: true
-    leetCodeName?: true
     salt?: true
     hash?: true
     leetCodeProfile?: true
@@ -10349,7 +10345,6 @@ export namespace Prisma {
     name?: true
     rno?: true
     uname?: true
-    leetCodeName?: true
     salt?: true
     hash?: true
     leetCodeProfile?: true
@@ -10363,7 +10358,6 @@ export namespace Prisma {
     name?: true
     rno?: true
     uname?: true
-    leetCodeName?: true
     salt?: true
     hash?: true
     leetCodeProfile?: true
@@ -10464,7 +10458,6 @@ export namespace Prisma {
     name: string
     rno: string
     uname: string
-    leetCodeName: string
     salt: string
     hash: string
     leetCodeProfile: string | null
@@ -10497,7 +10490,6 @@ export namespace Prisma {
     name?: boolean
     rno?: boolean
     uname?: boolean
-    leetCodeName?: boolean
     salt?: boolean
     hash?: boolean
     leetCodeProfile?: boolean
@@ -10511,7 +10503,6 @@ export namespace Prisma {
     name?: boolean
     rno?: boolean
     uname?: boolean
-    leetCodeName?: boolean
     salt?: boolean
     hash?: boolean
     leetCodeProfile?: boolean
@@ -10525,7 +10516,6 @@ export namespace Prisma {
     name?: boolean
     rno?: boolean
     uname?: boolean
-    leetCodeName?: boolean
     salt?: boolean
     hash?: boolean
     leetCodeProfile?: boolean
@@ -10539,7 +10529,6 @@ export namespace Prisma {
     name?: boolean
     rno?: boolean
     uname?: boolean
-    leetCodeName?: boolean
     salt?: boolean
     hash?: boolean
     leetCodeProfile?: boolean
@@ -10548,7 +10537,7 @@ export namespace Prisma {
     status?: boolean
   }
 
-  export type OTPStudentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rno" | "uname" | "leetCodeName" | "salt" | "hash" | "leetCodeProfile" | "otp" | "expiry" | "status", ExtArgs["result"]["oTPStudent"]>
+  export type OTPStudentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rno" | "uname" | "salt" | "hash" | "leetCodeProfile" | "otp" | "expiry" | "status", ExtArgs["result"]["oTPStudent"]>
 
   export type $OTPStudentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "OTPStudent"
@@ -10558,7 +10547,6 @@ export namespace Prisma {
       name: string
       rno: string
       uname: string
-      leetCodeName: string
       salt: string
       hash: string
       leetCodeProfile: string | null
@@ -10992,7 +10980,6 @@ export namespace Prisma {
     readonly name: FieldRef<"OTPStudent", 'String'>
     readonly rno: FieldRef<"OTPStudent", 'String'>
     readonly uname: FieldRef<"OTPStudent", 'String'>
-    readonly leetCodeName: FieldRef<"OTPStudent", 'String'>
     readonly salt: FieldRef<"OTPStudent", 'String'>
     readonly hash: FieldRef<"OTPStudent", 'String'>
     readonly leetCodeProfile: FieldRef<"OTPStudent", 'String'>
@@ -14893,7 +14880,6 @@ export namespace Prisma {
     name: 'name',
     rno: 'rno',
     uname: 'uname',
-    leetCodeName: 'leetCodeName',
     salt: 'salt',
     hash: 'hash',
     leetCodeProfile: 'leetCodeProfile',
@@ -15311,7 +15297,7 @@ export namespace Prisma {
     type?: EnumQuestionTypeFilter<"Questions"> | $Enums.QuestionType
     leetCodeLink?: StringNullableFilter<"Questions"> | string | null
     leetCodeTitle?: StringNullableFilter<"Questions"> | string | null
-    timeToSolveInMinutes?: IntFilter<"Questions"> | number
+    timeToSolveInMinutes?: IntNullableFilter<"Questions"> | number | null
     contestId?: IntNullableFilter<"Questions"> | number | null
     testCase?: TestCaseListRelationFilter
     submission?: SubmissionListRelationFilter
@@ -15332,7 +15318,7 @@ export namespace Prisma {
     type?: SortOrder
     leetCodeLink?: SortOrderInput | SortOrder
     leetCodeTitle?: SortOrderInput | SortOrder
-    timeToSolveInMinutes?: SortOrder
+    timeToSolveInMinutes?: SortOrderInput | SortOrder
     contestId?: SortOrderInput | SortOrder
     testCase?: TestCaseOrderByRelationAggregateInput
     submission?: SubmissionOrderByRelationAggregateInput
@@ -15356,7 +15342,7 @@ export namespace Prisma {
     type?: EnumQuestionTypeFilter<"Questions"> | $Enums.QuestionType
     leetCodeLink?: StringNullableFilter<"Questions"> | string | null
     leetCodeTitle?: StringNullableFilter<"Questions"> | string | null
-    timeToSolveInMinutes?: IntFilter<"Questions"> | number
+    timeToSolveInMinutes?: IntNullableFilter<"Questions"> | number | null
     contestId?: IntNullableFilter<"Questions"> | number | null
     testCase?: TestCaseListRelationFilter
     submission?: SubmissionListRelationFilter
@@ -15377,7 +15363,7 @@ export namespace Prisma {
     type?: SortOrder
     leetCodeLink?: SortOrderInput | SortOrder
     leetCodeTitle?: SortOrderInput | SortOrder
-    timeToSolveInMinutes?: SortOrder
+    timeToSolveInMinutes?: SortOrderInput | SortOrder
     contestId?: SortOrderInput | SortOrder
     _count?: QuestionsCountOrderByAggregateInput
     _avg?: QuestionsAvgOrderByAggregateInput
@@ -15401,7 +15387,7 @@ export namespace Prisma {
     type?: EnumQuestionTypeWithAggregatesFilter<"Questions"> | $Enums.QuestionType
     leetCodeLink?: StringNullableWithAggregatesFilter<"Questions"> | string | null
     leetCodeTitle?: StringNullableWithAggregatesFilter<"Questions"> | string | null
-    timeToSolveInMinutes?: IntWithAggregatesFilter<"Questions"> | number
+    timeToSolveInMinutes?: IntNullableWithAggregatesFilter<"Questions"> | number | null
     contestId?: IntNullableWithAggregatesFilter<"Questions"> | number | null
   }
 
@@ -15687,7 +15673,6 @@ export namespace Prisma {
     name?: StringFilter<"OTPStudent"> | string
     rno?: StringFilter<"OTPStudent"> | string
     uname?: StringFilter<"OTPStudent"> | string
-    leetCodeName?: StringFilter<"OTPStudent"> | string
     salt?: StringFilter<"OTPStudent"> | string
     hash?: StringFilter<"OTPStudent"> | string
     leetCodeProfile?: StringNullableFilter<"OTPStudent"> | string | null
@@ -15701,7 +15686,6 @@ export namespace Prisma {
     name?: SortOrder
     rno?: SortOrder
     uname?: SortOrder
-    leetCodeName?: SortOrder
     salt?: SortOrder
     hash?: SortOrder
     leetCodeProfile?: SortOrderInput | SortOrder
@@ -15718,7 +15702,6 @@ export namespace Prisma {
     OR?: OTPStudentWhereInput[]
     NOT?: OTPStudentWhereInput | OTPStudentWhereInput[]
     name?: StringFilter<"OTPStudent"> | string
-    leetCodeName?: StringFilter<"OTPStudent"> | string
     salt?: StringFilter<"OTPStudent"> | string
     hash?: StringFilter<"OTPStudent"> | string
     leetCodeProfile?: StringNullableFilter<"OTPStudent"> | string | null
@@ -15732,7 +15715,6 @@ export namespace Prisma {
     name?: SortOrder
     rno?: SortOrder
     uname?: SortOrder
-    leetCodeName?: SortOrder
     salt?: SortOrder
     hash?: SortOrder
     leetCodeProfile?: SortOrderInput | SortOrder
@@ -15754,7 +15736,6 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"OTPStudent"> | string
     rno?: StringWithAggregatesFilter<"OTPStudent"> | string
     uname?: StringWithAggregatesFilter<"OTPStudent"> | string
-    leetCodeName?: StringWithAggregatesFilter<"OTPStudent"> | string
     salt?: StringWithAggregatesFilter<"OTPStudent"> | string
     hash?: StringWithAggregatesFilter<"OTPStudent"> | string
     leetCodeProfile?: StringNullableWithAggregatesFilter<"OTPStudent"> | string | null
@@ -16122,7 +16103,7 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    timeToSolveInMinutes: number
+    timeToSolveInMinutes?: number | null
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
@@ -16142,7 +16123,7 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    timeToSolveInMinutes: number
+    timeToSolveInMinutes?: number | null
     contestId?: number | null
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
@@ -16159,7 +16140,7 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
@@ -16179,7 +16160,7 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
@@ -16198,7 +16179,7 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    timeToSolveInMinutes: number
+    timeToSolveInMinutes?: number | null
     contestId?: number | null
   }
 
@@ -16212,7 +16193,7 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type QuestionsUncheckedUpdateManyInput = {
@@ -16227,7 +16208,7 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
@@ -16502,7 +16483,6 @@ export namespace Prisma {
     name: string
     rno: string
     uname: string
-    leetCodeName: string
     salt: string
     hash: string
     leetCodeProfile?: string | null
@@ -16516,7 +16496,6 @@ export namespace Prisma {
     name: string
     rno: string
     uname: string
-    leetCodeName: string
     salt: string
     hash: string
     leetCodeProfile?: string | null
@@ -16529,7 +16508,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     rno?: StringFieldUpdateOperationsInput | string
     uname?: StringFieldUpdateOperationsInput | string
-    leetCodeName?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16543,7 +16521,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     rno?: StringFieldUpdateOperationsInput | string
     uname?: StringFieldUpdateOperationsInput | string
-    leetCodeName?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16557,7 +16534,6 @@ export namespace Prisma {
     name: string
     rno: string
     uname: string
-    leetCodeName: string
     salt: string
     hash: string
     leetCodeProfile?: string | null
@@ -16570,7 +16546,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     rno?: StringFieldUpdateOperationsInput | string
     uname?: StringFieldUpdateOperationsInput | string
-    leetCodeName?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16584,7 +16559,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     rno?: StringFieldUpdateOperationsInput | string
     uname?: StringFieldUpdateOperationsInput | string
-    leetCodeName?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     hash?: StringFieldUpdateOperationsInput | string
     leetCodeProfile?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17471,7 +17445,6 @@ export namespace Prisma {
     name?: SortOrder
     rno?: SortOrder
     uname?: SortOrder
-    leetCodeName?: SortOrder
     salt?: SortOrder
     hash?: SortOrder
     leetCodeProfile?: SortOrder
@@ -17489,7 +17462,6 @@ export namespace Prisma {
     name?: SortOrder
     rno?: SortOrder
     uname?: SortOrder
-    leetCodeName?: SortOrder
     salt?: SortOrder
     hash?: SortOrder
     leetCodeProfile?: SortOrder
@@ -17503,7 +17475,6 @@ export namespace Prisma {
     name?: SortOrder
     rno?: SortOrder
     uname?: SortOrder
-    leetCodeName?: SortOrder
     salt?: SortOrder
     hash?: SortOrder
     leetCodeProfile?: SortOrder
@@ -17992,6 +17963,14 @@ export namespace Prisma {
     set?: $Enums.QuestionType
   }
 
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type TestCaseUpdateManyWithoutQuestionsNestedInput = {
     create?: XOR<TestCaseCreateWithoutQuestionsInput, TestCaseUncheckedCreateWithoutQuestionsInput> | TestCaseCreateWithoutQuestionsInput[] | TestCaseUncheckedCreateWithoutQuestionsInput[]
     connectOrCreate?: TestCaseCreateOrConnectWithoutQuestionsInput | TestCaseCreateOrConnectWithoutQuestionsInput[]
@@ -18050,14 +18029,6 @@ export namespace Prisma {
     delete?: ContestWhereInput | boolean
     connect?: ContestWhereUniqueInput
     update?: XOR<XOR<ContestUpdateToOneWithWhereWithoutQuestionInput, ContestUpdateWithoutQuestionInput>, ContestUncheckedUpdateWithoutQuestionInput>
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput = {
@@ -18974,7 +18945,7 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    timeToSolveInMinutes: number
+    timeToSolveInMinutes?: number | null
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
@@ -18992,7 +18963,7 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    timeToSolveInMinutes: number
+    timeToSolveInMinutes?: number | null
     contestId?: number | null
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
@@ -19066,7 +19037,7 @@ export namespace Prisma {
     type?: EnumQuestionTypeFilter<"Questions"> | $Enums.QuestionType
     leetCodeLink?: StringNullableFilter<"Questions"> | string | null
     leetCodeTitle?: StringNullableFilter<"Questions"> | string | null
-    timeToSolveInMinutes?: IntFilter<"Questions"> | number
+    timeToSolveInMinutes?: IntNullableFilter<"Questions"> | number | null
     contestId?: IntNullableFilter<"Questions"> | number | null
   }
 
@@ -19374,7 +19345,7 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    timeToSolveInMinutes: number
+    timeToSolveInMinutes?: number | null
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
     topics: TopicsCreateNestedOneWithoutQuestionInput
@@ -19393,7 +19364,7 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    timeToSolveInMinutes: number
+    timeToSolveInMinutes?: number | null
     contestId?: number | null
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
@@ -19425,7 +19396,7 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
     topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
@@ -19444,7 +19415,7 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
@@ -19460,7 +19431,7 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    timeToSolveInMinutes: number
+    timeToSolveInMinutes?: number | null
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
     topics: TopicsCreateNestedOneWithoutQuestionInput
@@ -19479,7 +19450,7 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    timeToSolveInMinutes: number
+    timeToSolveInMinutes?: number | null
     contestId?: number | null
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
@@ -19543,7 +19514,7 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
     topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
@@ -19562,7 +19533,7 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
@@ -19863,7 +19834,7 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    timeToSolveInMinutes: number
+    timeToSolveInMinutes?: number | null
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     topics: TopicsCreateNestedOneWithoutQuestionInput
@@ -19882,7 +19853,7 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    timeToSolveInMinutes: number
+    timeToSolveInMinutes?: number | null
     contestId?: number | null
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
@@ -20001,7 +19972,7 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
@@ -20020,7 +19991,7 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
@@ -20080,7 +20051,7 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    timeToSolveInMinutes: number
+    timeToSolveInMinutes?: number | null
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
@@ -20099,7 +20070,7 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    timeToSolveInMinutes: number
+    timeToSolveInMinutes?: number | null
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
@@ -20319,7 +20290,7 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    timeToSolveInMinutes: number
+    timeToSolveInMinutes?: number | null
     contestId?: number | null
   }
 
@@ -20333,7 +20304,7 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
@@ -20351,7 +20322,7 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
@@ -20369,7 +20340,7 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
@@ -20572,7 +20543,7 @@ export namespace Prisma {
     type?: $Enums.QuestionType
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
-    timeToSolveInMinutes: number
+    timeToSolveInMinutes?: number | null
   }
 
   export type QuestionsUpdateWithoutContestInput = {
@@ -20585,7 +20556,7 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
@@ -20604,7 +20575,7 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
@@ -20622,7 +20593,7 @@ export namespace Prisma {
     type?: EnumQuestionTypeFieldUpdateOperationsInput | $Enums.QuestionType
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
+    timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
 

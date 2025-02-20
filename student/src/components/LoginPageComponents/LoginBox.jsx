@@ -33,7 +33,9 @@ function LoginBox({setLoginData , loginData , loginError , forgotPassword , setL
        loginError={loginError}
        forgotPassword={forgotPassword}
        setLoading={setLoading}
-       setLoginError={setLoginError}/> 
+       setLoginError={setLoginError}
+       setForgotPassword={setForgotPassword}
+       setOTPdiv={setOTPdiv}/> 
 
         <AnimatePresence>
           {OTPdiv === "block" && (
