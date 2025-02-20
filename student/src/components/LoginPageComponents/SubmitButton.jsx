@@ -1,53 +1,85 @@
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { data, useNavigate } from "react-router-dom";
+import { Toaster, toast } from "sonner";
+import Cookies from "js-cookie"
+
 
 function SubmitButton({loginData , loginError , setLoginError , setLoading , forgotPassword}){
 
     const nav = useNavigate();
 
+
     const handleLogin = async () => {
 
-        let flag = false
-        let rnoError = ""
-        let passwordError = ""
+        console.log("hi")
         if(!/^2[234]\d{7}$/.test(loginData.rno)){
-            rnoError = "*Enter a valid Roll No"
-            flag = true
-        }
-
-        if(!loginData.password ){
-            passwordError = "*Enter a valid password"
-            flag = true
-        }
-
-        if(flag){
-            setLoginError({rnoError:rnoError,passwordError:passwordError})
+            toast.error("Enter a valid username",{
+              style: {
+                fontSize:"1.125rem",
+                fontWeight:300,
+                padding:20
+              }
+            })
             return
         }
 
-        try {
-            setLoading(true)
-          const response = await fetch("http://localhost:4000/login-signup/login", {
-            method: "POST",
-            body: JSON.stringify(loginData),
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
+        if(!loginData.password ){
+          toast.error("Enter a valid password",{
+            style: {
+              fontSize:"1.125rem",
+              fontWeight:300,
+              padding:20
             }
-          });
-          
-          const data = await response.json();
-          if (data.msg) {
-            setLoading(false)
-            alert("Login successful");
-            nav(`/${data.uname}`);
-          }
-          else{
-            throw new Error(data.err)
-          }
-        } catch (error) {
-            setLoading(false)
-          alert(error.message);
+          })
+          return
+        }
+
+        let status = false
+        let dt = {};
+
+        const dummy =  await new Promise ((resolve)=>{
+          toast.promise(new Promise((resolve,reject)=>{
+            fetch("http://localhost:4000/login-signup/login", {
+              method: "POST",
+              body: JSON.stringify(loginData),
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              }
+            }).then((resp)=>resp.json())
+            .then((data)=>{
+              if(data.err){
+                throw new Error(data.err)
+              }
+              resolve(data)
+            })
+            .catch((err)=> reject(err))
+          }),{
+            loading: "Loading...",
+            success: (data)=>{
+              status = true
+              dt = data
+              console.log("i must be first")
+              resolve()
+              return (`Login Successful`)
+            },
+            error: (err) => {
+              resolve()
+              return (`${err}`)
+            },
+            style: {
+              fontSize:"1.125rem",
+              fontWeight:300,
+              padding:20
+            }
+          })
+        }) 
+        console.log("i must be second")
+        if(status){
+          console.log("i must be second")
+          Cookies.set('session',dt?.session,{expires: 10/24})
+          nav(`/${dt.uname}`)
         }
       };
 
@@ -87,6 +119,7 @@ function SubmitButton({loginData , loginError , setLoginError , setLoading , for
 
     return (
         <>
+            <Toaster duration={3000} position="bottom-right"/>
             <motion.button
             layout
             onClick={forgotPassword.style === "block" ? handleLogin : handleSendOTP}

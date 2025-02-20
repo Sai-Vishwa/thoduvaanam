@@ -19,7 +19,7 @@ async function login(req,res) {
             })
         }
         else{
-            const hashCheck = hashChecker(student.salt,student.hash , req.body.password );
+            const hashCheck = await hashChecker(student.salt,student.hash , req.body.password );
             if(hashCheck == 0){
                 res.status(200).json({
                     err: "Wrong password"

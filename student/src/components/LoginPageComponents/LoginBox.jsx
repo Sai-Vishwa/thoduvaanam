@@ -1,9 +1,12 @@
 import Header from "./Header";
 import {AnimatePresence, motion} from 'framer-motion'
 import Input from "./Input";
+import { useNavigate } from "react-router-dom";
 
 
 function LoginBox({setLoginData , loginData , loginError , forgotPassword , setLoginError , setForgotPassword , loading , setLoading , OTPdiv , setOTPdiv}){
+
+  const nav = useNavigate()
 
     return (
         <>

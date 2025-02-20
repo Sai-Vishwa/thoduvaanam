@@ -33,7 +33,6 @@ const LoginPage = () => {
   return (
 
     <div className="min-h-screen min-w-screen overflow-hidden bg-white flex items-center justify-center font-mono relative">
-      {/* loading animation */}
       <LoginBox 
       loading={loading}
       setLoading={setLoading}
