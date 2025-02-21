@@ -5,12 +5,14 @@ import { Toaster, toast } from "sonner";
 import Cookies from "js-cookie"
 
 
-function SubmitButton({loginData , loginError , setLoginError , setLoading , forgotPassword , setOTPdiv}){
+function SubmitButton({loginData , forgotPassword , setOTPdiv , disable , setDisable}){
 
     const nav = useNavigate();
 
 
     const handleLogin = async () => {
+
+
 
         console.log("hi")
         if(!/^2[234]\d{7}$/.test(loginData.rno)){
@@ -37,7 +39,7 @@ function SubmitButton({loginData , loginError , setLoginError , setLoading , for
 
         let status = false
         let dt = {};
-
+        setDisable(true)
         const dummy =  await new Promise ((resolve)=>{
           toast.promise(new Promise((resolve,reject)=>{
             fetch("http://localhost:4000/login-signup/login", {
@@ -76,6 +78,7 @@ function SubmitButton({loginData , loginError , setLoginError , setLoading , for
           })
         }) 
         console.log("i must be second")
+        setDisable(false)
         if(status){
           console.log("i must be second")
           Cookies.set('session',dt?.session,{expires: 10/24})
@@ -101,6 +104,7 @@ function SubmitButton({loginData , loginError , setLoginError , setLoading , for
         let status = false
         let dt = {};
 
+        setDisable(true)
         const dummy =  await new Promise ((resolve)=>{
           toast.promise(new Promise((resolve,reject)=>{
             fetch("http://localhost:4000/login-signup/forgot-password", {
@@ -140,7 +144,11 @@ function SubmitButton({loginData , loginError , setLoginError , setLoading , for
         }) 
         console.log("i must be second")
         if(status){
+          setDisable(true)
           setOTPdiv("block")
+        }
+        else{
+          setDisable(false)
         }
       };
 
@@ -151,9 +159,10 @@ function SubmitButton({loginData , loginError , setLoginError , setLoading , for
             <motion.button
             layout
             onClick={forgotPassword.style === "block" ? handleLogin : handleSendOTP}
-            className="w-full bg-[#000015] text-white py-2 rounded-lg hover:bg-gray-900 transition-colors font-mono"
+            className={`w-full bg-[#000015] text-white py-2 rounded-lg hover:bg-gray-900 transition-colors font-mono ${disable==true?"hidden":"block"}`}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
+            disabled={disable}
           >
             {forgotPassword.style === "block" ? "Login" : "Send OTP"}
           </motion.button>

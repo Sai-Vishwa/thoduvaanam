@@ -1,7 +1,7 @@
 import SubmitButton from "./SubmitButton";
-import { motion , AnimatePresence } from "framer-motion";
+import { motion , AnimatePresence} from "framer-motion";
 
-function Input({setLoginData , loginData , loginError , forgotPassword , setLoginError , setLoading , setForgotPassword, setOTPdiv}){
+function Input({setLoginData , loginData , loginError , forgotPassword , setLoginError , setLoading , setForgotPassword, setOTPdiv , disable , setDisable}){
 
 
     const toggleForgotPassword = () => {
@@ -25,14 +25,11 @@ function Input({setLoginData , loginData , loginError , forgotPassword , setLogi
           <div>
             <input
               type="text"
-              placeholder="Registration Number"
+              placeholder="Registration Number" disabled={disable}
               value={loginData.rno}
               onChange={(e) => setLoginData({ ...loginData, rno: e.target.value })}
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#000015] bg-transparent font-mono"
             />
-            {loginError.rnoError && (
-              <p className="text-[#000015] text-sm mt-1">{loginError.rnoError}</p>
-            )}
           </div>
 
           <AnimatePresence mode="wait">
@@ -48,28 +45,25 @@ function Input({setLoginData , loginData , loginError , forgotPassword , setLogi
                   type="password"
                   placeholder="Password"
                   value={loginData.password}
+                  disabled={disable}
                   onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#000015] bg-transparent font-mono"
                 />
-                {loginError.passwordError && (
-                  <p className="text-[#000015] text-sm mt-1">{loginError.passwordError}</p>
-                )}
               </motion.div>
             ) : null}
           </AnimatePresence>
 
             <SubmitButton 
             loginData={loginData}
-            loginError={loginError}
-            setLoading={setLoading}
-            setLoginError={setLoginError}
             forgotPassword={forgotPassword}
-            setOTPdiv={setOTPdiv}/>
+            setOTPdiv={setOTPdiv}
+            disable={disable}
+            setDisable={setDisable}/>
 
           <motion.button
             layout
             onClick={toggleForgotPassword}
-            className="w-full text-[#000015] text-sm hover:text-gray-800 font-mono mt-2"
+            className={`w-full text-[#000015] text-sm hover:text-gray-800 font-mono mt-2 ${disable==true?"hidden":"block"}`}
             whileHover={{ scale: 1.02 }}
           >
             {forgotPassword.val}

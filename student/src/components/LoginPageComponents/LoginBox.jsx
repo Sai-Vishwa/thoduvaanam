@@ -2,11 +2,14 @@ import Header from "./Header";
 import {AnimatePresence, motion} from 'framer-motion'
 import Input from "./Input";
 import { useNavigate } from "react-router-dom";
+import OtpVerifyButton from "./otpVerifyButton"
+import { useState } from "react";
 
 
-function LoginBox({setLoginData , loginData , loginError , forgotPassword , setLoginError , setForgotPassword , loading , setLoading , OTPdiv , setOTPdiv}){
+function LoginBox({setLoginData , loginData , forgotPassword  , setForgotPassword , OTPdiv , setOTPdiv , otpVal , setOtpVal , disable , setDisable}){
 
   const nav = useNavigate()
+  const [otpdis,setOtpdis] = useState(false)
 
     return (
         <>
@@ -30,12 +33,11 @@ function LoginBox({setLoginData , loginData , loginError , forgotPassword , setL
        <Input 
        setLoginData={setLoginData}
        loginData={loginData}
-       loginError={loginError}
        forgotPassword={forgotPassword}
-       setLoading={setLoading}
-       setLoginError={setLoginError}
        setForgotPassword={setForgotPassword}
-       setOTPdiv={setOTPdiv}/> 
+       setOTPdiv={setOTPdiv}
+       disable={disable}
+       setDisable={setDisable}/> 
 
         <AnimatePresence>
           {OTPdiv === "block" && (
@@ -47,11 +49,24 @@ function LoginBox({setLoginData , loginData , loginError , forgotPassword , setL
             >
               <p className="text-[#000015] font-mono">Enter OTP sent to your email</p>
               <input
+                onChange={(e)=>{setOtpVal(e.target.value);console.log(otpVal)}}
+                disabled={otpdis}
                 type="text"
                 placeholder="Enter OTP"
                 className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#000015] bg-transparent font-mono"
               />
+              <div className="mt-3">
+                  <OtpVerifyButton 
+                  otp={otpVal}
+                  rno={loginData.rno}
+                  disable={disable}
+                  setDisable={setDisable}
+                  otpdis = {otpdis}
+                  setOtpdis = {setOtpdis}/>
+              </div>
+              
             </motion.div>
+
           )}
         </AnimatePresence>
 

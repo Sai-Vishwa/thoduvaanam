@@ -9,23 +9,21 @@ const LoginPage = () => {
 
   const nav = useNavigate();
 
-  const [loading , setLoading] = useState(false)
   const [OTPdiv, setOTPdiv] = useState("hidden");
+
   const [loginData, setLoginData] = useState({
     rno: "",
     password: ""
   });
-  const [loginError, setLoginError] = useState({
-    rnoError: "",
-    passwordError: ""
-  });
+ 
   const [forgotPassword, setForgotPassword] = useState({
     val: "Forgot password?",
     style: "block"
   });
 
+  const [otpVal , setOtpVal] = useState("");
   
-
+  const [disable , setDisable] = useState(false)
   
 
   
@@ -34,16 +32,16 @@ const LoginPage = () => {
 
     <div className="min-h-screen min-w-screen overflow-hidden bg-white flex items-center justify-center font-mono relative">
       <LoginBox 
-      loading={loading}
-      setLoading={setLoading}
       loginData={loginData}
-      loginError={loginError}
       forgotPassword={forgotPassword}
       setForgotPassword={setForgotPassword}
       setLoginData={setLoginData}
-      setLoginError={setLoginError}
       OTPdiv={OTPdiv}
       setOTPdiv={setOTPdiv}
+      otpVal={otpVal}
+      setOtpVal={setOtpVal}
+      disable = {disable}
+      setDisable = {setDisable}
       />
     </div>
   );

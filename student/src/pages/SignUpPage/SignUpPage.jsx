@@ -5,30 +5,18 @@ const SignUpPage = () => {
   const nav = useNavigate();
   const [otpDiv, setOtpDiv] = useState("hidden");
   const [otpData, setOtpData] = useState("");
-  const [otpError, setOtpError] = useState("");
   
   const [signupData, setSignupData] = useState({
     name: "",
     uname: "",
     rno: "",
-    leetCodeName: "",
     leetCodeProfile: "",
     password: "",
     verifyPassword: "",
     isVerified: false
   });
 
-  const [signupError, setSignupError] = useState({
-    nameError: "",
-    unameError: "",
-    rnoError: "",
-    leetCodeNameError: "",
-    leetCodeProfileError: "",
-    passwordError: "",
-    verifyPasswordError: "",
-    isVerified: false
-  });
-
+  
   useEffect(() => {
     const handleBeforeUnload = (event) => {
       if (!window.confirm("All your data will be lost.. Sure wanna continue???")) {
@@ -44,6 +32,8 @@ const SignUpPage = () => {
   }, []);
 
   const verifyUsername = async (val) => {
+
+    
     try {
       const response = await fetch("http://localhost:4000/login-signup/uname-verify", {
         method: "POST",

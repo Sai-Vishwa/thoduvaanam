@@ -6,6 +6,11 @@ const prisma = new PrismaClient();
 
 async function verifyOTPforLogin(req,res) {
     try{
+        const st = await prisma.student.findFirst({
+            where:{
+                rno:req.body.rno
+            }
+        })
         const student = await prisma.oTPStudent.findFirst({
             where:{
                 rno:req.body.rno
@@ -21,32 +26,33 @@ async function verifyOTPforLogin(req,res) {
             const now = new Date(utc.getTime()+5.5*60*60*1000);
             const otpExpiry = new Date(student.expiry);
             if(student.otp===req.body.otp && now<otpExpiry){
-                const session = hashGenerator(student.uname);
+                const session = await hashGenerator(student.uname);
                 const exp = new Date(now.getTime()+60*60*1000);
                 const update = await prisma.oTPStudent.update({
                     where:{
-                        id:student.id
+                        rno:student.rno
                     },
                     data:{
                         status:"APPROVED"
                     }
                 })
-                const del = await prisma.session.deleteMany({
+                const removeIfExists = await prisma.session.deleteMany({
                     where:{
-                        studentId:student.id
+                        studentId: st.id
                     }
                 })
-                const ses = await prisma.session.create({
+                const addSession =  await prisma.session.create({
                     data:{
-                        stduentId:student.id,
-                        session:session,
-                        expiry: exp
+                        studentId:st.id,
+                        expiry: exp,
+                        session: session.hash
                     }
-                })
+                }) 
                 
                 res.status(200).json({
                     msg:"Success",
-                    data:{"data":JSON.stringify(student),"achievements":JSON.stringify(achieve)},
+                    data:{"data":JSON.stringify(st)},
+                    uname:st.uname,
                     session:session
                 })
             }

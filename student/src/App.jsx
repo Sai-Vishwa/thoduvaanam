@@ -14,12 +14,14 @@ import ReviewContestPage from './pages/ReviewContestPage/ReviewContestPage'
 import ContestHandlerPage from './pages/ContestHandlerPage/ContestHandlerPage'
 import DummyPage from './pages/CodingPage/dummy'
 import TextScramble from './pages/dummy'
+import ChangePasswordPage from './pages/passwordChangePage/ChangePasswordPage'
 
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
+        
         <Route path='/login' element={<LoginPage />}/>
         <Route path='/:uname' element={<HomePage />}/>
         <Route path='/:uname/code/:tname/:qname' element={<CodingPage />}/>
@@ -33,7 +35,7 @@ function App() {
         <Route path='/:uname/review-contest/:tname' element={<ReviewContestPage />} />
         <Route path='*' element={<Navigate to={"/:uname"} />} />
         <Route path='/:uname/dummy/:tname/:qname' element={<DummyPage />} />
-        <Route path='/hi' element={<TextScramble />} />
+        <Route path='/:uname/change-password' element={<ChangePasswordPage />} />
 
       </Routes>
     </BrowserRouter>
