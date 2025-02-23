@@ -32,7 +32,7 @@ const TextScramble = ({ text }) => {
 };
 
 
-function Header(){
+function Header({data1, data2}){
 
     return (
         <>
@@ -42,7 +42,7 @@ function Header(){
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            <TextScramble text="Welcome Back" />
+            <TextScramble text={data1}/>
           </motion.h1>
           <motion.p 
             className="text-gray-600 mt-2"
@@ -50,7 +50,7 @@ function Header(){
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
           >
-            Please login to continue!
+            {data2}
           </motion.p>
         </>
     )

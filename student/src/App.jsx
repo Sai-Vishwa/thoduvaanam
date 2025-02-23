@@ -15,6 +15,7 @@ import ContestHandlerPage from './pages/ContestHandlerPage/ContestHandlerPage'
 import DummyPage from './pages/CodingPage/dummy'
 import TextScramble from './pages/dummy'
 import ChangePasswordPage from './pages/passwordChangePage/ChangePasswordPage'
+import DiscussionsPage from './pages/DiscussionsPage/DiscussionsPage'
 
 function App() {
 
@@ -25,7 +26,8 @@ function App() {
         <Route path='/login' element={<LoginPage />}/>
         <Route path='/:uname' element={<HomePage />}/>
         <Route path='/:uname/code/:tname/:qname' element={<CodingPage />}/>
-        <Route path='/leaderboard' element={<LeaderBoardPage />}/>
+        <Route path='/:uname/leaderboard' element={<LeaderBoardPage />}/>
+        <Route path='/:uname/discussions' element={<DiscussionsPage />}/>
         <Route path='/signup' element={<SignUpPage />}/>
         <Route path='/' element={<HelloPage />} />
         <Route path='/:uname/question/:qname' element={<QuestionPage />} />
@@ -33,7 +35,7 @@ function App() {
         <Route path='/:uname/contest-handler/:tname' element={<ContestHandlerPage />} />
         <Route path='/:uname/review-question/:qname' element={<ReviewQuestionPage />} />
         <Route path='/:uname/review-contest/:tname' element={<ReviewContestPage />} />
-        <Route path='*' element={<Navigate to={"/:uname"} />} />
+        <Route path='*' element={<Navigate to={"/"} />} />
         <Route path='/:uname/dummy/:tname/:qname' element={<DummyPage />} />
         <Route path='/:uname/change-password' element={<ChangePasswordPage />} />
 

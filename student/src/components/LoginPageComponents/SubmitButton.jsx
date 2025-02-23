@@ -90,7 +90,7 @@ function SubmitButton({loginData , forgotPassword , setOTPdiv , disable , setDis
 
 
         if (!/^2[234]\d{7}$/.test(loginData.rno)) {
-          toast.error("Enter a valid username",{
+          toast.error("Enter a valid Roll no",{
             style: {
               fontSize:"1.125rem",
               fontWeight:300,

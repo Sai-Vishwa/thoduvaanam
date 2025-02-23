@@ -27,7 +27,9 @@ function LoginBox({setLoginData , loginData , forgotPassword  , setForgotPasswor
 
 
         <div className="text-center mb-8">
-            <Header />
+            <Header 
+            data1={"Welcome Back"}
+            data2={"Please Login to access your account"}/>
         </div>
 
        <Input 

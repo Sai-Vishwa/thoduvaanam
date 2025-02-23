@@ -1,10 +1,19 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast, Toaster } from 'sonner';
+import Header from '../../components/LoginPageComponents/Header';
+import OtpVerifyButton from '../../components/LoginPageComponents/otpVerifyButton';
+
 
 const SignUpPage = () => {
+  
   const nav = useNavigate();
   const [otpDiv, setOtpDiv] = useState("hidden");
   const [otpData, setOtpData] = useState("");
+
+  const [disable , setDisable ] = useState(false)
+  const [otpdis , setOtpdis] = useState(false)
   
   const [signupData, setSignupData] = useState({
     name: "",
@@ -33,101 +42,224 @@ const SignUpPage = () => {
 
   const verifyUsername = async (val) => {
 
-    
-    try {
-      const response = await fetch("http://localhost:4000/login-signup/uname-verify", {
-        method: "POST",
-        body: JSON.stringify({ "uname": val }),
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
+    let status = false
+    let dt = {}
+    const dummy =  await new Promise ((resolve)=>{
+      toast.promise(new Promise((resolve,reject)=>{
+        fetch("http://localhost:4000/login-signup/uname-verify", {
+          method: "POST",
+          body: JSON.stringify({ "uname": val }),
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        }).then((resp) => resp.json())
+        .then((data)=>{
+          if(data.err){
+            throw new Error(data.err)
+          }
+          resolve(data)
+        })
+        .catch((err)=> reject(err))
+      }),{
+        loading: "Loading...",
+        success: (data)=>{
+          status = true
+          dt = data
+          console.log("i must be first")
+          resolve()
+          return (`You can use this user name`)
+        },
+        error: (err) => {
+          resolve()
+          return (`${err}`)
+        },
+        style: {
+          fontSize:"1.125rem",
+          fontWeight:300,
+          padding:20
         }
-      });
-      const data = await response.json();
-      if (data.msg) {
-        setSignupError(prev => ({ ...prev, isVerified: true, uname: "" }));
-      } else {
-        throw new Error(data);
-      }
-    } catch (error) {
-      alert(JSON.stringify(error.message));
-      setSignupError(prev => ({ ...prev, isVerified: false, uname: "Username is taken" }));
+      })
+    })
+    if(status){
+      setSignupData(prev => ({ ...prev, isVerified: true , uname: val }));
+    }
+    else{
+      setSignupData(prev => ({ ...prev, isVerified: false , uname: val }));
     }
   };
 
   const handleSignup = async () => {
-    let flag = true;
-    try {
-      if (!signupError.isVerified) {
-        setSignupError(prev => ({ ...prev, uname: "Username not verified" }));
-        flag = false;
-      }
 
-      if (flag) {
-        const response = await fetch("http://localhost:4000/login-signup/signup", {
+    if (!/^2[234]\d{7}$/.test(signupData.rno)) {
+      toast.error("Enter a valid username",{
+        style: {
+          fontSize:"1.125rem",
+          fontWeight:300,
+          padding:20
+        }
+      })
+      return
+    }
+
+    if(!signupData.isVerified || signupData.uname.length<1){
+      toast.error("Have a valid user name vro",{
+        style: {
+          fontSize:"1.125rem",
+          fontWeight:300,
+          padding:20
+        }
+      })
+      return 
+    }
+
+    if(signupData.password.length<1 || signupData.verifyPassword.length<1 || signupData.password!==signupData.verifyPassword){
+      toast.error("Have a valid password vro",{
+        style: {
+          fontSize:"1.125rem",
+          fontWeight:300,
+          padding:20
+        }
+      })
+      return 
+    }
+
+    setDisable(true)
+    let status = false
+    let dt = {}
+    const dummy =  await new Promise ((resolve)=>{
+      toast.promise(new Promise((resolve,reject)=>{
+        fetch("http://localhost:4000/login-signup/signup", {
           method: "POST",
           body: JSON.stringify(signupData),
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           }
-        });
-        const data = await response.json();
-        if (data.msg) {
-          setOtpDiv("block");
-        } else {
-          throw new Error(data);
+        }).then((resp) => resp.json())
+        .then((data)=>{
+          if(data.err){
+            throw new Error(data.err)
+          }
+          resolve(data)
+        })
+        .catch((err)=> reject(err))
+      }),{
+        loading: "Loading...",
+        success: (data)=>{
+          status = true
+          dt = data
+          console.log("i must be first")
+          resolve()
+          return (`Otp sent to your mail id successfully`)
+        },
+        error: (err) => {
+          resolve()
+          return (`${err}`)
+        },
+        style: {
+          fontSize:"1.125rem",
+          fontWeight:300,
+          padding:20
         }
-      }
-    } catch (error) {
-      alert(JSON.stringify(error.message));
+      })
+    })
+
+    if(status){
+      setOtpDiv("block")
+      setDisable(true)
+    }
+    else{
+      setDisable(false)
     }
   };
 
   const handleVerifyOTP = async () => {
-    // alert(otpData)
-    console.log(otpData)
-    try {
-      const response = await fetch("http://localhost:4000/login-signup/otp-verify-signup", {
-        method: "POST",
-        body: JSON.stringify({ rno: signupData.rno, otp: otpData }),
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
-      });
-      const data = await response.json();
-      if (data.msg) {
-        nav("/login");
-      } else {
-        throw new Error(data);
-      }
-    } catch (error) {
-      setOtpError("Invalid OTP");
-    }
-  };
+
+    let status = false
+            let dt = {}
+            setOtpdis(true)
+            const dummy =  await new Promise ((resolve)=>{
+                toast.promise(new Promise((resolve,reject)=>{
+                  fetch("http://localhost:4000/login-signup/otp-verify-signup", {
+                    method: "POST",
+                    body: JSON.stringify({ rno: signupData.rno, otp: otpData }),
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Accept': 'application/json'
+                    }
+                  }).then((resp) => resp.json())
+                  .then((data)=>{
+                    if(data.err){
+                      throw new Error(data.err)
+                    }
+                    resolve(data)
+                  })
+                  .catch((err)=> reject(err))
+                }),{
+                  loading: "Loading...",
+                  success: (data)=>{
+                    status = true
+                    dt = data
+                    console.log("i must be first")
+                    resolve()
+                    return (`OTP verified!!`)
+                  },
+                  error: (err) => {
+                    resolve()
+                    return (`${err}`)
+                  },
+                  style: {
+                    fontSize:"1.125rem",
+                    fontWeight:300,
+                    padding:20
+                  }
+                })
+              }) 
+              console.log("i must be second")
+              setOtpdis(false)
+              if(status){
+                Cookies.set('session',dt?.session,{expires: 10/24})
+                nav(`/${dt.uname}/change-password`)
+              }
+            };
+  
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-lg">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900">Create Account</h1>
-          <p className="mt-2 text-gray-600">Please sign up to continue!</p>
+    <div className="min-h-screen min-w-screen overflow-hidden bg-white flex items-center justify-center font-mono relative">
+      <motion.div
+      className="bg-white p-8 rounded-lg shadow-lg mx-10 max-w-md w-full border-2 border-[#000015] border-t-[6px] relative"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}>
+
+      <motion.div className='absolute transform top-0 right-0 translate-x-0 -translate-y-[70px]'>
+                <img src="/download__5_-removebg-preview.png" alt="" className='w-[120px]'/>
+      </motion.div>
+      
+      <div className="text-center mb-8">
+            <Header 
+            data1={"Hey New User..!!"}
+            data2={"Sign up first to continue"}/>
         </div>
 
-        <div className="mt-8 space-y-6">
-          {/* Signup Form */}
-          <div className="space-y-4">
+        
+        <motion.div 
+          className="space-y-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+        >
+          
+
+            
             <div>
               <input
                 type="text"
                 placeholder="Full Name"
                 onChange={(e) => setSignupData({ ...signupData, name: e.target.value })}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 focus:outline-none border rounded-lg focus:ring-2 focus:ring-[#000015] focus:border-transparent"
               />
-              {signupError.nameError && (
-                <p className="text-red-500 text-sm mt-1">{signupError.nameError}</p>
-              )}
             </div>
 
             <div>
@@ -138,11 +270,8 @@ const SignUpPage = () => {
                   setSignupData({ ...signupData, uname: e.target.value });
                   verifyUsername(e.target.value);
                 }}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 border rounded-lg  focus:outline-none focus:ring-2 focus:ring-[#000015] focus:border-transparent"
               />
-              {signupError.uname && (
-                <p className="text-red-500 text-sm mt-1">{signupError.uname}</p>
-              )}
             </div>
 
             <div>
@@ -150,23 +279,8 @@ const SignUpPage = () => {
                 type="text"
                 placeholder="College Roll Number"
                 onChange={(e) => setSignupData({ ...signupData, rno: e.target.value })}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#000015] focus:border-transparent"
               />
-              {signupError.rnoError && (
-                <p className="text-red-500 text-sm mt-1">{signupError.rnoError}</p>
-              )}
-            </div>
-
-            <div>
-              <input
-                type="text"
-                placeholder="LeetCode Username"
-                onChange={(e) => setSignupData({ ...signupData, leetCodeName: e.target.value })}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-              {signupError.leetCodeNameError && (
-                <p className="text-red-500 text-sm mt-1">{signupError.leetCodeNameError}</p>
-              )}
             </div>
 
             <div>
@@ -174,11 +288,8 @@ const SignUpPage = () => {
                 type="url"
                 placeholder="LeetCode Profile URL"
                 onChange={(e) => setSignupData({ ...signupData, leetCodeProfile: e.target.value })}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#000015] focus:border-transparent"
               />
-              {signupError.leetCodeProfileError && (
-                <p className="text-red-500 text-sm mt-1">{signupError.leetCodeProfileError}</p>
-              )}
             </div>
 
             <div>
@@ -186,11 +297,8 @@ const SignUpPage = () => {
                 type="password"
                 placeholder="Password"
                 onChange={(e) => setSignupData({ ...signupData, password: e.target.value })}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 border  focus:outline-none rounded-lg focus:ring-2 focus:ring-[#000015] focus:border-transparent"
               />
-              {signupError.passwordError && (
-                <p className="text-red-500 text-sm mt-1">{signupError.passwordError}</p>
-              )}
             </div>
 
             <div>
@@ -198,80 +306,74 @@ const SignUpPage = () => {
                 type="password"
                 placeholder="Confirm Password"
                 onChange={(e) => setSignupData({ ...signupData, verifyPassword: e.target.value })}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 border focus:outline-none rounded-lg focus:ring-2 focus:ring-[#000015] focus:border-transparent"
               />
-              {signupError.verifyPasswordError && (
-                <p className="text-red-500 text-sm mt-1">{signupError.verifyPasswordError}</p>
-              )}
             </div>
-          </div>
 
-          <button
+
+            <Toaster duration={3000} position="bottom-right"/>
+            <motion.button
+            layout
             onClick={handleSignup}
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            className={`w-full bg-[#000015] text-white py-2 rounded-lg hover:bg-gray-900 transition-colors font-mono ${disable==true?"hidden":"block"}`}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            disabled={disable}
           >
-            Sign Up
-          </button>
+            {"Send OTP"}
+          </motion.button>
 
-          {/* OTP Section */}
+                </motion.div>
+          
+                <AnimatePresence>
           {otpDiv === "block" && (
-            <div className="mt-6 space-y-4">
-              <div className="flex gap-2 justify-between">
-                {[...Array(6)].map((_, index) => (
-                  <input
-                    key={index}
-                    type="text"
-                    maxLength={1}
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      setOtpData(prev => {
-                        const newOtp = prev.split('');
-                        newOtp[index] = value;
-                        return newOtp.join('');
-                      });
-                      if (value && e.target.nextSibling) {
-                        e.target.nextSibling.focus();
-                      }
-                    }}
-                    className="w-12 h-12 text-center border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                ))}
+            <motion.div 
+              className="mt-4 p-4 bg-gray-50 rounded-lg"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+            >
+              <p className="text-[#000015] font-mono">Enter OTP sent to your email</p>
+              <input
+                onChange={(e)=>{setOtpData(e.target.value);console.log(otpData)}}
+                disabled={otpdis}
+                type="text"
+                placeholder="Enter OTP"
+                className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#000015] bg-transparent font-mono"
+              />
+              <div className="mt-3">
+                  <OtpVerifyButton 
+                  otp={otpVal}
+                  rno={loginData.rno}
+                  disable={disable}
+                  setDisable={setDisable}
+                  otpdis = {otpdis}
+                  setOtpdis = {setOtpdis}/>
               </div>
-              {otpError && (
-                <p className="text-red-500 text-sm text-center">{otpError}</p>
-              )}
-              <div className="flex justify-between">
-                <button
-                  onClick={() => {
-                    // Add resend OTP logic here
-                  }}
-                  className="text-blue-600 hover:text-blue-800"
-                >
-                  Resend OTP
-                </button>
-                <button
-                  onClick={handleVerifyOTP}
-                  className="text-blue-600 hover:text-blue-800"
-                >
-                  Verify OTP
-                </button>
-              </div>
-            </div>
-          )}
+              
+            </motion.div>
 
-          <div className="text-center">
-            <p className="text-sm text-gray-600">
-              Already have an account?{" "}
-              <button
-                onClick={() => nav("/login")}
-                className="font-medium text-blue-600 hover:text-blue-500"
-              >
-                Login
-              </button>
-            </p>
-          </div>
-        </div>
-      </div>
+          )}
+        </AnimatePresence>
+          
+        <motion.div 
+          className="mt-6 text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9 }}
+        >
+          <p className="text-gray-600">
+            Already have an account?{" "}
+            <button
+              onClick={() => nav("/login")}
+              className="text-[#000015] hover:text-gray-800 font-bold"
+            >
+              Login
+            </button>
+          </p>
+        </motion.div>
+        
+      </motion.div>
     </div>
   );
 };
