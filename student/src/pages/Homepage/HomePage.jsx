@@ -104,6 +104,59 @@ const NavBar = ({ userData, currentPath, viewMode }) => {
     { label: "Leaderboard", icon: Trophy, path: `/${uname}/leaderboard` }
   ];
 
+
+
+  async function logout() {
+
+    let status = false
+    let dt = {}
+    const dummy =  await new Promise ((resolve)=>{
+          toast.promise(new Promise((resolve,reject)=>{
+            fetch("http://localhost:4000/login-signup/logout", {
+              method: "POST",
+              body: JSON.stringify({session:Cookies.get("session") , uname:uname}),
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              }
+            }).then((resp) => resp.json())
+            .then((data)=>{
+              if(data.err){
+                throw new Error(data.err)
+              }
+              resolve(data)
+            })
+            .catch((err)=> reject(err))
+          }),{
+            loading: "Logging out...",
+            success: (data)=>{
+              status = true
+              dt = data
+              console.log("i must be first")
+              resolve()
+              return (`Logged out successfully..!!`)
+            },
+            error: (err) => {
+              resolve()
+              return (`${err}`)
+            },
+            style: {
+              fontSize:"1.125rem",
+              fontWeight:300,
+              padding:20
+            }
+          })
+        })
+    
+        if(status){
+          Cookies.remove('session');
+          navigate('/');
+        }
+
+      
+    
+  }
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (profileRef.current && !profileRef.current.contains(event.target)) {
@@ -204,13 +257,10 @@ const NavBar = ({ userData, currentPath, viewMode }) => {
                   
                   {!viewMode && (
                     <button
-                      onClick={() => {
-                        Cookies.remove('session');
-                        navigate('/login');
-                      }}
+                      onClick={logout}
                       className="w-full p-4 text-left text-red-600 hover:bg-gray-50 text-sm font-bold border-t border-gray-200"
                     >
-                      Sign Out
+                      Logout
                     </button>
                   )}
                 </motion.div>
@@ -366,7 +416,7 @@ function HomePage() {
       />
       
       <div className="flex">
-        <div className="w-1/6">
+        <div className="w-1/6 xs:hidden sm:hidden md:hidden lg:block xl:block">
         <VerticalNav 
           topics={allData.data} 
           activeSection={activeSection}
@@ -375,7 +425,7 @@ function HomePage() {
         </div>
         
         
-        <main className="flex-1 p-8 w-5/6">
+        <main className="flex-1 p-8 lg:w-5/6 xl:w-5/6 xs:w-full md:w-full sm:w-full">
           <motion.div 
             className="mb-8"
             initial={{ opacity: 0, y: 20 }}

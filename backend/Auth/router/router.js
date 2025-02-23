@@ -6,6 +6,7 @@ const { unameVerify } = require("../Signup/unameVerify");
 const { verifyOTPforSignUp } = require("../Signup/otpVerifySignup");
 const { forgotPassword } = require("../Login/forgotPassword");
 const { verifyOTPforLogin } = require("../Login/otpVerfiyLogin");
+const { logout } = require("../Logout/logout");
 
 const router = new Router();
 
@@ -23,6 +24,10 @@ const asyncHandler = (fn) => (req, res, next) => {
 
   router.post('/login', asyncHandler(async (req, res) => {
     await login(req,res);
+  }));
+
+  router.post('/logout', asyncHandler(async (req, res) => {
+    await logout(req,res);
   }));
   
   router.post('/signup', asyncHandler(async (req, res) => {

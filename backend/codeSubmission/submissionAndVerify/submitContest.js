@@ -6,7 +6,7 @@ async function submitContest(req,res) {
     try{
         const session = await sessionChecker(req.body.session);
         if(session.err){
-            res.status(200).josn({
+            res.status(200).json({
                 err:"invalid session"
             })
             return
