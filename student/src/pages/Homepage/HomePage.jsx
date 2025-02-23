@@ -15,9 +15,9 @@ import {
 } from "lucide-react";
 import { toast, Toaster } from "sonner";
 
-const VerticalNav = ({ topics, activeSection, setActiveSection }) => {
+const VerticalNav = ({ topics, activeSection, setActiveSection , uname}) => {
   const [expandedTopics, setExpandedTopics] = useState({});
-
+  const nav = useNavigate();
   const toggleTopic = (topicName) => {
     setExpandedTopics(prev => ({
       ...prev,
@@ -64,11 +64,15 @@ const VerticalNav = ({ topics, activeSection, setActiveSection }) => {
                       className="px-4 py-3 text-sm font-semibold text-[#000015] hover:bg-[#000015]/5 cursor-pointer transition-colors"
                       whileHover={{ x: 4 }}
                       whileTap={{ scale: 0.98 }}
+                      onClick={()=>{
+                        nav(`/${uname}/question/${q.title}`)
+                      }}
                     >
                       {q.title}
                       <span className={`ml-2 text-xs font-bold ${
-                        q.difficulty === 'Easy' ? 'text-green-600' :
-                        q.difficulty === 'Medium' ? 'text-yellow-600' :
+                        q.difficulty === 'EASY' ? 'text-green-600' :
+                        q.difficulty === 'BALANCED' ? 'text-yellow-600' :
+                        q.difficulty === 'HELL' ? 'text-red-900' :
                         'text-red-600'
                       }`}>
                         {q.difficulty}
@@ -79,6 +83,9 @@ const VerticalNav = ({ topics, activeSection, setActiveSection }) => {
                     className="px-4 py-3 text-sm font-bold text-purple-600 hover:bg-[#000015]/5 cursor-pointer transition-colors"
                     whileHover={{ x: 4 }}
                     whileTap={{ scale: 0.98 }}
+                    onClick={()=>{
+                      nav(`/${uname}/contest/${topic.name}`)
+                    }}
                   >
                     {topic.name} Contest
                   </motion.div>
@@ -273,8 +280,9 @@ const NavBar = ({ userData, currentPath, viewMode }) => {
   );
 };
 
-const TopicSection = ({ topic }) => {
+const TopicSection = ({ topic ,uname }) => {
   const [isMinimized, setIsMinimized] = useState(false);
+  const nav = useNavigate();
 
   return (
     <motion.div 
@@ -286,19 +294,11 @@ const TopicSection = ({ topic }) => {
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-4">
           <h3 className="text-xl font-bold text-[#000015]">{topic.name}</h3>
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={() => setIsMinimized(!isMinimized)}
-            className="p-1 rounded-full hover:bg-gray-100"
-          >
-            <ChevronDown 
-              className={`w-5 h-5 transition-transform duration-300 ${
-                isMinimized ? '' : 'transform rotate-180'
-              }`}
-            />
-          </motion.button>
+      
         </div>
+        <div className="flex items-center justify-end space-x-4">
+
+
         <motion.a
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -318,6 +318,21 @@ const TopicSection = ({ topic }) => {
           <Download className="w-4 h-4" />
           <span>Download Notes</span>
         </motion.a>
+
+        <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => setIsMinimized(!isMinimized)}
+            className="p-1 rounded-full hover:bg-gray-100"
+          >
+            <ChevronDown 
+              className={`w-5 h-5 transition-transform duration-300 ${
+                isMinimized ? '' : 'transform rotate-180'
+              }`}
+            />
+          </motion.button>
+        </div>
+        
       </div>
 
       <AnimatePresence>
@@ -335,14 +350,18 @@ const TopicSection = ({ topic }) => {
                 className="border-2 border-gray-200 rounded-lg p-4 hover:shadow-md transition-all cursor-pointer hover:border-[#000015]"
                 whileHover={{ scale: 1 }}
                 whileTap={{ scale: 0.99 }}
+                onClick={()=>{
+                  nav(`/${uname}/question/${q.title}`)
+                }}
               >
                 <div className="flex items-center justify-between">
                   <h4 className="font-bold text-[#000015]">{q.title}</h4>
                   <span className={`
                     px-3 py-1 rounded-full text-sm font-bold
-                    ${q.difficulty === 'Easy' && 'bg-green-100 text-green-600'}
-                    ${q.difficulty === 'Medium' && 'bg-yellow-100 text-yellow-600'}
-                    ${q.difficulty === 'Hard' && 'bg-red-100 text-red-600'}
+                    ${q.difficulty === 'EASY' && 'bg-green-100 text-green-600'}
+                    ${q.difficulty === 'BALANCED' && 'bg-yellow-100 text-yellow-600'}
+                    ${q.difficulty === 'INTENSE' && 'bg-red-100 text-red-600'}
+                    ${q.difficulty === 'HELL' && 'bg-red-300 text-red-900'}
                   `}>
                     {q.difficulty}
                   </span>
@@ -354,6 +373,9 @@ const TopicSection = ({ topic }) => {
               className="border-2 border-gray-200 rounded-lg p-4 hover:shadow-md transition-all cursor-pointer hover:border-[#000015] bg-gray-50"
               whileHover={{ scale: 1 }}
               whileTap={{ scale: 0.99 }}
+              onClick={()=>{
+                nav(`/${uname}/contest/${topic.name}`)
+              }}
             >
               <div className="flex items-center justify-between">
                 <h4 className="font-bold text-[#000015]">{topic.name} Contest</h4>
@@ -421,6 +443,7 @@ function HomePage() {
           topics={allData.data} 
           activeSection={activeSection}
           setActiveSection={setActiveSection}
+          uname = {uname}
         />
         </div>
         
@@ -439,7 +462,7 @@ function HomePage() {
 
           <div className="space-y-8">
             {allData.data.map((topic) => (
-              <TopicSection key={topic.id} topic={topic} />
+              <TopicSection key={topic.id} topic={topic} uname={uname} />
             ))}
           </div>
         </main>
