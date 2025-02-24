@@ -39,6 +39,13 @@ const asyncHandler = (fn) => (req, res, next) => {
     await unameVerify(req,res);
   }));
 
+  router.post('/hello',asyncHandler(async (req,res)=>{
+    console.log("vanakkam")
+    res.status(200).json({
+      msg:"Vanakkam da mapla"
+    })
+  }))
+
   router.post('/forgot-password', asyncHandler(async (req, res) => {
     await forgotPassword(req,res);
   }));

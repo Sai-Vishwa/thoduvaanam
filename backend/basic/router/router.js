@@ -8,6 +8,8 @@ const { ContestBasicPage } = require("../pageHandler/contestBasicPage");
 const { contestHandlerPage } = require("../pageHandler/contestHandlerPage");
 const { contestReviewPage } = require("../pageHandler/contestReviewPage");
 const { codingPage } = require("../pageHandler/codingPage");
+const { loadData } = require("../pageHandler/adminInfoPage");
+const { updateTopics } = require("../update/updateTopics");
 
 const router =  new Router();
 
@@ -49,6 +51,15 @@ const asyncHandler = (fn) => (req, res, next) => {
 
   router.post('/coding-page', asyncHandler(async (req, res) => {
     await codingPage(req,res);
+  }));
+
+  router.post('/admin-load', asyncHandler(async (req, res) => {
+    await loadData(req,res);
+  }));
+
+
+  router.post('/admin-update', asyncHandler(async (req, res) => {
+    await updateTopics(req,res);
   }));
 
   router.get('/', asyncHandler(async (req, res) => {

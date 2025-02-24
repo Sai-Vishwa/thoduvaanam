@@ -16,6 +16,7 @@ import DummyPage from './pages/CodingPage/dummy'
 import TextScramble from './pages/dummy'
 import ChangePasswordPage from './pages/passwordChangePage/ChangePasswordPage'
 import DiscussionsPage from './pages/DiscussionsPage/DiscussionsPage'
+import AdminDetails from './pages/AdminPage/AdminDetails'
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
         <Route path='/:uname/contest-handler/:tname' element={<ContestHandlerPage />} />
         <Route path='/:uname/review-question/:qname' element={<ReviewQuestionPage />} />
         <Route path='/:uname/review-contest/:tname' element={<ReviewContestPage />} />
+        <Route path='/admin' element={<AdminDetails />} />
         <Route path='*' element={<Navigate to={"/"} />} />
         <Route path='/:uname/dummy/:tname/:qname' element={<DummyPage />} />
         <Route path='/:uname/change-password' element={<ChangePasswordPage />} />
