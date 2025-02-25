@@ -13,53 +13,55 @@ async function main() {
 
 //     // console.log('Students inserted successfully');
 
-    // Insert topics
+    // // Insert topics
     // const tomorrow830AM = new Date();
     // tomorrow830AM.setDate(tomorrow830AM.getDate() + 1);
     // tomorrow830AM.setHours(14, 0, 0, 0);
-    // const now = new Date()
+    // const now1 = new Date()
 
     // await prisma.topics.createMany({
     //     data: [
     //         { name: 'Aadukalam_Round_2', contestDate: tomorrow830AM},
-    //         { name: 'sample_test' , contestDate:now}
+    //         { name: 'sample_test' , contestDate:now1}
     //     ]
     // });
 
 //     // console.log('Topics inserted successfully');
 
     // Fetch topics
-    // const topics = await prisma.topics.findMany({ select: { id: true, name: true } });
-    // const topicMap = Object.fromEntries(topics.map(t => [t.name, t.id]));
+    const topics = await prisma.topics.findMany({ select: { id: true, name: true } });
+    const topicMap = Object.fromEntries(topics.map(t => [t.name, t.id]));
 
 //     // Insert contests
     // const today = new Date();
     // const opensOn1 = new Date(today.setHours(14, 0, 0, 0)); // Today 10 AM
     // const closesOn1 = new Date(today.setHours(15,30, 0, 0)); // Today 11 PM
 
-//     const opensOn2 = new Date(); // Today 10 AM
-//     const closesOn2 = new Date(today.setHours(22,30, 0, 0)); // Today 11 PM
-//     // const utc = new Date();
-//     // const now = new Date(utc.getTime()+12.5*60*60*1000);
-//     // await prisma.contest.updateMany({
-//     //     data:{
-//     //         closesOn:now
-//     //     }
-//     // })
+    // const opensOn2 = new Date(); // Today 10 AM
+    // const closesOn2 = new Date(today.setHours(22,30, 0, 0)); // Today 11 PM
+    
 
-//     await prisma.contest.createMany({
-//         data: [
-//             { title: 'Aadukalam_Round_2', topicId: topicMap['Aadukalam_Round_2'],opensOn: opensOn1,closesOn:closesOn1,timeToSolveInMinutes:90 , totalNoOfQuestions:3 ,totalPoints:120 },
-//             { title: 'sample_test', topicId: topicMap['sample_test'], opensOn:opensOn2,closesOn: closesOn2 ,timeToSolveInMinutes:90,totalNoOfQuestions:3,totalPoints:120}
-//         ]
-//     });
+    // await prisma.contest.createMany({
+    //     data: [
+    //         { title: 'Aadukalam_Round_2', topicId: topicMap['Aadukalam_Round_2'],opensOn: opensOn1,closesOn:closesOn1,timeToSolveInMinutes:90 , totalNoOfQuestions:3 ,totalPoints:120 },
+    //         { title: 'sample_test', topicId: topicMap['sample_test'], opensOn:opensOn2,closesOn: closesOn2 ,timeToSolveInMinutes:90,totalNoOfQuestions:3,totalPoints:120}
+    //     ]
+    // });
+
+    // const utc = new Date();
+    // const now = new Date(utc.getTime()+12.5*60*60*1000);
+    // await prisma.contest.updateMany({
+    //     data:{
+    //         closesOn:now
+    //     }
+    // })
 
 // //     // console.log('Contests inserted successfully');
 
 // //     // Fetch questions
 
-    const topics = await prisma.topics.findMany({ select: { id: true, name: true } });
-    const topicMap = Object.fromEntries(topics.map(t => [t.name, t.id]));
+    // const topics = await prisma.topics.findMany({ select: { id: true, name: true } });
+    // const topicMap = Object.fromEntries(topics.map(t => [t.name, t.id]));
 
     const contests = await prisma.contest.findMany({ select: { id: true, title: true } });
     const contestMap = Object.fromEntries(contests.map(t => [t.title, t.id]));
@@ -67,7 +69,7 @@ async function main() {
 //     // Insert questions
     const questions = await prisma.questions.createMany({
         data: [
-            { title: 'Game', description: `Alice and Bob are playing a game. There are n (n is even) integers written on a blackboard, represented by x1,x2,…,xn. There is also a given integer k and an integer score that is initially 0. The game lasts for n2 turns, in which the following events happen sequentially:
+            { title: 'Game-1', description: `Alice and Bob are playing a game. There are n (n is even) integers written on a blackboard, represented by x1,x2,…,xn. There is also a given integer k and an integer score that is initially 0. The game lasts for n2 turns, in which the following events happen sequentially:
 
 Alice selects an integer from the blackboard and erases it. Let's call Alice's chosen integer a.
 Bob selects an integer from the blackboard and erases it. Let's call Bob's chosen integer b.
@@ -110,7 +112,7 @@ Output
 
 4
 `, topic: topicMap["sample_test"], type:"PRACTICE", pointsPerTestCaseSolved:5,timeToSolveInMinutes:90,  },
-{ title: 'Game', description: `Alice and Bob are playing a game. There are n (n is even) integers written on a blackboard, represented by x1,x2,…,xn. There is also a given integer k and an integer score that is initially 0. The game lasts for n2 turns, in which the following events happen sequentially:
+{ title: 'Game-2', description: `Alice and Bob are playing a game. There are n (n is even) integers written on a blackboard, represented by x1,x2,…,xn. There is also a given integer k and an integer score that is initially 0. The game lasts for n2 turns, in which the following events happen sequentially:
 
     Alice selects an integer from the blackboard and erases it. Let's call Alice's chosen integer a.
     Bob selects an integer from the blackboard and erases it. Let's call Bob's chosen integer b.
@@ -153,7 +155,7 @@ Output
     
     4
     `, topic: topicMap["Aadukalam_Round_2"], type:"PRACTICE", pointsPerTestCaseSolved:5,timeToSolveInMinutes:90,},
-    { title: 'Direction', description: `You are given a list of spatial rules describing the relative positions of points in a 2D plane. Each rule follows the format:
+    { title: 'Direction-1', description: `You are given a list of spatial rules describing the relative positions of points in a 2D plane. Each rule follows the format:
 
 A <direction> B
 
@@ -220,7 +222,7 @@ TestCase
 rules = ["X E Y", "Y E Z", "Z N W", "W W X"]
 
 Otuput: -1`, topic: topicMap['sample_test'], type: 'PRACTICE' ,pointsPerTestCaseSolved:5,timeToSolveInMinutes:90,},
-{ title: 'Direction', description: `You are given a list of spatial rules describing the relative positions of points in a 2D plane. Each rule follows the format:
+{ title: 'Direction-2', description: `You are given a list of spatial rules describing the relative positions of points in a 2D plane. Each rule follows the format:
 
     A <direction> B
     
@@ -331,7 +333,7 @@ Replace three Qs (substring "QQQ") to obtain "QWER".  Expected Output:
 
 3
 `, topic: topicMap['sample_test'], type: 'PRACTICE',pointsPerTestCaseSolved:2,timeToSolveInMinutes:90 ,  },
-{ title: 'Balance', description: `You are given a string s of length n containing only four kinds of characters: 'Q', 'W', 'E', 'R'.
+{ title: 'Balance-1', description: `You are given a string s of length n containing only four kinds of characters: 'Q', 'W', 'E', 'R'.
 
     A string is said to be balanced if each of its characters appears n / 4 times where n is the length of the string.
     

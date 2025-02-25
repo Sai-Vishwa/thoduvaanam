@@ -7,16 +7,38 @@ async function updateTopics(req,res) {
         let topicArr = []
         let questionArr = []
         let testCaseArr = []
+        let contestArr = []
         let updatedTopicJson = {}
         let updatedQuestionJson = {}
+        let updatedContestJson = {}
+        const topicNameDelArr = req.body.topicNameDelArr;
+        const questionTitleDelArr = req.body.questionTitleDelArr;
+        const testCaseIdDelArr = req.body.testCaseIdDelArr;
+
 
         
         data.map((topic)=>{
-            let dummy = topic
+            let dummy = JSON.parse(JSON.stringify(topic))
             delete dummy.question
             delete dummy.id
+            delete dummy.contest
             topicArr.push(dummy)
         })
+
+        data.map((topic)=>{
+            contestArr.push(topic.contest)
+        })
+
+        await Promise.all(
+            contestArr.map(async(cont) =>{
+                const d3 = await prisma.contest.upsert({
+                    where:{title:cont.title},
+                    update:cont,
+                    create:cont
+                })
+                updatedContestJson[d3.title] = d3.id
+            })
+        )
 
         await Promise.all(
             topicArr.map(async (topic) =>{
@@ -37,10 +59,13 @@ async function updateTopics(req,res) {
 
         data.map((topic)=>{
             topic.question.map((ques)=>{
-                let dummy2 = ques
+                let dummy2 = JSON.parse(JSON.stringify(ques))
                 delete dummy2.id
                 delete dummy2.testCase
                 dummy2.topic = updatedTopicJson[topic.name]
+                if(dummy2.type == "CONTEST"){
+                    dummy2.contestId = updatedContestJson[topic.name]
+                }
                 questionArr.push(dummy2)
             })
         })
@@ -50,7 +75,7 @@ async function updateTopics(req,res) {
                 const d2 = await prisma.questions.upsert({
                     where:{
                         title:ques.title
-                    },
+                    },  
                     update:ques,
                     create:ques
                 })
@@ -82,6 +107,30 @@ async function updateTopics(req,res) {
             })
         )
         
+
+        await prisma.testCase.deleteMany({
+            where:{
+                id:{in:testCaseIdDelArr}
+            }
+        })
+
+        await prisma.questions.deleteMany({
+            where:{
+                title:{in:questionTitleDelArr}
+            }
+        })
+
+        await prisma.contest.deleteMany({
+            where:{
+                name:{in:testCaseIdDelArr}
+            }
+        })
+
+        await prisma.topics.deleteMany({
+            where:{
+                name:{in:topicNameDelArr}
+            }
+        })
 
         res.status(200).json({
             msg:"Successful",

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Edit, Trash, Plus, Save, ChevronDown, ChevronUp, CalendarIcon, AlertTriangle } from 'lucide-react';
+import { Edit, Plus, Save, ChevronDown, ChevronUp, CalendarIcon } from 'lucide-react';
 
 const AdminDashboard = () => {
   // Sample data as received from the backend
@@ -10,6 +10,16 @@ const AdminDashboard = () => {
       "description": null,
       "notes": null,
       "contestDate": "2025-02-15T08:30:00.000Z",
+      "contest": {
+        "id": 1,
+        "title": "Aadukalam_Round_2",
+        "opensOn": "2025-02-15T07:30:00.000Z",
+        "closesOn": "2025-02-15T10:30:00.000Z",
+        "timeToSolveInMinutes": 120,
+        "totalPoints": 150,
+        "totalNoOfQuestions": 4,
+        "topicId": 19
+      },
       "question": [/* questions array */]
     },
     {
@@ -18,17 +28,25 @@ const AdminDashboard = () => {
       "description": null,
       "notes": null,
       "contestDate": "2025-02-14T08:27:43.029Z",
+      "contest": {
+        "id": 2,
+        "title": "sample_test",
+        "opensOn": "2025-02-25T07:31:02.933Z",
+        "closesOn": "2025-02-25T20:01:02.947Z",
+        "timeToSolveInMinutes": 90,
+        "totalPoints": 120,
+        "totalNoOfQuestions": 3,
+        "topicId": 20
+      },
       "question": [/* questions array */]
     }
   ];
-
 
   const [topics, setTopics] = useState([]);
   const [expandedTopic, setExpandedTopic] = useState(null);
   const [expandedQuestion, setExpandedQuestion] = useState(null);
   const [editMode, setEditMode] = useState({});
   const [hasChanges, setHasChanges] = useState(false);
-  const [showDeleteConfirm, setShowDeleteConfirm] = useState(null);
   const [newTestCase, setNewTestCase] = useState({
     input: '',
     output: '',
@@ -102,6 +120,16 @@ const AdminDashboard = () => {
           q.id === id ? { ...q, [field]: value } : q
         )
       })));
+    } else if (type === 'contest') {
+      setTopics(topics.map(topic => 
+        topic.id === id ? { 
+          ...topic, 
+          contest: { 
+            ...topic.contest, 
+            [field]: value 
+          } 
+        } : topic
+      ));
     }
     
     setHasChanges(true);
@@ -126,38 +154,25 @@ const AdminDashboard = () => {
     inputRefs.current[`${type}-${id}-${field}`] = el;
   };
 
-  // Delete confirmation
-  const confirmDelete = (type, id) => {
-    setShowDeleteConfirm({ type, id });
-  };
-
-  // Delete item
-  const deleteItem = (type, id) => {
-    if (type === 'topic') {
-      setTopics(topics.filter(topic => topic.id !== id));
-    } else if (type === 'question') {
-      setTopics(topics.map(topic => ({
-        ...topic,
-        question: topic.question.filter(q => q.id !== id)
-      })));
-    }
-    setHasChanges(true);
-    setShowDeleteConfirm(null);
-  };
-
-  // Cancel deletion
-  const cancelDelete = () => {
-    setShowDeleteConfirm(null);
-  };
-
   // Add new item
   const addNewTopic = () => {
+    const newId = Date.now(); // Temporary ID for UI purposes
     const newTopic = {
-      id: Date.now(),
+      id: newId,
       name: "New Topic",
       description: "",
       notes: "",
       contestDate: new Date().toISOString(),
+      contest: {
+        id: newId,
+        title: "New Contest",
+        opensOn: new Date().toISOString(),
+        closesOn: new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString(), // 3 hours later
+        timeToSolveInMinutes: 90,
+        totalPoints: 100,
+        totalNoOfQuestions: 3,
+        topicId: newId
+      },
       question: []
     };
     setTopics([...topics, newTopic]);
@@ -166,8 +181,9 @@ const AdminDashboard = () => {
   };
 
   const addNewQuestion = (topicId) => {
+    const newId = Date.now(); // Temporary ID for UI purposes
     const newQuestion = {
-      id: Date.now(),
+      id: newId,
       title: "New Question",
       description: "",
       topic: topicId,
@@ -200,7 +216,7 @@ const AdminDashboard = () => {
   const addTestCase = (questionId) => {
     const testCase = {
       ...newTestCase,
-      id: Date.now(),
+      id: Date.now(), // Temporary ID for UI purposes
       questionId
     };
     
@@ -230,24 +246,32 @@ const AdminDashboard = () => {
     try{
         fetch("http://localhost:4000/basic/admin-update",{
             method:"POST",
-            body:JSON.stringify({data:topics}),
+            body:JSON.stringify({
+              data: topics
+            }),
             headers:{
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
         }).then(resp => resp.json())
         .then(data => {
-            console.log("here too   ")
-            console.log(JSON.stringify(data))
-            setTopics(data.data)
+            if(data.err){
+              throw new Error(data.err)
+            }
+            else{
+              alert("Changes made successfully ")
+              setHasChanges(false);
+              setEditMode({});
+            }
+        })
+        .catch(error => {
+          alert(error.message)
         })
     }
     catch(error){
         alert(error.message)
     }
-    alert("Changes saved!");
-    setHasChanges(false);
-    setEditMode({});
+    
   };
 
   // Render editable field
@@ -258,9 +282,9 @@ const AdminDashboard = () => {
     if (disabled) {
       return (
         <div className="relative mb-2">
-          <div className="font-semibold text-gray-700 text-sm">{field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1')}</div>
+          <div className="font-bold text-gray-800 text-sm">{field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1')}</div>
           <div className="flex items-center">
-            <div className="flex-1 p-2 border border-gray-100 bg-gray-50 text-gray-500">{value || "-"}</div>
+            <div className="flex-1 p-2 border border-gray-100 bg-gray-50 text-gray-800 font-semibold">{value || "-"}</div>
           </div>
         </div>
       );
@@ -268,11 +292,11 @@ const AdminDashboard = () => {
     
     return (
       <div className="relative mb-2">
-        <div className="font-semibold text-gray-700 text-sm">{field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1')}</div>
+        <div className="font-bold text-gray-800 text-sm">{field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1')}</div>
         {isEditing ? (
           isTextArea ? (
             <textarea
-              className="w-full border p-2 rounded bg-white text-black"
+              className="w-full border p-2 rounded bg-white text-black font-medium"
               value={value || ""}
               rows={5}
               onChange={(e) => handleChange(type, id, field, e.target.value)}
@@ -281,7 +305,7 @@ const AdminDashboard = () => {
             />
           ) : isSelect ? (
             <select
-              className="w-full border p-2 rounded bg-white text-black"
+              className="w-full border p-2 rounded bg-white text-black font-medium"
               value={value || ""}
               onChange={(e) => handleChange(type, id, field, e.target.value)}
               onBlur={(e) => handleBlur(type, id, field, e)}
@@ -293,9 +317,9 @@ const AdminDashboard = () => {
             </select>
           ) : (
             <input
-              className="w-full border p-2 rounded bg-white text-black"
-              type={field === "contestDate" ? "datetime-local" : "text"}
-              value={field === "contestDate" ? value?.substring(0, 16) : value || ""}
+              className="w-full border p-2 rounded bg-white text-black font-medium"
+              type={field === "contestDate" || field === "opensOn" || field === "closesOn" ? "datetime-local" : "text"}
+              value={field === "contestDate" || field === "opensOn" || field === "closesOn" ? value?.substring(0, 16) : value || ""}
               onChange={(e) => handleChange(type, id, field, e.target.value)}
               onBlur={(e) => handleBlur(type, id, field, e)}
               ref={(el) => setInputRef(type, id, field, el)}
@@ -303,7 +327,7 @@ const AdminDashboard = () => {
           )
         ) : (
           <div className="flex items-center">
-            <div className="flex-1 p-2 border border-transparent">{value || "-"}</div>
+            <div className="flex-1 p-2 border border-transparent font-medium">{value || "-"}</div>
             <button 
               className="p-1 text-blue-600 hover:bg-blue-100 rounded" 
               onClick={() => enableEdit(type, id, field)}
@@ -322,13 +346,13 @@ const AdminDashboard = () => {
         <h1 className="text-2xl font-bold text-blue-800">Admin Dashboard</h1>
         <div className="space-x-2">
           <button 
-            className="px-4 py-2 bg-blue-600 text-white rounded flex items-center"
+            className="px-4 py-2 bg-blue-600 text-white rounded flex items-center font-bold"
             onClick={addNewTopic}
           >
             <Plus size={18} className="mr-1" /> Add New Topic
           </button>
           <button 
-            className={`px-4 py-2 rounded flex items-center ${hasChanges ? 'bg-green-600 text-white' : 'bg-gray-300 text-gray-600'}`}
+            className={`px-4 py-2 rounded flex items-center font-bold ${hasChanges ? 'bg-green-600 text-white' : 'bg-gray-300 text-gray-600'}`}
             onClick={saveChanges}
             disabled={!hasChanges}
           >
@@ -346,23 +370,14 @@ const AdminDashboard = () => {
             >
               <div className="flex items-center">
                 {expandedTopic === topic.id ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-                <h2 className="ml-2 text-xl font-semibold">{topic.name}</h2>
+                <h2 className="ml-2 text-xl font-bold">{topic.name}</h2>
               </div>
               
               <div className="flex items-center space-x-2">
-                <div className="flex items-center text-gray-600">
+                <div className="flex items-center text-gray-800 font-semibold">
                   <CalendarIcon size={16} className="mr-1" />
                   {new Date(topic.contestDate).toLocaleDateString()}
                 </div>
-                <button 
-                  className="p-1 text-red-600 hover:bg-red-100 rounded"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    confirmDelete('topic', topic.id);
-                  }}
-                >
-                  <Trash size={18} />
-                </button>
               </div>
             </div>
             
@@ -379,11 +394,24 @@ const AdminDashboard = () => {
                   </div>
                 </div>
                 
+                {/* Contest Details Section */}
+                <div className="mt-6 mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                  <h3 className="text-lg font-bold mb-4 text-blue-800">Contest Details</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <EditableField type="contest" id={topic.id} field="title" value={topic.contest?.title || ""} />
+                    <EditableField type="contest" id={topic.id} field="timeToSolveInMinutes" value={topic.contest?.timeToSolveInMinutes || "90"} />
+                    <EditableField type="contest" id={topic.id} field="opensOn" value={topic.contest?.opensOn || new Date().toISOString()} />
+                    <EditableField type="contest" id={topic.id} field="closesOn" value={topic.contest?.closesOn || new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString()} />
+                    <EditableField type="contest" id={topic.id} field="totalPoints" value={topic.contest?.totalPoints || "100"} />
+                    <EditableField type="contest" id={topic.id} field="totalNoOfQuestions" value={topic.contest?.totalNoOfQuestions || "3"} />
+                  </div>
+                </div>
+                
                 <div className="mt-6">
                   <div className="flex justify-between items-center mb-3">
-                    <h3 className="text-lg font-medium">Questions ({topic.question.length})</h3>
+                    <h3 className="text-lg font-bold">Questions ({topic.question?.length || 0})</h3>
                     <button 
-                      className="px-3 py-1 bg-blue-600 text-white rounded flex items-center text-sm"
+                      className="px-3 py-1 bg-blue-600 text-white rounded flex items-center text-sm font-bold"
                       onClick={() => addNewQuestion(topic.id)}
                     >
                       <Plus size={16} className="mr-1" /> Add Question
@@ -391,7 +419,7 @@ const AdminDashboard = () => {
                   </div>
                   
                   <div className="space-y-3">
-                    {topic.question.map(question => (
+                    {topic.question && topic.question.map(question => (
                       <div key={question.id} className="border rounded overflow-hidden">
                         <div 
                           className="flex justify-between items-center p-3 bg-gray-50 cursor-pointer"
@@ -399,32 +427,25 @@ const AdminDashboard = () => {
                         >
                           <div className="flex items-center">
                             {expandedQuestion === question.id ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                            <span className="ml-2 font-medium">{question.title}</span>
+                            <span className="ml-2 font-bold">{question.title}</span>
                           </div>
                           
                           <div className="flex items-center space-x-2">
-                            <span className={`px-2 py-1 text-xs rounded ${
+                            <span className={`px-2 py-1 text-xs rounded font-bold ${
                               question.difficulty === 'EASY' ? 'bg-green-100 text-green-800' :
-                              question.difficulty === 'MEDIUM' ? 'bg-yellow-100 text-yellow-800' :
-                              'bg-red-100 text-red-800'
+                              question.difficulty === 'BALANCED' ? 'bg-yellow-100 text-yellow-800' :
+                              question.difficulty === 'INTENSE' ? 'bg-orange-100 text-orange-800' :
+                              question.difficulty === 'HELL' ? 'bg-red-100 text-red-800' :
+                              'bg-purple-100 text-purple-800'
                             }`}>
                               {question.difficulty}
                             </span>
-                            <span className={`px-2 py-1 text-xs rounded ${
+                            <span className={`px-2 py-1 text-xs rounded font-bold ${
                               question.type === 'CONTEST' ? 'bg-purple-100 text-purple-800' :
                               'bg-blue-100 text-blue-800'
                             }`}>
                               {question.type}
                             </span>
-                            <button 
-                              className="p-1 text-red-600 hover:bg-red-100 rounded"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                confirmDelete('question', question.id);
-                              }}
-                            >
-                              <Trash size={16} />
-                            </button>
                           </div>
                         </div>
                         
@@ -433,7 +454,14 @@ const AdminDashboard = () => {
                             <div className="grid grid-cols-2 gap-4">
                               <EditableField type="question" id={question.id} field="title" value={question.title} />
                               <div className="grid grid-cols-2 gap-2">
-                                <EditableField type="question" id={question.id} field="difficulty" value={question.difficulty} />
+                                <EditableField 
+                                  type="question" 
+                                  id={question.id} 
+                                  field="difficulty" 
+                                  value={question.difficulty}
+                                  isSelect={true}
+                                  options={['EASY', 'BALANCED', 'INTENSE', 'HELL']} 
+                                />
                                 <EditableField 
                                   type="question" 
                                   id={question.id} 
@@ -461,14 +489,14 @@ const AdminDashboard = () => {
                             </div>
                             
                             <div className="mt-6">
-                              <h4 className="font-medium text-sm mb-3">Test Cases ({question.testCase ? question.testCase.length : 0})</h4>
+                              <h4 className="font-bold text-sm mb-3">Test Cases ({question.testCase ? question.testCase.length : 0})</h4>
                               
                               <div className="mb-4 p-4 border rounded-lg bg-gray-50">
                                 <div className="grid grid-cols-3 gap-4 mb-3">
                                   <div className="col-span-1">
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
+                                    <label className="block text-sm font-bold text-gray-700 mb-1">Type</label>
                                     <select 
-                                      className="w-full border p-2 rounded bg-white text-black"
+                                      className="w-full border p-2 rounded bg-white text-black font-medium"
                                       value={newTestCase.type}
                                       onChange={(e) => handleTestCaseChange('type', e.target.value)}
                                     >
@@ -478,9 +506,9 @@ const AdminDashboard = () => {
                                     </select>
                                   </div>
                                   <div className="col-span-2">
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Input</label>
+                                    <label className="block text-sm font-bold text-gray-700 mb-1">Input</label>
                                     <textarea 
-                                      className="w-full border p-2 rounded bg-white text-black"
+                                      className="w-full border p-2 rounded bg-white text-black font-medium"
                                       value={newTestCase.input}
                                       rows={3}
                                       onChange={(e) => handleTestCaseChange('input', e.target.value)}
@@ -489,9 +517,9 @@ const AdminDashboard = () => {
                                   </div>
                                 </div>
                                 <div className="mb-3">
-                                  <label className="block text-sm font-medium text-gray-700 mb-1">Output</label>
+                                  <label className="block text-sm font-bold text-gray-700 mb-1">Output</label>
                                   <textarea 
-                                    className="w-full border p-2 rounded bg-white text-black"
+                                    className="w-full border p-2 rounded bg-white text-black font-medium"
                                     value={newTestCase.output}
                                     rows={3}
                                     onChange={(e) => handleTestCaseChange('output', e.target.value)}
@@ -499,7 +527,7 @@ const AdminDashboard = () => {
                                   />
                                 </div>
                                 <button 
-                                  className="px-3 py-2 bg-blue-600 text-white rounded flex items-center text-sm"
+                                  className="px-3 py-2 bg-blue-600 text-white rounded flex items-center text-sm font-bold"
                                   onClick={() => addTestCase(question.id)}
                                 >
                                   <Plus size={16} className="mr-1" /> Add Test Case
@@ -511,28 +539,30 @@ const AdminDashboard = () => {
                                   {question.testCase.map((tc, index) => (
                                     <div key={tc.id || index} className="border p-3 rounded text-sm">
                                       <div className="flex justify-between mb-2">
-                                        <span className="font-medium">Test Case #{index + 1}</span>
-                                        <span className={`px-2 py-1 text-xs rounded ${
-                                          tc.type === 'HIDDEN' ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'
-                                        }`}>
-                                          {tc.type}
-                                        </span>
+                                        <span className="font-bold">Test Case #{index + 1}</span>
+                                        <div className="flex items-center space-x-2">
+                                          <span className={`px-2 py-1 text-xs rounded font-bold ${
+                                            tc.type === 'HIDDEN' ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'
+                                          }`}>
+                                            {tc.type}
+                                          </span>
+                                        </div>
                                       </div>
                                       <div className="grid grid-cols-2 gap-2">
                                         <div>
-                                          <div className="text-xs text-gray-500">Input:</div>
-                                          <pre className="bg-gray-50 p-2 rounded text-xs overflow-x-auto">{tc.input}</pre>
+                                          <div className="text-xs font-bold text-gray-700">Input:</div>
+                                          <pre className="bg-gray-50 p-2 rounded text-xs overflow-x-auto font-medium">{tc.input}</pre>
                                         </div>
                                         <div>
-                                          <div className="text-xs text-gray-500">Expected Output:</div>
-                                          <pre className="bg-gray-50 p-2 rounded text-xs overflow-x-auto">{tc.output}</pre>
+                                          <div className="text-xs font-bold text-gray-700">Expected Output:</div>
+                                          <pre className="bg-gray-50 p-2 rounded text-xs overflow-x-auto font-medium">{tc.output}</pre>
                                         </div>
                                       </div>
                                     </div>
                                   ))}
                                 </div>
                               ) : (
-                                <div className="text-center py-4 text-gray-500 text-sm">
+                                <div className="text-center py-4 text-gray-700 text-sm font-medium">
                                   No test cases added yet.
                                 </div>
                               )}
@@ -542,8 +572,8 @@ const AdminDashboard = () => {
                       </div>
                     ))}
                     
-                    {topic.question.length === 0 && (
-                      <div className="text-center py-6 text-gray-500">
+                    {(!topic.question || topic.question.length === 0) && (
+                      <div className="text-center py-6 text-gray-700 font-medium">
                         No questions added yet. Click "Add Question" to create one.
                       </div>
                     )}
@@ -554,35 +584,6 @@ const AdminDashboard = () => {
           </div>
         ))}
       </div>
-      
-      {/* Delete Confirmation Modal */}
-      {showDeleteConfirm && (
-        <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-            <div className="flex items-center text-red-600 mb-4">
-              <AlertTriangle className="mr-2" size={24} />
-              <h3 className="text-lg font-bold">Confirm Deletion</h3>
-            </div>
-            <p className="mb-6">
-              Are you sure you want to delete this {showDeleteConfirm.type}? This action cannot be undone.
-            </p>
-            <div className="flex justify-end space-x-3">
-              <button 
-                className="px-4 py-2 border border-gray-300 rounded text-gray-700"
-                onClick={cancelDelete}
-              >
-                Cancel
-              </button>
-              <button 
-                className="px-4 py-2 bg-red-600 text-white rounded"
-                onClick={() => deleteItem(showDeleteConfirm.type, showDeleteConfirm.id)}
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
