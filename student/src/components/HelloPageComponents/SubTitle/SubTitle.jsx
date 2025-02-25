@@ -62,7 +62,7 @@ class TextScramble {
   }
 }
 
-const SubTitle = () => {
+const SubTitle = ({isvisible}) => {
   const textRef = useRef(null);
   const phrases = [
     "The DSA - Battle field",

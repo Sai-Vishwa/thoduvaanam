@@ -17,6 +17,11 @@ import TextScramble from './pages/dummy'
 import ChangePasswordPage from './pages/passwordChangePage/ChangePasswordPage'
 import DiscussionsPage from './pages/DiscussionsPage/DiscussionsPage'
 import AdminDetails from './pages/AdminPage/AdminDetails'
+// import ScrollAnimation from './pages/HelloPage/Hel
+import EnhancedAnimation from './pages/HelloPage/HelloTwo'
+import ScrollAnimation from './pages/HelloPage/HelloTwo'
+import SimpleScrollAnimation from './pages/HelloPage/HelloTwo'
+import HelloThree from './pages/HelloPage/Hello3'
 
 function App() {
 
@@ -31,6 +36,9 @@ function App() {
         <Route path='/:uname/discussions' element={<DiscussionsPage />}/>
         <Route path='/signup' element={<SignUpPage />}/>
         <Route path='/' element={<HelloPage />} />
+        <Route path='/hello2' element={<SimpleScrollAnimation />} />
+        <Route path='/hello3' element={<HelloThree />} />
+
         <Route path='/:uname/question/:qname' element={<QuestionPage />} />
         <Route path='/:uname/contest/:tname' element={<ContestBasicPage />} />
         <Route path='/:uname/contest-handler/:tname' element={<ContestHandlerPage />} />
