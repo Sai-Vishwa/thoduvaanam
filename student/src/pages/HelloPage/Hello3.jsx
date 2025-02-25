@@ -18,26 +18,20 @@ function HelloThree(){
 
     return (
 
-        <div className="overflow-x-hidden h-[220vh] text-[#000015] bg-[#ffe6cf]">
+        <div className="overflow-x-hidden h-[800vh] text-[#000015] bg-[#ffe6cf]">
 
             <div className="h-[100vh]">
                 <HelloPage 
                     isvisible={scrollY>100?false:true}
                 />
             </div>
-            <div className="flex w-full h-[100vh] text-6xl bg-red-500" >
-                <div className="flex w-1/2 justify-center items-center bg-green-500">
+            <div className="flex w-full h-[100vh] text-xl" >
                 <SecondPart 
                 isvisible={scrollY}/>
-                </div>
-                <div>
-
-                </div>
+                
                 
             </div>
-            <div className="h-[20vh] flex bg-[#000015]">
-
-            </div>
+           
 
         </div>
 
