@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import HelloPage from "./HelloPage";
 import SecondPart from "./SecondPart";
+import Footer from "./Footer";
 
 
 function HelloThree(){
@@ -18,7 +19,7 @@ function HelloThree(){
 
     return (
 
-        <div className="overflow-x-hidden h-[800vh] text-[#000015] bg-[#ffe6cf]">
+        <div className="overflow-x-hidden h-[1100vh] text-[#000015] bg-[#e5ffdf]">
 
             <div className="h-[100vh]">
                 <HelloPage 
@@ -29,8 +30,8 @@ function HelloThree(){
                 <SecondPart 
                 isvisible={scrollY}/>
                 
-                
             </div>
+            
            
 
         </div>
