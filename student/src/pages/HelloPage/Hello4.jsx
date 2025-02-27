@@ -1,14 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import HelloPage from './HelloPage';
-import SecondPart from './SecondPart';
-import { motion } from 'framer-motion';
 
-const HelloThree = () => {
+const MovingStarsBackground = () => {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const [scrollY, setScrollY] = useState(0);
-
   
   useEffect(() => {
     const container = containerRef.current;
@@ -79,28 +74,22 @@ const HelloThree = () => {
     // Start animation
     animate();
     
+    cons
     // Handle window resize
     window.addEventListener('resize', updateDimensions);
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-
     
     // Cleanup
     return () => {
       window.removeEventListener('resize', updateDimensions);
-      window.removeEventListener("scroll", handleScroll);
-
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
-
-  const colors = ["#c168fd" , "#373f94" ,"#5560d7"  , "#d75573" , "#d75555"]
   
   return (
-    <div className="overflow-x-hidden h-[825vh] text-[#000015] bg-[#ff4a5f] relative">
+    <div className="overflow-x-hidden h-[820vh] text-[#000015] bg-[#c168fd] relative">
       <canvas 
         ref={canvasRef} 
-        className="fixed top-0 left-0 w-full z-0 bg-transparent"
+        className="fixed top-0 left-0 w-full h-screen bg-black"
       />
       
       {/* Example content */}
@@ -111,18 +100,9 @@ const HelloThree = () => {
         <div className="flex w-full h-[100vh] text-xl">
           <SecondPart isvisible={scrollY} />
         </div>
-        <div className='h-[600vh]'>
-
-        </div>
-        <motion.div className='h-[25vh] bg-[#000015]'
-        initial={{opacity:0 , y:"-100vh"}}
-        animate={{opacity:1,y:0}}
-        transition={{ duration:2 , }}>
-
-        </motion.div>
       </div>
     </div>
   );
 };
 
-export default HelloThree;
+export default MovingStarsBackground;

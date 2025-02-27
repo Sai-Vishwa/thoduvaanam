@@ -25,8 +25,8 @@ function SecondPart({isvisible}) {
     const text3DataArr = text3Data.split("");
 
     const animateNo = (isvisible -(650 + 8*text1))/8
-    const animateNo2 = (isvisible -(1900 + 8*text2))/8
-    const animateNo3 = (isvisible -(3450 + 8*text3))/8
+    const animateNo2 = (isvisible -(1650 + 8*text2))/8
+    const animateNo3 = (isvisible -(2950 + 8*text3))/8
 
     
 
@@ -56,10 +56,10 @@ function SecondPart({isvisible}) {
                         onAnimationComplete={()=>{setTextBox(true)}}>
 
 
-                            <motion.div className={`block space-y-3 ${text1Hide==true?"hidden":""}`}
+                            <motion.div className={`block space-y-3 ${text1Hide==true || text2Hide==false || text3Hide==false?"hidden":""}`}
                                 initial={{opacity:0,x:0}}
                                 animate={isvisible>650 && isvisible<1650?{opacity:1,x:0}:{opacity:0,x:0}}
-                                transition={isvisible>650 && isvisible<1650?{duration:0.5}:{duration:2}}
+                                transition={isvisible>650 && isvisible<1650?{duration:0.5}:{duration:0.5}}
                                 onAnimationComplete={()=>{
                                     if(isvisible>650 && isvisible<1650){
                                         setText1Hide(false)
@@ -208,12 +208,12 @@ function SecondPart({isvisible}) {
 
 
 
-                        <motion.div className={`block space-y-3 ${text2Hide==true?"hidden":""}`}
+                        <motion.div className={`block space-y-3 ${text2Hide==true || text1Hide==false || text3Hide==false?"hidden":""}`}
                                 initial={{opacity:0,x:0}}
-                                animate={isvisible>1900 && isvisible<3200?{opacity:1,x:0}:{opacity:0,x:0}}
-                                transition={isvisible>1900 && isvisible<3200?{duration:0.5 , delay:0}:{duration:2 , delay:2}}
+                                animate={isvisible>1650 && isvisible<2950?{opacity:1,x:0}:{opacity:0,x:0}}
+                                transition={isvisible>1650 && isvisible<2950?{duration:0.5 , delay:0}:{duration:0.5}}
                                 onAnimationComplete={()=>{
-                                    if(isvisible>1900 && isvisible<3200){
+                                    if(isvisible>1650 && isvisible<2950){
                                         setText2Hide(false)
                                     }
                                     else{
@@ -361,12 +361,12 @@ function SecondPart({isvisible}) {
 
 
 
-                        <motion.div className={`block space-y-3 ${text3Hide==true?"hidden":""}`}
+                        <motion.div className={`block space-y-3 ${text3Hide==true || text1Hide==false || text2Hide==false?"hidden":""}`}
                                 initial={{opacity:0,x:0}}
-                                animate={isvisible>3450?{opacity:1,x:0}:{opacity:0,x:0}}
-                                transition={isvisible>3450?{duration:0.5 , delay:0}:{duration:2 , delay:2}}
+                                animate={isvisible>2950?{opacity:1,x:0}:{opacity:0,x:0}}
+                                transition={isvisible>2950?{duration:1 , delay:2}:{duration:0.5}}
                                 onAnimationComplete={()=>{
-                                    if(isvisible>3450){
+                                    if(isvisible>2950){
                                         setText3Hide(false)
                                     }
                                     else{

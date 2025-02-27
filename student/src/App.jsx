@@ -21,6 +21,9 @@ import AdminDetails from './pages/AdminPage/AdminDetails'
 import EnhancedAnimation from './pages/HelloPage/HelloTwo'
 import ScrollAnimation from './pages/HelloPage/HelloTwo'
 import SimpleScrollAnimation from './pages/HelloPage/HelloTwo'
+import CssDoodleAnimation from './pages/dummy'
+import SnowBackground from './pages/dummy'
+import Hello3 from './pages/HelloPage/Hello3'
 import HelloThree from './pages/HelloPage/Hello3'
 
 function App() {
@@ -38,6 +41,8 @@ function App() {
         <Route path='/' element={<HelloPage />} />
         <Route path='/hello2' element={<SimpleScrollAnimation />} />
         <Route path='/hello3' element={<HelloThree />} />
+        <Route path='/hello4' element={<SnowBackground />} />
+
 
         <Route path='/:uname/question/:qname' element={<QuestionPage />} />
         <Route path='/:uname/contest/:tname' element={<ContestBasicPage />} />
