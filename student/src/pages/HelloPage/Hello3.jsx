@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import HelloPage from './HelloPage';
 import SecondPart from './SecondPart';
 import { motion } from 'framer-motion';
+import AadukalamFooter from './Footer';
 
 const HelloThree = () => {
   const canvasRef = useRef(null);
@@ -95,13 +96,17 @@ const HelloThree = () => {
   }, []);
 
   const colors = ["#c168fd" , "#373f94" ,"#5560d7"  , "#d75573" , "#d75555"]
+
+
   
   return (
-    <div className="overflow-x-hidden h-[825vh] text-[#000015] bg-[#ff4a5f] relative">
+    <div className="overflow-x-hidden h-[820vh] text-[#000015] bg-[#ff4a5f] relative">
       <canvas 
         ref={canvasRef} 
         className="fixed top-0 left-0 w-full z-0 bg-transparent"
       />
+
+      
       
       {/* Example content */}
       <div className="relative z-10">
@@ -114,12 +119,15 @@ const HelloThree = () => {
         <div className='h-[600vh]'>
 
         </div>
-        <motion.div className='h-[25vh] bg-[#000015]'
-        initial={{opacity:0 , y:"-100vh"}}
-        animate={{opacity:1,y:0}}
-        transition={{ duration:2 , }}>
 
-        </motion.div>
+        <div className='w-full h-[20vh] text-[#ffafb9]'>
+                <AadukalamFooter />
+        </div>
+
+        {/* <motion.div className='h-[20vh] w-full bg-[#000015]'>
+            {/* <Footer 
+            isVisible={scrollY}/>  */}
+            {/* Im here */}
       </div>
     </div>
   );
