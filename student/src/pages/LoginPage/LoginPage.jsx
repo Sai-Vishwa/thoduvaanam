@@ -30,7 +30,7 @@ const LoginPage = () => {
 
   return (
 
-    <div className="min-h-screen min-w-screen overflow-hidden bg-white flex items-center justify-center font-mono relative">
+    <div className="min-h-screen min-w-screen overflow-hidden bg-[#ff4a5f] flex items-center justify-center font-mono relative">
       <LoginBox 
       loginData={loginData}
       forgotPassword={forgotPassword}

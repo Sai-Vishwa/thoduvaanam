@@ -226,7 +226,7 @@ const SignUpPage = () => {
   
 
   return (
-    <div className="min-h-screen min-w-screen overflow-hidden bg-white flex items-center justify-center font-mono relative">
+    <div className="min-h-screen min-w-screen overflow-hidden bg-[#ff4a5f] flex items-center justify-center font-mono relative">
       <motion.div
       className="bg-white p-8 rounded-lg shadow-lg mx-10 max-w-md w-full border-2 border-[#000015] border-t-[6px] relative"
       initial={{ opacity: 0, y: 20 }}

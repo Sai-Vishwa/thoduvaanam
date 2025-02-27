@@ -26,9 +26,9 @@ const VerticalNav = ({ topics, activeSection, setActiveSection , uname}) => {
   };
 
   return (
-    <div className="w-64 bg-white border-r border-[#000015] h-screen overflow-y-auto fixed">
+    <div className="w-64 bg-gray-200 border- border-[#000015] h-screen overflow-y-auto fixed">
       {topics.map((topic) => (
-        <div key={topic.name} className="border-b border-[#000015]/20">
+        <div key={topic.name} className="border-b border-r border-t border-[#000015]/20">
           <motion.div 
             className={`flex items-center justify-between p-4 cursor-pointer hover:bg-[#000015]/5 transition-colors ${
               activeSection === topic.name ? 'bg-[#000015]/10 text-[#000015]' : ''
@@ -80,7 +80,7 @@ const VerticalNav = ({ topics, activeSection, setActiveSection , uname}) => {
                     </motion.div>
                   ))}
                   <motion.div
-                    className="px-4 py-3 text-sm font-bold text-purple-600 hover:bg-[#000015]/5 cursor-pointer transition-colors"
+                    className="px-4 py-3 text-sm font-extrabold text-purple-600 hover:bg-[#000015]/5 cursor-pointer transition-colors"
                     whileHover={{ x: 4 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={()=>{
@@ -127,7 +127,7 @@ const NavBar = ({ userData, currentPath, viewMode }) => {
                 'Accept': 'application/json'
               }
             }).then((resp) => resp.json())
-            .then((data)=>{
+            ((data)=>{
               if(data.err){
                 throw new Error(data.err)
               }
@@ -288,7 +288,9 @@ const TopicSection = ({ topic ,uname }) => {
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="mb-8 border-2 border-[#000015] rounded-lg p-6 bg-white"
+      className={`mb-8 border-2 border-[#000015] rounded-lg ${isMinimized?"pb-1":"pb-6"} p-6 bg-white`}
+
+      onClick={() => setIsMinimized(!isMinimized)}
     >
       <Toaster />
       <div className="flex items-center justify-between mb-6">
@@ -378,7 +380,7 @@ const TopicSection = ({ topic ,uname }) => {
               }}
             >
               <div className="flex items-center justify-between">
-                <h4 className="font-bold text-[#000015]">{topic.name} Contest</h4>
+                <h4 className="font-black text-[#000015]">{topic.name} Contest</h4>
                 <span className="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-bold">
                   Contest
                 </span>
@@ -430,7 +432,7 @@ function HomePage() {
   }, [allData?.data?.length, navigate]);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gray-200">
       <NavBar 
         userData={allData.myData} 
         currentPath={window.location.pathname}
@@ -447,8 +449,8 @@ function HomePage() {
         />
         </div>
         
-        
-        <main className="flex-1 p-8 lg:w-5/6 xl:w-5/6 xs:w-full md:w-full sm:w-full">
+        <div className="flex p-8  lg:w-5/6 xl:w-5/6 xs:w-full md:w-full sm:w-full ">
+        <main className="flex-1 w-full p-8 border-2 border-black rounded-xl bg-white">
           <motion.div 
             className="mb-8"
             initial={{ opacity: 0, y: 20 }}
@@ -466,6 +468,8 @@ function HomePage() {
             ))}
           </div>
         </main>
+        </div>
+        
       </div>
     </div>
   );
