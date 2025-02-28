@@ -64,17 +64,62 @@ async function homePage(req,res) {
                     leetCodeName:true,
                     studentAchievements:{
                         select:{
-                            achievementId:true,
-                            count:true
+                            count:true,
+                            achievements:{
+                                select:{
+                                    title:true
+                                }
+                            }
                         }
                     }
                 }
             })
+            const rank = await prisma.achievements.findFirst({
+                where:{
+                    title:"totalPoints"
+                },
+                select:{
+                    studentAchievements:{
+                        select:{
+                            count:true,
+                            studentId:true,
+                        },
+                        orderBy:{
+                            count:"desc"
+                        }
+                    }
+                },
+
+            })
+            let rc = 1
+            let count =0
+            let flag = false
+            let prev = rank.studentAchievements[0].count
+            rank.studentAchievements.map((std , index)=>{
+            
+                if(std.studentId == searchid){
+                    flag = true
+                }
+                else{
+                    if(!flag){
+                        if(prev ==  std.count && index>0){
+                            count+=1
+                        }
+                        else if(index>0){
+                            rc = rc + count + 1
+                        }
+                    }
+                }
+            })
+            
+             
+            console.log(myData)
             res.status(200).json({
                 msg:"Success",
                 data:data,
                 myData:myData,
                 viewMode: viewMode,
+                rank:rc
             })
         }
     }

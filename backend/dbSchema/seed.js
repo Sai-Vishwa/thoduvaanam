@@ -2,14 +2,53 @@ const { PrismaClient } = require('./generated');
 const prisma = new PrismaClient();
 
 async function main() {
+
+
+    // await prisma.achievements.createMany({
+    //     data:[
+    //         {
+    //             title:"totalPoints",
+    //             description:"This achievement holds the total points secured by a student"
+    //         },
+    //         {
+    //             title:"totalQuestionsSolved",
+    //             description:"This achievement holds the total no. of successful correct submissions made by a user"
+    //         },
+    //         {
+    //             title:"totalContestsParticipated",
+    //             description:"This achievement holds the total no. of contests the student participated"
+    //         }
+    //     ]
+    // })
+
+    await prisma.studentAchievements.createMany({
+        data:[
+            {
+                count:0,
+                achievementId:1,
+                studentId:1
+            },
+            {
+                studentId:1,
+                achievementId:2,
+                count:0
+            },
+            {
+                count:0,
+                achievementId:3,
+                studentId:1
+            }
+        ]
+    })
+    
     //Insert students
-    await prisma.student.create({
-        data: 
-            { name: 'Senior', rno: '220701250', uname: 'Senior', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' }
+    // await prisma.student.create({
+    //     data: 
+    //         { name: 'Senior', rno: '220701250', uname: 'Senior', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' }
     // //         // { name: 'Rakul', rno: '220701216', uname: 'Rakul', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
     // //         // { name: 'Shanto', rno: '220701263', uname: 'Shanto', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' }
         
-    });
+    // });
 
 //     // console.log('Students inserted successfully');
 

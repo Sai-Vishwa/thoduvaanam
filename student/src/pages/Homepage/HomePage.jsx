@@ -102,7 +102,7 @@ const VerticalNav = ({ topics, activeSection, setActiveSection , uname}) => {
   );
 };
 
-const NavBar = ({ userData, currentPath, viewMode }) => {
+const NavBar = ({ userData, currentPath, viewMode , rank }) => {
   const [showProfile, setShowProfile] = useState(false);
   const profileRef = useRef(null);
   const navigate = useNavigate();
@@ -223,14 +223,14 @@ const NavBar = ({ userData, currentPath, viewMode }) => {
                         <Medal className="w-5 h-5 text-[#000015]" />
                         <div>
                           <div className="text-sm font-semibold text-gray-600">Total Points</div>
-                          <div className="font-bold text-[#000015]">{userData.points || 0}</div>
+                          <div className="font-bold text-[#000015]">{userData.points|| 0}</div>
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
                         <Target className="w-5 h-5 text-[#000015]" />
                         <div>
-                          <div className="text-sm font-semibold text-gray-600">Problems Solved</div>
-                          <div className="font-bold text-[#000015]">{userData.problemsSolved || 0}</div>
+                          <div className="text-sm font-semibold text-gray-600">Questions Solved</div>
+                          <div className="font-bold text-[#000015]">{userData.questionsSolved || 0}</div>
                         </div>
                       </div>
                     </div>
@@ -239,8 +239,8 @@ const NavBar = ({ userData, currentPath, viewMode }) => {
                       <div className="flex items-center space-x-2">
                         <Trophy className="w-5 h-5 text-[#000015]" />
                         <div>
-                          <div className="text-sm font-semibold text-gray-600">Contests Won</div>
-                          <div className="font-bold text-[#000015]">{userData.contestsWon || 0}</div>
+                          <div className="text-sm font-semibold text-gray-600">Contests Participated</div>
+                          <div className="font-bold text-[#000015]">{userData.contestsParticipated || 0}</div>
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
@@ -251,7 +251,7 @@ const NavBar = ({ userData, currentPath, viewMode }) => {
                         </div>
                       </div>
                     </div>
-                    {userData?.leetCodeProfile?.length > 0 && (
+                    {userData?.leetCodeProfile?.length > 0?(
                       <div className="pt-4 border-t border-gray-200">
                         <a
                           href={userData.leetCodeProfile}
@@ -259,7 +259,18 @@ const NavBar = ({ userData, currentPath, viewMode }) => {
                           rel="noopener noreferrer"
                           className="text-[#000015] hover:text-blue-600 text-sm font-bold flex items-center"
                         >
-                          <span>LeetCode Profile</span>
+                          <span>Leet code Profile</span>
+                        </a>
+                      </div>
+                    ):(
+                      <div className="pt-4 border-t border-gray-200">
+                        <a
+                          href={userData.leetCodeProfile}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#000015]  text-sm font-bold flex items-center"
+                        >
+                          <span>No Leet code profile</span>
                         </a>
                       </div>
                     )}
@@ -360,6 +371,9 @@ const TopicSection = ({ topic ,uname }) => {
             transition={{ duration: 0.3 }}
             className="space-y-4 overflow-hidden"
           >
+            <span className="font-bold">
+              Practice
+            </span>
             {topic.question.map((q) => (
               <motion.div
                 key={q.id}
@@ -384,7 +398,8 @@ const TopicSection = ({ topic ,uname }) => {
                 </div>
               </motion.div>
             ))}
-            
+                                          <span className="font-bold ">Contest</span>
+
             <motion.div
               className="border-2 border-gray-200 rounded-lg p-4 hover:shadow-md transition-all cursor-pointer hover:border-[#000015] bg-gray-50"
               whileHover={{ scale: 1 }}
@@ -393,6 +408,7 @@ const TopicSection = ({ topic ,uname }) => {
                 nav(`/${uname}/contest/${topic.name}`)
               }}
             >
+              
               <div className="flex items-center justify-between">
                 <h4 className="font-black text-[#000015]">{topic.name} Contest</h4>
                 <span className="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-bold">
@@ -426,7 +442,7 @@ function HomePage() {
       });
       const data = await result.json();
       setAllData(data);
-      if (data.data.length > 0) {
+      if (data?.data.length > 0) {
         setActiveSection(data.data[0].name);
       }
     } catch (error) {
@@ -451,6 +467,7 @@ function HomePage() {
         userData={allData.myData} 
         currentPath={window.location.pathname}
         viewMode={allData.viewMode}
+        rank = {allData.rank}
       />
       
       <div className="flex">

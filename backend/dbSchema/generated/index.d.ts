@@ -15329,10 +15329,10 @@ export namespace Prisma {
 
   export type QuestionsWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    title?: string
     AND?: QuestionsWhereInput | QuestionsWhereInput[]
     OR?: QuestionsWhereInput[]
     NOT?: QuestionsWhereInput | QuestionsWhereInput[]
+    title?: StringFilter<"Questions"> | string
     description?: StringNullableFilter<"Questions"> | string | null
     topic?: IntFilter<"Questions"> | number
     noOfHiddenTestCases?: IntFilter<"Questions"> | number
@@ -15349,7 +15349,7 @@ export namespace Prisma {
     discussion?: DiscussionsListRelationFilter
     topics?: XOR<TopicsScalarRelationFilter, TopicsWhereInput>
     contest?: XOR<ContestNullableScalarRelationFilter, ContestWhereInput> | null
-  }, "id" | "title">
+  }, "id">
 
   export type QuestionsOrderByWithAggregationInput = {
     id?: SortOrder
@@ -15582,13 +15582,13 @@ export namespace Prisma {
 
   export type AchievementsWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    title?: string
     AND?: AchievementsWhereInput | AchievementsWhereInput[]
     OR?: AchievementsWhereInput[]
     NOT?: AchievementsWhereInput | AchievementsWhereInput[]
-    title?: StringFilter<"Achievements"> | string
     description?: StringNullableFilter<"Achievements"> | string | null
     studentAchievements?: StudentAchievementsListRelationFilter
-  }, "id">
+  }, "id" | "title">
 
   export type AchievementsOrderByWithAggregationInput = {
     id?: SortOrder

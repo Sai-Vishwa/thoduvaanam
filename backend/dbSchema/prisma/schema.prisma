@@ -159,7 +159,8 @@ model Submission {
 
 model Achievements {
   id Int @id @default(autoincrement())
-  title String 
+  title String @unique
+  
   description String?
   
   //relationships
