@@ -2,6 +2,8 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Cookies from "js-cookie";
+import React from 'react';
+import { Mail, Linkedin, Instagram } from 'lucide-react';
 import { 
   ChevronDown, 
   Home, 
@@ -14,6 +16,7 @@ import {
   Crown 
 } from "lucide-react";
 import { toast, Toaster } from "sonner";
+// import AadukalamFooter from '../HelloPage/Footer'
 
 const VerticalNav = ({ topics, activeSection, setActiveSection , uname}) => {
   const [expandedTopics, setExpandedTopics] = useState({});
@@ -26,7 +29,7 @@ const VerticalNav = ({ topics, activeSection, setActiveSection , uname}) => {
   };
 
   return (
-    <div className="w-64 bg-gray-200 border- border-[#000015] h-screen overflow-y-auto fixed">
+    <div className="w-64 bg-gray-200  border-[#000015] h-screen overflow-y-auto fixed z-0">
       {topics.map((topic) => (
         <div key={topic.name} className="border-b border-r border-t border-[#000015]/20">
           <motion.div 
@@ -283,6 +286,7 @@ const NavBar = ({ userData, currentPath, viewMode }) => {
 const TopicSection = ({ topic ,uname }) => {
   const [isMinimized, setIsMinimized] = useState(false);
   const nav = useNavigate();
+  // const [btn , setBtn] = useState(false)
 
   return (
     <motion.div 
@@ -290,11 +294,17 @@ const TopicSection = ({ topic ,uname }) => {
       animate={{ opacity: 1, y: 0 }}
       className={`mb-8 border-2 border-[#000015] rounded-lg ${isMinimized?"pb-1":"pb-6"} p-6 bg-white`}
 
-      onClick={() => setIsMinimized(!isMinimized)}
+      // onClick={() => {
+      //   if(!btn){
+      //     setIsMinimized(!isMinimized)
+      //     setBtn(true)
+      //   }
+      //   }
+      // }
     >
       <Toaster />
       <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4" >
           <h3 className="text-xl font-bold text-[#000015]">{topic.name}</h3>
       
         </div>
@@ -305,17 +315,21 @@ const TopicSection = ({ topic ,uname }) => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           href={topic.notesUrl}
+  
           onClick={()=>{
+            // setBtn(true)
             toast.info("No notes available now",{
                     style: {
                       fontSize:"1.125rem",
                       fontWeight:300,
                       padding:20
                     }
+                    
                   })
+                // setIsMinimized(isMinimized)
           }}
           download
-          className="flex items-center space-x-2 px-4 py-2 bg-[#000015] text-white rounded-lg hover:bg-gray-900 transition-colors font-bold"
+          className="flex items-center cursor-pointer space-x-2 px-4 py-2 bg-[#000015] text-white rounded-lg hover:bg-gray-900 transition-colors font-bold"
         >
           <Download className="w-4 h-4" />
           <span>Download Notes</span>
@@ -432,7 +446,7 @@ function HomePage() {
   }, [allData?.data?.length, navigate]);
 
   return (
-    <div className="min-h-screen bg-gray-200">
+    <div className="min-h-screen bg-gray-200 relative">
       <NavBar 
         userData={allData.myData} 
         currentPath={window.location.pathname}
@@ -470,6 +484,51 @@ function HomePage() {
         </main>
         </div>
         
+      </div>
+      <div className="h-[20vh]"></div>
+      <div className="w-full h-[20vh] absolute transform bottom-0">
+      <footer className="bg-gray-900 text-white w-full h-full flex items-center overflow-hidden">
+      <div className="w-full  mx-auto px-4 py-2 flex flex-row items-center justify-around">
+        {/* Logo and Title */}
+        <div className="flex items-center space-x-3">
+          <img 
+            src="/Intellexa_Logo_black_bg-removebg-preview.png" 
+            alt="Intellexa Logo" 
+            className="w-[180px]"
+          />
+          <div>
+            <h3 className="text-base font-semibold">Aadukalam</h3>
+            <p className="text-xs text-gray-400">The DSA Battlefield</p>
+          </div>
+        </div>
+
+        {/* College and Motto */}
+        <div className="text-center hidden md:block">
+        <p className="text-sm text-gray-300">Team Intellexa </p>
+        <p className="text-xs italic text-gray-400 mb-5">"Innovate • Impact • Inspire"</p>
+          <p className="text-xs text-gray-300">Rajalakshmi Engineering College - Chennai</p>
+        </div>
+        
+        {/* Social Links */}
+        <div className='block '>
+          <div className='flex justify-center items-center mb-4'>
+            <p>Reach us on </p>
+          </div>
+          <div className="flex items-center space-x-4 justify-center">
+                  <a href="#" className="text-gray-300 hover:text-blue-400 transition-colors">
+                    <Linkedin size={16} />
+                  </a>
+                  <a href="#" className="text-gray-300 hover:text-red-400 transition-colors">
+                    <Mail size={16} />
+                  </a>
+                  <a href="#" className="text-gray-300 hover:text-pink-400 transition-colors">
+                    <Instagram size={16} />
+                  </a>
+          </div>
+        </div>
+        
+      </div>
+    </footer>
       </div>
     </div>
   );

@@ -95,7 +95,7 @@ const HelloThree = () => {
     };
   }, []);
 
-  const colors = ["#c168fd" , "#373f94" ,"#5560d7"  , "#d75573" , "#d75555"]
+  const colors = ["#c168fd" , "#373f94" ,"#5560d7"  , "#d75573" , "#d75555" , "#ff4a5f","#d74f2a"]
 
 
   
