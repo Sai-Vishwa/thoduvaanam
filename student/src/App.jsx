@@ -23,8 +23,8 @@ import ScrollAnimation from './pages/HelloPage/HelloTwo'
 import SimpleScrollAnimation from './pages/HelloPage/HelloTwo'
 import CssDoodleAnimation from './pages/dummy'
 import SnowBackground from './pages/dummy'
-import Hello3 from './pages/HelloPage/Hello3'
 import HelloThree from './pages/HelloPage/Hello3'
+import LanderPage from './pages/VeraRoute/VeraPage'
 
 function App() {
 
@@ -42,6 +42,8 @@ function App() {
         <Route path='/hello2' element={<SimpleScrollAnimation />} />
         <Route path='/hello3' element={<HelloThree />} />
         <Route path='/hello4' element={<SnowBackground />} />
+        <Route path='/lander' element={<LanderPage />} />
+
 
 
         <Route path='/:uname/question/:qname' element={<QuestionPage />} />

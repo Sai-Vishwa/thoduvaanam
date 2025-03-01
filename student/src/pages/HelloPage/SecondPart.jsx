@@ -46,10 +46,10 @@ function SecondPart({isvisible}) {
                         />
             </div>
 
-            <div className="w-1/2 flex items-center justify-start mb-12 xs:hidden sm:hidden md:flex">
+            <div className="w-full flex items-center justify-center mb-12 xs:hidden sm:hidden md:flex text-lg">
                                
                 
-                    <motion.div className={`${textBox==true?"fixed":""} w-[350px] h-[120px] border-2 border-[#000015] flex`}
+                    <motion.div className={`${textBox==true?"fixed":""} w-[750px] h-[240px]  flex`}
                         initial={{opacity:0 , x:"100vw"}} 
                         animate={isvisible>600?{opacity:1 , x:0 , y:"-60vh"}:{opacity:0,x:"100vw"  , y:"-100vh"}}
                         transition={ isvisible>600?{duration:2}:{duration:1}}

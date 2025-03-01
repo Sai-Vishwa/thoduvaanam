@@ -13,9 +13,9 @@ function Button({isvisible}) {
                 transition={isvisible?{ duration: 1, ease: "easeOut", delay: 3 }:{duration:1 , ease:'easeOut'}}
             >
                 <span className="mas">LOGIN</span>
-                <button type="button" name="Hover" onClick={()=>{nav("/login")}}>LOGIN</button>
+                <button type="button" name="Hover"  onClick={()=>{nav("/login")}}>LOGIN</button>
             </motion.div>
-
+ 
             <motion.div 
                 className="button-container-2"
                 initial={{ x: 100, opacity: 0 }}

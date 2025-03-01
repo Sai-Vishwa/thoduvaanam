@@ -32,7 +32,7 @@ function HelloPage({isvisible}) {
             </motion.div>
 
             <motion.div
-                className="w-full flex items-center justify-center lg:text-2xl xs:text-base md:text-xl sm:text-base "
+                className="w-full flex text-[#000015] items-center justify-center lg:text-2xl xs:text-base md:text-xl sm:text-base "
                 initial={{ opacity: 0 }}
                 animate={isvisible?{ opacity: 1 }:{opacity:0}}
                 transition={isvisible?{ duration: 1, delay: 4 }:{duration:1}} // Delay this animation after the first one

@@ -33,7 +33,7 @@
     margin-right: auto;
     margin-top: 7vh;
     overflow: hidden;
-    border: 1px solid #000;
+    border: 1px solid #fff;
     font-family: 'Lato', sans-serif;
     font-weight: 300;
     transition: 0.5s;
@@ -49,7 +49,7 @@
      letter-spacing: 1px;
      font-weight: bold;
    
-     @include button(#000, "https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/urban-sprite.png",
+     @include button(#4287a7, "https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/urban-sprite.png",
      3000%,
      100%,
      none,
@@ -68,7 +68,7 @@
    
    .mas {
        position: absolute;
-       color: #000;
+       color: #fff;
        text-align: center;
        width: 101%;
        font-family: 'Lato', sans-serif;

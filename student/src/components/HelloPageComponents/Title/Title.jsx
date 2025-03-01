@@ -6,7 +6,7 @@ function Title({isvisible}){
             initial={{y:500, opacity:0}} 
             animate={isvisible?{y:0,opacity:1}:{y:-500 , opacity:0}}
             transition={isvisible?{duration:1.5,delay:0}:{duration:1 , ease:"easeOut"}}>
-                Aadukalam
+                <p className='neon-text'>Aadukalam</p>
             </motion.div>
         </div>
     )
