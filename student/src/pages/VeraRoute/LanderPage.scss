@@ -1,0 +1,92 @@
+.main {
+  background: repeating-linear-gradient(
+    135deg,  /* Diagonal stripes */
+    #1a1a1a 0px, 
+    #1a1a1a 8px,  
+    rgba(255, 255, 255, 0.3) 8px,
+    rgba(255, 255, 255, 0.3) 9px, 
+    #1a1a1a 9px,  
+    #1a1a1a 17px,  
+    rgba(255, 255, 255, 0.2) 17px,
+    rgba(255, 255, 255, 0.2) 18px,
+    #1a1a1a 18px, 
+    #1a1a1a 26px,  
+    rgba(255, 255, 255, 0.1) 26px,
+    rgba(255, 255, 255, 0.1) 27px
+    /* #1a1a1a 27px,  
+    #1a1a1a 35px,  
+    rgba(255, 255, 255, 0.1) 35px,
+    rgba(255, 255, 255, 0.1) 36px */
+    );
+}
+
+.glitch {
+	font: {
+		size: 8.125em;
+		family: 'Raleway', sans-serif;
+		weight: 700;
+	}
+	text-decoration: none;
+	text-transform: uppercase;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: 0;
+	color: #fff;
+	letter-spacing: 5px;
+	
+	&:before, &:after {
+		display: block;
+		content: attr(data-glitch);
+		text-transform: uppercase;
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		opacity: .8;
+	} &:after {
+		color: rgb(255, 0, 76);
+		z-index: -2;
+	} &:before {
+		color: rgb(0, 106, 255);
+		z-index: -1;
+	}
+	&:hover {
+		&:before {
+			animation: glitch .3s cubic-bezier(.25, .46, .45, .94) both 5
+		}
+		&:after {
+			animation: glitch .3s cubic-bezier(.25, .46, .45, .94) reverse both 5
+		}
+	}
+}
+
+@media only screen and (max-width: 400px) {
+	.glitch {
+		font-size: 3em;
+	}
+}
+
+
+@keyframes glitch {
+	0% {
+		transform: translate(0)
+	}
+	20% {
+		transform: translate(-10px, 10px)
+	}
+	40% {
+		transform: translate(-10px, -10px)
+	}
+	60% {
+		transform: translate(10px, 10px)
+	}
+	80% {
+		transform: translate(10px, -10px)
+	}
+	to {
+		transform: translate(0)
+	}
+} 
