@@ -3,8 +3,8 @@
     135deg,  /* Diagonal stripes */
     #1a1a1a 0px, 
     #1a1a1a 8px,  
-    rgba(255, 255, 255, 0.3) 8px,
-    rgba(255, 255, 255, 0.3) 9px, 
+    rgba(255, 255, 255, 0.1) 8px,
+    rgba(255, 255, 255, 0.1) 9px, 
     #1a1a1a 9px,  
     #1a1a1a 17px,  
     rgba(255, 255, 255, 0.2) 17px,
@@ -12,7 +12,9 @@
     #1a1a1a 18px, 
     #1a1a1a 26px,  
     rgba(255, 255, 255, 0.1) 26px,
-    rgba(255, 255, 255, 0.1) 27px
+    rgba(255, 255, 255, 0.1) 27px,
+	#1a1a1a 27px, 
+    #1a1a1a 35px,
     /* #1a1a1a 27px,  
     #1a1a1a 35px,  
     rgba(255, 255, 255, 0.1) 35px,
@@ -22,18 +24,16 @@
 
 .glitch {
 	font: {
-		size: 8.125em;
 		family: 'Raleway', sans-serif;
 		weight: 700;
 	}
 	text-decoration: none;
 	text-transform: uppercase;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	top: 0%;
+	left: 0%;
+	transform: translate(0%, 0%);
 	margin: 0;
-	color: #fff;
+	color: #ffffec;
 	letter-spacing: 5px;
 	
 	&:before, &:after {
@@ -55,10 +55,10 @@
 	}
 	&:hover {
 		&:before {
-			animation: glitch .3s cubic-bezier(.25, .46, .45, .94) both 5
+			animation: glitch .3s cubic-bezier(.25, .46, .45, .94) both infinite
 		}
 		&:after {
-			animation: glitch .3s cubic-bezier(.25, .46, .45, .94) reverse both 5
+			animation: glitch .3s cubic-bezier(.25, .46, .45, .94) reverse both infinite
 		}
 	}
 }
@@ -75,16 +75,16 @@
 		transform: translate(0)
 	}
 	20% {
-		transform: translate(-10px, 10px)
+		transform: translate(-5px, 5px)
 	}
 	40% {
-		transform: translate(-10px, -10px)
+		transform: translate(-5px, -5px)
 	}
 	60% {
-		transform: translate(10px, 10px)
+		transform: translate(5px, 5px)
 	}
 	80% {
-		transform: translate(10px, -10px)
+		transform: translate(5px, -5px)
 	}
 	to {
 		transform: translate(0)

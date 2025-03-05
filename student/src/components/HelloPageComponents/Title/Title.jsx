@@ -3,10 +3,10 @@ function Title({isvisible}){
     return (
         <div className='out w-full h-full flex items-center justify-center mb-0'>
             <motion.div className='in w-full h-full flex items-center justify-center mb-0' 
-            initial={{y:500, opacity:0}} 
-            animate={isvisible?{y:0,opacity:1}:{y:-500 , opacity:0}}
-            transition={isvisible?{duration:1.5,delay:0}:{duration:1 , ease:"easeOut"}}>
-                <p className='neon-text'>Aadukalam</p>
+            initial={{ opacity:0}} 
+            animate={isvisible?{opacity:[0,1]}:{ opacity:[1,0]}}
+            transition={isvisible?{duration:2,delay:0 , ease:"circIn"}:{duration:1 , ease:"circIn"}}>
+                <p className='glitch' data-glitch="AADUKALAM">AADUKALAM</p>
             </motion.div>
         </div>
     )
