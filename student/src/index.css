@@ -7,6 +7,26 @@ body {
     width: 100%;
   }
 
-  /* .neon-text {
-    text-shadow: 0 0 1px currentColor, 0 0 2px currentColor, 0 0 5px currentColor;
-  } */
+.mybg{
+  background: repeating-linear-gradient(
+    135deg,  /* Diagonal stripes */
+    #1a1a1a 0px, 
+    #1a1a1a 8px,  
+    rgba(255, 255, 255, 0.1) 8px,
+    rgba(255, 255, 255, 0.1) 9px, 
+    #1a1a1a 9px,  
+    #1a1a1a 17px,  
+    rgba(255, 255, 255, 0.2) 17px,
+    rgba(255, 255, 255, 0.2) 18px,
+    #1a1a1a 18px, 
+    #1a1a1a 26px,  
+    rgba(255, 255, 255, 0.1) 26px,
+    rgba(255, 255, 255, 0.1) 27px,
+	#1a1a1a 27px, 
+    #1a1a1a 35px,
+    /* #1a1a1a 27px,  
+    #1a1a1a 35px,  
+    rgba(255, 255, 255, 0.1) 35px,
+    rgba(255, 255, 255, 0.1) 36px */
+    );
+}

@@ -25,6 +25,7 @@ import CssDoodleAnimation from './pages/dummy'
 import SnowBackground from './pages/dummy'
 import HelloThree from './pages/HelloPage/Hello3'
 import LanderPage from './pages/VeraRoute/VeraPage'
+import AboutUs from './pages/AboutUsPage/AboutUs'
 
 function App() {
 
@@ -43,6 +44,8 @@ function App() {
         <Route path='/hello3' element={<HelloThree />} />
         <Route path='/hello4' element={<SnowBackground />} />
         <Route path='/lander' element={<LanderPage />} />
+        <Route path='/about' element={<AboutUs />} />
+
 
 
 

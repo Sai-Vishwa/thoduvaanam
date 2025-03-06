@@ -8,11 +8,16 @@ import './LanderPage.scss'
 function Hello1({isvisible}) {
   return (
     <div className="w-screen h-[100vh] flex justify-center items-center relative">
-        <div className="absolute text-[#ffffec] transform top-0 right-0 text-sm pt-3 pr-3">
-                Know More!!
-        </div>
+        <motion.div
+        initial={{opacity:0}}
+        transition={{duration:1,delay:2.5}}
+        animate={{opacity:1}}
+        className="absolute text-[#ffffec] transform bottom-0 text-sm  -translate-y-[40px] pb-2 cursor-pointer basic-1">
+                Know about this site
+        </motion.div>
+        
        
-        <div className="block">
+        <div className="block mb-12">
 
        
             <div>

@@ -69,6 +69,16 @@
 	}
 }
 
+.basic-1 {
+	background: 
+		linear-gradient(currentColor 0 0) 
+		0 100% /var(--d, 0) 1px 
+	  no-repeat;
+	transition:0.5s;
+  }
+  .basic-1:hover {
+	--d: 100%;
+  }
 
 @keyframes glitch {
 	0% {
