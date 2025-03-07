@@ -1,66 +1,148 @@
-@import url(https://fonts.googleapis.com/css?family=Montserrat);
+.main {
+      background: repeating-linear-gradient(
 
-html, body{
-  height: 100%;
-  font-weight: 800;
-  margin: 0;
-  padding: 0;
-}
+        135deg,  /* Diagonal stripes */
 
-body{
-  background: #030321;
-  font-family: Arial;
-}
+        #1a1a1a 0px, 
+        #1a1a1a 8px,  
+        rgba(255, 255, 255, 0.1) 8px,
+        rgba(255, 255, 255, 0.1) 9px, 
+        #1a1a1a 9px,  
+        #1a1a1a 17px,  
+        rgba(255, 255, 255, 0.2) 17px,
+        rgba(255, 255, 255, 0.2) 18px,
+        #1a1a1a 18px, 
+        #1a1a1a 26px,  
+        rgba(255, 255, 255, 0.1) 26px,
+        rgba(255, 255, 255, 0.1) 27px,
+        #1a1a1a 27px, 
+        #1a1a1a 35px,
+        /* #1a1a1a 27px,  
+  19	+
+        #1a1a1a 35px,  
+  20	+
+        rgba(255, 255, 255, 0.1) 35px,
+  21	+
+        rgba(255, 255, 255, 0.1) 36px */
+        );
+    }
+    .glitch {
+        font: {
+            family: 'Raleway', sans-serif;
+            weight: 700;
+        }
+        text-decoration: none;
+        text-transform: uppercase;
+        top: 0%;
+        left: 0%;
+        transform: translate(0%, 0%);
+        margin: 0;
+        color: #ffffec;
+        letter-spacing: 5px;
+        
+        &:before, &:after {
+            display: block;
+            content: attr(data-glitch);
+            text-transform: uppercase;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            opacity: .8;
+        } &:after {
+            color: rgb(255, 0, 76);
+            z-index: -2;
+        } &:before {
+            color: rgb(0, 106, 255);
+            z-index: -1;
+        }
+        &:hover {
+            &:before {
+                animation: glitch .3s cubic-bezier(.25, .46, .45, .94) both infinite
+            }
+            &:after {
+                animation: glitch .3s cubic-bezier(.25, .46, .45, .94) reverse both infinite
+            }
+        }
+    }
+  
+    @media only screen and (max-width: 400px) {
+        .glitch {
+            font-size: 3em;
+        }
+    }
+ 
+    .basic-1 {
+ 
+        background: 
+ 
+            linear-gradient(currentColor 0 0) 
+ 
+           0 100% /var(--d, 0) 1px 
+ 
+          no-repeat;
+ 
+       transition:0.5s;
+ 
+      }
+ 
+      .basic-1:hover {
 
-.container {
-  display: flex;
-/*   border:1px solid red; */
-  height: 100%;
-  align-items: center;
-}
+        --d: 100%;
+      }
+    
+    @keyframes glitch {
+  
+        0% {
+            transform: translate(0)
+        }
+        20% {
+            transform: translate(-5px, 5px)
+        }
+        40% {
+            transform: translate(-5px, -5px)
+        }
+        60% {
+            transform: translate(5px, 5px)
+        }
+        80% {
+            transform: translate(5px, -5px)
+        }
+        to {
+            transform: translate(0)
+        }
+    } 
 
-svg {
-    display: block;
-    font: 10.5em 'Montserrat';
-    width: 960px;
-    height: 300px;
+    @import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+
+/* Cursor */
+.cursor{
+    position: relative;
+    width: 24em;
     margin: 0 auto;
+    border-right: 2px solid rgba(255,255,255,.75);
+    font-size: 30px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: translateY(-50%);    
+}
+/* Animation */
+.typewriter-animation {
+  animation: 
+    typewriter 5s steps(50) 1s 1 normal both, 
+    blinkingCursor 500ms steps(50) infinite normal;
+}
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes blinkingCursor{
+  from { border-right-color: rgba(255,255,255,.75); }
+  to { border-right-color: transparent; }
 }
 
-.text-copy {
-    fill: none;
-    stroke: white;
-    stroke-dasharray: 6% 29%;
-    stroke-width: 1px;
-    stroke-dashoffset: 0%;
-    animation: stroke-offset 5.5s infinite linear;
-}
 
-.text-copy:nth-child(1){
-  stroke: #65caf1;
-  animation-delay: -1;
-}
-
-.text-copy:nth-child(2){
-  stroke: #21ffc4;
-  animation-delay: -2s;
-}
-
-.text-copy:nth-child(3){
-  stroke: #17ff02;
-  animation-delay: -3s;
-}
-
-.text-copy:nth-child(4){
-  stroke: #1190ff;
-  animation-delay: -4s;
-}
-
-.text-copy:nth-child(5){
-  stroke: #31fd56;
-  animation-delay: -5s;
-}
-
-@keyframes stroke-offset{
-  100% {stroke-dashoffset: -35%;}
-}
+/* Global */
+body { margin-top: 4em; padding: 5em; color: #f1f1f1; font-family: 'Anonymous Pro', monospace;background-color: #673ab7; }
