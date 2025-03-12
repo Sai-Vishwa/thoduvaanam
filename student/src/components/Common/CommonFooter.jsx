@@ -2,7 +2,7 @@ import { Mail, Linkedin, Instagram } from 'lucide-react';
 
 function CommonFooter() {
   return (
-    <footer className="bg-[#1a1a1a] font-['Courier_New'] text-white w-full  flex z-50 py-6 border-t border-[#313131] absolute transform bottom-0">
+    <footer className="bg-[#1a1a1a] font-['Courier_New'] text-white w-full  flex z-50 py-6 border-t border-[#313131] ">
       <div className="container mx-auto">
         <div className="hidden md:flex w-full justify-between px-4">
           <div className="flex items-center space-x-3 justify-center md:justify-start ml-5">

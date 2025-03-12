@@ -48,3 +48,37 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
+
+// import { motion } from "framer-motion";
+
+// const Carousel = () => {
+//   return (
+//     <div className="flex items-center justify-center min-h-screen bg-gray-100">
+//       <div className="relative w-full max-w-4xl h-96">
+//         {/* Left Image (Blurred and Closer) */}
+//         <motion.img
+//           src="/path-to-left-image.jpg"
+//           alt="Left Ficus"
+//           className="absolute left-1/4 top-1/2 transform -translate-y-1/2 -translate-x-1/2 w-40 h-60 object-cover rounded-lg opacity-60 blur-md"
+//         />
+
+//         {/* Center Image (Main) */}
+//         <motion.img
+//           src="/path-to-main-image.jpg"
+//           alt="Main Ficus"
+//           className="absolute left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-1/2 w-60 h-80 object-cover rounded-lg shadow-lg"
+//         />
+
+//         {/* Right Image (Blurred and Closer) */}
+//         <motion.img
+//           src="/path-to-right-image.jpg"
+//           alt="Right Ficus"
+//           className="absolute right-1/4 top-1/2 transform -translate-y-1/2 translate-x-1/2 w-40 h-60 object-cover rounded-lg opacity-60 blur-md"
+//         />
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Carousel;
