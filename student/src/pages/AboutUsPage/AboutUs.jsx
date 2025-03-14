@@ -94,14 +94,16 @@ function AboutUs() {
       <main className="flex  w-full mx-auto px-4  mb-auto h-full">
 
         <div className="text-[#61dafb] mt-8 w-full md:w-5/12 text-2xl md:text-3xl tracking-[-0.1em] flex flex-col sm:flex-row font-[Liberty] sm:space-x-5 mb-8 md:mb-12">
-          <div className="space-x-1 mb-2 sm:mb-0">
+          <div className="space-x-1 mb-2 sm:mb-0 flex flex-nowrap">
             <span className="inline-block text-shadow">A</span>
             <span className="inline-block text-shadow">B</span>
             <span className="inline-block text-shadow">O</span>
             <span className="inline-block text-shadow">U</span>
             <span className="inline-block text-shadow">T</span>
           </div>
-          <div className="space-x-1">
+          <div>
+
+          <div className="space-x-1 flex flex-nowrap">
             <span className="inline-block text-shadow"> A</span>
             <motion.span
               className="inline-block text-shadow text-[#3a8bae] cursor-pointer"
@@ -124,6 +126,7 @@ function AboutUs() {
             <span className="inline-block text-shadow">L</span>
             <span className="inline-block text-shadow">A</span>
             <span className="inline-block text-shadow">M</span>
+          </div>
           </div>
         </div>
 

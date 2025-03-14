@@ -7,7 +7,7 @@ import './LanderPage.scss'
 
 function Hello1({isvisible}) {
   return (
-    <div className="w-screen h-[100vh] flex justify-center items-center relative">
+    <div className="w-screen h-[100vh] flex justify-center items-center relative font-['Courier_New']">
         <motion.div
         initial={{opacity:0}}
         transition={{duration:1,delay:2.5}}
