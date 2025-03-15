@@ -8,6 +8,7 @@ import { Mail, Linkedin, Instagram, ArrowLeft } from 'lucide-react';
 import { toast, Toaster } from "sonner";
 import AboutUsNav from "../../components/AboutUsPageComponents/AboutUsNav";
 import CommonFooter from "../../components/Common/CommonFooter";
+import ImageCarousel from "./Carosel";
 
 function AboutUs() {
 
@@ -93,8 +94,9 @@ function AboutUs() {
 
       <main className="flex  w-full mx-auto px-4  mb-auto h-full">
 
-        <div className="text-[#61dafb] mt-8 w-full md:w-5/12 text-2xl md:text-3xl tracking-[-0.1em] flex flex-col sm:flex-row font-[Liberty] sm:space-x-5 mb-8 md:mb-12">
-          <div className="space-x-1 mb-2 sm:mb-0 flex flex-nowrap">
+        <div className = "md:w-5/12 w-full">
+        <div className="text-[#61dafb] mt-8 w-full h-1/6 text-2xl md:text-3xl tracking-[-0.1em] flex flex-col sm:flex-row font-[Liberty] sm:space-x-5">
+          <div className="space-x-1 mb-0 flex flex-nowrap">
             <span className="inline-block text-shadow">A</span>
             <span className="inline-block text-shadow">B</span>
             <span className="inline-block text-shadow">O</span>
@@ -127,6 +129,13 @@ function AboutUs() {
             <span className="inline-block text-shadow">A</span>
             <span className="inline-block text-shadow">M</span>
           </div>
+          </div>
+        </div>
+
+        
+          <div className = "w-full h-5/6">
+          <ImageCarousel />
+
           </div>
         </div>
 

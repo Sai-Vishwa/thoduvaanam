@@ -26,7 +26,6 @@ import SnowBackground from './pages/dummy'
 import HelloThree from './pages/HelloPage/Hello3'
 import LanderPage from './pages/VeraRoute/VeraPage'
 import AboutUs from './pages/AboutUsPage/AboutUs'
-import IdkPage from './pages/IdkPage'
 
 function App() {
 
@@ -56,7 +55,6 @@ function App() {
         <Route path='/:uname/review-question/:qname' element={<ReviewQuestionPage />} />
         <Route path='/:uname/review-contest/:tname' element={<ReviewContestPage />} />
         <Route path='/admin' element={<AdminDetails />} />
-        <Route path='/idk' element={<IdkPage />} />
         <Route path='*' element={<Navigate to={"/"} />} />
         <Route path='/:uname/dummy/:tname/:qname' element={<DummyPage />} />
         <Route path='/:uname/change-password' element={<ChangePasswordPage />} />
