@@ -3,16 +3,20 @@ import Title from "../../components/HelloPageComponents/Title/Title";
 import SubTitle from "../../components/HelloPageComponents/SubTitle/SubTitle";
 import Button from "../../components/HelloPageComponents/Buttons/Button";
 import './LanderPage.scss'
+import { useNavigate } from "react-router-dom";
 
 
 function Hello1({isvisible}) {
+
+    const nav = useNavigate()
   return (
     <div className="w-screen h-[100vh] flex justify-center items-center relative font-['Courier_New']">
         <motion.div
         initial={{opacity:0}}
         transition={{duration:1,delay:2.5}}
         animate={{opacity:1}}
-        className="absolute text-[#ffffec] transform bottom-0 text-sm  -translate-y-[40px] pb-2 cursor-pointer basic-1">
+        className="absolute text-[#ffffec] basic-1  hover:text-[#61dafb] transition-colors transform bottom-0 text-sm  -translate-y-[40px] pb-2 cursor-pointer basic-1"
+        onClick={()=>{nav("/about")}}>
                 Know about this site
         </motion.div>
         

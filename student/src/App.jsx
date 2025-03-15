@@ -39,7 +39,7 @@ function App() {
         <Route path='/:uname/leaderboard' element={<LeaderBoardPage />}/>
         <Route path='/:uname/discussions' element={<DiscussionsPage />}/>
         <Route path='/signup' element={<SignUpPage />}/>
-        <Route path='/' element={<HelloPage />} />
+        <Route path='/' element={<LanderPage />} />
         <Route path='/hello2' element={<SimpleScrollAnimation />} />
         <Route path='/hello3' element={<HelloThree />} />
         <Route path='/hello4' element={<SnowBackground />} />

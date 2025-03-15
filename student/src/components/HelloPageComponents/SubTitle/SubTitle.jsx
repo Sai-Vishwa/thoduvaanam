@@ -85,7 +85,7 @@ const SubTitle = ({isvisible}) => {
 
   return (
     <div className="container mt-0 text-xl">
-      <div className="text text-nowrap text-[#000015]" ref={textRef}></div>
+      <div className="text text-nowrap " ref={textRef}></div>
     </div>
   );
 };

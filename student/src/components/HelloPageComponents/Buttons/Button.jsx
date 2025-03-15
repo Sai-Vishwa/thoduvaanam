@@ -12,7 +12,7 @@ function Button({isvisible}) {
                 animate={isvisible?{ x: 0, opacity: 1 }:{opacity:0 , x:-100}}
                 transition={isvisible?{ duration: 1, ease: "easeOut", delay: 2 }:{duration:1 , ease:'easeOut'}}
             >
-                <div ><a class="click-btn btn-style3" onClick={()=>{nav("/login")}} href="#">LOGIN</a></div>
+                <div ><a className="click-btn btn-style3" onClick={()=>{nav("/login")}} href="#">LOGIN</a></div>
                 {/* <span className="mas">LOGIN</span>
                 <button type="button" name="Hover"  onClick={()=>{nav("/login")}}>LOGIN</button> */}
             </motion.div>

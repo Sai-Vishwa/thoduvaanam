@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React, { useState, useEffect, useRef } from "react";
 
 const ImageCarousel = () => {
@@ -13,8 +14,8 @@ const ImageCarousel = () => {
       id: 1,
       name: "Prasanth S",
       dept: "III yr CSE",
-      src: "/IMG_20250315_204644.jpg",
-      info: "  En peru Vella Prasanth... I eat 100 Harkirat Singh for breakfast ",
+      src: "/download__1_-removebg-preview.png",
+      info: "  En peru Vella Prasanth. Na oru developer. I eat 100 Harkirat Singh for breakfast.",
       github: "github.com/user1",
       linkedin: "linkedin.com/in/user1"
     },
@@ -22,7 +23,7 @@ const ImageCarousel = () => {
       id: 2,
       name: "Poorvaja",
       dept: "III yr IT",
-      src: "/jiji-removebg-preview.png",
+      src: "/download__1_-removebg-preview.png",
       info: "  Hi this is Poorvaja ",
       github: "github.com/user2",
       linkedin: "linkedin.com/in/user2"
@@ -31,7 +32,7 @@ const ImageCarousel = () => {
       id: 3,
       name: "Rakul Prakash",
       dept:"III yr CSE",
-      src: "/___o____-removebg-preview.png",
+      src: "/download__1_-removebg-preview.png",
       info: "  Donec ultrices dolor vel urna feugiat, eget lacinia dui tempor.",
       github: "github.com/user3",
       linkedin: "linkedin.com/in/user3"
@@ -63,7 +64,15 @@ const ImageCarousel = () => {
         github: "github.com/user4",
         linkedin: "linkedin.com/in/user4"
       },
-
+      {
+        id: 7,
+        name: "Jeffrin",
+        dept:"III yr AIML",
+        src: "/download__1_-removebg-preview.png",
+        info: "  Etiam malesuada tellus id felis pulvinar, quis laoreet est tempus.",
+        github: "github.com/user4",
+        linkedin: "linkedin.com/in/user4"
+      },
     // You can add more images here and it will still work properly
   ];
 
@@ -204,9 +213,13 @@ const ImageCarousel = () => {
       display: "block"
     };
   };
+  
 
   return (
-    <div className="w-full h-full">
+    <motion.div className="w-full h-full font-[Courier]"
+    initial={{opacity:0}}
+    animate={{opacity:1}}
+    transition={{duration:3 , ease:"easeInOut"}}>
         <div className=" w-full h-full relative">
 
         <div className="w-full absolute ">
@@ -236,7 +249,7 @@ const ImageCarousel = () => {
                 <img
                   src={image.src}
                   alt={image.name}
-                  className={`object-cover bg-blue-400 w-full h-full shadow-lg rounded-lg ${isCenter ? 'ring-2 ring-[#61dafb]' : ''}`}
+                  className={`object-cover bg-blue-400 w-full h-full shadow-lg rounded-lg `}
                 />
                 
                 {/* Overlay for center image */}
@@ -298,8 +311,8 @@ const ImageCarousel = () => {
             onClick={() => goToSlide(index)}
             className={`indicator w-3 h-3 rounded-full transition-all focus:outline-none
               ${index === currentIndex 
-                ? 'bg-blue-600 border-1 border-blue-600' 
-                : 'bg-white hover:bg-gray-400 border-1 border-blue-600'}`}
+                ? 'bg-[#61dafb] border-1 border-[#61dafb]' 
+                : 'bg-white hover:bg-gray-400 border-1 border-[#61dafb]'}`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
@@ -330,7 +343,7 @@ const ImageCarousel = () => {
       `}</style>
       
       
-    </div>
+    </motion.div>
   );
 };
 
