@@ -66,7 +66,7 @@ function OtpVerifyButton({otp ,rno ,otpdis , setOtpdis}){
             layout
             onClick={verify}
             disabled={otpdis}
-            className="w-full bg-[#000015] text-white py-2 rounded-lg hover:bg-gray-900 transition-colors font-mono"
+            className="w-full bg-[#000015] text-[#ddf3ef] py-2 rounded-lg hover:bg-gray-900 transition-colors font-mono"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >

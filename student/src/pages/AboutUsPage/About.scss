@@ -1,6 +1,6 @@
 .custom-scrollbar {
     scrollbar-width: thin;
-    scrollbar-color: #61dafb #242424;
+    scrollbar-color: #e29dc5 #242424;
   }
   
   .custom-scrollbar::-webkit-scrollbar {
@@ -12,7 +12,7 @@
   }
   
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #3a8bae;
+    background-color: #e29dc5;
     border-radius: 6px;
     border: 2px solid #242424;
   }
@@ -96,7 +96,7 @@
     left: 0;
     height: 4px;
     width: 100%;
-    background: linear-gradient(90deg, #121212, #61dafb, #121212);
+    background: linear-gradient(90deg, #121212, #e29dc5, #121212);
     opacity: 0;
     transition: opacity 0.3s ease;
   }
@@ -114,7 +114,7 @@
   }
   
   .sonner-toast-message > [data-sonner-toast] > [data-sonner-toast-progress-bar] {
-    background: #61dafb;
+    background: #e29dc5;
     height: 2px;
     bottom: 0;
     opacity: 0.8;
@@ -122,7 +122,7 @@
   
   /* Close button styling */
   [data-sonner-toast] [data-sonner-toast-close-button] {
-    color: #61dafb;
+    color: #e29dc5;
     opacity: 0.6;
     transition: opacity 0.2s ease, transform 0.2s ease;
   }
@@ -142,7 +142,7 @@
     display: inline-block;
     width: 8px;
     height: 14px;
-    background-color: #61dafb;
+    background-color: #e29dc5;
     margin-left: 2px;
     animation: terminal-blink 1s infinite;
   }

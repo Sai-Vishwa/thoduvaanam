@@ -91,7 +91,7 @@ const Typewriter = () => {
   
   return (
     <div className="flex justify-start w-full font-['Courier_New'] h-full" ref={containerRef}>
-      <div className="text-[#ffffec] text-sm md:text-base space-y-2 leading-relaxed w-full">
+      <div className="text-[#ddf3ef] text-sm md:text-base space-y-2 leading-relaxed w-full">
         {Object.keys(displayText).map((line, i) => (
           <div 
             key={line} 
@@ -103,7 +103,7 @@ const Typewriter = () => {
             <p className="leading-relaxed">
               {displayText[line]}
               <span 
-                className={`text-[#61dafb] ${
+                className={`text-[#2bbdaa] ${
                   cursorVisible && (i == arr || (i == 5 && completed)) ? "inline-block" : "hidden"
                 }`}
               >

@@ -60,7 +60,7 @@ const SnowBackground = ({ children }) => {
         {snowflakes.map(flake => (
           <div
             key={flake.id}
-            className="absolute rounded-full bg-white"
+            className="absolute rounded-full bg-[#ddf3ef]"
             style={{
               left: `${flake.x}%`,
               top: `${flake.y}%`,

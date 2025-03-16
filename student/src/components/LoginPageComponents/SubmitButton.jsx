@@ -159,7 +159,7 @@ function SubmitButton({loginData , forgotPassword , setOTPdiv , disable , setDis
             <motion.button
             layout
             onClick={forgotPassword.style === "block" ? handleLogin : handleSendOTP}
-            className={`w-full bg-[#000015] text-white py-2 rounded-lg hover:bg-gray-900 transition-colors font-mono ${disable==true?"hidden":"block"}`}
+            className={`w-full  text-[#ddf3ef] border-2 border-[#ddf3ef] py-2 rounded-lg hover:border-[#2bbdaa]  transition-colors font-mono ${disable==true?"hidden":"block"}`}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             disabled={disable}

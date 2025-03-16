@@ -7,7 +7,7 @@ const LanderPage = () => {
   
   
   return (
-    <div className='main block text-6xl text-white w-full h-screen overflow-hidden'>
+    <div className='main block text-6xl w-full h-screen overflow-hidden'>
       <Hello1 
       isvisible={true}/>
       

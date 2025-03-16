@@ -135,7 +135,7 @@ const CodingPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-[#ddf3ef] flex items-center justify-center">
         Loading...
       </div>
     );
@@ -144,13 +144,13 @@ const CodingPage = () => {
   const { data, testCase, minutes, seconds } = questionData;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white p-6">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-[#ddf3ef] p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <button 
             onClick={() => navigate(`/${uname}/contest-handler/${tname}`)}
-            className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors"
+            className="flex items-center space-x-2 text-gray-400 hover:text-[#ddf3ef] transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
             <span>Back to Contest</span>
@@ -189,7 +189,7 @@ const CodingPage = () => {
             <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-6">
               <div className="flex justify-between items-center mb-4">
                 <select
-                  className="bg-gray-900 text-white border border-gray-700 rounded-lg px-4 py-2"
+                  className="bg-gray-900 text-[#ddf3ef] border border-gray-700 rounded-lg px-4 py-2"
                   value={language}
                   onChange={(e) => handleLanguageChange(e.target.value)}
                 >
@@ -241,13 +241,13 @@ const CodingPage = () => {
               <div className="space-y-4">
                 <div className="bg-gray-900/50 p-4 rounded-lg">
                   <h4 className="font-semibold mb-2">Test Case 1</h4>
-                  <pre className="font-mono text-sm whitespace-pre-wrap">
+                  <pre className="font-mono text-sm ddf3efspace-pre-wrap">
                     {data?.output1 || 'Not run yet'}
                   </pre>
                 </div>
                 <div className="bg-gray-900/50 p-4 rounded-lg">
                   <h4 className="font-semibold mb-2">Test Case 2</h4>
-                  <pre className="font-mono text-sm whitespace-pre-wrap">
+                  <pre className="font-mono text-sm ddf3efspace-pre-wrap">
                     {data?.output2 || 'Not run yet'}
                   </pre>
                 </div>

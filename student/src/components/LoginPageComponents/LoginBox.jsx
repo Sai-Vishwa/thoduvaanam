@@ -9,24 +9,25 @@ import { useState } from "react";
 function LoginBox({setLoginData , loginData , forgotPassword  , setForgotPassword , OTPdiv , setOTPdiv , otpVal , setOtpVal , disable , setDisable}){
 
   const nav = useNavigate()
+  let arr = ["#ddf3ef" , "#2bbdaa"]
   const [otpdis,setOtpdis] = useState(false)
 
     return (
         <>
             <motion.div 
-        className="bg-white p-8 rounded-lg shadow-lg mx-10 max-w-md w-full border-2 border-[#000015] border-t-[6px] relative"
+        className=" p-8 rounded-[30px] shadow-lg mx-10 max-w-md w-full border-2 border-[#3b3b3b] bg-[#1c1b1b] relative"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
               
               
-                <motion.div className='absolute transform top-0 right-0 translate-x-0 -translate-y-[70px]'>
+                {/* <motion.div className='absolute transform top-0 right-0 translate-x-0 -translate-y-[70px]'>
                 <img src="/download__5_-removebg-preview.png" alt="" className='w-[120px]'/>
-                </motion.div>
+                </motion.div> */}
 
 
-        <div className="text-center mb-8">
+        <div className="text-center mb-8 mx-0 px-0">
             <Header 
             data1={"Welcome Back"}
             data2={"Please Login to access your account"}/>
@@ -78,11 +79,11 @@ function LoginBox({setLoginData , loginData , forgotPassword  , setForgotPasswor
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9 }}
         >
-          <p className="text-gray-600">
+          <p className="text-[#ddf3ef]">
             Don't have an account?{" "}
             <button
               onClick={() => nav("/signup")}
-              className="text-[#000015] hover:text-gray-800 font-bold"
+              className="text-[#ddf3ef]  font-bold basic-1  hover:text-[#2bbdaa] transition-colors"
             >
               Sign Up
             </button>

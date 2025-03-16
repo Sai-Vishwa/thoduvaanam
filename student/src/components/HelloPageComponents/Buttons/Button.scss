@@ -25,15 +25,15 @@
   }
   
    .btn-style3 {
-    $btn-color: #d7d7d7;
-    $btn-hover-color: #ebeaea;
+    $btn-color: #ddf3ef;
+    $btn-hover-color: #ddf3ef;
     border-color: $btn-color;
     color: $btn-color;
     &:hover {
       transform: translateY(-0.25em);
       box-shadow: 0 0 0em 0em $btn-hover-color;
-      border-color: #61dafb;
-      color: #61dafb;
+      border-color: #36ead2;
+      color: #36ead2;
     }
   }
  

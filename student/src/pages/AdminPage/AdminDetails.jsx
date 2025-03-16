@@ -296,7 +296,7 @@ const AdminDashboard = () => {
         {isEditing ? (
           isTextArea ? (
             <textarea
-              className="w-full border p-2 rounded bg-white text-black font-medium"
+              className="w-full border p-2 rounded bg-[#ddf3ef] text-black font-medium"
               value={value || ""}
               rows={5}
               onChange={(e) => handleChange(type, id, field, e.target.value)}
@@ -305,7 +305,7 @@ const AdminDashboard = () => {
             />
           ) : isSelect ? (
             <select
-              className="w-full border p-2 rounded bg-white text-black font-medium"
+              className="w-full border p-2 rounded bg-[#ddf3ef] text-black font-medium"
               value={value || ""}
               onChange={(e) => handleChange(type, id, field, e.target.value)}
               onBlur={(e) => handleBlur(type, id, field, e)}
@@ -317,7 +317,7 @@ const AdminDashboard = () => {
             </select>
           ) : (
             <input
-              className="w-full border p-2 rounded bg-white text-black font-medium"
+              className="w-full border p-2 rounded bg-[#ddf3ef] text-black font-medium"
               type={field === "contestDate" || field === "opensOn" || field === "closesOn" ? "datetime-local" : "text"}
               value={field === "contestDate" || field === "opensOn" || field === "closesOn" ? value?.substring(0, 16) : value || ""}
               onChange={(e) => handleChange(type, id, field, e.target.value)}
@@ -346,13 +346,13 @@ const AdminDashboard = () => {
         <h1 className="text-2xl font-bold text-blue-800">Admin Dashboard</h1>
         <div className="space-x-2">
           <button 
-            className="px-4 py-2 bg-blue-600 text-white rounded flex items-center font-bold"
+            className="px-4 py-2 bg-blue-600 text-[#ddf3ef] rounded flex items-center font-bold"
             onClick={addNewTopic}
           >
             <Plus size={18} className="mr-1" /> Add New Topic
           </button>
           <button 
-            className={`px-4 py-2 rounded flex items-center font-bold ${hasChanges ? 'bg-green-600 text-white' : 'bg-gray-300 text-gray-600'}`}
+            className={`px-4 py-2 rounded flex items-center font-bold ${hasChanges ? 'bg-green-600 text-[#ddf3ef]' : 'bg-gray-300 text-gray-600'}`}
             onClick={saveChanges}
             disabled={!hasChanges}
           >
@@ -363,7 +363,7 @@ const AdminDashboard = () => {
 
       <div className="space-y-6">
         {topics.map(topic => (
-          <div key={topic.id} className="border rounded-lg overflow-hidden shadow-md bg-white">
+          <div key={topic.id} className="border rounded-lg overflow-hidden shadow-md bg-[#ddf3ef]">
             <div 
               className="flex justify-between items-center p-4 bg-gray-50 cursor-pointer"
               onClick={() => toggleTopic(topic.id)}
@@ -411,7 +411,7 @@ const AdminDashboard = () => {
                   <div className="flex justify-between items-center mb-3">
                     <h3 className="text-lg font-bold">Questions ({topic.question?.length || 0})</h3>
                     <button 
-                      className="px-3 py-1 bg-blue-600 text-white rounded flex items-center text-sm font-bold"
+                      className="px-3 py-1 bg-blue-600 text-[#ddf3ef] rounded flex items-center text-sm font-bold"
                       onClick={() => addNewQuestion(topic.id)}
                     >
                       <Plus size={16} className="mr-1" /> Add Question
@@ -450,7 +450,7 @@ const AdminDashboard = () => {
                         </div>
                         
                         {expandedQuestion === question.id && (
-                          <div className="p-3 bg-white">
+                          <div className="p-3 bg-[#ddf3ef]">
                             <div className="grid grid-cols-2 gap-4">
                               <EditableField type="question" id={question.id} field="title" value={question.title} />
                               <div className="grid grid-cols-2 gap-2">
@@ -496,7 +496,7 @@ const AdminDashboard = () => {
                                   <div className="col-span-1">
                                     <label className="block text-sm font-bold text-gray-700 mb-1">Type</label>
                                     <select 
-                                      className="w-full border p-2 rounded bg-white text-black font-medium"
+                                      className="w-full border p-2 rounded bg-[#ddf3ef] text-black font-medium"
                                       value={newTestCase.type}
                                       onChange={(e) => handleTestCaseChange('type', e.target.value)}
                                     >
@@ -508,7 +508,7 @@ const AdminDashboard = () => {
                                   <div className="col-span-2">
                                     <label className="block text-sm font-bold text-gray-700 mb-1">Input</label>
                                     <textarea 
-                                      className="w-full border p-2 rounded bg-white text-black font-medium"
+                                      className="w-full border p-2 rounded bg-[#ddf3ef] text-black font-medium"
                                       value={newTestCase.input}
                                       rows={3}
                                       onChange={(e) => handleTestCaseChange('input', e.target.value)}
@@ -519,7 +519,7 @@ const AdminDashboard = () => {
                                 <div className="mb-3">
                                   <label className="block text-sm font-bold text-gray-700 mb-1">Output</label>
                                   <textarea 
-                                    className="w-full border p-2 rounded bg-white text-black font-medium"
+                                    className="w-full border p-2 rounded bg-[#ddf3ef] text-black font-medium"
                                     value={newTestCase.output}
                                     rows={3}
                                     onChange={(e) => handleTestCaseChange('output', e.target.value)}
@@ -527,7 +527,7 @@ const AdminDashboard = () => {
                                   />
                                 </div>
                                 <button 
-                                  className="px-3 py-2 bg-blue-600 text-white rounded flex items-center text-sm font-bold"
+                                  className="px-3 py-2 bg-blue-600 text-[#ddf3ef] rounded flex items-center text-sm font-bold"
                                   onClick={() => addTestCase(question.id)}
                                 >
                                   <Plus size={16} className="mr-1" /> Add Test Case

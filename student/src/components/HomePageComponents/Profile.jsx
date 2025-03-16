@@ -1,6 +1,6 @@
 function Profile ({profileData}){
     return (
-        <div className="text-white">
+        <div className="text-[#ddf3ef]">
             {JSON.stringify(profileData)}
         </div>
     )

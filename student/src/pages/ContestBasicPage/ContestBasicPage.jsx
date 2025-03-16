@@ -83,17 +83,17 @@ function ContestBasicPage() {
 
   const getStatusColor = (status) => {
     const colors = {
-      'COMPLETED': 'bg-green-500 text-white',
-      'ENDED': 'bg-red-500 text-white',
-      'NOT STARTED': 'bg-yellow-500 text-white',
-      'START NEW ATTEMPT': 'bg-blue-500 text-white',
-      'CONTINUE LAST ATTEMPT': 'bg-purple-500 text-white'
+      'COMPLETED': 'bg-green-500 text-[#ddf3ef]',
+      'ENDED': 'bg-red-500 text-[#ddf3ef]',
+      'NOT STARTED': 'bg-yellow-500 text-[#ddf3ef]',
+      'START NEW ATTEMPT': 'bg-blue-500 text-[#ddf3ef]',
+      'CONTINUE LAST ATTEMPT': 'bg-purple-500 text-[#ddf3ef]'
     }
-    return colors[status] || 'bg-gray-500 text-white'
+    return colors[status] || 'bg-gray-500 text-[#ddf3ef]'
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#ddf3ef]">
       {JSON.stringify(contestDetails)}
       <div className="max-w-4xl mx-auto p-6">
         {/* Header */}
@@ -108,7 +108,7 @@ function ContestBasicPage() {
         </div>
 
         {/* Contest Details Card */}
-        <div className="bg-white rounded-xl p-8 border border-gray-200 shadow-sm">
+        <div className="bg-[#ddf3ef] rounded-xl p-8 border border-gray-200 shadow-sm">
           <div className="flex justify-between items-start mb-6">
             <h1 className="text-2xl font-bold text-black">{contestDetails.title}</h1>
             <span className={`px-4 py-1 rounded-full text-sm font-medium ${getStatusColor(attemptButton)}`}>
@@ -173,7 +173,7 @@ function ContestBasicPage() {
                 px-6 py-2 rounded-lg font-medium transition-all
                 ${disabled 
                   ? 'bg-gray-200 text-gray-500 cursor-not-allowed' 
-                  : 'bg-[#000015] text-white hover:bg-gray-900'
+                  : 'bg-[#000015] text-[#ddf3ef] hover:bg-gray-900'
                 }
               `}
             >

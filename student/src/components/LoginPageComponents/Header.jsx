@@ -13,14 +13,14 @@ const TextScramble = ({ text }) => {
       const scrambled = text
         .split('')
         .map((char, index) => {
-          if (frame > index * 3) return char;
+          if (frame > index*4) return char;
           return chars[Math.floor(Math.random() * chars.length)];
         })
         .join('');
       
       setScrambledText(scrambled);
       
-      if (frame < text.length * 3) {
+      if (frame < text.length*4) {
         requestAnimationFrame(animate);
       }
     };
@@ -35,9 +35,9 @@ const TextScramble = ({ text }) => {
 function Header({data1, data2}){
 
     return (
-        <>
+        <div className="flex flex-col items-center justify-center">
             <motion.h1 
-            className="text-4xl font-bold text-[#000015]"
+            className="text-4xl font-bold text-[#ddf3ef]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -45,14 +45,14 @@ function Header({data1, data2}){
             <TextScramble text={data1}/>
           </motion.h1>
           <motion.p 
-            className="text-gray-600 mt-2"
+            className="text-[#ddf3ef] mt-2 basic-1 p-0 m-0 w-fit hover:text-[#2bbdaa] transition-colors"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
           >
             {data2}
           </motion.p>
-        </>
+        </div>
     )
 }
 export default Header

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 function Title({isvisible}){
     return (
-        <div className='out w-full h-full flex items-center justify-center mb-0'>
+        <div className='out w-full h-full flex items-center justify-center mb-0 text-[#00ff00]'>
             <motion.div className='in w-full h-full flex items-center justify-center mb-0' 
             initial={{ opacity:0}} 
             animate={isvisible?{opacity:[0,1]}:{ opacity:[1,0]}}

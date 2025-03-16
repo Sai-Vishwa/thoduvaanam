@@ -15,7 +15,7 @@ function Hello1({isvisible}) {
         initial={{opacity:0}}
         transition={{duration:1,delay:2.5}}
         animate={{opacity:1}}
-        className="absolute text-[#ffffec] basic-1  hover:text-[#61dafb] transition-colors transform bottom-0 text-sm  -translate-y-[40px] pb-2 cursor-pointer basic-1"
+        className="absolute text-[#ddf3ef] basic-1  hover:text-[#36ead2] transition-colors transform bottom-0 text-sm  -translate-y-[40px] pb-2 cursor-pointer basic-1"
         onClick={()=>{nav("/about")}}>
                 Know about this site
         </motion.div>

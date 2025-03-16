@@ -17,7 +17,7 @@ function Input({setLoginData , loginData , loginError , forgotPassword , setLogi
     return (
         <>
         <motion.div 
-          className="space-y-4"
+          className="space-y-4 flex flex-col j"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
@@ -26,9 +26,10 @@ function Input({setLoginData , loginData , loginError , forgotPassword , setLogi
             <input
               type="text"
               placeholder="Registration Number" disabled={disable}
+              plac
               value={loginData.rno}
               onChange={(e) => setLoginData({ ...loginData, rno: e.target.value })}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#000015] bg-transparent font-mono"
+              className=" w-full px-4 py-2 border border-[#ddf3ef] placeholder-[#ddf3ef]  rounded-lg focus:outline-none focus:border-0 focus:ring-2 focus:ring-[#2bbdaa] bg-transparent font-mono text-[#ddf3ef]"
             />
           </div>
 
@@ -47,7 +48,7 @@ function Input({setLoginData , loginData , loginError , forgotPassword , setLogi
                   value={loginData.password}
                   disabled={disable}
                   onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#000015] bg-transparent font-mono"
+                  className="w-full px-4 py-2 border placeholder-[#ddf3ef]  border-[#ddf3ef] rounded-lg focus:outline-none focus:ring-2 focus:border-0 focus:ring-[#2bbdaa] bg-transparent font-mono text-[#ddf3ef] "
                 />
               </motion.div>
             ) : null}
@@ -60,14 +61,17 @@ function Input({setLoginData , loginData , loginError , forgotPassword , setLogi
             disable={disable}
             setDisable={setDisable}/>
 
-          <motion.button
+            <div className="flex justify-center items-center">
+            <motion.button
             layout
             onClick={toggleForgotPassword}
-            className={`w-full text-[#000015] text-sm hover:text-gray-800 font-mono mt-2 ${disable==true?"hidden":"block"}`}
+            className={`w-fit text-[#ddf3ef] text-sm basic-1  hover:text-[#2bbdaa] transition-colors font-mono mt-2 ${disable==true?"hidden":"block"}`}
             whileHover={{ scale: 1.02 }}
           >
             {forgotPassword.val}
           </motion.button>
+            </div>
+          
         </motion.div>
         </>
     )

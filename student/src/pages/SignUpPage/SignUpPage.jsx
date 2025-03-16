@@ -226,16 +226,14 @@ const SignUpPage = () => {
   
 
   return (
-    <div className="min-h-screen min-w-screen overflow-hidden bg-[#ff4a5f] flex items-center justify-center font-mono relative">
+    <div className="min-h-screen min-w-screen overflow-hidden main flex items-center justify-center font-mono relative">
       <motion.div
-      className="bg-white p-8 rounded-lg shadow-lg mx-10 max-w-md w-full border-2 border-[#000015] border-t-[6px] relative"
+      className="p-8 rounded-[30px] shadow-lg mx-10 max-w-md w-full border-2 border-[#3b3b3b] bg-[#1c1b1b] relative"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}>
 
-      <motion.div className='absolute transform top-0 right-0 translate-x-0 -translate-y-[70px]'>
-                <img src="/download__5_-removebg-preview.png" alt="" className='w-[120px]'/>
-      </motion.div>
+      
       
       <div className="text-center mb-8">
             <Header 
@@ -258,7 +256,7 @@ const SignUpPage = () => {
                 type="text"
                 placeholder="Full Name"
                 onChange={(e) => setSignupData({ ...signupData, name: e.target.value })}
-                className="w-full px-4 py-2 focus:outline-none border rounded-lg focus:ring-2 focus:ring-[#000015] focus:border-transparent"
+                className="w-full px-4 py-2 border border-[#ddf3ef] placeholder-[#ddf3ef]  rounded-lg focus:outline-none focus:border-0 focus:ring-2 focus:ring-[#2bbdaa] bg-transparent font-mono text-[#ddf3ef]"
               />
             </div>
 
@@ -270,7 +268,7 @@ const SignUpPage = () => {
                   setSignupData({ ...signupData, uname: e.target.value });
                   verifyUsername(e.target.value);
                 }}
-                className="w-full px-4 py-2 border rounded-lg  focus:outline-none focus:ring-2 focus:ring-[#000015] focus:border-transparent"
+                className="w-full px-4 py-2 border border-[#ddf3ef] placeholder-[#ddf3ef]  rounded-lg focus:outline-none focus:border-0 focus:ring-2 focus:ring-[#2bbdaa] bg-transparent font-mono text-[#ddf3ef]"
               />
             </div>
 
@@ -279,7 +277,7 @@ const SignUpPage = () => {
                 type="text"
                 placeholder="College Roll Number"
                 onChange={(e) => setSignupData({ ...signupData, rno: e.target.value })}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#000015] focus:border-transparent"
+                className="w-full px-4 py-2 border border-[#ddf3ef] placeholder-[#ddf3ef]  rounded-lg focus:outline-none focus:border-0 focus:ring-2 focus:ring-[#2bbdaa] bg-transparent font-mono text-[#ddf3ef]"
               />
             </div>
 
@@ -288,7 +286,7 @@ const SignUpPage = () => {
                 type="url"
                 placeholder="LeetCode Profile URL"
                 onChange={(e) => setSignupData({ ...signupData, leetCodeProfile: e.target.value })}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#000015] focus:border-transparent"
+                className="w-full px-4 py-2 border border-[#ddf3ef] placeholder-[#ddf3ef]  rounded-lg focus:outline-none focus:border-0 focus:ring-2 focus:ring-[#2bbdaa] bg-transparent font-mono text-[#ddf3ef]"
               />
             </div>
 
@@ -297,7 +295,7 @@ const SignUpPage = () => {
                 type="password"
                 placeholder="Password"
                 onChange={(e) => setSignupData({ ...signupData, password: e.target.value })}
-                className="w-full px-4 py-2 border  focus:outline-none rounded-lg focus:ring-2 focus:ring-[#000015] focus:border-transparent"
+                className="w-full px-4 py-2 border border-[#ddf3ef] placeholder-[#ddf3ef]  rounded-lg focus:outline-none focus:border-0 focus:ring-2 focus:ring-[#2bbdaa] bg-transparent font-mono text-[#ddf3ef]"
               />
             </div>
 
@@ -306,7 +304,7 @@ const SignUpPage = () => {
                 type="password"
                 placeholder="Confirm Password"
                 onChange={(e) => setSignupData({ ...signupData, verifyPassword: e.target.value })}
-                className="w-full px-4 py-2 border focus:outline-none rounded-lg focus:ring-2 focus:ring-[#000015] focus:border-transparent"
+                className="w-full px-4 py-2 border border-[#ddf3ef] placeholder-[#ddf3ef]  rounded-lg focus:outline-none focus:border-0 focus:ring-2 focus:ring-[#2bbdaa] bg-transparent font-mono text-[#ddf3ef]"
               />
             </div>
 

@@ -9,8 +9,8 @@ function Header({ data }) {
     };
 
     return (
-        <div className='flex justify-between items-center border-b border-white/20 py-2 px-10 text-white'>
-            <input type="text" className='rounded-2xl px-3 py-2 w-52 bg-black/10 text-white' placeholder='Search'/>
+        <div className='flex justify-between items-center border-b border-[#ddf3ef]/20 py-2 px-10 text-[#ddf3ef]'>
+            <input type="text" className='rounded-2xl px-3 py-2 w-52 bg-black/10 text-[#ddf3ef]' placeholder='Search'/>
             <div className='flex space-x-3 items-center'>
                 <div>{data?.uname}</div>
                 <span className='border rounded-full p-2 hover:cursor-pointer'><User /></span>
