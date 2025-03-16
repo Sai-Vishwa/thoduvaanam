@@ -32,12 +32,12 @@ const TextScramble = ({ text }) => {
 };
 
 
-function Header({data1, data2}){
+function Header({data1, data2 ,type , type2}){
 
     return (
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center ">
             <motion.h1 
-            className="text-4xl font-bold text-[#ddf3ef]"
+            className={`text-4xl font-bold text-[#ddf3ef] ${type}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -45,7 +45,7 @@ function Header({data1, data2}){
             <TextScramble text={data1}/>
           </motion.h1>
           <motion.p 
-            className="text-[#ddf3ef] mt-2 basic-1 p-0 m-0 w-fit hover:text-[#2bbdaa] transition-colors"
+            className={`text-[#ddf3ef] mt-2 basic-1 p-0 m-0 w-fit hover:text-[#2bbdaa] transition-colors ${type2}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}

@@ -13,14 +13,17 @@ import {
   Download, 
   Medal, 
   Target, 
-  Crown 
+  Crown,
+  Code,
+  Book
 } from "lucide-react";
 import { toast, Toaster } from "sonner";
-// import AadukalamFooter from '../HelloPage/Footer'
+import CommonFooter from "../../components/Common/CommonFooter";
 
-const VerticalNav = ({ topics, activeSection, setActiveSection , uname}) => {
+const VerticalNav = ({ topics, activeSection, setActiveSection, uname }) => {
   const [expandedTopics, setExpandedTopics] = useState({});
   const nav = useNavigate();
+  
   const toggleTopic = (topicName) => {
     setExpandedTopics(prev => ({
       ...prev,
@@ -29,23 +32,34 @@ const VerticalNav = ({ topics, activeSection, setActiveSection , uname}) => {
   };
 
   return (
-    <div className="w-64 bg-gray-200  border-[#000015] h-screen overflow-y-auto fixed z-0">
+    <motion.div 
+      className="w-64 bg-[#1c1b1b] border-r border-[#3b3b3b] h-screen overflow-y-auto fixed z-0"
+      initial={{ x: -20, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.4 }}
+    >
+      <div className="p-4 border-b border-[#3b3b3b]">
+        <h3 className="text-[#ddf3ef] font-mono text-lg font-bold">Topics</h3>
+      </div>
       {topics.map((topic) => (
-        <div key={topic.name} className="border-b border-r border-t border-[#000015]/20">
+        <div key={topic.name} className="border-b border-[#3b3b3b]">
           <motion.div 
-            className={`flex items-center justify-between p-4 cursor-pointer hover:bg-[#000015]/5 transition-colors ${
-              activeSection === topic.name ? 'bg-[#000015]/10 text-[#000015]' : ''
+            className={`flex items-center justify-between p-4 cursor-pointer transition-colors font-mono ${
+              activeSection === topic.name ? 'bg-[#2bbdaa]/20 text-[#ddf3ef]' : 'text-[#ddf3ef]/80 hover:bg-[#2bbdaa]/10'
             }`}
             onClick={() => {
               setActiveSection(topic.name);
               toggleTopic(topic.name);
             }}
-            whileHover={{ scale: 1.02 }}
+            whileHover={{ backgroundColor: "rgba(43, 189, 170, 0.1)" }}
             whileTap={{ scale: 0.98 }}
           >
-            <span className="font-bold text-sm">{topic.name}</span>
+            <div className="flex items-center">
+              <Code className="w-4 h-4 mr-3 text-[#2bbdaa]" />
+              <span className="font-bold text-sm">{topic.name}</span>
+            </div>
             <ChevronDown 
-              className={`w-4 h-4 transition-transform duration-300 ${
+              className={`w-4 h-4 text-[#2bbdaa] transition-transform duration-300 ${
                 expandedTopics[topic.name] ? 'transform rotate-180' : ''
               }`}
             />
@@ -60,33 +74,33 @@ const VerticalNav = ({ topics, activeSection, setActiveSection , uname}) => {
                 transition={{ duration: 0.3 }}
                 className="overflow-hidden"
               >
-                <div className="pl-4 pb-2 bg-gray-50">
+                <div className="pl-4 pb-2 bg-[#252525]">
                   {topic.question.map((q) => (
                     <motion.div
                       key={q.title}
-                      className="px-4 py-3 text-sm font-semibold text-[#000015] hover:bg-[#000015]/5 cursor-pointer transition-colors"
-                      whileHover={{ x: 4 }}
+                      className="px-4 py-3 text-sm font-mono text-[#ddf3ef]/90 hover:bg-[#2bbdaa]/10 cursor-pointer transition-colors"
+                      whileHover={{ x: 4, backgroundColor: "rgba(43, 189, 170, 0.1)" }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={()=>{
+                      onClick={() => {
                         nav(`/${uname}/question/${q.title}`)
                       }}
                     >
                       {q.title}
                       <span className={`ml-2 text-xs font-bold ${
-                        q.difficulty === 'EASY' ? 'text-green-600' :
-                        q.difficulty === 'BALANCED' ? 'text-yellow-600' :
-                        q.difficulty === 'HELL' ? 'text-red-900' :
-                        'text-red-600'
+                        q.difficulty === 'EASY' ? 'text-green-400' :
+                        q.difficulty === 'BALANCED' ? 'text-yellow-400' :
+                        q.difficulty === 'HELL' ? 'text-red-400' :
+                        'text-red-400'
                       }`}>
                         {q.difficulty}
                       </span>
                     </motion.div>
                   ))}
                   <motion.div
-                    className="px-4 py-3 text-sm font-extrabold text-purple-600 hover:bg-[#000015]/5 cursor-pointer transition-colors"
-                    whileHover={{ x: 4 }}
+                    className="px-4 py-3 text-sm font-extrabold text-[#2bbdaa] hover:bg-[#2bbdaa]/10 cursor-pointer transition-colors"
+                    whileHover={{ x: 4, backgroundColor: "rgba(43, 189, 170, 0.1)" }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={()=>{
+                    onClick={() => {
                       nav(`/${uname}/contest/${topic.name}`)
                     }}
                   >
@@ -98,11 +112,11 @@ const VerticalNav = ({ topics, activeSection, setActiveSection , uname}) => {
           </AnimatePresence>
         </div>
       ))}
-    </div>
+    </motion.div>
   );
 };
 
-const NavBar = ({ userData, currentPath, viewMode , rank }) => {
+const NavBar = ({ userData, currentPath, viewMode, rank }) => {
   const [showProfile, setShowProfile] = useState(false);
   const profileRef = useRef(null);
   const navigate = useNavigate();
@@ -114,57 +128,54 @@ const NavBar = ({ userData, currentPath, viewMode , rank }) => {
     { label: "Leaderboard", icon: Trophy, path: `/${uname}/leaderboard` }
   ];
 
-
-
   async function logout() {
-
-    let status = false
-    let dt = {}
-    const dummy =  await new Promise ((resolve)=>{
-          toast.promise(new Promise((resolve,reject)=>{
-            fetch("http://localhost:4000/login-signup/logout", {
-              method: "POST",
-              body: JSON.stringify({session:Cookies.get("session") , uname:uname}),
-              headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-              }
-            }).then((resp) => resp.json())
-            ((data)=>{
-              if(data.err){
-                throw new Error(data.err)
-              }
-              resolve(data)
-            })
-            .catch((err)=> reject(err))
-          }),{
-            loading: "Logging out...",
-            success: (data)=>{
-              status = true
-              dt = data
-              console.log("i must be first")
-              resolve()
-              return (`Logged out successfully..!!`)
-            },
-            error: (err) => {
-              resolve()
-              return (`${err}`)
-            },
-            style: {
-              fontSize:"1.125rem",
-              fontWeight:300,
-              padding:20
+    let status = false;
+    let dt = {};
+    const dummy = await new Promise((resolve) => {
+      toast.promise(
+        new Promise((resolve, reject) => {
+          fetch("http://localhost:4000/login-signup/logout", {
+            method: "POST",
+            body: JSON.stringify({ session: Cookies.get("session"), uname: uname }),
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
             }
           })
-        })
-    
-        if(status){
-          Cookies.remove('session');
-          navigate('/');
+          .then((resp) => resp.json())
+          .then((data) => {
+            if (data.err) {
+              throw new Error(data.err);
+            }
+            resolve(data);
+          })
+          .catch((err) => reject(err));
+        }),
+        {
+          loading: "Logging out...",
+          success: (data) => {
+            status = true;
+            dt = data;
+            resolve();
+            return (`Logged out successfully..!!`);
+          },
+          error: (err) => {
+            resolve();
+            return (`${err}`);
+          },
+          style: {
+            fontSize: "1.125rem",
+            fontWeight: 300,
+            padding: 20
+          }
         }
-
-      
+      );
+    });
     
+    if (status) {
+      Cookies.remove('session');
+      navigate('/');
+    }
   }
 
   useEffect(() => {
@@ -178,17 +189,22 @@ const NavBar = ({ userData, currentPath, viewMode , rank }) => {
   }, []);
 
   return (
-    <div className="bg-white border-b border-[#000015] sticky top-0 z-50 shadow-sm">
+    <motion.div 
+      className="bg-[#1c1b1b] border-b border-[#3b3b3b] sticky top-0 z-50"
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.4 }}
+    >
       <div className="px-4 w-full">
         <div className="flex items-center justify-between h-16 w-full">
           <div className="flex items-center space-x-8 ml-20">
             {navItems.map((item) => (
               <motion.button
                 key={item.label}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, color: "#2bbdaa" }}
                 whileTap={{ scale: 0.95 }}
-                className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors font-bold
-                  ${currentPath === item.path ? 'text-[#000015] bg-[#000015]/5 font-extrabold' : 'text-gray-600 hover:text-[#000015] hover:bg-gray-50'}`}
+                className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors font-mono
+                  ${currentPath === item.path ? 'text-[#2bbdaa] bg-[#2bbdaa]/10 font-extrabold' : 'text-[#ddf3ef] hover:text-[#2bbdaa]'}`}
                 onClick={() => navigate(item.path)}
               >
                 <item.icon className="w-4 h-4" />
@@ -198,9 +214,9 @@ const NavBar = ({ userData, currentPath, viewMode , rank }) => {
           </div>
           <div className="relative mr-20" ref={profileRef}>
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, color: "#2bbdaa" }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center space-x-2 px-4 py-2 rounded-lg text-gray-600 hover:text-[#000015] hover:bg-gray-50"
+              className="flex items-center space-x-2 px-4 py-2 rounded-lg text-[#ddf3ef] hover:text-[#2bbdaa] font-mono"
               onClick={() => setShowProfile(!showProfile)}
             >
               <User className="w-4 h-4" />
@@ -212,74 +228,68 @@ const NavBar = ({ userData, currentPath, viewMode , rank }) => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
-                  className="absolute right-0 mt-2 w-80 bg-white border-2 border-[#000015] rounded-lg shadow-lg overflow-hidden"
+                  className="absolute right-0 mt-2 w-80 bg-[#1c1b1b] border-2 border-[#3b3b3b] rounded-lg shadow-lg overflow-hidden"
                 >
                   <div className="p-6">
-                    <div className="text-[#000015] font-bold text-xl mb-2">{userData.name}</div>
-                    <div className="text-gray-600 font-semibold mb-4">{userData.rno}</div>
+                    <div className="text-[#ddf3ef] font-bold text-xl mb-2 font-mono">{userData.name}</div>
+                    <div className="text-[#ddf3ef]/70 font-semibold mb-4 font-mono">{userData.rno}</div>
                     
                     <div className="grid grid-cols-2 gap-4 mb-4">
                       <div className="flex items-center space-x-2">
-                        <Medal className="w-5 h-5 text-[#000015]" />
+                        <Medal className="w-5 h-5 text-[#2bbdaa]" />
                         <div>
-                          <div className="text-sm font-semibold text-gray-600">Total Points</div>
-                          <div className="font-bold text-[#000015]">{userData.points|| 0}</div>
+                          <div className="text-sm font-semibold text-[#ddf3ef]/70 font-mono">Total Points</div>
+                          <div className="font-bold text-[#ddf3ef] font-mono">{userData.points || 0}</div>
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <Target className="w-5 h-5 text-[#000015]" />
+                        <Target className="w-5 h-5 text-[#2bbdaa]" />
                         <div>
-                          <div className="text-sm font-semibold text-gray-600">Questions Solved</div>
-                          <div className="font-bold text-[#000015]">{userData.questionsSolved || 0}</div>
+                          <div className="text-sm font-semibold text-[#ddf3ef]/70 font-mono">Questions Solved</div>
+                          <div className="font-bold text-[#ddf3ef] font-mono">{userData.questionsSolved || 0}</div>
                         </div>
                       </div>
                     </div>
                     
                     <div className="grid grid-cols-2 gap-4 mb-4">
                       <div className="flex items-center space-x-2">
-                        <Trophy className="w-5 h-5 text-[#000015]" />
+                        <Trophy className="w-5 h-5 text-[#2bbdaa]" />
                         <div>
-                          <div className="text-sm font-semibold text-gray-600">Contests Participated</div>
-                          <div className="font-bold text-[#000015]">{userData.contestsParticipated || 0}</div>
+                          <div className="text-sm font-semibold text-[#ddf3ef]/70 font-mono">Contests Participated</div>
+                          <div className="font-bold text-[#ddf3ef] font-mono">{userData.contestsParticipated || 0}</div>
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <Crown className="w-5 h-5 text-[#000015]" />
+                        <Crown className="w-5 h-5 text-[#2bbdaa]" />
                         <div>
-                          <div className="text-sm font-semibold text-gray-600">Current Rank</div>
-                          <div className="font-bold text-[#000015]">#{userData.rank || '-'}</div>
+                          <div className="text-sm font-semibold text-[#ddf3ef]/70 font-mono">Current Rank</div>
+                          <div className="font-bold text-[#ddf3ef] font-mono">#{userData.rank || '-'}</div>
                         </div>
                       </div>
                     </div>
-                    {userData?.leetCodeProfile?.length > 0?(
-                      <div className="pt-4 border-t border-gray-200">
+                    
+                    <div className="pt-4 border-t border-[#3b3b3b]">
+                      {userData?.leetCodeProfile?.length > 0 ? (
                         <a
                           href={userData.leetCodeProfile}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[#000015] hover:text-blue-600 text-sm font-bold flex items-center"
+                          className="text-[#2bbdaa] hover:text-[#ddf3ef] text-sm font-bold flex items-center font-mono"
                         >
-                          <span>Leet code Profile</span>
+                          <span>LeetCode Profile</span>
                         </a>
-                      </div>
-                    ):(
-                      <div className="pt-4 border-t border-gray-200">
-                        <a
-                          href={userData.leetCodeProfile}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[#000015]  text-sm font-bold flex items-center"
-                        >
-                          <span>No Leet code profile</span>
-                        </a>
-                      </div>
-                    )}
+                      ) : (
+                        <span className="text-[#ddf3ef]/50 text-sm font-bold flex items-center font-mono">
+                          No LeetCode profile
+                        </span>
+                      )}
+                    </div>
                   </div>
                   
                   {!viewMode && (
                     <button
                       onClick={logout}
-                      className="w-full p-4 text-left text-red-600 hover:bg-gray-50 text-sm font-bold border-t border-gray-200"
+                      className="w-full p-4 text-left text-red-400 hover:bg-[#3b3b3b] text-sm font-bold border-t border-[#3b3b3b] font-mono"
                     >
                       Logout
                     </button>
@@ -290,67 +300,52 @@ const NavBar = ({ userData, currentPath, viewMode , rank }) => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
-const TopicSection = ({ topic ,uname }) => {
+const TopicSection = ({ topic, uname }) => {
   const [isMinimized, setIsMinimized] = useState(false);
   const nav = useNavigate();
-  // const [btn , setBtn] = useState(false)
 
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`mb-8 border-2 border-[#000015] rounded-lg ${isMinimized?"pb-1":"pb-6"} p-6 bg-white`}
-
-      // onClick={() => {
-      //   if(!btn){
-      //     setIsMinimized(!isMinimized)
-      //     setBtn(true)
-      //   }
-      //   }
-      // }
+      className={`mb-8 border-2 border-[#3b3b3b] rounded-lg ${isMinimized ? "pb-1" : "pb-6"} p-6 bg-[#1c1b1b]`}
     >
       <Toaster />
       <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center space-x-4" >
-          <h3 className="text-xl font-bold text-[#000015]">{topic.name}</h3>
-      
+        <div className="flex items-center space-x-4">
+          <Book className="w-5 h-5 text-[#2bbdaa]" />
+          <h3 className="text-xl font-bold text-[#ddf3ef] font-mono">{topic.name}</h3>
         </div>
         <div className="flex items-center justify-end space-x-4">
+          <motion.a
+            whileHover={{ scale: 1.05, backgroundColor: "#2bbdaa" }}
+            whileTap={{ scale: 0.95 }}
+            href={topic.notesUrl}
+            onClick={() => {
+              toast.info("No notes available now", {
+                style: {
+                  fontSize: "1.125rem",
+                  fontWeight: 300,
+                  padding: 20
+                }
+              })
+            }}
+            download
+            className="flex items-center cursor-pointer space-x-2 px-4 py-2 bg-[#2bbdaa] text-[#1c1b1b] rounded-lg hover:bg-[#25a796] transition-colors font-bold font-mono"
+          >
+            <Download className="w-4 h-4" />
+            <span>Download Notes</span>
+          </motion.a>
 
-
-        <motion.a
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          href={topic.notesUrl}
-  
-          onClick={()=>{
-            // setBtn(true)
-            toast.info("No notes available now",{
-                    style: {
-                      fontSize:"1.125rem",
-                      fontWeight:300,
-                      padding:20
-                    }
-                    
-                  })
-                // setIsMinimized(isMinimized)
-          }}
-          download
-          className="flex items-center cursor-pointer space-x-2 px-4 py-2 bg-[#000015] text-white rounded-lg hover:bg-gray-900 transition-colors font-bold"
-        >
-          <Download className="w-4 h-4" />
-          <span>Download Notes</span>
-        </motion.a>
-
-        <motion.button
+          <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsMinimized(!isMinimized)}
-            className="p-1 rounded-full hover:bg-gray-100"
+            className="p-1 rounded-full hover:bg-[#3b3b3b] text-[#2bbdaa]"
           >
             <ChevronDown 
               className={`w-5 h-5 transition-transform duration-300 ${
@@ -359,7 +354,6 @@ const TopicSection = ({ topic ,uname }) => {
             />
           </motion.button>
         </div>
-        
       </div>
 
       <AnimatePresence>
@@ -371,47 +365,46 @@ const TopicSection = ({ topic ,uname }) => {
             transition={{ duration: 0.3 }}
             className="space-y-4 overflow-hidden"
           >
-            <span className="font-bold">
+            <span className="font-bold text-[#ddf3ef] font-mono">
               Practice
             </span>
             {topic.question.map((q) => (
               <motion.div
                 key={q.id}
-                className="border-2 border-gray-200 rounded-lg p-4 hover:shadow-md transition-all cursor-pointer hover:border-[#000015]"
+                className="border-2 border-[#3b3b3b] rounded-lg p-4 hover:shadow-md transition-all cursor-pointer hover:border-[#2bbdaa]"
                 whileHover={{ scale: 1 }}
                 whileTap={{ scale: 0.99 }}
-                onClick={()=>{
+                onClick={() => {
                   nav(`/${uname}/question/${q.title}`)
                 }}
               >
                 <div className="flex items-center justify-between">
-                  <h4 className="font-bold text-[#000015]">{q.title}</h4>
+                  <h4 className="font-bold text-[#ddf3ef] font-mono">{q.title}</h4>
                   <span className={`
-                    px-3 py-1 rounded-full text-sm font-bold
-                    ${q.difficulty === 'EASY' && 'bg-green-100 text-green-600'}
-                    ${q.difficulty === 'BALANCED' && 'bg-yellow-100 text-yellow-600'}
-                    ${q.difficulty === 'INTENSE' && 'bg-red-100 text-red-600'}
-                    ${q.difficulty === 'HELL' && 'bg-red-300 text-red-900'}
+                    px-3 py-1 rounded-full text-sm font-bold font-mono
+                    ${q.difficulty === 'EASY' && 'bg-green-900/30 text-green-400'}
+                    ${q.difficulty === 'BALANCED' && 'bg-yellow-900/30 text-yellow-400'}
+                    ${q.difficulty === 'INTENSE' && 'bg-red-900/30 text-red-400'}
+                    ${q.difficulty === 'HELL' && 'bg-red-900/40 text-red-400'}
                   `}>
                     {q.difficulty}
                   </span>
                 </div>
               </motion.div>
             ))}
-                                          <span className="font-bold ">Contest</span>
+            <span className="font-bold text-[#ddf3ef] font-mono">Contest</span>
 
             <motion.div
-              className="border-2 border-gray-200 rounded-lg p-4 hover:shadow-md transition-all cursor-pointer hover:border-[#000015] bg-gray-50"
+              className="border-2 border-[#3b3b3b] rounded-lg p-4 hover:shadow-md transition-all cursor-pointer hover:border-[#2bbdaa] bg-[#252525]"
               whileHover={{ scale: 1 }}
               whileTap={{ scale: 0.99 }}
-              onClick={()=>{
+              onClick={() => {
                 nav(`/${uname}/contest/${topic.name}`)
               }}
             >
-              
               <div className="flex items-center justify-between">
-                <h4 className="font-black text-[#000015]">{topic.name} Contest</h4>
-                <span className="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-bold">
+                <h4 className="font-black text-[#ddf3ef] font-mono">{topic.name} Contest</h4>
+                <span className="bg-[#2bbdaa]/20 text-[#2bbdaa] px-3 py-1 rounded-full text-sm font-bold font-mono">
                   Contest
                 </span>
               </div>
@@ -453,7 +446,13 @@ function HomePage() {
   useEffect(() => {
     const session = Cookies.get("session");
     if (!session) {
-      alert("First login to access this route");
+      toast.error("Please login to continue", {
+        style: {
+          fontSize: "1.125rem",
+          fontWeight: 300,
+          padding: 20
+        }
+      });
       navigate("/login");
     }
     if (allData?.data?.length === 0) {
@@ -462,90 +461,49 @@ function HomePage() {
   }, [allData?.data?.length, navigate]);
 
   return (
-    <div className="min-h-screen bg-gray-200 relative">
+    <div className="min-h-screen  relative main">
       <NavBar 
         userData={allData.myData} 
         currentPath={window.location.pathname}
         viewMode={allData.viewMode}
-        rank = {allData.rank}
+        rank={allData.rank}
       />
       
       <div className="flex">
         <div className="w-1/6 xs:hidden sm:hidden md:hidden lg:block xl:block">
-        <VerticalNav 
-          topics={allData.data} 
-          activeSection={activeSection}
-          setActiveSection={setActiveSection}
-          uname = {uname}
-        />
+          <VerticalNav 
+            topics={allData.data} 
+            activeSection={activeSection}
+            setActiveSection={setActiveSection}
+            uname={uname}
+          />
         </div>
         
-        <div className="flex p-8  lg:w-5/6 xl:w-5/6 xs:w-full md:w-full sm:w-full ">
-        <main className="flex-1 w-full p-8 border-2 border-black rounded-xl bg-white">
-          <motion.div 
-            className="mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <h1 className="text-3xl font-bold text-center mb-2 text-[#000015]">Available Topics</h1>
-            <p className="text-gray-600 text-center">
-              Explore topics and their questions
-            </p>
-          </motion.div>
+        <div className="flex p-8 lg:w-5/6 xl:w-5/6 xs:w-full md:w-full sm:w-full">
+          <main className="flex-1 w-full p-8 border-2 border-[#3b3b3b] rounded-xl bg-[#1c1b1b]">
+            <motion.div 
+              className="mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <h1 className="text-3xl font-bold text-center mb-2 text-[#ddf3ef] font-mono">Available Topics</h1>
+              <p className="text-[#ddf3ef]/70 text-center font-mono">
+                Explore topics and practice questions
+              </p>
+            </motion.div>
 
-          <div className="space-y-8">
-            {allData.data.map((topic) => (
-              <TopicSection key={topic.id} topic={topic} uname={uname} />
-            ))}
-          </div>
-        </main>
+            <div className="space-y-8">
+              {allData.data.map((topic) => (
+                <TopicSection key={topic.id} topic={topic} uname={uname} />
+              ))}
+            </div>
+          </main>
         </div>
-        
       </div>
+      
       <div className="h-[20vh]"></div>
       <div className="w-full h-[20vh] absolute transform bottom-0">
-      <footer className="bg-gray-900 text-white w-full h-full flex items-center overflow-hidden">
-      <div className="w-full  mx-auto px-4 py-2 flex flex-row items-center justify-around">
-        {/* Logo and Title */}
-        <div className="flex items-center space-x-3">
-          <img 
-            src="/Intellexa_Logo_black_bg-removebg-preview.png" 
-            alt="Intellexa Logo" 
-            className="w-[180px]"
-          />
-          <div>
-            <h3 className="text-base font-semibold">Aadukalam</h3>
-            <p className="text-xs text-gray-400">The DSA Battlefield</p>
-          </div>
-        </div>
-
-        {/* College and Motto */}
-        <div className="text-center hidden md:block">
-        <p className="text-sm text-gray-300">Team Intellexa </p>
-        <p className="text-xs italic text-gray-400 mb-5">"Innovate • Impact • Inspire"</p>
-          <p className="text-xs text-gray-300">Rajalakshmi Engineering College - Chennai</p>
-        </div>
-        
-        {/* Social Links */}
-        <div className='block '>
-          <div className='flex justify-center items-center mb-4'>
-            <p>Reach us on </p>
-          </div>
-          <div className="flex items-center space-x-4 justify-center">
-                  <a href="#" className="text-gray-300 hover:text-blue-400 transition-colors">
-                    <Linkedin size={16} />
-                  </a>
-                  <a href="#" className="text-gray-300 hover:text-red-400 transition-colors">
-                    <Mail size={16} />
-                  </a>
-                  <a href="#" className="text-gray-300 hover:text-pink-400 transition-colors">
-                    <Instagram size={16} />
-                  </a>
-          </div>
-        </div>
-        
-      </div>
-    </footer>
+        <CommonFooter />
       </div>
     </div>
   );

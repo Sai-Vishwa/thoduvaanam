@@ -9,6 +9,8 @@ function SubmitButton({loginData , forgotPassword , setOTPdiv , disable , setDis
 
     const nav = useNavigate();
 
+    
+
 
     const handleLogin = async () => {
 
@@ -18,9 +20,14 @@ function SubmitButton({loginData , forgotPassword , setOTPdiv , disable , setDis
         if(!/^2[234]\d{7}$/.test(loginData.rno)){
             toast.error("Enter a valid username",{
               style: {
-                fontSize:"1.125rem",
-                fontWeight:300,
-                padding:20
+                fontSize:"1rem",
+                fontWeight:200,
+                padding:10,
+                color:"#ddf3ef", 
+                backgroundColor:"#1c1b1b",
+                borderColor:"#3b3b3b",
+                borderStyle:"solid",
+                borderWidth:"3px"
               }
             })
             return
@@ -155,7 +162,9 @@ function SubmitButton({loginData , forgotPassword , setOTPdiv , disable , setDis
 
     return (
         <>
-            <Toaster duration={3000} position="bottom-right"/>
+            <Toaster duration={3000} position="bottom-right"
+            className="text-base"
+            o/>
             <motion.button
             layout
             onClick={forgotPassword.style === "block" ? handleLogin : handleSendOTP}
