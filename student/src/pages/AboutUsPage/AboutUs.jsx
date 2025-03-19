@@ -71,7 +71,7 @@ function AboutUs() {
    
          <AboutUsNav />
          </div>
-         <div className="lg:h-[70vh] md:h-[150vh] sm:h-[150vh] xs:h-[150vh]">
+         <div className="lg:h-[70vh] md:h-[150vh] sm:h-[150vh] xs:h-[150vh] font-[Liberty]">
          <main className="flex  w-full mx-auto px-4  mb-auto h-full">
          <div className = "md:w-5/12 w-full">
         <div className="text-[#36ead2] mt-2 w-full h-1/6 text-2xl md:text-3xl tracking-[-0.1em] flex flex-col sm:flex-row font-[Liberty] sm:space-x-5">

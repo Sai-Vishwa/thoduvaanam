@@ -94,7 +94,7 @@ const NavBar = ({ userData, currentPath, viewMode, rank }) => {
   
     return (
       <motion.div 
-        className="bg-[#1c1b1b] border-b border-[#3b3b3b] sticky top-0 z-50 w-full h-full"
+        className="bg-[#1c1b1b] border-b border-[#3b3b3b] sticky top-0 z-50 w-full h-[10vh]"
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4 }}
@@ -120,6 +120,9 @@ const NavBar = ({ userData, currentPath, viewMode, rank }) => {
                 className="flex text-[#ddf3ef]  font-mono items-center space-x-2 px-4 py-2  basic-1  transition-colors hover:text-[#36ead2] "
                 onHoverStart={()=>{
                     if(!showProfile)setShowProfile(!showProfile)}}
+                onClick={()=>{
+                  setShowProfile(!showProfile)
+                }}
               >
 
                 <User className={`w-4 h-4` }/>
