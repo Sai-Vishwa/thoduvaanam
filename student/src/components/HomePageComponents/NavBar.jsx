@@ -106,7 +106,7 @@ const NavBar = ({ userData, currentPath, viewMode, rank }) => {
                 <motion.button
                   key={item.label}
                   whileHover={{ color: "#36ead2" }}
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors font-mono
+                  className={`flex items-center space-x-2 px-3 py-0   rounded-lg transition-colors font-mono
                     ${currentPath === item.path ? 'text-[#2bbdaa]' : 'text-[#ddf3ef] hover:text-[#36ead2] cursor-pointer basic-1  transition-colors'}`}
                   onClick={() => nav(item.path)}
                 >
@@ -117,7 +117,7 @@ const NavBar = ({ userData, currentPath, viewMode, rank }) => {
             </div>
             <div className="relative mr-20" ref={profileRef}>
               <motion.button
-                className="flex text-[#ddf3ef]  font-mono items-center space-x-2 px-4 py-2  basic-1  transition-colors hover:text-[#36ead2] "
+                className="flex text-[#ddf3ef]  font-mono items-center space-x-2 px-2   basic-1  transition-colors hover:text-[#36ead2] "
                 onHoverStart={()=>{
                     if(!showProfile)setShowProfile(!showProfile)}}
                 onClick={()=>{

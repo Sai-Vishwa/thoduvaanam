@@ -119,7 +119,8 @@ async function homePage(req,res) {
                 data:data,
                 myData:myData,
                 viewMode: viewMode,
-                rank:rc
+                rank:rc,
+                totalRank:rank.studentAchievements.length
             })
         }
     }

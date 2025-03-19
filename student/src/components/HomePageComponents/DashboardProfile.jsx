@@ -40,9 +40,9 @@ const FlipDigit = ({ value, isLast = false }) => {
     }, [value, prevValue]);
   
     return (
-      <div className="relative w-6 h-8 inline-block mx-0.5 overflow-hidden">
+      <div className="relative w-4 h-6 inline-block mx-0.5 overflow-hidden">
         <motion.div
-          className="absolute inset-0 flex items-center justify-center bg-gray-700 text-white rounded-sm"
+          className=" flex items-center justify-center  text-white "
           initial={{ y: isAnimating ? '-100%' : 0 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -51,7 +51,7 @@ const FlipDigit = ({ value, isLast = false }) => {
         </motion.div>
         {isAnimating && (
           <motion.div
-            className="absolute inset-0 flex items-center justify-center bg-gray-700 text-white rounded-sm"
+            className="flex items-center justify-center  text-white"
             initial={{ y: 0 }}
             animate={{ y: '100%' }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -64,8 +64,8 @@ const FlipDigit = ({ value, isLast = false }) => {
   };
   
   // Animated counter with countdown effect from 999
-  const CountdownCounter = ({ end, duration = 3, prefix = '', suffix = '' }) => {
-    const [displayValue, setDisplayValue] = useState(999);
+  const CountdownCounter = ({ end, duration = 3, prefix = '', suffix = '' ,flag}) => {
+    const [displayValue, setDisplayValue] = useState(end+150);
     
     useEffect(() => {
       let startTime;
@@ -82,7 +82,7 @@ const FlipDigit = ({ value, isLast = false }) => {
         // Calculate current value by counting down from 999
         const current = Math.max(
           end,
-          Math.floor(999 - easedProgress * (999 - end))
+          Math.floor(end+150 - easedProgress * (end+150 - end))
         );
         
         setDisplayValue(current);
@@ -96,11 +96,13 @@ const FlipDigit = ({ value, isLast = false }) => {
       return () => cancelAnimationFrame(animationFrame);
     }, [end, duration]);
     
-    // Convert number to array of digits
-    const digits = displayValue.toString().split('');
+    // Convert number to array of digits and pad to ensure 3 digits
+
+
+    const digits = displayValue.toString().padStart(3, flag).split('');
     
     return (
-      <div className="font-mono tabular-nums">
+      <div className="flex w-full h-full items-center justify-center">
         {prefix}
         {digits.map((digit, index) => (
           <FlipDigit 
@@ -134,41 +136,56 @@ function DashBoardProfile({userData}){
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.9 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="w-2/3 rounded-3xl border-2 border-[#3b3b3b] bg-[#1c1b1b] overflow-hidden shadow-2xl "
+        className="w-2/3 py-4 px-6 rounded-3xl border-2 border-[#3b3b3b] bg-[#1c1b1b] overflow-hidden shadow-2xl "
       >
-        <div className="py-4 px-6">
-          {/* Header with Name and RNO */}
-          <div className="flex items-start mb-6">
-            <div className="flex-grow">
-             <Header 
-             data1={``+JSON.stringify(data.name)}
-             data2={""+JSON.stringify(data.rno)}
-             type={"text-[24px]"}
-            type2={"text-[14px]"}
-            val={true}/>
-            </div>
-          </div>
+        <div className="flex">
+                <div className="flex items-start mb-6 w-1/2">
+        
+                    <div className="flex-grow">
+                    <Header 
+                    data1={``+JSON.stringify(data.name)}
+                    data2={""+JSON.stringify(data.rno)}
+                    type={"text-[24px]"}
+                    type2={"text-[14px]"}
+                    val={true}/>
+                    </div>
+
+                </div>
+
+
+                <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="col-span-12 md:col-span-4"
+            >
+                <div className="block">
+                        <div className="flex space-x-2 items-center">
+                            <Crown className="h-5 w-5 text-[#2bbdaa]" />
+                            <div className="text-[#ddf3ef]  text-xl">Rank</div>
+                        </div>
+                        <div className="flex space-x-1 items-center justify-center">
+                                    <div className="text-[#2bbdaa] font-bold ">#</div>
+                                    <CountdownCounter end={data.rank} duration={3} flag={0}/>
+                                    <div className="text-[#2bbdaa] font-bold">/</div>
+                                    <CountdownCounter end={data.totalRank} duration={3} flag={0}/>
+                        </div>
+                </div>
+              
+              <div className="font-bold text-white text-2xl mt-1">
+                
+              </div>
+            </motion.div>
+
+
+
+        </div>
+          
           
           {/* Main Stats Grid */}
           <div className="grid grid-cols-12 gap-4 mb-8">
             {/* Rank - Box style */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="col-span-12 md:col-span-4 bg-gray-800 rounded-xl p-4 border border-gray-700 hover:border-gray-600 transition-all"
-            >
-              <div className="h-10 w-10 rounded-md mb-3 flex items-center justify-center bg-gradient-to-br from-purple-500 to-indigo-600 shadow-md">
-                <Crown className="h-5 w-5 text-white" />
-              </div>
-              <div className="font-medium text-gray-400 text-sm font-mono">
-                Current Rank
-              </div>
-              <div className="font-bold text-white text-2xl mt-1">
-                <span className="text-purple-400 mr-1">#</span>
-                <CountdownCounter end={data.rank || 0} duration={3} />
-              </div>
-            </motion.div>
+            
             
             {/* Points - Larger size */}
             <motion.div
@@ -186,7 +203,7 @@ function DashBoardProfile({userData}){
                     Total Points
                   </div>
                   <div className="font-bold text-white text-3xl mt-1">
-                    <CountdownCounter end={data.points || 0} duration={3} />
+                    <CountdownCounter end={data.points || 0} duration={3} flag={"_"}/>
                   </div>
                 </div>
               </div>
@@ -208,7 +225,7 @@ function DashBoardProfile({userData}){
                     Questions Solved
                   </div>
                   <div className="font-bold text-white text-3xl mt-1">
-                    <CountdownCounter end={data.questionsSolved || 0} duration={3} />
+                    <CountdownCounter end={data.questionsSolved || 0} duration={3} flag={"_"}/>
                   </div>
                 </div>
               </div>
@@ -230,7 +247,7 @@ function DashBoardProfile({userData}){
                     Contests Participated
                   </div>
                   <div className="font-bold text-white text-3xl mt-1">
-                    <CountdownCounter end={data.contestsParticipated || 0} duration={3} />
+                    <CountdownCounter end={data.contestsParticipated || 0} duration={3} flag={"_"}/>
                   </div>
                 </div>
               </div>
@@ -252,7 +269,7 @@ function DashBoardProfile({userData}){
                     Current Streak
                   </div>
                   <div className="font-bold text-white text-2xl mt-1">
-                    <CountdownCounter end={data.currentStreak || 0} duration={3} suffix=" days" />
+                    <CountdownCounter end={data.currentStreak || 0} duration={3} suffix=" days" flag={"_"}/>
                   </div>
                 </div>
               </div>
@@ -274,7 +291,7 @@ function DashBoardProfile({userData}){
                     Max Streak
                   </div>
                   <div className="font-bold text-white text-2xl mt-1">
-                    <CountdownCounter end={data.maxStreak || 0} duration={3} suffix=" days" />
+                    <CountdownCounter end={data.maxStreak || 0} duration={3} suffix=" days" flag={"_"}/>
                   </div>
                 </div>
               </div>
@@ -306,7 +323,6 @@ function DashBoardProfile({userData}){
               </span>
             )}
           </motion.div>
-        </div>
       </motion.div>
     </div>
   );

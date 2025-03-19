@@ -89,7 +89,7 @@ function Temp(){
 
       <div className="flex items-center">
         <div className="h-full w-1/2">
-        <DashBoardProfile userData={allData.myData}/>
+        <DashBoardProfile userData={{...allData.myData , rank:allData.rank , totalRank:allData.totalRank}}/>
         </div>
         <div className="h-full w-1/2 text-[#ddf3ef]">
           vanakkam
