@@ -26,6 +26,8 @@ import SnowBackground from './pages/dummy'
 import HelloThree from './pages/HelloPage/Hello3'
 import LanderPage from './pages/VeraRoute/VeraPage'
 import AboutUs from './pages/AboutUsPage/AboutUs'
+import Temp from './pages/Temp'
+import ProfilePage from './pages/ProfilePage/ProfilePage'
 
 function App() {
 
@@ -45,6 +47,9 @@ function App() {
         <Route path='/hello4' element={<SnowBackground />} />
         <Route path='/lander' element={<LanderPage />} />
         <Route path='/about' element={<AboutUs />} />
+        <Route path='/temp/:uname' element={<Temp />} />
+        <Route path='/profile/:uname' element={<ProfilePage />} />
+
 
 
 

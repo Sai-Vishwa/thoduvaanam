@@ -117,6 +117,8 @@ const VerticalNav = ({ topics, activeSection, setActiveSection, uname }) => {
 };
 
 const NavBar = ({ userData, currentPath, viewMode, rank }) => {
+  const [nameHover , setNameHover] = useState(false)
+
   const [showProfile, setShowProfile] = useState(false);
   const profileRef = useRef(null);
   const navigate = useNavigate();
@@ -190,7 +192,7 @@ const NavBar = ({ userData, currentPath, viewMode, rank }) => {
 
   return (
     <motion.div 
-      className="bg-[#1c1b1b] border-b border-[#3b3b3b] sticky top-0 z-50"
+      className="bg-[#1c1b1b] border-b border-[#3b3b3b] sticky top-0 z-50 w-full h-full"
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4 }}
@@ -201,10 +203,9 @@ const NavBar = ({ userData, currentPath, viewMode, rank }) => {
             {navItems.map((item) => (
               <motion.button
                 key={item.label}
-                whileHover={{ scale: 1.05, color: "#2bbdaa" }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ color: "#36ead2" }}
                 className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors font-mono
-                  ${currentPath === item.path ? 'text-[#2bbdaa] bg-[#2bbdaa]/10 font-extrabold' : 'text-[#ddf3ef] hover:text-[#2bbdaa]'}`}
+                  ${currentPath === item.path ? 'text-[#2bbdaa]' : 'text-[#ddf3ef] hover:text-[#36ead2] cursor-pointer basic-1  transition-colors'}`}
                 onClick={() => navigate(item.path)}
               >
                 <item.icon className="w-4 h-4" />
@@ -214,13 +215,16 @@ const NavBar = ({ userData, currentPath, viewMode, rank }) => {
           </div>
           <div className="relative mr-20" ref={profileRef}>
             <motion.button
-              whileHover={{ scale: 1.05, color: "#2bbdaa" }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center space-x-2 px-4 py-2 rounded-lg text-[#ddf3ef] hover:text-[#2bbdaa] font-mono"
+              whileHover={()=>{setNameHover(true)}}
+              onHoverEnd={()=>{setNameHover(false)}}
+              className="flex text-[#ddf3ef]  font-mono"
               onClick={() => setShowProfile(!showProfile)}
             >
-              <User className="w-4 h-4" />
-              <span className="font-extrabold">{userData.uname}</span>
+              <div className={`flex items-center space-x-2 px-4 py-2  basic-1  transition-colors hover:text-[#36ead2] `}>
+              <User className={`w-4 h-4 text-[#ddf3ef] hover:text-[#36ead2] ${nameHover?"text:#[36ead2]":""}` }/>
+              <div className={`text-[#ddf3ef] hover:text-[#36ead2] ${nameHover?"text:#[36ead2]":""}`}>{userData.uname}</div>
+              </div>
+              
             </motion.button>
             <AnimatePresence>
               {showProfile && (
@@ -468,6 +472,7 @@ function HomePage() {
         viewMode={allData.viewMode}
         rank={allData.rank}
       />
+      
       
       <div className="flex">
         <div className="w-1/6 xs:hidden sm:hidden md:hidden lg:block xl:block">
