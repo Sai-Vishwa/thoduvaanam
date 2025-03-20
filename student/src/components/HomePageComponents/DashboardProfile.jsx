@@ -142,12 +142,12 @@ function DashBoardProfile({userData}){
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.9 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="w-5/6 h-5/6 pt-2 flex flex-col space-y-1 rounded-3xl border-2 border-[#3b3b3b] bg-[#1c1b1b] overflow-hidden shadow-2xl "
+        className="w-5/6 h-5/6 pt-2 flex flex-col space-y-3 rounded-3xl border-2 border-[#3b3b3b] bg-[#1c1b1b] overflow-hidden shadow-2xl "
       >
         
-                <div className="flex h-1/3 justify-around">
+                <div className="flex">
         
-                            <div className="flex flex-col space-y-1 ">
+                            <div className="flex flex-col space-y-0 w-1/2 items-center">
                                 <div className="text-[#22bdaa] text-lg">{data.name}</div>
                                 <div className="text-[#ddf3ea] text-xs">{data.rno}</div>
                             </div>
@@ -157,11 +157,11 @@ function DashBoardProfile({userData}){
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.4, duration: 0.6 }}
-                                className="flex flex-col space-y-1 items-center ">
+                                className="flex flex-col space-y-1 justify-end  items-center w-1/2 ">
 
                                     <div className="flex space-x-2 items-center">
-                                          <Crown className="h-4 w-4 text-[#2bbdaa]" />
-                                          <div className="text-[#ddf3ef]  text-lg">Rank</div>
+                                          <Crown className="h-3 w-3 text-[#2bbdaa]" />
+                                          <div className="text-[#ddf3ef]  text-sm">Rank</div>
                                     </div>
                                     <div className="flex space-x-0 items-center justify-center ">
                                     
@@ -178,22 +178,22 @@ function DashBoardProfile({userData}){
                             
 
                 </div>
-                <div className="flex h-1/3 justify-around">
+                <div className="flex">
 
                 <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.5, duration: 0.6 }}
-                                className="flex flex-col space-y-1 items-center ">
+                                className="flex flex-col space-y-1  items-center w-1/2  ">
 
                                     <div className="flex space-x-2 items-center">
-                                          <Medal className="h-4 w-4 text-[#2bbdaa]" />
-                                          <div className="text-[#ddf3ef]  text-lg">Total Pts</div>
+                                          <Medal className="h-3 w-3 text-[#2bbdaa]" />
+                                          <div className="text-[#ddf3ef]  text-sm">Total Pts</div>
                                     </div>
                                     <div className="flex space-x-0 items-center justify-center ">
                                     
                                                 <div className="text-[#2bbdaa] font-bold text-xs">#</div>
-                                                <CountdownCounter end={data.points} duration={5} flag={0}/>
+                                                <CountdownCounter end={data.totalPoints} duration={5} flag={0}/>
 
                                     </div>
 
@@ -204,16 +204,16 @@ function DashBoardProfile({userData}){
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.4, duration: 0.6 }}
-                                className="flex flex-col space-y-1 items-center ">
+                                className="flex flex-col space-y-1  items-center w-1/2 ">
 
                                     <div className="flex space-x-2 items-center">
-                                          <Medal className="h-4 w-4 text-[#2bbdaa]" />
-                                          <div className="text-[#ddf3ef]  text-lg">Rank</div>
+                                          <Trophy className="h-3 w-3 text-[#2bbdaa]" />
+                                          <div className="text-[#ddf3ef]  text-sm">Contests</div>
                                     </div>
                                     <div className="flex space-x-0 items-center justify-center ">
                                     
                                                 <div className="text-[#2bbdaa] font-bold text-xs">#</div>
-                                                <CountdownCounter end={data.points} duration={5} flag={0}/>
+                                                <CountdownCounter end={data.totalContestsParticipated} duration={5} flag={0}/>
                       
                                     </div>
 
@@ -221,7 +221,47 @@ function DashBoardProfile({userData}){
 
                 </div>
 
-                <div className="flex h-1/3">
+                <div className="flex justify-around">
+
+
+                <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.5, duration: 0.6 }}
+                                className="flex flex-col space-y-1 items-center w-1/2">
+
+                                    <div className="flex space-x-2 items-center">
+                                          <Flame className="h-3 w-3 text-[#2bbdaa]" />
+                                          <div className="text-[#ddf3ef]  text-sm">Current Streak</div>
+                                    </div>
+                                    <div className="flex space-x-0 items-center justify-center ">
+                                    
+                                                <div className="text-[#2bbdaa] font-bold text-xs">#</div>
+                                                <CountdownCounter end={data.currentStreak} duration={5} flag={0}/>
+
+                                    </div>
+
+                                </motion.div>
+                                
+                                
+                                <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.4, duration: 0.6 }}
+                                className="flex flex-col space-y-1 items-center w-1/2">
+
+                                    <div className="flex space-x-2 items-center">
+                                          <Crown className="h-3 w-3 text-[#2bbdaa]" />
+                                          <div className="text-[#ddf3ef]  text-sm">Max Streak</div>
+                                    </div>
+                                    <div className="flex space-x-0 items-center justify-center ">
+                                    
+                                                <div className="text-[#2bbdaa] font-bold text-xs">#</div>
+                                                <CountdownCounter end={data.maxStrea} duration={5} flag={0}/>
+                      
+                                    </div>
+
+                                </motion.div>
 
                 </div>
 
