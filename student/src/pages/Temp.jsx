@@ -79,7 +79,7 @@ function Temp(){
 
 
     return (
-        <div className="relative main">
+        <div className="relative main h-screen w-screen overflow-hidden">
       <NavBar 
         userData={allData.myData} 
         currentPath={window.location.pathname}
@@ -87,13 +87,40 @@ function Temp(){
         rank={allData.rank}
       />
 
-      <div className="flex items-center">
-        <div className="h-full w-1/2">
+      <div className="flex items-center h-[80vh]">
+
+        <div className="w-1/4 h-full bg-blue-800">
+
+        </div>
+
+        <div className="w-3/4 h-full">
+                  <div className="flex h-1/2 w-full">
+                      <div className="w-1/3 h-full bg-green-300">
+
+                      </div>
+                      <div className="w-1/3 h-full bg-amber-500">
+
+                      </div>
+                      <div className="w-1/3 h-full">
+                          <DashBoardProfile 
+                          userData={{...allData.myData , rank:allData.rank , totalRank:allData.totalRank}}/>
+                      </div>
+
+                  </div>  
+                  <div className="h-1/2 bg-red-300 w-full">
+
+                  </div>
+        </div>
+
+        
+
+        
+
+
+        {/* <div className="h-full w-1/2">
         <DashBoardProfile userData={{...allData.myData , rank:allData.rank , totalRank:allData.totalRank}}/>
-        </div>
-        <div className="h-full w-1/2 text-[#ddf3ef]">
-          vanakkam
-        </div>
+        </div> */}
+        
 
       </div>
             

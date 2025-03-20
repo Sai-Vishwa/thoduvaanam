@@ -50,7 +50,7 @@ function Header({data1, data2 ,type , type2 , val}){
     return (
         <div className="flex flex-col items-center justify-center ">
             <motion.h1 
-            className={`text-4xl font-bold ${dt?"text-[#2bbda2]":"text-[#ddf3ef]"}  ${type}`}
+            className={`text-4xl  ${dt?"text-[#2bbda2]":"text-[#ddf3ef] font-bold"}  ${type}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}

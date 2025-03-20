@@ -40,7 +40,7 @@ const FlipDigit = ({ value, isLast = false }) => {
     }, [value, prevValue]);
   
     return (
-      <div className="relative w-4 h-6 inline-block mx-0.5 overflow-hidden">
+      <div className="relative w-2 h-4 inline-block  overflow-hidden">
         <motion.div
           className=" flex items-center justify-center  text-white "
           initial={{ y: isAnimating ? '-100%' : 0 }}
@@ -65,7 +65,7 @@ const FlipDigit = ({ value, isLast = false }) => {
   
   // Animated counter with countdown effect from 999
   const CountdownCounter = ({ end, duration = 3, prefix = '', suffix = '' ,flag}) => {
-    const [displayValue, setDisplayValue] = useState(end+150);
+    const [displayValue, setDisplayValue] = useState(end+50);
     
     useEffect(() => {
       let startTime;
@@ -82,7 +82,7 @@ const FlipDigit = ({ value, isLast = false }) => {
         // Calculate current value by counting down from 999
         const current = Math.max(
           end,
-          Math.floor(end+150 - easedProgress * (end+150 - end))
+          Math.floor(end+50 - easedProgress * (end+50 - end))
         );
         
         setDisplayValue(current);
@@ -102,15 +102,18 @@ const FlipDigit = ({ value, isLast = false }) => {
     const digits = displayValue.toString().padStart(3, flag).split('');
     
     return (
-      <div className="flex w-full h-full items-center justify-center">
+      <div className="flex w-full h-full items-center justify-center text-xs space-x-0">
         {prefix}
+        <div className="space-x-0 flex">
         {digits.map((digit, index) => (
+          
           <FlipDigit 
             key={index} 
             value={digit} 
             isLast={index === digits.length - 1} 
           />
         ))}
+        </div>
         {suffix}
       </div>
     );
@@ -131,63 +134,104 @@ function DashBoardProfile({userData}){
   const data = { ...userData };
   
   return (
-    <div className="flex justify-center items-center h-full w-full py-10">
+    <div className="flex justify-center items-center h-full w-full font-['Yu_Gothic']">
       <motion.div 
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.9 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="w-2/3 py-4 px-6 rounded-3xl border-2 border-[#3b3b3b] bg-[#1c1b1b] overflow-hidden shadow-2xl "
+        className="w-5/6 h-5/6 pt-2 flex flex-col space-y-1 rounded-3xl border-2 border-[#3b3b3b] bg-[#1c1b1b] overflow-hidden shadow-2xl "
       >
-        <div className="flex">
-                <div className="flex items-start mb-6 w-1/2">
         
-                    <div className="flex-grow">
-                    <Header 
-                    data1={``+JSON.stringify(data.name)}
-                    data2={""+JSON.stringify(data.rno)}
-                    type={"text-[24px]"}
-                    type2={"text-[14px]"}
-                    val={true}/>
-                    </div>
+                <div className="flex h-1/3 justify-around">
+        
+                            <div className="flex flex-col space-y-1 ">
+                                <div className="text-[#22bdaa] text-lg">{data.name}</div>
+                                <div className="text-[#ddf3ea] text-xs">{data.rno}</div>
+                            </div>
+
+
+                                <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.4, duration: 0.6 }}
+                                className="flex flex-col space-y-1 items-center ">
+
+                                    <div className="flex space-x-2 items-center">
+                                          <Crown className="h-4 w-4 text-[#2bbdaa]" />
+                                          <div className="text-[#ddf3ef]  text-lg">Rank</div>
+                                    </div>
+                                    <div className="flex space-x-0 items-center justify-center ">
+                                    
+                                                <div className="text-[#2bbdaa] font-bold text-xs">#</div>
+                                                <CountdownCounter end={data.rank} duration={5} flag={0}/>
+                                                <div className="text-[#2bbdaa] font-bold text-xs">/</div>
+                                                <CountdownCounter end={data.totalRank} duration={0.0000001} flag={0}/>
+                                    </div>
+
+                                </motion.div>
+
+                                    
+
+                            
 
                 </div>
-
+                <div className="flex h-1/3 justify-around">
 
                 <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="col-span-12 md:col-span-4"
-            >
-                <div className="block">
-                        <div className="flex space-x-2 items-center">
-                            <Crown className="h-5 w-5 text-[#2bbdaa]" />
-                            <div className="text-[#ddf3ef]  text-xl">Rank</div>
-                        </div>
-                        <div className="flex space-x-1 items-center justify-center">
-                                    <div className="text-[#2bbdaa] font-bold ">#</div>
-                                    <CountdownCounter end={data.rank} duration={3} flag={0}/>
-                                    <div className="text-[#2bbdaa] font-bold">/</div>
-                                    <CountdownCounter end={data.totalRank} duration={3} flag={0}/>
-                        </div>
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.5, duration: 0.6 }}
+                                className="flex flex-col space-y-1 items-center ">
+
+                                    <div className="flex space-x-2 items-center">
+                                          <Crown className="h-4 w-4 text-[#2bbdaa]" />
+                                          <div className="text-[#ddf3ef]  text-lg">Rank</div>
+                                    </div>
+                                    <div className="flex space-x-0 items-center justify-center ">
+                                    
+                                                <div className="text-[#2bbdaa] font-bold text-xs">#</div>
+                                                <CountdownCounter end={data.rank} duration={5} flag={0}/>
+                                                <div className="text-[#2bbdaa] font-bold text-xs">/</div>
+                                                <CountdownCounter end={data.totalRank} duration={0.0000001} flag={0}/>
+                                    </div>
+
+                                </motion.div>
+                                
+                                
+                                <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.4, duration: 0.6 }}
+                                className="flex flex-col space-y-1 items-center ">
+
+                                    <div className="flex space-x-2 items-center">
+                                          <Crown className="h-4 w-4 text-[#2bbdaa]" />
+                                          <div className="text-[#ddf3ef]  text-lg">Rank</div>
+                                    </div>
+                                    <div className="flex space-x-0 items-center justify-center ">
+                                    
+                                                <div className="text-[#2bbdaa] font-bold text-xs">#</div>
+                                                <CountdownCounter end={data.rank} duration={5} flag={0}/>
+                                                <div className="text-[#2bbdaa] font-bold text-xs">/</div>
+                                                <CountdownCounter end={data.totalRank} duration={0.0000001} flag={0}/>
+                                    </div>
+
+                                </motion.div>
+
                 </div>
-              
-              <div className="font-bold text-white text-2xl mt-1">
-                
-              </div>
-            </motion.div>
+
+                <div className="flex h-1/3">
+
+                </div>
 
 
 
-        </div>
+
           
           
-          {/* Main Stats Grid */}
-          <div className="grid grid-cols-12 gap-4 mb-8">
-            {/* Rank - Box style */}
+          {/* <div className="grid grid-cols-12 gap-4 mb-8">
             
             
-            {/* Points - Larger size */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -209,7 +253,6 @@ function DashBoardProfile({userData}){
               </div>
             </motion.div>
             
-            {/* Questions Solved - Larger size */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -231,7 +274,6 @@ function DashBoardProfile({userData}){
               </div>
             </motion.div>
             
-            {/* Contests - Smaller size */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -253,7 +295,6 @@ function DashBoardProfile({userData}){
               </div>
             </motion.div>
             
-            {/* Current Streak - Smaller size */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -275,7 +316,6 @@ function DashBoardProfile({userData}){
               </div>
             </motion.div>
             
-            {/* Max Streak - Smaller size */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -298,7 +338,6 @@ function DashBoardProfile({userData}){
             </motion.div>
           </div>
           
-          {/* LeetCode Profile Link */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -322,7 +361,7 @@ function DashBoardProfile({userData}){
                 <span>No LeetCode profile</span>
               </span>
             )}
-          </motion.div>
+          </motion.div>8*/}
       </motion.div>
     </div>
   );
