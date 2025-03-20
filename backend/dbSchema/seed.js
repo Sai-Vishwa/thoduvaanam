@@ -4,39 +4,47 @@ const prisma = new PrismaClient();
 async function main() {
 
 
-    // await prisma.achievements.createMany({
-    //     data:[
-    //         {
-    //             title:"totalPoints",
-    //             description:"This achievement holds the total points secured by a student"
-    //         },
-    //         {
-    //             title:"totalQuestionsSolved",
-    //             description:"This achievement holds the total no. of successful correct submissions made by a user"
-    //         },
-    //         {
-    //             title:"totalContestsParticipated",
-    //             description:"This achievement holds the total no. of contests the student participated"
-    //         }
-    //     ]
-    // })
+    await prisma.achievements.createMany({
+        data:[
+            {
+                title:"totalEasyQuestionsSolved",
+                description:"This achievement holds the total No. of Easy Questions solved by the user"
+            },
+            {
+                title:"totalBalancedQuestionsSolved",
+                description:"This achievement holds the total No. of Balanced Questions solved by the user"
+            },{
+                title:"totalIntenseQuestionsSolved",
+                description:"This achievement holds the total No. of Intense Questions solved by the user"
+            },{
+                title:"totalHellQuestionsSolved",
+                description:"This achievement holds the total No. of Hell Questions solved by the user"
+            },
+            
+        ]
+    })
 
     await prisma.studentAchievements.createMany({
         data:[
             {
                 count:0,
-                achievementId:1,
+                achievementId:6,
                 studentId:1
             },
             {
                 studentId:1,
-                achievementId:2,
+                achievementId:7,
                 count:0
             },
             {
                 count:0,
-                achievementId:3,
+                achievementId:8,
                 studentId:1
+            },
+            {
+                studentId:1,
+                achievementId:9,
+                count:0
             }
         ]
     })

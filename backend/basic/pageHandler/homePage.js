@@ -112,12 +112,19 @@ async function homePage(req,res) {
                 }
             })
             
+
+            let myData2 = {...myData}
+
+
+            myData.studentAchievements.map((ac)=>{
+                myData2[ac.achievements.title] = ac.count
+            })
              
             console.log(myData)
             res.status(200).json({
                 msg:"Success",
                 data:data,
-                myData:myData,
+                myData:myData2,
                 viewMode: viewMode,
                 rank:rc,
                 totalRank:rank.studentAchievements.length

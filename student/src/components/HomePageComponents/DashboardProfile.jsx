@@ -133,6 +133,9 @@ function DashBoardProfile({userData}){
   
   const data = { ...userData };
   
+
+  console.log(JSON.stringify(data))
+  
   return (
     <div className="flex justify-center items-center h-full w-full font-['Yu_Gothic']">
       <motion.div 
@@ -184,15 +187,14 @@ function DashBoardProfile({userData}){
                                 className="flex flex-col space-y-1 items-center ">
 
                                     <div className="flex space-x-2 items-center">
-                                          <Crown className="h-4 w-4 text-[#2bbdaa]" />
-                                          <div className="text-[#ddf3ef]  text-lg">Rank</div>
+                                          <Medal className="h-4 w-4 text-[#2bbdaa]" />
+                                          <div className="text-[#ddf3ef]  text-lg">Total Pts</div>
                                     </div>
                                     <div className="flex space-x-0 items-center justify-center ">
                                     
                                                 <div className="text-[#2bbdaa] font-bold text-xs">#</div>
-                                                <CountdownCounter end={data.rank} duration={5} flag={0}/>
-                                                <div className="text-[#2bbdaa] font-bold text-xs">/</div>
-                                                <CountdownCounter end={data.totalRank} duration={0.0000001} flag={0}/>
+                                                <CountdownCounter end={data.points} duration={5} flag={0}/>
+
                                     </div>
 
                                 </motion.div>
@@ -205,15 +207,14 @@ function DashBoardProfile({userData}){
                                 className="flex flex-col space-y-1 items-center ">
 
                                     <div className="flex space-x-2 items-center">
-                                          <Crown className="h-4 w-4 text-[#2bbdaa]" />
+                                          <Medal className="h-4 w-4 text-[#2bbdaa]" />
                                           <div className="text-[#ddf3ef]  text-lg">Rank</div>
                                     </div>
                                     <div className="flex space-x-0 items-center justify-center ">
                                     
                                                 <div className="text-[#2bbdaa] font-bold text-xs">#</div>
-                                                <CountdownCounter end={data.rank} duration={5} flag={0}/>
-                                                <div className="text-[#2bbdaa] font-bold text-xs">/</div>
-                                                <CountdownCounter end={data.totalRank} duration={0.0000001} flag={0}/>
+                                                <CountdownCounter end={data.points} duration={5} flag={0}/>
+                      
                                     </div>
 
                                 </motion.div>
