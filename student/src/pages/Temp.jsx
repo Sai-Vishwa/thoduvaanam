@@ -25,6 +25,7 @@ import { toast, Toaster } from "sonner";
 import CommonFooter from "../components/Common/CommonFooter";
 import NavBar from "../components/HomePageComponents/NavBar";
 import DashBoardProfile from "../components/HomePageComponents/DashboardProfile";
+import PieChart from "../components/HomePageComponents/PieChart";
 
 
 
@@ -98,8 +99,8 @@ function Temp(){
                       <div className="w-1/3 h-full bg-green-300">
 
                       </div>
-                      <div className="w-1/3 h-full bg-amber-500">
-
+                      <div className="w-1/3 h-full flex justify-center items-center">
+                            <PieChart />
                       </div>
                       <div className="w-1/3 h-full">
                           <DashBoardProfile 

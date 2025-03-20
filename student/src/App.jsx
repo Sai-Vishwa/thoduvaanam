@@ -28,6 +28,7 @@ import LanderPage from './pages/VeraRoute/VeraPage'
 import AboutUs from './pages/AboutUsPage/AboutUs'
 import Temp from './pages/Temp'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
+import PieChart from './components/HomePageComponents/PieChart'
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
         <Route path='/temp/:uname' element={<Temp />} />
         <Route path='/profile/:uname' element={<ProfilePage />} />
 
+        <Route path='/pie' element={<PieChart />} />
 
 
 
