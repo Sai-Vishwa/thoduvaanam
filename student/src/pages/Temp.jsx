@@ -85,7 +85,7 @@ function Temp(){
       <NavBar 
         userData={allData.myData} 
         currentPath={window.location.pathname}
-        viewMode={allData.viewMode}
+        viewMode={allData.viewMode} 
         rank={allData.rank}
       />
 
