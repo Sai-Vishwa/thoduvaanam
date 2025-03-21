@@ -35,17 +35,6 @@ async function homePage(req,res) {
                             title:true,
                             difficulty:true,
                             type:true,
-                            submission:{
-                                select:{
-                                    status:true,
-                                },
-                                where:{
-                                    AND: [
-                                        {studentId: searchid},
-                                        {isFinal:"YES"}
-                                    ]
-                                }
-                            }
                         },
                         where:{
                             type:"PRACTICE"
@@ -53,6 +42,28 @@ async function homePage(req,res) {
                     }
                 }
             });
+
+            let e=0,b=0,i=0,h=0;
+
+            data.map((topic)=>{
+                topic.question.map((q)=>{
+                    if(q.difficulty=="BALANCED"){
+                        b+=1
+                    }
+                    else if(q.difficulty=="EASY"){
+                        e+=1
+                    }
+                    else if(q.difficulty=="HELL"){
+                        h+=1
+                    }
+                    else{
+                        i+=1
+                    }
+                })
+            })
+
+            let data2 = {...data , "totalQuestions":b+e+h+i ,"easyQuestions":e,"balancedQuestions":b,"intenseQuestions":i,"hellQuestions":h}
+
             const myData = await prisma.student.findFirst({
                 where:{
                     id:searchid
@@ -123,7 +134,7 @@ async function homePage(req,res) {
             console.log(myData)
             res.status(200).json({
                 msg:"Success",
-                data:data,
+                data:data2,
                 myData:myData2,
                 viewMode: viewMode,
                 rank:rc,

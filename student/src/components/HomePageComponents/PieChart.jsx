@@ -3,16 +3,19 @@ import { motion } from 'framer-motion';
 import { Divide } from 'lucide-react';
 
 const PieChart = ({details}) => {
+
+  console.log(JSON.stringify(details))
+  // alert(JSON.string  ify(details))
   // Data setup with aesthetic colors
   const data = [
-    { category: 'Easy', total: 8, solved: 2, color: '#3aff4e' },
-    { category: 'Hell', total: 2, solved: 1, color: '#ff0000' },
-    { category: 'Balanced', total: 4, solved: 1, color: '#ffba30' },
-    { category: 'Intense', total: 4, solved: 0, color: '#ff5c4a' },
+    { category: 'Easy', total: details.easyQuestions, solved: details.totalEasyQuestionsSolved, color: '#3aff4e' },
+    { category: 'Hell', total: details.hellQuestions, solved: details.totalHellQuestionsSolved, color: '#ff0000' },
+    { category: 'Balanced', total: details.balancedQuestions, solved: details.totalBalancedQuestionsSolved, color: '#ffba30' },
+    { category: 'Intense', total: details.intenseQuestions, solved: details.totalIntenseQuestionsSolved, color: '#ff5c4a' },
   ];
   
-  const totalProblems = data.reduce((sum, item) => sum + item.total, 0);
-  const solvedProblems = data.reduce((sum, item) => sum + item.solved, 0);
+  const totalProblems = details.totalQuestions;
+  const solvedProblems = details.totalQuestionsSolved;
   
   // TUTORIAL - STEP 1: Setting the ring thickness
   // The ring thickness is determined by the difference between innerRadius and outerRadius
@@ -28,10 +31,11 @@ const PieChart = ({details}) => {
     
     data.forEach(item => {
       const angle = (item.total / totalProblems) * 360;
+      // alert( angle)
       segments.push({
         ...item,
         startAngle: currentAngle,
-        endAngle: currentAngle + angle,
+        endAngle: currentAngle + angle-1,
         midAngle: currentAngle + (angle / 2)
       });
       currentAngle += angle;
@@ -143,7 +147,7 @@ const PieChart = ({details}) => {
                 {
                     segments.map((segment , index)=>(
                         <div className='flex justify-center items-center space-x-2 text-xs text-[#ddf3ef]'>
-                    <div className={`h-2 w-2 rounded-sm bg-[${segment.color}]`}></div>
+                    <div className={`h-2 w-2 rounded-sm ${segment.category=="Easy"?"bg-[#3aff4e]":segment.category=="Hell"?"bg-[#ff0000]":segment.category=="Balanced"?"bg-[#ffba30]":"bg-[#ff5c4a]"}`}></div>
                     <div >{segment.category.toLowerCase()}-{segment.solved}/{segment.total}</div>
                         </div>
                     ))

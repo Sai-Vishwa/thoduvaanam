@@ -126,7 +126,7 @@ const NavBar = ({ userData, currentPath, viewMode, rank }) => {
               >
 
                 <User className={`w-4 h-4` }/>
-                <span>{userData.uname}</span>
+                <span>{userData?.uname}</span>
                 <ChevronDown 
                               className={`w-5 h-5 transition-transform duration-300 ${showProfile?"transform rotate-180":""}`}
                             />

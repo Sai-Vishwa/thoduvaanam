@@ -26,6 +26,7 @@ import CommonFooter from "../components/Common/CommonFooter";
 import NavBar from "../components/HomePageComponents/NavBar";
 import DashBoardProfile from "../components/HomePageComponents/DashboardProfile";
 import PieChart from "../components/HomePageComponents/PieChart";
+import QuestionDashboard from "../components/HomePageComponents/QuestionDashboard";
 
 
 
@@ -90,9 +91,11 @@ function Temp(){
 
       <div className="flex items-center h-[80vh]">
 
-        <div className="w-1/4 h-full bg-blue-800">
-
+        <div className="w-1/4 h-full flex justify-center items-center py-4">
+            <QuestionDashboard />
         </div>
+
+  
 
         <div className="w-3/4 h-full">
                   <div className="flex h-1/2 w-full">
@@ -100,7 +103,8 @@ function Temp(){
 
                       </div>
                       <div className="w-1/3 h-full flex justify-center items-center">
-                            <PieChart />
+                            <PieChart 
+                            details={{...allData.data , ...allData.myData}}/>
                       </div>
                       <div className="w-1/3 h-full">
                           <DashBoardProfile 

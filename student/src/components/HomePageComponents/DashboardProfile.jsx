@@ -134,7 +134,7 @@ function DashBoardProfile({userData}){
   const data = { ...userData };
   
 
-  console.log(JSON.stringify(data))
+  // console.log(JSON.stringify(data))
   
   return (
     <div className="flex justify-center items-center h-full w-full font-['Yu_Gothic']">

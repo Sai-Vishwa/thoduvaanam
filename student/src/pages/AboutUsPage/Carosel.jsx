@@ -14,7 +14,7 @@ const ImageCarousel = () => {
       id: 1,
       name: "Prasanth S",
       dept: "III yr CSE",
-      src: "/download__1_-removebg-preview.png",
+      src: "/IMG_20250315_204644.jpg",
       info: "  En peru Vella Prasanth. Na oru developer. I eat 100 Harkirat Singh for breakfast.",
       github: "github.com/user1",
       linkedin: "linkedin.com/in/user1"
