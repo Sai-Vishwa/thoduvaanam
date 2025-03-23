@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const { update } = require("../update/updateProfile");
 const { verifySubmission } = require("../submissionVerify/verifySubmission");
-const { homePage } = require("../pageHandler/homePage");
+const { homePage } = require("../pageHandler/HomePage/homePage");
 const { questionPage } = require("../pageHandler/questionPage");
 const { leaderBoard } = require("../pageHandler/leaderBoard");
 const { ContestBasicPage } = require("../pageHandler/contestBasicPage");

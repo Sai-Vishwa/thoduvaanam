@@ -1,5 +1,5 @@
-const {PrismaClient} = require("../../dbSchema/generated");
-const { sessionChecker } = require("../../sessionChecker/sessionChecker");
+const {PrismaClient} = require("../../../dbSchema/generated");
+const { sessionChecker } = require("../../../sessionChecker/sessionChecker");
 const prisma = new PrismaClient();
 async function homePage(req,res) {
     try{

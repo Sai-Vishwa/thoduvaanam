@@ -6,8 +6,8 @@ const Typewriter = () => {
     `Aadukalam is a coding platform where we learn, compete, and grow together.`,
     `It's a battlefield of logic and problem-solving, designed to push your limits with challenges, contests, and leaderboards. With hand-picked problems, this is the place to sharpen your skills and prove where you stand.`,
     `This Battlefield wouldn't exist without the people who believed it could happen.`,
-    `To those who threw in ideas, stuck around when things broke, fixed my terrible decisions, and kept the spirit high, thank you.`,
-    `This place runs on code, but it was built on your support.`
+    `To those who threw in ideas, stuck around when things broke, fixed terrible decisions, and kept the spirit high, thank you.`,
+    `This battlefied runs on code, but it was built on your support.`
   ];
   
   const [displayText, setDisplayText] = useState({0:"",1:"",2:"",3:"",4:"",5:""});
