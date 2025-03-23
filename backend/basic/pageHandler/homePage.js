@@ -3,6 +3,7 @@ const { sessionChecker } = require("../../sessionChecker/sessionChecker");
 const prisma = new PrismaClient();
 async function homePage(req,res) {
     try{
+        console.log("vanakkam")
         let viewMode = true
         let searchid
         console.log(req.body.session)
@@ -124,21 +125,24 @@ async function homePage(req,res) {
             })
             
 
+            const contests = await prisma.contest.findMany()
+
             let myData2 = {...myData}
 
 
             myData.studentAchievements.map((ac)=>{
                 myData2[ac.achievements.title] = ac.count
             })
-             
-            console.log(myData)
+            console.log("hii")
+            console.log(contests)
             res.status(200).json({
                 msg:"Success",
                 data:data2,
                 myData:myData2,
                 viewMode: viewMode,
                 rank:rc,
-                totalRank:rank.studentAchievements.length
+                totalRank:rank.studentAchievements.length,
+                contests:contests
             })
         }
     }

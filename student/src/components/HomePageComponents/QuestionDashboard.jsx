@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const QuestionDashboard = ({details}) => {
 
-  console.log(JSON.stringify(details))
+  // console.log(JSON.stringify(details))
   const [searchTerm, setSearchTerm] = useState('');
   
   // Sample data from backend

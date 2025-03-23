@@ -27,6 +27,7 @@ import NavBar from "../components/HomePageComponents/NavBar";
 import DashBoardProfile from "../components/HomePageComponents/DashboardProfile";
 import PieChart from "../components/HomePageComponents/PieChart";
 import QuestionDashboard from "../components/HomePageComponents/QuestionDashboard";
+import ContestsDashboard from "../components/HomePageComponents/ContestDashboard";
 
 
 
@@ -79,7 +80,7 @@ function Temp(){
     }
   }, [allData?.data?.length, navigate]);
 
-
+    console.log(JSON.stringify(allData.contests))
     return (
         <div className="relative main h-screen w-screen overflow-hidden">
       <NavBar 
@@ -100,8 +101,8 @@ function Temp(){
 
         <div className="w-3/4 h-full">
                   <div className="flex h-1/2 w-full">
-                      <div className="w-1/3 h-full bg-green-300">
-
+                      <div className="w-1/3 h-full text-xs flex justify-center items-center">
+                            <ContestsDashboard />
                       </div>
                       <div className="w-1/3 h-full flex justify-center items-center">
                             <PieChart 

@@ -4,7 +4,7 @@ import { Divide } from 'lucide-react';
 
 const PieChart = ({details}) => {
 
-  console.log(JSON.stringify(details))
+  // console.log(JSON.stringify(details))
   // alert(JSON.string  ify(details))
   // Data setup with aesthetic colors
   const data = [
