@@ -67,7 +67,7 @@ const QuestionDashboard = ({details}) => {
             {filteredQuestions.map(question => (
               <div 
                 key={question.id} 
-                className="px-2 py-1 space-y-0   cursor-pointer border-t-2 w-full border-[#3b3b3b]"
+                className="px-2 py-1 space-y-0  hover:bg-[#252525] cursor-pointer border-t-2 w-full border-[#3b3b3b]"
               >
                 <div className="flex justify-between items-start">
                   <div className="flex-1">

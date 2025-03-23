@@ -232,7 +232,7 @@ function DashBoardProfile({userData}){
 
                                     <div className="flex space-x-2 items-center">
                                           <Flame className="h-3 w-3 text-[#2bbdaa]" />
-                                          <div className="text-[#ddf3ef]  text-sm">Current Streak</div>
+                                          <div className="text-[#ddf3ef]  text-sm">Daily Streak</div>
                                     </div>
                                     <div className="flex space-x-0 items-center justify-center ">
                                     
@@ -252,7 +252,7 @@ function DashBoardProfile({userData}){
 
                                     <div className="flex space-x-2 items-center">
                                           <Crown className="h-3 w-3 text-[#2bbdaa]" />
-                                          <div className="text-[#ddf3ef]  text-sm">Max Streak</div>
+                                          <div className="text-[#ddf3ef]  text-sm">Submit Streak</div>
                                     </div>
                                     <div className="flex space-x-0 items-center justify-center ">
                                     

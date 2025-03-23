@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 
-const ContestsDashboard = () => {
+const ContestsDashboard = ({details}) => {
+
+    // console.log(JSON.stringify(details))
+
+    details?.map((val)=>{
+        console.log(JSON.stringify(val))
+    })
   // Static sample data
-  const sampleData = [
+  const sampleData = details
+  const sampleData2 =[
     {
       "id": 1,
       "title": "Aadukalam_Round_2",
       "opensOn": "2025-02-25T08:30:00.000Z",
-      "closesOn": "2025-03-25T20:01:02.947Z", // Made this active for demo
+      "closesOn": "2025-03-26T20:01:02.947Z", // Made this active for demo
       "timeToSolveInMinutes": 90,
       "totalPoints": 120,
       "totalNoOfQuestions": 3
@@ -61,7 +68,7 @@ const ContestsDashboard = () => {
   const upcoming = [];
   const finished = [];
   
-  sampleData.forEach(contest => {
+  sampleData?.forEach(contest => {
     const opensOn = new Date(contest.opensOn);
     const closesOn = new Date(contest.closesOn);
     
@@ -123,7 +130,7 @@ const ContestsDashboard = () => {
   };
   
   // Render a contest card
-  const renderContestCard = (contest) => (
+  const renderContestCard = (contest , type) => (
     <div 
       key={contest.id} 
       className="px-4 py-3 cursor-pointer border-b-2 w-full border-[#3b3b3b] hover:bg-[#252525]"
@@ -146,6 +153,9 @@ const ContestsDashboard = () => {
           </div>
         </div>
       </div>
+      {
+        type=='finished' &&   
+      
       <div className="text-sm text-gray-400 font-['Courier_New']">
         {/* <p>Opens: {formatDate(contest.opensOn)}</p> */}
         <p>Closed on: {formatDate(contest.closesOn)}</p>
@@ -153,6 +163,31 @@ const ContestsDashboard = () => {
           <p className="text-[#2bbdaa] mt-1">{getTimeRemaining(contest.closesOn)}</p>
         )}
       </div>
+      }
+
+    {
+        type=='active' &&   
+      
+      <div className="text-sm text-gray-400 font-['Courier_New']">
+        {/* <p>Opens: {formatDate(contest.opensOn)}</p> */}
+        <p>Closes on: {formatDate(contest.closesOn)}</p>
+        {currentDate < new Date(contest.closesOn) && (
+          <p className="text-[#2bbdaa] mt-1">{getTimeRemaining(contest.closesOn)}</p>
+        )}
+      </div>
+      }
+
+{
+        type=='upcoming' &&   
+      
+      <div className="text-sm text-gray-400 font-['Courier_New']">
+        {/* <p>Opens: {formatDate(contest.opensOn)}</p> */}
+        <p>Opens on: {formatDate(contest.opensOn)}</p>
+        {currentDate < new Date(contest.opensOn) && (
+          <p className="text-[#2bbdaa] mt-1">{getTimeRemaining(contest.opensOn)}</p>
+        )}
+      </div>
+      }
     </div>
   );
   
@@ -163,7 +198,7 @@ const ContestsDashboard = () => {
         return (
           <div className="w-full">
             {filteredActive.length > 0 ? (
-              filteredActive.map(contest => renderContestCard(contest))
+              filteredActive.map(contest => renderContestCard(contest , 'active'))
             ) : (
               <div className="text-center py-8 text-gray-400 font-['Courier_New']">
                 No active contests at the moment
@@ -175,7 +210,7 @@ const ContestsDashboard = () => {
         return (
           <div className="w-full">
             {filteredUpcoming.length > 0 ? (
-              filteredUpcoming.map(contest => renderContestCard(contest))
+              filteredUpcoming.map(contest => renderContestCard(contest , 'upcoming'))
             ) : (
               <div className="text-center py-8 text-gray-400 font-['Courier_New']">
                 No upcoming contests found
@@ -187,7 +222,7 @@ const ContestsDashboard = () => {
         return (
           <div className="w-full">
             {filteredFinished.length > 0 ? (
-              filteredFinished.map(contest => renderContestCard(contest))
+              filteredFinished.map(contest => renderContestCard(contest , 'finished'))
             ) : (
               <div className="text-center py-8 text-gray-400 font-['Courier_New']">
                 No finished contests found
@@ -211,7 +246,7 @@ const ContestsDashboard = () => {
       </div>
       
       {/* Main content area */}
-      <div className="rounded-3xl border-2 h-full border-[#3b3b3b] bg-[#1c1b1b] border-t-0 rounded-t-none flex flex-col items-center overflow-hidden">
+      <div className="rounded-3xl rounded-br-none border-2 h-full border-[#3b3b3b] bg-[#1c1b1b] border-t-0 rounded-t-none flex flex-col items-center overflow-hidden">
         {/* Tab navigation */}
         <div className="w-full text-xs flex border-b-2 border-[#3b3b3b] bg-[#222]">
         <button 

@@ -80,7 +80,7 @@ function Temp(){
     }
   }, [allData?.data?.length, navigate]);
 
-    console.log(JSON.stringify(allData.contests))
+    // console.log(JSON.stringify(allData.contests))
     return (
         <div className="relative main h-screen w-screen overflow-hidden">
       <NavBar 
@@ -102,7 +102,8 @@ function Temp(){
         <div className="w-3/4 h-full">
                   <div className="flex h-1/2 w-full">
                       <div className="w-1/3 h-full text-xs flex justify-center items-center">
-                            <ContestsDashboard />
+                            <ContestsDashboard 
+                            details={allData.contests}/>
                       </div>
                       <div className="w-1/3 h-full flex justify-center items-center">
                             <PieChart 
