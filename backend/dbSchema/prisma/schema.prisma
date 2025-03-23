@@ -96,7 +96,6 @@ model Topics {
 
   //relationships
   question Questions[]
-  contest Contest?
 }
 
 model Questions {
@@ -229,9 +228,7 @@ model Contest {
   timeToSolveInMinutes Int
   totalPoints Int
   totalNoOfQuestions Int
-  topicId Int @unique
 
   //relationships
   question Questions[]
-  topic Topics @relation(fields:[topicId],references:[id])
 }

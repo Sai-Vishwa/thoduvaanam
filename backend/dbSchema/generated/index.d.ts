@@ -3537,7 +3537,6 @@ export namespace Prisma {
     notes?: boolean
     contestDate?: boolean
     question?: boolean | Topics$questionArgs<ExtArgs>
-    contest?: boolean | Topics$contestArgs<ExtArgs>
     _count?: boolean | TopicsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["topics"]>
 
@@ -3568,7 +3567,6 @@ export namespace Prisma {
   export type TopicsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "notes" | "contestDate", ExtArgs["result"]["topics"]>
   export type TopicsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     question?: boolean | Topics$questionArgs<ExtArgs>
-    contest?: boolean | Topics$contestArgs<ExtArgs>
     _count?: boolean | TopicsCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TopicsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3578,7 +3576,6 @@ export namespace Prisma {
     name: "Topics"
     objects: {
       question: Prisma.$QuestionsPayload<ExtArgs>[]
-      contest: Prisma.$ContestPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3981,7 +3978,6 @@ export namespace Prisma {
   export interface Prisma__TopicsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     question<T extends Topics$questionArgs<ExtArgs> = {}>(args?: Subset<T, Topics$questionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestionsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    contest<T extends Topics$contestArgs<ExtArgs> = {}>(args?: Subset<T, Topics$contestArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4413,25 +4409,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: QuestionsScalarFieldEnum | QuestionsScalarFieldEnum[]
-  }
-
-  /**
-   * Topics.contest
-   */
-  export type Topics$contestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Contest
-     */
-    select?: ContestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Contest
-     */
-    omit?: ContestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ContestInclude<ExtArgs> | null
-    where?: ContestWhereInput
   }
 
   /**
@@ -13617,7 +13594,6 @@ export namespace Prisma {
     timeToSolveInMinutes: number | null
     totalPoints: number | null
     totalNoOfQuestions: number | null
-    topicId: number | null
   }
 
   export type ContestSumAggregateOutputType = {
@@ -13625,7 +13601,6 @@ export namespace Prisma {
     timeToSolveInMinutes: number | null
     totalPoints: number | null
     totalNoOfQuestions: number | null
-    topicId: number | null
   }
 
   export type ContestMinAggregateOutputType = {
@@ -13636,7 +13611,6 @@ export namespace Prisma {
     timeToSolveInMinutes: number | null
     totalPoints: number | null
     totalNoOfQuestions: number | null
-    topicId: number | null
   }
 
   export type ContestMaxAggregateOutputType = {
@@ -13647,7 +13621,6 @@ export namespace Prisma {
     timeToSolveInMinutes: number | null
     totalPoints: number | null
     totalNoOfQuestions: number | null
-    topicId: number | null
   }
 
   export type ContestCountAggregateOutputType = {
@@ -13658,7 +13631,6 @@ export namespace Prisma {
     timeToSolveInMinutes: number
     totalPoints: number
     totalNoOfQuestions: number
-    topicId: number
     _all: number
   }
 
@@ -13668,7 +13640,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: true
     totalPoints?: true
     totalNoOfQuestions?: true
-    topicId?: true
   }
 
   export type ContestSumAggregateInputType = {
@@ -13676,7 +13647,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: true
     totalPoints?: true
     totalNoOfQuestions?: true
-    topicId?: true
   }
 
   export type ContestMinAggregateInputType = {
@@ -13687,7 +13657,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: true
     totalPoints?: true
     totalNoOfQuestions?: true
-    topicId?: true
   }
 
   export type ContestMaxAggregateInputType = {
@@ -13698,7 +13667,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: true
     totalPoints?: true
     totalNoOfQuestions?: true
-    topicId?: true
   }
 
   export type ContestCountAggregateInputType = {
@@ -13709,7 +13677,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: true
     totalPoints?: true
     totalNoOfQuestions?: true
-    topicId?: true
     _all?: true
   }
 
@@ -13807,7 +13774,6 @@ export namespace Prisma {
     timeToSolveInMinutes: number
     totalPoints: number
     totalNoOfQuestions: number
-    topicId: number
     _count: ContestCountAggregateOutputType | null
     _avg: ContestAvgAggregateOutputType | null
     _sum: ContestSumAggregateOutputType | null
@@ -13837,9 +13803,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: boolean
     totalPoints?: boolean
     totalNoOfQuestions?: boolean
-    topicId?: boolean
     question?: boolean | Contest$questionArgs<ExtArgs>
-    topic?: boolean | TopicsDefaultArgs<ExtArgs>
     _count?: boolean | ContestCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contest"]>
 
@@ -13851,8 +13815,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: boolean
     totalPoints?: boolean
     totalNoOfQuestions?: boolean
-    topicId?: boolean
-    topic?: boolean | TopicsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contest"]>
 
   export type ContestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -13863,8 +13825,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: boolean
     totalPoints?: boolean
     totalNoOfQuestions?: boolean
-    topicId?: boolean
-    topic?: boolean | TopicsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contest"]>
 
   export type ContestSelectScalar = {
@@ -13875,27 +13835,20 @@ export namespace Prisma {
     timeToSolveInMinutes?: boolean
     totalPoints?: boolean
     totalNoOfQuestions?: boolean
-    topicId?: boolean
   }
 
-  export type ContestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "opensOn" | "closesOn" | "timeToSolveInMinutes" | "totalPoints" | "totalNoOfQuestions" | "topicId", ExtArgs["result"]["contest"]>
+  export type ContestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "opensOn" | "closesOn" | "timeToSolveInMinutes" | "totalPoints" | "totalNoOfQuestions", ExtArgs["result"]["contest"]>
   export type ContestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     question?: boolean | Contest$questionArgs<ExtArgs>
-    topic?: boolean | TopicsDefaultArgs<ExtArgs>
     _count?: boolean | ContestCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type ContestIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    topic?: boolean | TopicsDefaultArgs<ExtArgs>
-  }
-  export type ContestIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    topic?: boolean | TopicsDefaultArgs<ExtArgs>
-  }
+  export type ContestIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ContestIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $ContestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Contest"
     objects: {
       question: Prisma.$QuestionsPayload<ExtArgs>[]
-      topic: Prisma.$TopicsPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -13905,7 +13858,6 @@ export namespace Prisma {
       timeToSolveInMinutes: number
       totalPoints: number
       totalNoOfQuestions: number
-      topicId: number
     }, ExtArgs["result"]["contest"]>
     composites: {}
   }
@@ -14301,7 +14253,6 @@ export namespace Prisma {
   export interface Prisma__ContestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     question<T extends Contest$questionArgs<ExtArgs> = {}>(args?: Subset<T, Contest$questionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestionsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    topic<T extends TopicsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TopicsDefaultArgs<ExtArgs>>): Prisma__TopicsClient<$Result.GetResult<Prisma.$TopicsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14338,7 +14289,6 @@ export namespace Prisma {
     readonly timeToSolveInMinutes: FieldRef<"Contest", 'Int'>
     readonly totalPoints: FieldRef<"Contest", 'Int'>
     readonly totalNoOfQuestions: FieldRef<"Contest", 'Int'>
-    readonly topicId: FieldRef<"Contest", 'Int'>
   }
     
 
@@ -14588,10 +14538,6 @@ export namespace Prisma {
      */
     data: ContestCreateManyInput | ContestCreateManyInput[]
     skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ContestIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -14654,10 +14600,6 @@ export namespace Prisma {
      * Filter which Contests to update
      */
     where?: ContestWhereInput
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ContestIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -14920,8 +14862,7 @@ export namespace Prisma {
     closesOn: 'closesOn',
     timeToSolveInMinutes: 'timeToSolveInMinutes',
     totalPoints: 'totalPoints',
-    totalNoOfQuestions: 'totalNoOfQuestions',
-    topicId: 'topicId'
+    totalNoOfQuestions: 'totalNoOfQuestions'
   };
 
   export type ContestScalarFieldEnum = (typeof ContestScalarFieldEnum)[keyof typeof ContestScalarFieldEnum]
@@ -15232,7 +15173,6 @@ export namespace Prisma {
     notes?: StringNullableFilter<"Topics"> | string | null
     contestDate?: DateTimeFilter<"Topics"> | Date | string
     question?: QuestionsListRelationFilter
-    contest?: XOR<ContestNullableScalarRelationFilter, ContestWhereInput> | null
   }
 
   export type TopicsOrderByWithRelationInput = {
@@ -15242,7 +15182,6 @@ export namespace Prisma {
     notes?: SortOrderInput | SortOrder
     contestDate?: SortOrder
     question?: QuestionsOrderByRelationAggregateInput
-    contest?: ContestOrderByWithRelationInput
   }
 
   export type TopicsWhereUniqueInput = Prisma.AtLeast<{
@@ -15255,7 +15194,6 @@ export namespace Prisma {
     description?: StringNullableFilter<"Topics"> | string | null
     contestDate?: DateTimeFilter<"Topics"> | Date | string
     question?: QuestionsListRelationFilter
-    contest?: XOR<ContestNullableScalarRelationFilter, ContestWhereInput> | null
   }, "id" | "name" | "notes">
 
   export type TopicsOrderByWithAggregationInput = {
@@ -15878,9 +15816,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: IntFilter<"Contest"> | number
     totalPoints?: IntFilter<"Contest"> | number
     totalNoOfQuestions?: IntFilter<"Contest"> | number
-    topicId?: IntFilter<"Contest"> | number
     question?: QuestionsListRelationFilter
-    topic?: XOR<TopicsScalarRelationFilter, TopicsWhereInput>
   }
 
   export type ContestOrderByWithRelationInput = {
@@ -15891,15 +15827,12 @@ export namespace Prisma {
     timeToSolveInMinutes?: SortOrder
     totalPoints?: SortOrder
     totalNoOfQuestions?: SortOrder
-    topicId?: SortOrder
     question?: QuestionsOrderByRelationAggregateInput
-    topic?: TopicsOrderByWithRelationInput
   }
 
   export type ContestWhereUniqueInput = Prisma.AtLeast<{
     id?: number
     title?: string
-    topicId?: number
     AND?: ContestWhereInput | ContestWhereInput[]
     OR?: ContestWhereInput[]
     NOT?: ContestWhereInput | ContestWhereInput[]
@@ -15909,8 +15842,7 @@ export namespace Prisma {
     totalPoints?: IntFilter<"Contest"> | number
     totalNoOfQuestions?: IntFilter<"Contest"> | number
     question?: QuestionsListRelationFilter
-    topic?: XOR<TopicsScalarRelationFilter, TopicsWhereInput>
-  }, "id" | "title" | "topicId">
+  }, "id" | "title">
 
   export type ContestOrderByWithAggregationInput = {
     id?: SortOrder
@@ -15920,7 +15852,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: SortOrder
     totalPoints?: SortOrder
     totalNoOfQuestions?: SortOrder
-    topicId?: SortOrder
     _count?: ContestCountOrderByAggregateInput
     _avg?: ContestAvgOrderByAggregateInput
     _max?: ContestMaxOrderByAggregateInput
@@ -15939,7 +15870,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: IntWithAggregatesFilter<"Contest"> | number
     totalPoints?: IntWithAggregatesFilter<"Contest"> | number
     totalNoOfQuestions?: IntWithAggregatesFilter<"Contest"> | number
-    topicId?: IntWithAggregatesFilter<"Contest"> | number
   }
 
   export type StudentCreateInput = {
@@ -16038,7 +15968,6 @@ export namespace Prisma {
     notes?: string | null
     contestDate: Date | string
     question?: QuestionsCreateNestedManyWithoutTopicsInput
-    contest?: ContestCreateNestedOneWithoutTopicInput
   }
 
   export type TopicsUncheckedCreateInput = {
@@ -16048,7 +15977,6 @@ export namespace Prisma {
     notes?: string | null
     contestDate: Date | string
     question?: QuestionsUncheckedCreateNestedManyWithoutTopicsInput
-    contest?: ContestUncheckedCreateNestedOneWithoutTopicInput
   }
 
   export type TopicsUpdateInput = {
@@ -16057,7 +15985,6 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
     question?: QuestionsUpdateManyWithoutTopicsNestedInput
-    contest?: ContestUpdateOneWithoutTopicNestedInput
   }
 
   export type TopicsUncheckedUpdateInput = {
@@ -16067,7 +15994,6 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
     question?: QuestionsUncheckedUpdateManyWithoutTopicsNestedInput
-    contest?: ContestUncheckedUpdateOneWithoutTopicNestedInput
   }
 
   export type TopicsCreateManyInput = {
@@ -16681,7 +16607,6 @@ export namespace Prisma {
     totalPoints: number
     totalNoOfQuestions: number
     question?: QuestionsCreateNestedManyWithoutContestInput
-    topic: TopicsCreateNestedOneWithoutContestInput
   }
 
   export type ContestUncheckedCreateInput = {
@@ -16692,7 +16617,6 @@ export namespace Prisma {
     timeToSolveInMinutes: number
     totalPoints: number
     totalNoOfQuestions: number
-    topicId: number
     question?: QuestionsUncheckedCreateNestedManyWithoutContestInput
   }
 
@@ -16704,7 +16628,6 @@ export namespace Prisma {
     totalPoints?: IntFieldUpdateOperationsInput | number
     totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
     question?: QuestionsUpdateManyWithoutContestNestedInput
-    topic?: TopicsUpdateOneRequiredWithoutContestNestedInput
   }
 
   export type ContestUncheckedUpdateInput = {
@@ -16715,7 +16638,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     totalPoints?: IntFieldUpdateOperationsInput | number
     totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
-    topicId?: IntFieldUpdateOperationsInput | number
     question?: QuestionsUncheckedUpdateManyWithoutContestNestedInput
   }
 
@@ -16727,7 +16649,6 @@ export namespace Prisma {
     timeToSolveInMinutes: number
     totalPoints: number
     totalNoOfQuestions: number
-    topicId: number
   }
 
   export type ContestUpdateManyMutationInput = {
@@ -16747,7 +16668,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     totalPoints?: IntFieldUpdateOperationsInput | number
     totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
-    topicId?: IntFieldUpdateOperationsInput | number
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -16966,11 +16886,6 @@ export namespace Prisma {
     none?: QuestionsWhereInput
   }
 
-  export type ContestNullableScalarRelationFilter = {
-    is?: ContestWhereInput | null
-    isNot?: ContestWhereInput | null
-  }
-
   export type QuestionsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -17055,6 +16970,11 @@ export namespace Prisma {
   export type TopicsScalarRelationFilter = {
     is?: TopicsWhereInput
     isNot?: TopicsWhereInput
+  }
+
+  export type ContestNullableScalarRelationFilter = {
+    is?: ContestWhereInput | null
+    isNot?: ContestWhereInput | null
   }
 
   export type TestCaseOrderByRelationAggregateInput = {
@@ -17604,7 +17524,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: SortOrder
     totalPoints?: SortOrder
     totalNoOfQuestions?: SortOrder
-    topicId?: SortOrder
   }
 
   export type ContestAvgOrderByAggregateInput = {
@@ -17612,7 +17531,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: SortOrder
     totalPoints?: SortOrder
     totalNoOfQuestions?: SortOrder
-    topicId?: SortOrder
   }
 
   export type ContestMaxOrderByAggregateInput = {
@@ -17623,7 +17541,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: SortOrder
     totalPoints?: SortOrder
     totalNoOfQuestions?: SortOrder
-    topicId?: SortOrder
   }
 
   export type ContestMinOrderByAggregateInput = {
@@ -17634,7 +17551,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: SortOrder
     totalPoints?: SortOrder
     totalNoOfQuestions?: SortOrder
-    topicId?: SortOrder
   }
 
   export type ContestSumOrderByAggregateInput = {
@@ -17642,7 +17558,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: SortOrder
     totalPoints?: SortOrder
     totalNoOfQuestions?: SortOrder
-    topicId?: SortOrder
   }
 
   export type SubmissionCreateNestedManyWithoutStudentInput = {
@@ -17830,23 +17745,11 @@ export namespace Prisma {
     connect?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
   }
 
-  export type ContestCreateNestedOneWithoutTopicInput = {
-    create?: XOR<ContestCreateWithoutTopicInput, ContestUncheckedCreateWithoutTopicInput>
-    connectOrCreate?: ContestCreateOrConnectWithoutTopicInput
-    connect?: ContestWhereUniqueInput
-  }
-
   export type QuestionsUncheckedCreateNestedManyWithoutTopicsInput = {
     create?: XOR<QuestionsCreateWithoutTopicsInput, QuestionsUncheckedCreateWithoutTopicsInput> | QuestionsCreateWithoutTopicsInput[] | QuestionsUncheckedCreateWithoutTopicsInput[]
     connectOrCreate?: QuestionsCreateOrConnectWithoutTopicsInput | QuestionsCreateOrConnectWithoutTopicsInput[]
     createMany?: QuestionsCreateManyTopicsInputEnvelope
     connect?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
-  }
-
-  export type ContestUncheckedCreateNestedOneWithoutTopicInput = {
-    create?: XOR<ContestCreateWithoutTopicInput, ContestUncheckedCreateWithoutTopicInput>
-    connectOrCreate?: ContestCreateOrConnectWithoutTopicInput
-    connect?: ContestWhereUniqueInput
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -17867,16 +17770,6 @@ export namespace Prisma {
     deleteMany?: QuestionsScalarWhereInput | QuestionsScalarWhereInput[]
   }
 
-  export type ContestUpdateOneWithoutTopicNestedInput = {
-    create?: XOR<ContestCreateWithoutTopicInput, ContestUncheckedCreateWithoutTopicInput>
-    connectOrCreate?: ContestCreateOrConnectWithoutTopicInput
-    upsert?: ContestUpsertWithoutTopicInput
-    disconnect?: ContestWhereInput | boolean
-    delete?: ContestWhereInput | boolean
-    connect?: ContestWhereUniqueInput
-    update?: XOR<XOR<ContestUpdateToOneWithWhereWithoutTopicInput, ContestUpdateWithoutTopicInput>, ContestUncheckedUpdateWithoutTopicInput>
-  }
-
   export type QuestionsUncheckedUpdateManyWithoutTopicsNestedInput = {
     create?: XOR<QuestionsCreateWithoutTopicsInput, QuestionsUncheckedCreateWithoutTopicsInput> | QuestionsCreateWithoutTopicsInput[] | QuestionsUncheckedCreateWithoutTopicsInput[]
     connectOrCreate?: QuestionsCreateOrConnectWithoutTopicsInput | QuestionsCreateOrConnectWithoutTopicsInput[]
@@ -17889,16 +17782,6 @@ export namespace Prisma {
     update?: QuestionsUpdateWithWhereUniqueWithoutTopicsInput | QuestionsUpdateWithWhereUniqueWithoutTopicsInput[]
     updateMany?: QuestionsUpdateManyWithWhereWithoutTopicsInput | QuestionsUpdateManyWithWhereWithoutTopicsInput[]
     deleteMany?: QuestionsScalarWhereInput | QuestionsScalarWhereInput[]
-  }
-
-  export type ContestUncheckedUpdateOneWithoutTopicNestedInput = {
-    create?: XOR<ContestCreateWithoutTopicInput, ContestUncheckedCreateWithoutTopicInput>
-    connectOrCreate?: ContestCreateOrConnectWithoutTopicInput
-    upsert?: ContestUpsertWithoutTopicInput
-    disconnect?: ContestWhereInput | boolean
-    delete?: ContestWhereInput | boolean
-    connect?: ContestWhereUniqueInput
-    update?: XOR<XOR<ContestUpdateToOneWithWhereWithoutTopicInput, ContestUpdateWithoutTopicInput>, ContestUncheckedUpdateWithoutTopicInput>
   }
 
   export type TestCaseCreateNestedManyWithoutQuestionsInput = {
@@ -18322,12 +18205,6 @@ export namespace Prisma {
     connect?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
   }
 
-  export type TopicsCreateNestedOneWithoutContestInput = {
-    create?: XOR<TopicsCreateWithoutContestInput, TopicsUncheckedCreateWithoutContestInput>
-    connectOrCreate?: TopicsCreateOrConnectWithoutContestInput
-    connect?: TopicsWhereUniqueInput
-  }
-
   export type QuestionsUncheckedCreateNestedManyWithoutContestInput = {
     create?: XOR<QuestionsCreateWithoutContestInput, QuestionsUncheckedCreateWithoutContestInput> | QuestionsCreateWithoutContestInput[] | QuestionsUncheckedCreateWithoutContestInput[]
     connectOrCreate?: QuestionsCreateOrConnectWithoutContestInput | QuestionsCreateOrConnectWithoutContestInput[]
@@ -18347,14 +18224,6 @@ export namespace Prisma {
     update?: QuestionsUpdateWithWhereUniqueWithoutContestInput | QuestionsUpdateWithWhereUniqueWithoutContestInput[]
     updateMany?: QuestionsUpdateManyWithWhereWithoutContestInput | QuestionsUpdateManyWithWhereWithoutContestInput[]
     deleteMany?: QuestionsScalarWhereInput | QuestionsScalarWhereInput[]
-  }
-
-  export type TopicsUpdateOneRequiredWithoutContestNestedInput = {
-    create?: XOR<TopicsCreateWithoutContestInput, TopicsUncheckedCreateWithoutContestInput>
-    connectOrCreate?: TopicsCreateOrConnectWithoutContestInput
-    upsert?: TopicsUpsertWithoutContestInput
-    connect?: TopicsWhereUniqueInput
-    update?: XOR<XOR<TopicsUpdateToOneWithWhereWithoutContestInput, TopicsUpdateWithoutContestInput>, TopicsUncheckedUpdateWithoutContestInput>
   }
 
   export type QuestionsUncheckedUpdateManyWithoutContestNestedInput = {
@@ -18980,32 +18849,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ContestCreateWithoutTopicInput = {
-    title: string
-    opensOn: Date | string
-    closesOn: Date | string
-    timeToSolveInMinutes: number
-    totalPoints: number
-    totalNoOfQuestions: number
-    question?: QuestionsCreateNestedManyWithoutContestInput
-  }
-
-  export type ContestUncheckedCreateWithoutTopicInput = {
-    id?: number
-    title: string
-    opensOn: Date | string
-    closesOn: Date | string
-    timeToSolveInMinutes: number
-    totalPoints: number
-    totalNoOfQuestions: number
-    question?: QuestionsUncheckedCreateNestedManyWithoutContestInput
-  }
-
-  export type ContestCreateOrConnectWithoutTopicInput = {
-    where: ContestWhereUniqueInput
-    create: XOR<ContestCreateWithoutTopicInput, ContestUncheckedCreateWithoutTopicInput>
-  }
-
   export type QuestionsUpsertWithWhereUniqueWithoutTopicsInput = {
     where: QuestionsWhereUniqueInput
     update: XOR<QuestionsUpdateWithoutTopicsInput, QuestionsUncheckedUpdateWithoutTopicsInput>
@@ -19039,38 +18882,6 @@ export namespace Prisma {
     leetCodeTitle?: StringNullableFilter<"Questions"> | string | null
     timeToSolveInMinutes?: IntNullableFilter<"Questions"> | number | null
     contestId?: IntNullableFilter<"Questions"> | number | null
-  }
-
-  export type ContestUpsertWithoutTopicInput = {
-    update: XOR<ContestUpdateWithoutTopicInput, ContestUncheckedUpdateWithoutTopicInput>
-    create: XOR<ContestCreateWithoutTopicInput, ContestUncheckedCreateWithoutTopicInput>
-    where?: ContestWhereInput
-  }
-
-  export type ContestUpdateToOneWithWhereWithoutTopicInput = {
-    where?: ContestWhereInput
-    data: XOR<ContestUpdateWithoutTopicInput, ContestUncheckedUpdateWithoutTopicInput>
-  }
-
-  export type ContestUpdateWithoutTopicInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
-    closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
-    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
-    totalPoints?: IntFieldUpdateOperationsInput | number
-    totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
-    question?: QuestionsUpdateManyWithoutContestNestedInput
-  }
-
-  export type ContestUncheckedUpdateWithoutTopicInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
-    closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
-    timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
-    totalPoints?: IntFieldUpdateOperationsInput | number
-    totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
-    question?: QuestionsUncheckedUpdateManyWithoutContestNestedInput
   }
 
   export type TestCaseCreateWithoutQuestionsInput = {
@@ -19173,7 +18984,6 @@ export namespace Prisma {
     description?: string | null
     notes?: string | null
     contestDate: Date | string
-    contest?: ContestCreateNestedOneWithoutTopicInput
   }
 
   export type TopicsUncheckedCreateWithoutQuestionInput = {
@@ -19182,7 +18992,6 @@ export namespace Prisma {
     description?: string | null
     notes?: string | null
     contestDate: Date | string
-    contest?: ContestUncheckedCreateNestedOneWithoutTopicInput
   }
 
   export type TopicsCreateOrConnectWithoutQuestionInput = {
@@ -19197,7 +19006,6 @@ export namespace Prisma {
     timeToSolveInMinutes: number
     totalPoints: number
     totalNoOfQuestions: number
-    topic: TopicsCreateNestedOneWithoutContestInput
   }
 
   export type ContestUncheckedCreateWithoutQuestionInput = {
@@ -19208,7 +19016,6 @@ export namespace Prisma {
     timeToSolveInMinutes: number
     totalPoints: number
     totalNoOfQuestions: number
-    topicId: number
   }
 
   export type ContestCreateOrConnectWithoutQuestionInput = {
@@ -19291,7 +19098,6 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    contest?: ContestUpdateOneWithoutTopicNestedInput
   }
 
   export type TopicsUncheckedUpdateWithoutQuestionInput = {
@@ -19300,7 +19106,6 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    contest?: ContestUncheckedUpdateOneWithoutTopicNestedInput
   }
 
   export type ContestUpsertWithoutQuestionInput = {
@@ -19321,7 +19126,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     totalPoints?: IntFieldUpdateOperationsInput | number
     totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
-    topic?: TopicsUpdateOneRequiredWithoutContestNestedInput
   }
 
   export type ContestUncheckedUpdateWithoutQuestionInput = {
@@ -19332,7 +19136,6 @@ export namespace Prisma {
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     totalPoints?: IntFieldUpdateOperationsInput | number
     totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
-    topicId?: IntFieldUpdateOperationsInput | number
   }
 
   export type QuestionsCreateWithoutTestCaseInput = {
@@ -20086,28 +19889,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type TopicsCreateWithoutContestInput = {
-    name: string
-    description?: string | null
-    notes?: string | null
-    contestDate: Date | string
-    question?: QuestionsCreateNestedManyWithoutTopicsInput
-  }
-
-  export type TopicsUncheckedCreateWithoutContestInput = {
-    id?: number
-    name: string
-    description?: string | null
-    notes?: string | null
-    contestDate: Date | string
-    question?: QuestionsUncheckedCreateNestedManyWithoutTopicsInput
-  }
-
-  export type TopicsCreateOrConnectWithoutContestInput = {
-    where: TopicsWhereUniqueInput
-    create: XOR<TopicsCreateWithoutContestInput, TopicsUncheckedCreateWithoutContestInput>
-  }
-
   export type QuestionsUpsertWithWhereUniqueWithoutContestInput = {
     where: QuestionsWhereUniqueInput
     update: XOR<QuestionsUpdateWithoutContestInput, QuestionsUncheckedUpdateWithoutContestInput>
@@ -20122,34 +19903,6 @@ export namespace Prisma {
   export type QuestionsUpdateManyWithWhereWithoutContestInput = {
     where: QuestionsScalarWhereInput
     data: XOR<QuestionsUpdateManyMutationInput, QuestionsUncheckedUpdateManyWithoutContestInput>
-  }
-
-  export type TopicsUpsertWithoutContestInput = {
-    update: XOR<TopicsUpdateWithoutContestInput, TopicsUncheckedUpdateWithoutContestInput>
-    create: XOR<TopicsCreateWithoutContestInput, TopicsUncheckedCreateWithoutContestInput>
-    where?: TopicsWhereInput
-  }
-
-  export type TopicsUpdateToOneWithWhereWithoutContestInput = {
-    where?: TopicsWhereInput
-    data: XOR<TopicsUpdateWithoutContestInput, TopicsUncheckedUpdateWithoutContestInput>
-  }
-
-  export type TopicsUpdateWithoutContestInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    question?: QuestionsUpdateManyWithoutTopicsNestedInput
-  }
-
-  export type TopicsUncheckedUpdateWithoutContestInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    question?: QuestionsUncheckedUpdateManyWithoutTopicsNestedInput
   }
 
   export type SubmissionCreateManyStudentInput = {

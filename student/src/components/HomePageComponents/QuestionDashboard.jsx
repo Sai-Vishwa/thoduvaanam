@@ -1,34 +1,12 @@
 import React, { useState } from 'react';
 
-const QuestionDashboard = () => {
+const QuestionDashboard = ({details}) => {
+
+  console.log(JSON.stringify(details))
   const [searchTerm, setSearchTerm] = useState('');
   
   // Sample data from backend
-  const data = {
-    "0": {
-      "id": 1,
-      "name": "Aadukalam_Round_2",
-      "question": [
-        { "id": 6, "title": "Game-2", "difficulty": "HELL", "type": "PRACTICE" },
-        { "id": 8, "title": "Direction-2", "difficulty": "BALANCED", "type": "PRACTICE" },
-        { "id": 10, "title": "Balance-1", "difficulty": "INTENSE", "type": "PRACTICE" }
-      ]
-    },
-    "1": {
-      "id": 2,
-      "name": "sample_test",
-      "question": [
-        { "id": 5, "title": "Game-1", "difficulty": "EASY", "type": "PRACTICE" },
-        { "id": 7, "title": "Direction-1", "difficulty": "EASY", "type": "PRACTICE" },
-        { "id": 9, "title": "Balance", "difficulty": "EASY", "type": "PRACTICE" }
-      ]
-    },
-    "totalQuestions": 6,
-    "easyQuestions": 6,
-    "balancedQuestions": 0,
-    "intenseQuestions": 0,
-    "hellQuestions": 0
-  };
+  const data = details
   
   // Extract all questions from data
   const allQuestions = Object.keys(data)
@@ -66,9 +44,8 @@ const QuestionDashboard = () => {
   
   return (
     <div className="h-full w-5/6 overflow-hidden flex flex-col text-gray-200 relative">
-      <div className="rounded-3xl border-2 border-[#3b3b3b] bg-[#1c1b1b] border-b-0 rounded-b-none flex flex-col items-center overflow-y-auto overflow-x-hidden">
-        <div className='sticky transform top-0 bg-[#1c1b1b] border-b-2 border-[#3b3b3b]'>
-        <h1 className='text-base font-["Courier_New"] text-[#2bbdaa] py-2'>PRACTICE</h1>
+      <div className='sticky transform top-0 bg-[#1c1b1b] rounded-3xl border-b-0 rounded-b-none border-2 px-3 pb-2 border-[#3b3b3b]'>
+        <h1 className='text-base font-["Courier_New"] text-[#2bbdaa] py-2 px-2'>PRACTICE</h1>
         <div>
           <input
           type="text"
@@ -79,39 +56,41 @@ const QuestionDashboard = () => {
         />
         </div>
         </div>
+      <div className="rounded-3xl border-2 h-full border-[#3b3b3b] bg-[#1c1b1b] border-t-0  rounded-t-none flex flex-col items-center overflow-y-auto overflow-x-hidden">
+        
         
         
 
-<div className="flex flex-col p-4">
+<div className="flex flex-col w-full h-full">
         {filteredQuestions.length > 0 ? (
-          <div className="space-y-3">
+          <div className="space-">
             {filteredQuestions.map(question => (
               <div 
                 key={question.id} 
-                className=" p-4 rounded shadow hover:shadow-lg transition-shadow cursor-pointer border-2  border-gray-700"
+                className="px-2 py-1 space-y-0   cursor-pointer border-t-2 w-full border-[#3b3b3b]"
               >
                 <div className="flex justify-between items-start">
                   <div className="flex-1">
-                    <p className="font-medium text-white">
-                      {question.title} - {question.groupName}  
+                    <p className="font-medium text-white font-['Courier_New']">
+                      {question.title} 
                       
                     </p>
                   </div>
                   <span className={`text-xs px-2 py-1 rounded ml-2 ${
                     question.difficulty === "EASY" ? "bg-green-900 text-[#3aff4e]" :
-                    question.difficulty === "BALANCED" ? "bg-yellow-900 text-[#ffba30]" :
-                    question.difficulty === "INTENSE" ? "bg-orange-900 text-orange-300" :
+                    question.difficulty === "BALANCED" ? "bg-orange-700 text-orange-200" :
+                    question.difficulty === "INTENSE" ? "bg-red-700 text-red-200" :
                     "bg-red-950 text-[#fda3a3]"
                   }`}>
                     {question.difficulty}
                   </span>
                 </div>
-                <p className="text-sm text-gray-400 mt-2">Group: {question.groupName}</p>
+                <p className="text-sm text-gray-400 mt-2 font-['Courier_New']">{question.groupName}</p>
               </div>
             ))}
           </div>
         ) : (
-          <div className="text-center py-8 text-gray-400">
+          <div className="text-center py-8 text-gray-400 font-['Courier_New']">
             No questions match your search criteria
           </div>
         )}

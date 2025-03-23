@@ -92,7 +92,8 @@ function Temp(){
       <div className="flex items-center h-[80vh]">
 
         <div className="w-1/4 h-full flex justify-center items-center py-4">
-            <QuestionDashboard />
+            <QuestionDashboard 
+            details={allData.data}/>
         </div>
 
   
