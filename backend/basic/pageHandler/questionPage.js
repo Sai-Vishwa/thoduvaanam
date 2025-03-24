@@ -7,14 +7,19 @@ async function questionPage(req,res) {
     try{
         const studentId = await sessionChecker(req.body.session);
         const qname = req.body.qname
-        const qid = await prisma.questions.findFirst({
+        let qid = await prisma.questions.findFirst({
             where:{
                 title:qname
-            } ,
-            select:{
-                
             }
         })
+        qid.points  = (parseInt(qid.noOfExternalTestCases)+parseInt(qid.noOfHiddenTestCases))*parseInt(qid.pointsPerTestCaseSolved)
+        delete qid.description
+        delete qid.contestId
+        delete qid.noOfExternalTestCases
+        delete qid.noOfHiddenTestCases
+        delete qid.pointsPerTestCaseSolved
+        
+        
         let viewMode = true
         let idToSearch = {id:""}
         if(studentId == -1){
@@ -42,12 +47,38 @@ async function questionPage(req,res) {
                     ]
                 }
             })
-                res.status(200).json({
-                    msg: "successful",
-                    viewMode: viewMode,
-                    submissionData: submissions,
-                    questionData : qid
-                })
+
+            let count = 0
+        let count2 = 0
+        submissions.map((sb)=>{
+            if(sb.status=="COMPLETED"){
+                count+=1
+            }
+        })
+        if(count==submissions.length){
+            res.status(200).json({
+                msg:"Successful",
+                status:"START NEW ATTEMPT",
+                submissionData: submissions,
+                questionData : qid,
+                viewMode: viewMode,
+
+            })
+            return
+        }
+        else{
+
+            res.status(200).json({
+                msg: "successful",
+                viewMode: viewMode,
+                submissionData: submissions,
+                questionData : qid,
+                status:"CONTINUE LAST ATTEMPT",
+
+            })
+
+        }
+                
             
         }
     }

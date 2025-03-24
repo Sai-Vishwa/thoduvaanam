@@ -14,7 +14,7 @@ const QuestionDashboard = ({details , setDetailsBox , uname}) => {
     try{
       const details = await fetch("http://localhost:4000/basic/question", {
                   method: "POST",
-                  body: JSON.stringify({ uname: uname, session: Cookies.get("session"), tname: questionTitle }),
+                  body: JSON.stringify({ uname: uname, session: Cookies.get("session"), qname: questionTitle }),
                   headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'

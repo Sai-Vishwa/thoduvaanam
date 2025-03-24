@@ -124,7 +124,8 @@ function Temp(){
                   </div>  
                   <div className="h-1/2 bg-red-300 w-full">
                         <DetailsDashBoard 
-                        details={detailsBox}
+                        type={detailsBox.type}
+                        details={detailsBox.details }
                         />
                   </div>
         </div>
