@@ -10,6 +10,9 @@ async function questionPage(req,res) {
         const qid = await prisma.questions.findFirst({
             where:{
                 title:qname
+            } ,
+            select:{
+                
             }
         })
         let viewMode = true

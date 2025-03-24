@@ -1,12 +1,38 @@
 import React, { useState } from 'react';
+import Cookies from "js-cookie";
 
-const QuestionDashboard = ({details}) => {
+const QuestionDashboard = ({details , setDetailsBox , uname}) => {
 
   // console.log(JSON.stringify(details))
   const [searchTerm, setSearchTerm] = useState('');
   
   // Sample data from backend
   const data = details
+
+  async function handleClick(questionTitle){
+    console.log("hi")
+    try{
+      const details = await fetch("http://localhost:4000/basic/question", {
+                  method: "POST",
+                  body: JSON.stringify({ uname: uname, session: Cookies.get("session"), tname: questionTitle }),
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                  }
+                })
+                const data = await details.json()
+                if (data.err) {
+                  throw new Error(data.err)
+                } else {
+                  setDetailsBox({type:"question" , details:data})
+                }
+    }
+    catch(error){
+      console.log(error)
+      setDetailsBox({type:"question" , details:{} , error:"Some internal error try again"})
+    }
+
+  }
   
   // Extract all questions from data
   const allQuestions = Object.keys(data)
@@ -67,6 +93,7 @@ const QuestionDashboard = ({details}) => {
             {filteredQuestions.map(question => (
               <div 
                 key={question.id} 
+                onClick={()=>{handleClick(question.title)}}
                 className="px-2 py-1 space-y-0  hover:bg-[#252525] cursor-pointer border-t-2 w-full border-[#3b3b3b]"
               >
                 <div className="flex justify-between items-start">

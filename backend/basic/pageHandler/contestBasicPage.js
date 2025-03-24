@@ -69,6 +69,22 @@ async function ContestBasicPage(req,res) {
             })
             return
         }
+        if(now > details.closesOn){
+            res.status(200).json({
+                msg:"Successful",
+                status:"ENDED",
+                data:details
+            })
+            return
+        }
+        if(now < details.opensOn){
+            res.status(200).json({
+                msg:"Successful",
+                status:"NOT STARTED",
+                data:details
+            })
+            return
+        }
 
         if(count2 == 0){
             res.status(200).json({
@@ -88,22 +104,7 @@ async function ContestBasicPage(req,res) {
             return
         }
 
-        if(now > details.closesOn){
-            res.status(200).json({
-                msg:"Successful",
-                status:"ENDED",
-                data:details
-            })
-            return
-        }
-        if(now < details.opensOn){
-            res.status(200).json({
-                msg:"Successful",
-                status:"NOT STARTED",
-                data:details
-            })
-            return
-        }
+        
         res.status(200).json({
             err:"ithu enna puthu case uh"
         })

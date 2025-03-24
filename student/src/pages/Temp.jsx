@@ -28,6 +28,7 @@ import DashBoardProfile from "../components/HomePageComponents/DashboardProfile"
 import PieChart from "../components/HomePageComponents/PieChart";
 import QuestionDashboard from "../components/HomePageComponents/QuestionDashboard";
 import ContestsDashboard from "../components/HomePageComponents/ContestDashboard";
+import DetailsDashBoard from "../components/HomePageComponents/DetailsDashboard";
 
 
 
@@ -41,6 +42,8 @@ function Temp(){
   const navigate = useNavigate();
   const [allData, setAllData] = useState({ myData: {}, data: [] });
   const [activeSection, setActiveSection] = useState(null);
+
+  const [detailsBox , setDetailsBox] = useState({details:{},type:"none"})
 
   const fetchData = async () => {
     const session = Cookies.get("session");
@@ -94,7 +97,9 @@ function Temp(){
 
         <div className="w-1/4 h-full flex justify-center items-center py-4">
             <QuestionDashboard 
-            details={allData.data}/>
+            details={allData.data}
+            setDetailsBox={setDetailsBox}
+            uname={uname}/>
         </div>
 
   
@@ -103,7 +108,9 @@ function Temp(){
                   <div className="flex h-1/2 w-full">
                       <div className="w-1/3 h-full text-xs flex justify-center items-center">
                             <ContestsDashboard 
-                            details={allData.contests}/>
+                            details={allData.contests}
+                            setDetailsBox={setDetailsBox}
+                            uname={uname}/>
                       </div>
                       <div className="w-1/3 h-full flex justify-center items-center">
                             <PieChart 
@@ -116,7 +123,9 @@ function Temp(){
 
                   </div>  
                   <div className="h-1/2 bg-red-300 w-full">
-
+                        <DetailsDashBoard 
+                        details={detailsBox}
+                        />
                   </div>
         </div>
 

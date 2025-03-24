@@ -1,12 +1,40 @@
 import React, { useState } from 'react';
+import Cookies from "js-cookie";
 
-const ContestsDashboard = ({details}) => {
+
+const ContestsDashboard = ({details , setDetailsBox , uname}) => {
+
+
+
+  async function handleClick(contestTitle) {
+
+    try {
+          const details = await fetch("http://localhost:4000/basic/contest-basic", {
+            method: "POST",
+            body: JSON.stringify({ uname: uname, session: Cookies.get("session"), tname: contestTitle }),
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            }
+          })
+          const data = await details.json()
+          if (data.err) {
+            throw new Error(data.err)
+          } else {
+            setDetailsBox({type:"contest" , details:data})
+          }
+        } 
+        catch (error) {
+          console.log(error)
+          setDetailsBox({type:"contest" , details:{} , error:"Some internal error try again"})
+        }
+  }
 
     // console.log(JSON.stringify(details))
 
-    details?.map((val)=>{
-        console.log(JSON.stringify(val))
-    })
+    // details?.map((val)=>{
+    //     console.log(JSON.stringify(val))
+    // })
   // Static sample data
   const sampleData = details
   const sampleData2 =[
@@ -132,8 +160,9 @@ const ContestsDashboard = ({details}) => {
   // Render a contest card
   const renderContestCard = (contest , type) => (
     <div 
+      onClick={()=>{handleClick(contest.title)}}
       key={contest.id} 
-      className="px-4 py-3 cursor-pointer border-b-2 w-full border-[#3b3b3b] hover:bg-[#252525]"
+      className="px-4 py-3 cursor-pointer border-b-2 w-full border-[#3b3b3b] hover:bg-[#252525] "
     >
       <div className="flex justify-between items-start">
         <div className="flex-1">
