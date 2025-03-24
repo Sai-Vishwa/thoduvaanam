@@ -3363,7 +3363,6 @@ export namespace Prisma {
     name: string | null
     description: string | null
     notes: string | null
-    contestDate: Date | null
   }
 
   export type TopicsMaxAggregateOutputType = {
@@ -3371,7 +3370,6 @@ export namespace Prisma {
     name: string | null
     description: string | null
     notes: string | null
-    contestDate: Date | null
   }
 
   export type TopicsCountAggregateOutputType = {
@@ -3379,7 +3377,6 @@ export namespace Prisma {
     name: number
     description: number
     notes: number
-    contestDate: number
     _all: number
   }
 
@@ -3397,7 +3394,6 @@ export namespace Prisma {
     name?: true
     description?: true
     notes?: true
-    contestDate?: true
   }
 
   export type TopicsMaxAggregateInputType = {
@@ -3405,7 +3401,6 @@ export namespace Prisma {
     name?: true
     description?: true
     notes?: true
-    contestDate?: true
   }
 
   export type TopicsCountAggregateInputType = {
@@ -3413,7 +3408,6 @@ export namespace Prisma {
     name?: true
     description?: true
     notes?: true
-    contestDate?: true
     _all?: true
   }
 
@@ -3508,7 +3502,6 @@ export namespace Prisma {
     name: string
     description: string | null
     notes: string | null
-    contestDate: Date
     _count: TopicsCountAggregateOutputType | null
     _avg: TopicsAvgAggregateOutputType | null
     _sum: TopicsSumAggregateOutputType | null
@@ -3535,7 +3528,6 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     notes?: boolean
-    contestDate?: boolean
     question?: boolean | Topics$questionArgs<ExtArgs>
     _count?: boolean | TopicsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["topics"]>
@@ -3545,7 +3537,6 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     notes?: boolean
-    contestDate?: boolean
   }, ExtArgs["result"]["topics"]>
 
   export type TopicsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3553,7 +3544,6 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     notes?: boolean
-    contestDate?: boolean
   }, ExtArgs["result"]["topics"]>
 
   export type TopicsSelectScalar = {
@@ -3561,10 +3551,9 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     notes?: boolean
-    contestDate?: boolean
   }
 
-  export type TopicsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "notes" | "contestDate", ExtArgs["result"]["topics"]>
+  export type TopicsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "notes", ExtArgs["result"]["topics"]>
   export type TopicsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     question?: boolean | Topics$questionArgs<ExtArgs>
     _count?: boolean | TopicsCountOutputTypeDefaultArgs<ExtArgs>
@@ -3582,7 +3571,6 @@ export namespace Prisma {
       name: string
       description: string | null
       notes: string | null
-      contestDate: Date
     }, ExtArgs["result"]["topics"]>
     composites: {}
   }
@@ -4011,7 +3999,6 @@ export namespace Prisma {
     readonly name: FieldRef<"Topics", 'String'>
     readonly description: FieldRef<"Topics", 'String'>
     readonly notes: FieldRef<"Topics", 'String'>
-    readonly contestDate: FieldRef<"Topics", 'DateTime'>
   }
     
 
@@ -4466,6 +4453,7 @@ export namespace Prisma {
     id: number | null
     title: string | null
     description: string | null
+    miniDescription: string | null
     topic: number | null
     noOfHiddenTestCases: number | null
     noOfExternalTestCases: number | null
@@ -4482,6 +4470,7 @@ export namespace Prisma {
     id: number | null
     title: string | null
     description: string | null
+    miniDescription: string | null
     topic: number | null
     noOfHiddenTestCases: number | null
     noOfExternalTestCases: number | null
@@ -4498,6 +4487,7 @@ export namespace Prisma {
     id: number
     title: number
     description: number
+    miniDescription: number
     topic: number
     noOfHiddenTestCases: number
     noOfExternalTestCases: number
@@ -4536,6 +4526,7 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
+    miniDescription?: true
     topic?: true
     noOfHiddenTestCases?: true
     noOfExternalTestCases?: true
@@ -4552,6 +4543,7 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
+    miniDescription?: true
     topic?: true
     noOfHiddenTestCases?: true
     noOfExternalTestCases?: true
@@ -4568,6 +4560,7 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
+    miniDescription?: true
     topic?: true
     noOfHiddenTestCases?: true
     noOfExternalTestCases?: true
@@ -4670,8 +4663,9 @@ export namespace Prisma {
   export type QuestionsGroupByOutputType = {
     id: number
     title: string
-    description: string | null
-    topic: number
+    description: string
+    miniDescription: string | null
+    topic: number | null
     noOfHiddenTestCases: number
     noOfExternalTestCases: number
     difficulty: $Enums.DifficultyType
@@ -4706,6 +4700,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    miniDescription?: boolean
     topic?: boolean
     noOfHiddenTestCases?: boolean
     noOfExternalTestCases?: boolean
@@ -4719,7 +4714,7 @@ export namespace Prisma {
     testCase?: boolean | Questions$testCaseArgs<ExtArgs>
     submission?: boolean | Questions$submissionArgs<ExtArgs>
     discussion?: boolean | Questions$discussionArgs<ExtArgs>
-    topics?: boolean | TopicsDefaultArgs<ExtArgs>
+    topics?: boolean | Questions$topicsArgs<ExtArgs>
     contest?: boolean | Questions$contestArgs<ExtArgs>
     _count?: boolean | QuestionsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["questions"]>
@@ -4728,6 +4723,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    miniDescription?: boolean
     topic?: boolean
     noOfHiddenTestCases?: boolean
     noOfExternalTestCases?: boolean
@@ -4738,7 +4734,7 @@ export namespace Prisma {
     leetCodeTitle?: boolean
     timeToSolveInMinutes?: boolean
     contestId?: boolean
-    topics?: boolean | TopicsDefaultArgs<ExtArgs>
+    topics?: boolean | Questions$topicsArgs<ExtArgs>
     contest?: boolean | Questions$contestArgs<ExtArgs>
   }, ExtArgs["result"]["questions"]>
 
@@ -4746,6 +4742,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    miniDescription?: boolean
     topic?: boolean
     noOfHiddenTestCases?: boolean
     noOfExternalTestCases?: boolean
@@ -4756,7 +4753,7 @@ export namespace Prisma {
     leetCodeTitle?: boolean
     timeToSolveInMinutes?: boolean
     contestId?: boolean
-    topics?: boolean | TopicsDefaultArgs<ExtArgs>
+    topics?: boolean | Questions$topicsArgs<ExtArgs>
     contest?: boolean | Questions$contestArgs<ExtArgs>
   }, ExtArgs["result"]["questions"]>
 
@@ -4764,6 +4761,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    miniDescription?: boolean
     topic?: boolean
     noOfHiddenTestCases?: boolean
     noOfExternalTestCases?: boolean
@@ -4776,21 +4774,21 @@ export namespace Prisma {
     contestId?: boolean
   }
 
-  export type QuestionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "topic" | "noOfHiddenTestCases" | "noOfExternalTestCases" | "difficulty" | "pointsPerTestCaseSolved" | "type" | "leetCodeLink" | "leetCodeTitle" | "timeToSolveInMinutes" | "contestId", ExtArgs["result"]["questions"]>
+  export type QuestionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "miniDescription" | "topic" | "noOfHiddenTestCases" | "noOfExternalTestCases" | "difficulty" | "pointsPerTestCaseSolved" | "type" | "leetCodeLink" | "leetCodeTitle" | "timeToSolveInMinutes" | "contestId", ExtArgs["result"]["questions"]>
   export type QuestionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     testCase?: boolean | Questions$testCaseArgs<ExtArgs>
     submission?: boolean | Questions$submissionArgs<ExtArgs>
     discussion?: boolean | Questions$discussionArgs<ExtArgs>
-    topics?: boolean | TopicsDefaultArgs<ExtArgs>
+    topics?: boolean | Questions$topicsArgs<ExtArgs>
     contest?: boolean | Questions$contestArgs<ExtArgs>
     _count?: boolean | QuestionsCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type QuestionsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    topics?: boolean | TopicsDefaultArgs<ExtArgs>
+    topics?: boolean | Questions$topicsArgs<ExtArgs>
     contest?: boolean | Questions$contestArgs<ExtArgs>
   }
   export type QuestionsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    topics?: boolean | TopicsDefaultArgs<ExtArgs>
+    topics?: boolean | Questions$topicsArgs<ExtArgs>
     contest?: boolean | Questions$contestArgs<ExtArgs>
   }
 
@@ -4800,14 +4798,15 @@ export namespace Prisma {
       testCase: Prisma.$TestCasePayload<ExtArgs>[]
       submission: Prisma.$SubmissionPayload<ExtArgs>[]
       discussion: Prisma.$DiscussionsPayload<ExtArgs>[]
-      topics: Prisma.$TopicsPayload<ExtArgs>
+      topics: Prisma.$TopicsPayload<ExtArgs> | null
       contest: Prisma.$ContestPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       title: string
-      description: string | null
-      topic: number
+      description: string
+      miniDescription: string | null
+      topic: number | null
       noOfHiddenTestCases: number
       noOfExternalTestCases: number
       difficulty: $Enums.DifficultyType
@@ -5214,7 +5213,7 @@ export namespace Prisma {
     testCase<T extends Questions$testCaseArgs<ExtArgs> = {}>(args?: Subset<T, Questions$testCaseArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestCasePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     submission<T extends Questions$submissionArgs<ExtArgs> = {}>(args?: Subset<T, Questions$submissionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     discussion<T extends Questions$discussionArgs<ExtArgs> = {}>(args?: Subset<T, Questions$discussionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscussionsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    topics<T extends TopicsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TopicsDefaultArgs<ExtArgs>>): Prisma__TopicsClient<$Result.GetResult<Prisma.$TopicsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    topics<T extends Questions$topicsArgs<ExtArgs> = {}>(args?: Subset<T, Questions$topicsArgs<ExtArgs>>): Prisma__TopicsClient<$Result.GetResult<Prisma.$TopicsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     contest<T extends Questions$contestArgs<ExtArgs> = {}>(args?: Subset<T, Questions$contestArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5248,6 +5247,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Questions", 'Int'>
     readonly title: FieldRef<"Questions", 'String'>
     readonly description: FieldRef<"Questions", 'String'>
+    readonly miniDescription: FieldRef<"Questions", 'String'>
     readonly topic: FieldRef<"Questions", 'Int'>
     readonly noOfHiddenTestCases: FieldRef<"Questions", 'Int'>
     readonly noOfExternalTestCases: FieldRef<"Questions", 'Int'>
@@ -5711,6 +5711,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DiscussionsScalarFieldEnum | DiscussionsScalarFieldEnum[]
+  }
+
+  /**
+   * Questions.topics
+   */
+  export type Questions$topicsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Topics
+     */
+    select?: TopicsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Topics
+     */
+    omit?: TopicsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TopicsInclude<ExtArgs> | null
+    where?: TopicsWhereInput
   }
 
   /**
@@ -13605,6 +13624,7 @@ export namespace Prisma {
 
   export type ContestMinAggregateOutputType = {
     id: number | null
+    miniDescription: string | null
     title: string | null
     opensOn: Date | null
     closesOn: Date | null
@@ -13615,6 +13635,7 @@ export namespace Prisma {
 
   export type ContestMaxAggregateOutputType = {
     id: number | null
+    miniDescription: string | null
     title: string | null
     opensOn: Date | null
     closesOn: Date | null
@@ -13625,6 +13646,7 @@ export namespace Prisma {
 
   export type ContestCountAggregateOutputType = {
     id: number
+    miniDescription: number
     title: number
     opensOn: number
     closesOn: number
@@ -13651,6 +13673,7 @@ export namespace Prisma {
 
   export type ContestMinAggregateInputType = {
     id?: true
+    miniDescription?: true
     title?: true
     opensOn?: true
     closesOn?: true
@@ -13661,6 +13684,7 @@ export namespace Prisma {
 
   export type ContestMaxAggregateInputType = {
     id?: true
+    miniDescription?: true
     title?: true
     opensOn?: true
     closesOn?: true
@@ -13671,6 +13695,7 @@ export namespace Prisma {
 
   export type ContestCountAggregateInputType = {
     id?: true
+    miniDescription?: true
     title?: true
     opensOn?: true
     closesOn?: true
@@ -13768,6 +13793,7 @@ export namespace Prisma {
 
   export type ContestGroupByOutputType = {
     id: number
+    miniDescription: string | null
     title: string
     opensOn: Date
     closesOn: Date
@@ -13797,6 +13823,7 @@ export namespace Prisma {
 
   export type ContestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    miniDescription?: boolean
     title?: boolean
     opensOn?: boolean
     closesOn?: boolean
@@ -13809,6 +13836,7 @@ export namespace Prisma {
 
   export type ContestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    miniDescription?: boolean
     title?: boolean
     opensOn?: boolean
     closesOn?: boolean
@@ -13819,6 +13847,7 @@ export namespace Prisma {
 
   export type ContestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    miniDescription?: boolean
     title?: boolean
     opensOn?: boolean
     closesOn?: boolean
@@ -13829,6 +13858,7 @@ export namespace Prisma {
 
   export type ContestSelectScalar = {
     id?: boolean
+    miniDescription?: boolean
     title?: boolean
     opensOn?: boolean
     closesOn?: boolean
@@ -13837,7 +13867,7 @@ export namespace Prisma {
     totalNoOfQuestions?: boolean
   }
 
-  export type ContestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "opensOn" | "closesOn" | "timeToSolveInMinutes" | "totalPoints" | "totalNoOfQuestions", ExtArgs["result"]["contest"]>
+  export type ContestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "miniDescription" | "title" | "opensOn" | "closesOn" | "timeToSolveInMinutes" | "totalPoints" | "totalNoOfQuestions", ExtArgs["result"]["contest"]>
   export type ContestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     question?: boolean | Contest$questionArgs<ExtArgs>
     _count?: boolean | ContestCountOutputTypeDefaultArgs<ExtArgs>
@@ -13852,6 +13882,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      miniDescription: string | null
       title: string
       opensOn: Date
       closesOn: Date
@@ -14283,6 +14314,7 @@ export namespace Prisma {
    */ 
   interface ContestFieldRefs {
     readonly id: FieldRef<"Contest", 'Int'>
+    readonly miniDescription: FieldRef<"Contest", 'String'>
     readonly title: FieldRef<"Contest", 'String'>
     readonly opensOn: FieldRef<"Contest", 'DateTime'>
     readonly closesOn: FieldRef<"Contest", 'DateTime'>
@@ -14739,8 +14771,7 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     description: 'description',
-    notes: 'notes',
-    contestDate: 'contestDate'
+    notes: 'notes'
   };
 
   export type TopicsScalarFieldEnum = (typeof TopicsScalarFieldEnum)[keyof typeof TopicsScalarFieldEnum]
@@ -14750,6 +14781,7 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     description: 'description',
+    miniDescription: 'miniDescription',
     topic: 'topic',
     noOfHiddenTestCases: 'noOfHiddenTestCases',
     noOfExternalTestCases: 'noOfExternalTestCases',
@@ -14857,6 +14889,7 @@ export namespace Prisma {
 
   export const ContestScalarFieldEnum: {
     id: 'id',
+    miniDescription: 'miniDescription',
     title: 'title',
     opensOn: 'opensOn',
     closesOn: 'closesOn',
@@ -15171,7 +15204,6 @@ export namespace Prisma {
     name?: StringFilter<"Topics"> | string
     description?: StringNullableFilter<"Topics"> | string | null
     notes?: StringNullableFilter<"Topics"> | string | null
-    contestDate?: DateTimeFilter<"Topics"> | Date | string
     question?: QuestionsListRelationFilter
   }
 
@@ -15180,7 +15212,6 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
-    contestDate?: SortOrder
     question?: QuestionsOrderByRelationAggregateInput
   }
 
@@ -15192,7 +15223,6 @@ export namespace Prisma {
     OR?: TopicsWhereInput[]
     NOT?: TopicsWhereInput | TopicsWhereInput[]
     description?: StringNullableFilter<"Topics"> | string | null
-    contestDate?: DateTimeFilter<"Topics"> | Date | string
     question?: QuestionsListRelationFilter
   }, "id" | "name" | "notes">
 
@@ -15201,7 +15231,6 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
-    contestDate?: SortOrder
     _count?: TopicsCountOrderByAggregateInput
     _avg?: TopicsAvgOrderByAggregateInput
     _max?: TopicsMaxOrderByAggregateInput
@@ -15217,7 +15246,6 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Topics"> | string
     description?: StringNullableWithAggregatesFilter<"Topics"> | string | null
     notes?: StringNullableWithAggregatesFilter<"Topics"> | string | null
-    contestDate?: DateTimeWithAggregatesFilter<"Topics"> | Date | string
   }
 
   export type QuestionsWhereInput = {
@@ -15226,8 +15254,9 @@ export namespace Prisma {
     NOT?: QuestionsWhereInput | QuestionsWhereInput[]
     id?: IntFilter<"Questions"> | number
     title?: StringFilter<"Questions"> | string
-    description?: StringNullableFilter<"Questions"> | string | null
-    topic?: IntFilter<"Questions"> | number
+    description?: StringFilter<"Questions"> | string
+    miniDescription?: StringNullableFilter<"Questions"> | string | null
+    topic?: IntNullableFilter<"Questions"> | number | null
     noOfHiddenTestCases?: IntFilter<"Questions"> | number
     noOfExternalTestCases?: IntFilter<"Questions"> | number
     difficulty?: EnumDifficultyTypeFilter<"Questions"> | $Enums.DifficultyType
@@ -15240,15 +15269,16 @@ export namespace Prisma {
     testCase?: TestCaseListRelationFilter
     submission?: SubmissionListRelationFilter
     discussion?: DiscussionsListRelationFilter
-    topics?: XOR<TopicsScalarRelationFilter, TopicsWhereInput>
+    topics?: XOR<TopicsNullableScalarRelationFilter, TopicsWhereInput> | null
     contest?: XOR<ContestNullableScalarRelationFilter, ContestWhereInput> | null
   }
 
   export type QuestionsOrderByWithRelationInput = {
     id?: SortOrder
     title?: SortOrder
-    description?: SortOrderInput | SortOrder
-    topic?: SortOrder
+    description?: SortOrder
+    miniDescription?: SortOrderInput | SortOrder
+    topic?: SortOrderInput | SortOrder
     noOfHiddenTestCases?: SortOrder
     noOfExternalTestCases?: SortOrder
     difficulty?: SortOrder
@@ -15271,8 +15301,9 @@ export namespace Prisma {
     OR?: QuestionsWhereInput[]
     NOT?: QuestionsWhereInput | QuestionsWhereInput[]
     title?: StringFilter<"Questions"> | string
-    description?: StringNullableFilter<"Questions"> | string | null
-    topic?: IntFilter<"Questions"> | number
+    description?: StringFilter<"Questions"> | string
+    miniDescription?: StringNullableFilter<"Questions"> | string | null
+    topic?: IntNullableFilter<"Questions"> | number | null
     noOfHiddenTestCases?: IntFilter<"Questions"> | number
     noOfExternalTestCases?: IntFilter<"Questions"> | number
     difficulty?: EnumDifficultyTypeFilter<"Questions"> | $Enums.DifficultyType
@@ -15285,15 +15316,16 @@ export namespace Prisma {
     testCase?: TestCaseListRelationFilter
     submission?: SubmissionListRelationFilter
     discussion?: DiscussionsListRelationFilter
-    topics?: XOR<TopicsScalarRelationFilter, TopicsWhereInput>
+    topics?: XOR<TopicsNullableScalarRelationFilter, TopicsWhereInput> | null
     contest?: XOR<ContestNullableScalarRelationFilter, ContestWhereInput> | null
   }, "id">
 
   export type QuestionsOrderByWithAggregationInput = {
     id?: SortOrder
     title?: SortOrder
-    description?: SortOrderInput | SortOrder
-    topic?: SortOrder
+    description?: SortOrder
+    miniDescription?: SortOrderInput | SortOrder
+    topic?: SortOrderInput | SortOrder
     noOfHiddenTestCases?: SortOrder
     noOfExternalTestCases?: SortOrder
     difficulty?: SortOrder
@@ -15316,8 +15348,9 @@ export namespace Prisma {
     NOT?: QuestionsScalarWhereWithAggregatesInput | QuestionsScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Questions"> | number
     title?: StringWithAggregatesFilter<"Questions"> | string
-    description?: StringNullableWithAggregatesFilter<"Questions"> | string | null
-    topic?: IntWithAggregatesFilter<"Questions"> | number
+    description?: StringWithAggregatesFilter<"Questions"> | string
+    miniDescription?: StringNullableWithAggregatesFilter<"Questions"> | string | null
+    topic?: IntNullableWithAggregatesFilter<"Questions"> | number | null
     noOfHiddenTestCases?: IntWithAggregatesFilter<"Questions"> | number
     noOfExternalTestCases?: IntWithAggregatesFilter<"Questions"> | number
     difficulty?: EnumDifficultyTypeWithAggregatesFilter<"Questions"> | $Enums.DifficultyType
@@ -15810,6 +15843,7 @@ export namespace Prisma {
     OR?: ContestWhereInput[]
     NOT?: ContestWhereInput | ContestWhereInput[]
     id?: IntFilter<"Contest"> | number
+    miniDescription?: StringNullableFilter<"Contest"> | string | null
     title?: StringFilter<"Contest"> | string
     opensOn?: DateTimeFilter<"Contest"> | Date | string
     closesOn?: DateTimeFilter<"Contest"> | Date | string
@@ -15821,6 +15855,7 @@ export namespace Prisma {
 
   export type ContestOrderByWithRelationInput = {
     id?: SortOrder
+    miniDescription?: SortOrderInput | SortOrder
     title?: SortOrder
     opensOn?: SortOrder
     closesOn?: SortOrder
@@ -15836,6 +15871,7 @@ export namespace Prisma {
     AND?: ContestWhereInput | ContestWhereInput[]
     OR?: ContestWhereInput[]
     NOT?: ContestWhereInput | ContestWhereInput[]
+    miniDescription?: StringNullableFilter<"Contest"> | string | null
     opensOn?: DateTimeFilter<"Contest"> | Date | string
     closesOn?: DateTimeFilter<"Contest"> | Date | string
     timeToSolveInMinutes?: IntFilter<"Contest"> | number
@@ -15846,6 +15882,7 @@ export namespace Prisma {
 
   export type ContestOrderByWithAggregationInput = {
     id?: SortOrder
+    miniDescription?: SortOrderInput | SortOrder
     title?: SortOrder
     opensOn?: SortOrder
     closesOn?: SortOrder
@@ -15864,6 +15901,7 @@ export namespace Prisma {
     OR?: ContestScalarWhereWithAggregatesInput[]
     NOT?: ContestScalarWhereWithAggregatesInput | ContestScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Contest"> | number
+    miniDescription?: StringNullableWithAggregatesFilter<"Contest"> | string | null
     title?: StringWithAggregatesFilter<"Contest"> | string
     opensOn?: DateTimeWithAggregatesFilter<"Contest"> | Date | string
     closesOn?: DateTimeWithAggregatesFilter<"Contest"> | Date | string
@@ -15966,7 +16004,6 @@ export namespace Prisma {
     name: string
     description?: string | null
     notes?: string | null
-    contestDate: Date | string
     question?: QuestionsCreateNestedManyWithoutTopicsInput
   }
 
@@ -15975,7 +16012,6 @@ export namespace Prisma {
     name: string
     description?: string | null
     notes?: string | null
-    contestDate: Date | string
     question?: QuestionsUncheckedCreateNestedManyWithoutTopicsInput
   }
 
@@ -15983,7 +16019,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
-    contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
     question?: QuestionsUpdateManyWithoutTopicsNestedInput
   }
 
@@ -15992,7 +16027,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
-    contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
     question?: QuestionsUncheckedUpdateManyWithoutTopicsNestedInput
   }
 
@@ -16001,14 +16035,12 @@ export namespace Prisma {
     name: string
     description?: string | null
     notes?: string | null
-    contestDate: Date | string
   }
 
   export type TopicsUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
-    contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TopicsUncheckedUpdateManyInput = {
@@ -16016,12 +16048,12 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
-    contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type QuestionsCreateInput = {
     title: string
-    description?: string | null
+    description: string
+    miniDescription?: string | null
     noOfHiddenTestCases?: number
     noOfExternalTestCases?: number
     difficulty?: $Enums.DifficultyType
@@ -16033,15 +16065,16 @@ export namespace Prisma {
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
-    topics: TopicsCreateNestedOneWithoutQuestionInput
+    topics?: TopicsCreateNestedOneWithoutQuestionInput
     contest?: ContestCreateNestedOneWithoutQuestionInput
   }
 
   export type QuestionsUncheckedCreateInput = {
     id?: number
     title: string
-    description?: string | null
-    topic: number
+    description: string
+    miniDescription?: string | null
+    topic?: number | null
     noOfHiddenTestCases?: number
     noOfExternalTestCases?: number
     difficulty?: $Enums.DifficultyType
@@ -16058,7 +16091,8 @@ export namespace Prisma {
 
   export type QuestionsUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
     noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
     noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
@@ -16070,15 +16104,16 @@ export namespace Prisma {
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
-    topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
+    topics?: TopicsUpdateOneWithoutQuestionNestedInput
     contest?: ContestUpdateOneWithoutQuestionNestedInput
   }
 
   export type QuestionsUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    topic?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableIntFieldUpdateOperationsInput | number | null
     noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
     noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
@@ -16096,8 +16131,9 @@ export namespace Prisma {
   export type QuestionsCreateManyInput = {
     id?: number
     title: string
-    description?: string | null
-    topic: number
+    description: string
+    miniDescription?: string | null
+    topic?: number | null
     noOfHiddenTestCases?: number
     noOfExternalTestCases?: number
     difficulty?: $Enums.DifficultyType
@@ -16111,7 +16147,8 @@ export namespace Prisma {
 
   export type QuestionsUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
     noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
     noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
@@ -16125,8 +16162,9 @@ export namespace Prisma {
   export type QuestionsUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    topic?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableIntFieldUpdateOperationsInput | number | null
     noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
     noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
@@ -16600,6 +16638,7 @@ export namespace Prisma {
   }
 
   export type ContestCreateInput = {
+    miniDescription?: string | null
     title: string
     opensOn: Date | string
     closesOn: Date | string
@@ -16611,6 +16650,7 @@ export namespace Prisma {
 
   export type ContestUncheckedCreateInput = {
     id?: number
+    miniDescription?: string | null
     title: string
     opensOn: Date | string
     closesOn: Date | string
@@ -16621,6 +16661,7 @@ export namespace Prisma {
   }
 
   export type ContestUpdateInput = {
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
     closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16632,6 +16673,7 @@ export namespace Prisma {
 
   export type ContestUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
     closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16643,6 +16685,7 @@ export namespace Prisma {
 
   export type ContestCreateManyInput = {
     id?: number
+    miniDescription?: string | null
     title: string
     opensOn: Date | string
     closesOn: Date | string
@@ -16652,6 +16695,7 @@ export namespace Prisma {
   }
 
   export type ContestUpdateManyMutationInput = {
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
     closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16662,6 +16706,7 @@ export namespace Prisma {
 
   export type ContestUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
     closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16869,17 +16914,6 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
   export type QuestionsListRelationFilter = {
     every?: QuestionsWhereInput
     some?: QuestionsWhereInput
@@ -16895,7 +16929,6 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     notes?: SortOrder
-    contestDate?: SortOrder
   }
 
   export type TopicsAvgOrderByAggregateInput = {
@@ -16907,7 +16940,6 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     notes?: SortOrder
-    contestDate?: SortOrder
   }
 
   export type TopicsMinOrderByAggregateInput = {
@@ -16915,25 +16947,21 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     notes?: SortOrder
-    contestDate?: SortOrder
   }
 
   export type TopicsSumOrderByAggregateInput = {
     id?: SortOrder
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type EnumDifficultyTypeFilter<$PrismaModel = never> = {
@@ -16950,26 +16978,15 @@ export namespace Prisma {
     not?: NestedEnumQuestionTypeFilter<$PrismaModel> | $Enums.QuestionType
   }
 
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type TestCaseListRelationFilter = {
     every?: TestCaseWhereInput
     some?: TestCaseWhereInput
     none?: TestCaseWhereInput
   }
 
-  export type TopicsScalarRelationFilter = {
-    is?: TopicsWhereInput
-    isNot?: TopicsWhereInput
+  export type TopicsNullableScalarRelationFilter = {
+    is?: TopicsWhereInput | null
+    isNot?: TopicsWhereInput | null
   }
 
   export type ContestNullableScalarRelationFilter = {
@@ -16985,6 +17002,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    miniDescription?: SortOrder
     topic?: SortOrder
     noOfHiddenTestCases?: SortOrder
     noOfExternalTestCases?: SortOrder
@@ -17011,6 +17029,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    miniDescription?: SortOrder
     topic?: SortOrder
     noOfHiddenTestCases?: SortOrder
     noOfExternalTestCases?: SortOrder
@@ -17027,6 +17046,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    miniDescription?: SortOrder
     topic?: SortOrder
     noOfHiddenTestCases?: SortOrder
     noOfExternalTestCases?: SortOrder
@@ -17049,6 +17069,22 @@ export namespace Prisma {
     contestId?: SortOrder
   }
 
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
   export type EnumDifficultyTypeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.DifficultyType | EnumDifficultyTypeFieldRefInput<$PrismaModel>
     in?: $Enums.DifficultyType[] | ListEnumDifficultyTypeFieldRefInput<$PrismaModel>
@@ -17067,22 +17103,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumQuestionTypeFilter<$PrismaModel>
     _max?: NestedEnumQuestionTypeFilter<$PrismaModel>
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type EnumTestCaseTypeFilter<$PrismaModel = never> = {
@@ -17139,6 +17159,17 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTestCaseTypeFilter<$PrismaModel>
     _max?: NestedEnumTestCaseTypeFilter<$PrismaModel>
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type EnumAcceptedTypeFilter<$PrismaModel = never> = {
@@ -17245,6 +17276,20 @@ export namespace Prisma {
     studentId?: SortOrder
     noOfCasesPassed?: SortOrder
     pointsSecured?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type EnumAcceptedTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -17518,6 +17563,7 @@ export namespace Prisma {
 
   export type ContestCountOrderByAggregateInput = {
     id?: SortOrder
+    miniDescription?: SortOrder
     title?: SortOrder
     opensOn?: SortOrder
     closesOn?: SortOrder
@@ -17535,6 +17581,7 @@ export namespace Prisma {
 
   export type ContestMaxOrderByAggregateInput = {
     id?: SortOrder
+    miniDescription?: SortOrder
     title?: SortOrder
     opensOn?: SortOrder
     closesOn?: SortOrder
@@ -17545,6 +17592,7 @@ export namespace Prisma {
 
   export type ContestMinOrderByAggregateInput = {
     id?: SortOrder
+    miniDescription?: SortOrder
     title?: SortOrder
     opensOn?: SortOrder
     closesOn?: SortOrder
@@ -17752,10 +17800,6 @@ export namespace Prisma {
     connect?: QuestionsWhereUniqueInput | QuestionsWhereUniqueInput[]
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
-  }
-
   export type QuestionsUpdateManyWithoutTopicsNestedInput = {
     create?: XOR<QuestionsCreateWithoutTopicsInput, QuestionsUncheckedCreateWithoutTopicsInput> | QuestionsCreateWithoutTopicsInput[] | QuestionsUncheckedCreateWithoutTopicsInput[]
     connectOrCreate?: QuestionsCreateOrConnectWithoutTopicsInput | QuestionsCreateOrConnectWithoutTopicsInput[]
@@ -17896,10 +17940,12 @@ export namespace Prisma {
     deleteMany?: DiscussionsScalarWhereInput | DiscussionsScalarWhereInput[]
   }
 
-  export type TopicsUpdateOneRequiredWithoutQuestionNestedInput = {
+  export type TopicsUpdateOneWithoutQuestionNestedInput = {
     create?: XOR<TopicsCreateWithoutQuestionInput, TopicsUncheckedCreateWithoutQuestionInput>
     connectOrCreate?: TopicsCreateOrConnectWithoutQuestionInput
     upsert?: TopicsUpsertWithoutQuestionInput
+    disconnect?: TopicsWhereInput | boolean
+    delete?: TopicsWhereInput | boolean
     connect?: TopicsWhereUniqueInput
     update?: XOR<XOR<TopicsUpdateToOneWithWhereWithoutQuestionInput, TopicsUpdateWithoutQuestionInput>, TopicsUncheckedUpdateWithoutQuestionInput>
   }
@@ -17984,6 +18030,10 @@ export namespace Prisma {
     create?: XOR<StudentCreateWithoutSubmissionInput, StudentUncheckedCreateWithoutSubmissionInput>
     connectOrCreate?: StudentCreateOrConnectWithoutSubmissionInput
     connect?: StudentWhereUniqueInput
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type EnumAcceptedTypeFieldUpdateOperationsInput = {
@@ -18376,31 +18426,6 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type NestedEnumDifficultyTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.DifficultyType | EnumDifficultyTypeFieldRefInput<$PrismaModel>
     in?: $Enums.DifficultyType[] | ListEnumDifficultyTypeFieldRefInput<$PrismaModel>
@@ -18413,26 +18438,6 @@ export namespace Prisma {
     in?: $Enums.QuestionType[] | ListEnumQuestionTypeFieldRefInput<$PrismaModel>
     notIn?: $Enums.QuestionType[] | ListEnumQuestionTypeFieldRefInput<$PrismaModel>
     not?: NestedEnumQuestionTypeFilter<$PrismaModel> | $Enums.QuestionType
-  }
-
-  export type NestedEnumDifficultyTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.DifficultyType | EnumDifficultyTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.DifficultyType[] | ListEnumDifficultyTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.DifficultyType[] | ListEnumDifficultyTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumDifficultyTypeWithAggregatesFilter<$PrismaModel> | $Enums.DifficultyType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumDifficultyTypeFilter<$PrismaModel>
-    _max?: NestedEnumDifficultyTypeFilter<$PrismaModel>
-  }
-
-  export type NestedEnumQuestionTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.QuestionType | EnumQuestionTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.QuestionType[] | ListEnumQuestionTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.QuestionType[] | ListEnumQuestionTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumQuestionTypeWithAggregatesFilter<$PrismaModel> | $Enums.QuestionType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumQuestionTypeFilter<$PrismaModel>
-    _max?: NestedEnumQuestionTypeFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -18462,6 +18467,26 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedEnumDifficultyTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DifficultyType | EnumDifficultyTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DifficultyType[] | ListEnumDifficultyTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DifficultyType[] | ListEnumDifficultyTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDifficultyTypeWithAggregatesFilter<$PrismaModel> | $Enums.DifficultyType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDifficultyTypeFilter<$PrismaModel>
+    _max?: NestedEnumDifficultyTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumQuestionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.QuestionType | EnumQuestionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.QuestionType[] | ListEnumQuestionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.QuestionType[] | ListEnumQuestionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumQuestionTypeWithAggregatesFilter<$PrismaModel> | $Enums.QuestionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumQuestionTypeFilter<$PrismaModel>
+    _max?: NestedEnumQuestionTypeFilter<$PrismaModel>
+  }
+
   export type NestedEnumTestCaseTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.TestCaseType | EnumTestCaseTypeFieldRefInput<$PrismaModel>
     in?: $Enums.TestCaseType[] | ListEnumTestCaseTypeFieldRefInput<$PrismaModel>
@@ -18477,6 +18502,17 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTestCaseTypeFilter<$PrismaModel>
     _max?: NestedEnumTestCaseTypeFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedEnumAcceptedTypeFilter<$PrismaModel = never> = {
@@ -18505,6 +18541,20 @@ export namespace Prisma {
     in?: $Enums.LanguageType[] | ListEnumLanguageTypeFieldRefInput<$PrismaModel> | null
     notIn?: $Enums.LanguageType[] | ListEnumLanguageTypeFieldRefInput<$PrismaModel> | null
     not?: NestedEnumLanguageTypeNullableFilter<$PrismaModel> | $Enums.LanguageType | null
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedEnumAcceptedTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -18806,7 +18856,8 @@ export namespace Prisma {
 
   export type QuestionsCreateWithoutTopicsInput = {
     title: string
-    description?: string | null
+    description: string
+    miniDescription?: string | null
     noOfHiddenTestCases?: number
     noOfExternalTestCases?: number
     difficulty?: $Enums.DifficultyType
@@ -18824,7 +18875,8 @@ export namespace Prisma {
   export type QuestionsUncheckedCreateWithoutTopicsInput = {
     id?: number
     title: string
-    description?: string | null
+    description: string
+    miniDescription?: string | null
     noOfHiddenTestCases?: number
     noOfExternalTestCases?: number
     difficulty?: $Enums.DifficultyType
@@ -18871,8 +18923,9 @@ export namespace Prisma {
     NOT?: QuestionsScalarWhereInput | QuestionsScalarWhereInput[]
     id?: IntFilter<"Questions"> | number
     title?: StringFilter<"Questions"> | string
-    description?: StringNullableFilter<"Questions"> | string | null
-    topic?: IntFilter<"Questions"> | number
+    description?: StringFilter<"Questions"> | string
+    miniDescription?: StringNullableFilter<"Questions"> | string | null
+    topic?: IntNullableFilter<"Questions"> | number | null
     noOfHiddenTestCases?: IntFilter<"Questions"> | number
     noOfExternalTestCases?: IntFilter<"Questions"> | number
     difficulty?: EnumDifficultyTypeFilter<"Questions"> | $Enums.DifficultyType
@@ -18983,7 +19036,6 @@ export namespace Prisma {
     name: string
     description?: string | null
     notes?: string | null
-    contestDate: Date | string
   }
 
   export type TopicsUncheckedCreateWithoutQuestionInput = {
@@ -18991,7 +19043,6 @@ export namespace Prisma {
     name: string
     description?: string | null
     notes?: string | null
-    contestDate: Date | string
   }
 
   export type TopicsCreateOrConnectWithoutQuestionInput = {
@@ -19000,6 +19051,7 @@ export namespace Prisma {
   }
 
   export type ContestCreateWithoutQuestionInput = {
+    miniDescription?: string | null
     title: string
     opensOn: Date | string
     closesOn: Date | string
@@ -19010,6 +19062,7 @@ export namespace Prisma {
 
   export type ContestUncheckedCreateWithoutQuestionInput = {
     id?: number
+    miniDescription?: string | null
     title: string
     opensOn: Date | string
     closesOn: Date | string
@@ -19097,7 +19150,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
-    contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TopicsUncheckedUpdateWithoutQuestionInput = {
@@ -19105,7 +19157,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
-    contestDate?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ContestUpsertWithoutQuestionInput = {
@@ -19120,6 +19171,7 @@ export namespace Prisma {
   }
 
   export type ContestUpdateWithoutQuestionInput = {
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
     closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19130,6 +19182,7 @@ export namespace Prisma {
 
   export type ContestUncheckedUpdateWithoutQuestionInput = {
     id?: IntFieldUpdateOperationsInput | number
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     opensOn?: DateTimeFieldUpdateOperationsInput | Date | string
     closesOn?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19140,7 +19193,8 @@ export namespace Prisma {
 
   export type QuestionsCreateWithoutTestCaseInput = {
     title: string
-    description?: string | null
+    description: string
+    miniDescription?: string | null
     noOfHiddenTestCases?: number
     noOfExternalTestCases?: number
     difficulty?: $Enums.DifficultyType
@@ -19151,15 +19205,16 @@ export namespace Prisma {
     timeToSolveInMinutes?: number | null
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
-    topics: TopicsCreateNestedOneWithoutQuestionInput
+    topics?: TopicsCreateNestedOneWithoutQuestionInput
     contest?: ContestCreateNestedOneWithoutQuestionInput
   }
 
   export type QuestionsUncheckedCreateWithoutTestCaseInput = {
     id?: number
     title: string
-    description?: string | null
-    topic: number
+    description: string
+    miniDescription?: string | null
+    topic?: number | null
     noOfHiddenTestCases?: number
     noOfExternalTestCases?: number
     difficulty?: $Enums.DifficultyType
@@ -19191,7 +19246,8 @@ export namespace Prisma {
 
   export type QuestionsUpdateWithoutTestCaseInput = {
     title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
     noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
     noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
@@ -19202,15 +19258,16 @@ export namespace Prisma {
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
-    topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
+    topics?: TopicsUpdateOneWithoutQuestionNestedInput
     contest?: ContestUpdateOneWithoutQuestionNestedInput
   }
 
   export type QuestionsUncheckedUpdateWithoutTestCaseInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    topic?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableIntFieldUpdateOperationsInput | number | null
     noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
     noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
@@ -19226,7 +19283,8 @@ export namespace Prisma {
 
   export type QuestionsCreateWithoutSubmissionInput = {
     title: string
-    description?: string | null
+    description: string
+    miniDescription?: string | null
     noOfHiddenTestCases?: number
     noOfExternalTestCases?: number
     difficulty?: $Enums.DifficultyType
@@ -19237,15 +19295,16 @@ export namespace Prisma {
     timeToSolveInMinutes?: number | null
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
-    topics: TopicsCreateNestedOneWithoutQuestionInput
+    topics?: TopicsCreateNestedOneWithoutQuestionInput
     contest?: ContestCreateNestedOneWithoutQuestionInput
   }
 
   export type QuestionsUncheckedCreateWithoutSubmissionInput = {
     id?: number
     title: string
-    description?: string | null
-    topic: number
+    description: string
+    miniDescription?: string | null
+    topic?: number | null
     noOfHiddenTestCases?: number
     noOfExternalTestCases?: number
     difficulty?: $Enums.DifficultyType
@@ -19309,7 +19368,8 @@ export namespace Prisma {
 
   export type QuestionsUpdateWithoutSubmissionInput = {
     title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
     noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
     noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
@@ -19320,15 +19380,16 @@ export namespace Prisma {
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
-    topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
+    topics?: TopicsUpdateOneWithoutQuestionNestedInput
     contest?: ContestUpdateOneWithoutQuestionNestedInput
   }
 
   export type QuestionsUncheckedUpdateWithoutSubmissionInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    topic?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableIntFieldUpdateOperationsInput | number | null
     noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
     noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
@@ -19629,7 +19690,8 @@ export namespace Prisma {
 
   export type QuestionsCreateWithoutDiscussionInput = {
     title: string
-    description?: string | null
+    description: string
+    miniDescription?: string | null
     noOfHiddenTestCases?: number
     noOfExternalTestCases?: number
     difficulty?: $Enums.DifficultyType
@@ -19640,15 +19702,16 @@ export namespace Prisma {
     timeToSolveInMinutes?: number | null
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
-    topics: TopicsCreateNestedOneWithoutQuestionInput
+    topics?: TopicsCreateNestedOneWithoutQuestionInput
     contest?: ContestCreateNestedOneWithoutQuestionInput
   }
 
   export type QuestionsUncheckedCreateWithoutDiscussionInput = {
     id?: number
     title: string
-    description?: string | null
-    topic: number
+    description: string
+    miniDescription?: string | null
+    topic?: number | null
     noOfHiddenTestCases?: number
     noOfExternalTestCases?: number
     difficulty?: $Enums.DifficultyType
@@ -19767,7 +19830,8 @@ export namespace Prisma {
 
   export type QuestionsUpdateWithoutDiscussionInput = {
     title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
     noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
     noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
@@ -19778,15 +19842,16 @@ export namespace Prisma {
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
-    topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
+    topics?: TopicsUpdateOneWithoutQuestionNestedInput
     contest?: ContestUpdateOneWithoutQuestionNestedInput
   }
 
   export type QuestionsUncheckedUpdateWithoutDiscussionInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    topic?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableIntFieldUpdateOperationsInput | number | null
     noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
     noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
@@ -19846,7 +19911,8 @@ export namespace Prisma {
 
   export type QuestionsCreateWithoutContestInput = {
     title: string
-    description?: string | null
+    description: string
+    miniDescription?: string | null
     noOfHiddenTestCases?: number
     noOfExternalTestCases?: number
     difficulty?: $Enums.DifficultyType
@@ -19858,14 +19924,15 @@ export namespace Prisma {
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
-    topics: TopicsCreateNestedOneWithoutQuestionInput
+    topics?: TopicsCreateNestedOneWithoutQuestionInput
   }
 
   export type QuestionsUncheckedCreateWithoutContestInput = {
     id?: number
     title: string
-    description?: string | null
-    topic: number
+    description: string
+    miniDescription?: string | null
+    topic?: number | null
     noOfHiddenTestCases?: number
     noOfExternalTestCases?: number
     difficulty?: $Enums.DifficultyType
@@ -20035,7 +20102,8 @@ export namespace Prisma {
   export type QuestionsCreateManyTopicsInput = {
     id?: number
     title: string
-    description?: string | null
+    description: string
+    miniDescription?: string | null
     noOfHiddenTestCases?: number
     noOfExternalTestCases?: number
     difficulty?: $Enums.DifficultyType
@@ -20049,7 +20117,8 @@ export namespace Prisma {
 
   export type QuestionsUpdateWithoutTopicsInput = {
     title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
     noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
     noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
@@ -20067,7 +20136,8 @@ export namespace Prisma {
   export type QuestionsUncheckedUpdateWithoutTopicsInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
     noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
     noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
@@ -20085,7 +20155,8 @@ export namespace Prisma {
   export type QuestionsUncheckedUpdateManyWithoutTopicsInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
     noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
     noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
@@ -20287,8 +20358,9 @@ export namespace Prisma {
   export type QuestionsCreateManyContestInput = {
     id?: number
     title: string
-    description?: string | null
-    topic: number
+    description: string
+    miniDescription?: string | null
+    topic?: number | null
     noOfHiddenTestCases?: number
     noOfExternalTestCases?: number
     difficulty?: $Enums.DifficultyType
@@ -20301,7 +20373,8 @@ export namespace Prisma {
 
   export type QuestionsUpdateWithoutContestInput = {
     title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
     noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
     noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
@@ -20313,14 +20386,15 @@ export namespace Prisma {
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
-    topics?: TopicsUpdateOneRequiredWithoutQuestionNestedInput
+    topics?: TopicsUpdateOneWithoutQuestionNestedInput
   }
 
   export type QuestionsUncheckedUpdateWithoutContestInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    topic?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableIntFieldUpdateOperationsInput | number | null
     noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
     noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType
@@ -20337,8 +20411,9 @@ export namespace Prisma {
   export type QuestionsUncheckedUpdateManyWithoutContestInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    topic?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    miniDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableIntFieldUpdateOperationsInput | number | null
     noOfHiddenTestCases?: IntFieldUpdateOperationsInput | number
     noOfExternalTestCases?: IntFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyTypeFieldUpdateOperationsInput | $Enums.DifficultyType

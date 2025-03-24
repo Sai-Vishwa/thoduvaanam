@@ -132,14 +132,14 @@ exports.Prisma.TopicsScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
-  notes: 'notes',
-  contestDate: 'contestDate'
+  notes: 'notes'
 };
 
 exports.Prisma.QuestionsScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
+  miniDescription: 'miniDescription',
   topic: 'topic',
   noOfHiddenTestCases: 'noOfHiddenTestCases',
   noOfExternalTestCases: 'noOfExternalTestCases',
@@ -223,6 +223,7 @@ exports.Prisma.DiscussionsScalarFieldEnum = {
 
 exports.Prisma.ContestScalarFieldEnum = {
   id: 'id',
+  miniDescription: 'miniDescription',
   title: 'title',
   opensOn: 'opensOn',
   closesOn: 'closesOn',

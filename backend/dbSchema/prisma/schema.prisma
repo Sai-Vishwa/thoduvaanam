@@ -92,7 +92,6 @@ model Topics {
   name String @unique
   description String?
   notes String? @unique
-  contestDate DateTime
 
   //relationships
   question Questions[]
@@ -101,8 +100,9 @@ model Topics {
 model Questions {
   id Int @id @default(autoincrement())
   title String 
-  description String?
-  topic Int
+  description String
+  miniDescription String?
+  topic Int?
   noOfHiddenTestCases Int @default(18)
   noOfExternalTestCases Int @default(2)
   difficulty DifficultyType @default(EASY)
@@ -117,7 +117,7 @@ model Questions {
   testCase TestCase[]
   submission Submission[]
   discussion Discussions[]
-  topics Topics @relation(fields: [topic],references:[id])
+  topics Topics? @relation(fields: [topic],references:[id])
   contest Contest? @relation(fields: [contestId],references:[id])
 }
 
@@ -222,6 +222,7 @@ model Discussions {
 
 model Contest {
   id Int @id @default(autoincrement())
+  miniDescription String?
   title String @unique
   opensOn DateTime
   closesOn DateTime
