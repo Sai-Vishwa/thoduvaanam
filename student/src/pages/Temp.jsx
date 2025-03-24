@@ -122,7 +122,7 @@ function Temp(){
                       </div>
 
                   </div>  
-                  <div className="h-1/2 bg-red-300 w-full">
+                  <div className="h-1/2 w-full flex justify-center items-center">
                         <DetailsDashBoard 
                         type={detailsBox.type}
                         details={detailsBox.details }
