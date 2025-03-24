@@ -212,7 +212,7 @@ const Admin = () => {
       
       const response = await fetch("http://localhost:4000/admin/addQuestion", {
         method: "POST",
-        body: JSON.stringify(payload),
+        body: JSON.stringify({data:payload}),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
@@ -278,7 +278,7 @@ const Admin = () => {
       
       const response = await fetch("http://localhost:4000/admin/addTestCase", {
         method: "POST",
-        body: JSON.stringify(payload),
+        body: JSON.stringify({data:payload}),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
@@ -314,8 +314,6 @@ const Admin = () => {
     try {
       const payload = {
         title: contestForm.title,
-        description: contestForm.description,
-        notes: contestForm.notes,
         miniDescription: contestForm.miniDescription,
         timeToSolveInMinutes: contestForm.timeToSolveInMinutes,
         totalPoints: contestForm.totalPoints,
@@ -326,7 +324,7 @@ const Admin = () => {
       
       const response = await fetch("http://localhost:4000/admin/addContest", {
         method: "POST",
-        body: JSON.stringify(payload),
+        body: JSON.stringify({data:payload}),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
@@ -803,47 +801,82 @@ const Admin = () => {
           <h2 className="text-xl font-semibold mb-4">Add Contest</h2>
           <form onSubmit={handleContestSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Title</label>
+              <label className="block text-sm font-medium text-gray-300">Title</label>
               <input
                 type="text"
                 name="title"
                 value={contestForm.title}
                 onChange={handleContestFormChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Description</label>
+              <label className="block text-sm font-medium text-gray-300">Mini Description</label>
               <textarea
-                name="description"
-                value={contestForm.description}
+                name="miniDescription"
+                value={contestForm.miniDescription}
                 onChange={handleContestFormChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
                 rows="3"
               />
             </div>
+            
             <div>
-              <label className="block text-sm font-medium text-gray-700">Notes</label>
-              <textarea
-                name="notes"
-                value={contestForm.notes}
-                onChange={handleContestFormChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                rows="2"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Contest Date</label>
+              <label className="block text-sm font-medium text-gray-300">Contest opens on</label>
               <input
                 type="datetime-local"
-                name="contestDate"
-                value={contestForm.contestDate}
+                name="opensOn"
+                value={contestForm.opensOn}
                 onChange={handleContestFormChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
                 required
               />
             </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-300">Contest closes on</label>
+              <input
+                type="datetime-local"
+                name="closesOn"
+                value={contestForm.closesOn}
+                onChange={handleContestFormChange}
+                className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                required
+              />
+            </div>
+            <div>
+                    <label className="block text-sm font-medium text-gray-400">Time to solve in minutes</label>
+                    <input
+                      type="number"
+                      name="timeToSolveInMinutes"
+                      value={contestForm.timeToSolveInMinutes}
+                      onChange={handleContestFormChange}
+                      className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                      min="0"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400">Total Points</label>
+                    <input
+                      type="number"
+                      name="totalPoints"
+                      value={contestForm.totalPoints}
+                      onChange={handleContestFormChange}
+                      className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                      min="0"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400">Total no of questions</label>
+                    <input
+                      type="number"
+                      name="totalNoOfQuestions"
+                      value={contestForm.totalNoOfQuestions}
+                      onChange={handleContestFormChange}
+                      className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                      min="0"
+                    />
+                  </div>
             <button
               type="submit"
               className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
