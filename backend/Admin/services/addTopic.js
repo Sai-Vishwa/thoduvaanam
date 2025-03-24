@@ -6,9 +6,13 @@ async function addTopic(req,res) {
     try{
         await prisma.topics.create({
             data:{
-                name:req.body.name,
+                name:req.body.title,
                 description:req.body.description
             }
+        })
+        console.log("success")
+        res.status(200).json({
+            msg:"Successful"
         })
     }
     catch(error){

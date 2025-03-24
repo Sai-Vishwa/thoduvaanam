@@ -2,7 +2,7 @@ const { PrismaClient } = require("../../dbSchema/generated")
 
 const prisma = new PrismaClient();
 async function loadData(req,res) {
-    console.log("start")
+    // console.log("start")
     try{
         const data = await prisma.topics.findMany({
             include:{
@@ -15,10 +15,23 @@ async function loadData(req,res) {
                 }
             }
         })
-        console.log("data i got",data)
+
+        const contest = await prisma.contest.findMany({
+            include:{
+                question:{
+                    include:{
+                        testCase:{
+
+                        }
+                    }
+                }
+            }
+        })
+        // console.log("data i got",data)
         res.status(200).json({
             msg:"Successful",
-            data:data
+            topic:data,
+            contest:contest
         })
     }
     catch(error){

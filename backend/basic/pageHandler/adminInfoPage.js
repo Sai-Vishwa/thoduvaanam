@@ -2,7 +2,7 @@ const { PrismaClient } = require("../../dbSchema/generated")
 
 const prisma = new PrismaClient();
 async function loadData(req,res) {
-    console.log("start")
+    // console.log("start")
     try{
         let data = await prisma.topics.findMany({
             include:{
@@ -25,7 +25,7 @@ async function loadData(req,res) {
             })
         })
 
-        console.log("data i got",data)
+        // console.log("data i got",data)
         res.status(200).json({
             msg:"Successful",
             data:data,

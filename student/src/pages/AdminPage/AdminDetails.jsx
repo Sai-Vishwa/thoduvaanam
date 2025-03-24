@@ -28,7 +28,10 @@ const Admin = () => {
     noOfExternalTestCases: 2,
     difficulty: 'EASY',
     pointsPerTestCaseSolved: 5,
-    timeToSolveInMinutes: 90
+    timeToSolveInMinutes: 90,
+    type: 'PRACTICE',
+    leetCodeLink: '',
+    leetCodeTitle: ''
   });
   
   // Testcase form state
@@ -44,90 +47,92 @@ const Admin = () => {
     title: '',
     description: '',
     notes: '',
-    contestDate: new Date().toISOString().slice(0, 16)
+    miniDescription: '',
+    timeToSolveInMinutes: 90,
+    totalPoints: 120,
+    totalNoOfQuestions: 3,
+    opensOn: new Date().toISOString().slice(0, 16),
+    closesOn: new Date(Date.now() + 12 * 60 * 60 * 1000).toISOString().slice(0, 16)
   });
   
   // Load data from backend
-  useEffect(()=>{
-    console.log("hlo")
-    async function fetchData(params) {
-      
-    console.log("hello")
-    try {
-              const details = await fetch("http://localhost:4000/admin/load", {
-                method: "POST",
-                body: JSON.stringify(),
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Accept': 'application/json'
-                }
-              })
-              const data = await details.json()
-              console.log("hi")
-              if (data.err) {
-                throw new Error(data.err)
-              } else {
-                console.log(JSON.stringify(data))
-                processBackendData(data.data)
-              }
-            } 
-            catch (error) {
-              alert(JSON.stringify(error.message))
-            }
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const details = await fetch("http://localhost:4000/admin/load", {
+          method: "POST",
+          body: JSON.stringify(),
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
           }
-          fetchData()
-  },[])
+        });
+        const data = await details.json();
+        if (data.err) {
+          throw new Error(data.err);
+        } else {
+          console.log(JSON.stringify(data));
+          if (data.msg === "Successful") {
+            processBackendData(data);
+          }
+        }
+      } 
+      catch (error) {
+        alert(JSON.stringify(error.message));
+      }
+    }
+    fetchData();
+  }, []);
 
-  
   // Process backend data and organize it for our component
   const processBackendData = (data) => {
-    // Extract unique topics
-    const uniqueTopics = new Set();
-    const extractedQuestions = [];
+    // Extract topics
+    const extractedTopics = data.topic.map(topic => ({
+      id: topic.id.toString(),
+      title: topic.name,
+      description: topic.description || ''
+    }));
     
-    // Process contests
-    const extractedContests = data.map(contest => {
-      // Extract questions
-      if (contest.question) {
-        contest.question.forEach(q => {
+    // Extract questions
+    const extractedQuestions = [];
+    data.topic.forEach(topic => {
+      if (topic.question && topic.question.length > 0) {
+        topic.question.forEach(q => {
           extractedQuestions.push({
             id: q.id.toString(),
             title: q.title,
             description: q.description,
             miniDescription: q.miniDescription || '',
             topicId: q.topic ? q.topic.toString() : null,
-            contestId: contest.id.toString(),
+            contestId: q.contestId ? q.contestId.toString() : null,
             noOfHiddenTestCases: q.noOfHiddenTestCases,
             noOfExternalTestCases: q.noOfExternalTestCases,
             difficulty: q.difficulty,
             pointsPerTestCaseSolved: q.pointsPerTestCaseSolved,
             timeToSolveInMinutes: q.timeToSolveInMinutes,
+            type: q.type || 'PRACTICE',
+            leetCodeLink: q.leetCodeLink,
+            leetCodeTitle: q.leetCodeTitle,
             testCases: q.testCase || []
           });
-          
-          // Record topic
-          if (q.topic) {
-            uniqueTopics.add(q.topic);
-          }
         });
       }
-      
-      return {
-        id: contest.id.toString(),
-        title: contest.name,
-        description: contest.description || '',
-        notes: contest.notes || '',
-        contestDate: contest.contestDate,
-        questions: contest.question ? contest.question.map(q => q.id.toString()) : []
-      };
     });
     
-    // Create topic objects
-    const extractedTopics = Array.from(uniqueTopics).map(topicId => {
+    // Extract contests
+    const extractedContests = data.contest.map(contest => {
       return {
-        id: topicId.toString(),
-        title: `Topic ${topicId}`, // Since topic titles aren't provided directly
-        description: `Description for Topic ${topicId}`
+        id: contest.id.toString(),
+        title: contest.title,
+        miniDescription: contest.miniDescription || '',
+        description: contest.description || '',
+        notes: contest.notes || '',
+        opensOn: contest.opensOn,
+        closesOn: contest.closesOn,
+        timeToSolveInMinutes: contest.timeToSolveInMinutes,
+        totalPoints: contest.totalPoints,
+        totalNoOfQuestions: contest.totalNoOfQuestions,
+        questions: contest.question ? contest.question.map(q => q.id.toString()) : []
       };
     });
     
@@ -155,81 +160,207 @@ const Admin = () => {
   };
   
   // Form handlers
-  const handleTopicSubmit = (e) => {
+  const handleTopicSubmit = async (e) => {
     e.preventDefault();
-    const newTopic = {
-      id: Date.now().toString(),
-      ...topicForm
-    };
-    setTopics([...topics, newTopic]);
-    setTopicForm({ title: '', description: '' });
-  };
-  
-  const handleQuestionSubmit = (e) => {
-    e.preventDefault();
-    const newQuestion = {
-      id: Date.now().toString(),
-      [questionMode === 'topic' ? 'topicId' : 'contestId']: questionForm.parentId,
-      ...questionForm
-    };
-    
-    // If this is a contest question, also update the contest
-    if (questionMode === 'contest') {
-      const updatedContests = contests.map(contest => {
-        if (contest.id === questionForm.parentId) {
-          return {
-            ...contest,
-            questions: [...contest.questions, newQuestion.id]
-          };
+    try {
+      const response = await fetch("http://localhost:4000/admin/addTopic", {
+        method: "POST",
+        body: JSON.stringify({
+          description: topicForm.description,
+          title: topicForm.title
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         }
-        return contest;
       });
-      setContests(updatedContests);
+      const data = await response.json();
+      if (data.err) {
+        throw new Error(data.err);
+      } else {
+        alert("Topic added successfully");
+        const newTopic = {
+          id: data.id || Date.now().toString(),
+          title: topicForm.title,
+          description: topicForm.description
+        };
+        setTopics([...topics, newTopic]);
+        setTopicForm({ title: '', description: '' });
+      }
+    } catch (error) {
+      alert(JSON.stringify(error.message));
     }
-    
-    setQuestions([...questions, newQuestion]);
-    setQuestionForm({
-      parentId: '',
-      title: '',
-      description: '',
-      miniDescription: '',
-      noOfHiddenTestCases: 18,
-      noOfExternalTestCases: 2,
-      difficulty: 'EASY',
-      pointsPerTestCaseSolved: 5,
-      timeToSolveInMinutes: 90
-    });
   };
   
-  const handleTestcaseSubmit = (e) => {
+  const handleQuestionSubmit = async (e) => {
     e.preventDefault();
-    const newTestcase = {
-      id: Date.now().toString(),
-      ...testcaseForm
-    };
-    setTestcases([...testcases, newTestcase]);
-    setTestcaseForm({
-      questionId: '',
-      inputString: '',
-      outputString: '',
-      testCaseType: 'OPEN1'
-    });
+    try {
+      const payload = {
+        title: questionForm.title,
+        description: questionForm.description,
+        miniDescription: questionForm.miniDescription,
+        [questionMode === 'topic' ? 'topic' : 'contestId']: questionForm.parentId,
+        noOfHiddenTestCases: questionForm.noOfHiddenTestCases,
+        noOfExternalTestCases: questionForm.noOfExternalTestCases,
+        difficulty: questionForm.difficulty,
+        pointsPerTestCaseSolved: questionForm.pointsPerTestCaseSolved,
+        timeToSolveInMinutes: questionForm.timeToSolveInMinutes,
+        type: questionForm.type,
+        leetCodeLink: questionForm.leetCodeLink,
+        leetCodeTitle: questionForm.leetCodeTitle
+      };
+      
+      const response = await fetch("http://localhost:4000/admin/addQuestion", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      });
+      
+      const data = await response.json();
+      if (data.err) {
+        throw new Error(data.err);
+      } else {
+        alert("Question added successfully");
+        
+        const newQuestion = {
+          id: data.id || Date.now().toString(),
+          [questionMode === 'topic' ? 'topicId' : 'contestId']: questionForm.parentId,
+          ...questionForm
+        };
+        
+        // If this is a contest question, also update the contest
+        if (questionMode === 'contest') {
+          const updatedContests = contests.map(contest => {
+            if (contest.id === questionForm.parentId) {
+              return {
+                ...contest,
+                questions: [...contest.questions, newQuestion.id]
+              };
+            }
+            return contest;
+          });
+          setContests(updatedContests);
+        }
+        
+        setQuestions([...questions, newQuestion]);
+        setQuestionForm({
+          parentId: '',
+          title: '',
+          description: '',
+          miniDescription: '',
+          noOfHiddenTestCases: 18,
+          noOfExternalTestCases: 2,
+          difficulty: 'EASY',
+          pointsPerTestCaseSolved: 5,
+          timeToSolveInMinutes: 90,
+          type: 'PRACTICE',
+          leetCodeLink: '',
+          leetCodeTitle: ''
+        });
+      }
+    } catch (error) {
+      alert(JSON.stringify(error.message));
+    }
   };
   
-  const handleContestSubmit = (e) => {
+  const handleTestcaseSubmit = async (e) => {
     e.preventDefault();
-    const newContest = {
-      id: Date.now().toString(),
-      questions: [],
-      ...contestForm
-    };
-    setContests([...contests, newContest]);
-    setContestForm({
-      title: '',
-      description: '',
-      notes: '',
-      contestDate: new Date().toISOString().slice(0, 16)
-    });
+    try {
+      const payload = {
+        questionId: testcaseForm.questionId,
+        inputString: testcaseForm.inputString,
+        outputString: testcaseForm.outputString,
+        testCaseType: testcaseForm.testCaseType
+      };
+      
+      const response = await fetch("http://localhost:4000/admin/addTestCase", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      });
+      
+      const data = await response.json();
+      if (data.err) {
+        throw new Error(data.err);
+      } else {
+        alert("Test case added successfully");
+        
+        const newTestcase = {
+          id: data.id || Date.now().toString(),
+          ...testcaseForm
+        };
+        
+        setTestcases([...testcases, newTestcase]);
+        setTestcaseForm({
+          questionId: '',
+          inputString: '',
+          outputString: '',
+          testCaseType: 'OPEN1'
+        });
+      }
+    } catch (error) {
+      alert(JSON.stringify(error.message));
+    }
+  };
+  
+  const handleContestSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const payload = {
+        title: contestForm.title,
+        description: contestForm.description,
+        notes: contestForm.notes,
+        miniDescription: contestForm.miniDescription,
+        timeToSolveInMinutes: contestForm.timeToSolveInMinutes,
+        totalPoints: contestForm.totalPoints,
+        totalNoOfQuestions: contestForm.totalNoOfQuestions,
+        opensOn: contestForm.opensOn,
+        closesOn: contestForm.closesOn
+      };
+      
+      const response = await fetch("http://localhost:4000/admin/addContest", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      });
+      
+      const data = await response.json();
+      if (data.err) {
+        throw new Error(data.err);
+      } else {
+        alert("Contest added successfully");
+        
+        const newContest = {
+          id: data.id || Date.now().toString(),
+          questions: [],
+          ...contestForm
+        };
+        
+        setContests([...contests, newContest]);
+        setContestForm({
+          title: '',
+          description: '',
+          notes: '',
+          miniDescription: '',
+          timeToSolveInMinutes: 90,
+          totalPoints: 120,
+          totalNoOfQuestions: 3,
+          opensOn: new Date().toISOString().slice(0, 16),
+          closesOn: new Date(Date.now() + 12 * 60 * 60 * 1000).toISOString().slice(0, 16)
+        });
+      }
+    } catch (error) {
+      alert(JSON.stringify(error.message));
+    }
   };
   
   // Form change handlers
@@ -260,348 +391,376 @@ const Admin = () => {
       [e.target.name]: e.target.value
     });
   };
-
-
-
-  async function addTopic(){
-    
-  }
   
   return (
-    <div className="p-6 max-w-6xl mx-auto bg-white rounded-lg shadow-md">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">Admin Dashboard</h1>
-      
-      {/* Tabs */}
-      <div className="flex mb-6 border-b">
-        <button 
-          className={`px-4 py-2 ${activeTab === 'topic' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
-          onClick={() => setActiveTab('topic')}
-        >
-          Topics
-        </button>
-        <button 
-          className={`px-4 py-2 ${activeTab === 'question' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
-          onClick={() => setActiveTab('question')}
-        >
-          Questions
-        </button>
-        <button 
-          className={`px-4 py-2 ${activeTab === 'testcase' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
-          onClick={() => setActiveTab('testcase')}
-        >
-          Test Cases
-        </button>
-        <button 
-          className={`px-4 py-2 ${activeTab === 'contest' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
-          onClick={() => setActiveTab('contest')}
-        >
-          Contests
-        </button>
-      </div>
-      
-      {/* Topic Form */}
-      {activeTab === 'topic' && (
-        <div>
-          <h2 className="text-xl font-semibold mb-4">Add Topic</h2>
-          <form onSubmit={handleTopicSubmit} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Title</label>
-              <input
-                type="text"
-                name="title"
-                value={topicForm.title}
-                onChange={handleTopicFormChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Description</label>
-              <textarea
-                name="description"
-                value={topicForm.description}
-                onChange={handleTopicFormChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                rows="3"
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-              onClick={addTopic}
-            >
-              Add Topic
-            </button>
-          </form>
-          
-          {/* Topic List */}
-          <div className="mt-8">
-            <h3 className="text-lg font-medium mb-2">Existing Topics</h3>
-            {topics.length === 0 ? (
-              <p className="text-gray-500">No topics added yet</p>
-            ) : (
-              <ul className="divide-y divide-gray-200">
-                {topics.map(topic => (
-                  <li key={topic.id} className="py-2">
-                    <h4 className="font-medium">{topic.title}</h4>
-                    <p className="text-gray-600 text-sm">{topic.description}</p>
-                    <p className="text-gray-500 text-xs mt-1">ID: {topic.id}</p>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
+    <div className="min-h-screen bg-gray-900 text-gray-100 p-6">
+      <div className="max-w-6xl mx-auto bg-gray-800 rounded-lg shadow-xl p-6">
+        <h1 className="text-3xl font-bold mb-6 text-blue-400">Admin Dashboard</h1>
+        
+        {/* Tabs */}
+        <div className="flex mb-6 border-b border-gray-700">
+          <button 
+            className={`px-4 py-2 ${activeTab === 'topic' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'} rounded-t-lg`}
+            onClick={() => setActiveTab('topic')}
+          >
+            Topics
+          </button>
+          <button 
+            className={`px-4 py-2 ${activeTab === 'question' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'} ml-1 rounded-t-lg`}
+            onClick={() => setActiveTab('question')}
+          >
+            Questions
+          </button>
+          <button 
+            className={`px-4 py-2 ${activeTab === 'testcase' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'} ml-1 rounded-t-lg`}
+            onClick={() => setActiveTab('testcase')}
+          >
+            Test Cases
+          </button>
+          <button 
+            className={`px-4 py-2 ${activeTab === 'contest' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'} ml-1 rounded-t-lg`}
+            onClick={() => setActiveTab('contest')}
+          >
+            Contests
+          </button>
         </div>
-      )}
-      
-      {/* Question Form */}
-      {activeTab === 'question' && (
-        <div>
-          <h2 className="text-xl font-semibold mb-4">Add Question</h2>
-          
-          {/* Toggle between topic and contest */}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Add Question To:</label>
-            <div className="flex space-x-4">
-              <button
-                type="button"
-                className={`px-4 py-2 rounded ${questionMode === 'topic' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
-                onClick={() => setQuestionMode('topic')}
-              >
-                Topic
-              </button>
-              <button
-                type="button"
-                className={`px-4 py-2 rounded ${questionMode === 'contest' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
-                onClick={() => setQuestionMode('contest')}
-              >
-                Contest
-              </button>
-            </div>
-          </div>
-          
-          {((questionMode === 'topic' && topics.length === 0) || 
-            (questionMode === 'contest' && contests.length === 0)) ? (
-            <p className="text-yellow-600">Please add {questionMode === 'topic' ? 'topics' : 'contests'} first</p>
-          ) : (
-            <form onSubmit={handleQuestionSubmit} className="space-y-4">
+        
+        {/* Topic Form */}
+        {activeTab === 'topic' && (
+          <div>
+            <h2 className="text-xl font-semibold mb-4 text-blue-300">Add Topic</h2>
+            <form onSubmit={handleTopicSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  {questionMode === 'topic' ? 'Topic' : 'Contest'}
-                </label>
-                <select
-                  name="parentId"
-                  value={questionForm.parentId}
-                  onChange={handleQuestionFormChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                  required
-                >
-                  <option value="">Select a {questionMode === 'topic' ? 'topic' : 'contest'}</option>
-                  {questionMode === 'topic' 
-                    ? topics.map(topic => (
-                        <option key={topic.id} value={topic.id}>{topic.title}</option>
-                      ))
-                    : contests.map(contest => (
-                        <option key={contest.id} value={contest.id}>{contest.title}</option>
-                      ))
-                  }
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Title</label>
+                <label className="block text-sm font-medium text-gray-400">Title</label>
                 <input
                   type="text"
                   name="title"
-                  value={questionForm.title}
-                  onChange={handleQuestionFormChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  value={topicForm.title}
+                  onChange={handleTopicFormChange}
+                  className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Description</label>
+                <label className="block text-sm font-medium text-gray-400">Description</label>
                 <textarea
                   name="description"
-                  value={questionForm.description}
-                  onChange={handleQuestionFormChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  value={topicForm.description}
+                  onChange={handleTopicFormChange}
+                  className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
                   rows="3"
                   required
                 />
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Mini Description</label>
-                <input
-                  type="text"
-                  name="miniDescription"
-                  value={questionForm.miniDescription}
-                  onChange={handleQuestionFormChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Hidden Test Cases</label>
-                  <input
-                    type="number"
-                    name="noOfHiddenTestCases"
-                    value={questionForm.noOfHiddenTestCases}
-                    onChange={handleQuestionFormChange}
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                    min="0"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">External Test Cases</label>
-                  <input
-                    type="number"
-                    name="noOfExternalTestCases"
-                    value={questionForm.noOfExternalTestCases}
-                    onChange={handleQuestionFormChange}
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                    min="0"
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Difficulty</label>
-                <select
-                  name="difficulty"
-                  value={questionForm.difficulty}
-                  onChange={handleQuestionFormChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                >
-                  <option value="EASY">EASY</option>
-                  <option value="BALANCED">BALANCED</option>
-                  <option value="INTENSE">INTENSE</option>
-                  <option value="HELL">HELL</option>
-                </select>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Points Per Test Case</label>
-                  <input
-                    type="number"
-                    name="pointsPerTestCaseSolved"
-                    value={questionForm.pointsPerTestCaseSolved}
-                    onChange={handleQuestionFormChange}
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                    min="0"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Time to Solve (minutes)</label>
-                  <input
-                    type="number"
-                    name="timeToSolveInMinutes"
-                    value={questionForm.timeToSolveInMinutes}
-                    onChange={handleQuestionFormChange}
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                    min="0"
-                    required
-                  />
-                </div>
-              </div>
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
               >
-                Add Question
+                Add Topic
               </button>
             </form>
-          )}
-          
-          {/* Question List */}
-          <div className="mt-8">
-            <h3 className="text-lg font-medium mb-2">Existing Questions</h3>
-            {questions.length === 0 ? (
-              <p className="text-gray-500">No questions added yet</p>
-            ) : (
-              <ul className="divide-y divide-gray-200">
-                {questions.map(question => {
-                  const topic = topics.find(t => t.id === question.topicId);
-                  const contest = contests.find(c => c.id === question.contestId);
-                  return (
-                    <li key={question.id} className="py-2">
-                      <h4 className="font-medium">{question.title}</h4>
-                      <p className="text-gray-600 text-sm mb-1">
-                        {question.topicId ? `Topic: ${topic?.title || 'Unknown'}` : 
-                         question.contestId ? `Contest: ${contest?.title || 'Unknown'}` : 'No Topic/Contest'}
-                      </p>
-                      <p className="text-gray-600 text-sm mb-1">Difficulty: {question.difficulty}</p>
-                      <p className="text-gray-600 text-sm">{question.miniDescription}</p>
-                      <p className="text-gray-500 text-xs mt-1">ID: {question.id}</p>
+            
+            {/* Topic List */}
+            <div className="mt-8">
+              <h3 className="text-lg font-medium mb-2 text-blue-300">Existing Topics</h3>
+              {topics.length === 0 ? (
+                <p className="text-gray-400">No topics added yet</p>
+              ) : (
+                <ul className="divide-y divide-gray-700">
+                  {topics.map(topic => (
+                    <li key={topic.id} className="py-3">
+                      <h4 className="font-medium text-white">{topic.title}</h4>
+                      <p className="text-gray-400 text-sm">{topic.description || 'No description'}</p>
+                      <p className="text-gray-500 text-xs mt-1">ID: {topic.id}</p>
                     </li>
-                  );
-                })}
-              </ul>
-            )}
-          </div>
-        </div>
-      )}
-      
-      {/* Test Case Form */}
-      {activeTab === 'testcase' && (
-        <div>
-          <h2 className="text-xl font-semibold mb-4">Add Test Case</h2>
-          {questions.length === 0 ? (
-            <p className="text-yellow-600">Please add questions first</p>
-          ) : (
-            <form onSubmit={handleTestcaseSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Question</label>
-                <select
-                  name="questionId"
-                  value={testcaseForm.questionId}
-                  onChange={handleTestcaseFormChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                  required
-                >
-                  <option value="">Select a question</option>
-                  {questions.map(question => (
-                    <option key={question.id} value={question.id}>{question.title}</option>
                   ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Input String</label>
-                <textarea
-                  name="inputString"
-                  value={testcaseForm.inputString}
-                  onChange={handleTestcaseFormChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 font-mono"
-                  rows="3"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Output String</label>
-                <textarea
-                  name="outputString"
-                  value={testcaseForm.outputString}
-                  onChange={handleTestcaseFormChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 font-mono"
-                  rows="3"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Test Case Type</label>
-                <select
-                  name="testCaseType"
-                  value={testcaseForm.testCaseType}
-                  onChange={handleTestcaseFormChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                </ul>
+              )}
+            </div>
+          </div>
+        )}
+        
+        {/* Question Form */}
+        {activeTab === 'question' && (
+          <div>
+            <h2 className="text-xl font-semibold mb-4 text-blue-300">Add Question</h2>
+            
+            {/* Toggle between topic and contest */}
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-400 mb-2">Add Question To:</label>
+              <div className="flex space-x-4">
+                <button
+                  type="button"
+                  className={`px-4 py-2 rounded ${questionMode === 'topic' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+                  onClick={() => setQuestionMode('topic')}
                 >
-                  <option value="OPEN1">OPEN1</option>
-                  <option value="OPEN2">OPEN2</option>
-                  <option value="HIDDEN">HIDDEN</option>
-                </select>
+                  Topic
+                </button>
+                <button
+                  type="button"
+                  className={`px-4 py-2 rounded ${questionMode === 'contest' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+                  onClick={() => setQuestionMode('contest')}
+                >
+                  Contest
+                </button>
               </div>
-              <button
-                type="submit"
+            </div>
+            
+            {((questionMode === 'topic' && topics.length === 0) || 
+              (questionMode === 'contest' && contests.length === 0)) ? (
+              <p className="text-yellow-500">Please add {questionMode === 'topic' ? 'topics' : 'contests'} first</p>
+            ) : (
+              <form onSubmit={handleQuestionSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-400">
+                    {questionMode === 'topic' ? 'Topic' : 'Contest'}
+                  </label>
+                  <select
+                    name="parentId"
+                    value={questionForm.parentId}
+                    onChange={handleQuestionFormChange}
+                    className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                    required
+                  >
+                    <option value="">Select a {questionMode === 'topic' ? 'topic' : 'contest'}</option>
+                    {questionMode === 'topic' 
+                      ? topics.map(topic => (
+                          <option key={topic.id} value={topic.id}>{topic.title}</option>
+                        ))
+                      : contests.map(contest => (
+                          <option key={contest.id} value={contest.id}>{contest.title}</option>
+                        ))
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-400">Title</label>
+                  <input
+                    type="text"
+                    name="title"
+                    value={questionForm.title}
+                    onChange={handleQuestionFormChange}
+                    className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-400">Description</label>
+                  <textarea
+                    name="description"
+                    value={questionForm.description}
+                    onChange={handleQuestionFormChange}
+                    className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                    rows="5"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-400">Mini Description</label>
+                  <input
+                    type="text"
+                    name="miniDescription"
+                    value={questionForm.miniDescription}
+                    onChange={handleQuestionFormChange}
+                    className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400">Hidden Test Cases</label>
+                    <input
+                      type="number"
+                      name="noOfHiddenTestCases"
+                      value={questionForm.noOfHiddenTestCases}
+                      onChange={handleQuestionFormChange}
+                      className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                      min="0"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400">External Test Cases</label>
+                    <input
+                      type="number"
+                      name="noOfExternalTestCases"
+                      value={questionForm.noOfExternalTestCases}
+                      onChange={handleQuestionFormChange}
+                      className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                      min="0"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-400">Difficulty</label>
+                  <select
+                    name="difficulty"
+                    value={questionForm.difficulty}
+                    onChange={handleQuestionFormChange}
+                    className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                  >
+                    <option value="EASY">EASY</option>
+                    <option value="BALANCED">BALANCED</option>
+                    <option value="INTENSE">INTENSE</option>
+                    <option value="HELL">HELL</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-400">Question Type</label>
+                  <select
+                    name="type"
+                    value={questionForm.type}
+                    onChange={handleQuestionFormChange}
+                    className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                  >
+                    <option value="PRACTICE">PRACTICE</option>
+                    <option value="CONTEST">CONTEST</option>
+                  </select>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400">Points Per Test Case</label>
+                    <input
+                      type="number"
+                      name="pointsPerTestCaseSolved"
+                      value={questionForm.pointsPerTestCaseSolved}
+                      onChange={handleQuestionFormChange}
+                      className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                      min="0"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400">Time to Solve (minutes)</label>
+                    <input
+                      type="number"
+                      name="timeToSolveInMinutes"
+                      value={questionForm.timeToSolveInMinutes}
+                      onChange={handleQuestionFormChange}
+                      className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                      min="0"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400">LeetCode Link (Optional)</label>
+                    <input
+                      type="text"
+                      name="leetCodeLink"
+                      value={questionForm.leetCodeLink || ''}
+                      onChange={handleQuestionFormChange}
+                      className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400">LeetCode Title (Optional)</label>
+                    <input
+                      type="text"
+                      name="leetCodeTitle"
+                      value={questionForm.leetCodeTitle || ''}
+                      onChange={handleQuestionFormChange}
+                      className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                    />
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                >
+                  Add Question
+                </button>
+              </form>
+            )}
+            
+            {/* Question List */}
+            <div className="mt-8">
+              <h3 className="text-lg font-medium mb-2 text-blue-300">Existing Questions</h3>
+              {questions.length === 0 ? (
+                <p className="text-gray-400">No questions added yet</p>
+              ) : (
+                <ul className="divide-y divide-gray-700">
+                  {questions.map(question => {
+                    const topic = topics.find(t => t.id === question.topicId);
+                    const contest = contests.find(c => c.id === question.contestId);
+                    return (
+                      <li key={question.id} className="py-3">
+                        <h4 className="font-medium text-white">{question.title}</h4>
+                        <p className="text-gray-400 text-sm mb-1">
+                          {question.topicId ? `Topic: ${topic?.title || 'Unknown'}` : 
+                           question.contestId ? `Contest: ${contest?.title || 'Unknown'}` : 'No Topic/Contest'}
+                        </p>
+                        <p className="text-blue-400 text-sm mb-1">Difficulty: {question.difficulty}</p>
+                        <p className="text-gray-400 text-sm">{question.miniDescription || 'No mini description'}</p>
+                        <p className="text-gray-500 text-xs mt-1">ID: {question.id}</p>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+            </div>
+          </div>
+        )}
+        
+        {/* Test Case Form */}
+        {activeTab === 'testcase' && (
+          <div>
+            <h2 className="text-xl font-semibold mb-4 text-blue-300">Add Test Case</h2>
+            {questions.length === 0 ? (
+              <p className="text-yellow-500">Please add questions first</p>
+            ) : (
+              <form onSubmit={handleTestcaseSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-400">Question</label>
+                  <select
+                    name="questionId"
+                    value={testcaseForm.questionId}
+                    onChange={handleTestcaseFormChange}
+                    className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                    required
+                  >
+                    <option value="">Select a question</option>
+                    {questions.map(question => (
+                      <option key={question.id} value={question.id}>{question.title}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-400">Input String</label>
+                  <textarea
+                    name="inputString"
+                    value={testcaseForm.inputString}
+                    onChange={handleTestcaseFormChange}
+                    className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white font-mono"
+                    rows="3"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-400">Output String</label>
+                  <textarea
+                    name="outputString"
+                    value={testcaseForm.outputString}
+                    onChange={handleTestcaseFormChange}
+                    className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white font-mono"
+                    rows="3"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-400">Test Case Type</label>
+                  <select
+                    name="testCaseType"
+                    value={testcaseForm.testCaseType}
+                    onChange={handleTestcaseFormChange}
+                    className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                  >
+                    <option value="OPEN1">OPEN1</option>
+                    <option value="OPEN2">OPEN2</option>
+                    <option value="HIDDEN">HIDDEN</option>
+                  </select>
+                </div>
+                <button
+                  type="submit"
                 className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
               >
                 Add Test Case
@@ -736,6 +895,7 @@ const Admin = () => {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 };

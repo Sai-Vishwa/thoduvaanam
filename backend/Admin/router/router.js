@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const { loadData } = require("../services/loadData");
+const { addTopic } = require("../services/addTopic");
 
 const router = new Router();
 
@@ -13,8 +14,14 @@ const asyncHandler = (fn) => (req, res, next) => {
   }))
 
   router.post('/load', asyncHandler(async (req, res) => {
-    console.log("hey inisde router")
+    // console.log("hey inisde router")
     await loadData(req,res);
+  }));
+
+  router.post('/addTopic', asyncHandler(async (req, res) => {
+    // console.log("hey inisde router")
+    console.log("im calling add topic ")
+    await addTopic(req,res);
   }));
 
 module.exports = {
