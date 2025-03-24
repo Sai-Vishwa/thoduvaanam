@@ -772,20 +772,20 @@ const Admin = () => {
             {testcases.length === 0 ? (
               <p className="text-gray-500">No test cases added yet</p>
             ) : (
-              <ul className="divide-y divide-gray-200">
+              <ul className="divide-y divide-gray-700">
                 {testcases.map(testcase => {
                   const question = questions.find(q => q.id === testcase.questionId);
                   return (
                     <li key={testcase.id} className="py-2">
                       <h4 className="font-medium">Test Case for: {question?.title || 'Unknown'}</h4>
-                      <p className="text-gray-600 text-sm">Type: {testcase.testCaseType}</p>
-                      <div className="mt-1 p-2 bg-gray-100 rounded">
+                      <p className="text-gray-300 text-sm">Type: {testcase.testCaseType}</p>
+                      <div className="mt-1 p-2 rounded">
                         <p className="text-sm font-medium">Input:</p>
                         <pre className="text-xs overflow-x-auto">{testcase.inputString}</pre>
                         <p className="text-sm font-medium mt-2">Output:</p>
                         <pre className="text-xs overflow-x-auto">{testcase.outputString}</pre>
                       </div>
-                      <p className="text-gray-500 text-xs mt-1">ID: {testcase.id}</p>
+                      <p className="text-gray-300 text-xs mt-1">ID: {testcase.id}</p>
                     </li>
                   );
                 })}
@@ -891,7 +891,7 @@ const Admin = () => {
             {contests.length === 0 ? (
               <p className="text-gray-500">No contests added yet</p>
             ) : (
-              <ul className="divide-y divide-gray-200">
+              <ul className="divide-y divide-gray-700">
                 {contests.map(contest => {
                   const contestQuestions = questions.filter(q => 
                     contest.questions.includes(q.id) || q.contestId === contest.id

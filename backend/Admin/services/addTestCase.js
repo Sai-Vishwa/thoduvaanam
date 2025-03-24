@@ -6,6 +6,9 @@ async function addTestCase(req,res) {
     try{
         let dt = req.body.data
         delete dt.id
+        dt.questionId = parseInt(dt.questionId)
+        dt.type = dt.testCaseType
+        delete dt.testCaseType
         await prisma.testCase.create({
             data:req.body.data
         })
