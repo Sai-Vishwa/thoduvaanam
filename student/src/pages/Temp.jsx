@@ -93,7 +93,7 @@ function Temp(){
         rank={allData.rank}
       />
 
-      <div className="flex items-center h-[80vh]">
+      <div className="flex items-center h-[90vh]">
 
         <div className="w-1/4 h-full flex justify-center items-center py-4">
             <QuestionDashboard 
@@ -123,7 +123,7 @@ function Temp(){
                       </div>
 
                   </div>  
-                  <div className="h-1/2 w-full flex justify-center items-center">
+                  <div className="h-1/2  w-full flex justify-center items-center">
                         <DetailsDashBoard 
                         type={detailsBox.type}
                         details={detailsBox.details }

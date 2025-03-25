@@ -24,7 +24,7 @@ const DashboardDetails = ({ type, details }) => {
   const renderStatusButton = () => {
     if (!details) return null;
     const status = details.status;
-    const buttonClasses = "w-full px-4 py-3 rounded-lg text-sm font-bold flex items-center justify-center space-x-2 transition-all";
+    const buttonClasses = "w-full px-4 py-2 rounded-lg text-sm font-bold flex items-center justify-center space-x-2 transition-all";
     
     const statusMap = {
       "START NEW ATTEMPT": { 
@@ -57,7 +57,7 @@ const DashboardDetails = ({ type, details }) => {
     };
     const statusConfig = statusMap[status] || statusMap["NOT STARTED"];
     return (
-      <button className={`${buttonClasses} ${statusConfig.color} `} disabled={statusConfig.disabled}>
+      <button className={`${buttonClasses} ${statusConfig.color} p-0 m-0`} disabled={statusConfig.disabled}>
         {statusConfig.icon}
         <span>{status}</span>
       </button>
@@ -83,9 +83,9 @@ const DashboardDetails = ({ type, details }) => {
     if (type === 'question') {
       const questionData = details.questionData;
       return (
-        <div className="space-y-4">
+        <div className="space-y-2 ">
           <div>
-            <h2 className="text-2xl font-bold text-[#2bbdaa] mb-2">
+            <h2 className="text-xl font-bold text-[#2bbdaa]">
               {questionData.title}
             </h2>
             <p className="text-[#ddf3ea] opacity-80 text-sm">
@@ -212,7 +212,7 @@ const DashboardDetails = ({ type, details }) => {
               <div className="flex items-center space-x-3">
                 <FileText className="w-5 h-5 text-[#2bbdaa]" />
                 <div>
-                  <div className="text-sm font-bold">Submission #{submission.id}</div>
+                  <div className="text-sm text-[#ddf3ea]">Submission #{submission.id}</div>
                   <div className="text-xs text-gray-400">
                     Submitted on: {new Date(submission.submittedOn).toLocaleString()}
                   </div>
@@ -223,16 +223,16 @@ const DashboardDetails = ({ type, details }) => {
                   className={`
                     text-xs font-bold px-2 py-1 rounded 
                     ${
-                      submission.status === 'completed' ? 'bg-green-600 text-[#ddf3ea]' :
-                      submission.status === 'computing' ? 'bg-yellow-600 text-[#ddf3ea]' :
-                      submission.status === 'waiting' ? 'bg-blue-600 text-[#ddf3ea]' :
+                      submission.status === 'completed' ? 'text-[#42f2a8]' :
+                      submission.status === 'computing' ? 'text-[#c84ae5]' :
+                      submission.status === 'waiting' ? ' text-[#44bade]' :
                       'bg-gray-600 text-[#ddf3ea]'
                     }
                   `}
                 >
                   {submission.status.toUpperCase()}
                 </span>
-                <button className="bg-[#2bbdaa] text-[#ddf3ea] px-3 py-1 rounded-md text-xs hover:bg-[#22a89f] transition-colors">
+                <button className=" text-[#ddf3ea] px-3 py-1 basic-1  hover:text-[#36ead2]  text-xs transition-colors">
                   Review
                 </button>
               </div>
@@ -247,14 +247,14 @@ const DashboardDetails = ({ type, details }) => {
   const renderNavBar = () => {
     if (!details) return null;
     return (
-      <div className="relative w-full font-['Courier_New'] flex border-b-2 border-[#3b3b3b] bg-[#222]">
+      <div className="relative w-full font-['Courier_New'] flex border-[#3b3b3b] bg-[#222]">
         <motion.button 
           whileTap={{ scale: 0.95 }}
           onClick={() => setActiveTab('details')}
-          className="w-1/2 py-2 flex items-center justify-center space-x-2 text-[#ddf3ea] relative"
+          className={`w-1/2 flex items-center justify-center space-x-2 relative ${activeTab==='details'?"text-[#36ead2]":"text-[#ddf3ea]"}`}
         >
           <Info className="w-4 h-4" />
-          <span>Details</span>
+          <span className={``}>Details</span>
           {activeTab === 'details' && (
             <motion.div 
               layoutId="navbar-underline"
@@ -266,7 +266,7 @@ const DashboardDetails = ({ type, details }) => {
         <motion.button 
           whileTap={{ scale: 0.95 }}
           onClick={() => setActiveTab('submissions')}
-          className="w-1/2 py-2 flex items-center justify-center space-x-2 text-[#ddf3ea] relative"
+          className={`w-1/2 py-2 flex items-center justify-center space-x-2 ${activeTab==='submissions'?"text-[#36ead2]":"text-[#ddf3ea]"} relative`}
         >
           <FileText className="w-4 h-4" />
           <span>Submissions</span>
@@ -282,7 +282,7 @@ const DashboardDetails = ({ type, details }) => {
   };
 
   return (
-    <div className="flex justify-center items-center h-full w-full font-['Yu_Gothic']">
+    <div className="flex justify-center items-center h-5/6 w-full font-['Yu_Gothic']">
       <motion.div 
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.9 }}
@@ -291,7 +291,7 @@ const DashboardDetails = ({ type, details }) => {
       >
         {Object.keys(details || {}).length > 0 && renderNavBar()}
         
-        <div className="px-6 py-4 overflow-y-auto flex-grow">
+        <div className="px-6 mt-0 pt-0 overflow-y-auto w-full h-4/6">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -308,7 +308,7 @@ const DashboardDetails = ({ type, details }) => {
         </div>
         
         {details && (
-          <div className="p-4 border-t border-[#3b3b3b]">
+          <div className="px-4 py-2 border-t border-[#3b3b3b]">
             {renderStatusButton()}
           </div>
         )}
