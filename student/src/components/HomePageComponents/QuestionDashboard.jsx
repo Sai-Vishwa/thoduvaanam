@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Cookies from "js-cookie";
 
-const QuestionDashboard = ({details , setDetailsBox , uname}) => {
+const QuestionDashboard = ({details , setDetailsBox , detailsBox , uname}) => {
 
   // console.log(JSON.stringify(details))
   const [searchTerm, setSearchTerm] = useState('');
@@ -67,6 +67,10 @@ const QuestionDashboard = ({details , setDetailsBox , uname}) => {
     q.difficulty.toLowerCase().includes(searchTerm.toLowerCase()) ||
     q.groupName.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  if(Object.keys(detailsBox.details).length==0){
+    handleClick(allQuestions[0]?.title)
+  }
   
   return (
     <div className="h-full w-5/6 overflow-hidden flex flex-col text-gray-200 relative">
@@ -90,7 +94,8 @@ const QuestionDashboard = ({details , setDetailsBox , uname}) => {
 <div className="flex flex-col w-full h-full">
         {filteredQuestions.length > 0 ? (
           <div className="space-">
-            {filteredQuestions.map(question => (
+            {filteredQuestions.map((question)=> (
+              
               <div 
                 key={question.id} 
                 onClick={()=>{handleClick(question.title)}}

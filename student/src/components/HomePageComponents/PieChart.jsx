@@ -117,7 +117,7 @@ const PieChart = ({details}) => {
               y="95"
               textAnchor="middle"
               className={"text-xs"}
-              fill={"#ddf3ef"}
+              fill={"#ffffff"}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 1.2 }}
@@ -146,7 +146,7 @@ const PieChart = ({details}) => {
 
                 {
                     segments.map((segment , index)=>(
-                        <div className='flex justify-center items-center space-x-2 text-xs text-[#ddf3ef]'>
+                        <div className='flex justify-center items-center space-x-2 text-xs text-[#ffffff]'>
                     <div className={`h-2 w-2 rounded-sm ${segment.category=="Easy"?"bg-[#3aff4e]":segment.category=="Hell"?"bg-[#ff0000]":segment.category=="Balanced"?"bg-[#ffba30]":"bg-[#ff5c4a]"}`}></div>
                     <div >{segment.category.toLowerCase()}-{segment.solved}/{segment.total}</div>
                         </div>

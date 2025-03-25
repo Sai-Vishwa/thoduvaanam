@@ -97,6 +97,7 @@ function Temp(){
 
         <div className="w-1/4 h-full flex justify-center items-center py-4">
             <QuestionDashboard 
+            detailsBox={detailsBox}
             details={allData.data}
             setDetailsBox={setDetailsBox}
             uname={uname}/>
