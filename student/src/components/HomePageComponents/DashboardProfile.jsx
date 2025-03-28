@@ -403,6 +403,23 @@ function DashBoardProfile({userData}){
               </span>
             )}
           </motion.div>8*/}
+          <div className="flex justify-center items-center">
+
+          {userData?.leetCodeProfile?.length > 0 ? (
+            <a
+            href={userData.leetCodeProfile}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#2bbdaa] hover:text-[#ddf3ef] text-sm font-bold flex items-center font-mono"
+            >
+                          <span>{userData.leetCodeProfile}</span>
+                        </a>
+                      ) : (
+                        <span className="text-[#ddf3ef]/50 text-sm font-bold flex items-center font-mono">
+                          No LeetCode profile
+                        </span>
+                      )}
+                      </div>
       </motion.div>
     </div>
   );

@@ -116,9 +116,9 @@ const DashboardDetails = ({ type, details }) => {
     if (type === 'contest') {
       const contestData = details.data;
       return (
-        <div className="space-y-4">
+        <div className="space-y-2">
           <div>
-            <h2 className="text-2xl font-bold text-[#2bbdaa] mb-2">
+            <h2 className="text-2xl font-bold text-[#2bbdaa] ">
               {contestData.title}
             </h2>
             <p className="text-[#ddf3ea] opacity-80 text-sm">
@@ -138,6 +138,12 @@ const DashboardDetails = ({ type, details }) => {
                 <Award className="w-5 h-5" />
                 <span className="font-semibold text-sm">
                   {contestData.totalPoints} pts
+                </span>
+              </div>
+              <div className="flex items-center space-x-2 text-[#2bbdaa]">
+                <Award className="w-5 h-5" />
+                <span className="font-semibold text-sm">
+                  No. of Questions - {contestData.totalNoOfQuestions}
                 </span>
               </div>
             </div>

@@ -1,95 +1,41 @@
 import React, { useState } from 'react';
 import Cookies from "js-cookie";
 
-
 const ContestsDashboard = ({details , setDetailsBox , uname}) => {
-
-
-
   async function handleClick(contestTitle) {
-
     try {
-          const details = await fetch("http://localhost:4000/basic/contest-basic", {
-            method: "POST",
-            body: JSON.stringify({ uname: uname, session: Cookies.get("session"), tname: contestTitle }),
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            }
-          })
-          const data = await details.json()
-          if (data.err) {
-            throw new Error(data.err)
-          } else {
-            setDetailsBox({type:"contest" , details:data})
-          }
-        } 
-        catch (error) {
-          console.log(error)
-          setDetailsBox({type:"contest" , details:{} , error:"Some internal error try again"})
+      const details = await fetch("http://localhost:4000/basic/contest-basic", {
+        method: "POST",
+        body: JSON.stringify({ uname: uname, session: Cookies.get("session"), tname: contestTitle }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         }
+      })
+      const data = await details.json()
+      if (data.err) {
+        throw new Error(data.err)
+      } else {
+        setDetailsBox({type:"contest" , details:data})
+      }
+    } 
+    catch (error) {
+      console.log(error)
+      setDetailsBox({type:"contest" , details:{} , error:"Some internal error try again"})
+    }
   }
 
-    // console.log(JSON.stringify(details))
-
-    // details?.map((val)=>{
-    //     console.log(JSON.stringify(val))
-    // })
   // Static sample data
   const sampleData = details
-  const sampleData2 =[
-    {
-      "id": 1,
-      "title": "Aadukalam_Round_2",
-      "opensOn": "2025-02-25T08:30:00.000Z",
-      "closesOn": "2025-03-26T20:01:02.947Z", // Made this active for demo
-      "timeToSolveInMinutes": 90,
-      "totalPoints": 120,
-      "totalNoOfQuestions": 3
-    },
-    {
-      "id": 2,
-      "title": "sample_test",
-      "opensOn": "2025-02-25T07:31:02.933Z",
-      "closesOn": "2025-03-25T20:01:02.947Z", // Made this active for demo
-      "timeToSolveInMinutes": 90,
-      "totalPoints": 120,
-      "totalNoOfQuestions": 3
-    },
-    {
-      "id": 3,
-      "title": "Upcoming_Contest_1",
-      "opensOn": "2025-04-05T08:30:00.000Z",
-      "closesOn": "2025-04-05T20:01:02.947Z",
-      "timeToSolveInMinutes": 120,
-      "totalPoints": 150,
-      "totalNoOfQuestions": 4
-    },
-    {
-      "id": 4,
-      "title": "Finished_Contest_1",
-      "opensOn": "2025-01-15T08:30:00.000Z",
-      "closesOn": "2025-01-15T20:01:02.947Z",
-      "timeToSolveInMinutes": 60,
-      "totalPoints": 100,
-      "totalNoOfQuestions": 2
-    },
-    {
-        "id": 5,
-        "title": "Finished_Contest_2",
-        "opensOn": "2025-01-15T08:30:00.000Z",
-        "closesOn": "2025-01-15T20:01:02.947Z",
-        "timeToSolveInMinutes": 60,
-        "totalPoints": 100,
-        "totalNoOfQuestions": 2
-      }
-  ];
   
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState('active'); // Default to active tab
   
-  // Mock current date for demonstration
-  const currentDate = new Date('2025-03-23');
+  // Get current date in IST
+  const getCurrentDateInIST = () => {
+    const now = new Date();
+    return new Date(now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+  };
   
   // Categorize contests
   const active = [];
@@ -99,10 +45,15 @@ const ContestsDashboard = ({details , setDetailsBox , uname}) => {
   sampleData?.forEach(contest => {
     const opensOn = new Date(contest.opensOn);
     const closesOn = new Date(contest.closesOn);
+    const currentDate = getCurrentDateInIST();
     
-    if (currentDate >= opensOn && currentDate <= closesOn) {
+    // Adjust dates to IST
+    const opensOnIST = new Date(opensOn.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+    const closesOnIST = new Date(closesOn.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+    
+    if (currentDate >= opensOnIST && currentDate <= closesOnIST) {
       active.push(contest);
-    } else if (currentDate < opensOn) {
+    } else if (currentDate < opensOnIST) {
       upcoming.push(contest);
     } else {
       finished.push(contest);
@@ -120,10 +71,11 @@ const ContestsDashboard = ({details , setDetailsBox , uname}) => {
   const filteredUpcoming = filterContests(upcoming);
   const filteredFinished = filterContests(finished);
   
-  // Format date for display
+  // Format date for display in IST
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleString('en-US', {
+      timeZone: 'Asia/Kolkata',
       year: 'numeric',
       month: 'short',
       day: 'numeric',
@@ -136,7 +88,7 @@ const ContestsDashboard = ({details , setDetailsBox , uname}) => {
   // Calculate time remaining
   const getTimeRemaining = (dateString) => {
     const targetDate = new Date(dateString);
-    const now = currentDate; // Using our mock current date
+    const now = getCurrentDateInIST(); 
     const diffMs = targetDate - now;
     
     // If the date has passed
@@ -166,29 +118,20 @@ const ContestsDashboard = ({details , setDetailsBox , uname}) => {
     >
       <div className="flex justify-between items-start">
         <div className="flex-1">
-          <p className="font-medium text-white font-['Courier_New']">
+          <p className="font-medium text-white font-['Inter']">
             {contest.title}
           </p>
           <div className="flex flex-wrap  gap-2">
-            {/* <span className="text-xs px-2 py-1 rounded bg-purple-900 text-purple-200">
-              {contest.timeToSolveInMinutes} mins
-            </span>
-            <span className="text-xs px-2 py-1 rounded bg-blue-900 text-blue-200">
-              {contest.totalPoints} points
-            </span> */}
-            {/* <span className="text-xs px-2 py-1 rounded bg-indigo-900 text-indigo-200">
-              {contest.totalNoOfQuestions} questions
-            </span> */}
+            {/* Optional additional contest info */}
           </div>
         </div>
       </div>
       {
         type=='finished' &&   
       
-      <div className="text-sm text-gray-400 font-['Courier_New']">
-        {/* <p>Opens: {formatDate(contest.opensOn)}</p> */}
+      <div className="text-sm text-gray-400 font-['Inter']">
         <p>Closed on: {formatDate(contest.closesOn)}</p>
-        {currentDate < new Date(contest.closesOn) && (
+        {getCurrentDateInIST() < new Date(contest.closesOn) && (
           <p className="text-[#2bbdaa] mt-1">{getTimeRemaining(contest.closesOn)}</p>
         )}
       </div>
@@ -197,22 +140,20 @@ const ContestsDashboard = ({details , setDetailsBox , uname}) => {
     {
         type=='active' &&   
       
-      <div className="text-sm text-gray-400 font-['Courier_New']">
-        {/* <p>Opens: {formatDate(contest.opensOn)}</p> */}
+      <div className="text-sm text-gray-400 font-['Inter']">
         <p>Closes on: {formatDate(contest.closesOn)}</p>
-        {currentDate < new Date(contest.closesOn) && (
+        {getCurrentDateInIST() < new Date(contest.closesOn) && (
           <p className="text-[#2bbdaa] mt-1">{getTimeRemaining(contest.closesOn)}</p>
         )}
       </div>
       }
 
-{
+    {
         type=='upcoming' &&   
       
-      <div className="text-sm text-gray-400 font-['Courier_New']">
-        {/* <p>Opens: {formatDate(contest.opensOn)}</p> */}
+      <div className="text-sm text-gray-400 font-['Inter']">
         <p>Opens on: {formatDate(contest.opensOn)}</p>
-        {currentDate < new Date(contest.opensOn) && (
+        {getCurrentDateInIST() < new Date(contest.opensOn) && (
           <p className="text-[#2bbdaa] mt-1">{getTimeRemaining(contest.opensOn)}</p>
         )}
       </div>
@@ -229,7 +170,7 @@ const ContestsDashboard = ({details , setDetailsBox , uname}) => {
             {filteredActive.length > 0 ? (
               filteredActive.map(contest => renderContestCard(contest , 'active'))
             ) : (
-              <div className="text-center py-8 text-gray-400 font-['Courier_New']">
+              <div className="text-center py-8 text-gray-400 font-['Inter']">
                 No active contests at the moment
               </div>
             )}
@@ -241,7 +182,7 @@ const ContestsDashboard = ({details , setDetailsBox , uname}) => {
             {filteredUpcoming.length > 0 ? (
               filteredUpcoming.map(contest => renderContestCard(contest , 'upcoming'))
             ) : (
-              <div className="text-center py-8 text-gray-400 font-['Courier_New']">
+              <div className="text-center py-8 text-gray-400 font-['Inter']">
                 No upcoming contests found
               </div>
             )}
@@ -253,7 +194,7 @@ const ContestsDashboard = ({details , setDetailsBox , uname}) => {
             {filteredFinished.length > 0 ? (
               filteredFinished.map(contest => renderContestCard(contest , 'finished'))
             ) : (
-              <div className="text-center py-8 text-gray-400 font-['Courier_New']">
+              <div className="text-center py-8 text-gray-400 font-['Inter']">
                 No finished contests found
               </div>
             )}
@@ -268,7 +209,7 @@ const ContestsDashboard = ({details , setDetailsBox , uname}) => {
     <div className="h-5/6 w-5/6 overflow-hidden flex flex-col text-gray-200 relative">
       {/* Header with search */}
       <div className='sticky transform top-0 bg-[#1c1b1b] rounded-3xl border-b-0 rounded-b-none border-2 px-3  border-[#3b3b3b]'>
-        <h1 className='text-base font-["Courier_New"] text-[#2bbdaa] pt-2 px-2' >CONTESTS</h1>
+        <h1 className='text-base font-["Inter"] text-[#2bbdaa] pt-2 px-2' >CONTESTS</h1>
         <div>
           
         </div>
@@ -280,19 +221,19 @@ const ContestsDashboard = ({details , setDetailsBox , uname}) => {
         <div className="w-full text-xs flex border-b-2 border-[#3b3b3b] bg-[#222]">
         <button 
             onClick={() => setActiveTab('finished')}
-            className={`flex-1  px-4 font-["Courier_New"] text-center ${activeTab === 'finished' ? 'text-[#2bbdaa] border-b-2 border-[#2bbdaa]' : 'text-gray-400'}`}
+            className={`flex-1  px-4 font-["Inter"] text-center ${activeTab === 'finished' ? 'text-[#2bbdaa] border-b-2 border-[#2bbdaa]' : 'text-gray-400'}`}
           >
             FINISHED ({finished.length})
           </button>
           <button 
             onClick={() => setActiveTab('active')}
-            className={`flex-1 px-4 font-["Courier_New"] text-center text-xs ${activeTab === 'active' ? 'text-[#2bbdaa] border-b-2 border-[#2bbdaa]' : 'text-gray-400'}`}
+            className={`flex-1 px-4 font-["Inter"] text-center text-xs ${activeTab === 'active' ? 'text-[#2bbdaa] border-b-2 border-[#2bbdaa]' : 'text-gray-400'}`}
           >
             ACTIVE ({active.length})
           </button>
           <button 
             onClick={() => setActiveTab('upcoming')}
-            className={`flex-1 px-4 font-["Courier_New"] text-center ${activeTab === 'upcoming' ? 'text-[#2bbdaa] border-b-2 border-[#2bbdaa]' : 'text-gray-400'}`}
+            className={`flex-1 px-4 font-["Inter"] text-center ${activeTab === 'upcoming' ? 'text-[#2bbdaa] border-b-2 border-[#2bbdaa]' : 'text-gray-400'}`}
           >
             UPCOMING ({upcoming.length})
           </button>

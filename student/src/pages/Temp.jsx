@@ -106,7 +106,7 @@ function Temp(){
   
 
         <div className="w-3/4 h-full">
-                  <div className="flex h-1/2 w-full">
+                  <div className="flex h-[38vh] w-full">
                       <div className="w-1/3 h-full text-xs flex justify-center items-center">
                             <ContestsDashboard 
                             details={allData.contests}
@@ -123,7 +123,7 @@ function Temp(){
                       </div>
 
                   </div>  
-                  <div className="h-1/2  w-full flex justify-center items-center">
+                  <div className="h-[52vh]  w-full flex justify-center items-center">
                         <DetailsDashBoard 
                         type={detailsBox.type}
                         details={detailsBox.details }

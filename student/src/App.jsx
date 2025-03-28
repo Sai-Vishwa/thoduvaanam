@@ -29,6 +29,7 @@ import AboutUs from './pages/AboutUsPage/AboutUs'
 import Temp from './pages/Temp'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
 import PieChart from './components/HomePageComponents/PieChart'
+import LeaderBoard from './pages/LeaderBoard/TempLb'
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
         <Route path='/about' element={<AboutUs />} />
         <Route path='/temp/:uname' element={<Temp />} />
         <Route path='/profile/:uname' element={<ProfilePage />} />
+        <Route path='/temp/LeaderBoard/:uname' element={<LeaderBoard />} />
 
         <Route path='/pie' element={<PieChart />} />
 
