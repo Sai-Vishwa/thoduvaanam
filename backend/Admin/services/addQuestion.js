@@ -7,6 +7,8 @@ async function addQuestion(req,res) {
         delete dt.id
         dt.topic = parseInt(dt.topic)
         dt.contestId = parseInt(dt.contestId)
+        dt.pointsPerTestCaseSolved = parseInt(dt.pointsPerTestCaseSolved)
+        dt.timeToSolveInMinutes = parseInt(dt.timeToSolveInMinutes)
         await prisma.questions.create({
             data:req.body.data
         })

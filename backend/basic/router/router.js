@@ -45,7 +45,7 @@ const asyncHandler = (fn) => (req, res, next) => {
     await contestReviewPage(req,res);
   }));
 
-  router.post('/leaderboard', asyncHandler(async (req, res) => {
+  router.post('/leaderBoard', asyncHandler(async (req, res) => {
     await leaderBoard(req,res);
   }));
 

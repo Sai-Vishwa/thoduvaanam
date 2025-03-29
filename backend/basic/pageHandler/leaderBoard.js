@@ -3,33 +3,20 @@ const { PrismaClient } = require("../../dbSchema/generated");
 const prisma =  new PrismaClient();
 
 async function leaderBoard(req,res) {
+    console.log("Vanakkam da dei")
     try{
-        const studentAchievements = await prisma.studentAchievements.findMany({
-            select:{
-                studentId:true,
-                achievementId:true,
-                count:true,
-                student:{
-                    select:{
-                        uname:true,
-                        name:true,
-                        rno:true
-                    }
-                },
-                achievements:{
-                    select:{
-                        description:true,
-                        title:true
+        const details = await prisma.submission.findMany({
+            include:{
+                questions:{
+                    include:{
+                        contest:true
                     }
                 }
-            },
-            where:{
-                achievementId:34
             }
         })
+        console.log(details)
         res.status(200).json({
-            msg:"successful",
-            data:studentAchievements
+            msg:"Successful"
         })
     }
     catch(error){

@@ -1,11 +1,44 @@
 import { AnimatePresence, color, motion } from 'framer-motion';
 import { FileText, Info } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Select from "react-select";
 
 
 const LeaderboardPage = () => {
   const [timeFilter, setTimeFilter] = useState('all');
+
+
+  useEffect(()=>{
+    async function fetchData() {
+
+      try {
+        const details = await fetch("http://localhost:4000/basic/leaderBoard", {
+          method: "POST",
+          body: JSON.stringify({}),
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            }
+          })
+          const data = await details.json()
+          if (data.err) {
+            throw new Error(data.err)
+          } else {
+            setDetailsBox({type:"contest" , details:data})
+          }
+        } 
+        catch (error) {
+          console.log(error)
+          setDetailsBox({type:"contest" , details:{} , error:"Some internal error try again"})
+        }
+      
+    }
+
+    fetchData();
+
+      
+      
+  },[])
 
 
   function getShortUrl(url) {

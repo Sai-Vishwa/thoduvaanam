@@ -10,6 +10,9 @@ async function addContest(req,res) {
        let closeTime = new Date(dt.closesOn).toISOString()
        dt.opensOn = openTime
        dt.closesOn = closeTime
+       dt.totalPoints = parseInt(dt.totalPoints)
+       dt.totalNoOfQuestions = parseInt(dt.totalNoOfQuestions)
+       dt.timeToSolveInMinutes = parseInt(dt.timeToSolveInMinutes)
         await prisma.contest.create({
             data:req.body.data
         })
