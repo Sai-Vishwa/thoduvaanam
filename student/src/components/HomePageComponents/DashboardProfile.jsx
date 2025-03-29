@@ -208,12 +208,12 @@ function DashBoardProfile({userData}){
 
                                     <div className="flex space-x-2 items-center">
                                           <Trophy className="h-3 w-3 text-[#2bbdaa]" />
-                                          <div className="text-[#ddf3ef]  text-sm">Contests</div>
+                                          <div className="text-[#ddf3ef]  text-sm">Contests Won</div>
                                     </div>
                                     <div className="flex space-x-0 items-center justify-center ">
                                     
                                                 <div className="text-[#2bbdaa] font-bold text-xs">#</div>
-                                                <CountdownCounter end={data.totalContestsParticipated} duration={5} flag={0}/>
+                                                <CountdownCounter end={data.totalContestWon} duration={5} flag={0}/>
                       
                                     </div>
 
@@ -232,7 +232,7 @@ function DashBoardProfile({userData}){
 
                                     <div className="flex space-x-2 items-center">
                                           <Flame className="h-3 w-3 text-[#2bbdaa]" />
-                                          <div className="text-[#ddf3ef]  text-sm">Daily Streak</div>
+                                          <div className="text-[#ddf3ef]  text-sm">Submit Streak</div>
                                     </div>
                                     <div className="flex space-x-0 items-center justify-center ">
                                     
@@ -252,12 +252,12 @@ function DashBoardProfile({userData}){
 
                                     <div className="flex space-x-2 items-center">
                                           <Crown className="h-3 w-3 text-[#2bbdaa]" />
-                                          <div className="text-[#ddf3ef]  text-sm">Submit Streak</div>
+                                          <div className="text-[#ddf3ef]  text-sm">Participation</div>
                                     </div>
                                     <div className="flex space-x-0 items-center justify-center ">
                                     
                                                 <div className="text-[#2bbdaa] font-bold text-xs">#</div>
-                                                <CountdownCounter end={data.maxStrea} duration={5} flag={0}/>
+                                                <CountdownCounter end={data.totalContestsParticipated} duration={5} flag={0}/>
                       
                                     </div>
 

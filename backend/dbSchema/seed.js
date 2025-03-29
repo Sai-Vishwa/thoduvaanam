@@ -4,57 +4,105 @@ const prisma = new PrismaClient();
 async function main() {
 
 
-    await prisma.achievements.createMany({
-        data:[
-            {
-                title:"totalEasyQuestionsSolved",
-                description:"This achievement holds the total No. of Easy Questions solved by the user"
-            },
-            {
-                title:"totalBalancedQuestionsSolved",
-                description:"This achievement holds the total No. of Balanced Questions solved by the user"
-            },{
-                title:"totalIntenseQuestionsSolved",
-                description:"This achievement holds the total No. of Intense Questions solved by the user"
-            },{
-                title:"totalHellQuestionsSolved",
-                description:"This achievement holds the total No. of Hell Questions solved by the user"
-            },
+    // await prisma.achievements.createMany({
+    //     data:[
+    //         {
+    //             title:"totalEasyQuestionsSolved",
+    //             description:"This achievement holds the total No. of Easy Questions solved by the user"
+    //         },
+    //         {
+    //             title:"totalBalancedQuestionsSolved",
+    //             description:"This achievement holds the total No. of Balanced Questions solved by the user"
+    //         },{
+    //             title:"totalIntenseQuestionsSolved",
+    //             description:"This achievement holds the total No. of Intense Questions solved by the user"
+    //         },{
+    //             title:"totalHellQuestionsSolved",
+    //             description:"This achievement holds the total No. of Hell Questions solved by the user"
+    //         },
             
-        ]
+    //     ]
+    // })
+
+    await prisma.studentAchievements.update({
+        where:{
+            id:109
+        },
+        data:{
+            count:25
+        }
     })
 
-    await prisma.studentAchievements.createMany({
-        data:[
-            {
-                count:0,
-                achievementId:6,
-                studentId:1
-            },
-            {
-                studentId:1,
-                achievementId:7,
-                count:0
-            },
-            {
-                count:0,
-                achievementId:8,
-                studentId:1
-            },
-            {
-                studentId:1,
-                achievementId:9,
-                count:0
-            }
-        ]
-    })
+    // await prisma.studentAchievements.createMany({
+    //     data:[
+    //         {
+    //             count:0,
+    //             achievementId:1,
+    //             studentId:10
+    //         },
+    //         {
+    //             studentId:10,
+    //             achievementId:2,
+    //             count:0
+    //         },
+    //         {
+    //             count:0,
+    //             achievementId:3,
+    //             studentId:10
+    //         },
+    //         {
+    //             studentId:10,
+    //             achievementId:4,
+    //             count:0
+    //         },
+    //         {
+    //             studentId:10,
+    //             achievementId:10,
+    //             count:0
+    //         },
+    //         {
+    //             studentId:10,
+    //             achievementId:6,
+    //             count:0
+    //         },
+    //         {
+    //             studentId:10,
+    //             achievementId:7,
+    //             count:0
+    //         },
+    //         {
+    //             studentId:10,
+    //             achievementId:8,
+    //             count:0
+    //         },
+    //         {
+    //             studentId:10,
+    //             achievementId:9,
+    //             count:0
+    //         }
+    //     ]
+    // })
+    
+    // await prisma.achievements.create({
+    //     data:{
+    //         title:"totalContestWon",
+    //         description:"This achievement holds the number of contests won by the user"
+    //     }
+    // })
+
     
     //Insert students
-    // await prisma.student.create({
-    //     data: 
-    //         { name: 'Senior', rno: '220701250', uname: 'Senior', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' }
-    // //         // { name: 'Rakul', rno: '220701216', uname: 'Rakul', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
-    // //         // { name: 'Shanto', rno: '220701263', uname: 'Shanto', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' }
+    // await prisma.student.createMany({
+    //     data:[ 
+    //         { name: 'Avinash', rno: '220701034', uname: 'AlphaStar', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
+    //         { name: 'Ruben', rno: '220701230', uname: 'Lion', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
+    //         { name: 'Raghul', rno: '220701209', uname: 'KotlinRaghul', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
+    //         { name: 'Bala', rno: '220701224', uname: 'BalaMama', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
+    //         { name: 'Sabarish', rno: '220701234', uname: 'Boomer', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
+    //         { name: 'Prasanth', rno: '220701200', uname: 'GayPrasanth', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
+    //         { name: 'Seenuvasan', rno: '220701255', uname: 'Soonu', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
+    //         { name: 'Sharan', rno: '220701264', uname: 'Sotta', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
+    //         { name: 'Roshini', rno: '220701228', uname: 'PeterRoshini', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' }]
         
     // });
 
