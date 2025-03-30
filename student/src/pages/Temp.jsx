@@ -127,6 +127,7 @@ function Temp(){
                         <DetailsDashBoard 
                         type={detailsBox.type}
                         details={detailsBox.details }
+                        uname={uname}
                         />
                   </div>
         </div>

@@ -12,19 +12,38 @@ import {
   Timer,
   Target 
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-const DashboardDetails = ({ type, details }) => {
+const DashboardDetails = ({ type, details , uname }) => {
   const [activeTab, setActiveTab] = useState("details");
   const [isVisible, setIsVisible] = useState(false);
-
+  const nav = useNavigate();
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  
 
   const renderStatusButton = () => {
     if (!details) return null;
     const status = details.status;
     const buttonClasses = "w-full px-4 py-2 rounded-lg text-sm font-bold flex items-center justify-center space-x-2 transition-all";
+
+    async function buttonClick() {
+      if(type=="question"){
+        const qname = details.questionData.title
+        if(status === "CONTINUE LAST ATTEMPT"){
+          nav(`/${uname}/question/${qname}`);
+        }
+      }
+      if(type=="contest"){
+        const tname = details.data.title
+        if(status === "CONTINUE LAST ATTEMPT"){
+          nav(`/${uname}/contest-handler/${tname}`);
+        }
+      }
+        
+    }
     
     const statusMap = {
       "START NEW ATTEMPT": { 
@@ -57,7 +76,8 @@ const DashboardDetails = ({ type, details }) => {
     };
     const statusConfig = statusMap[status] || statusMap["NOT STARTED"];
     return (
-      <button className={`${buttonClasses} ${statusConfig.color} p-0 m-0`} disabled={statusConfig.disabled}>
+      <button  onClick={buttonClick}
+      className={`${buttonClasses} ${statusConfig.color} p-0 m-0`} disabled={statusConfig.disabled}>
         {statusConfig.icon}
         <span>{status}</span>
       </button>
