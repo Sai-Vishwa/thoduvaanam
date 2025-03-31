@@ -20,7 +20,7 @@ async function startSolvingQuestion(req,res) {
         }
         const question = await prisma.questions.findFirstOrThrow({
             where:{
-                title:req.body.qname
+                title:req.body.title
             }
         })
         const submissions = await prisma.submission.findMany({
