@@ -59,12 +59,11 @@ const   ContestHandlerPage = () => {
   async function handleSubmit() {
     let status = false
     let dt = {}
-    setBtnVisible(false)
     const dummy =  await new Promise ((resolve)=>{
         toast.promise(new Promise((resolve,reject)=>{
           fetch("http://localhost:4000/submission/submit-contest", {
             method: "POST",
-            body: JSON.stringify({ uname: uname, session: Cookies.get("session"), title: qname }),
+            body: JSON.stringify({ uname: uname, session: Cookies.get("session"), tname: cname }),
             headers: {
               'Content-Type': 'application/json',
               'Accept': 'application/json'
@@ -78,13 +77,13 @@ const   ContestHandlerPage = () => {
           })
           .catch((err)=> reject(err))
         }),{
-          loading: "Preparing question...",
+          loading: "Submitting...",
           success: (data)=>{
             status = true
             dt = data
             console.log("i must be first")
             resolve()
-            return (`Navigating to question`)
+            return (`Submission successful`)
           },
           error: (err) => {
             resolve()
@@ -98,9 +97,8 @@ const   ContestHandlerPage = () => {
         })
       }) 
       console.log("i must be second")
-      setBtnVisible(true)
       if(status){
-        nav(`/${uname}/question/${qname}`);
+        nav(`/${uname}`);
       } 
   }
 
@@ -135,6 +133,8 @@ const   ContestHandlerPage = () => {
 
     return (
       <div className="min-h-screen main p-4 flex justify-center">
+        <Toaster 
+        position="bottom"/>
         <div className="w-full max-w-6xl border-2 border-[#3b3b3b] bg-[#1c1b1b] rounded-2xl p-6 text-[#ddf3ea]">
           {/* Header */}
           <div className="flex justify-between items-center">
@@ -151,7 +151,7 @@ const   ContestHandlerPage = () => {
               <motion.div 
                 
             >
-                <div ><a className="click-btn btn-style3" onClick={()=>{handleSubmit}} href="#">Submit</a></div>
+                <div ><a className="click-btn btn-style3" onClick={handleSubmit} href="#">Submit</a></div>
                 {/* <span className="mas">LOGIN</span>
                 <button type="button" name="Hover"  onClick={()=>{nav("/login")}}>LOGIN</button> */}
             </motion.div>
@@ -237,7 +237,7 @@ const   ContestHandlerPage = () => {
             <motion.div 
                 
                 >
-                <div ><a className="click-btn btn-style3" onClick={()=>{nav("/login")}} href="#">Submit</a></div>
+                <div ><a className="click-btn btn-style3" onClick={handleSubmit} href="#">Submit</a></div>
                 {/* <span className="mas">LOGIN</span>
                 <button type="button" name="Hover"  onClick={()=>{nav("/login")}}>LOGIN</button> */}
             </motion.div>

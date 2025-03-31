@@ -62,7 +62,7 @@ async function submitContest(req,res) {
             ach[a.title] = a.id
         })
 
-        await prisma.studentAchievements.update({
+        await prisma.studentAchievements.updateMany({
             where:{
                 AND:[
                     {studentId:session.id},
@@ -74,7 +74,7 @@ async function submitContest(req,res) {
             }
         })
 
-        await prisma.studentAchievements.update({
+        await prisma.studentAchievements.updateMany({
             where:{
                 AND:[
                     {studentId:session.id},
@@ -100,10 +100,15 @@ async function submitContest(req,res) {
         const streak = new Date(lastSolve.timeOfLastSolve)
 
         const diffDays = Math.floor((now - streak)/(1000*60*60*24))
+        console.log("look at this and ponder")
+
+        console.log("diffdays = ",diffDays)
+        console.log("streak = ",streak)
+        console.log("last solve = ",lastSolve.timeOfLastSolve)
 
         if(diffDays == 1){
 
-            await prisma.studentAchievements.update({
+            await prisma.studentAchievements.updateMany({
                 where:{
                     AND:[
                         {studentId:session.id},
@@ -119,12 +124,12 @@ async function submitContest(req,res) {
 
         }
 
-        else if(diffDays > 1 ){
-            await prisma.studentAchievements.update({
+        else if(diffDays > 1  || streak===null || lastSolve.timeOfLastSolve===null){
+            await prisma.studentAchievements.updateMany({
                 where:{
                     AND:[
                         {studentId:session.id},
-                        {achievementId:ach.totalContestsParticipated}
+                        {achievementId:ach.currentStreak}
                     ]
                 },
                 data:{
@@ -142,6 +147,15 @@ async function submitContest(req,res) {
             },
             select:{
                 count:true
+            }
+        })
+
+        await prisma.student.updateMany({
+            where:{
+                id:session.id
+            },
+            data:{
+                timeOfLastSolve:now
             }
         })
 
