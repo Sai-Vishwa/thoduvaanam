@@ -4,34 +4,34 @@ const prisma = new PrismaClient();
 async function main() {
 
 
-    // await prisma.achievements.createMany({
-    //     data:[
-    //         {
-    //             title:"totalEasyQuestionsSolved",
-    //             description:"This achievement holds the total No. of Easy Questions solved by the user"
-    //         },
-    //         {
-    //             title:"totalBalancedQuestionsSolved",
-    //             description:"This achievement holds the total No. of Balanced Questions solved by the user"
-    //         },{
-    //             title:"totalIntenseQuestionsSolved",
-    //             description:"This achievement holds the total No. of Intense Questions solved by the user"
-    //         },{
-    //             title:"totalHellQuestionsSolved",
-    //             description:"This achievement holds the total No. of Hell Questions solved by the user"
-    //         },
+    await prisma.achievements.create({
+        data:
+            {
+                title:"lastDateOfSolve",
+                description:"This achievement holds the last date when the user solved a question in the site."
+            }
+        //     {
+        //         title:"totalBalancedQuestionsSolved",
+        //         description:"This achievement holds the total No. of Balanced Questions solved by the user"
+        //     },{
+        //         title:"totalIntenseQuestionsSolved",
+        //         description:"This achievement holds the total No. of Intense Questions solved by the user"
+        //     },{
+        //         title:"totalHellQuestionsSolved",
+        //         description:"This achievement holds the total No. of Hell Questions solved by the user"
+        //     },
             
-    //     ]
-    // })
-
-    await prisma.studentAchievements.update({
-        where:{
-            id:109
-        },
-        data:{
-            count:25
-        }
+        // ]
     })
+
+    // await prisma.studentAchievements.update({
+    //     where:{
+    //         id:109
+    //     },
+    //     data:{
+    //         count:25
+    //     }
+    // })
 
     // await prisma.studentAchievements.createMany({
     //     data:[

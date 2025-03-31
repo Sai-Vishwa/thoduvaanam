@@ -19,16 +19,16 @@ async function submitContest(req,res) {
             })
             return
         }
-        const questions = await prisma.topics.findFirst({
-            select:{
+        const questions = await prisma.contest.findFirst({
+            include:{
                 question:{
-                    select:{
-                        id:true
+                    include:{
+                        submission:true
                     }
                 }
             },
             where:{
-                name:tname
+                title:tname
             }
         })
         let qids = []
@@ -55,6 +55,25 @@ async function submitContest(req,res) {
         submit.map((sub)=>{
             score+=parseInt(sub.pointsSecured)
         })
+
+        const achievements = await prisma.achievements.findMany()
+        let ach = {}
+        achievements.map((a)=>{
+            ach[a.title] = a.id
+        })
+
+        await prisma.studentAchievements.update({
+            where:{
+                AND:[
+                    {studentId:session.id},
+                    {achievementId:ach.totalPoints}
+                ]
+            },
+            data:{
+                count:score
+            }
+        })
+
         res.status(200).json({
             msg:"Successful",
             pts:score

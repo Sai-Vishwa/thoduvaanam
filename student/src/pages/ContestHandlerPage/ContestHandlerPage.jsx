@@ -4,6 +4,7 @@ import Cookies from 'js-cookie'
 import { useNavigate, useParams } from "react-router-dom";
 import { ClipboardList, CheckCircle, AlertCircle, ArrowRight , AlertTriangle} from 'lucide-react';
 import { motion } from "framer-motion";
+import { toast, Toaster } from "sonner";
 
 
 const   ContestHandlerPage = () => {
@@ -54,11 +55,55 @@ const   ContestHandlerPage = () => {
     return `${minutes}:${seconds}`;
   };
 
-  const getProgress = () => {
-    const totalSeconds = contest.timeToSolveInMinutes * 60;
-    const usedSeconds = totalSeconds - (timeLeft.minutes * 60 + timeLeft.seconds);
-    return (usedSeconds / totalSeconds) * 100;
-  };
+  
+  async function handleSubmit() {
+    let status = false
+    let dt = {}
+    setBtnVisible(false)
+    const dummy =  await new Promise ((resolve)=>{
+        toast.promise(new Promise((resolve,reject)=>{
+          fetch("http://localhost:4000/submission/submit-contest", {
+            method: "POST",
+            body: JSON.stringify({ uname: uname, session: Cookies.get("session"), title: qname }),
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            }
+          }).then((resp) => resp.json())
+          .then((data)=>{
+            if(data.err){
+              throw new Error(data.err)
+            }
+            resolve(data)
+          })
+          .catch((err)=> reject(err))
+        }),{
+          loading: "Preparing question...",
+          success: (data)=>{
+            status = true
+            dt = data
+            console.log("i must be first")
+            resolve()
+            return (`Navigating to question`)
+          },
+          error: (err) => {
+            resolve()
+            return (`${err}`)
+          },
+          style: {
+            fontSize:"1.125rem",
+            fontWeight:300,
+            padding:20
+          }
+        })
+      }) 
+      console.log("i must be second")
+      setBtnVisible(true)
+      if(status){
+        nav(`/${uname}/question/${qname}`);
+      } 
+  }
+
 
 
   async function fetchData() {
@@ -106,7 +151,7 @@ const   ContestHandlerPage = () => {
               <motion.div 
                 
             >
-                <div ><a className="click-btn btn-style3" onClick={()=>{nav("/login")}} href="#">Submit</a></div>
+                <div ><a className="click-btn btn-style3" onClick={()=>{handleSubmit}} href="#">Submit</a></div>
                 {/* <span className="mas">LOGIN</span>
                 <button type="button" name="Hover"  onClick={()=>{nav("/login")}}>LOGIN</button> */}
             </motion.div>
