@@ -46,11 +46,20 @@ async function submitContest(req,res) {
             where:{
                 AND:[
                     {questionId:{in:qids}},
-                    {studentId:session.id}
+                    {studentId:session.id},
+                    {status:"WAITING"},
+                    {isFinal:"NO"},
+                    {maxTimeToSolve:{gte:now}}
                 ]
                 
             }
         })
+        if(submit.length !== qids.length ){
+            res.status(200).json({
+                err:"Etho kolaru panta da.. contact admin"
+            })
+            return
+        }
         let score = 0;
         submit.map((sub)=>{
             score+=parseInt(sub.pointsSecured)
@@ -70,7 +79,7 @@ async function submitContest(req,res) {
                 ]
             },
             data:{
-                count:score
+                count:{increment:score}
             }
         })
 
