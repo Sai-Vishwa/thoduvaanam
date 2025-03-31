@@ -4,9 +4,44 @@ import Cookies from 'js-cookie'
 import { useNavigate, useParams } from "react-router-dom";
 
 const   ContestHandlerPage = () => {
+
+  const [details , setDetails ] = useState({});
+  const [time , setTime] = useState({});
+  const nav = useNavigate();
+  const {uname , cname} = useParams()
+
+
+  async function fetchData() {
+      try {
+        const details = await fetch("http://localhost:4000/basic/contest-handle", {
+          method: "POST",
+          body: JSON.stringify({ uname: uname, session:Cookies.get("session"), tname: cname }),
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        });
+        const data = await details.json();
+        if (data.msg) {
+          setDetails(data.allData);
+          setTime({"minutes":data.minutes , "seconds":data.seconds})
+        } else {
+          throw new Error(data.err);
+        }
+      } catch (error) {
+        alert(JSON.stringify(error.message));
+        nav(`/${uname}`)
+      }
+    }
+
+    useEffect(()=>{
+      fetchData()
+    },[])
+
   return (
     <div className="main text-white">
-        welcome to contest handler page
+        {JSON.stringify(details)}
+        {JSON.stringify(time)}
     </div>
   )
   //   const {uname , tname} = useParams();
@@ -39,28 +74,7 @@ const   ContestHandlerPage = () => {
   //   }
   // }
 
-  // async function fetchData() {
-  //   try {
-  //     const details = await fetch("http://localhost:4000/basic/contest-handle", {
-  //       method: "POST",
-  //       body: JSON.stringify({ uname: uname, session:Cookies.get("session"), tname: tname }),
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Accept': 'application/json'
-  //       }
-  //     });
-  //     const data = await details.json();
-  //     if (data.msg) {
-  //       setQuestionDetails(data.allData);
-  //       setTime({"minutes":data.minutes , "seconds":data.seconds})
-  //     } else {
-  //       throw new Error(data.err);
-  //     }
-  //   } catch (error) {
-  //     alert("Hey wtf");
-  //     nav(`/${uname}`)
-  //   }
-  // }
+  // 
 
   // useEffect(() => {
   //   if (Object.keys(questionDetails).length === 0) {

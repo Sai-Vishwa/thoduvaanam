@@ -21,11 +21,8 @@ async function contestHandlerPage(req,res) {
                 idToSearch = {id:studentId.id}
             }
             else{
-                idToSearch = await prisma.student.findFirst({
-                    where:{
-                        uname:req.body.uname
-                    }
-                })
+                res.status(200).json({err:"You cant access the contest of another user vro"})
+                return
             }
             
             const details = await prisma.contest.findFirst({
@@ -34,7 +31,14 @@ async function contestHandlerPage(req,res) {
                 },
                 include:{
                     question:{
-                        include:{
+                        select:{
+                            id:true,
+                            title:true,
+                            miniDescription:true,
+                            pointsPerTestCaseSolved:true,
+                            noOfExternalTestCases:true,
+                            noOfHiddenTestCases:true,
+                            
                             submission:{
                                 where:{
                                     studentId:idToSearch.id
@@ -77,7 +81,6 @@ async function contestHandlerPage(req,res) {
 
             const op = {
                     msg: "successful",
-                    viewMode: viewMode,
                     minutes:diffMinutes,
                     seconds:remainingSeconds,
                     allData:details,

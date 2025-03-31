@@ -38,7 +38,8 @@ async function ContestBasicPage(req,res) {
                             },
                             select:{
                                 status:true,
-                                id:true
+                                id:true,
+                                maxTimeToSolve:true
                             }
                         }
                     }
@@ -54,7 +55,7 @@ async function ContestBasicPage(req,res) {
 
         details.question.map(ques =>{
             ques.submission.map(sub =>{
-                if(sub.status == "COMPLETED"){
+                if(sub.status == "COMPLETED" || sub.maxTimeToSolve<now){
                     count+=1
                 }
                 count2 += 1
