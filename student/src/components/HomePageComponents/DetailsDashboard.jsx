@@ -13,8 +13,12 @@ import {
   Target 
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { toast, Toaster } from 'sonner';
+import Cookies from "js-cookie";
+
 
 const DashboardDetails = ({ type, details , uname }) => {
+  const [btnVisible , setBtnVisible] = useState(true)
   const [activeTab, setActiveTab] = useState("details");
   const [isVisible, setIsVisible] = useState(false);
   const nav = useNavigate();
@@ -37,9 +41,59 @@ const DashboardDetails = ({ type, details , uname }) => {
         }
       }
       if(type=="contest"){
-        const tname = details.data.title
+        const cname = details.data.title
         if(status === "CONTINUE LAST ATTEMPT"){
-          nav(`/${uname}/contest-handler/${tname}`);
+          nav(`/${uname}/contest-handler/${cname}`);
+        }
+        else if (status == "START NEW ATTEMPT"){
+
+
+          let status = false
+        let dt = {}
+        setBtnVisible(false)
+        const dummy =  await new Promise ((resolve)=>{
+            toast.promise(new Promise((resolve,reject)=>{
+              fetch("http://localhost:4000/submission/solve-contest", {
+                method: "POST",
+                body: JSON.stringify({ uname: uname, session: Cookies.get("session"), title: cname }),
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+                }
+              }).then((resp) => resp.json())
+              .then((data)=>{
+                if(data.err){
+                  throw new Error(data.err)
+                }
+                resolve(data)
+              })
+              .catch((err)=> reject(err))
+            }),{
+              loading: "Starting contest...",
+              success: (data)=>{
+                status = true
+                dt = data
+                console.log("i must be first")
+                resolve()
+                return (`Navigating to contest`)
+              },
+              error: (err) => {
+                resolve()
+                return (`${err}`)
+              },
+              style: {
+                fontSize:"1.125rem",
+                fontWeight:300,
+                padding:20
+              }
+            })
+          }) 
+          console.log("i must be second")
+          setBtnVisible(true)
+          if(status){
+            nav(`/${uname}/contest-handler/${cname}`);
+          }
+          
         }
       }
         
@@ -76,8 +130,9 @@ const DashboardDetails = ({ type, details , uname }) => {
     };
     const statusConfig = statusMap[status] || statusMap["NOT STARTED"];
     return (
+      
       <button  onClick={buttonClick}
-      className={`${buttonClasses} ${statusConfig.color} p-0 m-0`} disabled={statusConfig.disabled}>
+      className={`${buttonClasses} ${btnVisible?"block":"hidden"} ${statusConfig.color} p-0 m-0`} disabled={statusConfig.disabled}>
         {statusConfig.icon}
         <span>{status}</span>
       </button>
@@ -306,9 +361,12 @@ const DashboardDetails = ({ type, details , uname }) => {
       </div>
     );
   };
+  
 
   return (
     <div className="flex justify-center items-center h-5/6 w-full font-['Yu_Gothic']">
+                  <Toaster duration={3000} position="bottom-right"/>
+
       <motion.div 
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.9 }}

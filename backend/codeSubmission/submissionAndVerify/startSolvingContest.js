@@ -21,7 +21,7 @@ async function startSolvingContest(req,res) {
         }
         const contestAndQuestions = await prisma.contest.findFirst({
             where:{
-                title:req.body.tname
+                title:req.body.title
             },
             select:{
                 opensOn:true,
