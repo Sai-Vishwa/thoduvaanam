@@ -229,6 +229,7 @@ model Contest {
   timeToSolveInMinutes Int
   totalPoints Int
   totalNoOfQuestions Int
+  resultPublished Int @default(0)
 
   //relationships
   question Questions[]

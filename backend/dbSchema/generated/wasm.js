@@ -229,7 +229,8 @@ exports.Prisma.ContestScalarFieldEnum = {
   closesOn: 'closesOn',
   timeToSolveInMinutes: 'timeToSolveInMinutes',
   totalPoints: 'totalPoints',
-  totalNoOfQuestions: 'totalNoOfQuestions'
+  totalNoOfQuestions: 'totalNoOfQuestions',
+  resultPublished: 'resultPublished'
 };
 
 exports.Prisma.SortOrder = {

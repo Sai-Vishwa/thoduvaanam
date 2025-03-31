@@ -13613,6 +13613,7 @@ export namespace Prisma {
     timeToSolveInMinutes: number | null
     totalPoints: number | null
     totalNoOfQuestions: number | null
+    resultPublished: number | null
   }
 
   export type ContestSumAggregateOutputType = {
@@ -13620,6 +13621,7 @@ export namespace Prisma {
     timeToSolveInMinutes: number | null
     totalPoints: number | null
     totalNoOfQuestions: number | null
+    resultPublished: number | null
   }
 
   export type ContestMinAggregateOutputType = {
@@ -13631,6 +13633,7 @@ export namespace Prisma {
     timeToSolveInMinutes: number | null
     totalPoints: number | null
     totalNoOfQuestions: number | null
+    resultPublished: number | null
   }
 
   export type ContestMaxAggregateOutputType = {
@@ -13642,6 +13645,7 @@ export namespace Prisma {
     timeToSolveInMinutes: number | null
     totalPoints: number | null
     totalNoOfQuestions: number | null
+    resultPublished: number | null
   }
 
   export type ContestCountAggregateOutputType = {
@@ -13653,6 +13657,7 @@ export namespace Prisma {
     timeToSolveInMinutes: number
     totalPoints: number
     totalNoOfQuestions: number
+    resultPublished: number
     _all: number
   }
 
@@ -13662,6 +13667,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: true
     totalPoints?: true
     totalNoOfQuestions?: true
+    resultPublished?: true
   }
 
   export type ContestSumAggregateInputType = {
@@ -13669,6 +13675,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: true
     totalPoints?: true
     totalNoOfQuestions?: true
+    resultPublished?: true
   }
 
   export type ContestMinAggregateInputType = {
@@ -13680,6 +13687,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: true
     totalPoints?: true
     totalNoOfQuestions?: true
+    resultPublished?: true
   }
 
   export type ContestMaxAggregateInputType = {
@@ -13691,6 +13699,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: true
     totalPoints?: true
     totalNoOfQuestions?: true
+    resultPublished?: true
   }
 
   export type ContestCountAggregateInputType = {
@@ -13702,6 +13711,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: true
     totalPoints?: true
     totalNoOfQuestions?: true
+    resultPublished?: true
     _all?: true
   }
 
@@ -13800,6 +13810,7 @@ export namespace Prisma {
     timeToSolveInMinutes: number
     totalPoints: number
     totalNoOfQuestions: number
+    resultPublished: number
     _count: ContestCountAggregateOutputType | null
     _avg: ContestAvgAggregateOutputType | null
     _sum: ContestSumAggregateOutputType | null
@@ -13830,6 +13841,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: boolean
     totalPoints?: boolean
     totalNoOfQuestions?: boolean
+    resultPublished?: boolean
     question?: boolean | Contest$questionArgs<ExtArgs>
     _count?: boolean | ContestCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contest"]>
@@ -13843,6 +13855,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: boolean
     totalPoints?: boolean
     totalNoOfQuestions?: boolean
+    resultPublished?: boolean
   }, ExtArgs["result"]["contest"]>
 
   export type ContestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -13854,6 +13867,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: boolean
     totalPoints?: boolean
     totalNoOfQuestions?: boolean
+    resultPublished?: boolean
   }, ExtArgs["result"]["contest"]>
 
   export type ContestSelectScalar = {
@@ -13865,9 +13879,10 @@ export namespace Prisma {
     timeToSolveInMinutes?: boolean
     totalPoints?: boolean
     totalNoOfQuestions?: boolean
+    resultPublished?: boolean
   }
 
-  export type ContestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "miniDescription" | "title" | "opensOn" | "closesOn" | "timeToSolveInMinutes" | "totalPoints" | "totalNoOfQuestions", ExtArgs["result"]["contest"]>
+  export type ContestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "miniDescription" | "title" | "opensOn" | "closesOn" | "timeToSolveInMinutes" | "totalPoints" | "totalNoOfQuestions" | "resultPublished", ExtArgs["result"]["contest"]>
   export type ContestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     question?: boolean | Contest$questionArgs<ExtArgs>
     _count?: boolean | ContestCountOutputTypeDefaultArgs<ExtArgs>
@@ -13889,6 +13904,7 @@ export namespace Prisma {
       timeToSolveInMinutes: number
       totalPoints: number
       totalNoOfQuestions: number
+      resultPublished: number
     }, ExtArgs["result"]["contest"]>
     composites: {}
   }
@@ -14321,6 +14337,7 @@ export namespace Prisma {
     readonly timeToSolveInMinutes: FieldRef<"Contest", 'Int'>
     readonly totalPoints: FieldRef<"Contest", 'Int'>
     readonly totalNoOfQuestions: FieldRef<"Contest", 'Int'>
+    readonly resultPublished: FieldRef<"Contest", 'Int'>
   }
     
 
@@ -14895,7 +14912,8 @@ export namespace Prisma {
     closesOn: 'closesOn',
     timeToSolveInMinutes: 'timeToSolveInMinutes',
     totalPoints: 'totalPoints',
-    totalNoOfQuestions: 'totalNoOfQuestions'
+    totalNoOfQuestions: 'totalNoOfQuestions',
+    resultPublished: 'resultPublished'
   };
 
   export type ContestScalarFieldEnum = (typeof ContestScalarFieldEnum)[keyof typeof ContestScalarFieldEnum]
@@ -15850,6 +15868,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: IntFilter<"Contest"> | number
     totalPoints?: IntFilter<"Contest"> | number
     totalNoOfQuestions?: IntFilter<"Contest"> | number
+    resultPublished?: IntFilter<"Contest"> | number
     question?: QuestionsListRelationFilter
   }
 
@@ -15862,6 +15881,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: SortOrder
     totalPoints?: SortOrder
     totalNoOfQuestions?: SortOrder
+    resultPublished?: SortOrder
     question?: QuestionsOrderByRelationAggregateInput
   }
 
@@ -15877,6 +15897,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: IntFilter<"Contest"> | number
     totalPoints?: IntFilter<"Contest"> | number
     totalNoOfQuestions?: IntFilter<"Contest"> | number
+    resultPublished?: IntFilter<"Contest"> | number
     question?: QuestionsListRelationFilter
   }, "id" | "title">
 
@@ -15889,6 +15910,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: SortOrder
     totalPoints?: SortOrder
     totalNoOfQuestions?: SortOrder
+    resultPublished?: SortOrder
     _count?: ContestCountOrderByAggregateInput
     _avg?: ContestAvgOrderByAggregateInput
     _max?: ContestMaxOrderByAggregateInput
@@ -15908,6 +15930,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: IntWithAggregatesFilter<"Contest"> | number
     totalPoints?: IntWithAggregatesFilter<"Contest"> | number
     totalNoOfQuestions?: IntWithAggregatesFilter<"Contest"> | number
+    resultPublished?: IntWithAggregatesFilter<"Contest"> | number
   }
 
   export type StudentCreateInput = {
@@ -16645,6 +16668,7 @@ export namespace Prisma {
     timeToSolveInMinutes: number
     totalPoints: number
     totalNoOfQuestions: number
+    resultPublished?: number
     question?: QuestionsCreateNestedManyWithoutContestInput
   }
 
@@ -16657,6 +16681,7 @@ export namespace Prisma {
     timeToSolveInMinutes: number
     totalPoints: number
     totalNoOfQuestions: number
+    resultPublished?: number
     question?: QuestionsUncheckedCreateNestedManyWithoutContestInput
   }
 
@@ -16668,6 +16693,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     totalPoints?: IntFieldUpdateOperationsInput | number
     totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
+    resultPublished?: IntFieldUpdateOperationsInput | number
     question?: QuestionsUpdateManyWithoutContestNestedInput
   }
 
@@ -16680,6 +16706,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     totalPoints?: IntFieldUpdateOperationsInput | number
     totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
+    resultPublished?: IntFieldUpdateOperationsInput | number
     question?: QuestionsUncheckedUpdateManyWithoutContestNestedInput
   }
 
@@ -16692,6 +16719,7 @@ export namespace Prisma {
     timeToSolveInMinutes: number
     totalPoints: number
     totalNoOfQuestions: number
+    resultPublished?: number
   }
 
   export type ContestUpdateManyMutationInput = {
@@ -16702,6 +16730,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     totalPoints?: IntFieldUpdateOperationsInput | number
     totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
+    resultPublished?: IntFieldUpdateOperationsInput | number
   }
 
   export type ContestUncheckedUpdateManyInput = {
@@ -16713,6 +16742,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     totalPoints?: IntFieldUpdateOperationsInput | number
     totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
+    resultPublished?: IntFieldUpdateOperationsInput | number
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -17570,6 +17600,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: SortOrder
     totalPoints?: SortOrder
     totalNoOfQuestions?: SortOrder
+    resultPublished?: SortOrder
   }
 
   export type ContestAvgOrderByAggregateInput = {
@@ -17577,6 +17608,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: SortOrder
     totalPoints?: SortOrder
     totalNoOfQuestions?: SortOrder
+    resultPublished?: SortOrder
   }
 
   export type ContestMaxOrderByAggregateInput = {
@@ -17588,6 +17620,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: SortOrder
     totalPoints?: SortOrder
     totalNoOfQuestions?: SortOrder
+    resultPublished?: SortOrder
   }
 
   export type ContestMinOrderByAggregateInput = {
@@ -17599,6 +17632,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: SortOrder
     totalPoints?: SortOrder
     totalNoOfQuestions?: SortOrder
+    resultPublished?: SortOrder
   }
 
   export type ContestSumOrderByAggregateInput = {
@@ -17606,6 +17640,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: SortOrder
     totalPoints?: SortOrder
     totalNoOfQuestions?: SortOrder
+    resultPublished?: SortOrder
   }
 
   export type SubmissionCreateNestedManyWithoutStudentInput = {
@@ -19058,6 +19093,7 @@ export namespace Prisma {
     timeToSolveInMinutes: number
     totalPoints: number
     totalNoOfQuestions: number
+    resultPublished?: number
   }
 
   export type ContestUncheckedCreateWithoutQuestionInput = {
@@ -19069,6 +19105,7 @@ export namespace Prisma {
     timeToSolveInMinutes: number
     totalPoints: number
     totalNoOfQuestions: number
+    resultPublished?: number
   }
 
   export type ContestCreateOrConnectWithoutQuestionInput = {
@@ -19178,6 +19215,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     totalPoints?: IntFieldUpdateOperationsInput | number
     totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
+    resultPublished?: IntFieldUpdateOperationsInput | number
   }
 
   export type ContestUncheckedUpdateWithoutQuestionInput = {
@@ -19189,6 +19227,7 @@ export namespace Prisma {
     timeToSolveInMinutes?: IntFieldUpdateOperationsInput | number
     totalPoints?: IntFieldUpdateOperationsInput | number
     totalNoOfQuestions?: IntFieldUpdateOperationsInput | number
+    resultPublished?: IntFieldUpdateOperationsInput | number
   }
 
   export type QuestionsCreateWithoutTestCaseInput = {

@@ -74,9 +74,81 @@ async function submitContest(req,res) {
             }
         })
 
+        await prisma.studentAchievements.update({
+            where:{
+                AND:[
+                    {studentId:session.id},
+                    {achievementId:ach.totalContestsParticipated}
+                ]
+            },
+            data:{
+                count:{
+                    increment: 1
+                }
+            }
+        })
+
+        const lastSolve = await prisma.student.findFirst({
+            where:{
+                id:session.id
+            },
+            select:{
+                timeOfLastSolve:true
+            }
+        })
+
+        const streak = new Date(lastSolve.timeOfLastSolve)
+
+        const diffDays = Math.floor((now - streak)/(1000*60*60*24))
+
+        if(diffDays == 1){
+
+            await prisma.studentAchievements.update({
+                where:{
+                    AND:[
+                        {studentId:session.id},
+                        {achievementId:ach.currentStreak}
+                    ]
+                },
+                data:{
+                    count:{
+                        increment: 1
+                    }
+                }
+            })
+
+        }
+
+        else if(diffDays > 1 ){
+            await prisma.studentAchievements.update({
+                where:{
+                    AND:[
+                        {studentId:session.id},
+                        {achievementId:ach.totalContestsParticipated}
+                    ]
+                },
+                data:{
+                    count:1
+                }
+            })
+        }
+
+        const str = await prisma.studentAchievements.findFirst({
+            where:{
+                AND:[
+                    {studentId:session.id},
+                    {achievementId:ach.currentStreak}
+                ]
+            },
+            select:{
+                count:true
+            }
+        })
+
         res.status(200).json({
             msg:"Successful",
-            pts:score
+            pts:score,
+            streak:str.count
         })
     }
     catch(error){
