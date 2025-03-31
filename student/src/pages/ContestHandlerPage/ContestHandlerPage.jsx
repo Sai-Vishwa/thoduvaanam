@@ -1,14 +1,64 @@
 import { useEffect, useState } from "react";
-import { ArrowLeft, Clock, AlertCircle, Check, X } from 'lucide-react';
+import { ArrowLeft, Clock, Check, X } from 'lucide-react';
 import Cookies from 'js-cookie'
 import { useNavigate, useParams } from "react-router-dom";
+import { ClipboardList, CheckCircle, AlertCircle, ArrowRight , AlertTriangle} from 'lucide-react';
+import { motion } from "framer-motion";
+
 
 const   ContestHandlerPage = () => {
 
-  const [details , setDetails ] = useState({});
-  const [time , setTime] = useState({});
+  const [contest, setContest ] = useState({});
+  const [timeLeft, setTimeLeft] = useState({});
+  const [activeTab, setActiveTab] = useState("overview");
+  const [isLowTime, setIsLowTime] = useState(false);
+
+
   const nav = useNavigate();
   const {uname , cname} = useParams()
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (timeLeft.seconds > 0) {
+        setTimeLeft(prev => ({ ...prev, seconds: prev.seconds - 1 }));
+      } else if (timeLeft.minutes > 0) {
+        setTimeLeft({ minutes: timeLeft.minutes - 1, seconds: 59 });
+      } else {
+        clearInterval(timer);
+        // Handle contest end
+      }
+      
+      // Check if less than 5 minutes remaining
+      if (timeLeft.minutes < 5) {
+        setIsLowTime(true);
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [timeLeft]);
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+     });
+  };
+
+  const getTimeLeft = () => {
+    const minutes = timeLeft?.minutes?.toString()?.padStart(2, '0');
+    const seconds = timeLeft?.seconds?.toString()?.padStart(2, '0');
+    return `${minutes}:${seconds}`;
+  };
+
+  const getProgress = () => {
+    const totalSeconds = contest.timeToSolveInMinutes * 60;
+    const usedSeconds = totalSeconds - (timeLeft.minutes * 60 + timeLeft.seconds);
+    return (usedSeconds / totalSeconds) * 100;
+  };
 
 
   async function fetchData() {
@@ -23,8 +73,8 @@ const   ContestHandlerPage = () => {
         });
         const data = await details.json();
         if (data.msg) {
-          setDetails(data.allData);
-          setTime({"minutes":data.minutes , "seconds":data.seconds})
+          setContest(data.allData);
+          setTimeLeft ({"minutes":data.minutes , "seconds":data.seconds})
         } else {
           throw new Error(data.err);
         }
@@ -38,181 +88,128 @@ const   ContestHandlerPage = () => {
       fetchData()
     },[])
 
-  return (
-    <div className="main text-white">
-        {JSON.stringify(details)}
-        {JSON.stringify(time)}
-    </div>
-  )
-  //   const {uname , tname} = useParams();
-  // const [questionDetails, setQuestionDetails] = useState({});
-  // const [time , setTime] = useState({});
-  // const nav = useNavigate();
+    return (
+      <div className="min-h-screen main p-4 flex justify-center">
+        <div className="w-full max-w-6xl border-2 border-[#3b3b3b] bg-[#1c1b1b] rounded-2xl p-6 text-[#ddf3ea]">
+          {/* Header */}
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-2xl font-bold text-[#2bbdaa]">{contest.title}</h1>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              <div className={`flex items-center space-x-2 rounded-xl`}>
+                <Clock className={`w-4 h-4  ${isLowTime ? 'text-[#ff5252]' : 'text-[#2bbdaa]'} ${isLowTime ? 'animate-pulse' : ''}`} />
+                <span className={`${isLowTime ? 'text-[#ff5252]' : 'text-[#2bbdaa]'}  text-base font-['Yu_Gothic']`}>{getTimeLeft()}</span>
+              </div>
+              
+              <motion.div 
+                
+            >
+                <div ><a className="click-btn btn-style3" onClick={()=>{nav("/login")}} href="#">Submit</a></div>
+                {/* <span className="mas">LOGIN</span>
+                <button type="button" name="Hover"  onClick={()=>{nav("/login")}}>LOGIN</button> */}
+            </motion.div>
+            </div>
+          </div>
+          
+          {/* Contest Info */}
+          <div className="p-1 mb-1">
+          <p className="text-[#a7b9b2]">{contest.miniDescription}</p>
 
-  // async function handleSubmit() {
-  //   try{
-  //       const submit = await fetch("http://localhost:4000/submission/submit-contest",{
-  //           method:"POST",
-  //           body: JSON.stringify({session:Cookies.get("session"),uname:uname,tname:tname}),
-  //           headers:{
-  //               'Content-Type': 'application/json',
-  //               'Accept': 'application/json'
-  //           }
-  //       })
-  //       const outcome = await submit.json();
-  //       if(outcome.err){
-  //           throw new Error(outcome.err)
-  //       }
-  //       else{
-  //           alert(`Contest submitted successfully... u secured ${outcome.pts} points woohoo`);
-  //           nav(`/${uname}`)
-  //       }
-  //   }
-  //   catch(error){
-  //       alert("Aiyaiyo error submitting contest..")
-  //       alert(error.message)
-  //   }
-  // }
+          </div>
 
-  // 
+          
+          
+          {/* Rules Section */}
+          <div className="bg-[#222] border-2 border-[#323232] rounded-xl px-5 pt-3 text-[#2bbdaa] mt-2 pb-5 mb-4 ">
+            <div className="flex items-center gap-3 mb-2">
+              <AlertTriangle className=" w-5 h-5" />
+              <h2 className="text-lg font-bold">Contest Rules</h2>
+            </div>
+            
+            <div className="bg-[#1c1b1b] p-4 pt-2 rounded-lg overflow-y-auto h-[20vh]">
+              <ul className="list-disc list-inside text-[#ddf3ea] space-y-3">
+                <li>Complete all questions within the given time limit of {contest.timeToSolveInMinutes} minutes.</li>
+                <li>Each question has external and hidden test cases. Points are awarded per test case solved correctly.</li>
+                <li>Submit your final answers before the timer runs out or your progress will not be saved.</li>
+                <li className="text-[#ff5252] font-medium">Any form of malpractice, including but not limited to plagiarism, collaboration, or using unauthorized resources, will lead to immediate disqualification and potential termination of your account.</li>
+                <li>You cannot leave the page during the contest. Doing so may result in automatic submission.</li>
+              </ul>
+            </div>
+          </div>
+          
+          {/* Questions */}
+          <div className="bg-[#222] border-2 border-[#323232] rounded-xl px-5 pt-3   pb-5">
+            <h2 className="text-xl font-bold mb-2 text-[#2bbdaa]">Questions</h2>
+            {contest?.question?.map((q, index) => (
+              <div key={q.id} className="bg-[#1c1b1b] border border-[#323232] rounded-xl p-4 mb-4">
+                <div className="flex justify-between items-center mb-2">
+                  <div className="flex items-center gap-2">
+                    
+                    <div>
+                      <div className="font-medium text-[#36ead2]">{q.title}</div>
+                      <div className="text-sm text-[#a7b9b2]">{q.miniDescription}</div>
+                    </div>
+                  </div>
+                  <div className="flex justify-end">
+                  <motion.div 
+                
+            >
+                <div ><a className="click-btn btn-style3" onClick={()=>{nav("/login")}} href="#">Solve</a></div>
+                {/* <span className="mas">LOGIN</span>
+                <button type="button" name="Hover"  onClick={()=>{nav("/login")}}>LOGIN</button> */}
+            </motion.div>
+                </div>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 ">
+                  <div>
+                    <div className="text-xs text-[#36ead2]">POINTS PER TEST CASE</div>
+                    <div className="text-sm font-medium text-[#ddf3ea]">{q.pointsPerTestCaseSolved}</div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-[#36ead2]">EXTERNAL TEST CASES</div>
+                    <div className="text-sm font-medium text-[#ddf3ea]">{q.noOfExternalTestCases}</div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-[#36ead2]">HIDDEN TEST CASES</div>
+                    <div className="text-sm font-medium text-[#ddf3ea]">{q.noOfHiddenTestCases}</div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-[#36ead2]">TOTAL POINTS POSSIBLE</div>
+                    <div className="text-sm font-medium text-[#ddf3ea]">
+                      {q.pointsPerTestCaseSolved * (q.noOfExternalTestCases + q.noOfHiddenTestCases)}
+                    </div>
+                  </div>
+                </div>
+                
+                
+              </div>
+            ))}
+            <div className="flex justify-end">
 
-  // useEffect(() => {
-  //   if (Object.keys(questionDetails).length === 0) {
-  //     console.log("called");
-  //     fetchData();
-  //   }
-  // }, []);
-
-  // const Timer = ({ minutes,sec }) => {
-  //   const [timeLeft, setTimeLeft] = useState(minutes * 60 + sec);
-
-  //   useEffect(() => {
-  //     const timer = setInterval(() => {
-  //       setTimeLeft(prev => Math.max(0, prev - 1));
-  //     }, 1000);
-  //     if (timeLeft == 0){
-  //       alert 
-  //     }
-  //     return () => clearInterval(timer);
-  //   }, []);
-
-  //   const formatTime = (seconds) => {
-  //     const mins = Math.floor(seconds / 60);
-  //     const secs = seconds % 60;
-  //     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-  //   };
-
-  //   return (
-  //     <div className="flex items-center space-x-2 text-xl font-mono">
-  //       <Clock className="w-6 h-6" />
-  //       <span>{formatTime(timeLeft)}</span>
-  //     </div>
-  //   );
-  // };
-
-  // const getDifficultyColor = (difficulty) => {
-  //   const colors = {
-  //     'EASY': 'text-green-400',
-  //     'MEDIUM': 'text-yellow-400',
-  //     'HARD': 'text-red-400'
-  //   };
-  //   return colors[difficulty] || 'text-gray-400';
-  // };
-
-  // const getStatusIcon = (status) => {
-  //   switch (status) {
-  //     case 'COMPLETED':
-  //       return <Check className="w-5 h-5 text-green-400" />;
-  //     case 'FAILED':
-  //       return <X className="w-5 h-5 text-red-400" />;
-  //     default:
-  //       return <AlertCircle className="w-5 h-5 text-yellow-400" />;
-  //   }
-  // };
-
-  // return (
-  //   <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white p-6">
-  //     <div className="max-w-5xl mx-auto">
-  //       {/* Header */}
-  //       <div className="flex justify-between items-center mb-8">
-  //         <button
-  //           onClick={()=>{nav(`/${uname}/contest/${tname}`)}}
-  //           className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors"
-  //         >
-  //           <ArrowLeft className="w-5 h-5" />
-  //           <span>Back</span>
-  //         </button>
-  //         <Timer minutes={time?.minutes} 
-  //         sec={time?.seconds}/>
-  //       </div>
-
-  //       {/* Contest Title */}
-  //       <h1 className="text-3xl font-bold mb-6">{questionDetails.title}</h1>
-
-  //       {/* Questions Grid */}
-  //       <div className="space-y-6">
-  //         {questionDetails?.question?.map((ques, index) => (
-  //           <div 
-  //             key={ques.id} 
-  //             className="bg-gray-800/50 border border-gray-700 rounded-lg overflow-hidden"
-  //           >
-  //             <div className="p-6">
-  //               <div className="flex justify-between items-start">
-  //                 <div>
-  //                   <h2 className="text-xl font-semibold mb-2">
-  //                     {index + 1}. {ques.title}
-  //                   </h2>
-  //                   <div className="flex space-x-4 text-sm">
-  //                     <span className={getDifficultyColor(ques.difficulty)}>
-  //                       {ques.difficulty}
-  //                     </span>
-  //                     <span className="text-gray-400">
-  //                       {ques.pointsPerTestCaseSolved} points per test case
-  //                     </span>
-  //                     <span className="text-gray-400">
-  //                       {ques.timeToSolveInMinutes} minutes
-  //                     </span>
-  //                   </div>
-  //                 </div>
-  //                 <div className="flex items-center space-x-2">
-  //                   {ques.submission.map(sub => getStatusIcon(sub.status))}
-  //                 </div>
-  //               </div>
-
-  //               <div className="mt-4">
-  //                 <p className="text-gray-300">{ques.description}</p>
-  //                 <div className="mt-4 grid grid-cols-2 gap-4 text-sm text-gray-400">
-  //                   <div>
-  //                     <span>Hidden Test Cases: </span>
-  //                     <span className="text-white">{ques.noOfHiddenTestCases}</span>
-  //                   </div>
-  //                   <div>
-  //                     <span>External Test Cases: </span>
-  //                     <span className="text-white">{ques.noOfExternalTestCases}</span>
-  //                   </div>
-  //                 </div>
-  //                 <button 
-  //                   onClick={() => {nav(`/${uname}/code/${tname}/${ques.title}`)}}
-  //                   className="mt-6 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
-  //                 >
-  //                   Solve Question
-  //                 </button>
-  //               </div>
-  //             </div>
-  //           </div>
-  //         ))}
-  //       </div>
-  //       <div className="sticky bottom-6 mt-8 flex justify-end">
-  //         <button
-  //           onClick={handleSubmit}
-  //           className="flex items-center space-x-2 px-6 py-3 bg-green-600 hover:bg-green-700 rounded-lg transition-colors text-lg font-semibold shadow-lg"
-  //         >
-  //           <span>Submit All</span>
-  //         </button>
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
+            <motion.div 
+                
+                >
+                <div ><a className="click-btn btn-style3" onClick={()=>{nav("/login")}} href="#">Submit</a></div>
+                {/* <span className="mas">LOGIN</span>
+                <button type="button" name="Hover"  onClick={()=>{nav("/login")}}>LOGIN</button> */}
+            </motion.div>
+                </div>
+          </div>
+        </div>
+      </div>
+    )
+  
 };
 
 export default ContestHandlerPage;
+
+
+
+
+
+
+
+  
