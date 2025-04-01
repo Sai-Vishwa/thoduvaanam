@@ -75,6 +75,13 @@ async function codingPage(req,res) {
         const diffMinutes = Math.floor(diffSeconds / 60);
         const remainingSeconds = diffSeconds % 60
 
+        if(now>end){
+            res.status(200).json({
+                err:"Contest over bruh"
+            })
+            return
+        }
+
         res.status(200).json({
             msg:"Successful",
             data:data,

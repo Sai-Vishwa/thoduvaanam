@@ -40,6 +40,12 @@ const CodingPage = () => {
         setTimeLeft({ minutes: timeLeft.minutes - 1, seconds: 59 });
       } else {
         clearInterval(timer);
+        if(questionData.type=="CONTEST"){
+          nav(`/${uname}/contest-handler/${questionData.contest.title}`)
+        }
+        else if(questionData.type==="PRACTICE"){
+          nav(`/${uname}`)
+        }
         // Handle contest end
       }
       
@@ -352,12 +358,16 @@ public class Main {
   const submissionData = details.details?.data || {};
 
   return (
-    <div className="min-h-screen w-screen overflow-hidden flex flex-col font-mono relative bg-[#121212]">
+    <div className="h-screen w-screen overflow-hidden flex flex-col font-mono relative bg-[#121212]">
       <div className="w-full bg-[#1c1b1b] border-b border-[#3b3b3b] p-4 flex items-center">
         <div className='w-1/3'>
 
         <span
         onClick={()=>{
+          const ok = confirm("Potential loss of unsaved data.. make sure you saved your code")
+          if(!ok){
+            return
+          }
           if(questionData.type=="CONTEST"){
             nav(`/${uname}/contest-handler/${questionData.contest.title}`)
           }
@@ -413,10 +423,6 @@ public class Main {
             
             {/* Additional information */}
             <div className="mt-6 space-y-4">
-              <div className="bg-[#2a2a2a] p-3 rounded">
-                <h3 className="text-[#ddf3ef] font-semibold mb-2">Time Limit:</h3>
-                <p>{questionData.timeToSolveInMinutes || 90} minutes</p>
-              </div>
               
               <div className="bg-[#2a2a2a] p-3 rounded">
                 <h3 className="text-[#ddf3ef] font-semibold mb-2">Test Cases:</h3>
@@ -425,17 +431,7 @@ public class Main {
                 <p>Points per Test Case: {questionData.pointsPerTestCaseSolved || 5}</p>
               </div>
               
-              <div className="bg-[#2a2a2a] p-3 rounded">
-                <h3 className="text-[#ddf3ef] font-semibold mb-2">Example:</h3>
-                <div className="font-mono">
-                  <p className="font-semibold">Input:</p>
-                  <pre className="bg-[#333333] p-2 rounded mb-2 overflow-x-auto">3
-10 20 30
-1 2 3</pre>
-                  <p className="font-semibold">Output:</p>
-                  <pre className="bg-[#333333] p-2 rounded overflow-x-auto">23.33</pre>
-                </div>
-              </div>
+              
             </div>
           </div>
         </motion.div>
@@ -497,7 +493,7 @@ public class Main {
           </div>
           
           {/* Code editor */}
-          <div className="flex-1 overflow-hidden">
+          <div className="flex-1 overflow-x-auto">
             <Editor
               height="100%"
               language={languageMap[language] || 'java'}
@@ -517,21 +513,21 @@ public class Main {
           </div>
           
           {/* Test results toggle button */}
-          {showResults && (
+          
             <motion.button
               onClick={toggleResults}
               className="w-full py-2 bg-[#2a2a2a] text-[#ddf3ef] text-sm border-t border-[#3b3b3b] flex items-center justify-center"
               whileHover={{ backgroundColor: '#333333' }}
             >
-              {showResults ? "▲ Hide Test Results" : "▼ Show Test Results"}
+              {showResults ? "▼ Hide Test Results" : "▲ Show Test Results"}
             </motion.button>
-          )}
+          
           
           {/* Test results */}
           <AnimatePresence>
-            {true && (
+            {showResults && (
               <motion.div 
-                className="border-t border-[#3b3b3b] p-4 bg-[#1c1b1b] overflow-y-auto max-h-80"
+                className="border-t border-[#3b3b3b] p-4 bg-[#1c1b1b] overflow-hidden max-h-80"
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
@@ -553,15 +549,15 @@ public class Main {
                         <div className="grid grid-cols-2 gap-2">
                           <div>
                             <p className="text-[#ddf3ef] opacity-70">Input:</p>
-                            <pre className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded overflow-x-auto">{test.input}</pre>
+                            <pre className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded overflow-hidden">{test.input}</pre>
                           </div>
                           <div>
                             <p className="text-[#ddf3ef] opacity-70">Expected Output:</p>
-                            <pre className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded overflow-x-auto">{test.expectedOutput}</pre>
+                            <pre className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded overflow-hidden">{test.expectedOutput}</pre>
                           </div>
                           <div className="col-span-2">
                             <p className="text-[#ddf3ef] opacity-70">Your Output:</p>
-                            <pre className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded overflow-x-auto">{test.actualOutput}</pre>
+                            <pre className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded overflow-hidden">{test.actualOutput}</pre>
                           </div>
                         </div>
                       </div>

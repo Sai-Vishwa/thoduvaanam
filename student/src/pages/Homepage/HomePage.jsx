@@ -87,7 +87,7 @@ function HomePage(){
         <div className="relative main h-screen w-screen overflow-hidden">
       <NavBar 
         userData={allData.myData} 
-        currentPath={window.location.pathname}
+        currentPath={"home"}
         viewMode={allData.viewMode} 
         rank={allData.rank}
       />

@@ -14,7 +14,7 @@ const   ContestHandlerPage = () => {
   const [activeTab, setActiveTab] = useState("overview");
   const [isLowTime, setIsLowTime] = useState(false);
 
-
+  const [terminate , setTerminate] = useState(false)
   const nav = useNavigate();
   const {uname , cname} = useParams()
 
@@ -26,12 +26,16 @@ const   ContestHandlerPage = () => {
         setTimeLeft({ minutes: timeLeft.minutes - 1, seconds: 59 });
       } else {
         clearInterval(timer);
+        if(terminate){
+          handleSubmit()
+        }
         // Handle contest end
       }
       
       // Check if less than 5 minutes remaining
       if (timeLeft.minutes < 5) {
         setIsLowTime(true);
+        setTerminate(true)
       }
     }, 1000);
 

@@ -108,11 +108,11 @@ const QuestionDashboard = ({details , setDetailsBox , detailsBox , uname}) => {
                       
                     </p>
                   </div>
-                  <span className={`text-xs px-2 py-1 rounded ml-2 ${
-                    question.difficulty === "EASY" ? "bg-green-900 text-[#3aff4e]" :
-                    question.difficulty === "BALANCED" ? "bg-orange-700 text-orange-200" :
-                    question.difficulty === "INTENSE" ? "bg-red-700 text-red-200" :
-                    "bg-red-950 text-[#fda3a3]"
+                  <span className={`text-xs  ${
+                    question.difficulty === "EASY" ? " text-[#3aff4e]" :
+                    question.difficulty === "BALANCED" ? " text-yellow-100" :
+                    question.difficulty === "INTENSE" ? " text-orange-200" :
+                    " text-red-300"
                   }`}>
                     {question.difficulty}
                   </span>

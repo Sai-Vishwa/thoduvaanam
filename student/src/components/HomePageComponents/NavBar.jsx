@@ -27,9 +27,9 @@ const NavBar = ({ userData, currentPath, viewMode, rank }) => {
     const nav = useNavigate();
   
     const navItems = [
-      { label: "Home", icon: Home, path: `/${uname}` },
-      { label: "Discussions", icon: Users, path: `/${uname}/discussions` },
-      { label: "Leaderboard", icon: Trophy, path: `/${uname}/leaderboard` }
+      { label: "Home", icon: Home, path: `home` },
+      { label: "Discussions", icon: Users, path: `discussions` },
+      { label: "Leaderboard", icon: Trophy, path: `leaderboard` }
     ];
   
     async function logout() {
@@ -107,7 +107,7 @@ const NavBar = ({ userData, currentPath, viewMode, rank }) => {
                   key={item.label}
                   whileHover={{ color: "#36ead2" }}
                   className={`flex items-center space-x-2 px-3 py-0   rounded-lg transition-colors font-mono
-                    ${currentPath === item.path ? 'text-[#2bbdaa]' : 'text-[#ddf3ef] hover:text-[#36ead2] cursor-pointer basic-1  transition-colors'}`}
+                    ${currentPath === item.path ? 'text-[#3dead2] basic-1 transition-colors' : 'text-[#ddf3ef] hover:text-[#36ead2] cursor-pointer basic-1  transition-colors'}`}
                   onClick={() => nav(item.path)}
                 >
                   <item.icon className="w-4 h-4" />
