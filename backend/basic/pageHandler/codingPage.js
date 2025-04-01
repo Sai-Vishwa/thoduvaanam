@@ -20,6 +20,13 @@ async function codingPage(req,res) {
         const qid = await prisma.questions.findFirst({
             where:{
                 title:qname
+            },
+            include:{
+                contest:{
+                    select:{
+                        title:true
+                    }
+                }
             }
         })
         const details = await prisma.submission.findMany({

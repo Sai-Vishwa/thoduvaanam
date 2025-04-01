@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast, Toaster } from 'sonner';
 import Editor from '@monaco-editor/react';
 import Cookies from 'js-cookie';
-import { Clock } from 'lucide-react';
+import { ArrowLeft, Clock, SkipBack } from 'lucide-react';
 
 const CodingPage = () => {
   const nav = useNavigate();
@@ -106,7 +106,6 @@ public class Main {
       } else {
         setDetails({ details: data, error: null });
         // Set the language based on the backend data
-        alert(JSON.stringify(data?.minutes))
         setTimeLeft ({"minutes":data.minutes , "seconds":data.seconds})
         if (data.data && data.data.language) {
           const backendLanguage = data.data.language;
@@ -354,22 +353,38 @@ public class Main {
 
   return (
     <div className="min-h-screen w-screen overflow-hidden flex flex-col font-mono relative bg-[#121212]">
-      <div className="w-full bg-[#1c1b1b] border-b border-[#3b3b3b] p-4 flex justify-between items-center">
-        <motion.button
-          onClick={() => nav("/")}
-          className="text-[#ddf3ef] border-2 border-[#ddf3ef] px-4 py-1 rounded-lg text-sm hover:border-[#2bbdaa] transition-colors font-mono"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
+      <div className="w-full bg-[#1c1b1b] border-b border-[#3b3b3b] p-4 flex items-center">
+        <div className='w-1/3'>
+
+        <span
+        onClick={()=>{
+          if(questionData.type=="CONTEST"){
+            nav(`/${uname}/contest-handler/${questionData.contest.title}`)
+          }
+          else if(questionData.type==="PRACTICE"){
+            nav(`/${uname}`)
+          }
+        }}
+        className='text-[#ddf3ef] w-fit basic-1 border-0 hover:text-[#36ead2] transition-colors flex justify-start space-x-1 items-center'>
+        <ArrowLeft className='w-4 h-4'/>
+
+        <button
+          className=" text-base  font-mono"
+          
+          >
           Back
-        </motion.button>
-        <div className="flex flex-col items-center">
+        </button>
+          </span>
+            </div>
+        <div className="flex flex-col items-center w-1/3 justify-center">
           <h1 className="text-[#ddf3ef] text-xl">{questionData.title || "Coding Challenge"}</h1>
           <div className={`flex items-center space-x-2 rounded-xl`}>
                 <Clock className={`w-4 h-4  ${isLowTime ? 'text-[#ff5252]' : 'text-[#2bbdaa]'} ${isLowTime ? 'animate-pulse' : ''}`} />
                 <span className={`${isLowTime ? 'text-[#ff5252]' : 'text-[#2bbdaa]'}  text-base font-['Yu_Gothic']`}>{getTimeLeft()}</span>
               </div>
         </div>
+        <div className='w-1/3 flex justify-end pr-5'>
+
         <div className="text-[#ddf3ef] text-sm px-4 py-1 rounded-lg bg-[#2a2a2a]">
           Difficulty: <span className={
             questionData.difficulty === "EASY" ? "text-green-500" :
@@ -379,6 +394,7 @@ public class Main {
             {questionData.difficulty || "INTENSE"}
           </span>
         </div>
+            </div>
       </div>
 
       <div className="flex flex-1 overflow-hidden">
