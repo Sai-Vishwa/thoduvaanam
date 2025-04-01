@@ -1,122 +1,324 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast, Toaster } from 'sonner';
 import Editor from '@monaco-editor/react';
+import Cookies from 'js-cookie';
 
 const CodingPage = () => {
   const nav = useNavigate();
-  const [language, setLanguage] = useState('C++');
+  const [language, setLanguage] = useState('Java');
   const [code, setCode] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [testResults, setTestResults] = useState({
     visible: [
-      { passed: false, input: 'Input for test case 1', expectedOutput: 'Expected output 1', actualOutput: '' },
-      { passed: false, input: 'Input for test case 2', expectedOutput: 'Expected output 2', actualOutput: '' }
+      { passed: false, input: '', expectedOutput: '', actualOutput: '' },
+      { passed: false, input: '', expectedOutput: '', actualOutput: '' }
     ],
     hidden: {
-      totalTests: 5,
+      totalTests: 0,
       passedTests: 0,
       failedInput: ''
     }
   });
   const [showResults, setShowResults] = useState(false);
+  const [details, setDetails] = useState({ details: {}, error: null });
+  const [loading, setLoading] = useState(true);
+
+  const { uname, qname } = useParams();
+
+  // Language mapping for Monaco editor
+  const languageMap = {
+    'Java': 'java',
+    'C': 'c',
+    'C++': 'cpp',
+    'Python': 'python'
+  };
 
   // Initial code templates for each language
   const templates = {
     'C': `#include <stdio.h>
 
 int main() {
-    // Your code here
+    // TODO: Implement weighted average calculation
     return 0;
 }`,
     'C++': `#include <iostream>
+#include <iomanip>
+#include <vector>
 using namespace std;
 
 int main() {
-    // Your code here
+    // TODO: Implement weighted average calculation
     return 0;
 }`,
-    'Python': `# Your code here
+    'Python': `# TODO: Implement weighted average calculation
 `,
     'Java': `import java.util.*;
+import java.text.DecimalFormat;
 
 public class Main {
     public static void main(String[] args) {
-        // Your code here
+        // TODO: Implement weighted average calculation
     }
 }`
   };
 
+  async function fetchData() {
+    setLoading(true);
+    try {
+      const response = await fetch("http://localhost:4000/basic/coding-page", {
+        method: "POST",
+        body: JSON.stringify({ uname: uname, session: Cookies.get("session"), qname: qname }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      });
+      const data = await response.json();
+      if (data.err) {
+        throw new Error(data.err);
+      } else {
+        setDetails({ details: data, error: null });
+        // Set the language based on the backend data
+        if (data.data && data.data.language) {
+          const backendLanguage = data.data.language;
+          const mappedLanguage = backendLanguage === 'JAVA' ? 'Java' : 
+                                 backendLanguage === 'PYTHON' ? 'Python' : 
+                                 backendLanguage === 'C' ? 'C' : 'C++';
+          setLanguage(mappedLanguage);
+          // Set initial code if available, otherwise use template
+          setCode(data.data.code || templates[mappedLanguage]);
+        }
+      }
+    } catch (error) {
+      console.error(error);
+      setDetails({ details: {}, error: "Some internal error try again" });
+    } finally {
+      setLoading(false);
+    }
+  }
+
   useEffect(() => {
-    // Set initial code based on selected language
-    setCode(templates[language]);
+    fetchData();
   }, []);
+
+  useEffect(() => {
+    // Set initial code based on selected language if not already set
+    if (!code && templates[language]) {
+      setCode(templates[language]);
+    }
+  }, [language]);
 
   const handleEditorChange = (value) => {
     setCode(value);
   };
 
   const handleLanguageChange = (newLanguage) => {
-    setLanguage(newLanguage);
-    setCode(templates[newLanguage]);
+    if (newLanguage !== language) {
+      // Show confirmation dialog if code has been modified
+      if (code && code !== templates[language]) {
+        if (window.confirm("Changing language will reset your code. Are you sure?")) {
+          setLanguage(newLanguage);
+          setCode(templates[newLanguage]);
+        }
+      } else {
+        setLanguage(newLanguage);
+        setCode(templates[newLanguage]);
+      }
+    }
   };
 
   const handleCheckCode = async () => {
+    if (!code.trim()) {
+      toast.error("Please write some code before checking", {
+        style: {
+          fontSize: "1.125rem",
+          fontWeight: 300,
+          padding: 20
+        }
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     setShowResults(false);
     
-    // Simulate API call with timeout
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // Mock test results
-    const mockResults = {
-      visible: [
-        { 
-          passed: true, 
-          input: 'Input for test case 1', 
-          expectedOutput: 'Expected output 1', 
-          actualOutput: 'Expected output 1' 
-        },
-        { 
-          passed: true, 
-          input: 'Input for test case 2', 
-          expectedOutput: 'Expected output 2', 
-          actualOutput: 'Expected output 2' 
+    try {
+      // TODO: Replace with actual API call to check code
+      // For now using a timeout to simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Mock test results - replace with actual API response
+      const mockResults = {
+        visible: [
+          { 
+            passed: true, 
+            input: '3\n10 20 30\n1 2 3', 
+            expectedOutput: '23.33', 
+            actualOutput: '23.33' 
+          },
+          { 
+            passed: false, 
+            input: '4\n5 10 15 20\n2 3 4 5', 
+            expectedOutput: '14.29', 
+            actualOutput: '14.28' 
+          }
+        ],
+        hidden: {
+          totalTests: details.details?.ques?.noOfHiddenTestCases || 18,
+          passedTests: 15,
+          failedInput: 'Large dataset with negative weights'
         }
-      ],
-      hidden: {
-        totalTests: 5,
-        passedTests: 3,
-        failedInput: 'Input for hidden test case 4'
-      }
-    };
-    
-    setTestResults(mockResults);
-    setShowResults(true);
-    setIsSubmitting(false);
-    
-    toast.success("Code checked!", {
-      style: {
-        fontSize: "1.125rem",
-        fontWeight: 300,
-        padding: 20
-      }
-    });
+      };
+      
+      setTestResults(mockResults);
+      setShowResults(true);
+      
+      toast.success("Code checked!", {
+        style: {
+          fontSize: "1.125rem",
+          fontWeight: 300,
+          padding: 20
+        }
+      });
+    } catch (error) {
+      toast.error("Error checking code. Please try again.", {
+        style: {
+          fontSize: "1.125rem",
+          fontWeight: 300,
+          padding: 20
+        }
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleSaveCode = () => {
-    toast.success("Code saved successfully!", {
-      style: {
-        fontSize: "1.125rem",
-        fontWeight: 300,
-        padding: 20
-      }
-    });
+  const handleSaveCode = async () => {
+    try {
+      // TODO: Replace with actual API call to save code
+      // For now using a timeout to simulate API call
+      await new Promise(resolve => setTimeout(resolve, 800));
+      
+      toast.success("Code saved successfully!", {
+        style: {
+          fontSize: "1.125rem",
+          fontWeight: 300,
+          padding: 20
+        }
+      });
+    } catch (error) {
+      toast.error("Error saving code. Please try again.", {
+        style: {
+          fontSize: "1.125rem",
+          fontWeight: 300,
+          padding: 20
+        }
+      });
+    }
   };
+
+  const handleSubmitCode = async () => {
+    if (!code.trim()) {
+      toast.error("Please write some code before submitting", {
+        style: {
+          fontSize: "1.125rem",
+          fontWeight: 300,
+          padding: 20
+        }
+      });
+      return;
+    }
+
+    if (window.confirm("Are you sure you want to submit your solution? This is your final submission.")) {
+      setIsSubmitting(true);
+      
+      try {
+        // TODO: Replace with actual API call to submit code
+        // For now using a timeout to simulate API call
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        toast.success("Solution submitted successfully!", {
+          style: {
+            fontSize: "1.125rem",
+            fontWeight: 300,
+            padding: 20
+          }
+        });
+        
+        // Navigate back or to results page after successful submission
+        setTimeout(() => {
+          nav("/");
+        }, 2000);
+      } catch (error) {
+        toast.error("Error submitting code. Please try again.", {
+          style: {
+            fontSize: "1.125rem",
+            fontWeight: 300,
+            padding: 20
+          }
+        });
+      } finally {
+        setIsSubmitting(false);
+      }
+    }
+  };
+
+  const toggleResults = () => {
+    setShowResults(!showResults);
+  };
+
+  const formatTimeLeft = () => {
+    if (!details.details?.data?.maxTimeToSolve) return "Time: N/A";
+    
+    const endTime = new Date(details.details.data.maxTimeToSolve);
+    const now = new Date();
+    const timeLeftMs = endTime - now;
+    
+    if (timeLeftMs <= 0) return "Time Expired";
+    
+    const minutes = Math.floor(timeLeftMs / 60000);
+    const seconds = Math.floor((timeLeftMs % 60000) / 1000);
+    
+    return `Time Left: ${minutes}m ${seconds}s`;
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen w-screen flex items-center justify-center bg-[#121212] text-[#ddf3ef]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#2bbdaa] mx-auto mb-4"></div>
+          <p>Loading challenge...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (details.error) {
+    return (
+      <div className="min-h-screen w-screen flex items-center justify-center bg-[#121212] text-[#ddf3ef]">
+        <div className="text-center p-8 bg-[#1c1b1b] rounded-lg border border-red-500">
+          <h2 className="text-xl mb-4">Error Loading Challenge</h2>
+          <p className="mb-4">{details.error}</p>
+          <motion.button
+            onClick={() => nav("/")}
+            className="text-[#ddf3ef] border-2 border-[#ddf3ef] px-4 py-1 rounded-lg text-sm hover:border-[#2bbdaa] transition-colors font-mono"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            Back to Dashboard
+          </motion.button>
+        </div>
+      </div>
+    );
+  }
+
+  const questionData = details.details?.ques || {};
+  const submissionData = details.details?.data || {};
 
   return (
-    <div className="min-h-screen w-screen overflow-hidden main flex flex-col font-mono relative bg-[#121212]">
+    <div className="min-h-screen w-screen overflow-hidden flex flex-col font-mono relative bg-[#121212]">
       <div className="w-full bg-[#1c1b1b] border-b border-[#3b3b3b] p-4 flex justify-between items-center">
         <motion.button
           onClick={() => nav("/")}
@@ -126,8 +328,19 @@ public class Main {
         >
           Back
         </motion.button>
-        <h1 className="text-[#ddf3ef] text-xl">Coding Challenge</h1>
-        <div className="invisible w-20"> {/* Spacer for centering */} </div>
+        <div className="flex flex-col items-center">
+          <h1 className="text-[#ddf3ef] text-xl">{questionData.title || "Coding Challenge"}</h1>
+          <p className="text-[#ddf3ef] opacity-70 text-sm">{formatTimeLeft()}</p>
+        </div>
+        <div className="text-[#ddf3ef] text-sm px-4 py-1 rounded-lg bg-[#2a2a2a]">
+          Difficulty: <span className={
+            questionData.difficulty === "EASY" ? "text-green-500" :
+            questionData.difficulty === "MEDIUM" ? "text-yellow-500" :
+            "text-red-500"
+          }>
+            {questionData.difficulty || "INTENSE"}
+          </span>
+        </div>
       </div>
 
       <div className="flex flex-1 overflow-hidden">
@@ -138,56 +351,50 @@ public class Main {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-[#ddf3ef] text-xl mb-4 font-semibold">Problem: Two Sum</h2>
+          <h2 className="text-[#ddf3ef] text-xl mb-4 font-semibold">{questionData.title || "Weighted Average"}</h2>
           <div className="text-[#ddf3ef] text-sm space-y-4">
-            <p>
-              Given an array of integers <code className="bg-[#2a2a2a] px-1 rounded">nums</code> and an integer <code className="bg-[#2a2a2a] px-1 rounded">target</code>, return indices of the two numbers such that they add up to <code className="bg-[#2a2a2a] px-1 rounded">target</code>.
-            </p>
-            <p>
-              You may assume that each input would have exactly one solution, and you may not use the same element twice.
-            </p>
-            <p>
-              You can return the answer in any order.
+            <p className="whitespace-pre-line">
+              {questionData.description || "No description available"}
             </p>
             
-            <div className="mt-6">
-              <h3 className="text-[#ddf3ef] font-semibold mb-2">Example 1:</h3>
+            {/* Additional information */}
+            <div className="mt-6 space-y-4">
               <div className="bg-[#2a2a2a] p-3 rounded">
-                <p>Input: nums = [2,7,11,15], target = 9</p>
-                <p>Output: [0,1]</p>
-                <p>Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].</p>
+                <h3 className="text-[#ddf3ef] font-semibold mb-2">Time Limit:</h3>
+                <p>{questionData.timeToSolveInMinutes || 90} minutes</p>
               </div>
-            </div>
-            
-            <div className="mt-4">
-              <h3 className="text-[#ddf3ef] font-semibold mb-2">Example 2:</h3>
+              
               <div className="bg-[#2a2a2a] p-3 rounded">
-                <p>Input: nums = [3,2,4], target = 6</p>
-                <p>Output: [1,2]</p>
+                <h3 className="text-[#ddf3ef] font-semibold mb-2">Test Cases:</h3>
+                <p>External Test Cases: {questionData.noOfExternalTestCases || 2}</p>
+                <p>Hidden Test Cases: {questionData.noOfHiddenTestCases || 18}</p>
+                <p>Points per Test Case: {questionData.pointsPerTestCaseSolved || 5}</p>
               </div>
-            </div>
-            
-            <div className="mt-4">
-              <h3 className="text-[#ddf3ef] font-semibold mb-2">Constraints:</h3>
-              <ul className="list-disc pl-5">
-                <li>2 ≤ nums.length ≤ 10^4</li>
-                <li>-10^9 ≤ nums[i] ≤ 10^9</li>
-                <li>-10^9 ≤ target ≤ 10^9</li>
-                <li>Only one valid answer exists.</li>
-              </ul>
+              
+              <div className="bg-[#2a2a2a] p-3 rounded">
+                <h3 className="text-[#ddf3ef] font-semibold mb-2">Example:</h3>
+                <div className="font-mono">
+                  <p className="font-semibold">Input:</p>
+                  <pre className="bg-[#333333] p-2 rounded mb-2 overflow-x-auto">3
+10 20 30
+1 2 3</pre>
+                  <p className="font-semibold">Output:</p>
+                  <pre className="bg-[#333333] p-2 rounded overflow-x-auto">23.33</pre>
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>
         
         {/* Right panel - Editor and results */}
         <motion.div 
-          className="w-2/3 flex flex-col bg-[#1c1b1b]"
+          className="w-2/3 flex flex-col bg-[#1c1b1b] overflow-hidden"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
         >
           {/* Language selection and action buttons */}
-          <div className="px-6 py-3 border-b border-[#3b3b3b] flex justify-between">
+          <div className="px-6 py-3 border-b border-[#3b3b3b] flex justify-between items-center">
             <div className="flex space-x-2">
               {['C', 'C++', 'Python', 'Java'].map((lang) => (
                 <motion.button
@@ -217,20 +424,29 @@ public class Main {
               <motion.button
                 onClick={handleCheckCode}
                 disabled={isSubmitting}
-                className="bg-[#2bbdaa] text-[#1c1b1b] px-4 py-1 rounded-lg text-sm hover:bg-[#1a9b8c] transition-colors"
+                className="bg-[#2bbdaa] text-[#1c1b1b] px-4 py-1 rounded-lg text-sm hover:bg-[#1a9b8c] transition-colors disabled:opacity-50"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                {isSubmitting ? "Checking..." : "Check"}
+                {isSubmitting ? "Checking..." : "Run Tests"}
+              </motion.button>
+              <motion.button
+                onClick={handleSubmitCode}
+                disabled={isSubmitting}
+                className="bg-blue-500 text-white px-4 py-1 rounded-lg text-sm hover:bg-blue-600 transition-colors disabled:opacity-50"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {isSubmitting ? "Submitting..." : "Submit"}
               </motion.button>
             </div>
           </div>
           
           {/* Code editor */}
-          <div className="flex-1">
+          <div className="flex-1 overflow-hidden">
             <Editor
               height="100%"
-              language={language === 'C++' ? 'cpp' : language.toLowerCase()}
+              language={languageMap[language] || 'java'}
               value={code}
               onChange={handleEditorChange}
               theme="vs-dark"
@@ -239,15 +455,29 @@ public class Main {
                 minimap: { enabled: false },
                 scrollBeyondLastLine: false,
                 automaticLayout: true,
+                wordWrap: 'on',
+                lineNumbers: 'on',
+                tabSize: 2,
               }}
             />
           </div>
+          
+          {/* Test results toggle button */}
+          {showResults && (
+            <motion.button
+              onClick={toggleResults}
+              className="w-full py-2 bg-[#2a2a2a] text-[#ddf3ef] text-sm border-t border-[#3b3b3b] flex items-center justify-center"
+              whileHover={{ backgroundColor: '#333333' }}
+            >
+              {showResults ? "▲ Hide Test Results" : "▼ Show Test Results"}
+            </motion.button>
+          )}
           
           {/* Test results */}
           <AnimatePresence>
             {showResults && (
               <motion.div 
-                className="border-t border-[#3b3b3b] p-4 bg-[#1c1b1b]"
+                className="border-t border-[#3b3b3b] p-4 bg-[#1c1b1b] overflow-y-auto max-h-80"
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
@@ -269,15 +499,15 @@ public class Main {
                         <div className="grid grid-cols-2 gap-2">
                           <div>
                             <p className="text-[#ddf3ef] opacity-70">Input:</p>
-                            <p className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded">{test.input}</p>
+                            <pre className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded overflow-x-auto">{test.input}</pre>
                           </div>
                           <div>
                             <p className="text-[#ddf3ef] opacity-70">Expected Output:</p>
-                            <p className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded">{test.expectedOutput}</p>
+                            <pre className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded overflow-x-auto">{test.expectedOutput}</pre>
                           </div>
                           <div className="col-span-2">
                             <p className="text-[#ddf3ef] opacity-70">Your Output:</p>
-                            <p className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded">{test.actualOutput}</p>
+                            <pre className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded overflow-x-auto">{test.actualOutput}</pre>
                           </div>
                         </div>
                       </div>
@@ -306,7 +536,7 @@ public class Main {
                     
                     {testResults.hidden.passedTests < testResults.hidden.totalTests && (
                       <div>
-                        <p className="text-[#ddf3ef] opacity-70">First Failed Test Input:</p>
+                        <p className="text-[#ddf3ef] opacity-70">First Failed Test Input Hint:</p>
                         <p className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded">{testResults.hidden.failedInput}</p>
                       </div>
                     )}

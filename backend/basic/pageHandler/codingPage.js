@@ -20,12 +20,9 @@ async function codingPage(req,res) {
         const qid = await prisma.questions.findFirst({
             where:{
                 title:qname
-            },
-            select:{
-                id:true
             }
         })
-        const details = await prisma.submission.findFirst({
+        const details = await prisma.submission.findMany({
             where:{
                 AND:[
                     {questionId:qid.id},
@@ -33,6 +30,20 @@ async function codingPage(req,res) {
                 ]
             }
         })
+        let count = 0
+        let data = {}
+        details.map((dt)=>{
+            if(dt.status!=="COMPLETED" && dt.isFinal=="NO" ){
+                data = dt
+                count+=1
+            }
+        })
+        if(count!==1){
+            res.status(200).json({
+                err:"nee etho kolaru panta da.. contact admin"
+            })
+            return
+        }
         // 
         const tc = await prisma.testCase.findMany({
             where:{
@@ -47,12 +58,7 @@ async function codingPage(req,res) {
                 outputString:true
             }
         })
-        if(details.isFinal == "YES" || details.status!=="WAITING"){
-            res.status(200).json({
-                err:"contest completed already"
-            })
-            return
-        }
+        
         const utc = new Date();
         const now = new Date(utc.getTime()+5.5*60*60*1000)
         const st = new Date(details.startTime)
@@ -61,23 +67,16 @@ async function codingPage(req,res) {
         const diffSeconds = Math.floor((end-now) / 1000); 
         const diffMinutes = Math.floor(diffSeconds / 60);
         const remainingSeconds = diffSeconds % 60
-        const d ={
-            msg:"Successful",
-            data:details,
-            minutes:diffMinutes,
-            seconds:remainingSeconds,
-            testCase:tc,
-            
-        }
-        console.log(d)
+
         res.status(200).json({
             msg:"Successful",
-            data:details,
+            data:data,
             minutes:diffMinutes,
             seconds:remainingSeconds,
             testCase:tc,
-            
+            ques:qid
         })
+        return
     }
     catch(error){
         console.log(error)
