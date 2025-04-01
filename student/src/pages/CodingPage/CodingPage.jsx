@@ -4,12 +4,17 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast, Toaster } from 'sonner';
 import Editor from '@monaco-editor/react';
 import Cookies from 'js-cookie';
+import { Clock } from 'lucide-react';
 
 const CodingPage = () => {
   const nav = useNavigate();
   const [language, setLanguage] = useState('Java');
   const [code, setCode] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [timeLeft, setTimeLeft] = useState({});
+  const [isLowTime, setIsLowTime] = useState(false);
+
+
   const [testResults, setTestResults] = useState({
     visible: [
       { passed: false, input: '', expectedOutput: '', actualOutput: '' },
@@ -26,6 +31,26 @@ const CodingPage = () => {
   const [loading, setLoading] = useState(true);
 
   const { uname, qname } = useParams();
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (timeLeft.seconds > 0) {
+        setTimeLeft(prev => ({ ...prev, seconds: prev.seconds - 1 }));
+      } else if (timeLeft.minutes > 0) {
+        setTimeLeft({ minutes: timeLeft.minutes - 1, seconds: 59 });
+      } else {
+        clearInterval(timer);
+        // Handle contest end
+      }
+      
+      // Check if less than 5 minutes remaining
+      if (timeLeft.minutes < 5) {
+        setIsLowTime(true);
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [timeLeft]);
 
   // Language mapping for Monaco editor
   const languageMap = {
@@ -81,6 +106,8 @@ public class Main {
       } else {
         setDetails({ details: data, error: null });
         // Set the language based on the backend data
+        alert(JSON.stringify(data?.minutes))
+        setTimeLeft ({"minutes":data.minutes , "seconds":data.seconds})
         if (data.data && data.data.language) {
           const backendLanguage = data.data.language;
           const mappedLanguage = backendLanguage === 'JAVA' ? 'Java' : 
@@ -89,6 +116,7 @@ public class Main {
           setLanguage(mappedLanguage);
           // Set initial code if available, otherwise use template
           setCode(data.data.code || templates[mappedLanguage]);
+
         }
       }
     } catch (error) {
@@ -219,6 +247,13 @@ public class Main {
     }
   };
 
+
+  const getTimeLeft = () => {
+    const minutes = timeLeft?.minutes?.toString()?.padStart(2, '0');
+    const seconds = timeLeft?.seconds?.toString()?.padStart(2, '0');
+    return `${minutes}:${seconds}`;
+  };
+
   const handleSubmitCode = async () => {
     if (!code.trim()) {
       toast.error("Please write some code before submitting", {
@@ -330,7 +365,10 @@ public class Main {
         </motion.button>
         <div className="flex flex-col items-center">
           <h1 className="text-[#ddf3ef] text-xl">{questionData.title || "Coding Challenge"}</h1>
-          <p className="text-[#ddf3ef] opacity-70 text-sm">{formatTimeLeft()}</p>
+          <div className={`flex items-center space-x-2 rounded-xl`}>
+                <Clock className={`w-4 h-4  ${isLowTime ? 'text-[#ff5252]' : 'text-[#2bbdaa]'} ${isLowTime ? 'animate-pulse' : ''}`} />
+                <span className={`${isLowTime ? 'text-[#ff5252]' : 'text-[#2bbdaa]'}  text-base font-['Yu_Gothic']`}>{getTimeLeft()}</span>
+              </div>
         </div>
         <div className="text-[#ddf3ef] text-sm px-4 py-1 rounded-lg bg-[#2a2a2a]">
           Difficulty: <span className={
@@ -475,7 +513,7 @@ public class Main {
           
           {/* Test results */}
           <AnimatePresence>
-            {showResults && (
+            {true && (
               <motion.div 
                 className="border-t border-[#3b3b3b] p-4 bg-[#1c1b1b] overflow-y-auto max-h-80"
                 initial={{ opacity: 0, height: 0 }}

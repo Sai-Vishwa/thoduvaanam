@@ -61,8 +61,8 @@ async function codingPage(req,res) {
         
         const utc = new Date();
         const now = new Date(utc.getTime()+5.5*60*60*1000)
-        const st = new Date(details.startTime)
-        const end = new Date(details.maxTimeToSolve)
+        const st = new Date(data.startTime)
+        const end = new Date(data.maxTimeToSolve)
         // console.log(st);
         const diffSeconds = Math.floor((end-now) / 1000); 
         const diffMinutes = Math.floor(diffSeconds / 60);
