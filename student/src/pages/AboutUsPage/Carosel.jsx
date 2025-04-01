@@ -12,6 +12,15 @@ const ImageCarousel = () => {
   const images = [
     {
       id: 1,
+      name: "Saivishwa",
+      dept: "III yr CSE",
+      src: "/sai.jpg",
+      info: "Hii... Finally this site became a success",
+      github: "github.com/user1",
+      linkedin: "linkedin.com/in/user1"
+    },
+    {
+      id: 2,
       name: "Prasanth S",
       dept: "III yr CSE",
       src: "/IMG_20250315_204644.jpg",
@@ -20,7 +29,7 @@ const ImageCarousel = () => {
       linkedin: "linkedin.com/in/user1"
     },
     {
-      id: 2,
+      id: 3,
       name: "Poorvaja",
       dept: "III yr IT",
       src: "/download__1_-removebg-preview.png",
@@ -29,7 +38,7 @@ const ImageCarousel = () => {
       linkedin: "linkedin.com/in/user2"
     },
     {
-      id: 3,
+      id: 4,
       name: "Rakul Prakash",
       dept:"III yr CSE",
       src: "/download__1_-removebg-preview.png",
@@ -38,7 +47,7 @@ const ImageCarousel = () => {
       linkedin: "linkedin.com/in/user3"
     },
     {
-      id: 4,
+      id: 5,
       name: "SRK",
       dept:"II yr CSE",
       src: "/download__1_-removebg-preview.png",
@@ -47,7 +56,7 @@ const ImageCarousel = () => {
       linkedin: "linkedin.com/in/user4"
     },
     {
-        id: 5,
+        id: 6,
         name: "Surweesh",
         dept:"II yr AIML",
         src: "/download__1_-removebg-preview.png",
@@ -56,7 +65,7 @@ const ImageCarousel = () => {
         linkedin: "linkedin.com/in/user4"
       },
       {
-        id: 6,
+        id: 7,
         name: "Aaditya",
         dept:"II yr IT",
         src: "/download__1_-removebg-preview.png",
@@ -65,7 +74,7 @@ const ImageCarousel = () => {
         linkedin: "linkedin.com/in/user4"
       },
       {
-        id: 7,
+        id: 8,
         name: "Jeffrin",
         dept:"III yr AIML",
         src: "/download__1_-removebg-preview.png",

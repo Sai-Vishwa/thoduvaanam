@@ -58,7 +58,7 @@ function App() {
 
 
 
-        <Route path='/:uname/question/:qname' element={<QuestionPage />} />
+        <Route path='/:uname/question/:qname' element={<CodingPage />} />
         <Route path='/:uname/contest/:tname' element={<ContestBasicPage />} />
         <Route path='/:uname/contest-handler/:cname' element={<ContestHandlerPage />} />
         <Route path='/:uname/review-question/:qname' element={<ReviewQuestionPage />} />

@@ -343,7 +343,7 @@ const DashboardDetails = ({ type, details , uname }) => {
                 <div>
                   <div className="text-sm text-[#ddf3ea]">Submission #{submission.id}</div>
                   <div className="text-xs text-gray-400">
-                    Submitted on: {new Date(submission.submittedOn).toLocaleString()}
+                    Submitted on: {new Date(submission?.submittedOn).toISOString()}
                   </div>
                 </div>
               </div>

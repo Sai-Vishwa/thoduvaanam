@@ -39,7 +39,8 @@ async function ContestBasicPage(req,res) {
                             select:{
                                 status:true,
                                 id:true,
-                                maxTimeToSolve:true
+                                maxTimeToSolve:true,
+                                submittedOn:true
                             }
                         }
                     }

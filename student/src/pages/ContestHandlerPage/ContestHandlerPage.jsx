@@ -201,7 +201,7 @@ const   ContestHandlerPage = () => {
                   <motion.div 
                 
             >
-                <div ><a className="click-btn btn-style3" onClick={()=>{nav("/login")}} href="#">Solve</a></div>
+                <div ><a className="click-btn btn-style3" onClick={()=>{nav(`/${uname}/question/${q.title}`)}} href="#">Solve</a></div>
                 {/* <span className="mas">LOGIN</span>
                 <button type="button" name="Hover"  onClick={()=>{nav("/login")}}>LOGIN</button> */}
             </motion.div>

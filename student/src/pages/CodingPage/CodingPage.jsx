@@ -1,261 +1,324 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
-import { Editor } from "@monaco-editor/react";
-import { ArrowLeft, Clock, Play, CheckCircle, XCircle } from 'lucide-react';
-import { useParams, useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
+import { toast, Toaster } from 'sonner';
+import Editor from '@monaco-editor/react';
 
 const CodingPage = () => {
-  const { uname, tname, qname } = useParams();
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
-  const [language, setLanguage] = useState('JAVA');
+  const nav = useNavigate();
+  const [language, setLanguage] = useState('C++');
   const [code, setCode] = useState('');
-  const [memory, setMemory] = useState({
-    PYTHON: '',
-    C: '',
-    CPP: '',
-    JAVA: ''
-  });
-  const [questionData, setQuestionData] = useState({
-    data: null,
-    minutes: 0,
-    seconds: 0,
-    testCase: [],
-    boiler:[]
-  });
-
-  // Fetch initial data
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const result = await fetch("http://localhost:4000/basic/coding-page", {
-          method: "POST",
-          body: JSON.stringify({
-            session: Cookies.get("session"),
-            uname: uname,
-            qname: qname,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-        });
-        const data = await result.json();
-        if (data.err) {
-          throw new Error(data.err);
-        }
-        
-        setQuestionData(data);
-        setCode(data.data.code || '');
-        setLanguage(data.data.language);
-        setLoading(false);
-      } catch (error) {
-        alert(error.message);
-        navigate(`/${uname}/contest-handler/${tname}`);
-      }
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [testResults, setTestResults] = useState({
+    visible: [
+      { passed: false, input: 'Input for test case 1', expectedOutput: 'Expected output 1', actualOutput: '' },
+      { passed: false, input: 'Input for test case 2', expectedOutput: 'Expected output 2', actualOutput: '' }
+    ],
+    hidden: {
+      totalTests: 5,
+      passedTests: 0,
+      failedInput: ''
     }
+  });
+  const [showResults, setShowResults] = useState(false);
 
-    fetchData();
-  }, [uname, qname, tname, navigate]);
+  // Initial code templates for each language
+  const templates = {
+    'C': `#include <stdio.h>
 
-  const Timer = ({ minutes, seconds }) => {
-    const [timeLeft, setTimeLeft] = useState(minutes * 60 + seconds);
+int main() {
+    // Your code here
+    return 0;
+}`,
+    'C++': `#include <iostream>
+using namespace std;
 
-    useEffect(() => {
-      const timer = setInterval(() => {
-        setTimeLeft(prev => Math.max(0, prev - 1));
-      }, 1000);
+int main() {
+    // Your code here
+    return 0;
+}`,
+    'Python': `# Your code here
+`,
+    'Java': `import java.util.*;
 
-      return () => clearInterval(timer);
-    }, []);
-
-    const formatTime = (seconds) => {
-      const mins = Math.floor(seconds / 60);
-      const secs = seconds % 60;
-      return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-    };
-
-    return (
-      <div className="flex items-center space-x-2 text-xl font-mono">
-        <Clock className="w-6 h-6" />
-        <span>{formatTime(timeLeft)}</span>
-      </div>
-    );
+public class Main {
+    public static void main(String[] args) {
+        // Your code here
+    }
+}`
   };
+
+  useEffect(() => {
+    // Set initial code based on selected language
+    setCode(templates[language]);
+  }, []);
 
   const handleEditorChange = (value) => {
-    setCode(value || '');
-    setMemory(prev => ({
-      ...prev,
-      [language]: value || ''
-    }));
+    setCode(value);
   };
 
-  const handleLanguageChange = (newLang) => {
-    setLanguage(newLang);
-    if (questionData.boiler && questionData.boiler[0]) {
-      const boilerplateCode = questionData.boiler[0][newLang.toLowerCase()];
-      setCode(boilerplateCode?.replace(/^"|"$/g, '') || '');
-    }
+  const handleLanguageChange = (newLanguage) => {
+    setLanguage(newLanguage);
+    setCode(templates[newLanguage]);
   };
 
-  async function handleRunCode() {
-    try {
-      const response = await fetch("http://localhost:4000/submission/check-submission", {
-        method: "POST",
-        body: JSON.stringify({
-          session: Cookies.get("session"),
-          uname: uname,
-          qname: qname,
-          code: code,
-          language: language
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
+  const handleCheckCode = async () => {
+    setIsSubmitting(true);
+    setShowResults(false);
+    
+    // Simulate API call with timeout
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    // Mock test results
+    const mockResults = {
+      visible: [
+        { 
+          passed: true, 
+          input: 'Input for test case 1', 
+          expectedOutput: 'Expected output 1', 
+          actualOutput: 'Expected output 1' 
+        },
+        { 
+          passed: true, 
+          input: 'Input for test case 2', 
+          expectedOutput: 'Expected output 2', 
+          actualOutput: 'Expected output 2' 
         }
-      });
-      const data = await response.json();
-      if (data.err) {
-        throw new Error(data.err);
+      ],
+      hidden: {
+        totalTests: 5,
+        passedTests: 3,
+        failedInput: 'Input for hidden test case 4'
       }
-      alert(JSON.stringify(data))
-      setQuestionData(prev => ({
-        ...prev,
-        data: {
-          ...prev.data,
-          output1: data.output1,
-          output2: data.output2
-        }
-      }));
-    } catch (error) {
-      alert("Error running code: " + error.message);
-    }
-  }
+    };
+    
+    setTestResults(mockResults);
+    setShowResults(true);
+    setIsSubmitting(false);
+    
+    toast.success("Code checked!", {
+      style: {
+        fontSize: "1.125rem",
+        fontWeight: 300,
+        padding: 20
+      }
+    });
+  };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-[#ddf3ef] flex items-center justify-center">
-        Loading...
-      </div>
-    );
-  }
-
-  const { data, testCase, minutes, seconds } = questionData;
+  const handleSaveCode = () => {
+    toast.success("Code saved successfully!", {
+      style: {
+        fontSize: "1.125rem",
+        fontWeight: 300,
+        padding: 20
+      }
+    });
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-[#ddf3ef] p-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <button 
-            onClick={() => navigate(`/${uname}/contest-handler/${tname}`)}
-            className="flex items-center space-x-2 text-gray-400 hover:text-[#ddf3ef] transition-colors"
-          >
-            <ArrowLeft className="w-5 h-5" />
-            <span>Back to Contest</span>
-          </button>
-          <Timer minutes={minutes} seconds={seconds} />
-        </div>
-
-        {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Problem Description & Test Cases */}
-          <div className="lg:col-span-1 bg-gray-800/50 border border-gray-700 rounded-lg p-6">
-            <div className="mb-6">
-              <h2 className="text-2xl font-bold mb-4">Test Cases</h2>
-              <div className="space-y-4">
-                {testCase.map((test, index) => (
-                  <div key={index} className="bg-gray-900/50 p-4 rounded-lg">
-                    <p className="font-semibold mb-2">{test.type}</p>
-                    <div className="space-y-2">
-                      <div>
-                        <p className="font-mono text-sm text-gray-400">Input:</p>
-                        <p className="font-mono text-sm">{test.inputString}</p>
-                      </div>
-                      <div>
-                        <p className="font-mono text-sm text-gray-400">Expected Output:</p>
-                        <p className="font-mono text-sm">{test.outputString}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Code Editor Section */}
-          <div className="lg:col-span-2 space-y-4">
-            <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-6">
-              <div className="flex justify-between items-center mb-4">
-                <select
-                  className="bg-gray-900 text-[#ddf3ef] border border-gray-700 rounded-lg px-4 py-2"
-                  value={language}
-                  onChange={(e) => handleLanguageChange(e.target.value)}
-                >
-                  <option value="PYTHON">Python</option>
-                  <option value="JAVA">Java</option>
-                  <option value="CPP">C++</option>
-                  <option value="C">C</option>
-                </select>
-                
-              </div>
-              
-              <Editor
-                height="400px"
-                language={language.toLowerCase()}
-                value={code}
-                onChange={handleEditorChange}
-                theme="vs-dark"
-                options={{
-                  fontSize: 16,
-                  minimap: { enabled: false },
-                  scrollBeyondLastLine: false,
-                  automaticLayout: true,
-                }}
-              />
-              <div className='flex justify-end space-x-3'>
-              <button
-                  onClick={handleRunCode}
-                  className="mt-3 flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition-colors"
-                >
-                  <Play className="w-4 h-4" />
-                  <span>Run Code</span>
-                </button>
-                <button
-                  onClick={()=>{
-                    navigate(`/${uname}/contest-handler/${tname}`)
-                  }}
-                  className="mt-3 flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition-colors"
-                >
-                  <Play className="w-4 h-4" />
-                  <span>Save and Exit</span>
-                </button>
-              </div>
-              
-            </div>
-
-            {/* Output Section */}
-            <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-6">
-              <h3 className="text-lg font-semibold mb-4">Output</h3>
-              <div className="space-y-4">
-                <div className="bg-gray-900/50 p-4 rounded-lg">
-                  <h4 className="font-semibold mb-2">Test Case 1</h4>
-                  <pre className="font-mono text-sm ddf3efspace-pre-wrap">
-                    {data?.output1 || 'Not run yet'}
-                  </pre>
-                </div>
-                <div className="bg-gray-900/50 p-4 rounded-lg">
-                  <h4 className="font-semibold mb-2">Test Case 2</h4>
-                  <pre className="font-mono text-sm ddf3efspace-pre-wrap">
-                    {data?.output2 || 'Not run yet'}
-                  </pre>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div className="min-h-screen w-screen overflow-hidden main flex flex-col font-mono relative bg-[#121212]">
+      <div className="w-full bg-[#1c1b1b] border-b border-[#3b3b3b] p-4 flex justify-between items-center">
+        <motion.button
+          onClick={() => nav("/")}
+          className="text-[#ddf3ef] border-2 border-[#ddf3ef] px-4 py-1 rounded-lg text-sm hover:border-[#2bbdaa] transition-colors font-mono"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          Back
+        </motion.button>
+        <h1 className="text-[#ddf3ef] text-xl">Coding Challenge</h1>
+        <div className="invisible w-20"> {/* Spacer for centering */} </div>
       </div>
+
+      <div className="flex flex-1 overflow-hidden">
+        {/* Left panel - Question details */}
+        <motion.div 
+          className="w-1/3 p-6 border-r border-[#3b3b3b] overflow-y-auto bg-[#1c1b1b]"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-[#ddf3ef] text-xl mb-4 font-semibold">Problem: Two Sum</h2>
+          <div className="text-[#ddf3ef] text-sm space-y-4">
+            <p>
+              Given an array of integers <code className="bg-[#2a2a2a] px-1 rounded">nums</code> and an integer <code className="bg-[#2a2a2a] px-1 rounded">target</code>, return indices of the two numbers such that they add up to <code className="bg-[#2a2a2a] px-1 rounded">target</code>.
+            </p>
+            <p>
+              You may assume that each input would have exactly one solution, and you may not use the same element twice.
+            </p>
+            <p>
+              You can return the answer in any order.
+            </p>
+            
+            <div className="mt-6">
+              <h3 className="text-[#ddf3ef] font-semibold mb-2">Example 1:</h3>
+              <div className="bg-[#2a2a2a] p-3 rounded">
+                <p>Input: nums = [2,7,11,15], target = 9</p>
+                <p>Output: [0,1]</p>
+                <p>Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].</p>
+              </div>
+            </div>
+            
+            <div className="mt-4">
+              <h3 className="text-[#ddf3ef] font-semibold mb-2">Example 2:</h3>
+              <div className="bg-[#2a2a2a] p-3 rounded">
+                <p>Input: nums = [3,2,4], target = 6</p>
+                <p>Output: [1,2]</p>
+              </div>
+            </div>
+            
+            <div className="mt-4">
+              <h3 className="text-[#ddf3ef] font-semibold mb-2">Constraints:</h3>
+              <ul className="list-disc pl-5">
+                <li>2 ≤ nums.length ≤ 10^4</li>
+                <li>-10^9 ≤ nums[i] ≤ 10^9</li>
+                <li>-10^9 ≤ target ≤ 10^9</li>
+                <li>Only one valid answer exists.</li>
+              </ul>
+            </div>
+          </div>
+        </motion.div>
+        
+        {/* Right panel - Editor and results */}
+        <motion.div 
+          className="w-2/3 flex flex-col bg-[#1c1b1b]"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          {/* Language selection and action buttons */}
+          <div className="px-6 py-3 border-b border-[#3b3b3b] flex justify-between">
+            <div className="flex space-x-2">
+              {['C', 'C++', 'Python', 'Java'].map((lang) => (
+                <motion.button
+                  key={lang}
+                  onClick={() => handleLanguageChange(lang)}
+                  className={`px-3 py-1 rounded text-sm ${
+                    language === lang 
+                      ? 'bg-[#2bbdaa] text-[#1c1b1b]' 
+                      : 'text-[#ddf3ef] border border-[#3b3b3b] hover:border-[#2bbdaa]'
+                  }`}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {lang}
+                </motion.button>
+              ))}
+            </div>
+            <div className="flex space-x-2">
+              <motion.button
+                onClick={handleSaveCode}
+                className="text-[#ddf3ef] border border-[#ddf3ef] px-4 py-1 rounded-lg text-sm hover:border-[#2bbdaa] transition-colors"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Save
+              </motion.button>
+              <motion.button
+                onClick={handleCheckCode}
+                disabled={isSubmitting}
+                className="bg-[#2bbdaa] text-[#1c1b1b] px-4 py-1 rounded-lg text-sm hover:bg-[#1a9b8c] transition-colors"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {isSubmitting ? "Checking..." : "Check"}
+              </motion.button>
+            </div>
+          </div>
+          
+          {/* Code editor */}
+          <div className="flex-1">
+            <Editor
+              height="100%"
+              language={language === 'C++' ? 'cpp' : language.toLowerCase()}
+              value={code}
+              onChange={handleEditorChange}
+              theme="vs-dark"
+              options={{
+                fontSize: 16,
+                minimap: { enabled: false },
+                scrollBeyondLastLine: false,
+                automaticLayout: true,
+              }}
+            />
+          </div>
+          
+          {/* Test results */}
+          <AnimatePresence>
+            {showResults && (
+              <motion.div 
+                className="border-t border-[#3b3b3b] p-4 bg-[#1c1b1b]"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+              >
+                <h3 className="text-[#ddf3ef] font-semibold mb-3">Test Results</h3>
+                
+                {/* Visible test cases */}
+                <div className="mb-4">
+                  <h4 className="text-[#ddf3ef] text-sm mb-2">External Test Cases:</h4>
+                  <div className="space-y-3">
+                    {testResults.visible.map((test, index) => (
+                      <div key={index} className="bg-[#2a2a2a] p-3 rounded text-sm">
+                        <div className="flex justify-between items-center mb-2">
+                          <span className="text-[#ddf3ef]">Test Case {index + 1}</span>
+                          <span className={test.passed ? "text-green-500" : "text-red-500"}>
+                            {test.passed ? "✓ Passed" : "✗ Failed"}
+                          </span>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          <div>
+                            <p className="text-[#ddf3ef] opacity-70">Input:</p>
+                            <p className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded">{test.input}</p>
+                          </div>
+                          <div>
+                            <p className="text-[#ddf3ef] opacity-70">Expected Output:</p>
+                            <p className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded">{test.expectedOutput}</p>
+                          </div>
+                          <div className="col-span-2">
+                            <p className="text-[#ddf3ef] opacity-70">Your Output:</p>
+                            <p className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded">{test.actualOutput}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Hidden test cases */}
+                <div>
+                  <h4 className="text-[#ddf3ef] text-sm mb-2">Hidden Test Cases:</h4>
+                  <div className="bg-[#2a2a2a] p-3 rounded text-sm">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-[#ddf3ef]">
+                        {testResults.hidden.passedTests} of {testResults.hidden.totalTests} test cases passed
+                      </span>
+                      <span className={
+                        testResults.hidden.passedTests === testResults.hidden.totalTests 
+                          ? "text-green-500" 
+                          : "text-yellow-500"
+                      }>
+                        {testResults.hidden.passedTests === testResults.hidden.totalTests 
+                          ? "✓ All Passed" 
+                          : "⚠ Some Failed"}
+                      </span>
+                    </div>
+                    
+                    {testResults.hidden.passedTests < testResults.hidden.totalTests && (
+                      <div>
+                        <p className="text-[#ddf3ef] opacity-70">First Failed Test Input:</p>
+                        <p className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded">{testResults.hidden.failedInput}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      </div>
+      
+      <Toaster duration={3000} position="bottom-right"/>
     </div>
   );
 };
