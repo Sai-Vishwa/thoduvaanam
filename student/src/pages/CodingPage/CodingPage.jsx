@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast, Toaster } from 'sonner';
 import Editor from '@monaco-editor/react';
@@ -18,6 +18,63 @@ const CodingPage = () => {
   const [javaCode , setJavaCode] = useState("");
   const [pythonCode , setPythonCode] = useState("");
   const [lastSubmit , setLastSubmit] = useState({lang:"Java" , code:""});
+
+
+  const saveTimer = useRef(null);
+
+  const resetAutoSaveTimer = () => {
+    if (saveTimer.current) clearTimeout(saveTimer.current);
+    saveTimer.current = setTimeout(autoSave, 120000); // 2 minutes
+  };
+
+  const autoSave = async () => {
+    const dummy =  await new Promise ((resolve)=>{
+        toast.promise(new Promise((resolve,reject)=>{
+          fetch("http://localhost:4000/submission/auto-save-solution", {
+            method: "POST",
+            body: JSON.stringify({
+               uname: uname,
+               session: Cookies.get("session"), 
+               sId:details.details.id, 
+               savedCCode:cCode,
+               savedCppCode:cppCode,
+               savedJavaCode:javaCode,
+               savedPythonCode:pythonCode
+              }),
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            }
+          }).then((resp) => resp.json())
+          .then((data)=>{
+            if(data.err){
+              throw new Error(data.err)
+            }
+            resolve(data)
+          })
+          .catch((err)=> reject(err))
+        }),{
+          loading: "Auto saving...",
+          success: (data)=>{
+            status = true
+            dt = data
+            resolve()
+            return (`Successful`)
+          },
+          error: (err) => {
+            resolve()
+            return (`${err}`)
+          },
+          style: {
+            fontSize:"1.125rem",
+            fontWeight:300,
+            padding:20
+          }
+        })
+      }) 
+=      
+  };
+
 
   const [testResults, setTestResults] = useState({
     visible: [
@@ -124,6 +181,7 @@ public class Main {
         setJavaCode(data.ques.JavaBoilerCode)
         setPythonCode(data.ques.PythonBoilerCode)
         setLastSubmit({lang:"Java",code:data.ques.JavaBoilerCode})
+        
         if (data.data && data.data.language) {
           const backendLanguage = data.data.language;
           const mappedLanguage = backendLanguage === 'JAVA' ? 'Java' : 
@@ -144,6 +202,8 @@ public class Main {
 
   useEffect(() => {
     fetchData();
+    resetAutoSaveTimer(); // Start autosave on mount
+    return () => clearTimeout(saveTimer.current); 
   }, []);
 
   useEffect(() => {

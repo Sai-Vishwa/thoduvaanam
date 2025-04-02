@@ -3,6 +3,7 @@ const {startSolvingQuestion} = require("../submissionAndVerify/startSolvingQuest
 const { startSolvingContest } = require("../submissionAndVerify/startSolvingContest");
 const { check } = require("../submissionAndVerify/check");
 const { submitContest } = require("../submissionAndVerify/submitContest");
+const { autoSave } = require("../common/autoSave");
 
 const router = new Router();
 
@@ -25,6 +26,10 @@ const asyncHandler = (fn) => (req, res, next) => {
 
   router.post('/submit-contest', asyncHandler(async (req, res) => {
     await submitContest(req,res)
+  }));
+
+  router.post('/auto-save-solution', asyncHandler(async (req, res) => {
+    await autoSave(req,res)
   }));
 
 module.exports = {

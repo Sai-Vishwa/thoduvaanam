@@ -42,6 +42,7 @@ async function codingPage(req,res) {
         details.map((dt)=>{
             if(dt.status!=="COMPLETED" && dt.isFinal=="NO" ){
                 data = dt
+                
                 count+=1
             }
         })
