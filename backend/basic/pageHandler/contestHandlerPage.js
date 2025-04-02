@@ -47,7 +47,8 @@ async function contestHandlerPage(req,res) {
                                     status:true,
                                     id:true,
                                     maxTimeToSolve:true,
-                                    startTime:true
+                                    startTime:true,
+                                    isFinal:true
                                 }
                             }
                         }

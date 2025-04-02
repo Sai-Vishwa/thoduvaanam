@@ -40,7 +40,7 @@ async function codingPage(req,res) {
         let count = 0
         let data = {}
         details.map((dt)=>{
-            if(dt.status!=="COMPLETED" && dt.isFinal=="NO" ){
+            if(dt.status!=="COMPLETED" ){
                 data = dt
                 
                 count+=1
@@ -52,6 +52,14 @@ async function codingPage(req,res) {
             })
             return
         }
+        await prisma.submission.updateMany({
+            where:{
+                id:data.id
+            },
+            data:{
+                isFinal:"NO"
+            }
+        })
         // 
         const tc = await prisma.testCase.findMany({
             where:{
@@ -66,6 +74,7 @@ async function codingPage(req,res) {
                 outputString:true
             }
         })
+
         
         const utc = new Date();
         const now = new Date(utc.getTime()+5.5*60*60*1000)

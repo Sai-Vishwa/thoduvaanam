@@ -536,11 +536,11 @@ public class Main {
               <motion.button
                 onClick={handleCheckCode}
                 disabled={isSubmitting}
-                className="bg-[#2bbdaa] text-[#1c1b1b] px-4 py-1 rounded-lg text-sm hover:bg-[#1a9b8c] transition-colors disabled:opacity-50"
+                className=" text-[#ddf3ef] border border-[#ddf3ef] px-4 py-1 rounded-lg text-sm hover:border-[#2bbdaa] transition-colors"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                {isSubmitting ? "Checking..." : "Run Tests"}
+                {isSubmitting ? "Checking..." : "Save & Run"}
               </motion.button>
               {
                 questionData.type==="CONTEST"?

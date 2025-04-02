@@ -205,7 +205,13 @@ const   ContestHandlerPage = () => {
                   <motion.div 
                 
             >
-                <div ><a className="click-btn btn-style3" onClick={()=>{nav(`/${uname}/question/${q.title}`)}} href="#">Solve</a></div>
+                <div className="flex flex-col items-center" >
+                  <div>
+                    {q?.submission[0]?.isFinal == "YES"?(
+                      <span className="text-[#2bbdaa] text-sm">COMPLETED</span>
+                    ):(<span className="text-[#f8f880] text-sm">PENDING</span>)}
+                  </div>
+                  <a className="click-btn btn-style3" onClick={()=>{nav(`/${uname}/question/${q.title}`)}} href="#">Solve</a></div>
                 {/* <span className="mas">LOGIN</span>
                 <button type="button" name="Hover"  onClick={()=>{nav("/login")}}>LOGIN</button> */}
             </motion.div>
