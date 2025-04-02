@@ -10,7 +10,7 @@ import { toast, Toaster } from "sonner";
 const   ContestHandlerPage = () => {
 
   const [contest, setContest ] = useState({});
-  const [timeLeft, setTimeLeft] = useState({});
+  const [timeLeft, setTimeLeft] = useState({minutes:-10 , seconds:-10});
   const [activeTab, setActiveTab] = useState("overview");
   const [isLowTime, setIsLowTime] = useState(false);
 
@@ -26,7 +26,7 @@ const   ContestHandlerPage = () => {
         setTimeLeft({ minutes: timeLeft.minutes - 1, seconds: 59 });
       } else {
         clearInterval(timer);
-        if(terminate){
+        if(terminate && timeLeft.minutes>-1){
           handleSubmit()
         }
         // Handle contest end

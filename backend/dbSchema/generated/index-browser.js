@@ -149,7 +149,11 @@ exports.Prisma.QuestionsScalarFieldEnum = {
   leetCodeLink: 'leetCodeLink',
   leetCodeTitle: 'leetCodeTitle',
   timeToSolveInMinutes: 'timeToSolveInMinutes',
-  contestId: 'contestId'
+  contestId: 'contestId',
+  JavaBoilerCode: 'JavaBoilerCode',
+  CBoilerCode: 'CBoilerCode',
+  CppBoilerCode: 'CppBoilerCode',
+  PythonBoilerCode: 'PythonBoilerCode'
 };
 
 exports.Prisma.TestCaseScalarFieldEnum = {
@@ -176,7 +180,11 @@ exports.Prisma.SubmissionScalarFieldEnum = {
   isFinal: 'isFinal',
   code: 'code',
   leetCodeLink: 'leetCodeLink',
-  language: 'language'
+  language: 'language',
+  savedCCode: 'savedCCode',
+  savedCppCode: 'savedCppCode',
+  savedJavaCode: 'savedJavaCode',
+  savedPythonCode: 'savedPythonCode'
 };
 
 exports.Prisma.AchievementsScalarFieldEnum = {

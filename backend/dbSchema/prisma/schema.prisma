@@ -112,6 +112,10 @@ model Questions {
   leetCodeTitle String?
   timeToSolveInMinutes Int?
   contestId Int?
+  JavaBoilerCode String @default("Hi")
+  CBoilerCode String @default("Hi")
+  CppBoilerCode String @default("Hi")
+  PythonBoilerCode String @default("Hi")
 
   //relationships
   testCase TestCase[]
@@ -149,6 +153,10 @@ model Submission {
   code String?
   leetCodeLink String?
   language LanguageType?
+  savedCCode String @default("Hi")
+  savedCppCode String @default("Hi")
+  savedJavaCode String @default("Hi")
+  savedPythonCode String @default("Hi")
 
   //relationships
   questions Questions @relation(fields: [questionId], references: [id])

@@ -13,7 +13,11 @@ const CodingPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [timeLeft, setTimeLeft] = useState({});
   const [isLowTime, setIsLowTime] = useState(false);
-
+  const [cCode , setCCode] = useState("");
+  const [cppCode , setCppCode] = useState("");
+  const [javaCode , setJavaCode] = useState("");
+  const [pythonCode , setPythonCode] = useState("");
+  const [lastSubmit , setLastSubmit] = useState({lang:"Java" , code:""});
 
   const [testResults, setTestResults] = useState({
     visible: [
@@ -29,6 +33,7 @@ const CodingPage = () => {
   const [showResults, setShowResults] = useState(false);
   const [details, setDetails] = useState({ details: {}, error: null });
   const [loading, setLoading] = useState(true);
+  const [template , setTemplate] = useState({})
 
   const { uname, qname } = useParams();
 
@@ -113,6 +118,12 @@ public class Main {
         setDetails({ details: data, error: null });
         // Set the language based on the backend data
         setTimeLeft ({"minutes":data.minutes , "seconds":data.seconds})
+        setTemplate({c:data.ques.CBoilerCode,cpp:data.ques.CppBoilerCode,java:data.ques.JavaBoilerCode,python:data.ques.PythonBoilerCode,})
+        setCCode(data.ques.CBoilerCode)
+        setCppCode(data.ques.CppBoilerCode)
+        setJavaCode(data.ques.JavaBoilerCode)
+        setPythonCode(data.ques.PythonBoilerCode)
+        setLastSubmit({lang:"Java",code:data.ques.JavaBoilerCode})
         if (data.data && data.data.language) {
           const backendLanguage = data.data.language;
           const mappedLanguage = backendLanguage === 'JAVA' ? 'Java' : 
@@ -121,7 +132,6 @@ public class Main {
           setLanguage(mappedLanguage);
           // Set initial code if available, otherwise use template
           setCode(data.data.code || templates[mappedLanguage]);
-
         }
       }
     } catch (error) {
@@ -144,21 +154,25 @@ public class Main {
   }, [language]);
 
   const handleEditorChange = (value) => {
+    if(language=="Java"){
+      setJavaCode(value)
+    }
+    else if(language=="C++"){
+      setCppCode(value)
+    }
+    else if(language=="Python"){
+      setPythonCode(value)
+    }
+    else if(language=="C"){
+      setCCode(value)
+    }
     setCode(value);
   };
 
   const handleLanguageChange = (newLanguage) => {
     if (newLanguage !== language) {
       // Show confirmation dialog if code has been modified
-      if (code && code !== templates[language]) {
-        if (window.confirm("Changing language will reset your code. Are you sure?")) {
-          setLanguage(newLanguage);
-          setCode(templates[newLanguage]);
-        }
-      } else {
-        setLanguage(newLanguage);
-        setCode(templates[newLanguage]);
-      }
+      setLanguage(newLanguage)
     }
   };
 
@@ -355,7 +369,10 @@ public class Main {
   }
 
   const questionData = details.details?.ques || {};
+
+
   const submissionData = details.details?.data || {};
+
 
   return (
     <div className="h-screen w-screen overflow-hidden flex flex-col font-mono relative bg-[#121212]">
@@ -452,7 +469,7 @@ public class Main {
                   onClick={() => handleLanguageChange(lang)}
                   className={`px-3 py-1 rounded text-sm ${
                     language === lang 
-                      ? 'bg-[#2bbdaa] text-[#1c1b1b]' 
+                      ? 'border border-[#2bbdaa] text-[#2bbdaa]' 
                       : 'text-[#ddf3ef] border border-[#3b3b3b] hover:border-[#2bbdaa]'
                   }`}
                   whileHover={{ scale: 1.02 }}
@@ -494,22 +511,22 @@ public class Main {
           
           {/* Code editor */}
           <div className="flex-1 overflow-x-auto">
-            <Editor
-              height="100%"
-              language={languageMap[language] || 'java'}
-              value={code}
-              onChange={handleEditorChange}
-              theme="vs-dark"
-              options={{
-                fontSize: 16,
-                minimap: { enabled: false },
-                scrollBeyondLastLine: false,
-                automaticLayout: true,
-                wordWrap: 'on',
-                lineNumbers: 'on',
-                tabSize: 2,
-              }}
-            />
+                <Editor
+                  height="100%"
+                  language={languageMap[language] || 'java'}
+                  value={language=="Java"?javaCode:language=="C++"?cppCode:language=="Python"?pythonCode:cCode}
+                  onChange={handleEditorChange}
+                  theme="vs-dark"
+                  options={{
+                    fontSize: 16,
+                    minimap: { enabled: false },
+                    scrollBeyondLastLine: false,
+                    automaticLayout: true,
+                    wordWrap: 'on',
+                    lineNumbers: 'on',
+                    tabSize: 2,
+                  }}
+                />
           </div>
           
           {/* Test results toggle button */}

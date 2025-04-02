@@ -4464,6 +4464,10 @@ export namespace Prisma {
     leetCodeTitle: string | null
     timeToSolveInMinutes: number | null
     contestId: number | null
+    JavaBoilerCode: string | null
+    CBoilerCode: string | null
+    CppBoilerCode: string | null
+    PythonBoilerCode: string | null
   }
 
   export type QuestionsMaxAggregateOutputType = {
@@ -4481,6 +4485,10 @@ export namespace Prisma {
     leetCodeTitle: string | null
     timeToSolveInMinutes: number | null
     contestId: number | null
+    JavaBoilerCode: string | null
+    CBoilerCode: string | null
+    CppBoilerCode: string | null
+    PythonBoilerCode: string | null
   }
 
   export type QuestionsCountAggregateOutputType = {
@@ -4498,6 +4506,10 @@ export namespace Prisma {
     leetCodeTitle: number
     timeToSolveInMinutes: number
     contestId: number
+    JavaBoilerCode: number
+    CBoilerCode: number
+    CppBoilerCode: number
+    PythonBoilerCode: number
     _all: number
   }
 
@@ -4537,6 +4549,10 @@ export namespace Prisma {
     leetCodeTitle?: true
     timeToSolveInMinutes?: true
     contestId?: true
+    JavaBoilerCode?: true
+    CBoilerCode?: true
+    CppBoilerCode?: true
+    PythonBoilerCode?: true
   }
 
   export type QuestionsMaxAggregateInputType = {
@@ -4554,6 +4570,10 @@ export namespace Prisma {
     leetCodeTitle?: true
     timeToSolveInMinutes?: true
     contestId?: true
+    JavaBoilerCode?: true
+    CBoilerCode?: true
+    CppBoilerCode?: true
+    PythonBoilerCode?: true
   }
 
   export type QuestionsCountAggregateInputType = {
@@ -4571,6 +4591,10 @@ export namespace Prisma {
     leetCodeTitle?: true
     timeToSolveInMinutes?: true
     contestId?: true
+    JavaBoilerCode?: true
+    CBoilerCode?: true
+    CppBoilerCode?: true
+    PythonBoilerCode?: true
     _all?: true
   }
 
@@ -4675,6 +4699,10 @@ export namespace Prisma {
     leetCodeTitle: string | null
     timeToSolveInMinutes: number | null
     contestId: number | null
+    JavaBoilerCode: string
+    CBoilerCode: string
+    CppBoilerCode: string
+    PythonBoilerCode: string
     _count: QuestionsCountAggregateOutputType | null
     _avg: QuestionsAvgAggregateOutputType | null
     _sum: QuestionsSumAggregateOutputType | null
@@ -4711,6 +4739,10 @@ export namespace Prisma {
     leetCodeTitle?: boolean
     timeToSolveInMinutes?: boolean
     contestId?: boolean
+    JavaBoilerCode?: boolean
+    CBoilerCode?: boolean
+    CppBoilerCode?: boolean
+    PythonBoilerCode?: boolean
     testCase?: boolean | Questions$testCaseArgs<ExtArgs>
     submission?: boolean | Questions$submissionArgs<ExtArgs>
     discussion?: boolean | Questions$discussionArgs<ExtArgs>
@@ -4734,6 +4766,10 @@ export namespace Prisma {
     leetCodeTitle?: boolean
     timeToSolveInMinutes?: boolean
     contestId?: boolean
+    JavaBoilerCode?: boolean
+    CBoilerCode?: boolean
+    CppBoilerCode?: boolean
+    PythonBoilerCode?: boolean
     topics?: boolean | Questions$topicsArgs<ExtArgs>
     contest?: boolean | Questions$contestArgs<ExtArgs>
   }, ExtArgs["result"]["questions"]>
@@ -4753,6 +4789,10 @@ export namespace Prisma {
     leetCodeTitle?: boolean
     timeToSolveInMinutes?: boolean
     contestId?: boolean
+    JavaBoilerCode?: boolean
+    CBoilerCode?: boolean
+    CppBoilerCode?: boolean
+    PythonBoilerCode?: boolean
     topics?: boolean | Questions$topicsArgs<ExtArgs>
     contest?: boolean | Questions$contestArgs<ExtArgs>
   }, ExtArgs["result"]["questions"]>
@@ -4772,9 +4812,13 @@ export namespace Prisma {
     leetCodeTitle?: boolean
     timeToSolveInMinutes?: boolean
     contestId?: boolean
+    JavaBoilerCode?: boolean
+    CBoilerCode?: boolean
+    CppBoilerCode?: boolean
+    PythonBoilerCode?: boolean
   }
 
-  export type QuestionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "miniDescription" | "topic" | "noOfHiddenTestCases" | "noOfExternalTestCases" | "difficulty" | "pointsPerTestCaseSolved" | "type" | "leetCodeLink" | "leetCodeTitle" | "timeToSolveInMinutes" | "contestId", ExtArgs["result"]["questions"]>
+  export type QuestionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "miniDescription" | "topic" | "noOfHiddenTestCases" | "noOfExternalTestCases" | "difficulty" | "pointsPerTestCaseSolved" | "type" | "leetCodeLink" | "leetCodeTitle" | "timeToSolveInMinutes" | "contestId" | "JavaBoilerCode" | "CBoilerCode" | "CppBoilerCode" | "PythonBoilerCode", ExtArgs["result"]["questions"]>
   export type QuestionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     testCase?: boolean | Questions$testCaseArgs<ExtArgs>
     submission?: boolean | Questions$submissionArgs<ExtArgs>
@@ -4816,6 +4860,10 @@ export namespace Prisma {
       leetCodeTitle: string | null
       timeToSolveInMinutes: number | null
       contestId: number | null
+      JavaBoilerCode: string
+      CBoilerCode: string
+      CppBoilerCode: string
+      PythonBoilerCode: string
     }, ExtArgs["result"]["questions"]>
     composites: {}
   }
@@ -5258,6 +5306,10 @@ export namespace Prisma {
     readonly leetCodeTitle: FieldRef<"Questions", 'String'>
     readonly timeToSolveInMinutes: FieldRef<"Questions", 'Int'>
     readonly contestId: FieldRef<"Questions", 'Int'>
+    readonly JavaBoilerCode: FieldRef<"Questions", 'String'>
+    readonly CBoilerCode: FieldRef<"Questions", 'String'>
+    readonly CppBoilerCode: FieldRef<"Questions", 'String'>
+    readonly PythonBoilerCode: FieldRef<"Questions", 'String'>
   }
     
 
@@ -6899,6 +6951,10 @@ export namespace Prisma {
     code: string | null
     leetCodeLink: string | null
     language: $Enums.LanguageType | null
+    savedCCode: string | null
+    savedCppCode: string | null
+    savedJavaCode: string | null
+    savedPythonCode: string | null
   }
 
   export type SubmissionMaxAggregateOutputType = {
@@ -6918,6 +6974,10 @@ export namespace Prisma {
     code: string | null
     leetCodeLink: string | null
     language: $Enums.LanguageType | null
+    savedCCode: string | null
+    savedCppCode: string | null
+    savedJavaCode: string | null
+    savedPythonCode: string | null
   }
 
   export type SubmissionCountAggregateOutputType = {
@@ -6937,6 +6997,10 @@ export namespace Prisma {
     code: number
     leetCodeLink: number
     language: number
+    savedCCode: number
+    savedCppCode: number
+    savedJavaCode: number
+    savedPythonCode: number
     _all: number
   }
 
@@ -6974,6 +7038,10 @@ export namespace Prisma {
     code?: true
     leetCodeLink?: true
     language?: true
+    savedCCode?: true
+    savedCppCode?: true
+    savedJavaCode?: true
+    savedPythonCode?: true
   }
 
   export type SubmissionMaxAggregateInputType = {
@@ -6993,6 +7061,10 @@ export namespace Prisma {
     code?: true
     leetCodeLink?: true
     language?: true
+    savedCCode?: true
+    savedCppCode?: true
+    savedJavaCode?: true
+    savedPythonCode?: true
   }
 
   export type SubmissionCountAggregateInputType = {
@@ -7012,6 +7084,10 @@ export namespace Prisma {
     code?: true
     leetCodeLink?: true
     language?: true
+    savedCCode?: true
+    savedCppCode?: true
+    savedJavaCode?: true
+    savedPythonCode?: true
     _all?: true
   }
 
@@ -7118,6 +7194,10 @@ export namespace Prisma {
     code: string | null
     leetCodeLink: string | null
     language: $Enums.LanguageType | null
+    savedCCode: string
+    savedCppCode: string
+    savedJavaCode: string
+    savedPythonCode: string
     _count: SubmissionCountAggregateOutputType | null
     _avg: SubmissionAvgAggregateOutputType | null
     _sum: SubmissionSumAggregateOutputType | null
@@ -7156,6 +7236,10 @@ export namespace Prisma {
     code?: boolean
     leetCodeLink?: boolean
     language?: boolean
+    savedCCode?: boolean
+    savedCppCode?: boolean
+    savedJavaCode?: boolean
+    savedPythonCode?: boolean
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["submission"]>
@@ -7177,6 +7261,10 @@ export namespace Prisma {
     code?: boolean
     leetCodeLink?: boolean
     language?: boolean
+    savedCCode?: boolean
+    savedCppCode?: boolean
+    savedJavaCode?: boolean
+    savedPythonCode?: boolean
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["submission"]>
@@ -7198,6 +7286,10 @@ export namespace Prisma {
     code?: boolean
     leetCodeLink?: boolean
     language?: boolean
+    savedCCode?: boolean
+    savedCppCode?: boolean
+    savedJavaCode?: boolean
+    savedPythonCode?: boolean
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["submission"]>
@@ -7219,9 +7311,13 @@ export namespace Prisma {
     code?: boolean
     leetCodeLink?: boolean
     language?: boolean
+    savedCCode?: boolean
+    savedCppCode?: boolean
+    savedJavaCode?: boolean
+    savedPythonCode?: boolean
   }
 
-  export type SubmissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "questionId" | "studentId" | "startTime" | "maxTimeToSolve" | "submittedOn" | "status" | "noOfCasesPassed" | "pointsSecured" | "type" | "output1" | "output2" | "isFinal" | "code" | "leetCodeLink" | "language", ExtArgs["result"]["submission"]>
+  export type SubmissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "questionId" | "studentId" | "startTime" | "maxTimeToSolve" | "submittedOn" | "status" | "noOfCasesPassed" | "pointsSecured" | "type" | "output1" | "output2" | "isFinal" | "code" | "leetCodeLink" | "language" | "savedCCode" | "savedCppCode" | "savedJavaCode" | "savedPythonCode", ExtArgs["result"]["submission"]>
   export type SubmissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
@@ -7258,6 +7354,10 @@ export namespace Prisma {
       code: string | null
       leetCodeLink: string | null
       language: $Enums.LanguageType | null
+      savedCCode: string
+      savedCppCode: string
+      savedJavaCode: string
+      savedPythonCode: string
     }, ExtArgs["result"]["submission"]>
     composites: {}
   }
@@ -7699,6 +7799,10 @@ export namespace Prisma {
     readonly code: FieldRef<"Submission", 'String'>
     readonly leetCodeLink: FieldRef<"Submission", 'String'>
     readonly language: FieldRef<"Submission", 'LanguageType'>
+    readonly savedCCode: FieldRef<"Submission", 'String'>
+    readonly savedCppCode: FieldRef<"Submission", 'String'>
+    readonly savedJavaCode: FieldRef<"Submission", 'String'>
+    readonly savedPythonCode: FieldRef<"Submission", 'String'>
   }
     
 
@@ -14808,7 +14912,11 @@ export namespace Prisma {
     leetCodeLink: 'leetCodeLink',
     leetCodeTitle: 'leetCodeTitle',
     timeToSolveInMinutes: 'timeToSolveInMinutes',
-    contestId: 'contestId'
+    contestId: 'contestId',
+    JavaBoilerCode: 'JavaBoilerCode',
+    CBoilerCode: 'CBoilerCode',
+    CppBoilerCode: 'CppBoilerCode',
+    PythonBoilerCode: 'PythonBoilerCode'
   };
 
   export type QuestionsScalarFieldEnum = (typeof QuestionsScalarFieldEnum)[keyof typeof QuestionsScalarFieldEnum]
@@ -14841,7 +14949,11 @@ export namespace Prisma {
     isFinal: 'isFinal',
     code: 'code',
     leetCodeLink: 'leetCodeLink',
-    language: 'language'
+    language: 'language',
+    savedCCode: 'savedCCode',
+    savedCppCode: 'savedCppCode',
+    savedJavaCode: 'savedJavaCode',
+    savedPythonCode: 'savedPythonCode'
   };
 
   export type SubmissionScalarFieldEnum = (typeof SubmissionScalarFieldEnum)[keyof typeof SubmissionScalarFieldEnum]
@@ -15284,6 +15396,10 @@ export namespace Prisma {
     leetCodeTitle?: StringNullableFilter<"Questions"> | string | null
     timeToSolveInMinutes?: IntNullableFilter<"Questions"> | number | null
     contestId?: IntNullableFilter<"Questions"> | number | null
+    JavaBoilerCode?: StringFilter<"Questions"> | string
+    CBoilerCode?: StringFilter<"Questions"> | string
+    CppBoilerCode?: StringFilter<"Questions"> | string
+    PythonBoilerCode?: StringFilter<"Questions"> | string
     testCase?: TestCaseListRelationFilter
     submission?: SubmissionListRelationFilter
     discussion?: DiscussionsListRelationFilter
@@ -15306,6 +15422,10 @@ export namespace Prisma {
     leetCodeTitle?: SortOrderInput | SortOrder
     timeToSolveInMinutes?: SortOrderInput | SortOrder
     contestId?: SortOrderInput | SortOrder
+    JavaBoilerCode?: SortOrder
+    CBoilerCode?: SortOrder
+    CppBoilerCode?: SortOrder
+    PythonBoilerCode?: SortOrder
     testCase?: TestCaseOrderByRelationAggregateInput
     submission?: SubmissionOrderByRelationAggregateInput
     discussion?: DiscussionsOrderByRelationAggregateInput
@@ -15331,6 +15451,10 @@ export namespace Prisma {
     leetCodeTitle?: StringNullableFilter<"Questions"> | string | null
     timeToSolveInMinutes?: IntNullableFilter<"Questions"> | number | null
     contestId?: IntNullableFilter<"Questions"> | number | null
+    JavaBoilerCode?: StringFilter<"Questions"> | string
+    CBoilerCode?: StringFilter<"Questions"> | string
+    CppBoilerCode?: StringFilter<"Questions"> | string
+    PythonBoilerCode?: StringFilter<"Questions"> | string
     testCase?: TestCaseListRelationFilter
     submission?: SubmissionListRelationFilter
     discussion?: DiscussionsListRelationFilter
@@ -15353,6 +15477,10 @@ export namespace Prisma {
     leetCodeTitle?: SortOrderInput | SortOrder
     timeToSolveInMinutes?: SortOrderInput | SortOrder
     contestId?: SortOrderInput | SortOrder
+    JavaBoilerCode?: SortOrder
+    CBoilerCode?: SortOrder
+    CppBoilerCode?: SortOrder
+    PythonBoilerCode?: SortOrder
     _count?: QuestionsCountOrderByAggregateInput
     _avg?: QuestionsAvgOrderByAggregateInput
     _max?: QuestionsMaxOrderByAggregateInput
@@ -15378,6 +15506,10 @@ export namespace Prisma {
     leetCodeTitle?: StringNullableWithAggregatesFilter<"Questions"> | string | null
     timeToSolveInMinutes?: IntNullableWithAggregatesFilter<"Questions"> | number | null
     contestId?: IntNullableWithAggregatesFilter<"Questions"> | number | null
+    JavaBoilerCode?: StringWithAggregatesFilter<"Questions"> | string
+    CBoilerCode?: StringWithAggregatesFilter<"Questions"> | string
+    CppBoilerCode?: StringWithAggregatesFilter<"Questions"> | string
+    PythonBoilerCode?: StringWithAggregatesFilter<"Questions"> | string
   }
 
   export type TestCaseWhereInput = {
@@ -15457,6 +15589,10 @@ export namespace Prisma {
     code?: StringNullableFilter<"Submission"> | string | null
     leetCodeLink?: StringNullableFilter<"Submission"> | string | null
     language?: EnumLanguageTypeNullableFilter<"Submission"> | $Enums.LanguageType | null
+    savedCCode?: StringFilter<"Submission"> | string
+    savedCppCode?: StringFilter<"Submission"> | string
+    savedJavaCode?: StringFilter<"Submission"> | string
+    savedPythonCode?: StringFilter<"Submission"> | string
     questions?: XOR<QuestionsScalarRelationFilter, QuestionsWhereInput>
     student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
   }
@@ -15478,6 +15614,10 @@ export namespace Prisma {
     code?: SortOrderInput | SortOrder
     leetCodeLink?: SortOrderInput | SortOrder
     language?: SortOrderInput | SortOrder
+    savedCCode?: SortOrder
+    savedCppCode?: SortOrder
+    savedJavaCode?: SortOrder
+    savedPythonCode?: SortOrder
     questions?: QuestionsOrderByWithRelationInput
     student?: StudentOrderByWithRelationInput
   }
@@ -15502,6 +15642,10 @@ export namespace Prisma {
     code?: StringNullableFilter<"Submission"> | string | null
     leetCodeLink?: StringNullableFilter<"Submission"> | string | null
     language?: EnumLanguageTypeNullableFilter<"Submission"> | $Enums.LanguageType | null
+    savedCCode?: StringFilter<"Submission"> | string
+    savedCppCode?: StringFilter<"Submission"> | string
+    savedJavaCode?: StringFilter<"Submission"> | string
+    savedPythonCode?: StringFilter<"Submission"> | string
     questions?: XOR<QuestionsScalarRelationFilter, QuestionsWhereInput>
     student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
   }, "id">
@@ -15523,6 +15667,10 @@ export namespace Prisma {
     code?: SortOrderInput | SortOrder
     leetCodeLink?: SortOrderInput | SortOrder
     language?: SortOrderInput | SortOrder
+    savedCCode?: SortOrder
+    savedCppCode?: SortOrder
+    savedJavaCode?: SortOrder
+    savedPythonCode?: SortOrder
     _count?: SubmissionCountOrderByAggregateInput
     _avg?: SubmissionAvgOrderByAggregateInput
     _max?: SubmissionMaxOrderByAggregateInput
@@ -15550,6 +15698,10 @@ export namespace Prisma {
     code?: StringNullableWithAggregatesFilter<"Submission"> | string | null
     leetCodeLink?: StringNullableWithAggregatesFilter<"Submission"> | string | null
     language?: EnumLanguageTypeNullableWithAggregatesFilter<"Submission"> | $Enums.LanguageType | null
+    savedCCode?: StringWithAggregatesFilter<"Submission"> | string
+    savedCppCode?: StringWithAggregatesFilter<"Submission"> | string
+    savedJavaCode?: StringWithAggregatesFilter<"Submission"> | string
+    savedPythonCode?: StringWithAggregatesFilter<"Submission"> | string
   }
 
   export type AchievementsWhereInput = {
@@ -16085,6 +16237,10 @@ export namespace Prisma {
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
+    JavaBoilerCode?: string
+    CBoilerCode?: string
+    CppBoilerCode?: string
+    PythonBoilerCode?: string
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
@@ -16107,6 +16263,10 @@ export namespace Prisma {
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
     contestId?: number | null
+    JavaBoilerCode?: string
+    CBoilerCode?: string
+    CppBoilerCode?: string
+    PythonBoilerCode?: string
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
@@ -16124,6 +16284,10 @@ export namespace Prisma {
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaBoilerCode?: StringFieldUpdateOperationsInput | string
+    CBoilerCode?: StringFieldUpdateOperationsInput | string
+    CppBoilerCode?: StringFieldUpdateOperationsInput | string
+    PythonBoilerCode?: StringFieldUpdateOperationsInput | string
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
@@ -16146,6 +16310,10 @@ export namespace Prisma {
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaBoilerCode?: StringFieldUpdateOperationsInput | string
+    CBoilerCode?: StringFieldUpdateOperationsInput | string
+    CppBoilerCode?: StringFieldUpdateOperationsInput | string
+    PythonBoilerCode?: StringFieldUpdateOperationsInput | string
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
@@ -16166,6 +16334,10 @@ export namespace Prisma {
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
     contestId?: number | null
+    JavaBoilerCode?: string
+    CBoilerCode?: string
+    CppBoilerCode?: string
+    PythonBoilerCode?: string
   }
 
   export type QuestionsUpdateManyMutationInput = {
@@ -16180,6 +16352,10 @@ export namespace Prisma {
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaBoilerCode?: StringFieldUpdateOperationsInput | string
+    CBoilerCode?: StringFieldUpdateOperationsInput | string
+    CppBoilerCode?: StringFieldUpdateOperationsInput | string
+    PythonBoilerCode?: StringFieldUpdateOperationsInput | string
   }
 
   export type QuestionsUncheckedUpdateManyInput = {
@@ -16197,6 +16373,10 @@ export namespace Prisma {
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaBoilerCode?: StringFieldUpdateOperationsInput | string
+    CBoilerCode?: StringFieldUpdateOperationsInput | string
+    CppBoilerCode?: StringFieldUpdateOperationsInput | string
+    PythonBoilerCode?: StringFieldUpdateOperationsInput | string
   }
 
   export type TestCaseCreateInput = {
@@ -16265,6 +16445,10 @@ export namespace Prisma {
     code?: string | null
     leetCodeLink?: string | null
     language?: $Enums.LanguageType | null
+    savedCCode?: string
+    savedCppCode?: string
+    savedJavaCode?: string
+    savedPythonCode?: string
     questions: QuestionsCreateNestedOneWithoutSubmissionInput
     student: StudentCreateNestedOneWithoutSubmissionInput
   }
@@ -16286,6 +16470,10 @@ export namespace Prisma {
     code?: string | null
     leetCodeLink?: string | null
     language?: $Enums.LanguageType | null
+    savedCCode?: string
+    savedCppCode?: string
+    savedJavaCode?: string
+    savedPythonCode?: string
   }
 
   export type SubmissionUpdateInput = {
@@ -16302,6 +16490,10 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
+    savedCCode?: StringFieldUpdateOperationsInput | string
+    savedCppCode?: StringFieldUpdateOperationsInput | string
+    savedJavaCode?: StringFieldUpdateOperationsInput | string
+    savedPythonCode?: StringFieldUpdateOperationsInput | string
     questions?: QuestionsUpdateOneRequiredWithoutSubmissionNestedInput
     student?: StudentUpdateOneRequiredWithoutSubmissionNestedInput
   }
@@ -16323,6 +16515,10 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
+    savedCCode?: StringFieldUpdateOperationsInput | string
+    savedCppCode?: StringFieldUpdateOperationsInput | string
+    savedJavaCode?: StringFieldUpdateOperationsInput | string
+    savedPythonCode?: StringFieldUpdateOperationsInput | string
   }
 
   export type SubmissionCreateManyInput = {
@@ -16342,6 +16538,10 @@ export namespace Prisma {
     code?: string | null
     leetCodeLink?: string | null
     language?: $Enums.LanguageType | null
+    savedCCode?: string
+    savedCppCode?: string
+    savedJavaCode?: string
+    savedPythonCode?: string
   }
 
   export type SubmissionUpdateManyMutationInput = {
@@ -16358,6 +16558,10 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
+    savedCCode?: StringFieldUpdateOperationsInput | string
+    savedCppCode?: StringFieldUpdateOperationsInput | string
+    savedJavaCode?: StringFieldUpdateOperationsInput | string
+    savedPythonCode?: StringFieldUpdateOperationsInput | string
   }
 
   export type SubmissionUncheckedUpdateManyInput = {
@@ -16377,6 +16581,10 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
+    savedCCode?: StringFieldUpdateOperationsInput | string
+    savedCppCode?: StringFieldUpdateOperationsInput | string
+    savedJavaCode?: StringFieldUpdateOperationsInput | string
+    savedPythonCode?: StringFieldUpdateOperationsInput | string
   }
 
   export type AchievementsCreateInput = {
@@ -17043,6 +17251,10 @@ export namespace Prisma {
     leetCodeTitle?: SortOrder
     timeToSolveInMinutes?: SortOrder
     contestId?: SortOrder
+    JavaBoilerCode?: SortOrder
+    CBoilerCode?: SortOrder
+    CppBoilerCode?: SortOrder
+    PythonBoilerCode?: SortOrder
   }
 
   export type QuestionsAvgOrderByAggregateInput = {
@@ -17070,6 +17282,10 @@ export namespace Prisma {
     leetCodeTitle?: SortOrder
     timeToSolveInMinutes?: SortOrder
     contestId?: SortOrder
+    JavaBoilerCode?: SortOrder
+    CBoilerCode?: SortOrder
+    CppBoilerCode?: SortOrder
+    PythonBoilerCode?: SortOrder
   }
 
   export type QuestionsMinOrderByAggregateInput = {
@@ -17087,6 +17303,10 @@ export namespace Prisma {
     leetCodeTitle?: SortOrder
     timeToSolveInMinutes?: SortOrder
     contestId?: SortOrder
+    JavaBoilerCode?: SortOrder
+    CBoilerCode?: SortOrder
+    CppBoilerCode?: SortOrder
+    PythonBoilerCode?: SortOrder
   }
 
   export type QuestionsSumOrderByAggregateInput = {
@@ -17252,6 +17472,10 @@ export namespace Prisma {
     code?: SortOrder
     leetCodeLink?: SortOrder
     language?: SortOrder
+    savedCCode?: SortOrder
+    savedCppCode?: SortOrder
+    savedJavaCode?: SortOrder
+    savedPythonCode?: SortOrder
   }
 
   export type SubmissionAvgOrderByAggregateInput = {
@@ -17279,6 +17503,10 @@ export namespace Prisma {
     code?: SortOrder
     leetCodeLink?: SortOrder
     language?: SortOrder
+    savedCCode?: SortOrder
+    savedCppCode?: SortOrder
+    savedJavaCode?: SortOrder
+    savedPythonCode?: SortOrder
   }
 
   export type SubmissionMinOrderByAggregateInput = {
@@ -17298,6 +17526,10 @@ export namespace Prisma {
     code?: SortOrder
     leetCodeLink?: SortOrder
     language?: SortOrder
+    savedCCode?: SortOrder
+    savedCppCode?: SortOrder
+    savedJavaCode?: SortOrder
+    savedPythonCode?: SortOrder
   }
 
   export type SubmissionSumOrderByAggregateInput = {
@@ -18680,6 +18912,10 @@ export namespace Prisma {
     code?: string | null
     leetCodeLink?: string | null
     language?: $Enums.LanguageType | null
+    savedCCode?: string
+    savedCppCode?: string
+    savedJavaCode?: string
+    savedPythonCode?: string
     questions: QuestionsCreateNestedOneWithoutSubmissionInput
   }
 
@@ -18699,6 +18935,10 @@ export namespace Prisma {
     code?: string | null
     leetCodeLink?: string | null
     language?: $Enums.LanguageType | null
+    savedCCode?: string
+    savedCppCode?: string
+    savedJavaCode?: string
+    savedPythonCode?: string
   }
 
   export type SubmissionCreateOrConnectWithoutStudentInput = {
@@ -18811,6 +19051,10 @@ export namespace Prisma {
     code?: StringNullableFilter<"Submission"> | string | null
     leetCodeLink?: StringNullableFilter<"Submission"> | string | null
     language?: EnumLanguageTypeNullableFilter<"Submission"> | $Enums.LanguageType | null
+    savedCCode?: StringFilter<"Submission"> | string
+    savedCppCode?: StringFilter<"Submission"> | string
+    savedJavaCode?: StringFilter<"Submission"> | string
+    savedPythonCode?: StringFilter<"Submission"> | string
   }
 
   export type StudentAchievementsUpsertWithWhereUniqueWithoutStudentInput = {
@@ -18901,6 +19145,10 @@ export namespace Prisma {
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
+    JavaBoilerCode?: string
+    CBoilerCode?: string
+    CppBoilerCode?: string
+    PythonBoilerCode?: string
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
@@ -18921,6 +19169,10 @@ export namespace Prisma {
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
     contestId?: number | null
+    JavaBoilerCode?: string
+    CBoilerCode?: string
+    CppBoilerCode?: string
+    PythonBoilerCode?: string
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
@@ -18970,6 +19222,10 @@ export namespace Prisma {
     leetCodeTitle?: StringNullableFilter<"Questions"> | string | null
     timeToSolveInMinutes?: IntNullableFilter<"Questions"> | number | null
     contestId?: IntNullableFilter<"Questions"> | number | null
+    JavaBoilerCode?: StringFilter<"Questions"> | string
+    CBoilerCode?: StringFilter<"Questions"> | string
+    CppBoilerCode?: StringFilter<"Questions"> | string
+    PythonBoilerCode?: StringFilter<"Questions"> | string
   }
 
   export type TestCaseCreateWithoutQuestionsInput = {
@@ -19009,6 +19265,10 @@ export namespace Prisma {
     code?: string | null
     leetCodeLink?: string | null
     language?: $Enums.LanguageType | null
+    savedCCode?: string
+    savedCppCode?: string
+    savedJavaCode?: string
+    savedPythonCode?: string
     student: StudentCreateNestedOneWithoutSubmissionInput
   }
 
@@ -19028,6 +19288,10 @@ export namespace Prisma {
     code?: string | null
     leetCodeLink?: string | null
     language?: $Enums.LanguageType | null
+    savedCCode?: string
+    savedCppCode?: string
+    savedJavaCode?: string
+    savedPythonCode?: string
   }
 
   export type SubmissionCreateOrConnectWithoutQuestionsInput = {
@@ -19242,6 +19506,10 @@ export namespace Prisma {
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
+    JavaBoilerCode?: string
+    CBoilerCode?: string
+    CppBoilerCode?: string
+    PythonBoilerCode?: string
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
     topics?: TopicsCreateNestedOneWithoutQuestionInput
@@ -19263,6 +19531,10 @@ export namespace Prisma {
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
     contestId?: number | null
+    JavaBoilerCode?: string
+    CBoilerCode?: string
+    CppBoilerCode?: string
+    PythonBoilerCode?: string
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
   }
@@ -19295,6 +19567,10 @@ export namespace Prisma {
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaBoilerCode?: StringFieldUpdateOperationsInput | string
+    CBoilerCode?: StringFieldUpdateOperationsInput | string
+    CppBoilerCode?: StringFieldUpdateOperationsInput | string
+    PythonBoilerCode?: StringFieldUpdateOperationsInput | string
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
     topics?: TopicsUpdateOneWithoutQuestionNestedInput
@@ -19316,6 +19592,10 @@ export namespace Prisma {
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaBoilerCode?: StringFieldUpdateOperationsInput | string
+    CBoilerCode?: StringFieldUpdateOperationsInput | string
+    CppBoilerCode?: StringFieldUpdateOperationsInput | string
+    PythonBoilerCode?: StringFieldUpdateOperationsInput | string
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
   }
@@ -19332,6 +19612,10 @@ export namespace Prisma {
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
+    JavaBoilerCode?: string
+    CBoilerCode?: string
+    CppBoilerCode?: string
+    PythonBoilerCode?: string
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
     topics?: TopicsCreateNestedOneWithoutQuestionInput
@@ -19353,6 +19637,10 @@ export namespace Prisma {
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
     contestId?: number | null
+    JavaBoilerCode?: string
+    CBoilerCode?: string
+    CppBoilerCode?: string
+    PythonBoilerCode?: string
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
   }
@@ -19417,6 +19705,10 @@ export namespace Prisma {
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaBoilerCode?: StringFieldUpdateOperationsInput | string
+    CBoilerCode?: StringFieldUpdateOperationsInput | string
+    CppBoilerCode?: StringFieldUpdateOperationsInput | string
+    PythonBoilerCode?: StringFieldUpdateOperationsInput | string
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
     topics?: TopicsUpdateOneWithoutQuestionNestedInput
@@ -19438,6 +19730,10 @@ export namespace Prisma {
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaBoilerCode?: StringFieldUpdateOperationsInput | string
+    CBoilerCode?: StringFieldUpdateOperationsInput | string
+    CppBoilerCode?: StringFieldUpdateOperationsInput | string
+    PythonBoilerCode?: StringFieldUpdateOperationsInput | string
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
   }
@@ -19739,6 +20035,10 @@ export namespace Prisma {
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
+    JavaBoilerCode?: string
+    CBoilerCode?: string
+    CppBoilerCode?: string
+    PythonBoilerCode?: string
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     topics?: TopicsCreateNestedOneWithoutQuestionInput
@@ -19760,6 +20060,10 @@ export namespace Prisma {
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
     contestId?: number | null
+    JavaBoilerCode?: string
+    CBoilerCode?: string
+    CppBoilerCode?: string
+    PythonBoilerCode?: string
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
   }
@@ -19879,6 +20183,10 @@ export namespace Prisma {
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaBoilerCode?: StringFieldUpdateOperationsInput | string
+    CBoilerCode?: StringFieldUpdateOperationsInput | string
+    CppBoilerCode?: StringFieldUpdateOperationsInput | string
+    PythonBoilerCode?: StringFieldUpdateOperationsInput | string
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     topics?: TopicsUpdateOneWithoutQuestionNestedInput
@@ -19900,6 +20208,10 @@ export namespace Prisma {
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaBoilerCode?: StringFieldUpdateOperationsInput | string
+    CBoilerCode?: StringFieldUpdateOperationsInput | string
+    CppBoilerCode?: StringFieldUpdateOperationsInput | string
+    PythonBoilerCode?: StringFieldUpdateOperationsInput | string
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
   }
@@ -19960,6 +20272,10 @@ export namespace Prisma {
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
+    JavaBoilerCode?: string
+    CBoilerCode?: string
+    CppBoilerCode?: string
+    PythonBoilerCode?: string
     testCase?: TestCaseCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsCreateNestedManyWithoutQuestionInput
@@ -19980,6 +20296,10 @@ export namespace Prisma {
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
+    JavaBoilerCode?: string
+    CBoilerCode?: string
+    CppBoilerCode?: string
+    PythonBoilerCode?: string
     testCase?: TestCaseUncheckedCreateNestedManyWithoutQuestionsInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutQuestionsInput
     discussion?: DiscussionsUncheckedCreateNestedManyWithoutQuestionInput
@@ -20027,6 +20347,10 @@ export namespace Prisma {
     code?: string | null
     leetCodeLink?: string | null
     language?: $Enums.LanguageType | null
+    savedCCode?: string
+    savedCppCode?: string
+    savedJavaCode?: string
+    savedPythonCode?: string
   }
 
   export type StudentAchievementsCreateManyStudentInput = {
@@ -20057,6 +20381,10 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
+    savedCCode?: StringFieldUpdateOperationsInput | string
+    savedCppCode?: StringFieldUpdateOperationsInput | string
+    savedJavaCode?: StringFieldUpdateOperationsInput | string
+    savedPythonCode?: StringFieldUpdateOperationsInput | string
     questions?: QuestionsUpdateOneRequiredWithoutSubmissionNestedInput
   }
 
@@ -20076,6 +20404,10 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
+    savedCCode?: StringFieldUpdateOperationsInput | string
+    savedCppCode?: StringFieldUpdateOperationsInput | string
+    savedJavaCode?: StringFieldUpdateOperationsInput | string
+    savedPythonCode?: StringFieldUpdateOperationsInput | string
   }
 
   export type SubmissionUncheckedUpdateManyWithoutStudentInput = {
@@ -20094,6 +20426,10 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
+    savedCCode?: StringFieldUpdateOperationsInput | string
+    savedCppCode?: StringFieldUpdateOperationsInput | string
+    savedJavaCode?: StringFieldUpdateOperationsInput | string
+    savedPythonCode?: StringFieldUpdateOperationsInput | string
   }
 
   export type StudentAchievementsUpdateWithoutStudentInput = {
@@ -20152,6 +20488,10 @@ export namespace Prisma {
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
     contestId?: number | null
+    JavaBoilerCode?: string
+    CBoilerCode?: string
+    CppBoilerCode?: string
+    PythonBoilerCode?: string
   }
 
   export type QuestionsUpdateWithoutTopicsInput = {
@@ -20166,6 +20506,10 @@ export namespace Prisma {
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaBoilerCode?: StringFieldUpdateOperationsInput | string
+    CBoilerCode?: StringFieldUpdateOperationsInput | string
+    CppBoilerCode?: StringFieldUpdateOperationsInput | string
+    PythonBoilerCode?: StringFieldUpdateOperationsInput | string
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
@@ -20186,6 +20530,10 @@ export namespace Prisma {
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaBoilerCode?: StringFieldUpdateOperationsInput | string
+    CBoilerCode?: StringFieldUpdateOperationsInput | string
+    CppBoilerCode?: StringFieldUpdateOperationsInput | string
+    PythonBoilerCode?: StringFieldUpdateOperationsInput | string
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
@@ -20205,6 +20553,10 @@ export namespace Prisma {
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaBoilerCode?: StringFieldUpdateOperationsInput | string
+    CBoilerCode?: StringFieldUpdateOperationsInput | string
+    CppBoilerCode?: StringFieldUpdateOperationsInput | string
+    PythonBoilerCode?: StringFieldUpdateOperationsInput | string
   }
 
   export type TestCaseCreateManyQuestionsInput = {
@@ -20230,6 +20582,10 @@ export namespace Prisma {
     code?: string | null
     leetCodeLink?: string | null
     language?: $Enums.LanguageType | null
+    savedCCode?: string
+    savedCppCode?: string
+    savedJavaCode?: string
+    savedPythonCode?: string
   }
 
   export type DiscussionsCreateManyQuestionInput = {
@@ -20274,6 +20630,10 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
+    savedCCode?: StringFieldUpdateOperationsInput | string
+    savedCppCode?: StringFieldUpdateOperationsInput | string
+    savedJavaCode?: StringFieldUpdateOperationsInput | string
+    savedPythonCode?: StringFieldUpdateOperationsInput | string
     student?: StudentUpdateOneRequiredWithoutSubmissionNestedInput
   }
 
@@ -20293,6 +20653,10 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
+    savedCCode?: StringFieldUpdateOperationsInput | string
+    savedCppCode?: StringFieldUpdateOperationsInput | string
+    savedJavaCode?: StringFieldUpdateOperationsInput | string
+    savedPythonCode?: StringFieldUpdateOperationsInput | string
   }
 
   export type SubmissionUncheckedUpdateManyWithoutQuestionsInput = {
@@ -20311,6 +20675,10 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     language?: NullableEnumLanguageTypeFieldUpdateOperationsInput | $Enums.LanguageType | null
+    savedCCode?: StringFieldUpdateOperationsInput | string
+    savedCppCode?: StringFieldUpdateOperationsInput | string
+    savedJavaCode?: StringFieldUpdateOperationsInput | string
+    savedPythonCode?: StringFieldUpdateOperationsInput | string
   }
 
   export type DiscussionsUpdateWithoutQuestionInput = {
@@ -20408,6 +20776,10 @@ export namespace Prisma {
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
+    JavaBoilerCode?: string
+    CBoilerCode?: string
+    CppBoilerCode?: string
+    PythonBoilerCode?: string
   }
 
   export type QuestionsUpdateWithoutContestInput = {
@@ -20422,6 +20794,10 @@ export namespace Prisma {
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaBoilerCode?: StringFieldUpdateOperationsInput | string
+    CBoilerCode?: StringFieldUpdateOperationsInput | string
+    CppBoilerCode?: StringFieldUpdateOperationsInput | string
+    PythonBoilerCode?: StringFieldUpdateOperationsInput | string
     testCase?: TestCaseUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUpdateManyWithoutQuestionNestedInput
@@ -20442,6 +20818,10 @@ export namespace Prisma {
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaBoilerCode?: StringFieldUpdateOperationsInput | string
+    CBoilerCode?: StringFieldUpdateOperationsInput | string
+    CppBoilerCode?: StringFieldUpdateOperationsInput | string
+    PythonBoilerCode?: StringFieldUpdateOperationsInput | string
     testCase?: TestCaseUncheckedUpdateManyWithoutQuestionsNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutQuestionsNestedInput
     discussion?: DiscussionsUncheckedUpdateManyWithoutQuestionNestedInput
@@ -20461,6 +20841,10 @@ export namespace Prisma {
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaBoilerCode?: StringFieldUpdateOperationsInput | string
+    CBoilerCode?: StringFieldUpdateOperationsInput | string
+    CppBoilerCode?: StringFieldUpdateOperationsInput | string
+    PythonBoilerCode?: StringFieldUpdateOperationsInput | string
   }
 
 

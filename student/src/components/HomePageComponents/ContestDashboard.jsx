@@ -118,7 +118,7 @@ const ContestsDashboard = ({details , setDetailsBox , uname}) => {
     >
       <div className="flex justify-between items-start">
         <div className="flex-1">
-          <p className="font-medium text-white font-['Inter']">
+          <p className="font-base text-white font-['Yu_Gothic']">
             {contest.title}
           </p>
           <div className="flex flex-wrap  gap-2">
@@ -129,7 +129,7 @@ const ContestsDashboard = ({details , setDetailsBox , uname}) => {
       {
         type=='finished' &&   
       
-      <div className="text-sm text-gray-400 font-['Inter']">
+      <div className="text-sm text-gray-400 ">
         <p>Closed on: {formatDate(contest.closesOn)}</p>
         {getCurrentDateInIST() < new Date(contest.closesOn) && (
           <p className="text-[#2bbdaa] mt-1">{getTimeRemaining(contest.closesOn)}</p>
@@ -140,7 +140,7 @@ const ContestsDashboard = ({details , setDetailsBox , uname}) => {
     {
         type=='active' &&   
       
-      <div className="text-sm text-gray-400 font-['Inter']">
+      <div className="text-sm text-gray-400 ">
         <p>Closes on: {formatDate(contest.closesOn)}</p>
         {getCurrentDateInIST() < new Date(contest.closesOn) && (
           <p className="text-[#2bbdaa] mt-1">{getTimeRemaining(contest.closesOn)}</p>
@@ -151,7 +151,7 @@ const ContestsDashboard = ({details , setDetailsBox , uname}) => {
     {
         type=='upcoming' &&   
       
-      <div className="text-sm text-gray-400 font-['Inter']">
+      <div className="text-sm text-gray-400 ">
         <p>Opens on: {formatDate(contest.opensOn)}</p>
         {getCurrentDateInIST() < new Date(contest.opensOn) && (
           <p className="text-[#2bbdaa] mt-1">{getTimeRemaining(contest.opensOn)}</p>
@@ -170,7 +170,7 @@ const ContestsDashboard = ({details , setDetailsBox , uname}) => {
             {filteredActive.length > 0 ? (
               filteredActive.map(contest => renderContestCard(contest , 'active'))
             ) : (
-              <div className="text-center py-8 text-gray-400 font-['Inter']">
+              <div className="text-center py-8 text-gray-400 ">
                 No active contests at the moment
               </div>
             )}
@@ -182,7 +182,7 @@ const ContestsDashboard = ({details , setDetailsBox , uname}) => {
             {filteredUpcoming.length > 0 ? (
               filteredUpcoming.map(contest => renderContestCard(contest , 'upcoming'))
             ) : (
-              <div className="text-center py-8 text-gray-400 font-['Inter']">
+              <div className="text-center py-8 text-gray-400 ">
                 No upcoming contests found
               </div>
             )}
@@ -194,7 +194,7 @@ const ContestsDashboard = ({details , setDetailsBox , uname}) => {
             {filteredFinished.length > 0 ? (
               filteredFinished.map(contest => renderContestCard(contest , 'finished'))
             ) : (
-              <div className="text-center py-8 text-gray-400 font-['Inter']">
+              <div className="text-center py-8 text-gray-400 ">
                 No finished contests found
               </div>
             )}
@@ -206,10 +206,10 @@ const ContestsDashboard = ({details , setDetailsBox , uname}) => {
   };
   
   return (
-    <div className="h-5/6 w-5/6 overflow-hidden flex flex-col text-gray-200 relative">
+    <div className="h-5/6 w-5/6 overflow-hidden flex flex-col text-gray-200 relative font-['Courier_New']">
       {/* Header with search */}
       <div className='sticky transform top-0 bg-[#1c1b1b] rounded-3xl border-b-0 rounded-b-none border-2 px-3  border-[#3b3b3b]'>
-        <h1 className='text-base font-["Inter"] text-[#2bbdaa] pt-2 px-2' >CONTESTS</h1>
+        <h1 className='text-base  text-[#2bbdaa] pt-2 px-2' >CONTESTS</h1>
         <div>
           
         </div>
@@ -221,19 +221,19 @@ const ContestsDashboard = ({details , setDetailsBox , uname}) => {
         <div className="w-full text-xs flex border-b-2 border-[#3b3b3b] bg-[#222]">
         <button 
             onClick={() => setActiveTab('finished')}
-            className={`flex-1  px-4 font-["Inter"] text-center ${activeTab === 'finished' ? 'text-[#2bbdaa] border-b-2 border-[#2bbdaa]' : 'text-gray-400'}`}
+            className={`flex-1  px-4  text-center ${activeTab === 'finished' ? 'text-[#2bbdaa] border-b-2 border-[#2bbdaa]' : 'text-gray-400'}`}
           >
             FINISHED ({finished.length})
           </button>
           <button 
             onClick={() => setActiveTab('active')}
-            className={`flex-1 px-4 font-["Inter"] text-center text-xs ${activeTab === 'active' ? 'text-[#2bbdaa] border-b-2 border-[#2bbdaa]' : 'text-gray-400'}`}
+            className={`flex-1 px-4  text-center text-xs ${activeTab === 'active' ? 'text-[#2bbdaa] border-b-2 border-[#2bbdaa]' : 'text-gray-400'}`}
           >
             ACTIVE ({active.length})
           </button>
           <button 
             onClick={() => setActiveTab('upcoming')}
-            className={`flex-1 px-4 font-["Inter"] text-center ${activeTab === 'upcoming' ? 'text-[#2bbdaa] border-b-2 border-[#2bbdaa]' : 'text-gray-400'}`}
+            className={`flex-1 px-4  text-center ${activeTab === 'upcoming' ? 'text-[#2bbdaa] border-b-2 border-[#2bbdaa]' : 'text-gray-400'}`}
           >
             UPCOMING ({upcoming.length})
           </button>

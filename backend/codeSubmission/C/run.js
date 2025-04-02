@@ -5,7 +5,6 @@ async function run(fileName, testcaseInput, testCaseOutput) {
         const child = spawn("docker", ["exec", "-i" ,"c_container", `./${fileName}`],{
             stdio:["pipe","pipe","pipe"]
         });
-
         var utfEncoder = new TextEncoder("utf-8");
         var utfDecoder = new TextDecoder("utf-8");
 

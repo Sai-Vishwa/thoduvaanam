@@ -81,7 +81,7 @@ async function codingPage(req,res) {
             })
             return
         }
-
+        console.log(qid)
         res.status(200).json({
             msg:"Successful",
             data:data,

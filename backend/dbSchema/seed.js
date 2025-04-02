@@ -4,12 +4,12 @@ const prisma = new PrismaClient();
 async function main() {
 
 
-    await prisma.achievements.create({
-        data:
-            {
-                title:"lastDateOfSolve",
-                description:"This achievement holds the last date when the user solved a question in the site."
-            }
+    // await prisma.achievements.create({
+    //     data:
+    //         {
+    //             title:"lastDateOfSolve",
+    //             description:"This achievement holds the last date when the user solved a question in the site."
+    //         }
         //     {
         //         title:"totalBalancedQuestionsSolved",
         //         description:"This achievement holds the total No. of Balanced Questions solved by the user"
@@ -22,7 +22,7 @@ async function main() {
         //     },
             
         // ]
-    })
+    // })
 
     // await prisma.studentAchievements.update({
     //     where:{
@@ -33,55 +33,55 @@ async function main() {
     //     }
     // })
 
-    // await prisma.studentAchievements.createMany({
-    //     data:[
-    //         {
-    //             count:0,
-    //             achievementId:1,
-    //             studentId:10
-    //         },
-    //         {
-    //             studentId:10,
-    //             achievementId:2,
-    //             count:0
-    //         },
-    //         {
-    //             count:0,
-    //             achievementId:3,
-    //             studentId:10
-    //         },
-    //         {
-    //             studentId:10,
-    //             achievementId:4,
-    //             count:0
-    //         },
-    //         {
-    //             studentId:10,
-    //             achievementId:10,
-    //             count:0
-    //         },
-    //         {
-    //             studentId:10,
-    //             achievementId:6,
-    //             count:0
-    //         },
-    //         {
-    //             studentId:10,
-    //             achievementId:7,
-    //             count:0
-    //         },
-    //         {
-    //             studentId:10,
-    //             achievementId:8,
-    //             count:0
-    //         },
-    //         {
-    //             studentId:10,
-    //             achievementId:9,
-    //             count:0
-    //         }
-    //     ]
-    // })
+    await prisma.studentAchievements.createMany({
+        data:[
+            {
+                count:0,
+                achievementId:1,
+                studentId:12
+            },
+            {
+                studentId:12,
+                achievementId:2,
+                count:0
+            },
+            {
+                count:0,
+                achievementId:3,
+                studentId:12
+            },
+            {
+                studentId:12,
+                achievementId:4,
+                count:0
+            },
+            {
+                studentId:12,
+                achievementId:10,
+                count:0
+            },
+            {
+                studentId:12,
+                achievementId:6,
+                count:0
+            },
+            {
+                studentId:12,
+                achievementId:7,
+                count:0
+            },
+            {
+                studentId:12,
+                achievementId:8,
+                count:0
+            },
+            {
+                studentId:12,
+                achievementId:9,
+                count:0
+            }
+        ]
+    })
     
     // await prisma.achievements.create({
     //     data:{
@@ -92,17 +92,17 @@ async function main() {
 
     
     //Insert students
-    // await prisma.student.createMany({
-    //     data:[ 
-    //         { name: 'Avinash', rno: '220701034', uname: 'AlphaStar', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
-    //         { name: 'Ruben', rno: '220701230', uname: 'Lion', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
-    //         { name: 'Raghul', rno: '220701209', uname: 'KotlinRaghul', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
-    //         { name: 'Bala', rno: '220701224', uname: 'BalaMama', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
-    //         { name: 'Sabarish', rno: '220701234', uname: 'Boomer', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
-    //         { name: 'Prasanth', rno: '220701200', uname: 'GayPrasanth', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
-    //         { name: 'Seenuvasan', rno: '220701255', uname: 'Soonu', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
-    //         { name: 'Sharan', rno: '220701264', uname: 'Sotta', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
-    //         { name: 'Roshini', rno: '220701228', uname: 'PeterRoshini', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' }]
+    // await prisma.student.create({
+    //     data:
+    //         { name: 'Buvanesh', rno: '220701045', uname: 'Bhuv', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
+    //         // { name: 'Ruben', rno: '220701230', uname: 'Lion', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
+    //         // { name: 'Raghul', rno: '220701209', uname: 'KotlinRaghul', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
+    //         // { name: 'Bala', rno: '220701224', uname: 'BalaMama', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
+    //         // { name: 'Sabarish', rno: '220701234', uname: 'Boomer', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
+    //         // { name: 'Prasanth', rno: '220701200', uname: 'GayPrasanth', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
+    //         // { name: 'Seenuvasan', rno: '220701255', uname: 'Soonu', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
+    //         // { name: 'Sharan', rno: '220701264', uname: 'Sotta', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' },
+    //         // { name: 'Roshini', rno: '220701228', uname: 'PeterRoshini', hash: '$2b$10$628gZrGWquCWwtrTsU2CwOfBOjhivNByuthyt8BdfNP5naBQ9mI2y', salt: '$2b$10$628gZrGWquCWwtrTsU2CwO' }]
         
     // });
 
