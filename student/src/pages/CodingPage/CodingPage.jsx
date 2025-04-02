@@ -319,50 +319,51 @@ public class Main {
   };
 
   const handleSubmitCode = async () => {
-    if (!code.trim()) {
-      toast.error("Please write some code before submitting", {
-        style: {
-          fontSize: "1.125rem",
-          fontWeight: 300,
-          padding: 20
-        }
-      });
-      return;
-    }
-
-    if (window.confirm("Are you sure you want to submit your solution? This is your final submission.")) {
+    
       setIsSubmitting(true);
-      
-      try {
-        // TODO: Replace with actual API call to submit code
-        // For now using a timeout to simulate API call
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        
-        toast.success("Solution submitted successfully!", {
-          style: {
-            fontSize: "1.125rem",
-            fontWeight: 300,
-            padding: 20
-          }
-        });
-        
-        // Navigate back or to results page after successful submission
-        setTimeout(() => {
-          nav("/");
-        }, 2000);
-      } catch (error) {
-        toast.error("Error submitting code. Please try again.", {
-          style: {
-            fontSize: "1.125rem",
-            fontWeight: 300,
-            padding: 20
-          }
-        });
-      } finally {
-        setIsSubmitting(false);
-      }
-    }
-  };
+      let status = false
+      const dummy =  await new Promise ((resolve)=>{
+                    toast.promise(new Promise((resolve,reject)=>{
+                      fetch("http://localhost:4000/submission/submit-question-of-a-contest", {
+                        method: "POST",
+                        body: JSON.stringify({ uname: uname, session: Cookies.get("session"), submissionId: details.details.data.id}),
+                        headers: {
+                          'Content-Type': 'application/json',
+                          'Accept': 'application/json'
+                        }
+                      }).then((resp) => resp.json())
+                      .then((data)=>{
+                        if(data.err){
+                          throw new Error(data.err)
+                        }
+                        resolve(data)
+                      })
+                      .catch((err)=> reject(err))
+                    }),{
+                      loading: "Submitting...",
+                      success: (data)=>{
+                        status = true
+                        console.log("i must be first")
+                        resolve()
+                        return (`Navigating back`)
+                      },
+                      error: (err) => {
+                        resolve()
+                        return (`${err}`)
+                      },
+                      style: {
+                        fontSize:"1.125rem",
+                        fontWeight:300,
+                        padding:20
+                      }
+                    })
+                  }) 
+                  console.log("i must be second")
+                  if(status){
+                    setIsSubmitting(!isSubmitting)
+                    nav(`/${uname}/contest-handler/${questionData.contest.title}`)
+                  } 
+                }
 
   const toggleResults = () => {
     setShowResults(!showResults);
@@ -542,22 +543,7 @@ public class Main {
               >
                 {isSubmitting ? "Checking..." : "Save & Run"}
               </motion.button>
-              {
-                questionData.type==="CONTEST"?
-                (
-                  <motion.button
-                onClick={()=>{
-                  
-                }}
-                disabled={isSubmitting}
-                className="bg-blue-500 text-white px-4 py-1 rounded-lg text-sm hover:bg-blue-600 transition-colors disabled:opacity-50"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                {"Return"}
-              </motion.button>
-                ):<div></div>
-              }
+              
               <motion.button
                 onClick={handleSubmitCode}
                 disabled={isSubmitting}
