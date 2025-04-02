@@ -29,6 +29,7 @@ const asyncHandler = (fn) => (req, res, next) => {
   }));
 
   router.post('/auto-save-solution', asyncHandler(async (req, res) => {
+    console.log("hey inga paaru vro")
     await autoSave(req,res)
   }));
 

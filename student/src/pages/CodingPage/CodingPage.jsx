@@ -35,7 +35,7 @@ const CodingPage = () => {
             body: JSON.stringify({
                uname: uname,
                session: Cookies.get("session"), 
-               sId:details.details.id, 
+               sId:details.details.data.id, 
                savedCCode:cCode,
                savedCppCode:cppCode,
                savedJavaCode:javaCode,
@@ -54,10 +54,8 @@ const CodingPage = () => {
           })
           .catch((err)=> reject(err))
         }),{
-          loading: "Auto saving...",
+          loading: "Saving...",
           success: (data)=>{
-            status = true
-            dt = data
             resolve()
             return (`Successful`)
           },
@@ -72,7 +70,7 @@ const CodingPage = () => {
           }
         })
       }) 
-=      
+      resetAutoSaveTimer()
   };
 
 
@@ -175,12 +173,12 @@ public class Main {
         setDetails({ details: data, error: null });
         // Set the language based on the backend data
         setTimeLeft ({"minutes":data.minutes , "seconds":data.seconds})
-        setTemplate({c:data.ques.CBoilerCode,cpp:data.ques.CppBoilerCode,java:data.ques.JavaBoilerCode,python:data.ques.PythonBoilerCode,})
-        setCCode(data.ques.CBoilerCode)
-        setCppCode(data.ques.CppBoilerCode)
-        setJavaCode(data.ques.JavaBoilerCode)
-        setPythonCode(data.ques.PythonBoilerCode)
-        setLastSubmit({lang:"Java",code:data.ques.JavaBoilerCode})
+        setTemplate({c:data.data.savedCCode,cpp:data.data.savedCppCode,java:data.data.savedJavaCode,python:data.data.savedPythonCode})
+        setCCode(data.data.savedCCode)
+        setCppCode(data.data.savedCppCode)
+        setJavaCode(data.data.savedJavaCode)
+        setPythonCode(data.data.savedPythonCode)
+        setLastSubmit({lang:"Java",code:data.data.savedJavaCode})
         
         if (data.data && data.data.language) {
           const backendLanguage = data.data.language;
@@ -212,10 +210,10 @@ public class Main {
       setCode(templates[language]);
     }
   }, [language]);
-
   const handleEditorChange = (value) => {
     if(language=="Java"){
       setJavaCode(value)
+    
     }
     else if(language=="C++"){
       setCppCode(value)
@@ -304,25 +302,12 @@ public class Main {
 
   const handleSaveCode = async () => {
     try {
-      // TODO: Replace with actual API call to save code
-      // For now using a timeout to simulate API call
-      await new Promise(resolve => setTimeout(resolve, 800));
+      resetAutoSaveTimer();
+       await autoSave()
       
-      toast.success("Code saved successfully!", {
-        style: {
-          fontSize: "1.125rem",
-          fontWeight: 300,
-          padding: 20
-        }
-      });
-    } catch (error) {
-      toast.error("Error saving code. Please try again.", {
-        style: {
-          fontSize: "1.125rem",
-          fontWeight: 300,
-          padding: 20
-        }
-      });
+    }
+    catch(error){
+      
     }
   };
 
@@ -557,6 +542,22 @@ public class Main {
               >
                 {isSubmitting ? "Checking..." : "Run Tests"}
               </motion.button>
+              {
+                questionData.type==="CONTEST"?
+                (
+                  <motion.button
+                onClick={()=>{
+                  
+                }}
+                disabled={isSubmitting}
+                className="bg-blue-500 text-white px-4 py-1 rounded-lg text-sm hover:bg-blue-600 transition-colors disabled:opacity-50"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {"Return"}
+              </motion.button>
+                ):<div></div>
+              }
               <motion.button
                 onClick={handleSubmitCode}
                 disabled={isSubmitting}

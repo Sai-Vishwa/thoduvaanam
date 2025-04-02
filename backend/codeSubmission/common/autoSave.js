@@ -23,6 +23,7 @@ async function autoSave(req,res) {
                 err:"matniya da body soda"
             })
         }
+        console.log(JSON.stringify(req.body))
         await prisma.submission.updateMany({
             where:{
                 id:submissionId

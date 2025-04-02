@@ -28,12 +28,7 @@ async function startSolvingContest(req,res) {
                 closesOn:true,
                 totalNoOfQuestions:true,
                 timeToSolveInMinutes:true,
-                question:{
-                    select:{
-                        id:true,
-                        title:true,
-                    }
-                }
+                question:true
             }
         })
         // console.log("see here")
@@ -99,8 +94,11 @@ async function startSolvingContest(req,res) {
                 startTime:now,
                 maxTimeToSolve:end,
                 code:"",
-                language:"JAVA"
-                    
+                language:"JAVA",
+                savedCCode:q.CppBoilerCode,
+                savedCppCode:q.CppBoilerCode,
+                savedJavaCode:q.JavaBoilerCode,
+                savedPythonCode:q.PythonBoilerCode
             }
             console.log(data)
             await prisma.submission.create({
