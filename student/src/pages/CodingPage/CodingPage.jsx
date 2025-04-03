@@ -82,7 +82,8 @@ const CodingPage = () => {
     hidden: {
       totalTests: 0,
       passedTests: 0,
-      failedInput: 'mdme'
+      failedInput: '',
+      isChecked: false
     }
   });
   const [showResults, setShowResults] = useState(false);
@@ -187,7 +188,8 @@ public class Main {
           hidden: {
             totalTests: data.totaltc,
             passedTests: data.data.noOfCasesPassed,
-            failedInput: data.data.failedForInput
+            failedInput: data.data.failedForInput,
+            isChecked:data.data.isChecked
           }
         })
         
@@ -246,69 +248,7 @@ public class Main {
   };
 
   const handleCheckCode = async () => {
-    if (!code.trim()) {
-      toast.error("Please write some code before checking", {
-        style: {
-          fontSize: "1.125rem",
-          fontWeight: 300,
-          padding: 20
-        }
-      });
-      return;
-    }
-
-    setIsSubmitting(true);
-    setShowResults(false);
     
-    try {
-      // TODO: Replace with actual API call to check code
-      // For now using a timeout to simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Mock test results - replace with actual API response
-      const mockResults = {
-        visible: [
-          { 
-            passed: true, 
-            input: '3\n10 20 30\n1 2 3', 
-            expectedOutput: '23.33', 
-            actualOutput: '23.33' 
-          },
-          { 
-            passed: false, 
-            input: '4\n5 10 15 20\n2 3 4 5', 
-            expectedOutput: '14.29', 
-            actualOutput: '14.28' 
-          }
-        ],
-        hidden: {
-          totalTests: details.details?.ques?.noOfHiddenTestCases || 18,
-          passedTests: 15,
-          failedInput: 'Large dataset with negative weights'
-        }
-      };
-      
-      setTestResults(mockResults);
-      setShowResults(true);
-      
-      toast.success("Code checked!", {
-        style: {
-          fontSize: "1.125rem",
-          fontWeight: 300,
-          padding: 20
-        }
-      });
-    } catch (error) {
-      toast.error("Error checking code. Please try again.", {
-        style: {
-          fontSize: "1.125rem",
-          fontWeight: 300,
-          padding: 20
-        }
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
   };
 
   const handleSaveCode = async () => {
@@ -618,7 +558,7 @@ public class Main {
                         <div className="flex justify-between items-center mb-2">
                           <span className="text-[#ddf3ef]">Test Case {index + 1}</span>
                           <span className={test.passed ? "text-green-500" : "text-red-500"}>
-                            {test.passed ? "✓ Passed" : ""}
+                            {test.passed &&  testResults.hidden.isChecked=="YES"? "✓ Passed" : testResults.hidden.isChecked=="YES"?"X Failed":""}
                           </span>
                         </div>
                         <div className="grid grid-cols-2 gap-2">
@@ -655,14 +595,14 @@ public class Main {
                       }>
                         {testResults.hidden.passedTests === testResults.hidden.totalTests 
                           ? "✓ All Passed" 
-                          : " "}
+                          : testResults.hidden.isChecked=="YES"?"Some failed":""}
                       </span>
                     </div>
                     
                     {testResults.hidden.passedTests < testResults.hidden.totalTests && (
                       <div>
                         <p className="text-[#ddf3ef] opacity-70">Failed for the input:</p>
-                        <p className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded">{testResults.hidden.failedInput}</p>
+                        <pre className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded">{testResults.hidden.failedInput}{" "}</pre>
                       </div>
                     )}
                   </div>
