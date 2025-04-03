@@ -27,6 +27,7 @@ async function prun(fileName, testcaseInput, testCaseOutput) {
         });
 
         const timeout = setTimeout(() => {
+            errorOutput = "Time limit exceeded ..."
             child.kill();
         }, 10000);
 
@@ -39,6 +40,7 @@ async function prun(fileName, testcaseInput, testCaseOutput) {
                     msg: "Successful",
                     count: `${testCaseOutput}\n`===output || testCaseOutput===output? 1 : 0,
                     op: output,
+                    
                 });
             }
         });

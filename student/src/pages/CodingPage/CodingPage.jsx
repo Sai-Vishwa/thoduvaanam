@@ -182,8 +182,8 @@ public class Main {
         setLastSubmit({lang:"Java",code:data.data.savedJavaCode})
         setTestResults({
           visible: [
-            { passed: data.data.output1==data.ip1.Output?true:false, input: data.ip1.Input, expectedOutput: data.ip1.Output, actualOutput: data.data.output1 },
-            { passed: data.data.output2==data.ip2.Output?true:false, input: data.ip2.Input, expectedOutput: data.ip2.Output, actualOutput: data.data.output2 }
+            { passed: data.data["output1Status"]=="YES"?true:false, input: data.ip1.Input, expectedOutput: data.ip1.Output, actualOutput: data.data.output1 },
+            { passed: data.data["output2Status"]=="YES"?true:false, input: data.ip2.Input, expectedOutput: data.ip2.Output, actualOutput: data.data.output2 }
           ],
           hidden: {
             totalTests: data.totaltc,
@@ -257,6 +257,7 @@ public class Main {
     await handleSaveCode();
 
       let result = {}
+      let status = false
       
       const dummy =  await new Promise ((resolve)=>{
           toast.promise(new Promise((resolve,reject)=>{
@@ -267,7 +268,8 @@ public class Main {
                 session: Cookies.get("session"),
                 language:language=="Java"?"JAVA":language=="Python"?"PYTHON":language=="C"?"C":"CPP",
                 code:language=="Java"?javaCode:language=="Python"?pythonCode:language=="C"?cCode:cppCode,
-                qname:qname
+                qname:qname,
+                sId:details.details.data.id
                }),
               headers: {
                 'Content-Type': 'application/json',
@@ -284,6 +286,7 @@ public class Main {
           }),{
             loading: "Checking your code...",
             success: (data)=>{
+              status=true
               result = data
               console.log("i must be first")
               resolve()
@@ -301,7 +304,21 @@ public class Main {
           })
         }) 
         console.log("i must be second")
-        alert (JSON.stringify(result))
+        if(status){
+          setTestResults({
+            visible: [
+              { passed: result.op1Pass, input: testResults.visible[0].input, expectedOutput:testResults.visible[0].expectedOutput, actualOutput: result.op1 },
+              { passed: result.op2Pass, input: testResults.visible[1].input, expectedOutput: testResults.visible[1].expectedOutput, actualOutput: result.op2 }
+            ],
+            hidden: {
+              totalTests: testResults.hidden.totalTests,
+              passedTests: result.count,
+              failedInput: result.failedHidden,
+              isChecked: "YES"
+            }
+          })
+          setShowResults(true)
+        }
         
       
   };

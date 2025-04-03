@@ -187,7 +187,9 @@ exports.Prisma.SubmissionScalarFieldEnum = {
   savedJavaCode: 'savedJavaCode',
   savedPythonCode: 'savedPythonCode',
   failedForInput: 'failedForInput',
-  isChecked: 'isChecked'
+  isChecked: 'isChecked',
+  output1Status: 'output1Status',
+  output2Status: 'output2Status'
 };
 
 exports.Prisma.AchievementsScalarFieldEnum = {

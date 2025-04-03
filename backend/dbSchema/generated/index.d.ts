@@ -6970,6 +6970,8 @@ export namespace Prisma {
     savedPythonCode: string | null
     failedForInput: string | null
     isChecked: $Enums.isFinalType | null
+    output1Status: $Enums.isFinalType | null
+    output2Status: $Enums.isFinalType | null
   }
 
   export type SubmissionMaxAggregateOutputType = {
@@ -6995,6 +6997,8 @@ export namespace Prisma {
     savedPythonCode: string | null
     failedForInput: string | null
     isChecked: $Enums.isFinalType | null
+    output1Status: $Enums.isFinalType | null
+    output2Status: $Enums.isFinalType | null
   }
 
   export type SubmissionCountAggregateOutputType = {
@@ -7020,6 +7024,8 @@ export namespace Prisma {
     savedPythonCode: number
     failedForInput: number
     isChecked: number
+    output1Status: number
+    output2Status: number
     _all: number
   }
 
@@ -7063,6 +7069,8 @@ export namespace Prisma {
     savedPythonCode?: true
     failedForInput?: true
     isChecked?: true
+    output1Status?: true
+    output2Status?: true
   }
 
   export type SubmissionMaxAggregateInputType = {
@@ -7088,6 +7096,8 @@ export namespace Prisma {
     savedPythonCode?: true
     failedForInput?: true
     isChecked?: true
+    output1Status?: true
+    output2Status?: true
   }
 
   export type SubmissionCountAggregateInputType = {
@@ -7113,6 +7123,8 @@ export namespace Prisma {
     savedPythonCode?: true
     failedForInput?: true
     isChecked?: true
+    output1Status?: true
+    output2Status?: true
     _all?: true
   }
 
@@ -7225,6 +7237,8 @@ export namespace Prisma {
     savedPythonCode: string
     failedForInput: string | null
     isChecked: $Enums.isFinalType
+    output1Status: $Enums.isFinalType
+    output2Status: $Enums.isFinalType
     _count: SubmissionCountAggregateOutputType | null
     _avg: SubmissionAvgAggregateOutputType | null
     _sum: SubmissionSumAggregateOutputType | null
@@ -7269,6 +7283,8 @@ export namespace Prisma {
     savedPythonCode?: boolean
     failedForInput?: boolean
     isChecked?: boolean
+    output1Status?: boolean
+    output2Status?: boolean
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["submission"]>
@@ -7296,6 +7312,8 @@ export namespace Prisma {
     savedPythonCode?: boolean
     failedForInput?: boolean
     isChecked?: boolean
+    output1Status?: boolean
+    output2Status?: boolean
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["submission"]>
@@ -7323,6 +7341,8 @@ export namespace Prisma {
     savedPythonCode?: boolean
     failedForInput?: boolean
     isChecked?: boolean
+    output1Status?: boolean
+    output2Status?: boolean
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["submission"]>
@@ -7350,9 +7370,11 @@ export namespace Prisma {
     savedPythonCode?: boolean
     failedForInput?: boolean
     isChecked?: boolean
+    output1Status?: boolean
+    output2Status?: boolean
   }
 
-  export type SubmissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "questionId" | "studentId" | "startTime" | "maxTimeToSolve" | "submittedOn" | "status" | "noOfCasesPassed" | "pointsSecured" | "type" | "output1" | "output2" | "isFinal" | "code" | "leetCodeLink" | "language" | "savedCCode" | "savedCppCode" | "savedJavaCode" | "savedPythonCode" | "failedForInput" | "isChecked", ExtArgs["result"]["submission"]>
+  export type SubmissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "questionId" | "studentId" | "startTime" | "maxTimeToSolve" | "submittedOn" | "status" | "noOfCasesPassed" | "pointsSecured" | "type" | "output1" | "output2" | "isFinal" | "code" | "leetCodeLink" | "language" | "savedCCode" | "savedCppCode" | "savedJavaCode" | "savedPythonCode" | "failedForInput" | "isChecked" | "output1Status" | "output2Status", ExtArgs["result"]["submission"]>
   export type SubmissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
@@ -7395,6 +7417,8 @@ export namespace Prisma {
       savedPythonCode: string
       failedForInput: string | null
       isChecked: $Enums.isFinalType
+      output1Status: $Enums.isFinalType
+      output2Status: $Enums.isFinalType
     }, ExtArgs["result"]["submission"]>
     composites: {}
   }
@@ -7842,6 +7866,8 @@ export namespace Prisma {
     readonly savedPythonCode: FieldRef<"Submission", 'String'>
     readonly failedForInput: FieldRef<"Submission", 'String'>
     readonly isChecked: FieldRef<"Submission", 'isFinalType'>
+    readonly output1Status: FieldRef<"Submission", 'isFinalType'>
+    readonly output2Status: FieldRef<"Submission", 'isFinalType'>
   }
     
 
@@ -14995,7 +15021,9 @@ export namespace Prisma {
     savedJavaCode: 'savedJavaCode',
     savedPythonCode: 'savedPythonCode',
     failedForInput: 'failedForInput',
-    isChecked: 'isChecked'
+    isChecked: 'isChecked',
+    output1Status: 'output1Status',
+    output2Status: 'output2Status'
   };
 
   export type SubmissionScalarFieldEnum = (typeof SubmissionScalarFieldEnum)[keyof typeof SubmissionScalarFieldEnum]
@@ -15642,6 +15670,8 @@ export namespace Prisma {
     savedPythonCode?: StringFilter<"Submission"> | string
     failedForInput?: StringNullableFilter<"Submission"> | string | null
     isChecked?: EnumisFinalTypeFilter<"Submission"> | $Enums.isFinalType
+    output1Status?: EnumisFinalTypeFilter<"Submission"> | $Enums.isFinalType
+    output2Status?: EnumisFinalTypeFilter<"Submission"> | $Enums.isFinalType
     questions?: XOR<QuestionsScalarRelationFilter, QuestionsWhereInput>
     student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
   }
@@ -15669,6 +15699,8 @@ export namespace Prisma {
     savedPythonCode?: SortOrder
     failedForInput?: SortOrderInput | SortOrder
     isChecked?: SortOrder
+    output1Status?: SortOrder
+    output2Status?: SortOrder
     questions?: QuestionsOrderByWithRelationInput
     student?: StudentOrderByWithRelationInput
   }
@@ -15699,6 +15731,8 @@ export namespace Prisma {
     savedPythonCode?: StringFilter<"Submission"> | string
     failedForInput?: StringNullableFilter<"Submission"> | string | null
     isChecked?: EnumisFinalTypeFilter<"Submission"> | $Enums.isFinalType
+    output1Status?: EnumisFinalTypeFilter<"Submission"> | $Enums.isFinalType
+    output2Status?: EnumisFinalTypeFilter<"Submission"> | $Enums.isFinalType
     questions?: XOR<QuestionsScalarRelationFilter, QuestionsWhereInput>
     student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
   }, "id">
@@ -15726,6 +15760,8 @@ export namespace Prisma {
     savedPythonCode?: SortOrder
     failedForInput?: SortOrderInput | SortOrder
     isChecked?: SortOrder
+    output1Status?: SortOrder
+    output2Status?: SortOrder
     _count?: SubmissionCountOrderByAggregateInput
     _avg?: SubmissionAvgOrderByAggregateInput
     _max?: SubmissionMaxOrderByAggregateInput
@@ -15759,6 +15795,8 @@ export namespace Prisma {
     savedPythonCode?: StringWithAggregatesFilter<"Submission"> | string
     failedForInput?: StringNullableWithAggregatesFilter<"Submission"> | string | null
     isChecked?: EnumisFinalTypeWithAggregatesFilter<"Submission"> | $Enums.isFinalType
+    output1Status?: EnumisFinalTypeWithAggregatesFilter<"Submission"> | $Enums.isFinalType
+    output2Status?: EnumisFinalTypeWithAggregatesFilter<"Submission"> | $Enums.isFinalType
   }
 
   export type AchievementsWhereInput = {
@@ -16515,6 +16553,8 @@ export namespace Prisma {
     savedPythonCode?: string
     failedForInput?: string | null
     isChecked?: $Enums.isFinalType
+    output1Status?: $Enums.isFinalType
+    output2Status?: $Enums.isFinalType
     questions: QuestionsCreateNestedOneWithoutSubmissionInput
     student: StudentCreateNestedOneWithoutSubmissionInput
   }
@@ -16542,6 +16582,8 @@ export namespace Prisma {
     savedPythonCode?: string
     failedForInput?: string | null
     isChecked?: $Enums.isFinalType
+    output1Status?: $Enums.isFinalType
+    output2Status?: $Enums.isFinalType
   }
 
   export type SubmissionUpdateInput = {
@@ -16564,6 +16606,8 @@ export namespace Prisma {
     savedPythonCode?: StringFieldUpdateOperationsInput | string
     failedForInput?: NullableStringFieldUpdateOperationsInput | string | null
     isChecked?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
+    output1Status?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
+    output2Status?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
     questions?: QuestionsUpdateOneRequiredWithoutSubmissionNestedInput
     student?: StudentUpdateOneRequiredWithoutSubmissionNestedInput
   }
@@ -16591,6 +16635,8 @@ export namespace Prisma {
     savedPythonCode?: StringFieldUpdateOperationsInput | string
     failedForInput?: NullableStringFieldUpdateOperationsInput | string | null
     isChecked?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
+    output1Status?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
+    output2Status?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
   }
 
   export type SubmissionCreateManyInput = {
@@ -16616,6 +16662,8 @@ export namespace Prisma {
     savedPythonCode?: string
     failedForInput?: string | null
     isChecked?: $Enums.isFinalType
+    output1Status?: $Enums.isFinalType
+    output2Status?: $Enums.isFinalType
   }
 
   export type SubmissionUpdateManyMutationInput = {
@@ -16638,6 +16686,8 @@ export namespace Prisma {
     savedPythonCode?: StringFieldUpdateOperationsInput | string
     failedForInput?: NullableStringFieldUpdateOperationsInput | string | null
     isChecked?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
+    output1Status?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
+    output2Status?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
   }
 
   export type SubmissionUncheckedUpdateManyInput = {
@@ -16663,6 +16713,8 @@ export namespace Prisma {
     savedPythonCode?: StringFieldUpdateOperationsInput | string
     failedForInput?: NullableStringFieldUpdateOperationsInput | string | null
     isChecked?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
+    output1Status?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
+    output2Status?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
   }
 
   export type AchievementsCreateInput = {
@@ -17559,6 +17611,8 @@ export namespace Prisma {
     savedPythonCode?: SortOrder
     failedForInput?: SortOrder
     isChecked?: SortOrder
+    output1Status?: SortOrder
+    output2Status?: SortOrder
   }
 
   export type SubmissionAvgOrderByAggregateInput = {
@@ -17592,6 +17646,8 @@ export namespace Prisma {
     savedPythonCode?: SortOrder
     failedForInput?: SortOrder
     isChecked?: SortOrder
+    output1Status?: SortOrder
+    output2Status?: SortOrder
   }
 
   export type SubmissionMinOrderByAggregateInput = {
@@ -17617,6 +17673,8 @@ export namespace Prisma {
     savedPythonCode?: SortOrder
     failedForInput?: SortOrder
     isChecked?: SortOrder
+    output1Status?: SortOrder
+    output2Status?: SortOrder
   }
 
   export type SubmissionSumOrderByAggregateInput = {
@@ -19005,6 +19063,8 @@ export namespace Prisma {
     savedPythonCode?: string
     failedForInput?: string | null
     isChecked?: $Enums.isFinalType
+    output1Status?: $Enums.isFinalType
+    output2Status?: $Enums.isFinalType
     questions: QuestionsCreateNestedOneWithoutSubmissionInput
   }
 
@@ -19030,6 +19090,8 @@ export namespace Prisma {
     savedPythonCode?: string
     failedForInput?: string | null
     isChecked?: $Enums.isFinalType
+    output1Status?: $Enums.isFinalType
+    output2Status?: $Enums.isFinalType
   }
 
   export type SubmissionCreateOrConnectWithoutStudentInput = {
@@ -19148,6 +19210,8 @@ export namespace Prisma {
     savedPythonCode?: StringFilter<"Submission"> | string
     failedForInput?: StringNullableFilter<"Submission"> | string | null
     isChecked?: EnumisFinalTypeFilter<"Submission"> | $Enums.isFinalType
+    output1Status?: EnumisFinalTypeFilter<"Submission"> | $Enums.isFinalType
+    output2Status?: EnumisFinalTypeFilter<"Submission"> | $Enums.isFinalType
   }
 
   export type StudentAchievementsUpsertWithWhereUniqueWithoutStudentInput = {
@@ -19367,6 +19431,8 @@ export namespace Prisma {
     savedPythonCode?: string
     failedForInput?: string | null
     isChecked?: $Enums.isFinalType
+    output1Status?: $Enums.isFinalType
+    output2Status?: $Enums.isFinalType
     student: StudentCreateNestedOneWithoutSubmissionInput
   }
 
@@ -19392,6 +19458,8 @@ export namespace Prisma {
     savedPythonCode?: string
     failedForInput?: string | null
     isChecked?: $Enums.isFinalType
+    output1Status?: $Enums.isFinalType
+    output2Status?: $Enums.isFinalType
   }
 
   export type SubmissionCreateOrConnectWithoutQuestionsInput = {
@@ -20467,6 +20535,8 @@ export namespace Prisma {
     savedPythonCode?: string
     failedForInput?: string | null
     isChecked?: $Enums.isFinalType
+    output1Status?: $Enums.isFinalType
+    output2Status?: $Enums.isFinalType
   }
 
   export type StudentAchievementsCreateManyStudentInput = {
@@ -20503,6 +20573,8 @@ export namespace Prisma {
     savedPythonCode?: StringFieldUpdateOperationsInput | string
     failedForInput?: NullableStringFieldUpdateOperationsInput | string | null
     isChecked?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
+    output1Status?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
+    output2Status?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
     questions?: QuestionsUpdateOneRequiredWithoutSubmissionNestedInput
   }
 
@@ -20528,6 +20600,8 @@ export namespace Prisma {
     savedPythonCode?: StringFieldUpdateOperationsInput | string
     failedForInput?: NullableStringFieldUpdateOperationsInput | string | null
     isChecked?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
+    output1Status?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
+    output2Status?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
   }
 
   export type SubmissionUncheckedUpdateManyWithoutStudentInput = {
@@ -20552,6 +20626,8 @@ export namespace Prisma {
     savedPythonCode?: StringFieldUpdateOperationsInput | string
     failedForInput?: NullableStringFieldUpdateOperationsInput | string | null
     isChecked?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
+    output1Status?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
+    output2Status?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
   }
 
   export type StudentAchievementsUpdateWithoutStudentInput = {
@@ -20714,6 +20790,8 @@ export namespace Prisma {
     savedPythonCode?: string
     failedForInput?: string | null
     isChecked?: $Enums.isFinalType
+    output1Status?: $Enums.isFinalType
+    output2Status?: $Enums.isFinalType
   }
 
   export type DiscussionsCreateManyQuestionInput = {
@@ -20764,6 +20842,8 @@ export namespace Prisma {
     savedPythonCode?: StringFieldUpdateOperationsInput | string
     failedForInput?: NullableStringFieldUpdateOperationsInput | string | null
     isChecked?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
+    output1Status?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
+    output2Status?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
     student?: StudentUpdateOneRequiredWithoutSubmissionNestedInput
   }
 
@@ -20789,6 +20869,8 @@ export namespace Prisma {
     savedPythonCode?: StringFieldUpdateOperationsInput | string
     failedForInput?: NullableStringFieldUpdateOperationsInput | string | null
     isChecked?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
+    output1Status?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
+    output2Status?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
   }
 
   export type SubmissionUncheckedUpdateManyWithoutQuestionsInput = {
@@ -20813,6 +20895,8 @@ export namespace Prisma {
     savedPythonCode?: StringFieldUpdateOperationsInput | string
     failedForInput?: NullableStringFieldUpdateOperationsInput | string | null
     isChecked?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
+    output1Status?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
+    output2Status?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
   }
 
   export type DiscussionsUpdateWithoutQuestionInput = {

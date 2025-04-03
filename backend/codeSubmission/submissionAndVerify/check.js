@@ -25,7 +25,8 @@ async function check(req,res) {
                 title:qname
             },
             select:{
-                id:true
+                id:true,
+                pointsPerTestCaseSolved:true
             }
         })
         const upd = await prisma.submission.updateMany({
@@ -39,10 +40,7 @@ async function check(req,res) {
                 status:"COMPUTING"
             },
             where:{
-                AND:[
-                    {studentId:studentId},
-                    {questionId:qid.id},
-                ]
+                id:req.body.sId
             }
         })
         if(upd.count == 0){
@@ -67,16 +65,53 @@ async function check(req,res) {
         }
         else if(lang==="PYTHON"){
             console.log("calling py")
-            const outcome = await PythonMain(req.body);
+            let outcome = await PythonMain(req.body);
             if(outcome.status==-1){
                 res.status(400).json({
                     err:"internal error"
                 })
                 return
             }
+            let failedHidden = ""
+            let op1Pass = false
+            let op2Pass = false
+            outcome.results.map((res)=>{
+                if(res.type==="HIDDEN" && res.count==0){
+                    failedHidden = res.input
+                }
+                else if(res.type==="OPEN1" && res.count==1){
+                    op1Pass=true
+                }
+                else if(res.type==="OPEN2" && res.count==1){
+                    op2Pass=true
+                }
+
+            })
+
+            await prisma.submission.updateMany({
+                where:{
+                    id:req.body.sId
+                },
+                data:{
+                    isChecked:"YES",
+                    failedForInput:failedHidden,
+                    output1:outcome.op1,
+                    output2:outcome.op2,
+                    pointsSecured:outcome.count * qid.pointsPerTestCaseSolved,
+                    noOfCasesPassed: outcome.count,
+                    status:"WAITING",
+                    output1Status:op1Pass?"YES":"NO",
+                    output2Status:op2Pass?"YES":"NO"
+                }
+            })
+            delete outcome.results
+
             res.status(200).json({
                 msg:"Naama jeichittom maara",
-                ...outcome
+                ...outcome,
+                failedHidden:failedHidden,
+                op1Pass:op1Pass,
+                op2Pass:op2Pass
             })
         }
         

@@ -160,6 +160,8 @@ model Submission {
   savedPythonCode String @default("Hi")
   failedForInput String? 
   isChecked isFinalType @default(NO)
+  output1Status isFinalType @default(NO)
+  output2Status isFinalType @default(NO)
 
   //relationships
   questions Questions @relation(fields: [questionId], references: [id])

@@ -28,9 +28,11 @@ async function PythonMain(allData) {
         
         const resArr = await Promise.all(
             testCases.map(async (testcase) => {
-                const runOP = await prun(fileName, testcase.inputString, testcase.outputString);
+                let runOP = await prun(fileName, testcase.inputString, testcase.outputString);
                 if (testcase.type === "OPEN1") op1 = runOP.op;
                 if (testcase.type === "OPEN2") op2 = runOP.op;
+                runOP.type = testcase.type
+                runOP.input = testcase.inputString
                 count += parseInt(runOP.count);
                 return runOP;
             })
