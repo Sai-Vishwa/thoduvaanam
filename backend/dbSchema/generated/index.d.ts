@@ -6968,6 +6968,8 @@ export namespace Prisma {
     savedCppCode: string | null
     savedJavaCode: string | null
     savedPythonCode: string | null
+    failedForInput: string | null
+    isChecked: $Enums.isFinalType | null
   }
 
   export type SubmissionMaxAggregateOutputType = {
@@ -6991,6 +6993,8 @@ export namespace Prisma {
     savedCppCode: string | null
     savedJavaCode: string | null
     savedPythonCode: string | null
+    failedForInput: string | null
+    isChecked: $Enums.isFinalType | null
   }
 
   export type SubmissionCountAggregateOutputType = {
@@ -7014,6 +7018,8 @@ export namespace Prisma {
     savedCppCode: number
     savedJavaCode: number
     savedPythonCode: number
+    failedForInput: number
+    isChecked: number
     _all: number
   }
 
@@ -7055,6 +7061,8 @@ export namespace Prisma {
     savedCppCode?: true
     savedJavaCode?: true
     savedPythonCode?: true
+    failedForInput?: true
+    isChecked?: true
   }
 
   export type SubmissionMaxAggregateInputType = {
@@ -7078,6 +7086,8 @@ export namespace Prisma {
     savedCppCode?: true
     savedJavaCode?: true
     savedPythonCode?: true
+    failedForInput?: true
+    isChecked?: true
   }
 
   export type SubmissionCountAggregateInputType = {
@@ -7101,6 +7111,8 @@ export namespace Prisma {
     savedCppCode?: true
     savedJavaCode?: true
     savedPythonCode?: true
+    failedForInput?: true
+    isChecked?: true
     _all?: true
   }
 
@@ -7211,6 +7223,8 @@ export namespace Prisma {
     savedCppCode: string
     savedJavaCode: string
     savedPythonCode: string
+    failedForInput: string | null
+    isChecked: $Enums.isFinalType
     _count: SubmissionCountAggregateOutputType | null
     _avg: SubmissionAvgAggregateOutputType | null
     _sum: SubmissionSumAggregateOutputType | null
@@ -7253,6 +7267,8 @@ export namespace Prisma {
     savedCppCode?: boolean
     savedJavaCode?: boolean
     savedPythonCode?: boolean
+    failedForInput?: boolean
+    isChecked?: boolean
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["submission"]>
@@ -7278,6 +7294,8 @@ export namespace Prisma {
     savedCppCode?: boolean
     savedJavaCode?: boolean
     savedPythonCode?: boolean
+    failedForInput?: boolean
+    isChecked?: boolean
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["submission"]>
@@ -7303,6 +7321,8 @@ export namespace Prisma {
     savedCppCode?: boolean
     savedJavaCode?: boolean
     savedPythonCode?: boolean
+    failedForInput?: boolean
+    isChecked?: boolean
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["submission"]>
@@ -7328,9 +7348,11 @@ export namespace Prisma {
     savedCppCode?: boolean
     savedJavaCode?: boolean
     savedPythonCode?: boolean
+    failedForInput?: boolean
+    isChecked?: boolean
   }
 
-  export type SubmissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "questionId" | "studentId" | "startTime" | "maxTimeToSolve" | "submittedOn" | "status" | "noOfCasesPassed" | "pointsSecured" | "type" | "output1" | "output2" | "isFinal" | "code" | "leetCodeLink" | "language" | "savedCCode" | "savedCppCode" | "savedJavaCode" | "savedPythonCode", ExtArgs["result"]["submission"]>
+  export type SubmissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "questionId" | "studentId" | "startTime" | "maxTimeToSolve" | "submittedOn" | "status" | "noOfCasesPassed" | "pointsSecured" | "type" | "output1" | "output2" | "isFinal" | "code" | "leetCodeLink" | "language" | "savedCCode" | "savedCppCode" | "savedJavaCode" | "savedPythonCode" | "failedForInput" | "isChecked", ExtArgs["result"]["submission"]>
   export type SubmissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     questions?: boolean | QuestionsDefaultArgs<ExtArgs>
     student?: boolean | StudentDefaultArgs<ExtArgs>
@@ -7371,6 +7393,8 @@ export namespace Prisma {
       savedCppCode: string
       savedJavaCode: string
       savedPythonCode: string
+      failedForInput: string | null
+      isChecked: $Enums.isFinalType
     }, ExtArgs["result"]["submission"]>
     composites: {}
   }
@@ -7816,6 +7840,8 @@ export namespace Prisma {
     readonly savedCppCode: FieldRef<"Submission", 'String'>
     readonly savedJavaCode: FieldRef<"Submission", 'String'>
     readonly savedPythonCode: FieldRef<"Submission", 'String'>
+    readonly failedForInput: FieldRef<"Submission", 'String'>
+    readonly isChecked: FieldRef<"Submission", 'isFinalType'>
   }
     
 
@@ -14967,7 +14993,9 @@ export namespace Prisma {
     savedCCode: 'savedCCode',
     savedCppCode: 'savedCppCode',
     savedJavaCode: 'savedJavaCode',
-    savedPythonCode: 'savedPythonCode'
+    savedPythonCode: 'savedPythonCode',
+    failedForInput: 'failedForInput',
+    isChecked: 'isChecked'
   };
 
   export type SubmissionScalarFieldEnum = (typeof SubmissionScalarFieldEnum)[keyof typeof SubmissionScalarFieldEnum]
@@ -15612,6 +15640,8 @@ export namespace Prisma {
     savedCppCode?: StringFilter<"Submission"> | string
     savedJavaCode?: StringFilter<"Submission"> | string
     savedPythonCode?: StringFilter<"Submission"> | string
+    failedForInput?: StringNullableFilter<"Submission"> | string | null
+    isChecked?: EnumisFinalTypeFilter<"Submission"> | $Enums.isFinalType
     questions?: XOR<QuestionsScalarRelationFilter, QuestionsWhereInput>
     student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
   }
@@ -15637,6 +15667,8 @@ export namespace Prisma {
     savedCppCode?: SortOrder
     savedJavaCode?: SortOrder
     savedPythonCode?: SortOrder
+    failedForInput?: SortOrderInput | SortOrder
+    isChecked?: SortOrder
     questions?: QuestionsOrderByWithRelationInput
     student?: StudentOrderByWithRelationInput
   }
@@ -15665,6 +15697,8 @@ export namespace Prisma {
     savedCppCode?: StringFilter<"Submission"> | string
     savedJavaCode?: StringFilter<"Submission"> | string
     savedPythonCode?: StringFilter<"Submission"> | string
+    failedForInput?: StringNullableFilter<"Submission"> | string | null
+    isChecked?: EnumisFinalTypeFilter<"Submission"> | $Enums.isFinalType
     questions?: XOR<QuestionsScalarRelationFilter, QuestionsWhereInput>
     student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
   }, "id">
@@ -15690,6 +15724,8 @@ export namespace Prisma {
     savedCppCode?: SortOrder
     savedJavaCode?: SortOrder
     savedPythonCode?: SortOrder
+    failedForInput?: SortOrderInput | SortOrder
+    isChecked?: SortOrder
     _count?: SubmissionCountOrderByAggregateInput
     _avg?: SubmissionAvgOrderByAggregateInput
     _max?: SubmissionMaxOrderByAggregateInput
@@ -15721,6 +15757,8 @@ export namespace Prisma {
     savedCppCode?: StringWithAggregatesFilter<"Submission"> | string
     savedJavaCode?: StringWithAggregatesFilter<"Submission"> | string
     savedPythonCode?: StringWithAggregatesFilter<"Submission"> | string
+    failedForInput?: StringNullableWithAggregatesFilter<"Submission"> | string | null
+    isChecked?: EnumisFinalTypeWithAggregatesFilter<"Submission"> | $Enums.isFinalType
   }
 
   export type AchievementsWhereInput = {
@@ -16475,6 +16513,8 @@ export namespace Prisma {
     savedCppCode?: string
     savedJavaCode?: string
     savedPythonCode?: string
+    failedForInput?: string | null
+    isChecked?: $Enums.isFinalType
     questions: QuestionsCreateNestedOneWithoutSubmissionInput
     student: StudentCreateNestedOneWithoutSubmissionInput
   }
@@ -16500,6 +16540,8 @@ export namespace Prisma {
     savedCppCode?: string
     savedJavaCode?: string
     savedPythonCode?: string
+    failedForInput?: string | null
+    isChecked?: $Enums.isFinalType
   }
 
   export type SubmissionUpdateInput = {
@@ -16520,6 +16562,8 @@ export namespace Prisma {
     savedCppCode?: StringFieldUpdateOperationsInput | string
     savedJavaCode?: StringFieldUpdateOperationsInput | string
     savedPythonCode?: StringFieldUpdateOperationsInput | string
+    failedForInput?: NullableStringFieldUpdateOperationsInput | string | null
+    isChecked?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
     questions?: QuestionsUpdateOneRequiredWithoutSubmissionNestedInput
     student?: StudentUpdateOneRequiredWithoutSubmissionNestedInput
   }
@@ -16545,6 +16589,8 @@ export namespace Prisma {
     savedCppCode?: StringFieldUpdateOperationsInput | string
     savedJavaCode?: StringFieldUpdateOperationsInput | string
     savedPythonCode?: StringFieldUpdateOperationsInput | string
+    failedForInput?: NullableStringFieldUpdateOperationsInput | string | null
+    isChecked?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
   }
 
   export type SubmissionCreateManyInput = {
@@ -16568,6 +16614,8 @@ export namespace Prisma {
     savedCppCode?: string
     savedJavaCode?: string
     savedPythonCode?: string
+    failedForInput?: string | null
+    isChecked?: $Enums.isFinalType
   }
 
   export type SubmissionUpdateManyMutationInput = {
@@ -16588,6 +16636,8 @@ export namespace Prisma {
     savedCppCode?: StringFieldUpdateOperationsInput | string
     savedJavaCode?: StringFieldUpdateOperationsInput | string
     savedPythonCode?: StringFieldUpdateOperationsInput | string
+    failedForInput?: NullableStringFieldUpdateOperationsInput | string | null
+    isChecked?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
   }
 
   export type SubmissionUncheckedUpdateManyInput = {
@@ -16611,6 +16661,8 @@ export namespace Prisma {
     savedCppCode?: StringFieldUpdateOperationsInput | string
     savedJavaCode?: StringFieldUpdateOperationsInput | string
     savedPythonCode?: StringFieldUpdateOperationsInput | string
+    failedForInput?: NullableStringFieldUpdateOperationsInput | string | null
+    isChecked?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
   }
 
   export type AchievementsCreateInput = {
@@ -17505,6 +17557,8 @@ export namespace Prisma {
     savedCppCode?: SortOrder
     savedJavaCode?: SortOrder
     savedPythonCode?: SortOrder
+    failedForInput?: SortOrder
+    isChecked?: SortOrder
   }
 
   export type SubmissionAvgOrderByAggregateInput = {
@@ -17536,6 +17590,8 @@ export namespace Prisma {
     savedCppCode?: SortOrder
     savedJavaCode?: SortOrder
     savedPythonCode?: SortOrder
+    failedForInput?: SortOrder
+    isChecked?: SortOrder
   }
 
   export type SubmissionMinOrderByAggregateInput = {
@@ -17559,6 +17615,8 @@ export namespace Prisma {
     savedCppCode?: SortOrder
     savedJavaCode?: SortOrder
     savedPythonCode?: SortOrder
+    failedForInput?: SortOrder
+    isChecked?: SortOrder
   }
 
   export type SubmissionSumOrderByAggregateInput = {
@@ -18945,6 +19003,8 @@ export namespace Prisma {
     savedCppCode?: string
     savedJavaCode?: string
     savedPythonCode?: string
+    failedForInput?: string | null
+    isChecked?: $Enums.isFinalType
     questions: QuestionsCreateNestedOneWithoutSubmissionInput
   }
 
@@ -18968,6 +19028,8 @@ export namespace Prisma {
     savedCppCode?: string
     savedJavaCode?: string
     savedPythonCode?: string
+    failedForInput?: string | null
+    isChecked?: $Enums.isFinalType
   }
 
   export type SubmissionCreateOrConnectWithoutStudentInput = {
@@ -19084,6 +19146,8 @@ export namespace Prisma {
     savedCppCode?: StringFilter<"Submission"> | string
     savedJavaCode?: StringFilter<"Submission"> | string
     savedPythonCode?: StringFilter<"Submission"> | string
+    failedForInput?: StringNullableFilter<"Submission"> | string | null
+    isChecked?: EnumisFinalTypeFilter<"Submission"> | $Enums.isFinalType
   }
 
   export type StudentAchievementsUpsertWithWhereUniqueWithoutStudentInput = {
@@ -19301,6 +19365,8 @@ export namespace Prisma {
     savedCppCode?: string
     savedJavaCode?: string
     savedPythonCode?: string
+    failedForInput?: string | null
+    isChecked?: $Enums.isFinalType
     student: StudentCreateNestedOneWithoutSubmissionInput
   }
 
@@ -19324,6 +19390,8 @@ export namespace Prisma {
     savedCppCode?: string
     savedJavaCode?: string
     savedPythonCode?: string
+    failedForInput?: string | null
+    isChecked?: $Enums.isFinalType
   }
 
   export type SubmissionCreateOrConnectWithoutQuestionsInput = {
@@ -20397,6 +20465,8 @@ export namespace Prisma {
     savedCppCode?: string
     savedJavaCode?: string
     savedPythonCode?: string
+    failedForInput?: string | null
+    isChecked?: $Enums.isFinalType
   }
 
   export type StudentAchievementsCreateManyStudentInput = {
@@ -20431,6 +20501,8 @@ export namespace Prisma {
     savedCppCode?: StringFieldUpdateOperationsInput | string
     savedJavaCode?: StringFieldUpdateOperationsInput | string
     savedPythonCode?: StringFieldUpdateOperationsInput | string
+    failedForInput?: NullableStringFieldUpdateOperationsInput | string | null
+    isChecked?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
     questions?: QuestionsUpdateOneRequiredWithoutSubmissionNestedInput
   }
 
@@ -20454,6 +20526,8 @@ export namespace Prisma {
     savedCppCode?: StringFieldUpdateOperationsInput | string
     savedJavaCode?: StringFieldUpdateOperationsInput | string
     savedPythonCode?: StringFieldUpdateOperationsInput | string
+    failedForInput?: NullableStringFieldUpdateOperationsInput | string | null
+    isChecked?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
   }
 
   export type SubmissionUncheckedUpdateManyWithoutStudentInput = {
@@ -20476,6 +20550,8 @@ export namespace Prisma {
     savedCppCode?: StringFieldUpdateOperationsInput | string
     savedJavaCode?: StringFieldUpdateOperationsInput | string
     savedPythonCode?: StringFieldUpdateOperationsInput | string
+    failedForInput?: NullableStringFieldUpdateOperationsInput | string | null
+    isChecked?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
   }
 
   export type StudentAchievementsUpdateWithoutStudentInput = {
@@ -20636,6 +20712,8 @@ export namespace Prisma {
     savedCppCode?: string
     savedJavaCode?: string
     savedPythonCode?: string
+    failedForInput?: string | null
+    isChecked?: $Enums.isFinalType
   }
 
   export type DiscussionsCreateManyQuestionInput = {
@@ -20684,6 +20762,8 @@ export namespace Prisma {
     savedCppCode?: StringFieldUpdateOperationsInput | string
     savedJavaCode?: StringFieldUpdateOperationsInput | string
     savedPythonCode?: StringFieldUpdateOperationsInput | string
+    failedForInput?: NullableStringFieldUpdateOperationsInput | string | null
+    isChecked?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
     student?: StudentUpdateOneRequiredWithoutSubmissionNestedInput
   }
 
@@ -20707,6 +20787,8 @@ export namespace Prisma {
     savedCppCode?: StringFieldUpdateOperationsInput | string
     savedJavaCode?: StringFieldUpdateOperationsInput | string
     savedPythonCode?: StringFieldUpdateOperationsInput | string
+    failedForInput?: NullableStringFieldUpdateOperationsInput | string | null
+    isChecked?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
   }
 
   export type SubmissionUncheckedUpdateManyWithoutQuestionsInput = {
@@ -20729,6 +20811,8 @@ export namespace Prisma {
     savedCppCode?: StringFieldUpdateOperationsInput | string
     savedJavaCode?: StringFieldUpdateOperationsInput | string
     savedPythonCode?: StringFieldUpdateOperationsInput | string
+    failedForInput?: NullableStringFieldUpdateOperationsInput | string | null
+    isChecked?: EnumisFinalTypeFieldUpdateOperationsInput | $Enums.isFinalType
   }
 
   export type DiscussionsUpdateWithoutQuestionInput = {

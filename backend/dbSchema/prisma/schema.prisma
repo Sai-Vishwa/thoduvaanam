@@ -158,6 +158,8 @@ model Submission {
   savedCppCode String @default("Hi")
   savedJavaCode String @default("Hi")
   savedPythonCode String @default("Hi")
+  failedForInput String? 
+  isChecked isFinalType @default(NO)
 
   //relationships
   questions Questions @relation(fields: [questionId], references: [id])

@@ -19,7 +19,7 @@ async function codingPage(req,res) {
         }
         const qid = await prisma.questions.findFirst({
             where:{
-                title:qname+" "
+                title:qname
             },
             include:{
                 contest:{
@@ -45,6 +45,7 @@ async function codingPage(req,res) {
                 data = dt
                 
                 count+=1
+                
             }
         })
         if(count!==1){
@@ -66,7 +67,6 @@ async function codingPage(req,res) {
             where:{
                 AND:[
                     {questionId:qid.id},
-                    {type:{in:["OPEN1","OPEN2"]}}
                 ]
             },
             select:{
@@ -92,14 +92,29 @@ async function codingPage(req,res) {
             })
             return
         }
+        let ip1 ={};
+        let ip2 ={};
+        let totaltc = tc.length;
+        tc.map((t)=>{
+            if(t.type === "OPEN1"){
+                ip1["Input"] = t.inputString
+                ip1["Output"] = t.outputString
+            }
+            else if(t.type === "OPEN2"){
+                ip2["Input"] = t.inputString
+                ip2["Output"] = t.outputString
+            }
+        })
         console.log(qid)
         res.status(200).json({
             msg:"Successful",
             data:data,
             minutes:diffMinutes,
             seconds:remainingSeconds,
-            testCase:tc,
-            ques:qid
+            ques:qid,
+            ip1:ip1,
+            ip2:ip2,
+            totaltc:totaltc
         })
         return
     }

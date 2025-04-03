@@ -82,7 +82,7 @@ const CodingPage = () => {
     hidden: {
       totalTests: 0,
       passedTests: 0,
-      failedInput: ''
+      failedInput: 'mdme'
     }
   });
   const [showResults, setShowResults] = useState(false);
@@ -179,6 +179,17 @@ public class Main {
         setJavaCode(data.data.savedJavaCode)
         setPythonCode(data.data.savedPythonCode)
         setLastSubmit({lang:"Java",code:data.data.savedJavaCode})
+        setTestResults({
+          visible: [
+            { passed: data.data.output1==data.ip1.Output?true:false, input: data.ip1.Input, expectedOutput: data.ip1.Output, actualOutput: data.data.output1 },
+            { passed: data.data.output2==data.ip2.Output?true:false, input: data.ip2.Input, expectedOutput: data.ip2.Output, actualOutput: data.data.output2 }
+          ],
+          hidden: {
+            totalTests: data.totaltc,
+            passedTests: data.data.noOfCasesPassed,
+            failedInput: data.data.failedForInput
+          }
+        })
         
         if (data.data && data.data.language) {
           const backendLanguage = data.data.language;
@@ -607,7 +618,7 @@ public class Main {
                         <div className="flex justify-between items-center mb-2">
                           <span className="text-[#ddf3ef]">Test Case {index + 1}</span>
                           <span className={test.passed ? "text-green-500" : "text-red-500"}>
-                            {test.passed ? "✓ Passed" : "✗ Failed"}
+                            {test.passed ? "✓ Passed" : ""}
                           </span>
                         </div>
                         <div className="grid grid-cols-2 gap-2">
@@ -621,7 +632,7 @@ public class Main {
                           </div>
                           <div className="col-span-2">
                             <p className="text-[#ddf3ef] opacity-70">Your Output:</p>
-                            <pre className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded overflow-hidden">{test.actualOutput}</pre>
+                            <pre className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded overflow-hidden">{test.actualOutput}{" "}</pre>
                           </div>
                         </div>
                       </div>
@@ -644,13 +655,13 @@ public class Main {
                       }>
                         {testResults.hidden.passedTests === testResults.hidden.totalTests 
                           ? "✓ All Passed" 
-                          : "⚠ Some Failed"}
+                          : " "}
                       </span>
                     </div>
                     
                     {testResults.hidden.passedTests < testResults.hidden.totalTests && (
                       <div>
-                        <p className="text-[#ddf3ef] opacity-70">First Failed Test Input Hint:</p>
+                        <p className="text-[#ddf3ef] opacity-70">Failed for the input:</p>
                         <p className="text-[#ddf3ef] font-mono bg-[#333333] p-1 rounded">{testResults.hidden.failedInput}</p>
                       </div>
                     )}
