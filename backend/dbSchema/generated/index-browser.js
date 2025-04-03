@@ -150,6 +150,7 @@ exports.Prisma.QuestionsScalarFieldEnum = {
   leetCodeTitle: 'leetCodeTitle',
   timeToSolveInMinutes: 'timeToSolveInMinutes',
   contestId: 'contestId',
+  JavaImports: 'JavaImports',
   JavaBoilerCode: 'JavaBoilerCode',
   CBoilerCode: 'CBoilerCode',
   CppBoilerCode: 'CppBoilerCode',

@@ -19,7 +19,7 @@ async function codingPage(req,res) {
         }
         const qid = await prisma.questions.findFirst({
             where:{
-                title:qname
+                title:qname+" "
             },
             include:{
                 contest:{
@@ -29,6 +29,7 @@ async function codingPage(req,res) {
                 }
             }
         })
+        console.log(qid)
         const details = await prisma.submission.findMany({
             where:{
                 AND:[

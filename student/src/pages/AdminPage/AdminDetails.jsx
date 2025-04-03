@@ -31,7 +31,12 @@ const Admin = () => {
     timeToSolveInMinutes: 90,
     type: 'PRACTICE',
     leetCodeLink: '',
-    leetCodeTitle: ''
+    leetCodeTitle: '',
+    cCode: '',
+    cppCode:'',
+    pythonCode:'',
+    javaImport:'',
+    javaCode:''
   });
   
   // Testcase form state
@@ -207,7 +212,12 @@ const Admin = () => {
         timeToSolveInMinutes: questionForm.timeToSolveInMinutes,
         type: questionForm.type,
         leetCodeLink: questionForm.leetCodeLink,
-        leetCodeTitle: questionForm.leetCodeTitle
+        leetCodeTitle: questionForm.leetCodeTitle,
+        CBoilerCode:questionForm.cCode,
+        CppBoilerCode:questionForm.cppCode,
+        pythonCode:questionForm.pythonCode,
+        JavaImports:questionForm.javaImport,
+        JavaBoilerCode:questionForm.javaCode
       };
       
       const response = await fetch("http://localhost:4000/admin/addQuestion", {
@@ -547,6 +557,62 @@ const Admin = () => {
                   <textarea
                     name="description"
                     value={questionForm.description}
+                    onChange={handleQuestionFormChange}
+                    className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                    rows="5"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-400">C Code</label>
+                  <textarea
+                    name="cCode"
+                    value={questionForm.cCode}
+                    onChange={handleQuestionFormChange}
+                    className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                    rows="5"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-400">Cpp Code</label>
+                  <textarea
+                    name="cppCode"
+                    value={questionForm.cppCode}
+                    onChange={handleQuestionFormChange}
+                    className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                    rows="5"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-400">Python Code</label>
+                  <textarea
+                    name="pythonCode"
+                    value={questionForm.pythonCode}
+                    onChange={handleQuestionFormChange}
+                    className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                    rows="5"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-400">Java imports</label>
+                  <textarea
+                    name="javaImport"
+                    value={questionForm.javaImport}
+                    onChange={handleQuestionFormChange}
+                    className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                    rows="5"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-400">Java code</label>
+                  <textarea
+                    name="javaCode"
+                    value={questionForm.javaCode}
                     onChange={handleQuestionFormChange}
                     className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
                     rows="5"

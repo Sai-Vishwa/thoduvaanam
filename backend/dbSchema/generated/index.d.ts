@@ -4464,6 +4464,7 @@ export namespace Prisma {
     leetCodeTitle: string | null
     timeToSolveInMinutes: number | null
     contestId: number | null
+    JavaImports: string | null
     JavaBoilerCode: string | null
     CBoilerCode: string | null
     CppBoilerCode: string | null
@@ -4485,6 +4486,7 @@ export namespace Prisma {
     leetCodeTitle: string | null
     timeToSolveInMinutes: number | null
     contestId: number | null
+    JavaImports: string | null
     JavaBoilerCode: string | null
     CBoilerCode: string | null
     CppBoilerCode: string | null
@@ -4506,6 +4508,7 @@ export namespace Prisma {
     leetCodeTitle: number
     timeToSolveInMinutes: number
     contestId: number
+    JavaImports: number
     JavaBoilerCode: number
     CBoilerCode: number
     CppBoilerCode: number
@@ -4549,6 +4552,7 @@ export namespace Prisma {
     leetCodeTitle?: true
     timeToSolveInMinutes?: true
     contestId?: true
+    JavaImports?: true
     JavaBoilerCode?: true
     CBoilerCode?: true
     CppBoilerCode?: true
@@ -4570,6 +4574,7 @@ export namespace Prisma {
     leetCodeTitle?: true
     timeToSolveInMinutes?: true
     contestId?: true
+    JavaImports?: true
     JavaBoilerCode?: true
     CBoilerCode?: true
     CppBoilerCode?: true
@@ -4591,6 +4596,7 @@ export namespace Prisma {
     leetCodeTitle?: true
     timeToSolveInMinutes?: true
     contestId?: true
+    JavaImports?: true
     JavaBoilerCode?: true
     CBoilerCode?: true
     CppBoilerCode?: true
@@ -4699,6 +4705,7 @@ export namespace Prisma {
     leetCodeTitle: string | null
     timeToSolveInMinutes: number | null
     contestId: number | null
+    JavaImports: string
     JavaBoilerCode: string
     CBoilerCode: string
     CppBoilerCode: string
@@ -4739,6 +4746,7 @@ export namespace Prisma {
     leetCodeTitle?: boolean
     timeToSolveInMinutes?: boolean
     contestId?: boolean
+    JavaImports?: boolean
     JavaBoilerCode?: boolean
     CBoilerCode?: boolean
     CppBoilerCode?: boolean
@@ -4766,6 +4774,7 @@ export namespace Prisma {
     leetCodeTitle?: boolean
     timeToSolveInMinutes?: boolean
     contestId?: boolean
+    JavaImports?: boolean
     JavaBoilerCode?: boolean
     CBoilerCode?: boolean
     CppBoilerCode?: boolean
@@ -4789,6 +4798,7 @@ export namespace Prisma {
     leetCodeTitle?: boolean
     timeToSolveInMinutes?: boolean
     contestId?: boolean
+    JavaImports?: boolean
     JavaBoilerCode?: boolean
     CBoilerCode?: boolean
     CppBoilerCode?: boolean
@@ -4812,13 +4822,14 @@ export namespace Prisma {
     leetCodeTitle?: boolean
     timeToSolveInMinutes?: boolean
     contestId?: boolean
+    JavaImports?: boolean
     JavaBoilerCode?: boolean
     CBoilerCode?: boolean
     CppBoilerCode?: boolean
     PythonBoilerCode?: boolean
   }
 
-  export type QuestionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "miniDescription" | "topic" | "noOfHiddenTestCases" | "noOfExternalTestCases" | "difficulty" | "pointsPerTestCaseSolved" | "type" | "leetCodeLink" | "leetCodeTitle" | "timeToSolveInMinutes" | "contestId" | "JavaBoilerCode" | "CBoilerCode" | "CppBoilerCode" | "PythonBoilerCode", ExtArgs["result"]["questions"]>
+  export type QuestionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "miniDescription" | "topic" | "noOfHiddenTestCases" | "noOfExternalTestCases" | "difficulty" | "pointsPerTestCaseSolved" | "type" | "leetCodeLink" | "leetCodeTitle" | "timeToSolveInMinutes" | "contestId" | "JavaImports" | "JavaBoilerCode" | "CBoilerCode" | "CppBoilerCode" | "PythonBoilerCode", ExtArgs["result"]["questions"]>
   export type QuestionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     testCase?: boolean | Questions$testCaseArgs<ExtArgs>
     submission?: boolean | Questions$submissionArgs<ExtArgs>
@@ -4860,6 +4871,7 @@ export namespace Prisma {
       leetCodeTitle: string | null
       timeToSolveInMinutes: number | null
       contestId: number | null
+      JavaImports: string
       JavaBoilerCode: string
       CBoilerCode: string
       CppBoilerCode: string
@@ -5306,6 +5318,7 @@ export namespace Prisma {
     readonly leetCodeTitle: FieldRef<"Questions", 'String'>
     readonly timeToSolveInMinutes: FieldRef<"Questions", 'Int'>
     readonly contestId: FieldRef<"Questions", 'Int'>
+    readonly JavaImports: FieldRef<"Questions", 'String'>
     readonly JavaBoilerCode: FieldRef<"Questions", 'String'>
     readonly CBoilerCode: FieldRef<"Questions", 'String'>
     readonly CppBoilerCode: FieldRef<"Questions", 'String'>
@@ -14913,6 +14926,7 @@ export namespace Prisma {
     leetCodeTitle: 'leetCodeTitle',
     timeToSolveInMinutes: 'timeToSolveInMinutes',
     contestId: 'contestId',
+    JavaImports: 'JavaImports',
     JavaBoilerCode: 'JavaBoilerCode',
     CBoilerCode: 'CBoilerCode',
     CppBoilerCode: 'CppBoilerCode',
@@ -15396,6 +15410,7 @@ export namespace Prisma {
     leetCodeTitle?: StringNullableFilter<"Questions"> | string | null
     timeToSolveInMinutes?: IntNullableFilter<"Questions"> | number | null
     contestId?: IntNullableFilter<"Questions"> | number | null
+    JavaImports?: StringFilter<"Questions"> | string
     JavaBoilerCode?: StringFilter<"Questions"> | string
     CBoilerCode?: StringFilter<"Questions"> | string
     CppBoilerCode?: StringFilter<"Questions"> | string
@@ -15422,6 +15437,7 @@ export namespace Prisma {
     leetCodeTitle?: SortOrderInput | SortOrder
     timeToSolveInMinutes?: SortOrderInput | SortOrder
     contestId?: SortOrderInput | SortOrder
+    JavaImports?: SortOrder
     JavaBoilerCode?: SortOrder
     CBoilerCode?: SortOrder
     CppBoilerCode?: SortOrder
@@ -15451,6 +15467,7 @@ export namespace Prisma {
     leetCodeTitle?: StringNullableFilter<"Questions"> | string | null
     timeToSolveInMinutes?: IntNullableFilter<"Questions"> | number | null
     contestId?: IntNullableFilter<"Questions"> | number | null
+    JavaImports?: StringFilter<"Questions"> | string
     JavaBoilerCode?: StringFilter<"Questions"> | string
     CBoilerCode?: StringFilter<"Questions"> | string
     CppBoilerCode?: StringFilter<"Questions"> | string
@@ -15477,6 +15494,7 @@ export namespace Prisma {
     leetCodeTitle?: SortOrderInput | SortOrder
     timeToSolveInMinutes?: SortOrderInput | SortOrder
     contestId?: SortOrderInput | SortOrder
+    JavaImports?: SortOrder
     JavaBoilerCode?: SortOrder
     CBoilerCode?: SortOrder
     CppBoilerCode?: SortOrder
@@ -15506,6 +15524,7 @@ export namespace Prisma {
     leetCodeTitle?: StringNullableWithAggregatesFilter<"Questions"> | string | null
     timeToSolveInMinutes?: IntNullableWithAggregatesFilter<"Questions"> | number | null
     contestId?: IntNullableWithAggregatesFilter<"Questions"> | number | null
+    JavaImports?: StringWithAggregatesFilter<"Questions"> | string
     JavaBoilerCode?: StringWithAggregatesFilter<"Questions"> | string
     CBoilerCode?: StringWithAggregatesFilter<"Questions"> | string
     CppBoilerCode?: StringWithAggregatesFilter<"Questions"> | string
@@ -16237,6 +16256,7 @@ export namespace Prisma {
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
+    JavaImports?: string
     JavaBoilerCode?: string
     CBoilerCode?: string
     CppBoilerCode?: string
@@ -16263,6 +16283,7 @@ export namespace Prisma {
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
     contestId?: number | null
+    JavaImports?: string
     JavaBoilerCode?: string
     CBoilerCode?: string
     CppBoilerCode?: string
@@ -16284,6 +16305,7 @@ export namespace Prisma {
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaImports?: StringFieldUpdateOperationsInput | string
     JavaBoilerCode?: StringFieldUpdateOperationsInput | string
     CBoilerCode?: StringFieldUpdateOperationsInput | string
     CppBoilerCode?: StringFieldUpdateOperationsInput | string
@@ -16310,6 +16332,7 @@ export namespace Prisma {
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaImports?: StringFieldUpdateOperationsInput | string
     JavaBoilerCode?: StringFieldUpdateOperationsInput | string
     CBoilerCode?: StringFieldUpdateOperationsInput | string
     CppBoilerCode?: StringFieldUpdateOperationsInput | string
@@ -16334,6 +16357,7 @@ export namespace Prisma {
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
     contestId?: number | null
+    JavaImports?: string
     JavaBoilerCode?: string
     CBoilerCode?: string
     CppBoilerCode?: string
@@ -16352,6 +16376,7 @@ export namespace Prisma {
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaImports?: StringFieldUpdateOperationsInput | string
     JavaBoilerCode?: StringFieldUpdateOperationsInput | string
     CBoilerCode?: StringFieldUpdateOperationsInput | string
     CppBoilerCode?: StringFieldUpdateOperationsInput | string
@@ -16373,6 +16398,7 @@ export namespace Prisma {
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaImports?: StringFieldUpdateOperationsInput | string
     JavaBoilerCode?: StringFieldUpdateOperationsInput | string
     CBoilerCode?: StringFieldUpdateOperationsInput | string
     CppBoilerCode?: StringFieldUpdateOperationsInput | string
@@ -17251,6 +17277,7 @@ export namespace Prisma {
     leetCodeTitle?: SortOrder
     timeToSolveInMinutes?: SortOrder
     contestId?: SortOrder
+    JavaImports?: SortOrder
     JavaBoilerCode?: SortOrder
     CBoilerCode?: SortOrder
     CppBoilerCode?: SortOrder
@@ -17282,6 +17309,7 @@ export namespace Prisma {
     leetCodeTitle?: SortOrder
     timeToSolveInMinutes?: SortOrder
     contestId?: SortOrder
+    JavaImports?: SortOrder
     JavaBoilerCode?: SortOrder
     CBoilerCode?: SortOrder
     CppBoilerCode?: SortOrder
@@ -17303,6 +17331,7 @@ export namespace Prisma {
     leetCodeTitle?: SortOrder
     timeToSolveInMinutes?: SortOrder
     contestId?: SortOrder
+    JavaImports?: SortOrder
     JavaBoilerCode?: SortOrder
     CBoilerCode?: SortOrder
     CppBoilerCode?: SortOrder
@@ -19145,6 +19174,7 @@ export namespace Prisma {
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
+    JavaImports?: string
     JavaBoilerCode?: string
     CBoilerCode?: string
     CppBoilerCode?: string
@@ -19169,6 +19199,7 @@ export namespace Prisma {
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
     contestId?: number | null
+    JavaImports?: string
     JavaBoilerCode?: string
     CBoilerCode?: string
     CppBoilerCode?: string
@@ -19222,6 +19253,7 @@ export namespace Prisma {
     leetCodeTitle?: StringNullableFilter<"Questions"> | string | null
     timeToSolveInMinutes?: IntNullableFilter<"Questions"> | number | null
     contestId?: IntNullableFilter<"Questions"> | number | null
+    JavaImports?: StringFilter<"Questions"> | string
     JavaBoilerCode?: StringFilter<"Questions"> | string
     CBoilerCode?: StringFilter<"Questions"> | string
     CppBoilerCode?: StringFilter<"Questions"> | string
@@ -19506,6 +19538,7 @@ export namespace Prisma {
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
+    JavaImports?: string
     JavaBoilerCode?: string
     CBoilerCode?: string
     CppBoilerCode?: string
@@ -19531,6 +19564,7 @@ export namespace Prisma {
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
     contestId?: number | null
+    JavaImports?: string
     JavaBoilerCode?: string
     CBoilerCode?: string
     CppBoilerCode?: string
@@ -19567,6 +19601,7 @@ export namespace Prisma {
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaImports?: StringFieldUpdateOperationsInput | string
     JavaBoilerCode?: StringFieldUpdateOperationsInput | string
     CBoilerCode?: StringFieldUpdateOperationsInput | string
     CppBoilerCode?: StringFieldUpdateOperationsInput | string
@@ -19592,6 +19627,7 @@ export namespace Prisma {
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaImports?: StringFieldUpdateOperationsInput | string
     JavaBoilerCode?: StringFieldUpdateOperationsInput | string
     CBoilerCode?: StringFieldUpdateOperationsInput | string
     CppBoilerCode?: StringFieldUpdateOperationsInput | string
@@ -19612,6 +19648,7 @@ export namespace Prisma {
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
+    JavaImports?: string
     JavaBoilerCode?: string
     CBoilerCode?: string
     CppBoilerCode?: string
@@ -19637,6 +19674,7 @@ export namespace Prisma {
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
     contestId?: number | null
+    JavaImports?: string
     JavaBoilerCode?: string
     CBoilerCode?: string
     CppBoilerCode?: string
@@ -19705,6 +19743,7 @@ export namespace Prisma {
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaImports?: StringFieldUpdateOperationsInput | string
     JavaBoilerCode?: StringFieldUpdateOperationsInput | string
     CBoilerCode?: StringFieldUpdateOperationsInput | string
     CppBoilerCode?: StringFieldUpdateOperationsInput | string
@@ -19730,6 +19769,7 @@ export namespace Prisma {
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaImports?: StringFieldUpdateOperationsInput | string
     JavaBoilerCode?: StringFieldUpdateOperationsInput | string
     CBoilerCode?: StringFieldUpdateOperationsInput | string
     CppBoilerCode?: StringFieldUpdateOperationsInput | string
@@ -20035,6 +20075,7 @@ export namespace Prisma {
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
+    JavaImports?: string
     JavaBoilerCode?: string
     CBoilerCode?: string
     CppBoilerCode?: string
@@ -20060,6 +20101,7 @@ export namespace Prisma {
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
     contestId?: number | null
+    JavaImports?: string
     JavaBoilerCode?: string
     CBoilerCode?: string
     CppBoilerCode?: string
@@ -20183,6 +20225,7 @@ export namespace Prisma {
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaImports?: StringFieldUpdateOperationsInput | string
     JavaBoilerCode?: StringFieldUpdateOperationsInput | string
     CBoilerCode?: StringFieldUpdateOperationsInput | string
     CppBoilerCode?: StringFieldUpdateOperationsInput | string
@@ -20208,6 +20251,7 @@ export namespace Prisma {
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaImports?: StringFieldUpdateOperationsInput | string
     JavaBoilerCode?: StringFieldUpdateOperationsInput | string
     CBoilerCode?: StringFieldUpdateOperationsInput | string
     CppBoilerCode?: StringFieldUpdateOperationsInput | string
@@ -20272,6 +20316,7 @@ export namespace Prisma {
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
+    JavaImports?: string
     JavaBoilerCode?: string
     CBoilerCode?: string
     CppBoilerCode?: string
@@ -20296,6 +20341,7 @@ export namespace Prisma {
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
+    JavaImports?: string
     JavaBoilerCode?: string
     CBoilerCode?: string
     CppBoilerCode?: string
@@ -20488,6 +20534,7 @@ export namespace Prisma {
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
     contestId?: number | null
+    JavaImports?: string
     JavaBoilerCode?: string
     CBoilerCode?: string
     CppBoilerCode?: string
@@ -20506,6 +20553,7 @@ export namespace Prisma {
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaImports?: StringFieldUpdateOperationsInput | string
     JavaBoilerCode?: StringFieldUpdateOperationsInput | string
     CBoilerCode?: StringFieldUpdateOperationsInput | string
     CppBoilerCode?: StringFieldUpdateOperationsInput | string
@@ -20530,6 +20578,7 @@ export namespace Prisma {
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaImports?: StringFieldUpdateOperationsInput | string
     JavaBoilerCode?: StringFieldUpdateOperationsInput | string
     CBoilerCode?: StringFieldUpdateOperationsInput | string
     CppBoilerCode?: StringFieldUpdateOperationsInput | string
@@ -20553,6 +20602,7 @@ export namespace Prisma {
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     contestId?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaImports?: StringFieldUpdateOperationsInput | string
     JavaBoilerCode?: StringFieldUpdateOperationsInput | string
     CBoilerCode?: StringFieldUpdateOperationsInput | string
     CppBoilerCode?: StringFieldUpdateOperationsInput | string
@@ -20776,6 +20826,7 @@ export namespace Prisma {
     leetCodeLink?: string | null
     leetCodeTitle?: string | null
     timeToSolveInMinutes?: number | null
+    JavaImports?: string
     JavaBoilerCode?: string
     CBoilerCode?: string
     CppBoilerCode?: string
@@ -20794,6 +20845,7 @@ export namespace Prisma {
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaImports?: StringFieldUpdateOperationsInput | string
     JavaBoilerCode?: StringFieldUpdateOperationsInput | string
     CBoilerCode?: StringFieldUpdateOperationsInput | string
     CppBoilerCode?: StringFieldUpdateOperationsInput | string
@@ -20818,6 +20870,7 @@ export namespace Prisma {
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaImports?: StringFieldUpdateOperationsInput | string
     JavaBoilerCode?: StringFieldUpdateOperationsInput | string
     CBoilerCode?: StringFieldUpdateOperationsInput | string
     CppBoilerCode?: StringFieldUpdateOperationsInput | string
@@ -20841,6 +20894,7 @@ export namespace Prisma {
     leetCodeLink?: NullableStringFieldUpdateOperationsInput | string | null
     leetCodeTitle?: NullableStringFieldUpdateOperationsInput | string | null
     timeToSolveInMinutes?: NullableIntFieldUpdateOperationsInput | number | null
+    JavaImports?: StringFieldUpdateOperationsInput | string
     JavaBoilerCode?: StringFieldUpdateOperationsInput | string
     CBoilerCode?: StringFieldUpdateOperationsInput | string
     CppBoilerCode?: StringFieldUpdateOperationsInput | string

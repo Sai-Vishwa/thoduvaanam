@@ -100,7 +100,7 @@ const CodingPage = () => {
         setTimeLeft({ minutes: timeLeft.minutes - 1, seconds: 59 });
       } else {
         clearInterval(timer);
-        if(questionData.type=="CONTEST"){
+        if(questionData?.type=="CONTEST"){
           nav(`/${uname}/contest-handler/${questionData.contest.title}`)
         }
         else if(questionData.type==="PRACTICE"){
@@ -591,7 +591,7 @@ public class Main {
           <AnimatePresence>
             {showResults && (
               <motion.div 
-                className="border-t border-[#3b3b3b] p-4 bg-[#1c1b1b] overflow-hidden max-h-80"
+                className="border-t border-[#3b3b3b] p-4 bg-[#1c1b1b] overflow-y-auto max-h-80"
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}

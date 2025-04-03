@@ -112,6 +112,7 @@ model Questions {
   leetCodeTitle String?
   timeToSolveInMinutes Int?
   contestId Int?
+  JavaImports String @default("import java.util.*")
   JavaBoilerCode String @default("Hi")
   CBoilerCode String @default("Hi")
   CppBoilerCode String @default("Hi")

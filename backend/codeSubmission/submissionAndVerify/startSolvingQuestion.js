@@ -46,13 +46,27 @@ async function startSolvingQuestion(req,res) {
         const utc = new Date();
         const now = new Date(utc.getTime()+5.5*60*60*1000);
         const end = new Date(now.getTime()+question.timeToSolveInMinutes*60*1000)
-        const create = await prisma.submission.create({
-            data:{
+        const create = await prisma.submission.createManyAndReturn({
+            data:[{
                 questionId:question.id,
                 studentId:session.id,
                 startTime:now,
                 maxTimeToSolve:end,
-            }
+                code:"",
+                language:"JAVA",
+                savedCCode:question.CppBoilerCode,
+                savedCppCode:question.CppBoilerCode,
+                savedJavaCode:question.JavaBoilerCode,
+                savedPythonCode:question.PythonBoilerCode,
+            }]
+        })
+        await prisma.submission.updateMany({
+            where:{
+                id:create[0].id
+            },
+        data:{
+            savedJavaCode:`${question.JavaImports}\npublic class Submission_${create[0].id} {\n${question.JavaBoilerCode}\n}`
+        }
         })
         res.status(200).json({
             msg:"Successful"
