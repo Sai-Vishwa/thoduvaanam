@@ -247,9 +247,68 @@ public class Main {
     }
   };
 
+
+
+
+
+
   const handleCheckCode = async () => {
-    
+
+    await handleSaveCode();
+
+      let result = {}
+      
+      const dummy =  await new Promise ((resolve)=>{
+          toast.promise(new Promise((resolve,reject)=>{
+            fetch("http://localhost:4000/submission/check-submission", {
+              method: "POST",
+              body: JSON.stringify({ 
+                uname: uname, 
+                session: Cookies.get("session"),
+                language:language=="Java"?"JAVA":language=="Python"?"PYTHON":language=="C"?"C":"CPP",
+                code:language=="Java"?javaCode:language=="Python"?pythonCode:language=="C"?cCode:cppCode,
+                qname:qname
+               }),
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              }
+            }).then((resp) => resp.json())
+            .then((data)=>{
+              if(data.err){
+                throw new Error(data.err)
+              }
+              resolve(data)
+            })
+            .catch((err)=> reject(err))
+          }),{
+            loading: "Checking your code...",
+            success: (data)=>{
+              result = data
+              console.log("i must be first")
+              resolve()
+              return (`Checked successfully`)
+            },
+            error: (err) => {
+              resolve()
+              return (`${err}`)
+            },
+            style: {
+              fontSize:"1.125rem",
+              fontWeight:300,
+              padding:20
+            }
+          })
+        }) 
+        console.log("i must be second")
+        alert (JSON.stringify(result))
+        
+      
   };
+
+
+
+
 
   const handleSaveCode = async () => {
     try {

@@ -55,19 +55,22 @@ async function CMain(allData) {
     }
 }
 
-
-async function caller() {
-    const n = "\n";
-    const ans = await CMain({qId:23,submissionId:239 ,lang:"c" , 
-        code:`#include<stdio.h>
-        int main(){
-            int n1 =0;
-            while(1){
-                n1++;
-            }
-            return 0; 
-        }` });
-    console.log(ans);
+module.exports = {
+    CMain
 }
+
+// async function caller() {
+//     const n = "\n";
+//     const ans = await CMain({qId:23,submissionId:239 ,lang:"c" , 
+//         code:`#include<stdio.h>
+//         int main(){
+//             int n1 =0;
+//             while(1){
+//                 n1++;
+//             }
+//             return 0; 
+//         }` });
+//     console.log(ans);
+// }
 
 // caller();

@@ -7,7 +7,7 @@ async function prun(fileName, testcaseInput, testCaseOutput) {
         var utfEncoder = new TextEncoder("utf-8");
         var utfDecoder = new TextDecoder("utf-8");
 
-        child.stdin.write("1 2");
+        child.stdin.write(testcaseInput);
         
         child.stdin.end();
 
@@ -16,6 +16,7 @@ async function prun(fileName, testcaseInput, testCaseOutput) {
 
         // child.stdout.setEncoding("utf-8");
         child.stdout.on('data', (data) => {
+            output = data.toString()
             console.log(`Output: ${data.toString()}`); // Now safely convert
         });
         
@@ -36,8 +37,8 @@ async function prun(fileName, testcaseInput, testCaseOutput) {
             } else {
                 resolve({
                     msg: "Successful",
-                    count: "7"==="7"? 1 : 0,
-                    op: "7",
+                    count: `${testCaseOutput}\n`===output || testCaseOutput===output? 1 : 0,
+                    op: output,
                 });
             }
         });

@@ -55,31 +55,34 @@ async function cppMain(allData) {
     }
 }
 
+module.exports = {
+    cppMain,
+}
 
-async function caller() {
-    const n = "\n";
-    const ans = await cppMain({qId:23,submissionId:239 ,lang:"cpp" , 
-        code:`
-        #include <iostream>
-using namespace std;
+// async function caller() {
+//     const n = "\n";
+//     const ans = await cppMain({qId:23,submissionId:239 ,lang:"cpp" , 
+//         code:`
+//         #include <iostream>
+// using namespace std;
 
-int main() {
-    int n, sum = 0;
+// int main() {
+//     int n, sum = 0;
  
-    cin >> n;
+//     cin >> n;
 
-    int arr[n];
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
-        sum += arr[i];
-    }
+//     int arr[n];
+//     for (int i = 0; i < n; i++) {
+//         cin >> arr[i];
+//         sum += arr[i];
+//     }
 
-    cout << "Sum: " << sum << endl;
-    return 0;
-}
+//     cout << "Sum: " << sum << endl;
+//     return 0;
+// }
 
-        ` });
-    console.log(ans);
-}
+//         ` });
+//     console.log(ans);
+// }
 
-// caller();
+// // caller();
