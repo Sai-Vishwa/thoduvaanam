@@ -8,9 +8,12 @@ async function addQuestion(req,res) {
         dt.topic = parseInt(dt.topic)
         dt.contestId = parseInt(dt.contestId)
         dt.pointsPerTestCaseSolved = parseInt(dt.pointsPerTestCaseSolved)
+        dt.noOfHiddenTestCases = parseInt(dt.noOfHiddenTestCases)
         dt.timeToSolveInMinutes = parseInt(dt.timeToSolveInMinutes)
-        await prisma.questions.create({
-            data:req.body.data
+        await prisma.questions.createMany({
+            data:[
+                req.body.data,
+            ]
         })
         console.log("success")
         res.status(200).json({

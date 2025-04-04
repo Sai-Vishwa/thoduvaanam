@@ -215,7 +215,7 @@ const Admin = () => {
         leetCodeTitle: questionForm.leetCodeTitle,
         CBoilerCode:questionForm.cCode,
         CppBoilerCode:questionForm.cppCode,
-        pythonCode:questionForm.pythonCode,
+        PythonBoilerCode:questionForm.pythonCode,
         JavaImports:questionForm.javaImport,
         JavaBoilerCode:questionForm.javaCode
       };

@@ -21,7 +21,11 @@ async function submitQuestion(req,res) {
         }
         const questions = await prisma.questions.findFirst({
             include:{
-                submission:true
+                submission:{
+                    where:{
+                        studentId:session.id
+                    }
+                }
             },
             where:{
                 title:tname
@@ -31,7 +35,7 @@ async function submitQuestion(req,res) {
         let counter = 0;
         questions.submission.map((s)=>{
             counter+=1
-            if(s.pointsSecured>bestScore ){
+            if(s.pointsSecured>bestScore && s.isFinal=="YES" && s.status=="COMPLETED"){
                 bestScore= s.pointsSecured
             }
         })
@@ -44,14 +48,7 @@ async function submitQuestion(req,res) {
                 submittedOn:now
             },
             where:{
-                AND:[
-                    {questionId:questions.id},
-                    {studentId:session.id},
-                    {status:"WAITING"},
-                    {isFinal:"NO"},
-                    {maxTimeToSolve:{gte:now}}
-                ]
-                
+                id:req.body.sId
             }
         })
         if(submit.length !== 1 ){
@@ -87,6 +84,9 @@ async function submitQuestion(req,res) {
         })
 
     }
+    console.log("bestcore",bestScore)
+    console.log("score",score)
+    console.log("counter",counter)
 
     if(counter == 1 && parseInt(questions.pointsPerTestCaseSolved)*(parseInt(questions.noOfExternalTestCases)+parseInt(questions.noOfHiddenTestCases))===score){
 

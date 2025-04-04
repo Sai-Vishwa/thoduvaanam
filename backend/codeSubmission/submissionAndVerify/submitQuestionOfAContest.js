@@ -38,7 +38,8 @@ async function submitQuestionOfAContest(req,res) {
                 id:submissionId
             },
             data:{
-                isFinal:"YES"
+                isFinal:"YES",
+                
             }
         })
         res.status(200).json({

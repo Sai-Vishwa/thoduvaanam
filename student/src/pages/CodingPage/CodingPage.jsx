@@ -349,6 +349,50 @@ public class Main {
     
       setIsSubmitting(true);
       let status = false
+      if(questionData.type=="PRACTICE"){
+        let status2 = false
+        const dummy =  await new Promise ((resolve)=>{
+          toast.promise(new Promise((resolve,reject)=>{
+            fetch("http://localhost:4000/submission/submit-question", {
+              method: "POST",
+              body: JSON.stringify({ uname: uname, session: Cookies.get("session"), sId: details.details.data.id , tname:qname}),
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              }
+            }).then((resp) => resp.json())
+            .then((data)=>{
+              if(data.err){
+                throw new Error(data.err)
+              }
+              resolve(data)
+            })
+            .catch((err)=> reject(err))
+          }),{
+            loading: "Submitting...",
+            success: (data)=>{
+              status2 = true
+              console.log("i must be first")
+              resolve()
+              return (`Submitted successfully`)
+            },
+            error: (err) => {
+              resolve()
+              return (`${err}`)
+            },
+            style: {
+              fontSize:"1.125rem",
+              fontWeight:300,
+              padding:20
+            }
+          })
+        }) 
+        console.log("i must be second")
+        if(status2){
+          setIsSubmitting(!isSubmitting)
+          nav(`/${uname}`)
+        }
+      }
       const dummy =  await new Promise ((resolve)=>{
                     toast.promise(new Promise((resolve,reject)=>{
                       fetch("http://localhost:4000/submission/submit-question-of-a-contest", {
